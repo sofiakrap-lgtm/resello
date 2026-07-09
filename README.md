@@ -1,6 +1,7 @@
 # Resello
 
-Reselling-sovelluksen frontend-runko.
+Resellon markkinointisivu — jälleenmyynnin SaaS-työkalu, jonka etusivu
+esittelee tuotteen ominaisuudet ja hyödyt.
 
 ## Teknologiapino
 
@@ -41,11 +42,16 @@ src/
 ├── main.tsx              # sovelluksen entry, BrowserRouter
 ├── App.tsx               # reitit
 ├── index.css             # @import "tailwindcss"
+├── data/
+│   └── features.ts       # etusivun ominaisuudet / hyödyt -sisältö
 ├── components/
-│   ├── Layout.tsx        # navigaatio + Outlet
+│   ├── Layout.tsx        # header (nav + CTA) + footer + Outlet
+│   ├── Hero.tsx          # etusivun hero
+│   ├── FeaturesSection.tsx  # ominaisuudet / hyödyt -osio
+│   ├── FeatureCard.tsx   # yksittäinen ominaisuuskortti
 │   └── BarcodeSvg.tsx    # jsbarcode-viivakoodi SVG:nä
 └── pages/
-    ├── HomePage.tsx
-    ├── BarcodePage.tsx
+    ├── HomePage.tsx      # hero + ominaisuudet
+    ├── BarcodePage.tsx   # /demo — viivakoodin live-demo
     └── NotFoundPage.tsx
 ```
