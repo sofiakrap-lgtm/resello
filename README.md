@@ -1,7 +1,8 @@
-# Resello
+# ReSello
 
-Resellon markkinointisivu — jälleenmyynnin SaaS-työkalu, jonka etusivu
-esittelee tuotteen ominaisuudet ja hyödyt.
+Kirpputorin käyttöjärjestelmä itsepalvelukirpputoreille. Tämä repositorio
+sisältää ReSellon markkinointisivun (landing page), joka on suunnattu
+kirpputorien omistajille.
 
 ## Teknologiapino
 
@@ -14,8 +15,8 @@ esittelee tuotteen ominaisuudet ja hyödyt.
 
 **Tyylit**
 - Tailwind CSS v4 (`tailwindcss` + `@tailwindcss/vite`) — konfiguraatio hoituu
-  Vite-pluginilla, ei perinteistä `tailwind.config.js`-tiedostoa. Tyylit
-  tuodaan `src/index.css`:ssä rivillä `@import "tailwindcss";`.
+  Vite-pluginilla, ei `tailwind.config.js`-tiedostoa. Brändin värit ja fontti
+  määritellään `src/index.css`:n `@theme`-lohkossa.
 
 **Build & tooling**
 - Vite 7 — dev-serveri ja build (`@vitejs/plugin-react`)
@@ -23,7 +24,14 @@ esittelee tuotteen ominaisuudet ja hyödyt.
 
 **UI-kirjastot**
 - `lucide-react` — ikonit
-- `jsbarcode` — viivakoodien generointi
+- `jsbarcode` — viivakoodien generointi (käytössä myöhemmissä ominaisuuksissa)
+
+## Brändi
+
+- **Fontti:** Hanken Grotesk (Google Fonts) — otsikot 700, leipäteksti 400,
+  korostukset 500.
+- **Värit:** beige `#FAF1E0` (tausta), tummanruskea `#3C2415` (teksti, napit),
+  aksentit peach `#E2B48C`, sage `#BAB58D`, taupe `#9B8A76`, blue-grey `#9FB0AC`.
 
 ## Komennot
 
@@ -39,19 +47,24 @@ npm run typecheck # pelkkä tyyppitarkistus (tsc -b)
 
 ```
 src/
-├── main.tsx              # sovelluksen entry, BrowserRouter
+├── main.tsx              # entry, BrowserRouter
 ├── App.tsx               # reitit
-├── index.css             # @import "tailwindcss"
-├── data/
-│   └── features.ts       # etusivun ominaisuudet / hyödyt -sisältö
+├── index.css             # @import "tailwindcss" + @theme (värit, fontti)
 ├── components/
-│   ├── Layout.tsx        # header (nav + CTA) + footer + Outlet
-│   ├── Hero.tsx          # etusivun hero
-│   ├── FeaturesSection.tsx  # ominaisuudet / hyödyt -osio
-│   ├── FeatureCard.tsx   # yksittäinen ominaisuuskortti
-│   └── BarcodeSvg.tsx    # jsbarcode-viivakoodi SVG:nä
+│   ├── Navbar.tsx        # sticky-navigaatio + CTA
+│   ├── Button.tsx        # pyöristetty CTA-nappi (fill / outline)
+│   └── Eyebrow.tsx       # osioiden ylätunniste
+├── sections/            # landing pagen osiot järjestyksessä
+│   ├── Hero.tsx
+│   ├── Problem.tsx
+│   ├── Solution.tsx      # #ominaisuudet — 2×2 korttiruudukko
+│   ├── Visibility.tsx    # #nakyvyys — sage-aksenttitausta
+│   ├── Pricing.tsx       # #hinnoittelu — porrastettu taulukko
+│   ├── Migration.tsx
+│   ├── Team.tsx
+│   ├── FinalCta.tsx
+│   └── Footer.tsx
 └── pages/
-    ├── HomePage.tsx      # hero + ominaisuudet
-    ├── BarcodePage.tsx   # /demo — viivakoodin live-demo
+    ├── HomePage.tsx      # kokoaa osiot
     └── NotFoundPage.tsx
 ```
