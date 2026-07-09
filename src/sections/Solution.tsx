@@ -48,24 +48,22 @@ function Solution() {
 
         <div className="mt-12 grid items-center gap-10 md:grid-cols-2 md:gap-16">
           {/* Vasen: sovellusnäkymän paikka */}
-          <div className="flex items-center justify-center rounded-3xl bg-peach/35 p-8 md:p-12">
-            <div className="relative flex aspect-[9/19] w-52 items-center justify-center overflow-hidden rounded-[2rem] border-8 border-brown bg-beige">
-              {/* Kuva näkyy, kun public/images/app-screenshot.webp on lisätty */}
-              <img
-                src="/images/app-screenshot.webp"
-                alt="ReSello-sovellus"
-                onError={() => setShowAppImage(false)}
-                className={`absolute inset-0 h-full w-full object-cover ${
-                  showAppImage ? '' : 'hidden'
-                }`}
-              />
-              <span className="absolute left-1/2 top-3 z-10 h-1.5 w-16 -translate-x-1/2 rounded-full bg-brown/30" />
-              {!showAppImage && (
-                <span className="text-xs font-medium uppercase tracking-widest text-brown/40">
+          <div className="overflow-hidden rounded-3xl bg-peach/35">
+            <img
+              src="/images/kuva.jpg"
+              alt="ReSello-sovellus puhelimessa kirpputorilla"
+              onError={() => setShowAppImage(false)}
+              className={`aspect-[4/5] w-full object-cover ${
+                showAppImage ? '' : 'hidden'
+              }`}
+            />
+            {!showAppImage && (
+              <div className="flex aspect-[4/5] items-center justify-center text-brown/40">
+                <span className="text-xs font-medium uppercase tracking-widest">
                   Sovellusnäkymä
                 </span>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           {/* Oikea: jaoteltu lista */}

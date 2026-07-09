@@ -45,18 +45,19 @@ function SplitHero() {
         </div>
 
         <div>
-          <span className="block whitespace-nowrap font-bold leading-[0.85] tracking-tight text-brown [font-size:clamp(3.5rem,11vw,9rem)]">
-            ReSello
-          </span>
+          <img
+            src="/graphics/ReSello-hero.svg"
+            alt="ReSello"
+            className="h-auto w-[min(100%,30rem)]"
+          />
         </div>
       </div>
 
-      {/* Oikea palsta — hero-kuvan paikka */}
+      {/* Oikea palsta — hero-kuva */}
       <div className="relative min-h-[55vh] overflow-hidden bg-peach md:min-h-screen">
-        {/* Kuva näkyy, kun public/images/hero.webp on lisätty */}
         <img
-          src="/images/hero.webp"
-          alt="ReSello — kirpputori"
+          src="/images/kuva%204.jpg"
+          alt="Kirpputorin vaaterekkiä selaava asiakas"
           onError={() => setShowHeroImage(false)}
           className={`absolute inset-0 h-full w-full object-cover ${
             showHeroImage ? '' : 'hidden'
@@ -73,17 +74,17 @@ function SplitHero() {
         )}
 
         {/* Ylhäällä oikealla: some + CTA */}
-        <div className="absolute right-5 top-6 flex items-center gap-4 md:right-8">
+        <div className="absolute right-5 top-6 flex items-center gap-3 md:right-8">
           <a
             href="#varaa"
             aria-label="Instagram"
-            className={`text-brown transition-opacity hover:opacity-70 ${focus}`}
+            className={`flex h-9 w-9 items-center justify-center rounded-full bg-beige/85 text-brown backdrop-blur-sm transition-colors hover:bg-beige ${focus}`}
           >
             <Instagram className="h-5 w-5" />
           </a>
           <a
             href="#varaa"
-            className={`rounded-full border border-brown px-5 py-2 text-xs font-medium uppercase tracking-widest text-brown transition-colors hover:bg-brown hover:text-beige ${focus}`}
+            className={`rounded-full border border-brown bg-beige/85 px-5 py-2 text-xs font-medium uppercase tracking-widest text-brown backdrop-blur-sm transition-colors hover:bg-brown hover:text-beige ${focus}`}
           >
             Varaa esittely
           </a>
@@ -92,7 +93,7 @@ function SplitHero() {
         {/* Alhaalla oikealla */}
         <a
           href="#varaa"
-          className={`absolute bottom-6 right-6 inline-flex items-center gap-1.5 text-lg font-medium text-brown underline-offset-4 hover:underline md:bottom-8 md:right-8 ${focus}`}
+          className={`absolute bottom-6 right-6 inline-flex items-center gap-1.5 rounded-full bg-beige/85 px-4 py-2 text-base font-medium text-brown backdrop-blur-sm transition-colors hover:bg-beige md:bottom-8 md:right-8 ${focus}`}
         >
           Varaa esittely
           <ArrowUpRight className="h-5 w-5" />
