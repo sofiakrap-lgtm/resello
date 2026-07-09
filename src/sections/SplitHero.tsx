@@ -15,12 +15,12 @@ function SplitHero() {
     <section className="grid md:grid-cols-2">
       {/* Vasen palsta */}
       <div className="relative flex min-h-[88vh] flex-col overflow-hidden bg-beige px-6 py-8 md:min-h-screen md:px-10 md:py-10">
-        <nav className="flex flex-wrap items-center gap-x-7 gap-y-2 text-base font-medium text-brown">
+        <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium tracking-wide text-brown">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className={`text-brown/80 transition-colors hover:text-brown ${focus}`}
+              className={`text-brown/70 transition-colors hover:text-brown ${focus}`}
             >
               {link.label}
             </a>
@@ -28,12 +28,12 @@ function SplitHero() {
         </nav>
 
         <div className="flex flex-1 items-center">
-          <div className="max-w-xl py-12">
-            <h1 className="text-balance text-3xl font-bold leading-[1.12] tracking-tight text-brown sm:text-4xl md:text-5xl">
+          <div className="max-w-2xl py-12">
+            <h1 className="max-w-xl text-balance text-[1.9rem] font-bold leading-[1.08] tracking-tight text-brown sm:text-4xl md:text-[2.9rem]">
               Kirpputorisi koko toiminta yhdessä paikassa. Ja uusia asiakkaita
               kaupan päälle.
             </h1>
-            <p className="mt-6 max-w-md text-brown/75 md:text-lg">
+            <p className="mt-4 max-w-lg text-brown/70">
               ReSello hoitaa varaukset, kassan, tilitykset ja myynninseurannan.
               Samalla se tuo ostajat suoraan sinun kirpputorillesi.
             </p>
