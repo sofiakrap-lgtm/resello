@@ -43,6 +43,17 @@ npm run preview   # esikatsele tuotantobuild
 npm run typecheck # pelkkä tyyppitarkistus (tsc -b)
 ```
 
+## Kuvat ja grafiikat
+
+Lataa omat kuvat näihin kansioihin (esim. GitHubissa **Add file → Upload
+files**). Ne tarjoillaan sellaisenaan polusta `/…`.
+
+- `public/images/` — valokuvat. Sivu näyttää automaattisesti `hero.webp`
+  (heron oikea palsta) ja `app-screenshot.webp` (Ratkaisu-osion puhelinnäkymä),
+  jos ne on lisätty; muuten näkyy paikanpitäjä. Ohjeet: `public/images/README.md`.
+- `public/graphics/` — logot, ikonit ja SVG-grafiikat. Ohjeet:
+  `public/graphics/README.md`.
+
 ## Rakenne
 
 ```

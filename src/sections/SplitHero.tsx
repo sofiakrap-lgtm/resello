@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Instagram, ArrowUpRight, Image as ImageIcon } from 'lucide-react'
 
 const navLinks = [
@@ -11,6 +12,9 @@ const focus =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-beige rounded-md'
 
 function SplitHero() {
+  // Näyttää /images/hero.webp jos se on lisätty, muuten paikanpitäjän.
+  const [showHeroImage, setShowHeroImage] = useState(true)
+
   return (
     <section className="grid md:grid-cols-2">
       {/* Vasen palsta */}
@@ -48,14 +52,25 @@ function SplitHero() {
       </div>
 
       {/* Oikea palsta — hero-kuvan paikka */}
-      <div className="relative min-h-[55vh] bg-peach md:min-h-screen">
-        {/* Paikanpitäjä: vaihda oikea valokuva tähän */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-brown/45">
-          <ImageIcon className="h-10 w-10" />
-          <span className="text-sm font-medium uppercase tracking-widest">
-            Lisää hero-kuva
-          </span>
-        </div>
+      <div className="relative min-h-[55vh] overflow-hidden bg-peach md:min-h-screen">
+        {/* Kuva näkyy, kun public/images/hero.webp on lisätty */}
+        <img
+          src="/images/hero.webp"
+          alt="ReSello — kirpputori"
+          onError={() => setShowHeroImage(false)}
+          className={`absolute inset-0 h-full w-full object-cover ${
+            showHeroImage ? '' : 'hidden'
+          }`}
+        />
+        {/* Paikanpitäjä, kun kuvaa ei ole */}
+        {!showHeroImage && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-brown/45">
+            <ImageIcon className="h-10 w-10" />
+            <span className="text-sm font-medium uppercase tracking-widest">
+              Lisää hero-kuva
+            </span>
+          </div>
+        )}
 
         {/* Ylhäällä oikealla: some + CTA */}
         <div className="absolute right-5 top-6 flex items-center gap-4 md:right-8">
