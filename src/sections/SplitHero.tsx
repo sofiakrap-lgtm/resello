@@ -18,8 +18,8 @@ function SplitHero() {
   return (
     <section className="grid md:grid-cols-2">
       {/* Vasen palsta */}
-      <div className="relative flex min-h-[88vh] flex-col overflow-hidden bg-beige px-6 pb-2 pt-8 md:min-h-screen md:px-10 md:pb-4 md:pt-10">
-        <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium tracking-wide text-brown">
+      <div className="relative flex min-h-[88vh] flex-col overflow-hidden bg-beige px-6 pb-0 pt-5 md:min-h-screen md:px-10 md:pb-0 md:pt-6">
+        <nav className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs font-medium uppercase tracking-[0.08em] text-brown">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -34,8 +34,11 @@ function SplitHero() {
         <div className="flex flex-1 items-center">
           <div className="max-w-2xl py-12">
             <h1 className="max-w-xl text-balance text-[1.1rem] font-bold uppercase leading-[1.15] tracking-tight text-brown sm:text-[1.3rem] md:text-[1.65rem]">
-              Kirpputorisi koko toiminta yhdessä paikassa. Ja uusia asiakkaita
-              kaupan päälle.
+              Kirpputorisi koko toiminta{' '}
+              <span className="underline decoration-2 underline-offset-4">
+                yhdessä paikassa
+              </span>
+              . Ja uusia asiakkaita kaupan päälle.
             </h1>
             <p className="mt-4 max-w-lg text-brown/70">
               ReSello hoitaa varaukset, kassan, tilitykset ja myynninseurannan.
@@ -78,13 +81,13 @@ function SplitHero() {
           <a
             href="#varaa"
             aria-label="Instagram"
-            className={`flex h-9 w-9 items-center justify-center rounded-full bg-beige/85 text-brown backdrop-blur-sm transition-colors hover:bg-beige ${focus}`}
+            className={`flex h-9 w-9 items-center justify-center rounded-full border border-beige text-beige transition-colors hover:bg-beige hover:text-brown ${focus}`}
           >
             <Instagram className="h-5 w-5" />
           </a>
           <a
             href="#varaa"
-            className={`rounded-full border border-brown bg-beige/85 px-5 py-2 text-xs font-medium uppercase tracking-widest text-brown backdrop-blur-sm transition-colors hover:bg-brown hover:text-beige ${focus}`}
+            className={`rounded-full border border-beige px-5 py-2 text-xs font-medium uppercase tracking-widest text-beige transition-colors hover:bg-beige hover:text-brown ${focus}`}
           >
             Varaa esittely
           </a>
@@ -93,7 +96,7 @@ function SplitHero() {
         {/* Alhaalla oikealla */}
         <a
           href="#varaa"
-          className={`absolute bottom-6 right-6 inline-flex items-center gap-1.5 rounded-full bg-beige/85 px-4 py-2 text-base font-medium text-brown backdrop-blur-sm transition-colors hover:bg-beige md:bottom-8 md:right-8 ${focus}`}
+          className={`absolute bottom-6 right-6 inline-flex items-center gap-1.5 rounded-full border border-beige px-4 py-2 text-base font-medium text-beige transition-colors hover:bg-beige hover:text-brown md:bottom-8 md:right-8 ${focus}`}
         >
           Varaa esittely
           <ArrowUpRight className="h-5 w-5" />
