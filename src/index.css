@@ -2,11 +2,8 @@
 
 @theme {
   --font-sans: "Montserrat", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: "Nourd", "Montserrat", ui-sans-serif, sans-serif;
-  --font-heading: "Fraunces", "Playfair Display", Georgia, serif;
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Jost", "Inter", ui-sans-serif, sans-serif;
-  --font-serif: "EB Garamond", Georgia, serif;
-  --font-hand: "Caveat", cursive;
 
   --color-beige: #faf1e0;
   --color-card: #fffbf4;
@@ -30,7 +27,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Leipäteksti Jostilla; otsikot Montserratilla (display); UI/labelit Montserrat */
+  /* Yksi yhtenäinen typografialinja: otsikot Montserrat, leipäteksti Jost */
   p,
   li {
     font-family: var(--font-body);

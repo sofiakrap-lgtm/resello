@@ -105,7 +105,11 @@ function EverythingHub() {
   }, [])
 
   return (
-    <section ref={rootRef} className="hub bg-beige px-4 py-14 sm:px-6 md:py-20">
+    <section
+      id="ominaisuudet"
+      ref={rootRef}
+      className="hub scroll-mt-24 bg-beige px-4 py-14 sm:px-6 md:py-20"
+    >
       <div className="hub-card mx-auto max-w-6xl rounded-[2rem] bg-brown px-6 py-12 text-beige md:px-10 md:py-16">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-[2.5rem]">

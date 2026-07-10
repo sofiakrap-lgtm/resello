@@ -11,10 +11,10 @@ function Connect() {
     <section className="px-6 py-20 md:py-28">
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2 md:gap-16">
         <div>
-          <h2 className="font-heading text-3xl font-medium italic tracking-tight text-brown sm:text-4xl">
+          <h2 className="text-[1.05rem] font-bold tracking-tight text-brown sm:text-[1.25rem] md:text-[1.7rem]">
             Yhdistämme ihmisiä ja vaatteita.
           </h2>
-          <p className="mt-5 max-w-md font-serif text-xl italic text-brown/75">
+          <p className="mt-5 max-w-md text-xl text-brown/75">
             ReSello tuo kirpputorit, myyjät ja ostajat yhteen — ja tekee
             kiertotaloudesta arjen juttu.
           </p>

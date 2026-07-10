@@ -4,9 +4,6 @@ function FinalCta() {
   return (
     <section id="varaa" className="scroll-mt-24 px-6 py-24 md:py-32">
       <div className="mx-auto max-w-2xl text-center">
-        <p className="mb-2 -rotate-2 font-hand text-2xl text-taupe">
-          ilman sitoutumista
-        </p>
         <h2 className="text-[1.05rem] font-bold tracking-tight text-brown sm:text-[1.25rem] md:text-[1.7rem]">
           Kokeile ilmaiseksi tai varaa esittely.
         </h2>

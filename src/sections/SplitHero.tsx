@@ -3,7 +3,6 @@ import { Instagram, ArrowUpRight, Image as ImageIcon } from 'lucide-react'
 
 const navLinks = [
   { href: '#ominaisuudet', label: 'Ominaisuudet' },
-  { href: '#nakyvyys', label: 'Näkyvyys' },
   { href: '#hinnoittelu', label: 'Hinnoittelu' },
   { href: '#varaa', label: 'Yhteystiedot' },
 ]
@@ -40,7 +39,7 @@ function SplitHero() {
               </span>
               . Ja uusia asiakkaita kaupan päälle.
             </h1>
-            <p className="mt-4 max-w-lg font-serif text-lg italic text-brown/70">
+            <p className="mt-4 max-w-lg text-lg text-brown/70">
               ReSello hoitaa varaukset, kassan, tilitykset ja myynninseurannan.
               Samalla se tuo ostajat suoraan sinun kirpputorillesi.
             </p>
@@ -93,10 +92,22 @@ function SplitHero() {
           </a>
         </div>
 
+        {/* Koristegrafiikka (grafiikka 2) taustan värinä oikeassa alakulmassa */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 810 809.999993"
+          className="pointer-events-none absolute -bottom-16 -right-16 h-64 w-64 text-brown/25 md:h-80 md:w-80"
+        >
+          <path
+            fill="currentColor"
+            d="M 740.445312 174.984375 C 690.042969 151.953125 618.199219 195.582031 561.488281 276.675781 C 558.871094 227.066406 541.636719 189.371094 510.105469 174.984375 C 459.792969 151.953125 387.949219 195.582031 331.242188 276.675781 C 328.578125 227.066406 311.339844 189.371094 279.855469 174.984375 C 215.625 145.507812 116.363281 224.917969 58.25 351.792969 C 0.140625 478.664062 5.183594 605.722656 69.460938 635.152344 C 119.863281 658.179688 191.710938 614.550781 248.417969 533.457031 C 251.082031 583.066406 268.316406 620.765625 299.804688 635.152344 C 350.207031 658.179688 422.003906 614.550781 478.710938 533.457031 C 481.375 583.066406 498.613281 620.765625 530.097656 635.152344 C 594.421875 664.535156 693.589844 585.402344 751.75 458.34375 C 809.90625 331.285156 804.769531 204.414062 740.445312 174.984375 Z M 740.445312 174.984375 "
+          />
+        </svg>
+
         {/* Alhaalla oikealla */}
         <a
           href="#varaa"
-          className={`absolute bottom-6 right-6 inline-flex items-center gap-1.5 rounded-full border border-beige px-4 py-2 text-base font-medium text-beige transition-colors hover:bg-beige hover:text-brown md:bottom-8 md:right-8 ${focus}`}
+          className={`absolute bottom-6 right-6 z-10 inline-flex items-center gap-1.5 rounded-full border border-beige px-4 py-2 text-base font-medium text-beige transition-colors hover:bg-beige hover:text-brown md:bottom-8 md:right-8 ${focus}`}
         >
           Ota yhteyttä
           <ArrowUpRight className="h-5 w-5" />
