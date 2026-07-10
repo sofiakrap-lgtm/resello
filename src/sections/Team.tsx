@@ -1,5 +1,3 @@
-import Eyebrow from '../components/Eyebrow.tsx'
-
 function Team() {
   return (
     <section className="px-6 py-20 md:py-24">
@@ -12,8 +10,7 @@ function Team() {
           />
         </div>
         <div>
-          <Eyebrow>Kuka rakentaa</Eyebrow>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-brown sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-brown sm:text-4xl">
             Rakennettu kirpputorialan sisältä.
           </h2>
           <p className="mt-5 text-lg text-brown/75">

@@ -1,5 +1,4 @@
 import { QrCode } from 'lucide-react'
-import Eyebrow from '../components/Eyebrow.tsx'
 
 function Visibility() {
   return (
@@ -10,8 +9,7 @@ function Visibility() {
             <div className="mb-6 inline-flex rounded-2xl bg-brown/10 p-4 text-brown">
               <QrCode className="h-7 w-7" />
             </div>
-            <Eyebrow>Miksi ReSello</Eyebrow>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-brown sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-brown sm:text-4xl">
               Kirpputorisi ei jää enää piiloon.
             </h2>
             <p className="mt-5 text-lg text-brown/80">

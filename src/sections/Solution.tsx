@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Eyebrow from '../components/Eyebrow.tsx'
 
 interface Item {
   title: string
@@ -35,8 +34,7 @@ function Solution() {
     <section id="ominaisuudet" className="scroll-mt-24 px-6 py-20 md:py-24">
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
-          <Eyebrow>Ratkaisu</Eyebrow>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-brown sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-brown sm:text-4xl">
             Yksi järjestelmä koko kirpputorille.
           </h2>
           <p className="mt-5 text-lg text-brown/75">
