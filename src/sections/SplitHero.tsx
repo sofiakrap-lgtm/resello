@@ -18,7 +18,7 @@ function SplitHero() {
   return (
     <section className="grid md:grid-cols-2">
       {/* Vasen palsta */}
-      <div className="relative flex min-h-[88vh] flex-col overflow-hidden bg-beige px-6 py-8 md:min-h-screen md:px-10 md:py-10">
+      <div className="relative flex min-h-[88vh] flex-col overflow-hidden bg-beige px-6 pb-2 pt-8 md:min-h-screen md:px-10 md:pb-4 md:pt-10">
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium tracking-wide text-brown">
           {navLinks.map((link) => (
             <a
