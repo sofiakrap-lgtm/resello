@@ -19,7 +19,7 @@ function SplitHero() {
     <section className="grid border-b border-brown md:grid-cols-2">
       {/* Vasen palsta */}
       <div className="relative flex min-h-[88vh] flex-col overflow-hidden bg-beige px-6 pb-0 pt-5 md:min-h-screen md:px-10 md:pb-0 md:pt-6">
-        <nav className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs font-medium uppercase tracking-[0.08em] text-brown">
+        <nav className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs font-medium uppercase tracking-[0.16em] text-brown">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -40,7 +40,7 @@ function SplitHero() {
               </span>
               . Ja uusia asiakkaita kaupan päälle.
             </h1>
-            <p className="mt-4 max-w-lg text-brown/70">
+            <p className="mt-4 max-w-lg font-serif text-lg italic text-brown/70">
               ReSello hoitaa varaukset, kassan, tilitykset ja myynninseurannan.
               Samalla se tuo ostajat suoraan sinun kirpputorillesi.
             </p>
