@@ -47,13 +47,13 @@ function PriceTimeline() {
             i += 1
             if (i < n) {
               select(i)
-              timers.push(window.setTimeout(step, 520))
+              timers.push(window.setTimeout(step, 760))
             } else {
               // Ikkunat auki — palataan aloitushintaan (99 €).
-              timers.push(window.setTimeout(() => select(0), 650))
+              timers.push(window.setTimeout(() => select(0), 950))
             }
           }
-          timers.push(window.setTimeout(step, 640))
+          timers.push(window.setTimeout(step, 820))
         }
       },
       { threshold: 0.3 },
@@ -103,13 +103,26 @@ function PriceTimeline() {
     }
   }
 
+  // Ruskean eri sävyt: alku haalein, loppu tummin. Väri ei muutu valinnasta.
+  const shades = [
+    'bg-[#e7d8c6] text-brown',
+    'bg-[#cbb094] text-brown',
+    'bg-[#9e7c5c] text-beige',
+    'bg-[#6b4a2e] text-beige',
+    'bg-[#3c2415] text-beige',
+  ]
+
   const card = (i: number) => {
     const t = tiers[i]
     const isActive = i === active
     return (
       <div
-        className={`rounded-2xl px-5 py-4 transition-colors ${
-          isActive ? 'bg-brown text-beige' : 'bg-bluegrey/25 text-brown'
+        className={`rounded-2xl px-5 py-4 transition-shadow duration-300 ${
+          shades[i]
+        } ${
+          isActive
+            ? 'ring-2 ring-brown ring-offset-2 ring-offset-bluegrey'
+            : 'ring-0'
         }`}
       >
         <div className="text-sm font-medium">{t.size}</div>
@@ -123,7 +136,7 @@ function PriceTimeline() {
   return (
     <div
       ref={rootRef}
-      className="mt-10 rounded-3xl border border-brown/10 bg-card px-6 py-10 md:px-10"
+      className="mt-10 rounded-3xl border border-brown/15 bg-bluegrey px-6 py-10 md:px-10"
     >
       {/* Työpöytä: vaaka-aikajana */}
       <div className="relative hidden h-80 md:block">
@@ -139,7 +152,7 @@ function PriceTimeline() {
                 tabIndex={-1}
                 onClick={() => select(i)}
                 style={{ left: `${pct(i)}%` }}
-                className={`absolute w-40 -translate-x-1/2 text-left transition-all duration-500 ease-out ${
+                className={`absolute w-40 -translate-x-1/2 text-left transition-all duration-700 ease-[cubic-bezier(0.55,0,0.1,1)] ${
                   above
                     ? 'bottom-[calc(50%+2rem)]'
                     : 'top-[calc(50%+2rem)]'
@@ -167,7 +180,7 @@ function PriceTimeline() {
           >
             <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-brown/25" />
             <div
-              className="absolute left-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-brown transition-[width] duration-500 ease-out"
+              className="absolute left-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-brown transition-[width] duration-700 ease-[cubic-bezier(0.55,0,0.1,1)]"
               style={{ width: `${pct(active)}%` }}
             />
             {tiers.map((t, i) => (
@@ -189,7 +202,7 @@ function PriceTimeline() {
               aria-label="Myyntipaikkojen määrä"
               onKeyDown={onKeyDown}
               style={{ left: `${pct(active)}%` }}
-              className="absolute top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 cursor-grab rounded-full border-[3px] border-brown bg-beige shadow-sm transition-[left] duration-500 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-card active:cursor-grabbing"
+              className="absolute top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 cursor-grab rounded-full border-[3px] border-brown bg-beige shadow-sm transition-[left] duration-700 ease-[cubic-bezier(0.55,0,0.1,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-bluegrey active:cursor-grabbing"
             />
           </div>
         </div>
@@ -197,26 +210,26 @@ function PriceTimeline() {
 
       {/* Mobiili: pystyaikajana */}
       <div className="relative pl-8 md:hidden">
-        <div className="absolute bottom-3 left-[7px] top-3 w-0.5 bg-brown/15" />
+        <div className="absolute bottom-3 left-[7px] top-3 w-0.5 bg-brown/25" />
         <div className="space-y-4">
           {tiers.map((t, i) => {
             const open = i <= maxOpen
             return (
               <div
                 key={t.tick}
-                className={`relative transition-all duration-500 ease-out ${
+                className={`relative transition-all duration-700 ease-[cubic-bezier(0.55,0,0.1,1)] ${
                   open ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'
                 }`}
               >
                 <span
-                  className={`absolute -left-[1.6rem] top-4 h-3.5 w-3.5 rounded-full ring-4 ring-card transition-colors ${
-                    i === active ? 'bg-brown' : 'bg-brown/30'
+                  className={`absolute -left-[1.6rem] top-4 h-3.5 w-3.5 rounded-full ring-4 ring-bluegrey transition-colors ${
+                    i === active ? 'bg-brown' : 'bg-brown/40'
                   }`}
                 />
                 <button
                   type="button"
                   onClick={() => select(i)}
-                  className="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-card rounded-2xl"
+                  className="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-bluegrey rounded-2xl"
                 >
                   {card(i)}
                 </button>

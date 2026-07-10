@@ -110,7 +110,17 @@ function EverythingHub() {
       ref={rootRef}
       className="hub scroll-mt-24 bg-beige px-4 py-14 sm:px-6 md:py-20"
     >
-      <div className="hub-card mx-auto max-w-6xl rounded-[2rem] bg-brown px-6 py-12 text-beige md:px-10 md:py-16">
+      <div className="hub-card relative mx-auto max-w-6xl rounded-[2rem] bg-brown px-6 py-12 text-beige md:px-10 md:py-16">
+        {/* Pyörivä merkki (grafiikka 4) — ilmestyy animaation lopuksi */}
+        <div className="hub-badge absolute -left-4 -top-4 z-30 h-24 w-24 md:-left-7 md:-top-7 md:h-28 md:w-28">
+          <img
+            src="/graphics/grafiikka-4.png"
+            alt=""
+            aria-hidden="true"
+            className="hub-badge-spin h-full w-full"
+          />
+        </div>
+
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-[2.5rem]">
             Tässä on kaikki.
@@ -156,7 +166,7 @@ function EverythingHub() {
                   ...(n.side === 'l' ? { left: 0 } : { right: 0 }),
                   transitionDelay: `${260 + i * 70}ms`,
                 }}
-                className="hub-node absolute z-20 flex w-40 items-center gap-3 rounded-2xl border border-beige/20 bg-beige/[0.08] px-4 py-3 backdrop-blur-sm"
+                className="hub-node absolute z-20 flex w-44 items-center gap-3 rounded-2xl border border-beige/20 bg-beige/[0.08] px-4 py-3 backdrop-blur-sm"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-beige/15 text-beige">
                   <Icon className="h-4 w-4" />

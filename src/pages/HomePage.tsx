@@ -1,18 +1,22 @@
+import SiteHeader from '../sections/SiteHeader.tsx'
 import SplitHero from '../sections/SplitHero.tsx'
 import EverythingHub from '../sections/EverythingHub.tsx'
 import Pricing from '../sections/Pricing.tsx'
 import Connect from '../sections/Connect.tsx'
+import Gallery from '../sections/Gallery.tsx'
 import FinalCta from '../sections/FinalCta.tsx'
 import Footer from '../sections/Footer.tsx'
 
 function HomePage() {
   return (
-    <div className="min-h-screen bg-beige">
+    <div id="top" className="min-h-screen bg-beige">
+      <SiteHeader />
       <SplitHero />
       <main>
         <EverythingHub />
         <Pricing />
         <Connect />
+        <Gallery />
         <FinalCta />
       </main>
       <Footer />
