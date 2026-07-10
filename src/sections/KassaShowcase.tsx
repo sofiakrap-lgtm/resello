@@ -49,7 +49,7 @@ function KassaShowcase() {
     <section ref={rootRef} className="kassa px-6 pb-12 pt-20 md:pb-16 md:pt-28">
       <div className="mx-auto max-w-6xl">
         <div className="reveal-item mx-auto max-w-2xl text-center">
-          <h2 className="text-[1.05rem] font-bold tracking-tight text-brown sm:text-[1.25rem] md:text-[1.7rem]">
+          <h2 className="text-[1.1rem] font-bold tracking-tight text-brown sm:text-[1.35rem] md:text-[1.9rem]">
             Tässä on kassa.
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-lg text-brown/75">
@@ -75,11 +75,11 @@ function KassaShowcase() {
                   <img
                     src="/graphics/grafiikka-9.png"
                     alt="Helppo työkalu"
-                    className="kassa-badge-anim absolute -right-5 -top-8 w-20 md:w-24"
+                    className="kassa-badge-anim absolute -right-4 -top-4 w-20 md:w-24"
                   />
                 )}
               </div>
-              <p className="mx-auto mt-5 max-w-xs text-brown/80">{item.title}</p>
+              <p className="mx-auto mt-3 max-w-xs text-brown/80">{item.title}</p>
             </div>
           ))}
         </div>

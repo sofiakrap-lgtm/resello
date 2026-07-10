@@ -25,9 +25,9 @@ function Footer() {
           <a
             href="#varaa"
             aria-label="Instagram"
-            className={`flex h-10 w-10 items-center justify-center rounded-full border border-beige/60 text-beige transition-colors hover:border-beige ${focus}`}
+            className={`text-beige/80 transition-colors hover:text-beige ${focus}`}
           >
-            <Instagram className="h-5 w-5" />
+            <Instagram className="h-6 w-6" />
           </a>
         </div>
 

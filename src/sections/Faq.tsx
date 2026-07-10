@@ -45,7 +45,7 @@ function Faq() {
           </p>
           <a
             href="#varaa"
-            className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium uppercase tracking-[0.16em] text-brown transition-opacity hover:opacity-70"
+            className="mt-6 inline-flex items-center gap-1.5 rounded-full border-2 border-brown px-5 py-2.5 text-sm font-medium uppercase tracking-[0.16em] text-brown transition-colors hover:bg-brown hover:text-beige focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-beige"
           >
             Varaa esittely
             <ArrowUpRight className="h-4 w-4" />

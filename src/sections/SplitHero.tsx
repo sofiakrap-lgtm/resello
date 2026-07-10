@@ -100,7 +100,7 @@ function SplitHero() {
         {/* Alhaalla oikealla */}
         <a
           href="#varaa"
-          className={`absolute bottom-6 right-6 z-10 inline-flex items-center gap-1.5 rounded-full border border-beige px-4 py-2 text-base font-medium text-beige transition-colors hover:bg-beige hover:text-brown md:bottom-8 md:right-8 ${focus}`}
+          className={`absolute bottom-6 right-6 z-10 inline-flex items-center gap-1.5 rounded-full border-2 border-beige px-4 py-2 text-base font-bold text-beige transition-colors hover:bg-beige hover:text-brown md:bottom-8 md:right-8 ${focus}`}
         >
           Ota yhteyttä
           <ArrowUpRight className="h-5 w-5" />
