@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans: "Archivo", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-serif: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-body: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 
   --color-beige: #faf1e0;
   --color-card: #fffbf4;
@@ -26,10 +26,10 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Leipäteksti antiikvalla; otsikot ja UI pysyvät groteskilla */
+  /* Leipäteksti Montserratilla; otsikot ja UI Archivolla */
   p,
   li {
-    font-family: var(--font-serif);
+    font-family: var(--font-body);
   }
   h1,
   h2,
