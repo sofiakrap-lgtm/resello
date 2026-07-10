@@ -26,25 +26,29 @@ const nodes: Node[] = [
   { icon: Share2, label: 'Kirjanpito ja some', side: 'r', y: 78 },
 ]
 
-/** Vaakasuora tabletti (pädi). */
+/** Vaakasuora tabletti (pädi), vaalea näyttö ja ReSello-logo. */
 function Device({ className = '' }: { className?: string }) {
   return (
     <div
-      className={`relative aspect-[4/3] rounded-2xl border-4 border-beige/90 bg-brown shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] ${className}`}
+      className={`relative aspect-[4/3] rounded-2xl bg-beige p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] ${className}`}
     >
-      <div className="absolute inset-[0.45rem] flex flex-col gap-2 rounded-xl bg-beige/[0.07] p-3">
+      <div className="flex h-full flex-col gap-2 rounded-xl bg-card p-3">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-bold text-beige">ReSello</span>
-          <span className="h-2 w-10 rounded-full bg-beige/20" />
+          <img
+            src="/graphics/ReSello-hero.svg"
+            alt="ReSello"
+            className="h-3.5 w-auto"
+          />
+          <span className="h-2 w-8 rounded-full bg-brown/15" />
         </div>
         <div className="mt-1 grid grid-cols-3 gap-2">
-          <span className="h-9 rounded-md bg-beige/15" />
-          <span className="h-9 rounded-md bg-beige/15" />
-          <span className="h-9 rounded-md bg-beige/15" />
+          <span className="h-9 rounded-md bg-brown/10" />
+          <span className="h-9 rounded-md bg-brown/10" />
+          <span className="h-9 rounded-md bg-brown/10" />
         </div>
-        <span className="mt-1 h-2 w-3/4 rounded-full bg-beige/20" />
-        <span className="h-2 w-full rounded-full bg-beige/12" />
-        <span className="mt-auto h-6 w-full rounded-lg bg-beige/20" />
+        <span className="mt-1 h-2 w-3/4 rounded-full bg-brown/15" />
+        <span className="h-2 w-full rounded-full bg-brown/10" />
+        <span className="mt-auto h-6 w-full rounded-lg bg-brown/12" />
       </div>
     </div>
   )
@@ -54,6 +58,7 @@ function EverythingHub() {
   const rootRef = useRef<HTMLElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
   const nodeRefs = useRef<(HTMLDivElement | null)[]>([])
+  const lineRefs = useRef<(SVGLineElement | null)[]>([])
 
   useEffect(() => {
     const measure = () => {
@@ -61,12 +66,23 @@ function EverythingHub() {
       if (!stage) return
       const cx = stage.clientWidth / 2
       const cy = stage.clientHeight / 2
-      nodeRefs.current.forEach((el) => {
+      nodes.forEach((n, i) => {
+        const el = nodeRefs.current[i]
         if (!el) return
         const x = el.offsetLeft + el.offsetWidth / 2
         const y = el.offsetTop + el.offsetHeight / 2
         el.style.setProperty('--dx', `${cx - x}px`)
         el.style.setProperty('--dy', `${cy - y}px`)
+        // Viiva päättyy solmun sisäreunaan (missä kortti alkaa).
+        const line = lineRefs.current[i]
+        if (line) {
+          const innerX =
+            n.side === 'l' ? el.offsetLeft + el.offsetWidth : el.offsetLeft
+          line.setAttribute('x1', String(cx))
+          line.setAttribute('y1', String(cy))
+          line.setAttribute('x2', String(innerX))
+          line.setAttribute('y2', String(y))
+        }
       })
     }
     measure()
@@ -106,13 +122,12 @@ function EverythingHub() {
           className="relative mx-auto mt-8 hidden h-[24rem] md:block"
         >
           <svg className="pointer-events-none absolute inset-0 h-full w-full overflow-visible">
-            {nodes.map((n) => (
+            {nodes.map((n, i) => (
               <line
                 key={n.label}
-                x1="50%"
-                y1="50%"
-                x2={n.side === 'l' ? '0%' : '100%'}
-                y2={`${n.y}%`}
+                ref={(el) => {
+                  lineRefs.current[i] = el
+                }}
                 pathLength={1}
                 className="hub-line"
               />

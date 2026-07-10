@@ -1,7 +1,6 @@
 import SplitHero from '../sections/SplitHero.tsx'
 import EverythingHub from '../sections/EverythingHub.tsx'
-import Problem from '../sections/Problem.tsx'
-import Solution from '../sections/Solution.tsx'
+import ValueProps from '../sections/ValueProps.tsx'
 import Visibility from '../sections/Visibility.tsx'
 import Pricing from '../sections/Pricing.tsx'
 import Migration from '../sections/Migration.tsx'
@@ -15,8 +14,7 @@ function HomePage() {
       <SplitHero />
       <main>
         <EverythingHub />
-        <Problem />
-        <Solution />
+        <ValueProps />
         <Visibility />
         <Pricing />
         <Migration />
