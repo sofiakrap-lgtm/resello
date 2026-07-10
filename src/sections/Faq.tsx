@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Plus } from 'lucide-react'
+import { Plus, ArrowUpRight } from 'lucide-react'
 
 const faqs = [
   {
@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     q: 'Tarvitsenko erityistä laitteistoa?',
-    a: 'Et. ReSello toimii tabletilla tai tietokoneella — ei kilojen rautaa. Käteinen, kortti ja lähimaksu onnistuvat kaikki.',
+    a: 'Et. ReSello toimii tabletilla tai tietokoneella, ei kilojen rautaa. Käteinen, kortti ja lähimaksu onnistuvat kaikki.',
   },
   {
     q: 'Miten myyjien tilitykset hoituvat?',
@@ -33,12 +33,27 @@ function Faq() {
 
   return (
     <section className="px-6 py-20 md:py-28">
-      <div className="mx-auto max-w-3xl">
-        <h2 className="text-center text-[1.05rem] font-bold tracking-tight text-brown sm:text-[1.25rem] md:text-[1.7rem]">
-          Usein kysyttyä
-        </h2>
+      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
+        {/* Vasen palsta: otsikko + esittely */}
+        <div className="reveal-item md:sticky md:top-24 md:self-start">
+          <h2 className="text-balance text-[1.2rem] font-bold leading-[1.15] tracking-tight text-brown sm:text-[1.5rem] md:text-[2rem]">
+            Onko kysyttävää? Autamme mielellämme.
+          </h2>
+          <p className="mt-5 max-w-sm text-lg text-brown/75">
+            Kokosimme yleisimmät kysymykset. Jos jokin jää mietityttämään, varaa
+            maksuton esittely, niin jutellaan lisää.
+          </p>
+          <a
+            href="#varaa"
+            className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium uppercase tracking-[0.16em] text-brown transition-opacity hover:opacity-70"
+          >
+            Varaa esittely
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
+        </div>
 
-        <div className="mt-10 flex flex-col gap-3">
+        {/* Oikea palsta: haitari */}
+        <div className="reveal-item flex flex-col gap-3">
           {faqs.map((item, i) => {
             const isOpen = open === i
             return (

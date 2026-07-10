@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 
-/** "Entä jos minulla on jo toinen kassajärjestelmä?" — läppäri liukuu esiin. */
+/** "Entä jos minulla on jo toinen kassajärjestelmä?" — teksti vasemmalla,
+ *  kuva + läppäri oikealla puolikkaalla. */
 function Migration() {
   const rootRef = useRef<HTMLElement>(null)
 
@@ -21,32 +22,34 @@ function Migration() {
   }, [])
 
   return (
-    <section ref={rootRef} className="migrate relative overflow-hidden">
-      {/* Taustakuva + tumma sävy */}
-      <img
-        src="/images/kuva%205.jpg"
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-      <div className="absolute inset-0 bg-brown/80" />
-
-      <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 md:grid-cols-2 md:gap-16 md:py-28">
-        <div>
-          <h2 className="text-balance text-[1.1rem] font-bold leading-[1.2] text-beige sm:text-[1.35rem] md:text-[1.8rem]">
+    <section ref={rootRef} className="migrate grid md:grid-cols-2">
+      {/* Vasen puolikas: pelkkä tausta ja teksti */}
+      <div className="flex items-center bg-brown px-6 py-16 md:px-14 md:py-28">
+        <div className="max-w-md">
+          <h2 className="text-balance text-[1.1rem] font-bold leading-[1.2] text-beige sm:text-[1.35rem] md:text-[1.9rem]">
             Entä jos minulla on jo toinen kassajärjestelmä?
           </h2>
-          <p className="mt-5 max-w-md text-lg text-beige/80">
-            Ei hätää — me pidämme huolen datan siirrosta, niin että tiedot
+          <p className="mt-5 text-lg text-beige/80">
+            Ei hätää. Me pidämme huolen datan siirrosta, niin että tiedot
             asiakkaistasi, tuotteistasi ja myyjistäsi pysyvät tallessa.
           </p>
         </div>
+      </div>
 
-        <div className="migrate-laptop">
+      {/* Oikea puolikas: kuva + läppäri */}
+      <div className="relative min-h-[18rem] overflow-hidden md:min-h-0">
+        <img
+          src="/images/kuva%205.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-brown/45" />
+        <div className="migrate-laptop relative flex h-full items-center justify-center p-8 md:p-12">
           <img
             src="/graphics/grafiikka-5.png"
             alt="ReSellon näkymä kannettavalla"
-            className="mx-auto w-full max-w-lg drop-shadow-2xl"
+            className="w-full max-w-md drop-shadow-2xl"
           />
         </div>
       </div>

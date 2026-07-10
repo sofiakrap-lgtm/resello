@@ -34,7 +34,7 @@ function SplitHero() {
           <div className="max-w-2xl py-12">
             <h1 className="max-w-xl text-balance text-[1.1rem] font-bold leading-[1.15] tracking-tight text-brown sm:text-[1.3rem] md:text-[1.65rem]">
               Kirpputorisi koko toiminta{' '}
-              <span className="underline decoration-2 underline-offset-4">
+              <span className="box-decoration-clone rounded bg-brown px-1.5 py-0.5 text-beige">
                 yhdessä paikassa
               </span>
               . Ja uusia asiakkaita kaupan päälle.

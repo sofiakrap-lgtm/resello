@@ -24,7 +24,7 @@ const nodes: Node[] = [
     label: 'Varaukset ja kassa',
     side: 'l',
     y: 22,
-    info: 'Ota vastaan varauksia ja maksut samasta näkymästä — käteinen, kortti ja lähimaksu.',
+    info: 'Ota vastaan varauksia ja maksut samasta näkymästä: käteinen, kortti ja lähimaksu.',
   },
   {
     icon: TrendingUp,
@@ -211,12 +211,8 @@ function EverythingHub() {
                 <span className="text-sm font-medium leading-tight">
                   {n.label}
                 </span>
-                {/* Info-ikkuna hoverilla */}
-                <div
-                  className={`pointer-events-none absolute top-[calc(100%+0.5rem)] z-40 w-56 rounded-xl bg-beige p-3 text-left text-xs leading-snug text-brown/80 opacity-0 shadow-[0_15px_35px_-15px_rgba(0,0,0,0.6)] transition-opacity duration-200 group-hover:opacity-100 ${
-                    n.side === 'l' ? 'left-0' : 'right-0'
-                  }`}
-                >
+                {/* Info-ikkuna hoverilla — keskitetty, väljempi */}
+                <div className="pointer-events-none absolute left-1/2 top-[calc(100%+0.6rem)] z-40 w-64 -translate-x-1/2 rounded-2xl bg-beige p-4 text-center text-sm leading-relaxed text-brown/80 opacity-0 shadow-[0_15px_35px_-15px_rgba(0,0,0,0.6)] transition-opacity duration-200 group-hover:opacity-100">
                   {n.info}
                 </div>
               </div>

@@ -16,7 +16,7 @@ function FinalCta() {
       <div className="absolute inset-0 bg-brown/45" />
 
       {/* Sisältö ikkunassa keskellä */}
-      <div className="relative mx-auto max-w-xl rounded-3xl bg-beige/95 px-6 py-12 text-center shadow-2xl backdrop-blur-sm md:px-12 md:py-16">
+      <div className="reveal-item relative mx-auto max-w-xl rounded-3xl bg-beige/95 px-6 py-12 text-center shadow-2xl backdrop-blur-sm md:px-12 md:py-16">
         <h2 className="text-[1.05rem] font-bold tracking-tight text-brown sm:text-[1.25rem] md:text-[1.7rem]">
           Kokeile ilmaiseksi tai varaa esittely.
         </h2>
