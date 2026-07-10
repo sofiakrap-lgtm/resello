@@ -40,3 +40,64 @@
     font-family: var(--font-sans);
   }
 }
+
+/* "Tässä on kaikki" — ominaisuudet leviävät keskuslaitteesta näkyviin */
+.hub-device {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.92);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.hub.in .hub-device {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.hub-node {
+  opacity: 0;
+  transform: translate(
+      calc(-50% + var(--dx, 0px)),
+      calc(-50% + var(--dy, 0px))
+    )
+    scale(0.6);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.hub.in .hub-node {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.hub-line {
+  stroke: rgba(250, 241, 224, 0.25);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  transition:
+    stroke-dashoffset 0.7s ease 0.15s,
+    opacity 0.4s ease;
+}
+.hub.in .hub-line {
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
+.hub-mnode {
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.hub.in .hub-mnode {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hub-device,
+  .hub-node,
+  .hub-line,
+  .hub-mnode {
+    transition: none;
+  }
+}

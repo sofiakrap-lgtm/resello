@@ -1,4 +1,5 @@
 import SplitHero from '../sections/SplitHero.tsx'
+import EverythingHub from '../sections/EverythingHub.tsx'
 import Problem from '../sections/Problem.tsx'
 import Solution from '../sections/Solution.tsx'
 import Visibility from '../sections/Visibility.tsx'
@@ -13,6 +14,7 @@ function HomePage() {
     <div className="min-h-screen bg-beige">
       <SplitHero />
       <main>
+        <EverythingHub />
         <Problem />
         <Solution />
         <Visibility />
