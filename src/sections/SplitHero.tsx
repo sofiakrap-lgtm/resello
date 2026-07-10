@@ -33,7 +33,7 @@ function SplitHero() {
 
         <div className="flex flex-1 items-center">
           <div className="max-w-2xl py-12">
-            <h1 className="max-w-xl text-balance text-[1.9rem] font-bold leading-[1.08] tracking-tight text-brown sm:text-4xl md:text-[2.9rem]">
+            <h1 className="max-w-xl text-balance text-[1.35rem] font-bold uppercase leading-[1.12] tracking-tight text-brown sm:text-[1.6rem] md:text-[2rem]">
               Kirpputorisi koko toiminta yhdessä paikassa. Ja uusia asiakkaita
               kaupan päälle.
             </h1>
