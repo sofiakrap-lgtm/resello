@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system,
-    sans-serif;
+  --font-sans: "Archivo", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
 
   --color-beige: #faf1e0;
   --color-card: #fffbf4;
@@ -22,6 +22,21 @@
     background-color: var(--color-beige);
     color: var(--color-brown);
     font-family: var(--font-sans);
+    font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* Leipäteksti antiikvalla; otsikot ja UI pysyvät groteskilla */
+  p,
+  li {
+    font-family: var(--font-serif);
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
   }
 }

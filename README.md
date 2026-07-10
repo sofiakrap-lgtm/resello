@@ -28,8 +28,9 @@ kirpputorien omistajille.
 
 ## Brändi
 
-- **Fontti:** Hanken Grotesk (Google Fonts) — otsikot 700, leipäteksti 400,
-  korostukset 500.
+- **Fontit:** Archivo (otsikot ja UI, groteski) + Fraunces (leipäteksti,
+  antiikva) — Google Fonts. Isot otsikot versaalilla. Leipäteksti (`p`, `li`)
+  on antiikvaa, otsikot ja käyttöliittymä groteskia.
 - **Värit:** beige `#FAF1E0` (tausta), tummanruskea `#3C2415` (teksti, napit),
   aksentit peach `#E2B48C`, sage `#BAB58D`, taupe `#9B8A76`, blue-grey `#9FB0AC`.
 
