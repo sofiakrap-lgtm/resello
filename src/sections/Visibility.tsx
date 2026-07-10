@@ -9,7 +9,7 @@ function Visibility() {
             <div className="mb-6 inline-flex rounded-2xl bg-brown/10 p-4 text-brown">
               <QrCode className="h-7 w-7" />
             </div>
-            <h2 className="text-[1.3rem] font-bold uppercase tracking-tight text-brown sm:text-[1.55rem]">
+            <h2 className="text-[1.05rem] font-bold uppercase tracking-tight text-brown sm:text-[1.25rem]">
               Kirpputorisi ei jää enää piiloon.
             </h2>
             <p className="mt-5 text-lg text-brown/80">

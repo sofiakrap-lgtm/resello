@@ -10,7 +10,7 @@ function Team() {
           />
         </div>
         <div>
-          <h2 className="text-[1.3rem] font-bold uppercase tracking-tight text-brown sm:text-[1.55rem]">
+          <h2 className="text-[1.05rem] font-bold uppercase tracking-tight text-brown sm:text-[1.25rem]">
             Rakennettu kirpputorialan sisältä.
           </h2>
           <p className="mt-5 text-lg text-brown/75">
