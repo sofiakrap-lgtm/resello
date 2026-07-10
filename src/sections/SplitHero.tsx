@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Instagram, ArrowUpRight, Image as ImageIcon } from 'lucide-react'
+import { ArrowUpRight, Image as ImageIcon } from 'lucide-react'
 
 const navLinks = [
   { href: '#ominaisuudet', label: 'Ominaisuudet' },
@@ -75,15 +75,8 @@ function SplitHero() {
           </div>
         )}
 
-        {/* Ylhäällä oikealla: some + CTA */}
+        {/* Ylhäällä oikealla: CTA */}
         <div className="absolute right-5 top-6 flex items-center gap-3 md:right-8">
-          <a
-            href="#varaa"
-            aria-label="Instagram"
-            className={`flex h-9 w-9 items-center justify-center rounded-full bg-beige text-brown transition-colors hover:bg-beige/90 ${focus}`}
-          >
-            <Instagram className="h-5 w-5" />
-          </a>
           <a
             href="#varaa"
             className={`rounded-full bg-beige px-5 py-2 text-xs font-medium uppercase tracking-widest text-brown transition-colors hover:bg-beige/90 ${focus}`}
@@ -107,7 +100,7 @@ function SplitHero() {
         {/* Alhaalla oikealla */}
         <a
           href="#varaa"
-          className={`absolute bottom-6 right-6 z-10 inline-flex items-center gap-1.5 rounded-full border border-brown px-4 py-2 text-base font-medium text-brown transition-colors hover:bg-brown hover:text-beige md:bottom-8 md:right-8 ${focus}`}
+          className={`absolute bottom-6 right-6 z-10 inline-flex items-center gap-1.5 rounded-full border border-beige px-4 py-2 text-base font-medium text-beige transition-colors hover:bg-beige hover:text-brown md:bottom-8 md:right-8 ${focus}`}
         >
           Ota yhteyttä
           <ArrowUpRight className="h-5 w-5" />

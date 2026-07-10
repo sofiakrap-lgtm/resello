@@ -121,7 +121,7 @@ function PriceTimeline() {
           shades[i]
         } ${
           isActive
-            ? 'ring-2 ring-brown ring-offset-2 ring-offset-bluegrey'
+            ? 'ring-2 ring-brown ring-offset-2 ring-offset-card'
             : 'ring-0'
         }`}
       >
@@ -136,7 +136,7 @@ function PriceTimeline() {
   return (
     <div
       ref={rootRef}
-      className="mt-10 rounded-3xl border border-brown/15 bg-bluegrey px-6 py-10 md:px-10"
+      className="mt-10 rounded-3xl border border-brown/15 bg-card px-6 py-10 md:px-10"
     >
       {/* Työpöytä: vaaka-aikajana */}
       <div className="relative hidden h-80 md:block">
@@ -202,7 +202,7 @@ function PriceTimeline() {
               aria-label="Myyntipaikkojen määrä"
               onKeyDown={onKeyDown}
               style={{ left: `${pct(active)}%` }}
-              className="absolute top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 cursor-grab rounded-full border-[3px] border-brown bg-beige shadow-sm transition-[left] duration-700 ease-[cubic-bezier(0.55,0,0.1,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-bluegrey active:cursor-grabbing"
+              className="absolute top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 cursor-grab rounded-full border-[3px] border-brown bg-beige shadow-sm transition-[left] duration-700 ease-[cubic-bezier(0.55,0,0.1,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-card active:cursor-grabbing"
             />
           </div>
         </div>
@@ -222,14 +222,14 @@ function PriceTimeline() {
                 }`}
               >
                 <span
-                  className={`absolute -left-[1.6rem] top-4 h-3.5 w-3.5 rounded-full ring-4 ring-bluegrey transition-colors ${
+                  className={`absolute -left-[1.6rem] top-4 h-3.5 w-3.5 rounded-full ring-4 ring-card transition-colors ${
                     i === active ? 'bg-brown' : 'bg-brown/40'
                   }`}
                 />
                 <button
                   type="button"
                   onClick={() => select(i)}
-                  className="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-bluegrey rounded-2xl"
+                  className="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-card rounded-2xl"
                 >
                   {card(i)}
                 </button>

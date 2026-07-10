@@ -49,7 +49,7 @@ function Footer() {
             <img
               src="/graphics/ReSello-hero-light.svg"
               alt="ReSello"
-              className="h-14 w-auto select-none md:h-20"
+              className="h-16 w-auto select-none md:h-24"
             />
           </div>
 

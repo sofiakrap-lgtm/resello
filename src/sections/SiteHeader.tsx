@@ -27,7 +27,7 @@ function SiteHeader() {
         show ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3 md:px-10">
+      <div className="flex items-center justify-between gap-4 px-6 py-3 md:px-10">
         <a href="#top" aria-label="ReSello" className={focus}>
           <img
             src="/graphics/ReSello-hero.svg"

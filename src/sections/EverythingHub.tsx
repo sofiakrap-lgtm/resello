@@ -14,16 +14,53 @@ interface Node {
   label: string
   side: 'l' | 'r'
   y: number
+  info: string
 }
 
 // Ominaisuudet reunoilla; viivat kulkevat keskuslaitteesta ikkunan reunaan.
 const nodes: Node[] = [
-  { icon: CalendarCheck, label: 'Varaukset ja kassa', side: 'l', y: 22 },
-  { icon: TrendingUp, label: 'Reaaliaikainen seuranta', side: 'l', y: 50 },
-  { icon: Wallet, label: 'Myyjien tilitykset', side: 'l', y: 78 },
-  { icon: QrCode, label: 'Näkyvyys ostajille', side: 'r', y: 22 },
-  { icon: Barcode, label: 'Viivakoodit ja kartta', side: 'r', y: 50 },
-  { icon: Share2, label: 'Kirjanpito ja some', side: 'r', y: 78 },
+  {
+    icon: CalendarCheck,
+    label: 'Varaukset ja kassa',
+    side: 'l',
+    y: 22,
+    info: 'Ota vastaan varauksia ja maksut samasta näkymästä — käteinen, kortti ja lähimaksu.',
+  },
+  {
+    icon: TrendingUp,
+    label: 'Reaaliaikainen seuranta',
+    side: 'l',
+    y: 50,
+    info: 'Näe myynti, kävijät ja paikkojen täyttöaste reaaliajassa.',
+  },
+  {
+    icon: Wallet,
+    label: 'Myyjien tilitykset',
+    side: 'l',
+    y: 78,
+    info: 'Automaattiset tilitykset myyjille ilman käsityötä ja Excel-taulukoita.',
+  },
+  {
+    icon: QrCode,
+    label: 'Näkyvyys ostajille',
+    side: 'r',
+    y: 22,
+    info: 'Jokainen myyntipaikka näkyy ostajille QR-koodin kautta.',
+  },
+  {
+    icon: Barcode,
+    label: 'Viivakoodit ja kartta',
+    side: 'r',
+    y: 50,
+    info: 'Tuotteiden viivakoodit ja myymäläkartta yhdellä silmäyksellä.',
+  },
+  {
+    icon: Share2,
+    label: 'Kirjanpito ja some',
+    side: 'r',
+    y: 78,
+    info: 'Kirjanpito ja somejaot hoituvat samasta järjestelmästä.',
+  },
 ]
 
 /** Vaakasuora tabletti (pädi), vaalea näyttö ja ReSello-logo. */
@@ -166,7 +203,7 @@ function EverythingHub() {
                   ...(n.side === 'l' ? { left: 0 } : { right: 0 }),
                   transitionDelay: `${260 + i * 70}ms`,
                 }}
-                className="hub-node absolute z-20 flex w-44 items-center gap-3 rounded-2xl border border-beige/20 bg-beige/[0.08] px-4 py-3 backdrop-blur-sm"
+                className="hub-node group absolute z-20 flex w-44 cursor-default items-center gap-3 rounded-2xl border border-beige/20 bg-beige/[0.08] px-4 py-3 backdrop-blur-sm transition-colors hover:border-beige/40 hover:bg-beige/[0.14]"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-beige/15 text-beige">
                   <Icon className="h-4 w-4" />
@@ -174,6 +211,14 @@ function EverythingHub() {
                 <span className="text-sm font-medium leading-tight">
                   {n.label}
                 </span>
+                {/* Info-ikkuna hoverilla */}
+                <div
+                  className={`pointer-events-none absolute top-[calc(100%+0.5rem)] z-40 w-56 rounded-xl bg-beige p-3 text-left text-xs leading-snug text-brown/80 opacity-0 shadow-[0_15px_35px_-15px_rgba(0,0,0,0.6)] transition-opacity duration-200 group-hover:opacity-100 ${
+                    n.side === 'l' ? 'left-0' : 'right-0'
+                  }`}
+                >
+                  {n.info}
+                </div>
               </div>
             )
           })}

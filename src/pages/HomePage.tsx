@@ -1,9 +1,12 @@
 import SiteHeader from '../sections/SiteHeader.tsx'
 import SplitHero from '../sections/SplitHero.tsx'
 import EverythingHub from '../sections/EverythingHub.tsx'
+import KassaShowcase from '../sections/KassaShowcase.tsx'
 import Pricing from '../sections/Pricing.tsx'
-import Connect from '../sections/Connect.tsx'
+import Migration from '../sections/Migration.tsx'
+import Onboarding from '../sections/Onboarding.tsx'
 import Gallery from '../sections/Gallery.tsx'
+import Faq from '../sections/Faq.tsx'
 import FinalCta from '../sections/FinalCta.tsx'
 import Footer from '../sections/Footer.tsx'
 
@@ -14,9 +17,12 @@ function HomePage() {
       <SplitHero />
       <main>
         <EverythingHub />
+        <KassaShowcase />
         <Pricing />
-        <Connect />
+        <Migration />
+        <Onboarding />
         <Gallery />
+        <Faq />
         <FinalCta />
       </main>
       <Footer />

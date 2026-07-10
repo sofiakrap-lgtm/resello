@@ -157,26 +157,20 @@
   }
 }
 
-/* "Yhdistämme ihmisiä ja vaatteita" — pyörivä ympyrä + vaihtuvat kuvat */
-.connect-photo {
+/* Migraatio-osio — läppäri liukuu esiin */
+.migrate-laptop {
   opacity: 0;
-  animation: connect-imgcycle 10.5s infinite;
+  transform: translateY(2rem) scale(0.96);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-@keyframes connect-imgcycle {
-  0% { opacity: 0; }
-  4% { opacity: 1; }
-  29% { opacity: 1; }
-  33% { opacity: 0; }
-  100% { opacity: 0; }
-}
-.connect-spin {
-  transform-origin: center;
-  animation: connect-spin 18s linear infinite;
-}
-@keyframes connect-spin {
-  to { transform: rotate(360deg); }
+.migrate.in .migrate-laptop {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 @media (prefers-reduced-motion: reduce) {
-  .connect-photo { animation: none; opacity: 1; }
-  .connect-spin { animation: none; }
+  .migrate-laptop {
+    transition: none;
+  }
 }
