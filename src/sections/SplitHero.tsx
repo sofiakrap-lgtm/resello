@@ -56,8 +56,8 @@ function SplitHero() {
       {/* Oikea palsta — hero-kuva */}
       <div className="relative min-h-[55vh] overflow-hidden bg-peach md:min-h-screen">
         <img
-          src="/images/kuva%204.jpg"
-          alt="Kirpputorin vaaterekkiä selaava asiakas"
+          src="/images/kuva%201.jpg"
+          alt="Osto- ja maksutapahtuma kirpputorilla"
           onError={() => setShowHeroImage(false)}
           className={`absolute inset-0 h-full w-full object-cover ${
             showHeroImage ? '' : 'hidden'
