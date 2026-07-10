@@ -70,7 +70,8 @@ function EverythingHub() {
         const el = nodeRefs.current[i]
         if (!el) return
         const x = el.offsetLeft + el.offsetWidth / 2
-        const y = el.offsetTop + el.offsetHeight / 2
+        // Solmu keskitetään pystyssä translate(-50%):lla, joten näkyvä keskikohta on offsetTop.
+        const y = el.offsetTop
         el.style.setProperty('--dx', `${cx - x}px`)
         el.style.setProperty('--dy', `${cy - y}px`)
         // Viiva päättyy solmun sisäreunaan (missä kortti alkaa).

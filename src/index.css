@@ -108,3 +108,27 @@
     transition: none;
   }
 }
+
+/* "Yhdistämme ihmisiä ja vaatteita" — pyörivä ympyrä + vaihtuvat kuvat */
+.connect-photo {
+  opacity: 0;
+  animation: connect-imgcycle 10.5s infinite;
+}
+@keyframes connect-imgcycle {
+  0% { opacity: 0; }
+  4% { opacity: 1; }
+  29% { opacity: 1; }
+  33% { opacity: 0; }
+  100% { opacity: 0; }
+}
+.connect-spin {
+  transform-origin: center;
+  animation: connect-spin 18s linear infinite;
+}
+@keyframes connect-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .connect-photo { animation: none; opacity: 1; }
+  .connect-spin { animation: none; }
+}
