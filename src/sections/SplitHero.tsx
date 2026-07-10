@@ -96,7 +96,7 @@ function SplitHero() {
         <svg
           aria-hidden="true"
           viewBox="0 0 810 809.999993"
-          className="pointer-events-none absolute -bottom-16 -right-16 h-64 w-64 text-brown/25 md:h-80 md:w-80"
+          className="pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 text-peach/95 md:h-[23rem] md:w-[23rem]"
         >
           <path
             fill="currentColor"
@@ -107,7 +107,7 @@ function SplitHero() {
         {/* Alhaalla oikealla */}
         <a
           href="#varaa"
-          className={`absolute bottom-6 right-6 z-10 inline-flex items-center gap-1.5 rounded-full border border-beige px-4 py-2 text-base font-medium text-beige transition-colors hover:bg-beige hover:text-brown md:bottom-8 md:right-8 ${focus}`}
+          className={`absolute bottom-6 right-6 z-10 inline-flex items-center gap-1.5 rounded-full border border-brown px-4 py-2 text-base font-medium text-brown transition-colors hover:bg-brown hover:text-beige md:bottom-8 md:right-8 ${focus}`}
         >
           Ota yhteyttä
           <ArrowUpRight className="h-5 w-5" />
