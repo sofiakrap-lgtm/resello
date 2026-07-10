@@ -167,7 +167,7 @@ function PriceTimeline() {
           >
             <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-brown/25" />
             <div
-              className="absolute left-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-brown transition-[width] duration-300 ease-out"
+              className="absolute left-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-brown transition-[width] duration-500 ease-out"
               style={{ width: `${pct(active)}%` }}
             />
             {tiers.map((t, i) => (
@@ -189,7 +189,7 @@ function PriceTimeline() {
               aria-label="Myyntipaikkojen määrä"
               onKeyDown={onKeyDown}
               style={{ left: `${pct(active)}%` }}
-              className="absolute top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 cursor-grab rounded-full border-[3px] border-brown bg-beige shadow-sm transition-[left] duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-card active:cursor-grabbing"
+              className="absolute top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 cursor-grab rounded-full border-[3px] border-brown bg-beige shadow-sm transition-[left] duration-500 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-card active:cursor-grabbing"
             />
           </div>
         </div>

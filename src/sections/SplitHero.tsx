@@ -16,7 +16,7 @@ function SplitHero() {
   const [showHeroImage, setShowHeroImage] = useState(true)
 
   return (
-    <section className="grid md:grid-cols-2">
+    <section className="grid border-b border-brown md:grid-cols-2">
       {/* Vasen palsta */}
       <div className="relative flex min-h-[88vh] flex-col overflow-hidden bg-beige px-6 pb-0 pt-5 md:min-h-screen md:px-10 md:pb-0 md:pt-6">
         <nav className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs font-medium uppercase tracking-[0.08em] text-brown">
@@ -81,13 +81,13 @@ function SplitHero() {
           <a
             href="#varaa"
             aria-label="Instagram"
-            className={`flex h-9 w-9 items-center justify-center rounded-full border border-beige text-beige transition-colors hover:bg-beige hover:text-brown ${focus}`}
+            className={`flex h-9 w-9 items-center justify-center rounded-full bg-beige text-brown transition-colors hover:bg-beige/90 ${focus}`}
           >
             <Instagram className="h-5 w-5" />
           </a>
           <a
             href="#varaa"
-            className={`rounded-full border border-beige px-5 py-2 text-xs font-medium uppercase tracking-widest text-beige transition-colors hover:bg-beige hover:text-brown ${focus}`}
+            className={`rounded-full bg-beige px-5 py-2 text-xs font-medium uppercase tracking-widest text-brown transition-colors hover:bg-beige/90 ${focus}`}
           >
             Varaa esittely
           </a>
@@ -98,7 +98,7 @@ function SplitHero() {
           href="#varaa"
           className={`absolute bottom-6 right-6 inline-flex items-center gap-1.5 rounded-full border border-beige px-4 py-2 text-base font-medium text-beige transition-colors hover:bg-beige hover:text-brown md:bottom-8 md:right-8 ${focus}`}
         >
-          Varaa esittely
+          Ota yhteyttä
           <ArrowUpRight className="h-5 w-5" />
         </a>
       </div>
