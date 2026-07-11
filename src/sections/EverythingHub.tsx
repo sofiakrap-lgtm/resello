@@ -1,27 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import {
-  Barcode,
-  BarChart3,
-  BookText,
-  CalendarCheck,
-  Coins,
-  CreditCard,
-  Map as MapIcon,
-  MapPin,
-  MapPinned,
-  MonitorSmartphone,
-  QrCode,
-  Search,
-  Share2,
-  TrendingUp,
-  Users,
-  type LucideIcon,
-} from 'lucide-react'
 
 // --- Sisältö: 5 pääaihetta, kullakin oma väri ja 3 ala-aihetta (ikonia) ---
+// Ikonit ovat /public/graphics-kansion SVG-tiedostoja, nimetty ala-aiheen mukaan.
 
 interface Feature {
-  Icon: LucideIcon
+  img: string
   title: string
   body: string
   x: number
@@ -36,6 +19,8 @@ interface Topic {
   features: Feature[]
 }
 
+const g = (name: string) => encodeURI(`/graphics/${name}`)
+
 const topics: Topic[] = [
   {
     label: 'Varausjärjestelmä',
@@ -44,21 +29,21 @@ const topics: Topic[] = [
     y: 73,
     features: [
       {
-        Icon: CalendarCheck,
+        img: g('1.1 Myyntipaikkojen sähköinen varaus.svg'),
         title: 'Sähköinen paikkavaraus',
         body: 'Myyntipaikkojen varaus hoituu verkossa muutamassa sekunnissa, ilman puheluita tai papereita.',
         x: 9,
         y: 60,
       },
       {
-        Icon: MapIcon,
+        img: g('1.2 Myymäläkartta.svg'),
         title: 'Myymäläkartta',
         body: 'Näe koko myymälä yhdellä silmäyksellä ja valitse vapaa paikka suoraan visuaaliselta pohjalta.',
         x: 31,
         y: 62,
       },
       {
-        Icon: MapPin,
+        img: g('1.3 Vuokrattavien paikkojen hallinta ja saatavuus.svg'),
         title: 'Paikkojen hallinta ja saatavuus',
         body: 'Vuokrattavat paikat pysyvät ajan tasalla — varatut, vapaat ja tulevat näkyvät reaaliajassa.',
         x: 12,
@@ -73,21 +58,21 @@ const topics: Topic[] = [
     y: 39,
     features: [
       {
-        Icon: Barcode,
+        img: g('2.1 Viivakoodilliset hintalaput.svg'),
         title: 'Viivakoodilliset hintalaput',
         body: 'Tulosta hintalaput viivakoodilla ja lue tuotteet kassalla ilman virheitä ja käsin näppäilyä.',
         x: 7,
         y: 25,
       },
       {
-        Icon: CreditCard,
+        img: g('2.2 Kassa ja maksutapahtumat.svg'),
         title: 'Kassa ja maksutapahtumat',
         body: 'Käteinen, kortti ja lähimaksu samasta laitteesta — nopeasti ja ilman kilojen rautaa.',
         x: 27,
         y: 27,
       },
       {
-        Icon: Coins,
+        img: g('2.3 Myyjäkohtaiset tilitykset automaattisesti.svg'),
         title: 'Automaattiset tilitykset',
         body: 'Myyjäkohtaiset tilitykset lasketaan automaattisesti, joten rahat menevät oikein ilman käsityötä.',
         x: 9,
@@ -102,21 +87,21 @@ const topics: Topic[] = [
     y: 55,
     features: [
       {
-        Icon: TrendingUp,
+        img: g('3.1 Reaaliaikainen näkymä omiin myynteihin ja tuloihin.svg'),
         title: 'Myynti reaaliajassa',
         body: 'Reaaliaikainen näkymä omiin myynteihin ja tuloihin — seuraa päivän kertymää mistä tahansa.',
         x: 41,
         y: 42,
       },
       {
-        Icon: MonitorSmartphone,
+        img: g('3.2 Toimii millä tahansa laitteella.svg'),
         title: 'Toimii millä tahansa laitteella',
         body: 'Puhelin, tabletti tai tietokone — ReSello toimii selaimessa ilman erillisiä asennuksia.',
         x: 55,
         y: 66,
       },
       {
-        Icon: Share2,
+        img: g('3.3 Oman valikoiman jakaminen someen suoralla linkillä.svg'),
         title: 'Jaa valikoima someen',
         body: 'Jaa oma valikoimasi someen suoralla linkillä ja tuo lisää ostajia pöytäsi äärelle.',
         x: 38,
@@ -131,21 +116,21 @@ const topics: Topic[] = [
     y: 46,
     features: [
       {
-        Icon: Search,
+        img: g('4.1 Tuotehaku kirpputoreilta.svg'),
         title: 'Löydä tuote ja paikka',
         body: 'Haku näyttää miltä kirpputorilta ja mistä paikasta tuote löytyy — ostaja kävelee suoraan oikealle pöydälle.',
         x: 91,
         y: 33,
       },
       {
-        Icon: QrCode,
+        img: g('4.2 QR-koodi ohjaa selaamaan valikoimaa.svg'),
         title: 'QR-koodi pöydällä',
         body: 'Kirpputorin pöydällä oleva QR-koodi ohjaa selaamaan myyjän ajantasaista valikoimaa.',
         x: 72,
         y: 31,
       },
       {
-        Icon: MapPinned,
+        img: g('4.3 Tuotteiden löydettävyys yli kirpputorirajojen.svg'),
         title: 'Löydettävyys yli rajojen',
         body: 'Tuotteet löytyvät yli kirpputorirajojen — koko verkoston valikoima yhdessä haussa.',
         x: 91,
@@ -160,21 +145,21 @@ const topics: Topic[] = [
     y: 21,
     features: [
       {
-        Icon: BarChart3,
+        img: g('5.1 Käyttöaste ja myynnin kehitys.svg'),
         title: 'Käyttöaste ja myynnin kehitys',
         body: 'Selkeät näkymät myymälän käyttöasteeseen ja myynnin kehitykseen — päätökset dataan nojaten.',
         x: 49,
         y: 15,
       },
       {
-        Icon: Users,
+        img: g('5.2 Asiakashallinta.svg'),
         title: 'Asiakashallinta',
         body: 'Lisää ja hallitse asiakkaita sekä aseta alennuksia yhdestä selkeästä näkymästä.',
         x: 73,
         y: 13,
       },
       {
-        Icon: BookText,
+        img: g('5.3 Kirjanpito ja tilitykset.svg'),
         title: 'Kirjanpito ja tilitykset',
         body: 'Kirjanpito ja tilitykset samassa paikassa — valmiit raportit aina saatavilla.',
         x: 59,
@@ -327,7 +312,7 @@ function EverythingHub() {
                 onBlur={() => setHover((h) => (h === f ? null : h))}
                 aria-label={f.title}
               >
-                <f.Icon className="h-full w-full" strokeWidth={1.6} />
+                <img src={f.img} alt="" aria-hidden="true" className="hub-icon-img" />
               </button>
             ))}
           </div>
@@ -363,10 +348,15 @@ function EverythingHub() {
                 {t.features.map((f) => (
                   <li key={f.title} className="flex gap-3">
                     <span
-                      className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
+                      className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg p-2"
                       style={{ background: hexA(t.color, 0.63) }}
                     >
-                      <f.Icon className="h-5 w-5" strokeWidth={1.6} />
+                      <img
+                        src={f.img}
+                        alt=""
+                        aria-hidden="true"
+                        className="hub-icon-img h-full w-full"
+                      />
                     </span>
                     <div>
                       <p className="font-semibold text-brown">{f.title}</p>
