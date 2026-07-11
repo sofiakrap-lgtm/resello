@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 340" fill="none">
+  <rect width="460" height="340" rx="30" fill="#3c2415"/>
+  <rect x="26" y="26" width="408" height="288" rx="20" fill="#fdf7ec"/>
+  <text x="50" y="72" font-family="Montserrat, system-ui, sans-serif" font-size="22" font-weight="800" fill="#3c2415">ReSello</text>
+  <rect x="342" y="54" width="66" height="16" rx="8" fill="#e7ddca"/>
+  <rect x="50" y="104" width="112" height="52" rx="10" fill="#efe6d5"/>
+  <rect x="174" y="104" width="112" height="52" rx="10" fill="#e2b48c" opacity="0.5"/>
+  <rect x="298" y="104" width="110" height="52" rx="10" fill="#efe6d5"/>
+  <rect x="50" y="182" width="358" height="14" rx="7" fill="#ece2cf"/>
+  <rect x="50" y="206" width="270" height="14" rx="7" fill="#ece2cf"/>
+  <rect x="50" y="246" width="358" height="40" rx="12" fill="#efe6d5"/>
+</svg>

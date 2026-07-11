@@ -387,10 +387,10 @@ function EverythingHub() {
               </button>
             ))}
 
-            {/* Keskuslaite (ReSello-sovellus tabletilla) */}
+            {/* Keskuslaite (generoitu ReSello-näkymä) */}
             <img
-              src={g('grafiikka-6.png')}
-              alt="ReSello-sovellus tabletilla"
+              src={g('resello-tablet.svg')}
+              alt="ReSello-sovelluksen näkymä"
               className="hub-device"
               style={{ left: `${reselloPos.x}%`, top: `${reselloPos.y}%` }}
             />

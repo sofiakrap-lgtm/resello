@@ -117,7 +117,7 @@ function PriceTimeline() {
     const isActive = i === active
     return (
       <div
-        className={`rounded-lg px-5 py-4 transition-shadow duration-300 ${
+        className={`rounded-lg px-5 py-4 text-center transition-shadow duration-300 ${
           shades[i]
         } ${
           isActive
@@ -136,7 +136,7 @@ function PriceTimeline() {
   return (
     <div
       ref={rootRef}
-      className="mt-10 rounded-lg border border-brown/15 bg-card px-6 py-10 md:px-10"
+      className="mt-10 rounded-lg border border-brown/50 bg-card px-6 py-10 md:px-10"
     >
       {/* Työpöytä: vaaka-aikajana */}
       <div className="relative hidden h-80 md:block">
