@@ -159,12 +159,23 @@
   transform: translate(-50%, -50%);
   border-radius: 8px;
   background: rgba(250, 241, 224, 0.09);
+  animation: hub2-drift var(--d, 7s) ease-in-out var(--delay, 0s) infinite;
+}
+@keyframes hub2-drift {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, calc(-50% - 7px));
+  }
 }
 .hub2-main {
   position: absolute;
   transform: translate(-50%, -50%);
   z-index: 20;
   cursor: default;
+  animation: hub2-drift var(--d, 8s) ease-in-out var(--delay, 0s) infinite;
 }
 .hub2-badge {
   position: absolute;
@@ -198,7 +209,9 @@
     translate(calc(14vw * var(--open, 0)), calc(22vh * var(--open, 0)));
 }
 @media (prefers-reduced-motion: reduce) {
-  .hub2-badge-spin {
+  .hub2-badge-spin,
+  .hub2-pill,
+  .hub2-main {
     animation: none;
   }
 }

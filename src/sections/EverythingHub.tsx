@@ -138,6 +138,8 @@ function EverythingHub() {
                   top: `${n.y}%`,
                   width: `${n.w}%`,
                   height: `${n.h}%`,
+                  ['--d' as string]: `${6 + (i % 4)}s`,
+                  ['--delay' as string]: `${-(i % 5) * 0.9}s`,
                 }}
               />
             ))}
@@ -152,11 +154,16 @@ function EverythingHub() {
               />
             </div>
 
-            {mains.map((m) => (
+            {mains.map((m, i) => (
               <div
                 key={m.label}
                 className="hub2-main group"
-                style={{ left: `${m.x}%`, top: `${m.y}%` }}
+                style={{
+                  left: `${m.x}%`,
+                  top: `${m.y}%`,
+                  ['--d' as string]: `${8 + (i % 3)}s`,
+                  ['--delay' as string]: `${-i * 1.1}s`,
+                }}
               >
                 <span className="text-[1.4rem] font-bold text-beige md:text-[1.9rem]">
                   {m.label}
