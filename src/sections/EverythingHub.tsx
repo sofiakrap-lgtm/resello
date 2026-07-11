@@ -32,8 +32,8 @@ const topics: Topic[] = [
         img: g('1.1 Myyntipaikkojen sähköinen varaus.svg'),
         title: 'Sähköinen paikkavaraus',
         body: 'Myyntipaikkojen varaus hoituu verkossa muutamassa sekunnissa, ilman puheluita tai papereita.',
-        x: 32.7,
-        y: 80.5,
+        x: 38,
+        y: 71.4,
       },
       {
         img: g('1.2 Myymäläkartta.svg'),
@@ -46,8 +46,8 @@ const topics: Topic[] = [
         img: g('1.3 Vuokrattavien paikkojen hallinta ja saatavuus.svg'),
         title: 'Paikkojen hallinta ja saatavuus',
         body: 'Vuokrattavat paikat pysyvät ajan tasalla — varatut, vapaat ja tulevat näkyvät reaaliajassa.',
-        x: 12,
-        y: 85,
+        x: 12.2,
+        y: 84.2,
       },
     ],
   },
@@ -61,8 +61,8 @@ const topics: Topic[] = [
         img: g('2.1 Viivakoodilliset hintalaput.svg'),
         title: 'Viivakoodilliset hintalaput',
         body: 'Tulosta hintalaput viivakoodilla ja lue tuotteet kassalla ilman virheitä ja käsin näppäilyä.',
-        x: 7,
-        y: 25,
+        x: 29.3,
+        y: 27.3,
       },
       {
         img: g('2.2 Kassa ja maksutapahtumat.svg'),
@@ -83,29 +83,29 @@ const topics: Topic[] = [
   {
     label: 'Myyjän myynninseuranta',
     color: '#3c2415',
-    x: 47,
-    y: 55,
+    x: 55.5,
+    y: 79.1,
     features: [
       {
         img: g('3.1 Reaaliaikainen näkymä omiin myynteihin ja tuloihin.svg'),
         title: 'Myynti reaaliajassa',
         body: 'Reaaliaikainen näkymä omiin myynteihin ja tuloihin — seuraa päivän kertymää mistä tahansa.',
-        x: 41,
-        y: 42,
+        x: 68.4,
+        y: 68,
       },
       {
         img: g('3.2 Toimii millä tahansa laitteella.svg'),
         title: 'Toimii millä tahansa laitteella',
         body: 'Puhelin, tabletti tai tietokone — ReSello toimii selaimessa ilman erillisiä asennuksia.',
-        x: 55,
-        y: 66,
+        x: 65.4,
+        y: 85.5,
       },
       {
         img: g('3.3 Oman valikoiman jakaminen someen suoralla linkillä.svg'),
         title: 'Jaa valikoima someen',
         body: 'Jaa oma valikoimasi someen suoralla linkillä ja tuo lisää ostajia pöytäsi äärelle.',
-        x: 45.2,
-        y: 71.4,
+        x: 49.4,
+        y: 91.6,
       },
     ],
   },
@@ -126,44 +126,44 @@ const topics: Topic[] = [
         img: g('4.2 QR-koodi ohjaa selaamaan valikoimaa.svg'),
         title: 'QR-koodi pöydällä',
         body: 'Kirpputorin pöydällä oleva QR-koodi ohjaa selaamaan myyjän ajantasaista valikoimaa.',
-        x: 71.9,
-        y: 63.2,
+        x: 73.2,
+        y: 56.3,
       },
       {
         img: g('4.3 Tuotteiden löydettävyys yli kirpputorirajojen.svg'),
         title: 'Löydettävyys yli rajojen',
         body: 'Tuotteet löytyvät yli kirpputorirajojen — koko verkoston valikoima yhdessä haussa.',
-        x: 81.8,
-        y: 67.8,
+        x: 87.1,
+        y: 61.3,
       },
     ],
   },
   {
     label: 'Hallinta ja analytiikka',
     color: '#3c2415',
-    x: 61,
-    y: 21,
+    x: 57.2,
+    y: 12.6,
     features: [
       {
         img: g('5.1 Käyttöaste ja myynnin kehitys.svg'),
         title: 'Käyttöaste ja myynnin kehitys',
         body: 'Selkeät näkymät myymälän käyttöasteeseen ja myynnin kehitykseen — päätökset dataan nojaten.',
-        x: 51.1,
-        y: 33.5,
+        x: 41.4,
+        y: 27.3,
       },
       {
         img: g('5.2 Asiakashallinta.svg'),
         title: 'Asiakashallinta',
         body: 'Lisää ja hallitse asiakkaita sekä aseta alennuksia yhdestä selkeästä näkymästä.',
-        x: 68.5,
-        y: 33.5,
+        x: 69.9,
+        y: 15,
       },
       {
         img: g('5.3 Kirjanpito ja tilitykset.svg'),
         title: 'Kirjanpito ja tilitykset',
         body: 'Kirjanpito ja tilitykset samassa paikassa — valmiit raportit aina saatavilla.',
-        x: 64.8,
-        y: 49.5,
+        x: 64.7,
+        y: 35,
       },
     ],
   },
@@ -183,10 +183,65 @@ const stagger = new Map<number, number>(
   order.map((idx, rank) => [idx, rank] as [number, number]),
 )
 
-// Yhdysviivat pääsanasta sen ikoneihin
-const links = topics.flatMap((t) =>
-  t.features.map((f) => ({ x1: t.x, y1: t.y, x2: f.x, y2: f.y })),
-)
+// ReSello-keskusnode
+const reselloPos = { x: 49.4, y: 46.2 }
+
+// Pääsanojen lopulliset (auenneen) paikat + lähtöpaikat otsikossa
+const words = [
+  { text: 'Tässä on', sx: 40, sy: 42, tx: 18.3, ty: 10.5 },
+  { text: 'kaikki.', sx: 60, sy: 42, tx: 86.3, ty: 83.4 },
+]
+
+// Solmujen sijainnit avaimella (otsikot, ikonit, ReSello) — viivoja varten
+const nodePos = new Map<string, { x: number; y: number }>()
+topics.forEach((t) => {
+  nodePos.set(t.label, { x: t.x, y: t.y })
+  t.features.forEach((f) => nodePos.set(f.title, { x: f.x, y: f.y }))
+})
+nodePos.set('ReSello', reselloPos)
+
+// Mukautetut yhdysviivat (avainpareina); kaksoiskappaleet poistetaan
+const linkPairs: [string, string][] = [
+  ['Varausjärjestelmä', 'Sähköinen paikkavaraus'],
+  ['Varausjärjestelmä', 'Myymäläkartta'],
+  ['Varausjärjestelmä', 'Paikkojen hallinta ja saatavuus'],
+  ['Kassajärjestelmä', 'Viivakoodilliset hintalaput'],
+  ['Kassajärjestelmä', 'Kassa ja maksutapahtumat'],
+  ['Kassajärjestelmä', 'Automaattiset tilitykset'],
+  ['Myyjän myynninseuranta', 'Myynti reaaliajassa'],
+  ['Myyjän myynninseuranta', 'Toimii millä tahansa laitteella'],
+  ['Myyjän myynninseuranta', 'Jaa valikoima someen'],
+  ['Ostajan tuotehaku', 'Löydä tuote ja paikka'],
+  ['Ostajan tuotehaku', 'QR-koodi pöydällä'],
+  ['Ostajan tuotehaku', 'Löydettävyys yli rajojen'],
+  ['Hallinta ja analytiikka', 'Käyttöaste ja myynnin kehitys'],
+  ['Hallinta ja analytiikka', 'Asiakashallinta'],
+  ['Hallinta ja analytiikka', 'Kirjanpito ja tilitykset'],
+  ['Myymäläkartta', 'Jaa valikoima someen'],
+  ['Varausjärjestelmä', 'Kassajärjestelmä'],
+  ['Hallinta ja analytiikka', 'Ostajan tuotehaku'],
+  ['Löydettävyys yli rajojen', 'Toimii millä tahansa laitteella'],
+  ['Asiakashallinta', 'Löydä tuote ja paikka'],
+  ['ReSello', 'Myyjän myynninseuranta'],
+  ['Varausjärjestelmä', 'ReSello'],
+  ['Kassajärjestelmä', 'ReSello'],
+  ['Hallinta ja analytiikka', 'ReSello'],
+  ['ReSello', 'Ostajan tuotehaku'],
+]
+const seenLink = new Set<string>()
+const links = linkPairs
+  .filter(([a, b]) => {
+    const k = [a, b].sort().join('|')
+    if (seenLink.has(k)) return false
+    seenLink.add(k)
+    return true
+  })
+  .map(([a, b]) => {
+    const A = nodePos.get(a)
+    const B = nodePos.get(b)
+    return A && B ? { x1: A.x, y1: A.y, x2: B.x, y2: B.y } : null
+  })
+  .filter((l): l is { x1: number; y1: number; x2: number; y2: number } => l !== null)
 
 const clamp = (v: number, a: number, b: number) => Math.min(Math.max(v, a), b)
 const smooth = (x: number, a: number, b: number) => {
@@ -315,11 +370,31 @@ function EverythingHub() {
                 <img src={f.img} alt="" aria-hidden="true" className="hub-icon-img" />
               </button>
             ))}
+
+            {/* ReSello-keskusnode */}
+            <span
+              className="hub-resello"
+              style={{ left: `${reselloPos.x}%`, top: `${reselloPos.y}%` }}
+            >
+              <b>Re</b>Sello
+            </span>
           </div>
 
           {/* Keskuslause, joka repeää nurkkiin */}
-          <span className="hub-word hub-word1">Tässä on</span>
-          <span className="hub-word hub-word2">kaikki.</span>
+          {words.map((w) => (
+            <span
+              key={w.text}
+              className="hub-word"
+              style={{
+                ['--sx' as string]: w.sx,
+                ['--sy' as string]: w.sy,
+                ['--tx' as string]: w.tx,
+                ['--ty' as string]: w.ty,
+              }}
+            >
+              {w.text}
+            </span>
+          ))}
 
           {/* Keskitetty tietoikkuna ikonin päällä */}
           <div className={`hub-tip ${hover ? 'show' : ''}`}>

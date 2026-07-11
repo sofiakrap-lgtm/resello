@@ -193,8 +193,9 @@
 /* Keskuslause, joka repeää nurkkiin auetessa */
 .hub-word {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: calc((var(--sx) + (var(--tx) - var(--sx)) * var(--open, 0)) * 1%);
+  top: calc((var(--sy) + (var(--ty) - var(--sy)) * var(--open, 0)) * 1%);
+  transform: translate(-50%, -50%);
   z-index: 26;
   color: #ffffff;
   font-family: var(--font-display);
@@ -204,15 +205,26 @@
   white-space: nowrap;
   pointer-events: none;
 }
-.hub-word1 {
-  transform: translate(-104%, -50%)
-    translate(calc(-15vw * var(--open, 0)), calc(-31vh * var(--open, 0)))
-    translateY(calc(-10vh * (1 - var(--open, 0))));
+
+/* ReSello-keskusnode verkoston keskellä */
+.hub-resello {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 23;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.1rem, 2vw, 1.9rem);
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  background: rgba(60, 36, 21, 0.55);
+  padding: 0.35rem 0.85rem;
+  border-radius: 12px;
+  white-space: nowrap;
+  pointer-events: none;
 }
-.hub-word2 {
-  transform: translate(4%, -50%)
-    translate(calc(15vw * var(--open, 0)), calc(31vh * var(--open, 0)))
-    translateY(calc(-10vh * (1 - var(--open, 0))));
+.hub-resello b {
+  color: #e2b48c;
+  font-weight: 800;
 }
 
 /* Keskitetty tietoikkuna ikonin päällä */
