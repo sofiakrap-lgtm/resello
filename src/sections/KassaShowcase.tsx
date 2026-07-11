@@ -1,3 +1,8 @@
+interface Deco {
+  img: string
+  tint: string
+}
+
 interface Row {
   img: string
   photo: string
@@ -6,7 +11,10 @@ interface Row {
   body: string
   bg: string
   reverse: boolean
+  deco?: Deco
 }
+
+const g = (name: string) => encodeURI(`/graphics/${name}`)
 
 const rows: Row[] = [
   {
@@ -16,6 +24,7 @@ const rows: Row[] = [
     body: 'Aseta alennuksia, muuta varauksia ja lisää asiakkaita ilman erillisiä työkaluja. Hallitset koko myymälää yhdestä näkymästä, jossa kaikki pysyy ajan tasalla eikä mikään jää roikkumaan eri järjestelmiin.',
     bg: 'bg-peach',
     reverse: false,
+    deco: { img: g('grafiikka 2.svg'), tint: 'rgba(255, 251, 244, 0.5)' },
   },
   {
     img: '/graphics/grafiikka-7.png',
@@ -33,24 +42,23 @@ const rows: Row[] = [
     body: 'Koordinoi varauksia, paikkoja ja tuotteita helposti. Kaikki tiedot löytyvät samasta paikasta ja pysyvät ajan tasalla, joten myymälän arki pysyy hallinnassa ruuhkaisimpanakin päivänä.',
     bg: 'bg-bluegrey',
     reverse: false,
+    deco: { img: g('grafiikka 20.svg'), tint: 'rgba(255, 251, 244, 0.45)' },
   },
 ]
 
-/** "Tässä on kassa." — kolme vuorottelevaa riviä (kuva + pädi / teksti). */
+/** Kolme vuorottelevaa riviä (kuva + pädi / teksti) + koristegrafiikat. */
 function KassaShowcase() {
   return (
     <section className="px-6 py-20 md:py-28">
-      <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-[1.1rem] font-bold tracking-tight text-brown sm:text-[1.35rem] md:text-[1.9rem]">
-          Tässä on kassa.
-        </h2>
-        <p className="mx-auto mt-5 max-w-xl text-lg text-brown/75">
-          Nopea ja intuitiivinen, ei kilojen rautaa. Käteinen, kortti tai
-          lähimaksu, aivan niin kuin haluat.
-        </p>
-      </div>
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-6">
+        {/* Pyörivä resello-merkki (grafiikka 15) keskellä rivien välissä */}
+        <img
+          src={g('grafiikka 15.svg')}
+          alt=""
+          aria-hidden="true"
+          className="price-spin pointer-events-none absolute left-1/2 top-1/3 z-30 h-24 w-24 -translate-x-1/2 -translate-y-1/2 md:h-32 md:w-32"
+        />
 
-      <div className="mx-auto mt-14 flex max-w-6xl flex-col gap-6">
         {rows.map((row) => (
           <div
             key={row.img}
@@ -87,9 +95,26 @@ function KassaShowcase() {
 
             {/* Teksti */}
             <div
-              className={`flex items-center px-6 py-10 text-brown md:px-12 md:py-14 ${row.bg}`}
+              className={`relative flex items-center overflow-hidden px-6 py-10 text-brown md:px-12 md:py-14 ${row.bg}`}
             >
-              <div>
+              {row.deco && (
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -bottom-12 -right-12 h-44 w-44 md:h-56 md:w-56"
+                  style={{
+                    backgroundColor: row.deco.tint,
+                    WebkitMaskImage: `url("${row.deco.img}")`,
+                    maskImage: `url("${row.deco.img}")`,
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                  }}
+                />
+              )}
+              <div className="relative z-10">
                 <h3 className="text-balance text-[1.05rem] font-bold leading-[1.25] sm:text-[1.25rem] md:text-[1.5rem]">
                   {row.title}
                 </h3>

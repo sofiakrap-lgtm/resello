@@ -1,28 +1,31 @@
-import { ArrowLeftRight, GraduationCap, LifeBuoy } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
-
 interface Card {
-  icon: LucideIcon
+  img: string
+  tint: string
   title: string
   body: string
   bg: string
 }
 
+const g = (name: string) => encodeURI(`/graphics/${name}`)
+
 const cards: Card[] = [
   {
-    icon: ArrowLeftRight,
+    img: g('grafiikka 14.svg'),
+    tint: '#fffbf4',
     title: 'Siirrämme datan',
     body: 'Siirrämme vanhan järjestelmäsi tiedot asiakkaista, tuotteista ja myyjistä puolestasi. Sinun ei tarvitse aloittaa tyhjästä, eikä mitään katoa matkalla.',
     bg: 'bg-bluegrey',
   },
   {
-    icon: GraduationCap,
+    img: g('grafiikka 12.svg'),
+    tint: '#fffbf4',
     title: 'Koulutamme',
     body: 'Saat kattavan koulutusmateriaalin sekä videot ja ohjekirjat. Niiden avulla sinä ja henkilökuntasi opitte käyttämään ReSelloa nopeasti ja varmasti.',
     bg: 'bg-peach',
   },
   {
-    icon: LifeBuoy,
+    img: g('grafiikka 13.svg'),
+    tint: '#fffbf4',
     title: 'Autamme',
     body: 'Olemme tukenasi koko matkan ajan. Autamme käyttöönotossa ja vastaamme kysymyksiin aina kun tarvitset, jotta arki sujuu ilman katkoja.',
     bg: 'bg-sage',
@@ -45,22 +48,33 @@ function Onboarding() {
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {cards.map((c, i) => {
-            const Icon = c.icon
-            return (
-              <div
-                key={c.title}
-                style={{ transitionDelay: `${i * 100}ms` }}
-                className={`reveal-item flex flex-col items-center rounded-lg p-8 text-center text-card ${c.bg}`}
-              >
-                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-card/20">
-                  <Icon className="h-6 w-6" />
-                </span>
-                <h3 className="mt-5 text-xl font-bold">{c.title}</h3>
-                <p className="mt-3 leading-relaxed text-card/90">{c.body}</p>
-              </div>
-            )
-          })}
+          {cards.map((c, i) => (
+            <div
+              key={c.title}
+              style={{ transitionDelay: `${i * 100}ms` }}
+              className={`reveal-item flex flex-col items-center rounded-lg p-8 text-center text-card ${c.bg}`}
+            >
+              <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-card/25">
+                <span
+                  aria-hidden="true"
+                  className="h-8 w-8"
+                  style={{
+                    backgroundColor: c.tint,
+                    WebkitMaskImage: `url("${c.img}")`,
+                    maskImage: `url("${c.img}")`,
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                  }}
+                />
+              </span>
+              <h3 className="mt-5 text-xl font-bold">{c.title}</h3>
+              <p className="mt-3 leading-relaxed text-card/90">{c.body}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

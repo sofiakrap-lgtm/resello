@@ -63,8 +63,8 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: calc(88% + 12% * var(--open, 0));
-  height: calc(76vh + 24vh * var(--open, 0));
+  width: calc(94% + 6% * var(--open, 0));
+  height: calc(88vh + 12vh * var(--open, 0));
   background: #b4c0bc;
   border-radius: calc(26px - 26px * var(--open, 0));
 }
@@ -73,13 +73,22 @@
 .hub-intro {
   position: absolute;
   left: 50%;
-  top: 59%;
+  top: 50%;
   z-index: 30;
   width: min(88%, 40rem);
   transform: translate(-50%, -50%);
   text-align: center;
   opacity: calc(1 - var(--open, 0) * 3);
   pointer-events: none;
+}
+.hub-intro-title {
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 2rem;
 }
 .hub-intro-lead {
   color: #ffffff;
@@ -204,6 +213,8 @@
   line-height: 1;
   white-space: nowrap;
   pointer-events: none;
+  /* Häivähtävät esiin keskeltä, kun osio aukeaa */
+  opacity: calc((var(--open, 0) - 0.12) * 3.5);
 }
 
 /* Keskuslaite (tabletti) verkoston keskellä */

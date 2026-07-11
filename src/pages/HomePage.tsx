@@ -41,10 +41,10 @@ function HomePage() {
         <Pricing />
         <Migration />
         <Onboarding />
-        <Story />
         <Gallery />
         <Faq />
         <FinalCta />
+        <Story />
       </main>
       <Footer />
     </div>

@@ -187,9 +187,10 @@ const stagger = new Map<number, number>(
 const reselloPos = { x: 49.4, y: 46.2 }
 
 // Pääsanojen lopulliset (auenneen) paikat + lähtöpaikat otsikossa
+// Pääsanat lähtevät keskeltä (näkymättöminä) ja repeävät nurkkiin auetessa.
 const words = [
-  { text: 'Tässä on', sx: 40, sy: 42, tx: 18.3, ty: 10.5 },
-  { text: 'kaikki.', sx: 60, sy: 42, tx: 86.3, ty: 83.4 },
+  { text: 'Tässä on', sx: 50, sy: 50, tx: 18.3, ty: 10.5 },
+  { text: 'kaikki.', sx: 50, sy: 50, tx: 86.3, ty: 83.4 },
 ]
 
 // Solmujen sijainnit avaimella (otsikot, ikonit, ReSello) — viivoja varten
@@ -239,7 +240,14 @@ const links = linkPairs
   .map(([a, b]) => {
     const A = nodePos.get(a)
     const B = nodePos.get(b)
-    return A && B ? { x1: A.x, y1: A.y, x2: B.x, y2: B.y } : null
+    if (!A || !B) return null
+    // Pieni tyhjä tila viivan päihin, ettei viiva ala suoraan sanasta/ikonista.
+    const dx = B.x - A.x
+    const dy = B.y - A.y
+    const len = Math.hypot(dx, dy) || 1
+    const gx = (dx / len) * 3
+    const gy = (dy / len) * 3
+    return { x1: A.x + gx, y1: A.y + gy, x2: B.x - gx, y2: B.y - gy }
   })
   .filter((l): l is { x1: number; y1: number; x2: number; y2: number } => l !== null)
 
@@ -304,6 +312,7 @@ function EverythingHub() {
 
           {/* Intro: näkyy suljettuna, häipyy auetessa */}
           <div className="hub-intro">
+            <h2 className="hub-intro-title">Tässä on kaikki.</h2>
             <p className="hub-intro-lead">
               ReSello on suomalaisille itsepalvelukirpputoreille suunnattu moderni
               käyttöjärjestelmä, joka yhdistää tavarat ja ihmiset samaan verkostoon
@@ -363,7 +372,7 @@ function EverythingHub() {
                 style={{
                   left: `${f.x}%`,
                   top: `${f.y}%`,
-                  background: hexA(f.color, 0.63),
+                  background: hexA(f.color, 0.7),
                   ['--rank' as string]: stagger.get(i) ?? 0,
                   ['--fd' as string]: `${7 + (i % 5)}s`,
                   ['--fdelay' as string]: `${-(i % 6) * 0.8}s`,
@@ -431,7 +440,7 @@ function EverythingHub() {
                   <li key={f.title} className="flex gap-3">
                     <span
                       className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg p-2"
-                      style={{ background: hexA(t.color, 0.63) }}
+                      style={{ background: hexA(t.color, 0.7) }}
                     >
                       <img
                         src={f.img}
