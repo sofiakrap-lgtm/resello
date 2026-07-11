@@ -259,15 +259,22 @@ function EverythingHub() {
     const sticky = stickyRef.current
     if (!sec || !sticky) return
     let raf = 0
+    let latched = false
     const update = () => {
       const total = sec.offsetHeight - window.innerHeight
       const scrolled = clamp(-sec.getBoundingClientRect().top, 0, Math.max(total, 1))
       const p = total > 0 ? scrolled / total : 0
-      const open = smooth(p, 0.04, 0.42)
-      const net = smooth(p, 0.32, 0.6)
+      let open = smooth(p, 0.04, 0.42)
+      let net = smooth(p, 0.32, 0.6)
+      // Kun osio on skrollattu kerran läpi, se jää auki (ei enää sulkeudu).
+      if (net >= 0.99) latched = true
+      if (latched) {
+        open = 1
+        net = 1
+      }
       sticky.style.setProperty('--open', String(open))
       sticky.style.setProperty('--net', String(net))
-      sticky.classList.toggle('is-open', net > 0.35)
+      sticky.classList.toggle('is-open', latched || net > 0.35)
     }
     const onScroll = () => {
       cancelAnimationFrame(raf)
@@ -371,13 +378,13 @@ function EverythingHub() {
               </button>
             ))}
 
-            {/* ReSello-keskusnode */}
-            <span
-              className="hub-resello"
+            {/* Keskuslaite (ReSello-sovellus tabletilla) */}
+            <img
+              src={g('grafiikka-6.png')}
+              alt="ReSello-sovellus tabletilla"
+              className="hub-device"
               style={{ left: `${reselloPos.x}%`, top: `${reselloPos.y}%` }}
-            >
-              <b>Re</b>Sello
-            </span>
+            />
           </div>
 
           {/* Keskuslause, joka repeää nurkkiin */}

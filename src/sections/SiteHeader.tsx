@@ -15,10 +15,19 @@ function SiteHeader() {
   const [show, setShow] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.85)
+    // Yläpalkki ilmestyy vasta kun "Tässä on kaikki" -osio on skrollattu ohi.
+    const onScroll = () => {
+      const hub = document.getElementById('ominaisuudet')
+      if (hub) setShow(hub.getBoundingClientRect().bottom <= 0)
+      else setShow(window.scrollY > window.innerHeight * 0.85)
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   return (

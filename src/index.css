@@ -206,25 +206,15 @@
   pointer-events: none;
 }
 
-/* ReSello-keskusnode verkoston keskellä */
-.hub-resello {
+/* Keskuslaite (tabletti) verkoston keskellä */
+.hub-device {
   position: absolute;
   transform: translate(-50%, -50%);
   z-index: 23;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1.1rem, 2vw, 1.9rem);
-  letter-spacing: -0.02em;
-  color: #ffffff;
-  background: rgba(60, 36, 21, 0.55);
-  padding: 0.35rem 0.85rem;
-  border-radius: 12px;
-  white-space: nowrap;
+  width: clamp(9rem, 17vw, 15rem);
+  height: auto;
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.28));
   pointer-events: none;
-}
-.hub-resello b {
-  color: #e2b48c;
-  font-weight: 800;
 }
 
 /* Keskitetty tietoikkuna ikonin päällä */
