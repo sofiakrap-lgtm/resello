@@ -24,7 +24,7 @@ const g = (name: string) => encodeURI(`/graphics/${name}`)
 const topics: Topic[] = [
   {
     label: 'Varausjärjestelmä',
-    color: '#c17c45',
+    color: '#3c2415',
     x: 21,
     y: 73,
     features: [
@@ -53,7 +53,7 @@ const topics: Topic[] = [
   },
   {
     label: 'Kassajärjestelmä',
-    color: '#4c5591',
+    color: '#3c2415',
     x: 15,
     y: 39,
     features: [
@@ -82,7 +82,7 @@ const topics: Topic[] = [
   },
   {
     label: 'Myyjän myynninseuranta',
-    color: '#85815e',
+    color: '#3c2415',
     x: 47,
     y: 55,
     features: [
@@ -140,7 +140,7 @@ const topics: Topic[] = [
   },
   {
     label: 'Hallinta ja analytiikka',
-    color: '#606060',
+    color: '#3c2415',
     x: 61,
     y: 21,
     features: [
