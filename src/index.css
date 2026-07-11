@@ -44,174 +44,217 @@
   }
 }
 
-/* "Tässä on kaikki" — laajeneva ikkuna, ominaisuudet leviävät laitteesta */
-.hub-card {
-  opacity: 0;
-  transform: scale(0.96);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.hub.in .hub-card {
-  opacity: 1;
-  transform: scale(1);
-}
-.hub-device {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.92);
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
-}
-.hub.in .hub-device {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-.hub-node {
-  opacity: 0;
-  transform: translate(var(--dx, 0px), calc(-50% + var(--dy, 0px))) scale(0.6);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.hub.in .hub-node {
-  opacity: 1;
-  transform: translate(0, -50%) scale(1);
-  /* Kevyt kelluminen animaation jälkeen (Anthropic-tyyliin) */
-  animation: hub-float var(--fdur, 5s) ease-in-out var(--fdelay, 1.6s) infinite;
-}
-@keyframes hub-float {
-  0%,
-  100% {
-    transform: translate(0, -50%) scale(1);
-  }
-  50% {
-    transform: translate(0, calc(-50% - 7px)) scale(1);
-  }
-}
-.hub-line {
-  stroke: rgba(250, 241, 224, 0.25);
-  stroke-width: 1;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  opacity: 0;
-  transition:
-    stroke-dashoffset 0.85s ease 0.25s,
-    opacity 0.5s ease 0.15s;
-}
-.hub.in .hub-line {
-  stroke-dashoffset: 0;
-  opacity: 1;
-}
-.hub-mnode {
-  opacity: 0;
-  transform: translateY(0.75rem);
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
-}
-.hub.in .hub-mnode {
-  opacity: 1;
-  transform: translateY(0);
-}
-@media (prefers-reduced-motion: reduce) {
-  .hub-device,
-  .hub-node,
-  .hub-line,
-  .hub-mnode {
-    transition: none;
-  }
-  .hub.in .hub-node {
-    animation: none;
-  }
-}
-
-/* "Tässä on kaikki" — scroll-ohjattu animaatio (Anthropic path-to-hope -tyyliin) */
-.hub2-scroll {
+/* "Tässä on kaikki" — scroll-ohjattu verkosto (Anthropic "Keep thinking" -tyyliin) */
+.hub-scroll {
   position: relative;
-  height: 320vh;
+  height: 360vh;
 }
-.hub2-sticky {
+.hub-sticky {
   position: sticky;
   top: 0;
   height: 100vh;
   overflow: hidden;
+  background: var(--color-beige);
 }
-.hub2-card {
+
+/* Vihreä levy, joka aukeaa koko ruutuun scrollatessa */
+.hub-plate {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: calc(20% + 80% * var(--open, 0));
-  height: calc(20vh + 80vh * var(--open, 0));
-  max-height: 100vh;
-  background: var(--color-brown);
-  border-radius: calc(28px - 20px * var(--open, 0));
+  width: calc(88% + 12% * var(--open, 0));
+  height: calc(76vh + 24vh * var(--open, 0));
+  background: #b4c0bc;
+  border-radius: calc(26px - 26px * var(--open, 0));
 }
-.hub2-net {
+
+/* Intro-teksti — näkyy suljettuna, häipyy heti kun levy aukeaa */
+.hub-intro {
   position: absolute;
-  inset: 0;
-  opacity: var(--net, 0);
-  transition: opacity 0.05s linear;
-}
-.hub2-pill {
-  position: absolute;
+  left: 50%;
+  top: 59%;
+  z-index: 30;
+  width: min(88%, 40rem);
   transform: translate(-50%, -50%);
-  border-radius: 8px;
-  background: rgba(250, 241, 224, 0.09);
-  animation: hub2-drift var(--d, 7s) ease-in-out var(--delay, 0s) infinite;
+  text-align: center;
+  opacity: calc(1 - var(--open, 0) * 3);
+  pointer-events: none;
 }
-@keyframes hub2-drift {
+.hub-intro-lead {
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  line-height: 1.65;
+}
+.hub-scrollhint {
+  margin-top: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+.hub-scrollhint svg {
+  width: 1rem;
+  height: 1rem;
+  animation: hub-bob 1.8s ease-in-out infinite;
+}
+@keyframes hub-bob {
   0%,
   100% {
-    transform: translate(-50%, -50%);
+    transform: translateY(0);
   }
   50% {
-    transform: translate(-50%, calc(-50% - 7px));
+    transform: translateY(3px);
   }
 }
-.hub2-main {
+
+/* Verkosto */
+.hub-net {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  opacity: var(--net, 0);
+}
+.hub-links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.hub-link {
+  stroke: rgba(255, 255, 255, 0.45);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.hub-label {
   position: absolute;
   transform: translate(-50%, -50%);
-  z-index: 20;
-  cursor: default;
-  animation: hub2-drift var(--d, 8s) ease-in-out var(--delay, 0s) infinite;
+  z-index: 22;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.6vw, 1.55rem);
+  white-space: nowrap;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
 }
-.hub2-badge {
+.hub-icon {
   position: absolute;
-  left: 3.5%;
-  top: 9%;
-  z-index: 25;
-  width: 5.5rem;
-  height: 5.5rem;
+  width: clamp(2.7rem, 4vw, 3.4rem);
+  height: clamp(2.7rem, 4vw, 3.4rem);
+  padding: 0.62rem;
+  border-radius: 15px;
+  color: #ffffff;
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+  transition:
+    opacity 0.5s ease,
+    box-shadow 0.2s ease,
+    transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: calc(var(--rank, 0) * 55ms);
+  cursor: pointer;
+  z-index: 24;
 }
-.hub2-badge-spin {
-  animation: hub-badge-spin 16s linear infinite;
-  transform-origin: center;
+.hub-sticky.is-open .hub-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  animation: hub-float var(--fd, 8s) ease-in-out var(--fdelay, 0s) infinite;
+  animation-delay: calc(var(--rank, 0) * 55ms + 0.55s);
 }
-.hub2-t {
+.hub-icon:hover,
+.hub-icon:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+}
+@keyframes hub-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, calc(-50% - 6px)) scale(1);
+  }
+}
+
+/* Keskuslause, joka repeää nurkkiin auetessa */
+.hub-word {
   position: absolute;
   left: 50%;
   top: 50%;
-  z-index: 30;
-  color: #fff;
+  z-index: 26;
+  color: #ffffff;
+  font-family: var(--font-display);
   font-weight: 800;
   font-size: clamp(2rem, 6vw, 4.5rem);
   line-height: 1;
   white-space: nowrap;
+  pointer-events: none;
 }
-.hub2-t1 {
-  transform: translate(-108%, -50%)
-    translate(calc(-14vw * var(--open, 0)), calc(-22vh * var(--open, 0)));
+.hub-word1 {
+  transform: translate(-104%, -50%)
+    translate(calc(-15vw * var(--open, 0)), calc(-31vh * var(--open, 0)))
+    translateY(calc(-10vh * (1 - var(--open, 0))));
 }
-.hub2-t2 {
-  transform: translate(8%, -50%)
-    translate(calc(14vw * var(--open, 0)), calc(22vh * var(--open, 0)));
+.hub-word2 {
+  transform: translate(4%, -50%)
+    translate(calc(15vw * var(--open, 0)), calc(31vh * var(--open, 0)))
+    translateY(calc(-10vh * (1 - var(--open, 0))));
+}
+
+/* Keskitetty tietoikkuna ikonin päällä */
+.hub-tip {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 40;
+  width: min(85%, 23rem);
+  transform: translate(-50%, -50%) scale(0.96);
+  background: var(--color-card);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  text-align: center;
+  box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+.hub-tip.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.hub-tip h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+.hub-tip p {
+  margin-top: 0.6rem;
+  font-family: var(--font-body);
+  color: rgba(60, 36, 21, 0.8);
+  line-height: 1.6;
+  font-size: 0.95rem;
 }
 @media (prefers-reduced-motion: reduce) {
-  .hub2-badge-spin,
-  .hub2-pill,
-  .hub2-main {
+  .hub-icon {
+    transition:
+      opacity 0.5s ease,
+      box-shadow 0.2s ease;
+    animation: none;
+  }
+  .hub-sticky.is-open .hub-icon {
+    animation: none;
+  }
+  .hub-scrollhint svg {
     animation: none;
   }
 }
@@ -231,58 +274,11 @@
   }
 }
 
-/* "Tässä on kaikki" — pyörivä merkki (grafiikka 4) ilmestyy animaation lopuksi */
-.hub-badge {
-  opacity: 0;
-  transform: scale(0.6) rotate(-20deg);
-  transition:
-    opacity 0.6s ease 1.15s,
-    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 1.15s;
-}
-.hub.in .hub-badge {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
-.hub-badge-spin {
-  transform-origin: center;
-  animation: hub-badge-spin 16s linear infinite;
-}
+/* Pyörivä merkki (käytetään hinnasto-osiossa) */
 @keyframes hub-badge-spin {
   to {
     transform: rotate(360deg);
   }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hub-badge {
-    transition: none;
-  }
-  .hub-badge-spin {
-    animation: none;
-  }
-}
-
-/* Kassa-esittely — pädit ilmestyvät ensin, sitten leima */
-.kassa-tablet {
-  opacity: 0;
-  transform: translateY(1.5rem);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.kassa.in .kassa-tablet {
-  opacity: 1;
-  transform: none;
-}
-.kassa-badge-anim {
-  opacity: 0;
-  transform: scale(0.5) rotate(-8deg);
-  transition:
-    opacity 0.5s ease 0.85s,
-    transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) 0.85s;
-}
-.kassa.in .kassa-badge-anim {
-  opacity: 1;
-  transform: scale(1) rotate(12deg);
 }
 
 /* Yleinen reveal-on-scroll (kaikki osiot animoituja) */
@@ -298,8 +294,6 @@
   transform: none;
 }
 @media (prefers-reduced-motion: reduce) {
-  .kassa-tablet,
-  .kassa-badge-anim,
   .reveal-item {
     transition: none;
   }

@@ -1,68 +1,207 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import {
+  Barcode,
+  BarChart3,
+  BookText,
+  CalendarCheck,
+  Coins,
+  CreditCard,
+  Map as MapIcon,
+  MapPin,
+  MapPinned,
+  MonitorSmartphone,
+  QrCode,
+  Search,
+  Share2,
+  TrendingUp,
+  Users,
+  type LucideIcon,
+} from 'lucide-react'
 
-// Koristepalikat (Anthropic path-to-hope -tyylinen verkosto)
-const pills = [
-  { x: 22, y: 30, w: 15, h: 5 },
-  { x: 8, y: 36, w: 17, h: 5 },
-  { x: 53, y: 15, w: 6, h: 6 },
-  { x: 57, y: 42, w: 18, h: 6 },
-  { x: 71, y: 40, w: 5, h: 6 },
-  { x: 87, y: 40, w: 14, h: 6 },
-  { x: 65, y: 13, w: 5, h: 6 },
-  { x: 81, y: 13, w: 15, h: 5 },
-  { x: 14, y: 66, w: 16, h: 6 },
-  { x: 40, y: 69, w: 20, h: 6 },
-  { x: 63, y: 66, w: 16, h: 6 },
-  { x: 85, y: 62, w: 13, h: 6 },
-  { x: 37, y: 83, w: 18, h: 6 },
-  { x: 59, y: 83, w: 6, h: 6 },
-]
+// --- Sisältö: 5 pääaihetta, kullakin oma väri ja 3 ala-aihetta (ikonia) ---
 
-interface Main {
-  label: string
+interface Feature {
+  Icon: LucideIcon
+  title: string
+  body: string
   x: number
   y: number
-  info: string
 }
 
-const mains: Main[] = [
+interface Topic {
+  label: string
+  color: string
+  x: number
+  y: number
+  features: Feature[]
+}
+
+const topics: Topic[] = [
   {
-    label: 'kassa',
-    x: 46,
-    y: 55,
-    info: 'Käteinen, kortti ja lähimaksu samasta laitteesta, ilman kilojen rautaa.',
+    label: 'Varausjärjestelmä',
+    color: '#c17c45',
+    x: 21,
+    y: 73,
+    features: [
+      {
+        Icon: CalendarCheck,
+        title: 'Sähköinen paikkavaraus',
+        body: 'Myyntipaikkojen varaus hoituu verkossa muutamassa sekunnissa, ilman puheluita tai papereita.',
+        x: 9,
+        y: 60,
+      },
+      {
+        Icon: MapIcon,
+        title: 'Myymäläkartta',
+        body: 'Näe koko myymälä yhdellä silmäyksellä ja valitse vapaa paikka suoraan visuaaliselta pohjalta.',
+        x: 31,
+        y: 62,
+      },
+      {
+        Icon: MapPin,
+        title: 'Paikkojen hallinta ja saatavuus',
+        body: 'Vuokrattavat paikat pysyvät ajan tasalla — varatut, vapaat ja tulevat näkyvät reaaliajassa.',
+        x: 12,
+        y: 85,
+      },
+    ],
   },
   {
-    label: 'myyjien työkalu',
-    x: 70,
-    y: 27,
-    info: 'Automaattiset tilitykset ja myyjän oma näkymä myyntiin reaaliajassa.',
-  },
-  {
-    label: 'asiakashallinta',
-    x: 82,
-    y: 55,
-    info: 'Lisää ja hallitse asiakkaita sekä aseta alennuksia yhdestä näkymästä.',
-  },
-  {
-    label: 'mainostyökalu',
-    x: 20,
-    y: 50,
-    info: 'Jaa tuotteet someen ja tuo lisää ostajia valmiilla mainospohjilla.',
-  },
-  {
-    label: 'kirjanpito',
+    label: 'Kassajärjestelmä',
+    color: '#4c5591',
     x: 15,
-    y: 78,
-    info: 'Vie tiedot suoraan kirjanpitoosi, valmiit raportit aina saatavilla.',
+    y: 39,
+    features: [
+      {
+        Icon: Barcode,
+        title: 'Viivakoodilliset hintalaput',
+        body: 'Tulosta hintalaput viivakoodilla ja lue tuotteet kassalla ilman virheitä ja käsin näppäilyä.',
+        x: 7,
+        y: 25,
+      },
+      {
+        Icon: CreditCard,
+        title: 'Kassa ja maksutapahtumat',
+        body: 'Käteinen, kortti ja lähimaksu samasta laitteesta — nopeasti ja ilman kilojen rautaa.',
+        x: 27,
+        y: 27,
+      },
+      {
+        Icon: Coins,
+        title: 'Automaattiset tilitykset',
+        body: 'Myyjäkohtaiset tilitykset lasketaan automaattisesti, joten rahat menevät oikein ilman käsityötä.',
+        x: 9,
+        y: 49,
+      },
+    ],
+  },
+  {
+    label: 'Myyjän myynninseuranta',
+    color: '#85815e',
+    x: 47,
+    y: 55,
+    features: [
+      {
+        Icon: TrendingUp,
+        title: 'Myynti reaaliajassa',
+        body: 'Reaaliaikainen näkymä omiin myynteihin ja tuloihin — seuraa päivän kertymää mistä tahansa.',
+        x: 41,
+        y: 42,
+      },
+      {
+        Icon: MonitorSmartphone,
+        title: 'Toimii millä tahansa laitteella',
+        body: 'Puhelin, tabletti tai tietokone — ReSello toimii selaimessa ilman erillisiä asennuksia.',
+        x: 55,
+        y: 66,
+      },
+      {
+        Icon: Share2,
+        title: 'Jaa valikoima someen',
+        body: 'Jaa oma valikoimasi someen suoralla linkillä ja tuo lisää ostajia pöytäsi äärelle.',
+        x: 38,
+        y: 68,
+      },
+    ],
+  },
+  {
+    label: 'Ostajan tuotehaku',
+    color: '#3c2415',
+    x: 81,
+    y: 46,
+    features: [
+      {
+        Icon: Search,
+        title: 'Löydä tuote ja paikka',
+        body: 'Haku näyttää miltä kirpputorilta ja mistä paikasta tuote löytyy — ostaja kävelee suoraan oikealle pöydälle.',
+        x: 91,
+        y: 33,
+      },
+      {
+        Icon: QrCode,
+        title: 'QR-koodi pöydällä',
+        body: 'Kirpputorin pöydällä oleva QR-koodi ohjaa selaamaan myyjän ajantasaista valikoimaa.',
+        x: 72,
+        y: 31,
+      },
+      {
+        Icon: MapPinned,
+        title: 'Löydettävyys yli rajojen',
+        body: 'Tuotteet löytyvät yli kirpputorirajojen — koko verkoston valikoima yhdessä haussa.',
+        x: 91,
+        y: 58,
+      },
+    ],
+  },
+  {
+    label: 'Hallinta ja analytiikka',
+    color: '#606060',
+    x: 61,
+    y: 21,
+    features: [
+      {
+        Icon: BarChart3,
+        title: 'Käyttöaste ja myynnin kehitys',
+        body: 'Selkeät näkymät myymälän käyttöasteeseen ja myynnin kehitykseen — päätökset dataan nojaten.',
+        x: 49,
+        y: 15,
+      },
+      {
+        Icon: Users,
+        title: 'Asiakashallinta',
+        body: 'Lisää ja hallitse asiakkaita sekä aseta alennuksia yhdestä selkeästä näkymästä.',
+        x: 73,
+        y: 13,
+      },
+      {
+        Icon: BookText,
+        title: 'Kirjanpito ja tilitykset',
+        body: 'Kirjanpito ja tilitykset samassa paikassa — valmiit raportit aina saatavilla.',
+        x: 59,
+        y: 35,
+      },
+    ],
   },
 ]
 
-// Viivat pääsanoista lähipalikoihin
-const lines = [
-  { x1: 26, y1: 51, x2: 35, y2: 49 },
-  { x1: 18, y1: 74, x2: 22, y2: 68 },
-]
+// Litistetty lista kaikista ikoneista + porrastusjärjestys (etäisyys keskeltä)
+type FeatureX = Feature & { color: string }
+const allFeatures: FeatureX[] = topics.flatMap((t) =>
+  t.features.map((f) => ({ ...f, color: t.color })),
+)
+const order = [...allFeatures.keys()].sort(
+  (a, b) =>
+    Math.hypot(allFeatures[a].x - 50, allFeatures[a].y - 50) -
+    Math.hypot(allFeatures[b].x - 50, allFeatures[b].y - 50),
+)
+const stagger = new Map<number, number>(
+  order.map((idx, rank) => [idx, rank] as [number, number]),
+)
+
+// Yhdysviivat pääsanasta sen ikoneihin
+const links = topics.flatMap((t) =>
+  t.features.map((f) => ({ x1: t.x, y1: t.y, x2: f.x, y2: f.y })),
+)
 
 const clamp = (v: number, a: number, b: number) => Math.min(Math.max(v, a), b)
 const smooth = (x: number, a: number, b: number) => {
@@ -73,6 +212,7 @@ const smooth = (x: number, a: number, b: number) => {
 function EverythingHub() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const stickyRef = useRef<HTMLDivElement>(null)
+  const [hover, setHover] = useState<FeatureX | null>(null)
 
   useEffect(() => {
     const sec = scrollRef.current
@@ -83,10 +223,11 @@ function EverythingHub() {
       const total = sec.offsetHeight - window.innerHeight
       const scrolled = clamp(-sec.getBoundingClientRect().top, 0, Math.max(total, 1))
       const p = total > 0 ? scrolled / total : 0
-      const open = smooth(p, 0, 0.2) * (1 - smooth(p, 0.8, 1))
-      const net = smooth(p, 0.24, 0.4) * (1 - smooth(p, 0.62, 0.78))
+      const open = smooth(p, 0.04, 0.42)
+      const net = smooth(p, 0.32, 0.6)
       sticky.style.setProperty('--open', String(open))
       sticky.style.setProperty('--net', String(net))
+      sticky.classList.toggle('is-open', net > 0.35)
     }
     const onScroll = () => {
       cancelAnimationFrame(raf)
@@ -103,102 +244,149 @@ function EverythingHub() {
   }, [])
 
   return (
-    <section id="ominaisuudet" className="hub2 scroll-mt-0 bg-beige">
-      {/* Työpöytä: scroll-ohjattu animaatio */}
-      <div ref={scrollRef} className="hub2-scroll hidden md:block">
+    <section id="ominaisuudet" className="hub bg-beige">
+      {/* Työpöytä: scroll-ohjattu, laitteesta aukeava verkosto */}
+      <div ref={scrollRef} className="hub-scroll hidden md:block">
         <div
           ref={stickyRef}
-          className="hub2-sticky"
+          className="hub-sticky"
           style={{ ['--open' as string]: 0, ['--net' as string]: 0 }}
         >
-          <div className="hub2-card" />
+          {/* Aukeava vihreä levy */}
+          <div className="hub-plate" />
 
-          {/* Verkosto */}
-          <div className="hub2-net">
-            <svg className="pointer-events-none absolute inset-0 h-full w-full">
-              {lines.map((l, i) => (
+          {/* Intro: näkyy suljettuna, häipyy auetessa */}
+          <div className="hub-intro">
+            <p className="hub-intro-lead">
+              ReSello on suomalaisille itsepalvelukirpputoreille suunnattu moderni
+              käyttöjärjestelmä, joka yhdistää tavarat ja ihmiset samaan verkostoon
+              ja tehostaa tuotteiden kiertoa. Se kokoaa myyntipaikkojen varaukset,
+              kassan, tilitykset ja myynninseurannan yhteen selkeään näkymään, joka
+              toimii millä tahansa laitteella ilman asennuksia.
+            </p>
+            <span className="hub-scrollhint">
+              SKROLLAA ALAS
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 4v14m0 0l6-6m-6 6l-6-6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </div>
+
+          {/* Verkosto: viivat + pääsanat + ikonit */}
+          <div className="hub-net">
+            <svg
+              className="hub-links"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              {links.map((l, i) => (
                 <line
                   key={i}
-                  x1={`${l.x1}%`}
-                  y1={`${l.y1}%`}
-                  x2={`${l.x2}%`}
-                  y2={`${l.y2}%`}
-                  stroke="rgba(250,241,224,0.55)"
-                  strokeWidth={1.5}
+                  x1={l.x1}
+                  y1={l.y1}
+                  x2={l.x2}
+                  y2={l.y2}
+                  className="hub-link"
                 />
               ))}
             </svg>
 
-            {pills.map((n, i) => (
+            {topics.map((t) => (
               <span
-                key={i}
-                className="hub2-pill"
-                style={{
-                  left: `${n.x}%`,
-                  top: `${n.y}%`,
-                  width: `${n.w}%`,
-                  height: `${n.h}%`,
-                  ['--d' as string]: `${6 + (i % 4)}s`,
-                  ['--delay' as string]: `${-(i % 5) * 0.9}s`,
-                }}
-              />
+                key={t.label}
+                className="hub-label"
+                style={{ left: `${t.x}%`, top: `${t.y}%` }}
+              >
+                {t.label}
+              </span>
             ))}
 
-            {/* Grafiikka 4 -merkki nurkassa */}
-            <div className="hub2-badge">
-              <img
-                src="/graphics/grafiikka-4.png"
-                alt=""
-                aria-hidden="true"
-                className="hub2-badge-spin h-full w-full"
-              />
-            </div>
-
-            {mains.map((m, i) => (
-              <div
-                key={m.label}
-                className="hub2-main group"
+            {allFeatures.map((f, i) => (
+              <button
+                key={f.title}
+                type="button"
+                className="hub-icon"
                 style={{
-                  left: `${m.x}%`,
-                  top: `${m.y}%`,
-                  ['--d' as string]: `${8 + (i % 3)}s`,
-                  ['--delay' as string]: `${-i * 1.1}s`,
+                  left: `${f.x}%`,
+                  top: `${f.y}%`,
+                  background: hexA(f.color, 0.63),
+                  ['--rank' as string]: stagger.get(i) ?? 0,
+                  ['--fd' as string]: `${7 + (i % 5)}s`,
+                  ['--fdelay' as string]: `${-(i % 6) * 0.8}s`,
                 }}
+                onMouseEnter={() => setHover(f)}
+                onMouseLeave={() => setHover((h) => (h === f ? null : h))}
+                onFocus={() => setHover(f)}
+                onBlur={() => setHover((h) => (h === f ? null : h))}
+                aria-label={f.title}
               >
-                <span className="text-[1.4rem] font-bold text-beige md:text-[1.9rem]">
-                  {m.label}
-                </span>
-                <div className="pointer-events-none absolute left-1/2 top-[calc(100%+0.5rem)] z-50 w-56 -translate-x-1/2 rounded-lg bg-beige p-3 text-center text-xs leading-relaxed text-brown/80 opacity-0 shadow-[0_15px_35px_-15px_rgba(0,0,0,0.6)] transition-opacity duration-200 group-hover:opacity-100">
-                  {m.info}
-                </div>
-              </div>
+                <f.Icon className="h-full w-full" strokeWidth={1.6} />
+              </button>
             ))}
           </div>
 
-          {/* Keskuslause, joka jakautuu nurkkiin */}
-          <span className="hub2-t hub2-t1">Tässä on</span>
-          <span className="hub2-t hub2-t2">kaikki.</span>
+          {/* Keskuslause, joka repeää nurkkiin */}
+          <span className="hub-word hub-word1">Tässä on</span>
+          <span className="hub-word hub-word2">kaikki.</span>
+
+          {/* Keskitetty tietoikkuna ikonin päällä */}
+          <div className={`hub-tip ${hover ? 'show' : ''}`}>
+            {hover && (
+              <>
+                <h3 style={{ color: hover.color }}>{hover.title}</h3>
+                <p>{hover.body}</p>
+              </>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Mobiili: yksinkertainen versio */}
+      {/* Mobiili: selkeä listaus */}
       <div className="mx-auto max-w-md px-6 py-20 md:hidden">
-        <h2 className="text-center text-[1.75rem] font-bold leading-[1.1] tracking-tight text-brown">
+        <h2 className="text-center text-[1.9rem] font-bold leading-[1.1] tracking-tight text-brown">
           Tässä on kaikki.
         </h2>
-        <div className="mt-8 flex flex-wrap justify-center gap-2.5">
-          {mains.map((m) => (
-            <span
-              key={m.label}
-              className="rounded-lg bg-brown px-4 py-2 text-sm font-bold text-beige"
-            >
-              {m.label}
-            </span>
+        <div className="mt-10 flex flex-col gap-8">
+          {topics.map((t) => (
+            <div key={t.label}>
+              <h3 className="text-[1.15rem] font-bold" style={{ color: t.color }}>
+                {t.label}
+              </h3>
+              <ul className="mt-3 flex flex-col gap-3">
+                {t.features.map((f) => (
+                  <li key={f.title} className="flex gap-3">
+                    <span
+                      className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
+                      style={{ background: hexA(t.color, 0.63) }}
+                    >
+                      <f.Icon className="h-5 w-5" strokeWidth={1.6} />
+                    </span>
+                    <div>
+                      <p className="font-semibold text-brown">{f.title}</p>
+                      <p className="text-sm text-brown/75">{f.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
       </div>
     </section>
   )
+}
+
+// #rrggbb + alfa -> rgba()
+function hexA(hex: string, a: number) {
+  const n = parseInt(hex.slice(1), 16)
+  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`
 }
 
 export default EverythingHub

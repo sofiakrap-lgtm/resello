@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import SiteHeader from '../sections/SiteHeader.tsx'
 import SplitHero from '../sections/SplitHero.tsx'
 import EverythingHub from '../sections/EverythingHub.tsx'
-import KassaShowcase from '../sections/KassaShowcase.tsx'
 import Pricing from '../sections/Pricing.tsx'
 import Migration from '../sections/Migration.tsx'
 import Onboarding from '../sections/Onboarding.tsx'
@@ -37,7 +36,6 @@ function HomePage() {
       <SplitHero />
       <main>
         <EverythingHub />
-        <KassaShowcase />
         <Pricing />
         <Migration />
         <Onboarding />
