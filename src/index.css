@@ -126,39 +126,79 @@
   }
 }
 
-/* "Tässä on kaikki" -verkosto (vaalea, Anthropic-tyyliin) */
-.hub2-cluster {
+/* "Tässä on kaikki" — scroll-ohjattu animaatio (Anthropic path-to-hope -tyyliin) */
+.hub2-scroll {
+  position: relative;
+  height: 320vh;
+}
+.hub2-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+.hub2-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.7s ease;
+  width: calc(20% + 80% * var(--open, 0));
+  height: calc(20vh + 80vh * var(--open, 0));
+  max-height: 100vh;
+  background: var(--color-brown);
+  border-radius: calc(28px - 20px * var(--open, 0));
 }
-.hub2.in .hub2-cluster {
-  opacity: 1;
-  animation: hub2-float var(--fdur, 6s) ease-in-out var(--fdelay, 0s) infinite;
+.hub2-net {
+  position: absolute;
+  inset: 0;
+  opacity: var(--net, 0);
+  transition: opacity 0.05s linear;
 }
-@keyframes hub2-float {
-  0%,
-  100% {
-    transform: translate(-50%, -50%);
-  }
-  50% {
-    transform: translate(-50%, calc(-50% - 9px));
-  }
+.hub2-pill {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  background: rgba(250, 241, 224, 0.09);
 }
-.hub2-line {
-  stroke: rgba(60, 36, 21, 0.18);
-  stroke-width: 1.5;
-  opacity: 0;
-  transition: opacity 0.6s ease;
+.hub2-main {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  cursor: default;
 }
-.hub2.in .hub2-line {
-  opacity: 1;
+.hub2-badge {
+  position: absolute;
+  left: 3.5%;
+  top: 9%;
+  z-index: 25;
+  width: 5.5rem;
+  height: 5.5rem;
+}
+.hub2-badge-spin {
+  animation: hub-badge-spin 16s linear infinite;
+  transform-origin: center;
+}
+.hub2-t {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 30;
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+.hub2-t1 {
+  transform: translate(-108%, -50%)
+    translate(calc(-14vw * var(--open, 0)), calc(-22vh * var(--open, 0)));
+}
+.hub2-t2 {
+  transform: translate(8%, -50%)
+    translate(calc(14vw * var(--open, 0)), calc(22vh * var(--open, 0)));
 }
 @media (prefers-reduced-motion: reduce) {
-  .hub2-cluster {
-    transition: none;
-  }
-  .hub2.in .hub2-cluster {
+  .hub2-badge-spin {
     animation: none;
   }
 }

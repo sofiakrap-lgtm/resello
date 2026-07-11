@@ -1,260 +1,192 @@
 import { useEffect, useRef } from 'react'
-import {
-  CreditCard,
-  Wallet,
-  FileText,
-  Megaphone,
-  Users,
-} from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
 
-interface Chip {
-  type: 'icon' | 'text'
-  icon?: LucideIcon
+// Koristepalikat (Anthropic path-to-hope -tyylinen verkosto)
+const pills = [
+  { x: 22, y: 30, w: 15, h: 5 },
+  { x: 8, y: 36, w: 17, h: 5 },
+  { x: 53, y: 15, w: 6, h: 6 },
+  { x: 57, y: 42, w: 18, h: 6 },
+  { x: 71, y: 40, w: 5, h: 6 },
+  { x: 87, y: 40, w: 14, h: 6 },
+  { x: 65, y: 13, w: 5, h: 6 },
+  { x: 81, y: 13, w: 15, h: 5 },
+  { x: 14, y: 66, w: 16, h: 6 },
+  { x: 40, y: 69, w: 20, h: 6 },
+  { x: 63, y: 66, w: 16, h: 6 },
+  { x: 85, y: 62, w: 13, h: 6 },
+  { x: 37, y: 83, w: 18, h: 6 },
+  { x: 59, y: 83, w: 6, h: 6 },
+]
+
+interface Main {
   label: string
+  x: number
+  y: number
   info: string
 }
 
-interface Cluster {
-  word: string
-  color: 'peach' | 'sage' | 'bluegrey' | 'taupe' | 'brown'
-  x: number
-  y: number
-  chips: Chip[]
-}
-
-// Pääsanat leviävät keskuslauseen "Tässä on kaikki." ympärille, kukin oma väri.
-const clusters: Cluster[] = [
+const mains: Main[] = [
   {
-    word: 'Kassa',
-    color: 'peach',
+    label: 'kassa',
+    x: 46,
+    y: 55,
+    info: 'Käteinen, kortti ja lähimaksu samasta laitteesta, ilman kilojen rautaa.',
+  },
+  {
+    label: 'myyjien työkalu',
+    x: 70,
+    y: 27,
+    info: 'Automaattiset tilitykset ja myyjän oma näkymä myyntiin reaaliajassa.',
+  },
+  {
+    label: 'asiakashallinta',
+    x: 82,
+    y: 55,
+    info: 'Lisää ja hallitse asiakkaita sekä aseta alennuksia yhdestä näkymästä.',
+  },
+  {
+    label: 'mainostyökalu',
     x: 20,
-    y: 20,
-    chips: [
-      {
-        type: 'text',
-        label: 'Käteinen & kortti',
-        info: 'Käteinen, kortti ja lähimaksu samasta laitteesta, ilman kilojen rautaa.',
-      },
-      {
-        type: 'icon',
-        icon: CreditCard,
-        label: 'Maksut',
-        info: 'Nopea maksaminen ja selkeä kassanäkymä koko myymälään.',
-      },
-    ],
+    y: 50,
+    info: 'Jaa tuotteet someen ja tuo lisää ostajia valmiilla mainospohjilla.',
   },
   {
-    word: 'Myyjien työkalu',
-    color: 'bluegrey',
-    x: 80,
-    y: 18,
-    chips: [
-      {
-        type: 'text',
-        label: 'Tilitykset',
-        info: 'Automaattiset tilitykset myyjille ilman käsityötä.',
-      },
-      {
-        type: 'icon',
-        icon: Wallet,
-        label: 'Myynti',
-        info: 'Myyjät näkevät oman myyntinsä ja saldonsa reaaliajassa.',
-      },
-    ],
-  },
-  {
-    word: 'Kirjanpito',
-    color: 'taupe',
-    x: 85,
-    y: 56,
-    chips: [
-      {
-        type: 'icon',
-        icon: FileText,
-        label: 'Vienti',
-        info: 'Vie tiedot suoraan kirjanpitoosi muutamalla klikkauksella.',
-      },
-      {
-        type: 'text',
-        label: 'Raportit',
-        info: 'Valmiit raportit ja koosteet ovat aina saatavilla.',
-      },
-    ],
-  },
-  {
-    word: 'Mainostyökalu',
-    color: 'brown',
-    x: 60,
-    y: 85,
-    chips: [
-      {
-        type: 'text',
-        label: 'Some-jaot',
-        info: 'Jaa tuotteet someen yhdellä klikkauksella.',
-      },
-      {
-        type: 'icon',
-        icon: Megaphone,
-        label: 'Näkyvyys',
-        info: 'Tuo lisää ostajia valmiilla mainospohjilla.',
-      },
-    ],
-  },
-  {
-    word: 'Asiakashallinta',
-    color: 'sage',
-    x: 16,
-    y: 72,
-    chips: [
-      {
-        type: 'icon',
-        icon: Users,
-        label: 'Asiakkaat',
-        info: 'Lisää ja hallitse asiakkaita yhdestä näkymästä.',
-      },
-      {
-        type: 'text',
-        label: 'Alennukset',
-        info: 'Aseta alennuksia ja tarjouksia hetkessä.',
-      },
-    ],
+    label: 'kirjanpito',
+    x: 15,
+    y: 78,
+    info: 'Vie tiedot suoraan kirjanpitoosi, valmiit raportit aina saatavilla.',
   },
 ]
 
-const bgClass: Record<Cluster['color'], string> = {
-  peach: 'bg-peach',
-  sage: 'bg-sage',
-  bluegrey: 'bg-bluegrey',
-  taupe: 'bg-taupe',
-  brown: 'bg-brown',
-}
-const wordText: Record<Cluster['color'], string> = {
-  peach: 'text-brown',
-  sage: 'text-brown',
-  bluegrey: 'text-brown',
-  taupe: 'text-brown',
-  brown: 'text-beige',
-}
-const iconText: Record<Cluster['color'], string> = {
-  peach: 'text-peach',
-  sage: 'text-sage',
-  bluegrey: 'text-bluegrey',
-  taupe: 'text-taupe',
-  brown: 'text-brown',
-}
+// Viivat pääsanoista lähipalikoihin
+const lines = [
+  { x1: 26, y1: 51, x2: 35, y2: 49 },
+  { x1: 18, y1: 74, x2: 22, y2: 68 },
+]
 
-function Chips({ chips, color }: { chips: Chip[]; color: Cluster['color'] }) {
-  return (
-    <div className="flex items-start justify-center gap-2">
-      {chips.map((chip) => {
-        const Icon = chip.icon
-        return (
-          <div key={chip.label} className="group relative">
-            <div className="flex items-center gap-1.5 rounded-lg border border-brown/10 bg-card px-3 py-2 text-xs font-medium text-brown shadow-sm">
-              {chip.type === 'icon' && Icon ? (
-                <Icon className={`h-4 w-4 ${iconText[color]}`} />
-              ) : (
-                <span>{chip.label}</span>
-              )}
-            </div>
-            {/* Lisätietoikkuna hoverilla — laatikon alla keskellä */}
-            <div className="pointer-events-none absolute left-1/2 top-[calc(100%+0.5rem)] z-50 w-52 -translate-x-1/2 rounded-lg bg-beige p-3 text-center text-xs leading-relaxed text-brown/80 opacity-0 shadow-[0_15px_35px_-15px_rgba(0,0,0,0.55)] transition-opacity duration-200 group-hover:opacity-100">
-              {chip.info}
-            </div>
-          </div>
-        )
-      })}
-    </div>
-  )
+const clamp = (v: number, a: number, b: number) => Math.min(Math.max(v, a), b)
+const smooth = (x: number, a: number, b: number) => {
+  const t = clamp((x - a) / (b - a), 0, 1)
+  return t * t * (3 - 2 * t)
 }
 
 function EverythingHub() {
-  const rootRef = useRef<HTMLElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const stickyRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const el = rootRef.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          el.classList.add('in')
-          io.disconnect()
-        }
-      },
-      { threshold: 0.25 },
-    )
-    io.observe(el)
-    return () => io.disconnect()
+    const sec = scrollRef.current
+    const sticky = stickyRef.current
+    if (!sec || !sticky) return
+    let raf = 0
+    const update = () => {
+      const total = sec.offsetHeight - window.innerHeight
+      const scrolled = clamp(-sec.getBoundingClientRect().top, 0, Math.max(total, 1))
+      const p = total > 0 ? scrolled / total : 0
+      const open = smooth(p, 0, 0.2) * (1 - smooth(p, 0.8, 1))
+      const net = smooth(p, 0.24, 0.4) * (1 - smooth(p, 0.62, 0.78))
+      sticky.style.setProperty('--open', String(open))
+      sticky.style.setProperty('--net', String(net))
+    }
+    const onScroll = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      cancelAnimationFrame(raf)
+    }
   }, [])
 
   return (
-    <section
-      id="ominaisuudet"
-      ref={rootRef}
-      className="hub2 scroll-mt-24 bg-beige px-6 py-20 md:py-28"
-    >
-      {/* Työpöytä: verkosto */}
-      <div className="relative mx-auto hidden h-[44rem] max-w-6xl md:block">
-        <svg className="pointer-events-none absolute inset-0 h-full w-full">
-          {clusters.map((c, i) => (
-            <line
-              key={c.word}
-              x1="50%"
-              y1="50%"
-              x2={`${c.x}%`}
-              y2={`${c.y}%`}
-              className="hub2-line"
-              style={{ transitionDelay: `${400 + i * 90}ms` }}
-            />
-          ))}
-        </svg>
+    <section id="ominaisuudet" className="hub2 scroll-mt-0 bg-beige">
+      {/* Työpöytä: scroll-ohjattu animaatio */}
+      <div ref={scrollRef} className="hub2-scroll hidden md:block">
+        <div
+          ref={stickyRef}
+          className="hub2-sticky"
+          style={{ ['--open' as string]: 0, ['--net' as string]: 0 }}
+        >
+          <div className="hub2-card" />
 
-        <div className="absolute left-1/2 top-1/2 w-[22rem] -translate-x-1/2 -translate-y-1/2 text-center">
-          <h2 className="text-[2rem] font-bold leading-[1.1] tracking-tight text-brown md:text-[2.75rem]">
-            Tässä on kaikki.
-          </h2>
-        </div>
+          {/* Verkosto */}
+          <div className="hub2-net">
+            <svg className="pointer-events-none absolute inset-0 h-full w-full">
+              {lines.map((l, i) => (
+                <line
+                  key={i}
+                  x1={`${l.x1}%`}
+                  y1={`${l.y1}%`}
+                  x2={`${l.x2}%`}
+                  y2={`${l.y2}%`}
+                  stroke="rgba(250,241,224,0.55)"
+                  strokeWidth={1.5}
+                />
+              ))}
+            </svg>
 
-        {clusters.map((c, i) => (
-          <div
-            key={c.word}
-            className="hub2-cluster absolute"
-            style={{
-              left: `${c.x}%`,
-              top: `${c.y}%`,
-              transitionDelay: `${250 + i * 120}ms`,
-              ['--fdur' as string]: `${5.5 + i * 0.4}s`,
-              ['--fdelay' as string]: `${i * 0.3}s`,
-            }}
-          >
-            <div className="flex flex-col items-center gap-2.5">
+            {pills.map((n, i) => (
               <span
-                className={`rounded-lg px-4 py-1.5 text-sm font-bold shadow-sm ${bgClass[c.color]} ${wordText[c.color]}`}
-              >
-                {c.word}
-              </span>
-              <Chips chips={c.chips} color={c.color} />
+                key={i}
+                className="hub2-pill"
+                style={{
+                  left: `${n.x}%`,
+                  top: `${n.y}%`,
+                  width: `${n.w}%`,
+                  height: `${n.h}%`,
+                }}
+              />
+            ))}
+
+            {/* Grafiikka 4 -merkki nurkassa */}
+            <div className="hub2-badge">
+              <img
+                src="/graphics/grafiikka-4.png"
+                alt=""
+                aria-hidden="true"
+                className="hub2-badge-spin h-full w-full"
+              />
             </div>
+
+            {mains.map((m) => (
+              <div
+                key={m.label}
+                className="hub2-main group"
+                style={{ left: `${m.x}%`, top: `${m.y}%` }}
+              >
+                <span className="text-[1.4rem] font-bold text-beige md:text-[1.9rem]">
+                  {m.label}
+                </span>
+                <div className="pointer-events-none absolute left-1/2 top-[calc(100%+0.5rem)] z-50 w-56 -translate-x-1/2 rounded-lg bg-beige p-3 text-center text-xs leading-relaxed text-brown/80 opacity-0 shadow-[0_15px_35px_-15px_rgba(0,0,0,0.6)] transition-opacity duration-200 group-hover:opacity-100">
+                  {m.info}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+
+          {/* Keskuslause, joka jakautuu nurkkiin */}
+          <span className="hub2-t hub2-t1">Tässä on</span>
+          <span className="hub2-t hub2-t2">kaikki.</span>
+        </div>
       </div>
 
-      {/* Mobiili: keskuslause + pinottu lista */}
-      <div className="mx-auto max-w-md md:hidden">
+      {/* Mobiili: yksinkertainen versio */}
+      <div className="mx-auto max-w-md px-6 py-20 md:hidden">
         <h2 className="text-center text-[1.75rem] font-bold leading-[1.1] tracking-tight text-brown">
           Tässä on kaikki.
         </h2>
-        <div className="mt-10 flex flex-col gap-6">
-          {clusters.map((c) => (
-            <div key={c.word} className="flex flex-col items-center gap-2.5">
-              <span
-                className={`rounded-lg px-4 py-1.5 text-sm font-bold ${bgClass[c.color]} ${wordText[c.color]}`}
-              >
-                {c.word}
-              </span>
-              <Chips chips={c.chips} color={c.color} />
-            </div>
+        <div className="mt-8 flex flex-wrap justify-center gap-2.5">
+          {mains.map((m) => (
+            <span
+              key={m.label}
+              className="rounded-lg bg-brown px-4 py-2 text-sm font-bold text-beige"
+            >
+              {m.label}
+            </span>
           ))}
         </div>
       </div>
