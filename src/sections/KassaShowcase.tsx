@@ -24,7 +24,7 @@ const rows: Row[] = [
     body: 'Aseta alennuksia, muuta varauksia ja lisää asiakkaita ilman erillisiä työkaluja. Hallitset koko myymälää yhdestä näkymästä, jossa kaikki pysyy ajan tasalla eikä mikään jää roikkumaan eri järjestelmiin.',
     bg: 'bg-peach',
     reverse: false,
-    deco: { img: g('grafiikka 2.svg'), tint: 'rgba(255, 251, 244, 0.5)' },
+    deco: { img: g('grafiikka 2.svg'), tint: '#fdf7ec' },
   },
   {
     img: '/graphics/grafiikka-7.png',
@@ -42,7 +42,7 @@ const rows: Row[] = [
     body: 'Koordinoi varauksia, paikkoja ja tuotteita helposti. Kaikki tiedot löytyvät samasta paikasta ja pysyvät ajan tasalla, joten myymälän arki pysyy hallinnassa ruuhkaisimpanakin päivänä.',
     bg: 'bg-bluegrey',
     reverse: false,
-    deco: { img: g('grafiikka 20.svg'), tint: 'rgba(255, 251, 244, 0.45)' },
+    deco: { img: g('grafiikka 20.svg'), tint: '#fdf7ec' },
   },
 ]
 
@@ -50,6 +50,12 @@ const rows: Row[] = [
 function KassaShowcase() {
   return (
     <section className="px-6 py-20 md:py-28">
+      <div className="mb-12 flex justify-center">
+        <h2 className="rounded-full bg-[#5c4f42] px-8 py-3.5 text-center text-[1.05rem] font-bold text-white sm:text-[1.3rem] md:text-[1.6rem]">
+          Kassa, varaus- ja asiakashallinta
+        </h2>
+      </div>
+
       <div className="relative mx-auto flex max-w-6xl flex-col gap-6">
         {/* Pyörivä resello-merkki (grafiikka 15) keskellä rivien välissä */}
         <img

@@ -54,23 +54,21 @@ function Onboarding() {
               style={{ transitionDelay: `${i * 100}ms` }}
               className={`reveal-item flex flex-col items-center rounded-lg p-8 text-center text-card ${c.bg}`}
             >
-              <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-card/25">
-                <span
-                  aria-hidden="true"
-                  className="h-8 w-8"
-                  style={{
-                    backgroundColor: c.tint,
-                    WebkitMaskImage: `url("${c.img}")`,
-                    maskImage: `url("${c.img}")`,
-                    WebkitMaskRepeat: 'no-repeat',
-                    maskRepeat: 'no-repeat',
-                    WebkitMaskPosition: 'center',
-                    maskPosition: 'center',
-                    WebkitMaskSize: 'contain',
-                    maskSize: 'contain',
-                  }}
-                />
-              </span>
+              <span
+                aria-hidden="true"
+                className="h-20 w-20"
+                style={{
+                  backgroundColor: c.tint,
+                  WebkitMaskImage: `url("${c.img}")`,
+                  maskImage: `url("${c.img}")`,
+                  WebkitMaskRepeat: 'no-repeat',
+                  maskRepeat: 'no-repeat',
+                  WebkitMaskPosition: 'center',
+                  maskPosition: 'center',
+                  WebkitMaskSize: 'contain',
+                  maskSize: 'contain',
+                }}
+              />
               <h3 className="mt-5 text-xl font-bold">{c.title}</h3>
               <p className="mt-3 leading-relaxed text-card/90">{c.body}</p>
             </div>

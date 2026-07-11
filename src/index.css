@@ -47,7 +47,7 @@
 /* "Tässä on kaikki" — scroll-ohjattu verkosto (Anthropic "Keep thinking" -tyyliin) */
 .hub-scroll {
   position: relative;
-  height: 360vh;
+  height: 240vh;
 }
 .hub-sticky {
   position: sticky;
@@ -66,7 +66,8 @@
   width: calc(94% + 6% * var(--open, 0));
   height: calc(88vh + 12vh * var(--open, 0));
   background: #b4c0bc;
-  border-radius: calc(26px - 26px * var(--open, 0));
+  /* Auki-tilassa jää 8 px pyöristys (kuten muut ikkunat) */
+  border-radius: calc(26px - 18px * var(--open, 0));
 }
 
 /* Intro-teksti — näkyy suljettuna, häipyy heti kun levy aukeaa */

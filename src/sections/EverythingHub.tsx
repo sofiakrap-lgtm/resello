@@ -272,8 +272,8 @@ function EverythingHub() {
       const total = sec.offsetHeight - window.innerHeight
       const scrolled = clamp(-sec.getBoundingClientRect().top, 0, Math.max(total, 1))
       const p = total > 0 ? scrolled / total : 0
-      let open = smooth(p, 0.04, 0.42)
-      let net = smooth(p, 0.32, 0.6)
+      let open = smooth(p, 0.05, 0.5)
+      let net = smooth(p, 0.34, 0.9)
       // Kun osio on skrollattu kerran läpi, se jää auki (ei enää sulkeudu).
       if (net >= 0.99) latched = true
       if (latched) {
