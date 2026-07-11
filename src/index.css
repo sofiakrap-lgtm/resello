@@ -77,6 +77,17 @@
 .hub.in .hub-node {
   opacity: 1;
   transform: translate(0, -50%) scale(1);
+  /* Kevyt kelluminen animaation jälkeen (Anthropic-tyyliin) */
+  animation: hub-float var(--fdur, 5s) ease-in-out var(--fdelay, 1.6s) infinite;
+}
+@keyframes hub-float {
+  0%,
+  100% {
+    transform: translate(0, -50%) scale(1);
+  }
+  50% {
+    transform: translate(0, calc(-50% - 7px)) scale(1);
+  }
 }
 .hub-line {
   stroke: rgba(250, 241, 224, 0.25);
@@ -109,6 +120,9 @@
   .hub-line,
   .hub-mnode {
     transition: none;
+  }
+  .hub.in .hub-node {
+    animation: none;
   }
 }
 

@@ -14,37 +14,48 @@ interface Node {
   label: string
   side: 'l' | 'r'
   y: number
+  x: string
+  color: string
   info: string
 }
 
-// Ominaisuudet reunoilla; viivat kulkevat keskuslaitteesta ikkunan reunaan.
+// Ominaisuudet reunoilla, epäsymmetrisesti; värit vaihtelevat kolmen
+// taustavärin mukaan niin, ettei sama väri toistu vastapäätä.
 const nodes: Node[] = [
   {
     icon: CalendarCheck,
     label: 'Varaukset ja kassa',
     side: 'l',
-    y: 22,
+    y: 20,
+    x: '0rem',
+    color: 'bg-peach',
     info: 'Ota vastaan varauksia ja maksut samasta näkymästä: käteinen, kortti ja lähimaksu.',
   },
   {
     icon: TrendingUp,
     label: 'Reaaliaikainen seuranta',
     side: 'l',
-    y: 50,
+    y: 52,
+    x: '2.5rem',
+    color: 'bg-sage',
     info: 'Näe myynti, kävijät ja paikkojen täyttöaste reaaliajassa.',
   },
   {
     icon: Wallet,
     label: 'Myyjien tilitykset',
     side: 'l',
-    y: 78,
+    y: 80,
+    x: '0.5rem',
+    color: 'bg-bluegrey',
     info: 'Automaattiset tilitykset myyjille ilman käsityötä ja Excel-taulukoita.',
   },
   {
     icon: QrCode,
     label: 'Näkyvyys ostajille',
     side: 'r',
-    y: 22,
+    y: 24,
+    x: '1.5rem',
+    color: 'bg-sage',
     info: 'Jokainen myyntipaikka näkyy ostajille QR-koodin kautta.',
   },
   {
@@ -52,6 +63,8 @@ const nodes: Node[] = [
     label: 'Viivakoodit ja kartta',
     side: 'r',
     y: 50,
+    x: '0rem',
+    color: 'bg-bluegrey',
     info: 'Tuotteiden viivakoodit ja myymäläkartta yhdellä silmäyksellä.',
   },
   {
@@ -59,6 +72,8 @@ const nodes: Node[] = [
     label: 'Kirjanpito ja some',
     side: 'r',
     y: 78,
+    x: '3rem',
+    color: 'bg-peach',
     info: 'Kirjanpito ja somejaot hoituvat samasta järjestelmästä.',
   },
 ]
@@ -187,7 +202,7 @@ function EverythingHub() {
           </svg>
 
           <div className="hub-device absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
-            <Device className="w-72" />
+            <Device className="w-60" />
           </div>
 
           {nodes.map((n, i) => {
@@ -200,15 +215,17 @@ function EverythingHub() {
                 }}
                 style={{
                   top: `${n.y}%`,
-                  ...(n.side === 'l' ? { left: 0 } : { right: 0 }),
+                  ...(n.side === 'l' ? { left: n.x } : { right: n.x }),
                   transitionDelay: `${260 + i * 70}ms`,
+                  ['--fdur' as string]: `${4.5 + i * 0.35}s`,
+                  ['--fdelay' as string]: `${1.6 + i * 0.15}s`,
                 }}
-                className="hub-node group absolute z-20 flex w-44 cursor-default items-center gap-3 rounded-2xl border border-beige/20 bg-beige/[0.08] px-4 py-3 backdrop-blur-sm transition-colors hover:border-beige/40 hover:bg-beige/[0.14]"
+                className={`hub-node group absolute z-20 flex w-52 cursor-default items-center gap-3 rounded-2xl px-5 py-4 text-brown shadow-sm transition-shadow hover:shadow-lg ${n.color}`}
               >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-beige/15 text-beige">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brown/10 text-brown">
                   <Icon className="h-4 w-4" />
                 </span>
-                <span className="text-sm font-medium leading-tight">
+                <span className="text-[0.95rem] font-semibold leading-tight">
                   {n.label}
                 </span>
                 {/* Info-ikkuna hoverilla — keskitetty, väljempi */}
@@ -230,12 +247,12 @@ function EverythingHub() {
                 <div
                   key={n.label}
                   style={{ transitionDelay: `${i * 60}ms` }}
-                  className="hub-mnode flex items-center gap-3 rounded-2xl border border-beige/20 bg-beige/[0.08] px-4 py-3"
+                  className={`hub-mnode flex items-center gap-3 rounded-2xl px-4 py-3 text-brown ${n.color}`}
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-beige/15 text-beige">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brown/10 text-brown">
                     <Icon className="h-4 w-4" />
                   </span>
-                  <span className="text-sm font-medium">{n.label}</span>
+                  <span className="text-sm font-semibold">{n.label}</span>
                 </div>
               )
             })}
