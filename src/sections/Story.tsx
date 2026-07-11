@@ -33,7 +33,7 @@ function Story() {
       <div className="reveal-item mt-12 text-center">
         <a
           href="#varaa"
-          className="inline-flex items-center gap-1.5 rounded-full border-2 border-brown px-6 py-3 text-sm font-medium uppercase tracking-[0.16em] text-brown transition-colors hover:bg-brown hover:text-beige focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-beige"
+          className="inline-flex items-center gap-1.5 rounded-lg border-2 border-brown px-6 py-3 text-sm font-medium uppercase tracking-[0.16em] text-brown transition-colors hover:bg-brown hover:text-beige focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-beige"
         >
           Tutustu ReSelloon
           <ArrowUpRight className="h-4 w-4" />

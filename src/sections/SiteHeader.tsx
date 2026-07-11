@@ -7,7 +7,7 @@ const links = [
 ]
 
 const focus =
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-beige rounded-md'
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-beige rounded-lg'
 
 /** Kiinteä yläpalkki, joka ilmestyy heti heron jälkeen: logo vasemmalla,
  *  sivulinkit ja "Varaa esittely" oikealla. */
@@ -47,7 +47,7 @@ function SiteHeader() {
           ))}
           <a
             href="#varaa"
-            className={`inline-flex items-center rounded-full bg-brown px-4 py-2 text-beige transition-colors hover:bg-brown/90 ${focus}`}
+            className={`inline-flex items-center rounded-lg bg-brown px-4 py-2 text-beige transition-colors hover:bg-brown/90 ${focus}`}
           >
             Varaa esittely
           </a>

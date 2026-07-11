@@ -8,7 +8,7 @@ const navLinks = [
 ]
 
 const focus =
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-beige rounded-md'
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brown focus-visible:ring-offset-2 focus-visible:ring-offset-beige rounded-lg'
 
 function SplitHero() {
   // Näyttää /images/hero.webp jos se on lisätty, muuten paikanpitäjän.
@@ -34,7 +34,7 @@ function SplitHero() {
           <div className="max-w-2xl py-12">
             <h1 className="max-w-xl text-balance text-[1.1rem] font-bold leading-[1.15] tracking-tight text-brown sm:text-[1.3rem] md:text-[1.65rem]">
               Kirpputorisi koko toiminta{' '}
-              <span className="box-decoration-clone rounded bg-brown px-1.5 py-0.5 text-beige">
+              <span className="box-decoration-clone rounded-lg bg-brown px-1.5 py-0.5 text-beige">
                 yhdessä paikassa
               </span>
               . Ja uusia asiakkaita kaupan päälle.
@@ -79,7 +79,7 @@ function SplitHero() {
         <div className="absolute right-5 top-6 flex items-center gap-3 md:right-8">
           <a
             href="#varaa"
-            className={`rounded-full bg-beige px-5 py-2 text-xs font-medium uppercase tracking-widest text-brown transition-colors hover:bg-beige/90 ${focus}`}
+            className={`rounded-lg bg-beige px-5 py-2 text-xs font-medium uppercase tracking-widest text-brown transition-colors hover:bg-beige/90 ${focus}`}
           >
             Varaa esittely
           </a>
@@ -100,7 +100,7 @@ function SplitHero() {
         {/* Alhaalla oikealla */}
         <a
           href="#varaa"
-          className={`absolute bottom-6 right-6 z-10 inline-flex items-center gap-1.5 rounded-full border-2 border-beige px-4 py-2 text-base font-bold text-beige transition-colors hover:bg-beige hover:text-brown md:bottom-8 md:right-8 ${focus}`}
+          className={`absolute bottom-6 right-6 z-10 inline-flex items-center gap-1.5 rounded-lg border-2 border-beige px-4 py-2 text-base font-bold text-beige transition-colors hover:bg-beige hover:text-brown md:bottom-8 md:right-8 ${focus}`}
         >
           Ota yhteyttä
           <ArrowUpRight className="h-5 w-5" />

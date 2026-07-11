@@ -151,7 +151,7 @@ function Chips({ chips, color }: { chips: Chip[]; color: Cluster['color'] }) {
         const Icon = chip.icon
         return (
           <div key={chip.label} className="group relative">
-            <div className="flex items-center gap-1.5 rounded-xl border border-brown/10 bg-card px-3 py-2 text-xs font-medium text-brown shadow-sm">
+            <div className="flex items-center gap-1.5 rounded-lg border border-brown/10 bg-card px-3 py-2 text-xs font-medium text-brown shadow-sm">
               {chip.type === 'icon' && Icon ? (
                 <Icon className={`h-4 w-4 ${iconText[color]}`} />
               ) : (
@@ -159,7 +159,7 @@ function Chips({ chips, color }: { chips: Chip[]; color: Cluster['color'] }) {
               )}
             </div>
             {/* Lisätietoikkuna hoverilla — laatikon alla keskellä */}
-            <div className="pointer-events-none absolute left-1/2 top-[calc(100%+0.5rem)] z-50 w-52 -translate-x-1/2 rounded-xl bg-beige p-3 text-center text-xs leading-relaxed text-brown/80 opacity-0 shadow-[0_15px_35px_-15px_rgba(0,0,0,0.55)] transition-opacity duration-200 group-hover:opacity-100">
+            <div className="pointer-events-none absolute left-1/2 top-[calc(100%+0.5rem)] z-50 w-52 -translate-x-1/2 rounded-lg bg-beige p-3 text-center text-xs leading-relaxed text-brown/80 opacity-0 shadow-[0_15px_35px_-15px_rgba(0,0,0,0.55)] transition-opacity duration-200 group-hover:opacity-100">
               {chip.info}
             </div>
           </div>
@@ -230,7 +230,7 @@ function EverythingHub() {
           >
             <div className="flex flex-col items-center gap-2.5">
               <span
-                className={`rounded-full px-4 py-1.5 text-sm font-bold shadow-sm ${bgClass[c.color]} ${wordText[c.color]}`}
+                className={`rounded-lg px-4 py-1.5 text-sm font-bold shadow-sm ${bgClass[c.color]} ${wordText[c.color]}`}
               >
                 {c.word}
               </span>
@@ -249,7 +249,7 @@ function EverythingHub() {
           {clusters.map((c) => (
             <div key={c.word} className="flex flex-col items-center gap-2.5">
               <span
-                className={`rounded-full px-4 py-1.5 text-sm font-bold ${bgClass[c.color]} ${wordText[c.color]}`}
+                className={`rounded-lg px-4 py-1.5 text-sm font-bold ${bgClass[c.color]} ${wordText[c.color]}`}
               >
                 {c.word}
               </span>

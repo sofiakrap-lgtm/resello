@@ -51,9 +51,9 @@ function Onboarding() {
               <div
                 key={c.title}
                 style={{ transitionDelay: `${i * 100}ms` }}
-                className={`reveal-item flex flex-col items-center rounded-3xl p-8 text-center text-card ${c.bg}`}
+                className={`reveal-item flex flex-col items-center rounded-lg p-8 text-center text-card ${c.bg}`}
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-card/20">
+                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-card/20">
                   <Icon className="h-6 w-6" />
                 </span>
                 <h3 className="mt-5 text-xl font-bold">{c.title}</h3>

@@ -14,7 +14,7 @@ const socials = [
 ]
 
 const focus =
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-beige focus-visible:ring-offset-2 focus-visible:ring-offset-brown rounded-md'
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-beige focus-visible:ring-offset-2 focus-visible:ring-offset-brown rounded-lg'
 
 function Footer() {
   return (

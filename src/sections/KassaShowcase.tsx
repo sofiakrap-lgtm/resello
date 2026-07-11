@@ -54,7 +54,7 @@ function KassaShowcase() {
         {rows.map((row) => (
           <div
             key={row.img}
-            className="reveal-item grid overflow-hidden rounded-3xl md:grid-cols-2"
+            className="reveal-item grid overflow-hidden rounded-lg md:grid-cols-2"
           >
             {/* Kuva + pädi */}
             <div

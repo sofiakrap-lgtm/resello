@@ -7,7 +7,7 @@ function NotFoundPage() {
       <h1 className="text-2xl font-bold text-brown">Sivua ei löytynyt</h1>
       <Link
         to="/"
-        className="rounded-full border border-brown px-6 py-3 font-medium text-brown transition-colors hover:bg-brown/5"
+        className="rounded-lg border border-brown px-6 py-3 font-medium text-brown transition-colors hover:bg-brown/5"
       >
         Takaisin etusivulle
       </Link>
