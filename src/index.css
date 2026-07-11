@@ -126,6 +126,43 @@
   }
 }
 
+/* "Tässä on kaikki" -verkosto (vaalea, Anthropic-tyyliin) */
+.hub2-cluster {
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.hub2.in .hub2-cluster {
+  opacity: 1;
+  animation: hub2-float var(--fdur, 6s) ease-in-out var(--fdelay, 0s) infinite;
+}
+@keyframes hub2-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, calc(-50% - 9px));
+  }
+}
+.hub2-line {
+  stroke: rgba(60, 36, 21, 0.18);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.hub2.in .hub2-line {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hub2-cluster {
+    transition: none;
+  }
+  .hub2.in .hub2-cluster {
+    animation: none;
+  }
+}
+
 /* Kuvagalleria — jatkuva liuku vasemmalle */
 .gallery-track {
   animation: gallery-scroll 45s linear infinite;

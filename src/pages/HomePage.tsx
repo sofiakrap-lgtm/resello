@@ -6,6 +6,7 @@ import KassaShowcase from '../sections/KassaShowcase.tsx'
 import Pricing from '../sections/Pricing.tsx'
 import Migration from '../sections/Migration.tsx'
 import Onboarding from '../sections/Onboarding.tsx'
+import Story from '../sections/Story.tsx'
 import Gallery from '../sections/Gallery.tsx'
 import Faq from '../sections/Faq.tsx'
 import FinalCta from '../sections/FinalCta.tsx'
@@ -40,6 +41,7 @@ function HomePage() {
         <Pricing />
         <Migration />
         <Onboarding />
+        <Story />
         <Gallery />
         <Faq />
         <FinalCta />

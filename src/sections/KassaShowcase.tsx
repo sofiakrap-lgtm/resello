@@ -1,88 +1,103 @@
-import { useEffect, useRef } from 'react'
-
-interface Item {
+interface Row {
   img: string
-  title: string
+  photo: string
   badge?: boolean
+  title: string
+  body: string
+  bg: string
+  reverse: boolean
 }
 
-const items: Item[] = [
+const rows: Row[] = [
   {
     img: '/graphics/grafiikka-6.png',
-    title:
-      'Aseta alennuksia, muuta varauksia ja lisää asiakkaita. Hallitset koko myymälää yhdestä näkymästä ilman erillisiä työkaluja tai päällekkäistä kirjanpitoa.',
+    photo: '/images/kuva%203.jpg',
+    title: 'Asiakkaat ja alennukset yhdessä näkymässä',
+    body: 'Aseta alennuksia, muuta varauksia ja lisää asiakkaita ilman erillisiä työkaluja. Hallitset koko myymälää yhdestä näkymästä, jossa kaikki pysyy ajan tasalla eikä mikään jää roikkumaan eri järjestelmiin.',
+    bg: 'bg-peach',
+    reverse: false,
   },
   {
     img: '/graphics/grafiikka-7.png',
-    title:
-      'Koordinoi asiakkaita, varauksia ja tuotteita helposti. Kaikki tiedot löytyvät samasta paikasta ja pysyvät ajan tasalla reaaliajassa.',
+    photo: '/images/kuva%206.jpg',
     badge: true,
+    title: 'Tilitykset ja käteisvirta hallinnassa',
+    body: 'Helpot käteistilitykset ja selkeä näkymä käteisvirtaan. Näet kassavirran reaaliajassa ja teet myyjien tilitykset muutamalla klikkauksella, ilman käsityötä tai Excel-taulukoita.',
+    bg: 'bg-sage',
+    reverse: true,
   },
   {
     img: '/graphics/grafiikka-8.png',
-    title:
-      'Helpot käteistilitykset ja käteisvirran ylläpito. Näet kassavirran reaaliajassa ja teet tilitykset muutamalla klikkauksella, ilman käsityötä.',
+    photo: '/images/kuva%202.jpg',
+    title: 'Varaukset ja paikat järjestyksessä',
+    body: 'Koordinoi varauksia, paikkoja ja tuotteita helposti. Kaikki tiedot löytyvät samasta paikasta ja pysyvät ajan tasalla, joten myymälän arki pysyy hallinnassa ruuhkaisimpanakin päivänä.',
+    bg: 'bg-bluegrey',
+    reverse: false,
   },
 ]
 
-/** "Tässä on kassa." — kolme tablettinäkymää (grafiikat 6-8). */
+/** "Tässä on kassa." — kolme vuorottelevaa riviä (kuva + pädi / teksti). */
 function KassaShowcase() {
-  const rootRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const el = rootRef.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          el.classList.add('in')
-          io.disconnect()
-        }
-      },
-      { threshold: 0.25 },
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
-
   return (
-    <section ref={rootRef} className="kassa px-6 pb-12 pt-20 md:pb-16 md:pt-28">
-      <div className="mx-auto max-w-6xl">
-        <div className="reveal-item mx-auto max-w-2xl text-center">
-          <h2 className="text-[1.1rem] font-bold tracking-tight text-brown sm:text-[1.35rem] md:text-[1.9rem]">
-            Tässä on kassa.
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-lg text-brown/75">
-            Nopea ja intuitiivinen, ei kilojen rautaa. Käteinen, kortti tai
-            lähimaksu, aivan niin kuin haluat.
-          </p>
-        </div>
+    <section className="px-6 py-20 md:py-28">
+      <div className="mx-auto max-w-2xl text-center">
+        <h2 className="text-[1.1rem] font-bold tracking-tight text-brown sm:text-[1.35rem] md:text-[1.9rem]">
+          Tässä on kassa.
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-lg text-brown/75">
+          Nopea ja intuitiivinen, ei kilojen rautaa. Käteinen, kortti tai
+          lähimaksu, aivan niin kuin haluat.
+        </p>
+      </div>
 
-        <div className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
-          {items.map((item, i) => (
-            <div key={item.img} className="text-center">
-              <div
-                className="kassa-tablet relative mx-auto w-full max-w-xs"
-                style={{ transitionDelay: `${i * 140}ms` }}
-              >
+      <div className="mx-auto mt-14 flex max-w-6xl flex-col gap-6">
+        {rows.map((row) => (
+          <div
+            key={row.img}
+            className="reveal-item grid overflow-hidden rounded-3xl md:grid-cols-2"
+          >
+            {/* Kuva + pädi */}
+            <div
+              className={`relative min-h-[16rem] overflow-hidden md:min-h-[22rem] ${
+                row.reverse ? 'md:order-2' : ''
+              }`}
+            >
+              <img
+                src={row.photo}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-brown/40" />
+              <div className="relative flex h-full items-center justify-center p-6 md:p-10">
                 <img
-                  src={item.img}
-                  alt=""
-                  aria-hidden="true"
-                  className="w-full"
+                  src={row.img}
+                  alt="ReSellon näkymä tabletilla"
+                  className="w-full max-w-sm drop-shadow-2xl"
                 />
-                {item.badge && (
+                {row.badge && (
                   <img
                     src="/graphics/grafiikka-9.png"
                     alt="Helppo työkalu"
-                    className="kassa-badge-anim absolute -right-4 -top-4 w-20 md:w-24"
+                    className="absolute right-4 top-4 w-16 rotate-12 md:w-20"
                   />
                 )}
               </div>
-              <p className="mx-auto mt-3 max-w-xs text-brown/80">{item.title}</p>
             </div>
-          ))}
-        </div>
+
+            {/* Teksti */}
+            <div
+              className={`flex items-center px-6 py-10 text-brown md:px-12 md:py-14 ${row.bg}`}
+            >
+              <div>
+                <h3 className="text-balance text-[1.05rem] font-bold leading-[1.25] sm:text-[1.25rem] md:text-[1.5rem]">
+                  {row.title}
+                </h3>
+                <p className="mt-4 leading-relaxed text-brown/80">{row.body}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   )
