@@ -25,8 +25,8 @@ const topics: Topic[] = [
   {
     label: 'Varausjärjestelmä',
     color: '#3c2415',
-    x: 21,
-    y: 73,
+    x: 23.7,
+    y: 71.2,
     features: [
       {
         img: g('1.1 Myyntipaikkojen sähköinen varaus.svg'),
@@ -61,30 +61,30 @@ const topics: Topic[] = [
         img: g('2.1 Viivakoodilliset hintalaput.svg'),
         title: 'Viivakoodilliset hintalaput',
         body: 'Tulosta hintalaput viivakoodilla ja lue tuotteet kassalla ilman virheitä ja käsin näppäilyä.',
-        x: 29.3,
-        y: 27.3,
+        x: 30.3,
+        y: 31.5,
       },
       {
         img: g('2.2 Kassa ja maksutapahtumat.svg'),
         title: 'Kassa ja maksutapahtumat',
         body: 'Käteinen, kortti ja lähimaksu samasta laitteesta — nopeasti ja ilman kilojen rautaa.',
-        x: 23.7,
-        y: 57.6,
+        x: 24.9,
+        y: 54.8,
       },
       {
         img: g('2.3 Myyjäkohtaiset tilitykset automaattisesti.svg'),
         title: 'Automaattiset tilitykset',
         body: 'Myyjäkohtaiset tilitykset lasketaan automaattisesti, joten rahat menevät oikein ilman käsityötä.',
-        x: 13.4,
-        y: 53.9,
+        x: 10.8,
+        y: 56.8,
       },
     ],
   },
   {
     label: 'Myyjän myynninseuranta',
     color: '#3c2415',
-    x: 55.5,
-    y: 79.1,
+    x: 53.7,
+    y: 78.8,
     features: [
       {
         img: g('3.1 Reaaliaikainen näkymä omiin myynteihin ja tuloihin.svg'),
@@ -112,15 +112,15 @@ const topics: Topic[] = [
   {
     label: 'Ostajan tuotehaku',
     color: '#3c2415',
-    x: 81,
-    y: 46,
+    x: 86.5,
+    y: 38.7,
     features: [
       {
         img: g('4.1 Tuotehaku kirpputoreilta.svg'),
         title: 'Löydä tuote ja paikka',
         body: 'Haku näyttää miltä kirpputorilta ja mistä paikasta tuote löytyy — ostaja kävelee suoraan oikealle pöydälle.',
-        x: 81,
-        y: 32,
+        x: 84.6,
+        y: 21.5,
       },
       {
         img: g('4.2 QR-koodi ohjaa selaamaan valikoimaa.svg'),
@@ -148,8 +148,8 @@ const topics: Topic[] = [
         img: g('5.1 Käyttöaste ja myynnin kehitys.svg'),
         title: 'Käyttöaste ja myynnin kehitys',
         body: 'Selkeät näkymät myymälän käyttöasteeseen ja myynnin kehitykseen — päätökset dataan nojaten.',
-        x: 41.4,
-        y: 27.3,
+        x: 45,
+        y: 26.9,
       },
       {
         img: g('5.2 Asiakashallinta.svg'),
@@ -184,7 +184,7 @@ const stagger = new Map<number, number>(
 )
 
 // ReSello-keskusnode
-const reselloPos = { x: 49.4, y: 46.2 }
+const reselloPos = { x: 52.6, y: 51.2 }
 
 // Pääsanojen lopulliset (auenneen) paikat + lähtöpaikat otsikossa
 // Pääsanat lähtevät keskeltä (näkymättöminä) ja repeävät nurkkiin auetessa.
