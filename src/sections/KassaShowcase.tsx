@@ -6,7 +6,6 @@ interface Deco {
 interface Row {
   img: string
   photo: string
-  badge?: boolean
   title: string
   body: string
   bg: string
@@ -29,7 +28,6 @@ const rows: Row[] = [
   {
     img: '/graphics/grafiikka-7.png',
     photo: '/images/kuva%206.jpg',
-    badge: true,
     title: 'Tilitykset ja käteisvirta hallinnassa',
     body: 'Helpot käteistilitykset ja selkeä näkymä käteisvirtaan. Näet kassavirran reaaliajassa ja teet myyjien tilitykset muutamalla klikkauksella, ilman käsityötä tai Excel-taulukoita.',
     bg: 'bg-sage',
@@ -42,7 +40,6 @@ const rows: Row[] = [
     body: 'Koordinoi varauksia, paikkoja ja tuotteita helposti. Kaikki tiedot löytyvät samasta paikasta ja pysyvät ajan tasalla, joten myymälän arki pysyy hallinnassa ruuhkaisimpanakin päivänä.',
     bg: 'bg-bluegrey',
     reverse: false,
-    deco: { img: g('grafiikka 20.svg'), tint: '#fdf7ec' },
   },
 ]
 
@@ -57,6 +54,41 @@ function KassaShowcase() {
           alt=""
           aria-hidden="true"
           className="price-spin pointer-events-none absolute left-1/2 top-1/3 z-30 h-24 w-24 -translate-x-1/2 -translate-y-1/2 md:h-32 md:w-32"
+        />
+
+        {/* "Helppo työkalu" -merkki (grafiikka 9) kolmannen rivin kuvan päällä */}
+        <img
+          src="/graphics/grafiikka-9.png"
+          alt="Helppo työkalu"
+          aria-hidden="true"
+          className="pointer-events-none absolute z-30"
+          style={{
+            left: '40.7%',
+            top: '70.1%',
+            width: '5.7%',
+            transform: 'translate(-50%, -50%) rotate(22deg)',
+          }}
+        />
+
+        {/* Kermanvärinen "yrittäjältä yrittäjälle" -leima (grafiikka 22) */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute z-30 aspect-square"
+          style={{
+            left: '93.9%',
+            top: '68.3%',
+            width: '6%',
+            transform: 'translate(-50%, -50%) rotate(31deg)',
+            backgroundColor: '#fdf7ec',
+            WebkitMaskImage: `url("${g('grafiikka 22.svg')}")`,
+            maskImage: `url("${g('grafiikka 22.svg')}")`,
+            WebkitMaskRepeat: 'no-repeat',
+            maskRepeat: 'no-repeat',
+            WebkitMaskPosition: 'center',
+            maskPosition: 'center',
+            WebkitMaskSize: 'contain',
+            maskSize: 'contain',
+          }}
         />
 
         {rows.map((row) => (
@@ -83,13 +115,6 @@ function KassaShowcase() {
                   alt="ReSellon näkymä tabletilla"
                   className="w-full max-w-sm drop-shadow-2xl"
                 />
-                {row.badge && (
-                  <img
-                    src="/graphics/grafiikka-9.png"
-                    alt="Helppo työkalu"
-                    className="absolute right-4 top-4 w-16 rotate-12 md:w-20"
-                  />
-                )}
               </div>
             </div>
 
