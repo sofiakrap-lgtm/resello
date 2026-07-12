@@ -189,7 +189,7 @@ const reselloPos = { x: 52.6, y: 51.2 }
 // Pääsanojen lopulliset (auenneen) paikat + lähtöpaikat otsikossa
 // Pääsanat lähtevät keskeltä (näkymättöminä) ja repeävät nurkkiin auetessa.
 const words = [
-  { text: 'Tässä on', sx: 50, sy: 50, tx: 18.3, ty: 10.5 },
+  { text: 'Tässä on', sx: 50, sy: 50, tx: 18.3, ty: 18 },
   { text: 'kaikki.', sx: 50, sy: 50, tx: 86.3, ty: 83.4 },
 ]
 

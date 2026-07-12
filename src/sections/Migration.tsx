@@ -28,7 +28,7 @@ function Migration() {
         src="/graphics/grafiikka-4.png"
         alt=""
         aria-hidden="true"
-        className="price-spin pointer-events-none absolute bottom-0 left-1/2 z-20 h-24 w-24 -translate-x-1/2 translate-y-1/3 md:h-32 md:w-32"
+        className="price-spin pointer-events-none absolute bottom-0 left-[70%] z-20 h-24 w-24 -translate-x-1/2 translate-y-1/3 md:h-32 md:w-32"
       />
 
       {/* Vasen puolikas: pelkkä tausta ja teksti */}

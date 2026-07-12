@@ -42,9 +42,9 @@ function HomePage() {
         <Migration />
         <Onboarding />
         <Gallery />
-        <Faq />
-        <FinalCta />
         <Story />
+        <FinalCta />
+        <Faq />
       </main>
       <Footer />
     </div>

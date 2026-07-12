@@ -17,7 +17,7 @@ function SplitHero() {
   return (
     <section className="grid border-b border-brown md:grid-cols-2">
       {/* Vasen palsta */}
-      <div className="relative flex min-h-[88vh] flex-col overflow-hidden bg-beige px-6 pb-0 pt-5 md:min-h-screen md:px-10 md:pb-0 md:pt-6">
+      <div className="relative flex min-h-[88vh] flex-col overflow-hidden border-t border-brown bg-beige px-6 pb-0 pt-5 md:min-h-screen md:px-10 md:pb-0 md:pt-6">
         <nav className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs font-medium uppercase tracking-[0.16em] text-brown">
           {navLinks.map((link) => (
             <a
@@ -56,7 +56,7 @@ function SplitHero() {
       </div>
 
       {/* Oikea palsta — hero-kuva */}
-      <div className="relative min-h-[55vh] overflow-hidden bg-peach md:min-h-screen">
+      <div className="relative min-h-[55vh] overflow-hidden border-t border-beige bg-peach md:min-h-screen">
         <img
           src="/images/kuva%201.jpg"
           alt="Osto- ja maksutapahtuma kirpputorilla"
