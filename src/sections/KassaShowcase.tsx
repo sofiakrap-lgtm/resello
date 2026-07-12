@@ -50,12 +50,6 @@ const rows: Row[] = [
 function KassaShowcase() {
   return (
     <section className="px-6 py-20 md:py-28">
-      <div className="mb-12 flex justify-center">
-        <h2 className="rounded-full bg-[#5c4f42] px-8 py-3.5 text-center text-[1.05rem] font-bold text-white sm:text-[1.3rem] md:text-[1.6rem]">
-          Kassa, varaus- ja asiakashallinta
-        </h2>
-      </div>
-
       <div className="relative mx-auto flex max-w-6xl flex-col gap-6">
         {/* Pyörivä resello-merkki (grafiikka 15) keskellä rivien välissä */}
         <img
