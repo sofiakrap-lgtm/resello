@@ -56,7 +56,7 @@ function Onboarding() {
             >
               <span
                 aria-hidden="true"
-                className="h-20 w-20"
+                className={i === 1 ? 'h-24 w-24' : 'h-20 w-20'}
                 style={{
                   backgroundColor: c.tint,
                   WebkitMaskImage: `url("${c.img}")`,

@@ -15,24 +15,36 @@ function SiteHeader() {
   const [show, setShow] = useState(false)
 
   useEffect(() => {
-    // Yläpalkki ilmestyy vasta kun "Tässä on kaikki" -osio on skrollattu ohi.
-    const onScroll = () => {
+    // Yläpalkki näkyy vain kun sivua liikutetaan (ja kun "Tässä on kaikki"
+    // -osio on ohitettu); pysähtyessä se piiloutuu.
+    let idle: number | undefined
+    const pastHub = () => {
       const hub = document.getElementById('ominaisuudet')
-      if (hub) setShow(hub.getBoundingClientRect().bottom <= 0)
-      else setShow(window.scrollY > window.innerHeight * 0.85)
+      return hub
+        ? hub.getBoundingClientRect().bottom <= 0
+        : window.scrollY > window.innerHeight * 0.85
     }
-    onScroll()
+    const onScroll = () => {
+      if (pastHub()) {
+        setShow(true)
+        window.clearTimeout(idle)
+        idle = window.setTimeout(() => setShow(false), 1200)
+      } else {
+        setShow(false)
+      }
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
     return () => {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
+      window.clearTimeout(idle)
     }
   }, [])
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b border-brown/10 bg-beige/85 backdrop-blur transition-transform duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b border-brown/10 bg-beige transition-transform duration-300 ${
         show ? 'translate-y-0' : '-translate-y-full'
       }`}
     >

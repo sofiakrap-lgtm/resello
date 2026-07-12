@@ -263,37 +263,46 @@ function EverythingHub() {
   const [hover, setHover] = useState<FeatureX | null>(null)
 
   useEffect(() => {
-    const sec = scrollRef.current
-    const sticky = stickyRef.current
-    if (!sec || !sticky) return
+    const stage = stickyRef.current
+    if (!stage) return
     let raf = 0
-    let latched = false
-    const update = () => {
-      const total = sec.offsetHeight - window.innerHeight
-      const scrolled = clamp(-sec.getBoundingClientRect().top, 0, Math.max(total, 1))
-      const p = total > 0 ? scrolled / total : 0
-      let open = smooth(p, 0.05, 0.5)
-      let net = smooth(p, 0.34, 0.9)
-      // Kun osio on skrollattu kerran läpi, se jää auki (ei enää sulkeudu).
-      if (net >= 0.99) latched = true
-      if (latched) {
-        open = 1
-        net = 1
+    let played = false
+    const setAll = (open: number, net: number) => {
+      stage.style.setProperty('--open', String(open))
+      stage.style.setProperty('--net', String(net))
+      stage.classList.toggle('is-open', net > 0.35)
+    }
+    const play = () => {
+      if (played) return
+      played = true
+      // Saavutettavuus: ei liikettä -> näytetään suoraan valmis verkosto.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setAll(1, 1)
+        return
       }
-      sticky.style.setProperty('--open', String(open))
-      sticky.style.setProperty('--net', String(net))
-      sticky.classList.toggle('is-open', latched || net > 0.35)
+      const start = performance.now()
+      const delay = 350
+      const dur = 2600
+      const tick = (now: number) => {
+        const t = clamp((now - start - delay) / dur, 0, 1)
+        // Aukeaa ja verkosto ilmestyy itsestään, ilman skrollausta.
+        setAll(smooth(t, 0, 0.55), smooth(t, 0.4, 1))
+        if (t < 1) raf = requestAnimationFrame(tick)
+      }
+      raf = requestAnimationFrame(tick)
     }
-    const onScroll = () => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(update)
-    }
-    update()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          play()
+          io.disconnect()
+        }
+      },
+      { threshold: 0.4 },
+    )
+    io.observe(stage)
     return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
+      io.disconnect()
       cancelAnimationFrame(raf)
     }
   }, [])

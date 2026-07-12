@@ -136,7 +136,7 @@ function PriceTimeline() {
   return (
     <div
       ref={rootRef}
-      className="mt-10 rounded-lg border-2 border-brown/50 bg-card px-6 py-10 md:px-10"
+      className="mt-10 rounded-lg border-2 border-brown bg-card px-6 py-10 md:px-10"
     >
       {/* Työpöytä: vaaka-aikajana */}
       <div className="relative hidden h-80 md:block">
