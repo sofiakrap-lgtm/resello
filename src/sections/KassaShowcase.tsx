@@ -49,8 +49,8 @@ const rows: Row[] = [
 /** Kolme vuorottelevaa riviä (kuva + pädi / teksti) + koristegrafiikat. */
 function KassaShowcase() {
   return (
-    <section className="px-6 py-20 md:py-28">
-      <div className="relative mx-auto flex max-w-6xl flex-col gap-6">
+    <section className="px-6 pt-5 pb-16 md:pt-7 md:pb-20">
+      <div className="relative mx-auto flex max-w-7xl flex-col gap-4">
         {/* Pyörivä resello-merkki (grafiikka 15) keskellä rivien välissä */}
         <img
           src={g('grafiikka 15.svg')}

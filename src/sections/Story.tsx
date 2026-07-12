@@ -8,9 +8,6 @@ function Story() {
         <h2 className="reveal-item text-balance text-[1.5rem] font-bold leading-[1.1] tracking-tight text-brown sm:text-[2rem] md:text-[2.6rem]">
           Rakennettu kirpputorin arjesta
         </h2>
-        <p className="reveal-item mt-4 text-sm font-semibold uppercase tracking-[0.2em] text-taupe">
-          Yrittäjältä yrittäjälle
-        </p>
       </div>
 
       <div className="reveal-item mx-auto mt-8 grid max-w-4xl gap-8 text-brown/80 sm:grid-cols-2 sm:gap-12">

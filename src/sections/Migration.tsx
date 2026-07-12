@@ -22,7 +22,15 @@ function Migration() {
   }, [])
 
   return (
-    <section ref={rootRef} className="migrate grid md:grid-cols-2">
+    <section ref={rootRef} className="migrate relative grid md:grid-cols-2">
+      {/* Pyörivä grafiikka 4 -merkki alareunan keskellä, saumaan */}
+      <img
+        src="/graphics/grafiikka-4.png"
+        alt=""
+        aria-hidden="true"
+        className="price-spin pointer-events-none absolute bottom-0 left-1/2 z-20 h-24 w-24 -translate-x-1/2 translate-y-1/3 md:h-32 md:w-32"
+      />
+
       {/* Vasen puolikas: pelkkä tausta ja teksti */}
       <div className="flex items-center bg-brown px-6 py-16 md:px-14 md:py-28">
         <div className="max-w-md">
