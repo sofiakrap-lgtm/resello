@@ -78,7 +78,7 @@ function KassaShowcase() {
             left: '93.9%',
             top: '68.3%',
             width: '6%',
-            transform: 'translate(-50%, calc(-50% + 50px)) rotate(31deg)',
+            transform: 'translate(calc(-50% - 20px), calc(-50% + 50px)) rotate(31deg)',
             backgroundColor: '#fffbf4',
             WebkitMaskImage: `url("${g('grafiikka 22.svg')}")`,
             maskImage: `url("${g('grafiikka 22.svg')}")`,

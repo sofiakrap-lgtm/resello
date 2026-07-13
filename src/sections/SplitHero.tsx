@@ -20,7 +20,7 @@ function SplitHero() {
           ruskea taustan puolella, vaalea kuvan puolella. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[3.75rem] z-20 hidden h-px md:block"
+        className="pointer-events-none absolute inset-x-0 top-[4.5rem] z-20 hidden h-px md:block"
         style={{
           background:
             'linear-gradient(to right, var(--color-brown) 0 50%, var(--color-beige) 50% 100%)',
