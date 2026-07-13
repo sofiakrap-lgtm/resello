@@ -86,7 +86,7 @@ function SplitHero() {
         )}
 
         {/* Ylhäällä oikealla: CTA */}
-        <div className="absolute right-5 top-4 flex items-center gap-3 md:right-8 md:top-[1.1rem]">
+        <div className="absolute right-5 top-3 flex items-center gap-3 md:right-8 md:top-[0.55rem]">
           <a
             href="#varaa"
             className={`rounded-lg bg-beige px-5 py-2 text-xs font-medium uppercase tracking-widest text-brown transition-colors hover:bg-beige/90 ${focus}`}

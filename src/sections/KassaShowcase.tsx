@@ -30,7 +30,7 @@ const rows: Row[] = [
     photo: '/images/kuva%206.jpg',
     title: 'Tilitykset ja käteisvirta hallinnassa',
     body: 'Helpot käteistilitykset ja selkeä näkymä käteisvirtaan. Näet kassavirran reaaliajassa ja teet myyjien tilitykset muutamalla klikkauksella, ilman käsityötä tai Excel-taulukoita.',
-    bg: 'bg-sage',
+    bg: 'bg-bluegrey',
     reverse: true,
   },
   {
@@ -38,7 +38,7 @@ const rows: Row[] = [
     photo: '/images/kuva%202.jpg',
     title: 'Varaukset ja paikat järjestyksessä',
     body: 'Koordinoi varauksia, paikkoja ja tuotteita helposti. Kaikki tiedot löytyvät samasta paikasta ja pysyvät ajan tasalla, joten myymälän arki pysyy hallinnassa ruuhkaisimpanakin päivänä.',
-    bg: 'bg-bluegrey',
+    bg: 'bg-sage',
     reverse: false,
   },
 ]
@@ -66,7 +66,7 @@ function KassaShowcase() {
             left: '40.7%',
             top: '70.1%',
             width: '5.7%',
-            transform: 'translate(-50%, calc(-50% + 50px)) rotate(22deg)',
+            transform: 'translate(-50%, calc(-50% + 70px)) rotate(22deg)',
           }}
         />
 

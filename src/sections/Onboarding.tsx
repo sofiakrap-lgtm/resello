@@ -54,21 +54,24 @@ function Onboarding() {
               style={{ transitionDelay: `${i * 100}ms` }}
               className={`reveal-item flex flex-col items-center rounded-lg p-8 text-center text-card ${c.bg}`}
             >
-              <span
-                aria-hidden="true"
-                className={i === 1 ? 'h-24 w-24' : 'h-20 w-20'}
-                style={{
-                  backgroundColor: c.tint,
-                  WebkitMaskImage: `url("${c.img}")`,
-                  maskImage: `url("${c.img}")`,
-                  WebkitMaskRepeat: 'no-repeat',
-                  maskRepeat: 'no-repeat',
-                  WebkitMaskPosition: 'center',
-                  maskPosition: 'center',
-                  WebkitMaskSize: 'contain',
-                  maskSize: 'contain',
-                }}
-              />
+              {/* Kiinteä ikoni-alue, jotta otsikot ovat samassa linjassa */}
+              <div className="flex h-24 items-center justify-center">
+                <span
+                  aria-hidden="true"
+                  className={i === 1 ? 'h-24 w-24' : 'h-20 w-20'}
+                  style={{
+                    backgroundColor: c.tint,
+                    WebkitMaskImage: `url("${c.img}")`,
+                    maskImage: `url("${c.img}")`,
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                  }}
+                />
+              </div>
               <h3 className="mt-5 text-xl font-bold">{c.title}</h3>
               <p className="mt-3 leading-relaxed text-card/90">{c.body}</p>
             </div>

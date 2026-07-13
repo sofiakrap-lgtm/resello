@@ -49,14 +49,10 @@
 /* "Tässä on kaikki" — scroll-ohjattu verkosto (Anthropic "Keep thinking" -tyyliin) */
 .hub-scroll {
   position: relative;
-  /* Korkea kelauskontti: näyttämö pysyy paikallaan ja animaatio etenee
-     scrollatessa, joten osan ohi on vaikea kelata kesken animaation. */
-  height: 260vh;
 }
-/* Näyttämö: pysyy kiinni (sticky), kun animaatio on kesken. */
+/* Näyttämö täyttää ruudun; animaatio käynnistyy itsestään näkyviin tullessa. */
 .hub-sticky {
-  position: sticky;
-  top: 0;
+  position: relative;
   height: 100vh;
   overflow: hidden;
   background: var(--color-beige);

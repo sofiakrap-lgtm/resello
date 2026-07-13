@@ -263,38 +263,45 @@ function EverythingHub() {
   const [hover, setHover] = useState<FeatureX | null>(null)
 
   useEffect(() => {
-    const scrollEl = scrollRef.current
     const stage = stickyRef.current
-    if (!scrollEl || !stage) return
+    if (!stage) return
+    let raf = 0
+    let played = false
     const setAll = (open: number, net: number) => {
       stage.style.setProperty('--open', String(open))
       stage.style.setProperty('--net', String(net))
       stage.classList.toggle('is-open', net > 0.35)
     }
-    // Saavutettavuus: ei liikettä -> näytetään suoraan valmis verkosto.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setAll(1, 1)
-      return
-    }
-    // Scroll-ohjattu: näyttämö pysyy kiinni (sticky) ja animaatio etenee
-    // sen mukaan, kuinka pitkälle kelauskontin läpi on scrollattu. Näin
-    // osan ohi on vaikea kelata ennen kuin animaatio on valmis.
-    let raf = 0
-    const onScroll = () => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(() => {
-        const total = scrollEl.offsetHeight - window.innerHeight
-        const scrolled = clamp(-scrollEl.getBoundingClientRect().top, 0, total)
-        const t = total > 0 ? scrolled / total : 1
+    // Animaatio käynnistyy itsestään, kun osio tulee näkyviin.
+    const play = () => {
+      if (played) return
+      played = true
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setAll(1, 1)
+        return
+      }
+      const start = performance.now()
+      const delay = 350
+      const dur = 2600
+      const tick = (now: number) => {
+        const t = clamp((now - start - delay) / dur, 0, 1)
         setAll(smooth(t, 0, 0.55), smooth(t, 0.4, 1))
-      })
+        if (t < 1) raf = requestAnimationFrame(tick)
+      }
+      raf = requestAnimationFrame(tick)
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    onScroll()
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          play()
+          io.disconnect()
+        }
+      },
+      { threshold: 0.4 },
+    )
+    io.observe(stage)
     return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
+      io.disconnect()
       cancelAnimationFrame(raf)
     }
   }, [])

@@ -4,7 +4,7 @@ function Pricing() {
   return (
     <section
       id="hinnoittelu"
-      className="scroll-mt-24 bg-[#cad3d0] px-6 py-20 md:py-24"
+      className="scroll-mt-24 border-t border-brown bg-bluegrey px-6 py-14 md:py-16"
     >
       <div className="mx-auto max-w-5xl">
         <div className="reveal-item mx-auto max-w-2xl text-center">
