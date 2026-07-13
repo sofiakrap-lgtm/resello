@@ -33,7 +33,7 @@ function SplitHero() {
             <a
               key={link.href}
               href={link.href}
-              className={`text-brown/70 transition-colors hover:text-brown ${focus}`}
+              className={`text-brown transition-colors hover:text-brown/70 ${focus}`}
             >
               {link.label}
             </a>
@@ -44,7 +44,7 @@ function SplitHero() {
           <div className="max-w-2xl py-12">
             <h1 className="max-w-xl text-balance text-[1.1rem] font-bold leading-[1.15] tracking-tight text-brown sm:text-[1.3rem] md:text-[1.65rem]">
               Kirpputorisi koko toiminta{' '}
-              <span className="box-decoration-clone rounded-lg bg-brown px-1.5 py-0.5 text-beige">
+              <span className="box-decoration-clone rounded-[3px] bg-brown px-1.5 py-0.5 text-beige">
                 yhdessä paikassa
               </span>
               . Ja uusia asiakkaita kaupan päälle.
@@ -86,7 +86,7 @@ function SplitHero() {
         )}
 
         {/* Ylhäällä oikealla: CTA */}
-        <div className="absolute right-5 top-6 flex items-center gap-3 md:right-8">
+        <div className="absolute right-5 top-4 flex items-center gap-3 md:right-8 md:top-[1.1rem]">
           <a
             href="#varaa"
             className={`rounded-lg bg-beige px-5 py-2 text-xs font-medium uppercase tracking-widest text-brown transition-colors hover:bg-beige/90 ${focus}`}

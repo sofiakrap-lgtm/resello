@@ -35,7 +35,7 @@ function Faq() {
     <section className="px-6 py-20 md:py-28">
       <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
         {/* Vasen palsta: otsikko + esittely */}
-        <div className="reveal-item md:sticky md:top-24 md:self-start">
+        <div className="reveal-item">
           <h2 className="text-balance text-[1.2rem] font-bold leading-[1.15] tracking-tight text-brown sm:text-[1.5rem] md:text-[2rem]">
             Onko kysyttävää? Autamme mielellämme.
           </h2>

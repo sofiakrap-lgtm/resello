@@ -11,7 +11,7 @@
   --color-peach: #e2b48c;
   --color-sage: #bab58d;
   --color-taupe: #9b8a76;
-  --color-bluegrey: #7fa2ad;
+  --color-bluegrey: #b4c0bc;
 }
 
 @layer base {
@@ -49,10 +49,14 @@
 /* "Tässä on kaikki" — scroll-ohjattu verkosto (Anthropic "Keep thinking" -tyyliin) */
 .hub-scroll {
   position: relative;
+  /* Korkea kelauskontti: näyttämö pysyy paikallaan ja animaatio etenee
+     scrollatessa, joten osan ohi on vaikea kelata kesken animaation. */
+  height: 260vh;
 }
-/* Näyttämö: aukeaa itsestään näkyviin tullessa (ei scroll-ohjattu) */
+/* Näyttämö: pysyy kiinni (sticky), kun animaatio on kesken. */
 .hub-sticky {
-  position: relative;
+  position: sticky;
+  top: 0;
   height: 100vh;
   overflow: hidden;
   background: var(--color-beige);
@@ -64,12 +68,11 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  /* Kehystetty ikkuna: levenee vain hieman, reunat jäävät näkyviin. */
-  width: calc(90% + 4% * var(--open, 0));
-  height: calc(84vh + 6vh * var(--open, 0));
+  width: calc(94% + 6% * var(--open, 0));
+  height: calc(88vh + 12vh * var(--open, 0));
   background: #b4c0bc;
-  /* Reunat pysyvät pyöristettyinä (ikkunamainen kehys). */
-  border-radius: calc(26px - 8px * var(--open, 0));
+  /* Auki-tilassa jää 8 px pyöristys (kuten muut ikkunat) */
+  border-radius: calc(26px - 18px * var(--open, 0));
 }
 
 /* Intro-teksti — näkyy suljettuna, häipyy heti kun levy aukeaa */

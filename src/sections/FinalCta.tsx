@@ -3,9 +3,10 @@ import Button from '../components/Button.tsx'
 function FinalCta() {
   return (
     <section id="varaa" className="scroll-mt-24 px-4 py-10 md:py-12">
-      <div className="mx-auto max-w-[108rem]">
-        {/* Kaksi erillistä, joka kulmasta pyöristettyä lohkoa, kaari välissä */}
-        <div className="grid gap-4 md:grid-cols-2">
+      <div className="mx-auto max-w-[120rem]">
+        {/* Kaksi joka kulmasta pyöristettyä lohkoa, jotka koskettavat keskeltä
+            toisiaan — pyöristys jättää kaaren kohtaamiskohtaan. */}
+        <div className="grid gap-0 md:grid-cols-2">
           {/* Vasen: sinooriharmaa paneeli, teksti suoraan taustalla (ei valkoista korttia) */}
           <div className="flex items-center justify-center rounded-[2rem] bg-bluegrey px-6 py-16 text-center md:px-14 md:py-24">
             <div className="max-w-sm">
