@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 /** "Rakennettu kirpputorin arjesta" — keskitetty arvot/tarina-osio. */
 function Story() {
   return (
-    <section className="px-6 py-12 md:py-16">
+    <section className="px-6 py-10 md:py-12">
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="reveal-item text-balance text-[1.5rem] font-bold leading-[1.1] tracking-tight text-brown sm:text-[2rem] md:text-[2.6rem]">
           Rakennettu kirpputorin arjesta

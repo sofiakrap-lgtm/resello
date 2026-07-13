@@ -2,12 +2,12 @@ import Button from '../components/Button.tsx'
 
 function FinalCta() {
   return (
-    <section id="varaa" className="scroll-mt-24 px-4 py-16 md:py-20">
-      <div className="mx-auto max-w-7xl">
-        {/* Kaksi vierekkäistä lohkoa kiinni toisissaan, ulkoreunat pyöristetty */}
-        <div className="grid overflow-hidden rounded-[2rem] md:grid-cols-2">
+    <section id="varaa" className="scroll-mt-24 px-4 py-10 md:py-12">
+      <div className="mx-auto max-w-[108rem]">
+        {/* Kaksi erillistä, joka kulmasta pyöristettyä lohkoa, kaari välissä */}
+        <div className="grid gap-4 md:grid-cols-2">
           {/* Vasen: sinooriharmaa paneeli, teksti suoraan taustalla (ei valkoista korttia) */}
-          <div className="flex items-center justify-center bg-bluegrey px-6 py-16 text-center md:px-14 md:py-24">
+          <div className="flex items-center justify-center rounded-[2rem] bg-bluegrey px-6 py-16 text-center md:px-14 md:py-24">
             <div className="max-w-sm">
               <h2 className="text-[1.4rem] font-bold tracking-tight text-brown sm:text-[1.7rem] md:text-[2rem]">
                 Kiinnostuitko?
@@ -23,7 +23,7 @@ function FinalCta() {
           </div>
 
           {/* Oikea: kuva */}
-          <div className="relative min-h-[20rem] overflow-hidden md:min-h-[32rem]">
+          <div className="relative min-h-[20rem] overflow-hidden rounded-[2rem] md:min-h-[32rem]">
             <img
               src="/images/kuva%204.jpg"
               alt="Kirpputorin vaatteita ja tavaroita"

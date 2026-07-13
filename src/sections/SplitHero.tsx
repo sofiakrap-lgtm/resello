@@ -15,9 +15,19 @@ function SplitHero() {
   const [showHeroImage, setShowHeroImage] = useState(true)
 
   return (
-    <section className="grid border-b border-brown md:grid-cols-2">
+    <section className="relative grid border-b border-brown md:grid-cols-2">
+      {/* Ohut kaksisävyinen viiva yläpalkin (linkkien) alapuolella:
+          ruskea taustan puolella, vaalea kuvan puolella. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-[3.75rem] z-20 hidden h-px md:block"
+        style={{
+          background:
+            'linear-gradient(to right, var(--color-brown) 0 50%, var(--color-beige) 50% 100%)',
+        }}
+      />
       {/* Vasen palsta */}
-      <div className="relative flex min-h-[88vh] flex-col overflow-hidden border-t border-brown bg-beige px-6 pb-0 pt-5 md:min-h-screen md:px-10 md:pb-0 md:pt-6">
+      <div className="relative flex min-h-[88vh] flex-col overflow-hidden bg-beige px-6 pb-0 pt-5 md:min-h-screen md:px-10 md:pb-0 md:pt-6">
         <nav className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs font-medium uppercase tracking-[0.16em] text-brown">
           {navLinks.map((link) => (
             <a
@@ -56,7 +66,7 @@ function SplitHero() {
       </div>
 
       {/* Oikea palsta — hero-kuva */}
-      <div className="relative min-h-[55vh] overflow-hidden border-t border-beige bg-peach md:min-h-screen">
+      <div className="relative min-h-[55vh] overflow-hidden bg-peach md:min-h-screen">
         <img
           src="/images/kuva%201.jpg"
           alt="Osto- ja maksutapahtuma kirpputorilla"

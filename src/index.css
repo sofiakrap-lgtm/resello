@@ -11,7 +11,7 @@
   --color-peach: #e2b48c;
   --color-sage: #bab58d;
   --color-taupe: #9b8a76;
-  --color-bluegrey: #9fb0ac;
+  --color-bluegrey: #7fa2ad;
 }
 
 @layer base {
@@ -64,11 +64,12 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: calc(94% + 6% * var(--open, 0));
-  height: calc(88vh + 12vh * var(--open, 0));
+  /* Kehystetty ikkuna: levenee vain hieman, reunat jäävät näkyviin. */
+  width: calc(90% + 4% * var(--open, 0));
+  height: calc(84vh + 6vh * var(--open, 0));
   background: #b4c0bc;
-  /* Auki-tilassa jää 8 px pyöristys (kuten muut ikkunat) */
-  border-radius: calc(26px - 18px * var(--open, 0));
+  /* Reunat pysyvät pyöristettyinä (ikkunamainen kehys). */
+  border-radius: calc(26px - 8px * var(--open, 0));
 }
 
 /* Intro-teksti — näkyy suljettuna, häipyy heti kun levy aukeaa */
