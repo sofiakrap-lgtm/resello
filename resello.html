@@ -34,10 +34,11 @@
   .demo{font-size:.72rem;padding:.6rem 1.25rem;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
 
   /* lang switch, minimal (no glow) */
-  .langsw{position:relative;width:4.4rem;height:1.7rem;border-radius:999px;border:1.5px solid rgba(250,241,224,.55);background:transparent;cursor:pointer;padding:0;flex:none}
-  .langsw .lbl{position:absolute;top:50%;left:.62rem;transform:translateY(-50%);font-size:.66rem;font-weight:500;letter-spacing:.04em;color:var(--c-beige);transition:left .25s,right .25s}
-  .langsw .knob{position:absolute;top:50%;left:calc(100% - 1.3rem - .18rem);transform:translateY(-50%);width:1.3rem;height:1.3rem;border-radius:50%;background:var(--c-beige);transition:left .25s}
-  .langsw.fi .knob{left:.18rem} .langsw.fi .lbl{left:auto;right:.62rem}
+  .langsw{position:relative;display:inline-flex;align-items:center;height:1.8rem;border-radius:999px;border:1.5px solid rgba(250,241,224,.55);background:transparent;cursor:pointer;padding:.15rem;flex:none}
+  .langsw .lo{position:relative;z-index:1;flex:1;text-align:center;font-family:var(--disp);font-size:.62rem;font-weight:600;letter-spacing:.05em;padding:.18rem .5rem;border-radius:999px;color:rgba(250,241,224,.65);transition:color .25s}
+  .langsw .lo.on{color:var(--c-brown)}
+  .langsw .knob{position:absolute;z-index:0;top:.15rem;bottom:.15rem;left:.15rem;width:calc(50% - .15rem);border-radius:999px;background:var(--c-beige);transition:transform .25s var(--ease)}
+  .langsw.fi .knob{transform:translateX(100%)}
 
   /* content — keskitetty näytön keskelle */
   .content{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:10;width:92%;max-width:48rem;text-align:center;display:flex;flex-direction:column;align-items:center}
@@ -190,7 +191,8 @@
 
   /* ===== Pysyvä nappula -> ylävalikko ===== */
   .navwrap{position:fixed;top:1.1rem;right:1.4rem;z-index:60;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s var(--ease),transform .4s var(--ease)}
-  .navwrap.show{opacity:1;transform:none;pointer-events:auto}
+  .navwrap.show.active{opacity:1;transform:none;pointer-events:auto}
+  .navwrap.open{opacity:1;transform:none;pointer-events:auto}
   .navdot{width:54px;height:54px;border-radius:50%;background:var(--c-brown);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(42,28,17,.32);transition:transform .25s var(--ease),opacity .25s var(--ease)}
   .navdot:hover{transform:scale(1.15)}
   .navdot-mark{position:relative;width:20px;height:2px;border-radius:2px;background:var(--c-beige)}
@@ -213,7 +215,10 @@
   @media(max-width:640px){.navbar nav{display:none}}
 
   /* ===== OSA 3: Tarina / arvot (yksi näkymä, sininen tausta, vaalea teksti, animoitu) ===== */
-  .story{background:#5E7C82;color:var(--c-cream);min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:clamp(1.8rem,4.5vh,3.2rem);overflow:hidden}
+  .story{background:#9FB0AC;color:var(--c-cream);min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:clamp(1.8rem,4.5vh,3.2rem);overflow:hidden;position:relative;padding-bottom:clamp(30px,4vw,62px)}
+  /* ylä- ja alareuna kaareutuu osaa kohti (viereinen beige kaareutuu sisään) */
+  .story::before{content:"";position:absolute;z-index:4;top:-1px;left:-3%;right:-3%;height:clamp(30px,4.2vw,64px);background:var(--c-beige);border-radius:0 0 50% 50%/0 0 100% 100%}
+  .story::after{content:"";position:absolute;z-index:4;bottom:-1px;left:-3%;right:-3%;height:clamp(30px,4.2vw,64px);background:var(--c-beige);border-radius:50% 50% 0 0/100% 100% 0 0}
   .story-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 clamp(1.5rem,6vw,6rem);display:flex;flex-direction:column;gap:clamp(1.6rem,4vh,2.6rem)}
   .story-h1{font-family:var(--disp);font-weight:700;font-style:italic;text-align:center;font-size:clamp(27px,3.8vw,52px);line-height:1.08;letter-spacing:-.01em;color:var(--c-cream);max-width:20ch;margin:0 auto;
     opacity:0;transform:translateY(34vh) scale(1.5);transition:opacity .7s var(--ease-out),transform 1.2s cubic-bezier(.2,.6,.28,1)}
@@ -227,7 +232,7 @@
   .prod-marquee{overflow:hidden;width:100%;opacity:0;transform:translateX(60px);transition:opacity 1s 1.75s var(--ease-out),transform 1.2s 1.75s var(--ease-out)}
   .story.in .prod-marquee{opacity:1;transform:none}
   .prod-track{display:flex;align-items:flex-end;gap:clamp(1.4rem,3vw,3rem);width:max-content;animation:prod-scroll 48s linear infinite}
-  .prod-track img{height:clamp(104px,15vh,168px);width:auto;display:block;filter:drop-shadow(0 12px 24px rgba(18,28,30,.30))}
+  .prod-track img{height:clamp(104px,15vh,168px);width:auto;display:block}
   .prod-marquee:hover .prod-track{animation-play-state:paused}
   @keyframes prod-scroll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 
@@ -337,7 +342,7 @@
     <span class="logo" aria-label="ReSello"></span>
     <div class="tb-right">
       <nav class="jsnav"><a>Features</a><a>Pricing</a><a>Contact</a></nav>
-      <button class="langsw" id="langsw" aria-label="Language"><span class="lbl">EN</span><span class="knob"></span></button>
+      <button class="langsw" id="langsw" aria-label="Kieli"><span class="lo" data-l="en">EN</span><span class="lo" data-l="fi">FI</span><span class="knob"></span></button>
       <a class="btn demo">Book a demo</a>
     </div>
   </header>
@@ -422,7 +427,7 @@
     <span class="logo nb-logo" aria-label="ReSello"></span>
     <div class="tb-right">
       <nav class="jsnav"><a>Features</a><a>Pricing</a><a>Contact</a></nav>
-      <button class="langsw" aria-label="Language"><span class="lbl">EN</span><span class="knob"></span></button>
+      <button class="langsw" aria-label="Kieli"><span class="lo" data-l="en">EN</span><span class="lo" data-l="fi">FI</span><span class="knob"></span></button>
       <a class="btn demo">Book a demo</a>
       <button class="navclose" id="navclose" aria-label="Sulje">&times;</button>
     </div>
@@ -434,7 +439,7 @@
   <div class="story-inner">
     <h2 class="story-h1">Vuosien kokemuksella rakennettu, jotta ala kasvaa ja vaatteet kiertävät.</h2>
     <div class="story-cols">
-      <div class="scol"><p>Olen ollut mukana kirpputorialalla vuosia ja nähnyt läheltä, mikä myyjien ja yrittäjien arjessa toimii ja mikä ei. ReSellon kehitystyön takana on aito ymmärrys alasta: järjestelmä on rakennettu ratkaisemaan niitä ongelmia, joita kentällä oikeasti kohdataan, ja auttamaan koko alaa kasvamaan.</p></div>
+      <div class="scol"><p>Tiimissämme on vahvaa ja monipuolista kokemusta alalta. Olen itse toiminut niin kierrätysvaikuttajana, alan työntekijänä kuin yrittäjänäkin, ja samaa käytännön ymmärrystä löytyy koko porukastamme. Kirpputoriarki on tullut tutuksi monelta eri kantilta, ja se näkyy siinä, miten ReSelloa rakennetaan.</p></div>
       <div class="scol"><p>Uskomme fyysiseen kirpputoriyhteisöön ja sen tulevaisuuteen. Haluamme, että jokainen tuote löytää omistajan, joka sitä tarvitsee, ja että kestävä uudelleenmyynti on yhtä helppoa kuin uuden ostaminen. Arvomme ovat yksinkertaiset: kierto, yhteisö ja kirpputoriarjen aito helpottaminen.</p></div>
     </div>
   </div>
@@ -567,7 +572,7 @@ function setLang(l){const s=STR[l];
   document.getElementById('cta').textContent=s.cta;
 }
 const sws=[...document.querySelectorAll('.langsw')];
-function applyLang(){sws.forEach(function(sw){sw.classList.toggle('fi',lang==='fi');var l=sw.querySelector('.lbl');if(l)l.textContent=lang==='en'?'EN':'FIN';});setLang(lang);}
+function applyLang(){sws.forEach(function(sw){sw.classList.toggle('fi',lang==='fi');sw.querySelectorAll('.lo').forEach(function(o){o.classList.toggle('on',o.getAttribute('data-l')===lang);});});setLang(lang);}
 sws.forEach(function(sw){sw.addEventListener('click',function(){lang=lang==='en'?'fi':'en';applyLang();});});
 applyLang();
 
@@ -579,6 +584,13 @@ navdot.addEventListener('click',function(){navwrap.classList.add('open');});
 navclose.addEventListener('click',function(){navwrap.classList.remove('open');});
 document.querySelectorAll('#navbar .jsnav a,#navbar .demo').forEach(function(a){a.addEventListener('click',function(){navwrap.classList.remove('open');});});
 addEventListener('keydown',function(e){if(e.key==='Escape')navwrap.classList.remove('open');});
+/* nappula piiloutuu paikallaan ollessa, ilmestyy kun liikkuu (scroll/hiiri/kosketus) */
+let navIdle;
+function navActive(){ navwrap.classList.add('active'); clearTimeout(navIdle); navIdle=setTimeout(function(){ navwrap.classList.remove('active'); },2800); }
+addEventListener('scroll',navActive,{passive:true});
+addEventListener('mousemove',navActive,{passive:true});
+addEventListener('touchstart',navActive,{passive:true});
+navActive();
 
 const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
