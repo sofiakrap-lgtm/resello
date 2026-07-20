@@ -269,10 +269,10 @@
   .kassa{padding:1.75rem 1.5rem 7rem;background:var(--c-beige)}
   .kassa-rows{max-width:80rem;margin:1rem auto 0;display:flex;flex-direction:column;gap:1rem;position:relative}
   .kassa-row{display:grid;grid-template-columns:1fr 1fr;border-radius:32px;overflow:hidden}
-  .kassa-row.reveal{transform:translateY(46px)}
+  .kassa-row.reveal{transform:translateY(64px) scale(.965);transition:opacity .85s var(--ease-out),transform .85s cubic-bezier(.2,.7,.2,1)}
   .kassa-row.reveal.in{transform:none}
-  .kassa-row.reveal:nth-of-type(2){transition-delay:.14s}
-  .kassa-row.reveal:nth-of-type(3){transition-delay:.28s}
+  .kassa-row.reveal:nth-of-type(2){transition-delay:.22s}
+  .kassa-row.reveal:nth-of-type(3){transition-delay:.44s}
   .kassa-row.rev .kassa-media{order:2}
   .kassa-media{position:relative;overflow:hidden;min-height:22rem}
   .kassa-media .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -287,11 +287,17 @@
   .kassa-text.c-bluegrey{background:#BAB58D}
   .kassa-text h3{font-family:var(--disp);font-style:italic;font-size:clamp(1.05rem,2.5vw,1.55rem);font-weight:700;line-height:1.22;margin:0;letter-spacing:-.01em;text-wrap:balance;color:#FFFBF4}
   .kassa-text p{margin:1rem 0 0;line-height:1.6;font-size:1.15rem;color:rgba(255,251,244,.92)}
-  .kassa-deco{position:absolute;bottom:-3rem;right:-3rem;width:14rem;height:14rem;pointer-events:none;z-index:0}
-  .kassa-badge9{position:absolute;left:40.7%;top:70.1%;width:5.7%;transform:translate(-50%,calc(-50% + 70px)) rotate(22deg);z-index:30;pointer-events:none}
-  .kassa-stamp22{position:absolute;left:93.9%;top:68.3%;width:6%;aspect-ratio:1;transform:translate(calc(-50% - 20px),calc(-50% + 50px)) rotate(31deg);z-index:30;pointer-events:none}
-  .kassa-spin{position:absolute;left:50%;top:33%;width:8rem;height:8rem;transform:translate(-50%,-50%);z-index:30;pointer-events:none;animation:kassa-spin-kf 22s linear infinite}
+  .kassa-deco{position:absolute;bottom:-3rem;right:-3rem;width:14rem;height:14rem;pointer-events:none;z-index:0;opacity:0;transform:scale(.55) rotate(-12deg);transition:opacity .55s var(--ease-out),transform .6s cubic-bezier(.3,1.4,.5,1)}
+  .kassa-badge9{position:absolute;left:40.7%;top:70.1%;width:5.7%;transform:translate(-50%,calc(-50% + 70px)) rotate(22deg) scale(.45);opacity:0;transition:opacity .5s var(--ease-out),transform .55s cubic-bezier(.3,1.5,.5,1);z-index:30;pointer-events:none}
+  .kassa-stamp22{position:absolute;left:93.9%;top:68.3%;width:6%;aspect-ratio:1;transform:translate(calc(-50% - 20px),calc(-50% + 50px)) rotate(31deg) scale(.45);opacity:0;transition:opacity .5s var(--ease-out),transform .55s cubic-bezier(.3,1.5,.5,1);z-index:30;pointer-events:none}
+  .kassa-spin{position:absolute;left:50%;top:33%;width:8rem;height:8rem;transform:translate(-50%,-50%);z-index:30;pointer-events:none;opacity:0;transition:opacity .6s var(--ease-out);animation:kassa-spin-kf 22s linear infinite;animation-play-state:paused}
   @keyframes kassa-spin-kf{to{transform:translate(-50%,-50%) rotate(360deg)}}
+  /* tarrat ilmestyvät vasta kun taustat (rivit) ovat tulleet */
+  .kassa.stk .kassa-deco{opacity:1;transform:none}
+  .kassa.stk .kassa-badge9{opacity:1;transform:translate(-50%,calc(-50% + 70px)) rotate(22deg) scale(1)}
+  .kassa.stk .kassa-stamp22{opacity:1;transform:translate(calc(-50% - 20px),calc(-50% + 50px)) rotate(31deg) scale(1)}
+  .kassa.stk .kassa-spin{opacity:1;animation-play-state:running}
+  .kassa.stk .kassa-badge9{transition-delay:.1s}.kassa.stk .kassa-stamp22{transition-delay:.22s}.kassa.stk .kassa-deco{transition-delay:.05s}
   @media(max-width:760px){.kassa-row{grid-template-columns:1fr}.kassa-row.rev .kassa-media{order:0}}
 
   /* ===== OSA 5: Hinnastosivu (keskitetty; tummat rivit, beige reunus; hover -> beige) ===== */
@@ -322,12 +328,16 @@
   /* pyörivä resello-rengas (grafiikka 15, oikea ala) */
   .pp-spin{position:absolute;right:clamp(-1.8rem,-2vw,-.2rem);bottom:clamp(-1.4rem,-2vh,.2rem);z-index:3;width:clamp(72px,9vw,108px);height:auto;animation:spin 18s linear infinite}
   /* sivupaneelit: label aina näkyvä, kortti kurkkii reunasta ja liukuu esiin */
-  .pp-side{position:absolute;top:0;bottom:0;width:calc(var(--ppw) + 6vw);z-index:5;pointer-events:none}
+  .pp-side{position:absolute;top:0;bottom:0;width:calc(var(--ppw) + 6vw);z-index:5;pointer-events:none;transition:transform .6s var(--ease)}
   .pp-left{left:0}
   .pp-right{right:0}
-  .pp-label{position:absolute;top:30%;display:inline-flex;align-items:center;gap:.55rem;font-family:var(--disp);font-weight:600;font-style:italic;font-size:clamp(12px,1.15vw,15px);color:var(--c-beige);white-space:nowrap;pointer-events:auto;cursor:pointer;letter-spacing:.01em;transition:opacity .3s}
+  /* vastakkainen paneeli panoroituu ulos samalla skaalalla, jottei keskiö vain lähesty reunaa */
+  .prices:has(.pp-left:hover) .pp-right,.prices.left-open .pp-right{transform:translateX(var(--shift))}
+  .prices:has(.pp-right:hover) .pp-left,.prices.right-open .pp-left{transform:translateX(calc(-1 * var(--shift)))}
+  .pp-label{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:.55rem;font-family:var(--disp);font-weight:600;font-style:italic;font-size:clamp(12px,1.15vw,15px);color:var(--c-beige);white-space:nowrap;pointer-events:auto;cursor:pointer;letter-spacing:.01em;transition:opacity .35s;z-index:6}
   .pp-left .pp-label{left:clamp(1rem,2.4vw,2.2rem)}
   .pp-right .pp-label{right:clamp(1rem,2.4vw,2.2rem)}
+  .pp-left:hover .pp-label,.pp-right:hover .pp-label,.pp-side.open .pp-label{opacity:0}
   .pp-arr{display:inline-flex;align-items:center;justify-content:center;width:1.7em;height:1.7em;border:1.5px solid var(--c-beige);border-radius:50%;font-size:.9em;font-style:normal;flex:none}
   .pp-card{position:absolute;top:50%;width:var(--ppw);max-width:82vw;max-height:82vh;overflow:auto;background:var(--c-cream);color:var(--c-brown);padding:clamp(1.4rem,2vw,2rem);display:flex;flex-direction:column;gap:.7rem;box-shadow:0 18px 46px rgba(0,0,0,.3);pointer-events:auto;transition:transform .6s var(--ease)}
   .pp-left .pp-card{left:0;border-radius:0 26px 26px 0;transform:translate(calc(-100% + var(--peek)),-50%)}
@@ -342,7 +352,7 @@
   .pp-feat p{font-size:clamp(13px,1.05vw,15px);line-height:1.5}
   .pp-feat b{font-weight:700}
   .pp-vals{font-size:clamp(13px,1.05vw,15px);line-height:1.6}
-  @media(max-width:860px){.pp-side{position:static;width:100%;pointer-events:auto}.pp-label{display:none}.pp-card{position:static;transform:none!important;width:100%;max-width:none;max-height:none;margin:1rem auto;border-radius:22px!important}.pp-star{display:none}.prices-stage{padding-top:2rem}.prices{flex-direction:column;overflow:visible}.prices:has(.pp-left:hover) .prices-stage,.prices:has(.pp-right:hover) .prices-stage,.prices.left-open .prices-stage,.prices.right-open .prices-stage{transform:none}}
+  @media(max-width:860px){.pp-side{position:static;width:100%;pointer-events:auto;transform:none!important}.pp-label{display:none}.pp-card{position:static;transform:none!important;width:100%;max-width:none;max-height:none;margin:1rem auto;border-radius:22px!important}.pp-star{display:none}.prices-stage{padding-top:2rem}.prices{flex-direction:column;overflow:visible}.prices:has(.pp-left:hover) .prices-stage,.prices:has(.pp-right:hover) .prices-stage,.prices.left-open .prices-stage,.prices.right-open .prices-stage{transform:none}}
 
   /* ===== Footer (kopio alkuperäiseltä sivulta) ===== */
   .footer{background:var(--c-brown);color:var(--c-beige);font-family:var(--text)}
@@ -657,6 +667,10 @@ navActive();
 
 const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* kassa: tarrat ilmestyvät vasta kun taustarivit ovat tulleet */
+const kassaSec=document.querySelector('.kassa');
+if(kassaSec){ const kIO=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ setTimeout(function(){kassaSec.classList.add('stk');},1150); kIO.disconnect(); } });},{threshold:.2}); kIO.observe(kassaSec); }
 
 /* tuoterivi: kahdennetaan sisältö saumatonta looppia varten (kuvat vain kerran HTML:ssä) */
 const prodTrack=document.getElementById('prodTrack');
