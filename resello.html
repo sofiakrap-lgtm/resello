@@ -296,10 +296,10 @@
 
   /* ===== OSA 5: Hinnastosivu (keskitetty; tummat rivit, beige reunus; hover -> beige) ===== */
   .prices{--ppw:clamp(300px,26vw,380px);--peek:clamp(20px,2.6vw,44px);--shift:clamp(110px,14vw,240px);background:var(--c-brown);color:var(--c-beige);padding:clamp(2rem,5vh,4rem) clamp(1.5rem,6vw,4rem);min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-  .prices-stage{width:100%;max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:stretch;text-align:center;position:relative;z-index:2;padding-top:clamp(3.4rem,9vh,5.6rem);transition:transform .6s var(--ease)}
+  .prices-stage{width:100%;max-width:min(1000px,90vw);margin:0 auto;display:flex;flex-direction:column;align-items:stretch;text-align:center;position:relative;z-index:2;padding-top:clamp(3.4rem,9vh,5.6rem);transition:transform .6s var(--ease)}
   .prices:has(.pp-left:hover) .prices-stage,.prices.left-open .prices-stage{transform:translateX(var(--shift))}
   .prices:has(.pp-right:hover) .prices-stage,.prices.right-open .prices-stage{transform:translateX(calc(-1 * var(--shift)))}
-  .prices-sub{font-family:var(--disp);font-weight:700;font-style:italic;font-size:clamp(16px,1.9vw,26px);margin:0 auto clamp(1.2rem,3vh,2rem);color:var(--c-beige);letter-spacing:-.01em}
+  .prices-sub{font-family:var(--disp);font-weight:700;font-style:italic;font-size:clamp(24px,2.8vw,44px);margin:0 auto clamp(1.4rem,3.4vh,2.4rem);color:var(--c-beige);letter-spacing:-.01em}
   .ptable{display:flex;flex-direction:column;gap:clamp(.5rem,1.1vh,.8rem)}
   .ptable-head{display:flex;justify-content:space-between;padding:0 clamp(.9rem,1.6vw,1.6rem) .5rem;font-size:clamp(12px,1vw,14px);color:var(--c-beige);opacity:.82}
   .prow{display:flex;align-items:center;justify-content:space-between;color:var(--c-beige);border:1.5px solid rgba(250,241,224,.55);border-radius:16px;padding:clamp(.75rem,1.7vh,1.15rem) clamp(.9rem,1.6vw,1.6rem);transition:background .16s var(--ease),color .16s var(--ease),border-color .16s}
