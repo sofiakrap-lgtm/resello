@@ -326,8 +326,8 @@
   .pp-cta{display:inline-flex;align-self:center;margin-top:clamp(1.4rem,3.4vh,2.4rem);align-items:center;justify-content:center;cursor:pointer;background:transparent;color:var(--c-beige);border:1.5px solid var(--c-beige);border-radius:980px;font-family:var(--disp);font-weight:600;font-size:clamp(14px,1.2vw,16px);padding:.8rem 2rem;transition:transform .25s var(--ease),background .25s,color .25s}
   .pp-cta:hover{background:var(--c-beige);color:var(--c-brown)}.pp-cta:active{transform:scale(.97)}
   /* leimat (leima-editorin koordinaatit: keskipiste + leveys % lohkosta) */
-  .pp-stamp{position:absolute;left:27.3%;top:16.6%;width:12.0%;z-index:3;transform:translate(-50%,-50%) rotate(-8deg)}
-  .pp-spin{position:absolute;left:71.3%;top:89.6%;width:8.5%;z-index:3;transform:translate(-50%,-50%) rotate(0deg)}
+  .pp-stamp{position:absolute;left:27.2%;top:9.3%;width:8.2%;z-index:3;transform:translate(-50%,-50%) rotate(-8deg)}
+  .pp-spin{position:absolute;left:79.6%;top:88.6%;width:8.5%;z-index:3;transform:translate(-50%,-50%) rotate(0deg)}
   .pp-spin img{width:100%;height:auto;display:block;animation:spin 18s linear infinite}
   /* sivupaneelit: label aina näkyvä, kortti kurkkii reunasta ja liukuu esiin */
   .pp-side{position:absolute;top:0;bottom:0;width:calc(var(--ppw) + 6vw);z-index:5;pointer-events:none;transition:transform .6s var(--ease)}
@@ -460,8 +460,8 @@ var stage=document.querySelector('.prices-stage');
 var stamp=document.querySelector('.pp-stamp');
 var spin=document.querySelector('.pp-spin');
 var items=[
-  {el:stamp, id:'stamp', sel:'.pp-stamp', x:27.3, y:16.6, w:12.0, rot:-8},
-  {el:spin,  id:'spin',  sel:'.pp-spin',  x:71.3, y:89.6, w:8.5, rot:0}
+  {el:stamp, id:'stamp', sel:'.pp-stamp', x:27.2, y:9.3, w:8.2, rot:-8},
+  {el:spin,  id:'spin',  sel:'.pp-spin',  x:79.6, y:88.6, w:8.5, rot:0}
 ];
 var DEF=JSON.parse(JSON.stringify(items.map(function(o){return {id:o.id,x:o.x,y:o.y,w:o.w,rot:o.rot};})));
 var who=document.getElementById('who'), size=document.getElementById('size'), sizev=document.getElementById('sizev'), rot=document.getElementById('rot'), rotv=document.getElementById('rotv');
