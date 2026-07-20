@@ -301,7 +301,7 @@
   @media(max-width:760px){.kassa-row{grid-template-columns:1fr}.kassa-row.rev .kassa-media{order:0}}
 
   /* ===== OSA 5: Hinnastosivu (keskitetty; tummat rivit, beige reunus; hover -> beige) ===== */
-  .prices{--ppw:clamp(300px,26vw,380px);--peek:clamp(20px,2.6vw,44px);--shift:clamp(110px,14vw,240px);background:var(--c-brown);color:var(--c-beige);padding:clamp(2rem,5vh,4rem) clamp(1.5rem,6vw,4rem);min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .prices{--ppw:clamp(300px,26vw,380px);--peek:clamp(88px,12vw,175px);--shift:clamp(110px,14vw,240px);background:var(--c-brown);color:var(--c-beige);padding:clamp(2rem,5vh,4rem) clamp(1.5rem,6vw,4rem);min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
   .prices-stage{width:100%;max-width:min(1000px,90vw);margin:0 auto;display:flex;flex-direction:column;align-items:stretch;text-align:center;position:relative;z-index:2;padding-top:clamp(3.4rem,9vh,5.6rem);transition:transform .6s var(--ease)}
   .prices:has(.pp-left:hover) .prices-stage,.prices.left-open .prices-stage{transform:translateX(var(--shift))}
   .prices:has(.pp-right:hover) .prices-stage,.prices.right-open .prices-stage{transform:translateX(calc(-1 * var(--shift)))}
