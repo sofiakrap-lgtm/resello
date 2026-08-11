@@ -1,0 +1,128 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ReSello – hero-reunuksen editori</title>
+<style>
+  :root{--cream:#FAF1E0;--brown:#3C2415}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#e9ddc7;font-family:'Segoe UI',system-ui,sans-serif;color:var(--brown);padding:14px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  h1{font-size:1.05rem;font-weight:700}
+  .hint{font-size:.82rem;opacity:.75;max-width:54rem;text-align:center;line-height:1.5}
+  .wrap{width:100%;max-width:1000px}
+  svg#stage{width:100%;aspect-ratio:1000/620;display:block;border-radius:16px;box-shadow:0 10px 30px rgba(60,36,21,.25);background:var(--brown);touch-action:none}
+  .sel{outline:none}
+  .panel{width:100%;max-width:1000px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;background:#FFFDF8;border:1.5px solid #d9c6a8;border-radius:12px;padding:12px 16px}
+  .panel .who{font-weight:700;font-size:.9rem;min-width:9rem}
+  .ctl{display:flex;align-items:center;gap:8px;font-size:.82rem}
+  .ctl[hidden]{display:none}
+  .ctl input[type=range]{width:140px}
+  .ctl .val{min-width:3.4rem;text-align:right;font-variant-numeric:tabular-nums}
+  .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  button.tool{font-size:.82rem;padding:.5rem .9rem;border-radius:10px;border:1.5px solid var(--brown);background:#FFFDF8;color:var(--brown);cursor:pointer;font-weight:600}
+  button.tool:hover{background:var(--cream)}
+  button.tool.on{background:var(--brown);color:var(--cream)}
+  textarea{width:100%;max-width:1000px;height:120px;font-family:ui-monospace,monospace;font-size:.72rem;border-radius:12px;border:1.5px solid #c9b7a0;padding:10px;background:#fff;color:var(--brown)}
+</style>
+
+<h1>ReSello – hero-reunuksen editori</h1>
+<p class="hint">Raahaa suorakulmiota ja tähtiä. Valitse elementti klikkaamalla. Suorakulmiolle voit säätää leveyttä, korkeutta ja kaarta; tähdille kokoa ja kääntöä. Viivan paksuus on sama kuin yläpalkin reunassa. Alhaalta saat valmiin SVG:n.</p>
+
+<div class="wrap">
+ <svg id="stage" viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg">
+   <rect id="frame" fill="none" stroke="#FAF1E0" stroke-width="1.4" vector-effect="non-scaling-stroke"/>
+   <path id="star1" class="star" fill="none" stroke="#FAF1E0" stroke-width="1.4" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+   <path id="star2" class="star" fill="none" stroke="#FAF1E0" stroke-width="1.4" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+ </svg>
+</div>
+
+<div class="panel" id="panel">
+  <span class="who" id="who">Valitse elementti</span>
+  <label class="ctl" data-for="frame" hidden>Leveys <input type="range" id="fw" min="200" max="960" step="2"><span class="val" id="fwv">–</span></label>
+  <label class="ctl" data-for="frame" hidden>Korkeus <input type="range" id="fh" min="120" max="580" step="2"><span class="val" id="fhv">–</span></label>
+  <label class="ctl" data-for="frame" hidden>Kaari <input type="range" id="fr" min="0" max="120" step="1"><span class="val" id="frv">–</span></label>
+  <label class="ctl" data-for="star" hidden>Koko <input type="range" id="ss" min="20" max="160" step="1"><span class="val" id="ssv">–</span></label>
+  <label class="ctl" data-for="star" hidden>Kääntö <input type="range" id="sr" min="-180" max="180" step="1"><span class="val" id="srv">–</span></label>
+</div>
+
+<div class="row">
+  <button class="tool" id="copy">Kopioi SVG</button>
+  <button class="tool" id="reset">Palauta</button>
+</div>
+<textarea id="out" readonly></textarea>
+
+<script>
+// --- tähden muoto (annetun kaltainen piikikäs tähti), keskitetty (0,0), säde ~ 50 ---
+function starPath(){
+  var outer=[54,40,50,38,58,40,48,38,52], inner=17, n=outer.length, d='';
+  for(var i=0;i<n;i++){
+    var ao=(i*360/n-90)*Math.PI/180, ai=((i+0.5)*360/n-90)*Math.PI/180;
+    var ox=Math.cos(ao)*outer[i], oy=Math.sin(ao)*outer[i];
+    var ix=Math.cos(ai)*inner, iy=Math.sin(ai)*inner;
+    d+=(i===0?'M':'L')+ox.toFixed(1)+' '+oy.toFixed(1)+' L'+ix.toFixed(1)+' '+iy.toFixed(1)+' ';
+  }
+  return d+'Z';
+}
+var SP=starPath();
+document.getElementById('star1').setAttribute('d',SP);
+document.getElementById('star2').setAttribute('d',SP);
+
+var DEF={frame:{cx:500,cy:300,w:660,h:360,r:60},
+         star1:{x:210,y:120,s:70,rot:8},
+         star2:{x:815,y:150,s:64,rot:-14}};
+var S=JSON.parse(JSON.stringify(DEF));
+var frame=document.getElementById('frame'), st1=document.getElementById('star1'), st2=document.getElementById('star2'), stage=document.getElementById('stage');
+var sel=null, drag=null;
+
+function render(){
+  frame.setAttribute('x',(S.frame.cx-S.frame.w/2).toFixed(1));
+  frame.setAttribute('y',(S.frame.cy-S.frame.h/2).toFixed(1));
+  frame.setAttribute('width',S.frame.w); frame.setAttribute('height',S.frame.h);
+  frame.setAttribute('rx',S.frame.r); frame.setAttribute('ry',S.frame.r);
+  st1.setAttribute('transform','translate('+S.star1.x+' '+S.star1.y+') rotate('+S.star1.rot+') scale('+(S.star1.s/50).toFixed(3)+')');
+  st2.setAttribute('transform','translate('+S.star2.x+' '+S.star2.y+') rotate('+S.star2.rot+') scale('+(S.star2.s/50).toFixed(3)+')');
+  [frame,st1,st2].forEach(function(el){ el.setAttribute('stroke-opacity', (sel&&sel.el===el)?'1':'0.6'); });
+  writeOut();
+}
+function pt(ev){ var r=stage.getBoundingClientRect(); return {x:(ev.clientX-r.left)/r.width*1000, y:(ev.clientY-r.top)/r.height*620}; }
+function selectEl(name,el){
+  sel={name:name,el:el};
+  document.getElementById('who').textContent = name==='frame'?'Suorakulmio':(name==='star1'?'Tähti 1':'Tähti 2');
+  var isF=name==='frame';
+  document.querySelectorAll('[data-for=frame]').forEach(function(n){n.hidden=!isF;});
+  document.querySelectorAll('[data-for=star]').forEach(function(n){n.hidden=isF;});
+  if(isF){ fw.value=S.frame.w; fwv.textContent=S.frame.w; fh.value=S.frame.h; fhv.textContent=S.frame.h; fr.value=S.frame.r; frv.textContent=S.frame.r; }
+  else { var o=S[name]; ss.value=o.s; ssv.textContent=o.s; sr.value=o.rot; srv.textContent=o.rot+'°'; }
+  render();
+}
+function down(name,el,ev){ ev.preventDefault(); selectEl(name,el); var p=pt(ev);
+  if(name==='frame') drag={name:name,dx:p.x-S.frame.cx,dy:p.y-S.frame.cy};
+  else drag={name:name,dx:p.x-S[name].x,dy:p.y-S[name].y};
+  try{stage.setPointerCapture(ev.pointerId);}catch(e){}
+}
+frame.addEventListener('pointerdown',function(e){down('frame',frame,e);});
+st1.addEventListener('pointerdown',function(e){down('star1',st1,e);});
+st2.addEventListener('pointerdown',function(e){down('star2',st2,e);});
+stage.addEventListener('pointermove',function(ev){ if(!drag)return; var p=pt(ev);
+  if(drag.name==='frame'){ S.frame.cx=Math.round(p.x-drag.dx); S.frame.cy=Math.round(p.y-drag.dy); }
+  else { S[drag.name].x=Math.round(p.x-drag.dx); S[drag.name].y=Math.round(p.y-drag.dy); }
+  render();
+});
+addEventListener('pointerup',function(){drag=null;});
+
+function bind(id,key,sub,suf){ document.getElementById(id).addEventListener('input',function(){ if(!sel)return;
+  var v=+this.value; if(sel.name==='frame') S.frame[sub]=v; else S[sel.name][sub]=v;
+  document.getElementById(id+'v').textContent=v+(suf||''); render(); }); }
+bind('fw','w','w'); bind('fh','h','h'); bind('fr','r','r'); bind('ss','s','s'); bind('sr','rot','rot','°');
+
+function writeOut(){
+  var f=S.frame;
+  var s='<svg viewBox="0 0 1000 620" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">\n';
+  s+='  <rect x="'+(f.cx-f.w/2)+'" y="'+(f.cy-f.h/2)+'" width="'+f.w+'" height="'+f.h+'" rx="'+f.r+'" ry="'+f.r+'" fill="none" stroke="#FAF1E0" stroke-width="1.4" vector-effect="non-scaling-stroke"/>\n';
+  ['star1','star2'].forEach(function(k){ var o=S[k];
+    s+='  <path d="'+SP+'" transform="translate('+o.x+' '+o.y+') rotate('+o.rot+') scale('+(o.s/50).toFixed(3)+')" fill="none" stroke="#FAF1E0" stroke-width="1.4" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>\n'; });
+  s+='</svg>';
+  document.getElementById('out').value=s;
+}
+document.getElementById('copy').onclick=function(){ var o=document.getElementById('out'); o.select(); document.execCommand('copy'); this.textContent='Kopioitu!'; var b=this; setTimeout(function(){b.textContent='Kopioi SVG';},1200); };
+document.getElementById('reset').onclick=function(){ S=JSON.parse(JSON.stringify(DEF)); sel=null; document.getElementById('who').textContent='Valitse elementti'; document.querySelectorAll('[data-for=frame],[data-for=star]').forEach(function(n){n.hidden=true;}); render(); };
+stage.addEventListener('pointerdown',function(ev){ if(ev.target===stage){ sel=null; document.getElementById('who').textContent='Valitse elementti'; document.querySelectorAll('[data-for=frame],[data-for=star]').forEach(function(n){n.hidden=true;}); render(); } });
+render();
+</script>
