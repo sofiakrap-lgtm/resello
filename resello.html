@@ -193,8 +193,7 @@
   /* ===== Pysyvä nappula -> ylävalikko ===== */
   .navwrap{position:fixed;top:1.1rem;right:1.4rem;z-index:60;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s var(--ease),transform .4s var(--ease)}
   .navwrap.show.active{opacity:1;transform:none;pointer-events:auto}
-  .navwrap.show.open{opacity:1;transform:none;pointer-events:auto}
-  .navdot{width:54px;height:54px;border-radius:50%;background:var(--c-brown);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(42,28,17,.32);transition:transform .25s var(--ease),opacity .25s var(--ease)}
+    .navdot{width:54px;height:54px;border-radius:50%;background:var(--c-brown);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(42,28,17,.32);transition:transform .25s var(--ease),opacity .25s var(--ease)}
   .navdot:hover{transform:scale(1.15)}
   .navdot-mark{position:relative;width:20px;height:2px;border-radius:2px;background:var(--c-beige)}
   .navdot-mark::before,.navdot-mark::after{content:"";position:absolute;left:0;width:20px;height:2px;border-radius:2px;background:var(--c-beige)}
@@ -653,13 +652,13 @@ applyLang();
 const navwrap=document.getElementById('navwrap'),navdot=document.getElementById('navdot'),navclose=document.getElementById('navclose');
 function navShow(){ var past=window.scrollY>window.innerHeight*0.6; navwrap.classList.toggle('show',past); if(!past) navwrap.classList.remove('open'); }
 addEventListener('scroll',navShow,{passive:true}); navShow();
-navdot.addEventListener('click',function(){navwrap.classList.add('open');});
+navdot.addEventListener('click',function(){navwrap.classList.add('open');navActive();});
 navclose.addEventListener('click',function(){navwrap.classList.remove('open');});
 document.querySelectorAll('#navbar .jsnav a,#navbar .demo').forEach(function(a){a.addEventListener('click',function(){navwrap.classList.remove('open');});});
 addEventListener('keydown',function(e){if(e.key==='Escape')navwrap.classList.remove('open');});
 /* nappula piiloutuu paikallaan ollessa, ilmestyy kun liikkuu (scroll/hiiri/kosketus) */
 let navIdle;
-function navActive(){ navwrap.classList.add('active'); clearTimeout(navIdle); navIdle=setTimeout(function(){ navwrap.classList.remove('active'); },2800); }
+function navActive(){ navwrap.classList.add('active'); clearTimeout(navIdle); navIdle=setTimeout(function(){ navwrap.classList.remove('active'); navwrap.classList.remove('open'); },2000); }
 addEventListener('scroll',navActive,{passive:true});
 addEventListener('mousemove',navActive,{passive:true});
 addEventListener('touchstart',navActive,{passive:true});
