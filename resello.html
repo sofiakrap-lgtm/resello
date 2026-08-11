@@ -292,6 +292,7 @@
   .kassa-badge9{position:absolute;left:40.7%;top:70.1%;width:5.7%;transform:translate(-50%,calc(-50% + 70px)) rotate(22deg) scale(.45);opacity:0;transition:opacity .5s var(--ease-out),transform .55s cubic-bezier(.3,1.5,.5,1);z-index:30;pointer-events:none}
   .kassa-stamp22{position:absolute;left:93.9%;top:68.3%;width:6%;aspect-ratio:1;transform:translate(calc(-50% - 20px),calc(-50% + 50px)) rotate(31deg) scale(.45);opacity:0;transition:opacity .5s var(--ease-out),transform .55s cubic-bezier(.3,1.5,.5,1);z-index:30;pointer-events:none}
   .kassa-spin{position:absolute;left:50%;top:33%;width:8rem;height:8rem;transform:translate(-50%,-50%);z-index:30;pointer-events:none;opacity:0;transition:opacity .6s var(--ease-out);animation:kassa-spin-kf 22s linear infinite;animation-play-state:paused}
+  @keyframes spin{to{transform:rotate(360deg)}}
   @keyframes kassa-spin-kf{to{transform:translate(-50%,-50%) rotate(360deg)}}
   /* tarrat ilmestyvät vasta kun taustat (rivit) ovat tulleet */
   .kassa-deco.on{opacity:1;transform:none}
@@ -322,12 +323,14 @@
   .leima span{font-size:clamp(10px,.85vw,12px);line-height:1.25;color:var(--c-beige)}
   @media(max-width:560px){.leimat{flex-wrap:wrap}.leima{flex:1 1 44%}}
   /* Varaa esittely -nappi */
-  .pp-cta{display:inline-flex;align-self:center;margin-top:clamp(1.4rem,3.4vh,2.4rem);align-items:center;justify-content:center;cursor:pointer;background:transparent;color:var(--c-beige);border:1.5px solid var(--c-beige);border-radius:980px;font-family:var(--disp);font-weight:600;font-size:clamp(14px,1.2vw,16px);padding:.8rem 2rem;transition:transform .25s var(--ease),background .25s,color .25s}
+  .pp-cta{display:inline-flex;align-self:center;margin-top:clamp(1.4rem,3.4vh,2.4rem);align-items:center;justify-content:center;cursor:pointer;background:transparent;color:var(--c-beige);border:1.5px solid rgba(250,241,224,.6);border-radius:980px;font-family:var(--disp);font-weight:600;font-size:clamp(14px,1.2vw,16px);padding:.8rem 2rem;transition:transform .25s var(--ease),background .25s,color .25s}
   .pp-cta:hover{background:var(--c-beige);color:var(--c-brown)}.pp-cta:active{transform:scale(.97)}
   /* leimat (leima-editorin koordinaatit: keskipiste + leveys % lohkosta) */
-  .pp-stamp{position:absolute;left:27.2%;top:9.3%;width:8.2%;z-index:3;transform:translate(-50%,-50%) rotate(-8deg)}
+  .pp-stamp{position:absolute;left:27.2%;top:9.3%;width:8.2%;z-index:3;transform:translate(-50%,-50%) rotate(-28deg)}
   .pp-spin{position:absolute;left:79.6%;top:89.9%;width:8.5%;z-index:3;transform:translate(-50%,-50%) rotate(0deg)}
-  .pp-spin img{width:100%;height:auto;display:block;animation:spin 18s linear infinite}
+  .pp-spin img{width:100%;height:auto;display:block;animation:spin 34s linear infinite}
+  .pp-stamp,.pp-spin{opacity:0;transition:opacity .8s var(--ease-out)}
+  .prices.lin .pp-stamp,.prices.lin .pp-spin{opacity:1}
   /* sivupaneelit: label aina näkyvä, kortti kurkkii reunasta ja liukuu esiin */
   .pp-side{position:absolute;top:0;bottom:0;width:calc(var(--ppw) + 6vw);z-index:5;pointer-events:none;transition:transform .6s var(--ease)}
   .pp-left{left:0}
@@ -340,7 +343,7 @@
   .pp-right .pp-label{right:clamp(1.5rem,2.7vw,2.6rem)}
   .pp-arr{display:inline-flex;align-items:center;justify-content:center;width:1.7em;height:1.7em;border:1.5px solid var(--c-beige);border-radius:50%;font-size:.9em;font-style:normal;flex:none}
   /* ulompi kortti läpinäkyvä (vain beige ääriviiva), sisältö kermalaatikoissa */
-  .pp-card{position:absolute;bottom:18%;width:var(--ppw);max-width:82vw;max-height:82vh;overflow:auto;background:rgba(60,36,21,.55);backdrop-filter:blur(2px);border:1.5px solid rgba(250,241,224,.55);color:var(--c-beige);padding:clamp(1.2rem,1.7vw,1.7rem);padding-top:clamp(3.2rem,7vh,4.6rem);display:flex;flex-direction:column;gap:clamp(.7rem,1.4vh,1rem);pointer-events:auto;transition:transform .6s var(--ease)}
+  .pp-card{position:absolute;top:29%;width:var(--ppw);max-width:82vw;max-height:82vh;overflow:auto;background:rgba(60,36,21,.55);backdrop-filter:blur(2px);border:1.5px solid rgba(250,241,224,.55);color:var(--c-beige);padding:clamp(1.2rem,1.7vw,1.7rem);padding-top:clamp(3.2rem,7vh,4.6rem);display:flex;flex-direction:column;gap:clamp(.7rem,1.4vh,1rem);pointer-events:auto;transition:transform .6s var(--ease)}
   .pp-left .pp-card{left:0;border-radius:0 26px 26px 0;transform:translateX(calc(-100% + var(--peek)))}
   .pp-right .pp-card{right:0;border-radius:26px 0 0 26px;transform:translateX(calc(100% - var(--peek)))}
   .pp-left:hover .pp-card,.pp-right:hover .pp-card,.pp-side.open .pp-card{transform:translateX(0)}
@@ -673,6 +676,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 /* kassa: tarrat ilmestyvät vasta kun taustarivit ovat tulleet */
 document.querySelectorAll('.kassa-deco,.kassa-badge9,.kassa-stamp22,.kassa-spin').forEach(function(el){ var o=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ setTimeout(function(){el.classList.add('on');},600); o.disconnect(); } });},{threshold:.55}); o.observe(el); });
+var pricesSec=document.querySelector('.prices'); if(pricesSec){ var po=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ setTimeout(function(){pricesSec.classList.add('lin');},900); po.disconnect(); } });},{threshold:.3}); po.observe(pricesSec); }
 
 /* tuoterivi: kahdennetaan sisältö saumatonta looppia varten (kuvat vain kerran HTML:ssä) */
 const prodTrack=document.getElementById('prodTrack');
