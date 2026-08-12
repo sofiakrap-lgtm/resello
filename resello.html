@@ -236,32 +236,32 @@
   .chain{background:var(--c-beige);color:var(--c-brown);min-height:100vh;display:flex;align-items:center;padding:clamp(2rem,4vh,4rem) clamp(1.2rem,5vw,4rem)}
   .chain-inner{width:100%;max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:clamp(1rem,3vh,2rem)}
   .chain-stage{position:relative;width:100%;max-width:720px;aspect-ratio:1000/640;transition:transform .9s var(--ease)}
-  .chain.p5 .chain-stage{transform:scale(.9)}
+  .chain.p2 .chain-stage{transform:scale(.8) translateY(-7%)}
   .chain-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
   .arc{stroke:#3C2415;stroke-width:2.5;fill:none;opacity:0;transition:opacity .6s var(--ease-out)}
-  .chain.p4 .arc{opacity:1}
+  .chain.p1 .arc{opacity:1}
   /* solmut (brändimuodot) */
   .node{position:absolute;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);z-index:2}
   .nA{left:21.8%;top:37.9%}.nB{left:67.4%;top:22.1%}.nC{left:57.1%;top:62.8%}
   .node .shape{display:block;width:100%;height:100%;-webkit-mask-position:center;-webkit-mask-repeat:no-repeat;-webkit-mask-size:contain;mask-position:center;mask-repeat:no-repeat;mask-size:contain;opacity:0;transform:scale(.35);transition:opacity .5s var(--ease-out),transform .6s var(--ease)}
   .nA .shape{background:#6C888D}.nB .shape{background:#C17C45}.nC .shape{background:#BAB58D}
-  .chain.p1 .nA .shape,.chain.p2 .nB .shape,.chain.p3 .nC .shape{opacity:1;transform:scale(1)}
+  .chain.p1 .node .shape{opacity:1;transform:scale(1)}
   /* lauseet solmujen vieressä (animaatiossa, sitten hoverilla) */
   .phrase{position:absolute;width:max-content;max-width:180px;text-align:center;font-family:var(--disp);font-weight:600;font-size:clamp(12px,1.1vw,14.5px);line-height:1.2;color:var(--c-brown);background:var(--c-cream);border:2px solid var(--c-brown);border-radius:14px;padding:.4rem .7rem;opacity:0;transition:opacity .45s var(--ease-out);pointer-events:none;z-index:6}
   .nA .phrase{right:108%;top:50%;transform:translateY(-50%)}
   .nB .phrase{left:108%;top:50%;transform:translateY(-50%)}
   .nC .phrase{left:50%;top:118%;transform:translateX(-50%)}
-  .chain.p1 .nA .phrase,.chain.p2 .nB .phrase,.chain.p3 .nC .phrase{opacity:1}
-  .chain.p5 .node .phrase{opacity:0}
+  .chain.p1 .node .phrase{opacity:1}
+  .chain.p2 .node .phrase{opacity:0}
   .chain.done .node:hover .phrase{opacity:1}
   /* napit väleissä (hero-tyyliset pillerit) */
   .chain-figure{position:absolute;left:48.5%;top:41%;transform:translate(-50%,-50%);width:16.5%;height:auto;z-index:2;pointer-events:none;opacity:0;transition:opacity .9s var(--ease-out)}
-  .chain.p1 .chain-figure{opacity:1}
+  .chain.p3 .chain-figure{opacity:1}
   .cbtn{position:absolute;transform:translate(-50%,-50%) scale(.7);width:clamp(118px,13vw,168px);height:auto;opacity:0;transition:opacity .5s var(--ease-out),transform .5s var(--ease);z-index:4}
   .b1{left:39.8%;top:16%}.b2{left:28.6%;top:58.3%}.b3{left:72.7%;top:41.4%}
-  .chain.p5 .cbtn{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  .chain.p3 .cbtn{opacity:1;animation:cfloat 3.4s ease-in-out infinite}.chain.p3 .b1{animation-duration:3.1s;animation-delay:-.4s}.chain.p3 .b2{animation-duration:3.9s;animation-delay:-1.2s}.chain.p3 .b3{animation-duration:3.5s;animation-delay:-.8s}@keyframes cfloat{0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(-1.6deg)}50%{transform:translate(-50%,-50%) translateY(-7px) rotate(1.6deg)}}
   .chain-summary{text-align:center;max-width:44rem;margin-top:clamp(-10rem,-15vh,-6rem);opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
-  .chain.p6 .chain-summary{opacity:1;transform:none}
+  .chain.p3 .chain-summary{opacity:1;transform:none}
   .cs-h{font-family:var(--disp);font-weight:700;font-style:italic;font-size:clamp(24px,3vw,40px);line-height:1.1;letter-spacing:-.01em;margin-bottom:1rem}
   .cs-p{font-size:clamp(15px,1.3vw,18.5px);line-height:1.6;color:var(--c-brown)}
   @media(max-width:600px){.phrase{font-size:11px;max-width:130px}.cbtn{font-size:11px;padding:.35rem .7rem}}
@@ -699,8 +699,8 @@ if(storySec){ const sIO=new IntersectionObserver(function(es){es.forEach(functio
 const chainSec=document.getElementById('chain');
 if(chainSec){ let cDone=false;
   const cIO=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting && !cDone){ cDone=true;
-    const steps=['p1','p2','p3','p4','p5','p6']; let i=0;
-    (function next(){ if(i<steps.length){ chainSec.classList.add(steps[i]); i++; setTimeout(next, i<=3?800:1150); } else { chainSec.classList.add('done'); } })();
+    const steps=['p1','p2','p3']; let i=0;
+    (function next(){ if(i<steps.length){ chainSec.classList.add(steps[i]); i++; setTimeout(next, i===1?1200:1000); } else { chainSec.classList.add('done'); } })();
   } });},{threshold:.4}); cIO.observe(chainSec); }
 
 /* skrollaus: pädi kutistuu -> bento paljastuu (zoom out) */
