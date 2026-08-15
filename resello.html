@@ -753,8 +753,9 @@ const smooth=(a,b,x)=>{const t=Math.min(Math.max((x-a)/(b-a),0),1);return t*t*(3
 /* jaettu muunnos: pysty-zoom (scroll) + vaakapan (sivupaneelit) */
 let curS=1, curYoff=0, curP=0, panX=0, panTarget=0;
 function applyBento(){ bento.style.transform='translate('+panX.toFixed(2)+'px,'+curYoff.toFixed(2)+'px) scale('+curS.toFixed(4)+')'; }
-var sceneP=0, animP=0, sceneReady=false;
-function renderScene(p){
+function bscroll(){
+  const total=scene.offsetHeight-window.innerHeight;
+  const p=Math.min(Math.max(-scene.getBoundingClientRect().top/total,0),1);
   const e=easeInOut(p);
   const vw=window.innerWidth, vh=window.innerHeight;
   const Sfit=Math.min(vw/1440, vh/810)*0.98;      // loppunäkymä: koko lava mahtuu
@@ -763,25 +764,16 @@ function renderScene(p){
   const devVisH=0.93*(536/1.778)*Speek;           // tabletin näkyvä korkeus peekissä
   const YoffPeek=1.02*vh - vh/2 + devVisH/2;         // tabletin yläreuna ~90% korkeudelle (näkyy vähemmän)
   curYoff=YoffPeek*(1-e); curS=S; curP=p;
+  if(p<0.85) panTarget=0;                          // paneelit vetäytyvät kun bento ei ole auki
   applyBento();
-  hlayer.style.opacity=1-smooth(0,0.42,p);
-  hlayer.style.transform='scale('+(1+0.06*smooth(0,0.55,p)).toFixed(4)+')';  // hienovarainen zoom poistuessa -> ei jäykkä
-  bentoBg.style.opacity=smooth(0.06,0.5,p);        // beige nousee samalla kun hero häviää -> ei tummaa väliä
+  hlayer.style.opacity=1-smooth(0,0.4,p);
+  bentoBg.style.opacity=smooth(0.25,0.65,p);
   bels.forEach(function(b){ var s0=0.46+b.g*0.095; b.el.style.opacity=smooth(s0,s0+0.14,p); });
-}
-function bscroll(){
-  const total=scene.offsetHeight-window.innerHeight;
-  sceneP=Math.min(Math.max(-scene.getBoundingClientRect().top/total,0),1);
-  if(sceneP<0.85) panTarget=0;                     // paneelit vetäytyvät kun bento ei ole auki
-  if(!sceneReady){ animP=sceneP; sceneReady=true; renderScene(animP); }
 }
 addEventListener('scroll',bscroll,{passive:true}); addEventListener('resize',bscroll); bscroll();
 
 /* sivupaneelit: kun bento on auki, kursorin vetäminen reunaan avaa puolen kokonaan */
 function panLoop(){
-  var dp=sceneP-animP;                                    // pehmeä skrollaus: eteneminen seuraa skrollia hienoisella viiveellä
-  if(Math.abs(dp)>0.0005){ animP+=dp*0.14; renderScene(animP); }
-  else if(animP!==sceneP){ animP=sceneP; renderScene(animP); }
   const d=panTarget-panX;
   if(Math.abs(d)>0.15){ panX+=d*0.075; applyBento(); }   // pehmeä liuku (ei äkkinäinen)
   else if(panX!==panTarget){ panX=panTarget; applyBento(); }
