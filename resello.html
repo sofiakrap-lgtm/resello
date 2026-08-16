@@ -770,7 +770,7 @@ function renderScene(p){
   bels.forEach(function(b){ var s0=0.46+b.g*0.095; b.el.style.opacity=smooth(s0,s0+0.14,p); });
 }
 /* Bento avautuu itsestään ensimmäisestä skrollauksesta - käyttäjän ei tarvitse skrollata läpi */
-var morphState=0;                 // 0=hero, 1=soi, 2=valmis
+var morphState=0, sceneLeft=false; // 0=hero, 1=soi eteen, 2=valmis, 3=soi taakse
 var morphT0=0, morphDur=1540;
 var reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function morphTick(now){
@@ -778,6 +778,12 @@ function morphTick(now){
   renderScene(t);
   if(t<1) requestAnimationFrame(morphTick);
   else { morphState=2; sceneUnlock(); }
+}
+function morphTickRev(now){
+  var t=Math.min(1,(now-morphT0)/morphDur);
+  renderScene(1-t);
+  if(t<1) requestAnimationFrame(morphTickRev);
+  else { morphState=0; sceneLeft=false; sceneUnlock(); }
 }
 function sceneBlock(e){ if(e.cancelable) e.preventDefault(); }
 function sceneLock(){ window.scrollTo(0,0); addEventListener('wheel',sceneBlock,{passive:false}); addEventListener('touchmove',sceneBlock,{passive:false}); }
@@ -788,9 +794,15 @@ function startMorph(){
   if(reduceMotion){ renderScene(1); morphState=2; return; }   // liikettä vältetään: näytä valmis heti
   sceneLock(); morphT0=performance.now(); requestAnimationFrame(morphTick);
 }
+function startReverse(){
+  if(morphState!==2) return;
+  morphState=3;
+  if(reduceMotion){ renderScene(0); morphState=0; sceneLeft=false; return; }  // sama animaatio takaperin
+  sceneLock(); morphT0=performance.now(); requestAnimationFrame(morphTickRev);
+}
 function sceneGuard(e){
   if(morphState===2) return;                                   // valmis -> normaali skrollaus
-  if(morphState===1){ if(e.cancelable) e.preventDefault(); return; }  // soi -> estä skrollaus
+  if(morphState===1||morphState===3){ if(e.cancelable) e.preventDefault(); return; }  // soi -> estä skrollaus
   var down = e.type==='wheel' ? e.deltaY>0 : e.type==='touchmove' ? true : (['ArrowDown','PageDown','End',' ','Spacebar'].indexOf(e.key)>=0);
   if(e.type==='keydown' && !down) return;
   if(window.scrollY<10 && down){ if(e.cancelable) e.preventDefault(); startMorph(); }
@@ -798,8 +810,7 @@ function sceneGuard(e){
 addEventListener('wheel',sceneGuard,{passive:false});
 addEventListener('touchmove',sceneGuard,{passive:false});
 addEventListener('keydown',sceneGuard);
-var sceneLeft=false;
-addEventListener('scroll',function(){ var y=window.scrollY; if(y>window.innerHeight*0.5){ sceneLeft=true; if(morphState===0){ morphState=2; renderScene(1); } } else if(y<5 && sceneLeft && morphState===2){ morphState=0; sceneLeft=false; renderScene(0); } },{passive:true});  // ylös takaisin -> hero uudelleen
+addEventListener('scroll',function(){ var y=window.scrollY; if(y>window.innerHeight*0.5){ sceneLeft=true; if(morphState===0){ morphState=2; renderScene(1); } } else if(y<5 && sceneLeft && morphState===2){ startReverse(); } },{passive:true});  // ylös takaisin -> hero uudelleen
 addEventListener('resize',function(){ renderScene(morphState===2?1:0); });
 renderScene(0);
 
