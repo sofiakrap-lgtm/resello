@@ -162,7 +162,7 @@
   .dpromo-b .go{background:#3C2415;color:#F5E9D8} .dpromo-b .no{border:1px solid rgba(60,36,21,.4)}
 
   /* ===== BENTO (absoluuttinen asettelu, 1440x810 lava — täsmää editoriin) ===== */
-  .scene{position:relative;height:200vh}
+  .scene{position:relative;height:150vh}
   .pin{position:sticky;top:0;height:100vh;overflow:hidden}
   .hlayer{position:absolute;inset:0}
   .blayer{position:absolute;inset:0;pointer-events:none}
@@ -212,8 +212,8 @@
   .t5 img{animation:t-float 5.2s ease-in-out 2.9s infinite}
 
   /* ===== Pysyvä nappula -> ylävalikko ===== */
-  .navwrap{position:fixed;top:1.1rem;left:50%;z-index:60;opacity:0;transform:translateX(-50%) translateY(-8px);pointer-events:none;transition:opacity .4s var(--ease),transform .4s var(--ease)}
-  .navwrap.show.active{opacity:1;transform:translateX(-50%);pointer-events:auto}
+  .navwrap{position:fixed;top:1.1rem;right:1.4rem;z-index:60;opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
+  .navwrap.show.active{opacity:1;pointer-events:auto}
     .navdot{width:54px;height:54px;border-radius:50%;background:var(--c-brown);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(42,28,17,.32);transition:transform .25s var(--ease),opacity .25s var(--ease)}
   .navdot:hover{transform:scale(1.15)}
   .navdot-mark{position:relative;width:20px;height:2px;border-radius:2px;background:var(--c-beige)}
@@ -702,7 +702,7 @@ document.querySelectorAll('#navbar .jsnav a,#navbar .demo').forEach(function(a){
 addEventListener('keydown',function(e){if(e.key==='Escape')navwrap.classList.remove('open');});
 /* nappula piiloutuu skrollatessa ja tauon jälkeen; ilmestyy hiiren liikkeestä */
 function navActive(){ navwrap.classList.add('active'); clearTimeout(navIdle); navIdle=setTimeout(function(){ navwrap.classList.remove('active'); navwrap.classList.remove('open'); },2000); }
-addEventListener('mousemove',navActive,{passive:true});
+addEventListener('mousemove',function(e){ if(e.clientY<110) navActive(); },{passive:true});
 addEventListener('touchstart',navActive,{passive:true});
 navwrap.addEventListener('mouseenter',function(){navwrap.classList.add('active');clearTimeout(navIdle);});
 navwrap.addEventListener('mouseleave',navActive);
