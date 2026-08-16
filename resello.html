@@ -429,7 +429,7 @@
     <div class="content-r">
       <h1 class="h1 reveal">Your entire flea market, in one place.</h1>
       <p class="sub reveal">ReSella handles bookings, checkout, settlements and sales tracking, and brings new buyers straight to your flea market.</p>
-      <a class="cta ctaswitch reveal" id="cta" href="#yhteys" aria-label="Get in touch"><span class="cs-seg cs-label">Get in touch</span><span class="cs-seg cs-arrow" aria-hidden="true">&#8594;</span><span class="cs-knob" aria-hidden="true"></span></a>
+      <a class="cta ctaswitch reveal" id="cta" href="#yhteys" aria-label="Get in touch"><span class="cs-seg cs-label">Get in touch</span><span class="cs-seg cs-arrow" aria-hidden="true"></span><span class="cs-knob" aria-hidden="true"></span></a>
     </div>
   </div>
   </div>
@@ -696,14 +696,14 @@ applyLang();
 const navwrap=document.getElementById('navwrap'),navdot=document.getElementById('navdot'),navclose=document.getElementById('navclose');
 let navIdle;
 var navLastY=0;
-function navShow(){ var y=window.scrollY; var past=y>window.innerHeight*0.6; navwrap.classList.toggle('show',past); if(past && y<navLastY-3){ navActive(); } else { navwrap.classList.remove('active'); navwrap.classList.remove('open'); clearTimeout(navIdle); } navLastY=y; }
+function navShow(){ var y=window.scrollY; var past=y>window.innerHeight*0.6; navwrap.classList.toggle('show',past); if(!past){ navwrap.classList.remove('active'); navwrap.classList.remove('open'); clearTimeout(navIdle); } else if(y<navLastY-3){ navActive(); } navLastY=y; }
 addEventListener('scroll',navShow,{passive:true}); navShow();
 navdot.addEventListener('click',function(){navwrap.classList.add('open');navActive();});
 navclose.addEventListener('click',function(){navwrap.classList.remove('open');});
 document.querySelectorAll('#navbar .jsnav a,#navbar .demo').forEach(function(a){a.addEventListener('click',function(){navwrap.classList.remove('open');});});
 addEventListener('keydown',function(e){if(e.key==='Escape')navwrap.classList.remove('open');});
 /* nappula piiloutuu skrollatessa ja tauon jälkeen; ilmestyy hiiren liikkeestä */
-function navActive(){ navwrap.classList.add('active'); clearTimeout(navIdle); navIdle=setTimeout(function(){ navwrap.classList.remove('active'); navwrap.classList.remove('open'); },2000); }
+function navActive(){ navwrap.classList.add('active'); clearTimeout(navIdle); navIdle=setTimeout(function(){ navwrap.classList.remove('active'); navwrap.classList.remove('open'); },1500); }
 addEventListener('mousemove',function(e){ if(e.clientY<110) navActive(); },{passive:true});
 addEventListener('touchstart',navActive,{passive:true});
 navwrap.addEventListener('mouseenter',function(){navwrap.classList.add('active');clearTimeout(navIdle);});
@@ -739,7 +739,7 @@ const chainSec=document.getElementById('chain');
 if(chainSec){ let cDone=false;
   const cIO=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting && !cDone){ cDone=true;
     const steps=['p1','p2','p3']; let i=0;
-    (function next(){ if(i<steps.length){ chainSec.classList.add(steps[i]); i++; setTimeout(next, i===1?1200:1000); } else { chainSec.classList.add('done'); } })();
+    (function next(){ if(i<steps.length){ chainSec.classList.add(steps[i]); i++; setTimeout(next, i===1?840:700); } else { chainSec.classList.add('done'); } })();
   } });},{threshold:.4}); cIO.observe(chainSec); }
 
 /* skrollaus: pädi kutistuu -> bento paljastuu (zoom out) */
@@ -771,7 +771,7 @@ function renderScene(p){
 }
 /* Bento avautuu itsestään ensimmäisestä skrollauksesta - käyttäjän ei tarvitse skrollata läpi */
 var morphState=0;                 // 0=hero, 1=soi, 2=valmis
-var morphT0=0, morphDur=2200;
+var morphT0=0, morphDur=1540;
 var reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function morphTick(now){
   var t=Math.min(1,(now-morphT0)/morphDur);
