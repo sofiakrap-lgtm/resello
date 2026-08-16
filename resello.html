@@ -162,7 +162,7 @@
   .dpromo-b .go{background:#3C2415;color:#F5E9D8} .dpromo-b .no{border:1px solid rgba(60,36,21,.4)}
 
   /* ===== BENTO (absoluuttinen asettelu, 1440x810 lava — täsmää editoriin) ===== */
-  .scene{position:relative;height:150vh}
+  .scene{position:relative;height:100vh}
   .pin{position:sticky;top:0;height:100vh;overflow:hidden}
   .hlayer{position:absolute;inset:0}
   .blayer{position:absolute;inset:0;pointer-events:none}
@@ -752,9 +752,7 @@ const smooth=(a,b,x)=>{const t=Math.min(Math.max((x-a)/(b-a),0),1);return t*t*(3
 /* jaettu muunnos: pysty-zoom (scroll) + vaakapan (sivupaneelit) */
 let curS=1, curYoff=0, curP=0, panX=0, panTarget=0;
 function applyBento(){ bento.style.transform='translate('+panX.toFixed(2)+'px,'+curYoff.toFixed(2)+'px) scale('+curS.toFixed(4)+')'; }
-function bscroll(){
-  const total=scene.offsetHeight-window.innerHeight;
-  const p=Math.min(Math.max(-scene.getBoundingClientRect().top/total,0),1);
+function renderScene(p){
   const e=easeInOut(p);
   const vw=window.innerWidth, vh=window.innerHeight;
   const Sfit=Math.min(vw/1440, vh/810)*0.98;      // loppunäkymä: koko lava mahtuu
@@ -769,7 +767,38 @@ function bscroll(){
   bentoBg.style.opacity=smooth(0.25,0.65,p);
   bels.forEach(function(b){ var s0=0.46+b.g*0.095; b.el.style.opacity=smooth(s0,s0+0.14,p); });
 }
-addEventListener('scroll',bscroll,{passive:true}); addEventListener('resize',bscroll); bscroll();
+/* Bento avautuu itsestään ensimmäisestä skrollauksesta - käyttäjän ei tarvitse skrollata läpi */
+var morphState=0;                 // 0=hero, 1=soi, 2=valmis
+var morphT0=0, morphDur=2200;
+var reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function morphTick(now){
+  var t=Math.min(1,(now-morphT0)/morphDur);
+  renderScene(t);
+  if(t<1) requestAnimationFrame(morphTick);
+  else { morphState=2; sceneUnlock(); }
+}
+function sceneBlock(e){ if(e.cancelable) e.preventDefault(); }
+function sceneLock(){ window.scrollTo(0,0); addEventListener('wheel',sceneBlock,{passive:false}); addEventListener('touchmove',sceneBlock,{passive:false}); }
+function sceneUnlock(){ removeEventListener('wheel',sceneBlock,{passive:false}); removeEventListener('touchmove',sceneBlock,{passive:false}); }
+function startMorph(){
+  if(morphState!==0) return;
+  morphState=1;
+  if(reduceMotion){ renderScene(1); morphState=2; return; }   // liikettä vältetään: näytä valmis heti
+  sceneLock(); morphT0=performance.now(); requestAnimationFrame(morphTick);
+}
+function sceneGuard(e){
+  if(morphState===2) return;                                   // valmis -> normaali skrollaus
+  if(morphState===1){ if(e.cancelable) e.preventDefault(); return; }  // soi -> estä skrollaus
+  var down = e.type==='wheel' ? e.deltaY>0 : e.type==='touchmove' ? true : (['ArrowDown','PageDown','End',' ','Spacebar'].indexOf(e.key)>=0);
+  if(e.type==='keydown' && !down) return;
+  if(window.scrollY<10 && down){ if(e.cancelable) e.preventDefault(); startMorph(); }
+}
+addEventListener('wheel',sceneGuard,{passive:false});
+addEventListener('touchmove',sceneGuard,{passive:false});
+addEventListener('keydown',sceneGuard);
+addEventListener('scroll',function(){ if(morphState===0 && window.scrollY>window.innerHeight*0.5){ morphState=2; renderScene(1); } },{passive:true});  // esim. ankkurilinkki -> näytä valmis
+addEventListener('resize',function(){ renderScene(morphState===2?1:0); });
+renderScene(0);
 
 /* sivupaneelit: kun bento on auki, kursorin vetäminen reunaan avaa puolen kokonaan */
 function panLoop(){
