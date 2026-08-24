@@ -29,6 +29,7 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html resello.html og.jpg _site/
+          cp -r images fonts _site/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
