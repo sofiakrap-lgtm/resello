@@ -341,8 +341,8 @@
   .prow .pk{font-family:var(--disp);font-style:normal;font-weight:400;font-size:clamp(16px,1.4vw,22px)}
   .prow .pv{font-family:var(--disp);font-style:italic;font-weight:700;font-size:clamp(17px,1.5vw,24px)}
   /* leimat: 4 tasakokoista laatikkoa rivien levyisenä */
-  .leimat{display:flex;gap:clamp(.5rem,1.1vw,.9rem);margin-top:clamp(1rem,2.6vh,1.8rem)}
-  .leima{flex:1 1 0;min-width:0;border:2px solid rgba(250,241,224,.6);border-radius:16px;padding:clamp(.7rem,1.4vh,1rem) .5rem;display:flex;flex-direction:column;align-items:center;gap:.3rem}
+  .leimat{display:flex;justify-content:center;gap:clamp(.5rem,1.1vw,.9rem);margin-top:clamp(1rem,2.6vh,1.8rem)}
+  .leima{flex:0 1 clamp(180px,22vw,240px);min-width:0;border:2px solid rgba(250,241,224,.6);border-radius:16px;padding:clamp(.7rem,1.4vh,1rem) .5rem;display:flex;flex-direction:column;align-items:center;gap:.3rem}
   .leima b{font-family:var(--disp);font-style:italic;font-weight:700;font-size:clamp(19px,2vw,28px);color:var(--c-beige)}
   .leima span{font-size:clamp(10px,.85vw,12px);line-height:1.25;color:var(--c-beige)}
   @media(max-width:560px){.leimat{flex-wrap:wrap}.leima{flex:1 1 44%}}
@@ -637,8 +637,6 @@
       <div class="leimat">
           <div class="leima reveal" style="transition-delay:0.75s"><b>0€</b><span data-i18n="lm_l1">Käyttöönottokulut</span></div>
         <div class="leima reveal" style="transition-delay:0.85s"><b data-i18n="lm_days">1-3 pv</b><span data-i18n="lm_l2">Arvioitu käyttöönottoaika</span></div>
-        <div class="leima reveal" style="transition-delay:0.95s"><b>26%</b><span data-i18n="lm_l3">Arvioitu liikevaihdon kasvu</span></div>
-        <div class="leima reveal" style="transition-delay:1.05s"><b>4981</b><span data-i18n="lm_l4">Aktiivista käyttäjää</span></div>
       </div>
     </div>
     <a class="pp-cta reveal" href="#yhteys" data-i18n="pp_cta">Varaa esittely</a>
