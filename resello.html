@@ -278,11 +278,11 @@
   .chain.done .node:hover .phrase{opacity:1}
   /* napit väleissä (hero-tyyliset pillerit) */
   .chain-figure{position:absolute;left:48.5%;top:41%;transform:translate(-50%,-50%);width:16.5%;height:auto;z-index:2;pointer-events:none;opacity:0;transition:opacity .9s var(--ease-out)}
-  .chain.p3 .chain-figure{opacity:1}
-  .cbtn{position:absolute;transform:translate(-50%,-50%) scale(.7);width:clamp(118px,13vw,168px);height:auto;opacity:0;transition:opacity .5s var(--ease-out),transform .5s var(--ease);z-index:4}
+  .chain.p1 .chain-figure{opacity:1}.chain.done .chain-figure{opacity:0}
+  .cbtn{position:absolute;transform:translate(-50%,-50%);width:clamp(118px,13vw,168px);height:auto;opacity:0;transition:opacity .5s var(--ease-out);z-index:4}
   .b1{left:39.8%;top:16%}.b2{left:28.6%;top:58.3%}.b3{left:72.7%;top:41.4%}
-  .chain.p3 .cbtn{opacity:1;animation:cfloat 3.4s ease-in-out infinite}.chain.p3 .b1{animation-duration:3.1s;animation-delay:-.4s}.chain.p3 .b2{animation-duration:3.9s;animation-delay:-1.2s}.chain.p3 .b3{animation-duration:3.5s;animation-delay:-.8s}@keyframes cfloat{0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(-1.6deg)}50%{transform:translate(-50%,-50%) translateY(-7px) rotate(1.6deg)}}
-  .chain-summary{text-align:center;max-width:44rem;margin-top:clamp(-13rem,-19.5vh,-8rem);opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+  .chain.p3 .cbtn{opacity:1}.chain.p3 .b1{animation-duration:3.1s;animation-delay:-.4s}.chain.p3 .b2{animation-duration:3.9s;animation-delay:-1.2s}.chain.p3 .b3{animation-duration:3.5s;animation-delay:-.8s}@keyframes cfloat{0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(-1.6deg)}50%{transform:translate(-50%,-50%) translateY(-7px) rotate(1.6deg)}}
+  .chain-summary{text-align:center;max-width:44rem;margin-top:clamp(-10rem,-15vh,-6rem);opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
   .chain.p3 .chain-summary{opacity:1;transform:none}
   .cs-h{font-family:var(--disp);font-weight:700;font-style:italic;font-size:clamp(24px,3vw,40px);line-height:1.1;letter-spacing:-.01em;margin-bottom:1rem}
   .cs-p{font-size:clamp(15px,1.3vw,18.5px);line-height:1.6;color:var(--c-brown)}
