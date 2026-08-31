@@ -167,7 +167,7 @@
   .hlayer{position:absolute;inset:0}
   .blayer{position:absolute;inset:0;pointer-events:none}
   .bento-bg{position:absolute;inset:0;background:#FAECDE;opacity:0}
-  .bento{position:absolute;left:50%;top:50%;width:1440px;height:810px;margin:-405px 0 0 -720px;transform-origin:center;text-rendering:geometricPrecision;overflow:hidden;clip-path:inset(0 24px)}
+  .bento{position:absolute;left:50%;top:50%;width:1440px;height:810px;margin:-405px 0 0 -720px;transform-origin:center;text-rendering:geometricPrecision;overflow:hidden}
   .bento-track{position:absolute;inset:0;will-change:transform}
   .bel{position:absolute;box-sizing:border-box;font-family:var(--text)}
   .bel.ebox{overflow:hidden}
@@ -330,8 +330,8 @@
   /* ===== OSA 5: Hinnastosivu (keskitetty; tummat rivit, beige reunus; hover -> beige) ===== */
   .prices{--ppw:clamp(300px,26vw,380px);--peek:clamp(88px,12vw,175px);--shift:clamp(110px,14vw,240px);background:var(--c-brown);color:var(--c-beige);padding:clamp(2rem,5vh,4rem) clamp(1.5rem,6vw,4rem);min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
   .prices-stage{width:100%;max-width:min(1000px,90vw);margin:0 auto;display:flex;flex-direction:column;align-items:stretch;text-align:center;position:relative;z-index:2;padding-top:clamp(3.4rem,9vh,5.6rem);transition:transform .6s var(--ease)}
-  .prices:has(.pp-left:hover) .prices-stage,.prices.left-open .prices-stage{transform:translateX(var(--shift))}
-  .prices:has(.pp-right:hover) .prices-stage,.prices.right-open .prices-stage{transform:translateX(calc(-1 * var(--shift)))}
+
+
   .prices-sub{font-family:var(--disp);font-weight:700;font-style:italic;font-size:clamp(24px,2.8vw,44px);margin:0 auto clamp(1.4rem,3.4vh,2.4rem);color:var(--c-beige);letter-spacing:-.01em}
   /* rivit + leimat: kapeampi keskitetty lohko (samat reunat) */
   .ptable-block{width:100%;max-width:min(600px,82vw);margin:0 auto}
@@ -438,16 +438,16 @@
   <div class="blayer">
    <div class="bento-bg" id="bento-bg"></div>
    <div class="bento" id="bento"><div class="bento-track" id="bentoTrack"><div class="btk" style="left:57.8%;top:90.02%;width:13.42%;transform:translate(-50%,-50%) rotate(-6deg) scaleX(1)"><picture class=""><source type="image/avif" srcset="images/tarra10.avif"><source type="image/webp" srcset="images/tarra10.webp"><img src="images/tarra10.png" alt="" width="460" height="109" loading="lazy" decoding="async"></picture></div>
-    <div class="bel ebox" data-id="L-bgA" data-panel="L" style="position:absolute;left:-410px;top:30px;width:420px;height:250px;z-index:1;border-radius:32px;background:#6C888D;"></div>
+    <div class="bel ebox" data-id="L-bgA" data-panel="L" style="position:absolute;left:-392px;top:30px;width:420px;height:250px;z-index:1;border-radius:32px;background:#6C888D;"></div>
     <div class="bel epill obg" data-id="L-a-pill" data-i18n="be_L-a-pill" data-panel="L" style="position:absolute;left:-186px;top:46px;width:180px;height:48px;z-index:5;font-size:14px;height:38px;"><span>Asiakashallinta</span></div>
     <div class="bel et" data-id="L-a-text" data-i18n="be_L-a-text" data-panel="L" style="position:absolute;left:-392px;top:110px;width:356px;height:100px;z-index:5;color:#FAECDE;font-size:14.9px;height:135px;">Kaikki asiakkaasi, heidän ostohistoriansa ja viestintänsä pysyvät yhdessä näkymässä, joten tunnistat vakioasiakkaasi ja pidät heidät palaamassa kerta toisensa jälkeen.</div>
     <div class="bel earrow abg" data-id="L-a-arrow" data-panel="L" style="position:absolute;left:-398px;top:220px;width:52px;height:52px;z-index:5;width:42px;height:42px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="20" y1="12" x2="5" y2="12"></line><polyline points="11 6 5 12 11 18"></polyline></svg></div>
-    <div class="bel ebox" data-id="L-bgB" data-panel="L" style="position:absolute;left:-410px;top:298px;width:420px;height:482px;z-index:1;border-radius:32px;background:#FFFBF4;"></div>
+    <div class="bel ebox" data-id="L-bgB" data-panel="L" style="position:absolute;left:-392px;top:298px;width:420px;height:482px;z-index:1;border-radius:32px;background:#FFFBF4;"></div>
     <div class="bel epill ob" data-id="L-b-pill" data-i18n="be_L-b-pill" data-panel="L" style="position:absolute;left:-396px;top:314px;width:120px;height:48px;z-index:5;font-size:14px;height:38px;"><span>Hallita</span></div>
     <div class="bel earrow ab" data-id="L-b-arrow" data-panel="L" style="position:absolute;left:-56px;top:312px;width:52px;height:52px;z-index:5;width:42px;height:42px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="19" y2="12"></line><polyline points="13 6 19 12 13 18"></polyline></svg></div>
     <div class="bel et" data-id="L-b-text" data-i18n="be_L-b-text" data-panel="L" style="position:absolute;left:-392px;top:378px;width:356px;height:88px;z-index:5;color:#3C2415;font-size:14.9px;height:119px;">Käyttöaste, myynnin kehitys, asiakkaat ja kirjanpito pysyvät yhdessä paikassa ja ajan tasalla, joten näet nopeasti mikä toimii.</div>
     <div class="bel ebox" data-id="L-b-img" data-panel="L" style="position:absolute;left:-396px;top:478px;width:392px;height:290px;z-index:2;border-radius:18px;background:#3C2415 url('images/rk4-1080.webp') center/cover;"></div>
-    <div class="bel ebox" data-id="R-bgA" data-panel="R" style="position:absolute;left:1420px;top:30px;width:420px;height:500px;z-index:1;border-radius:32px;background:#C0693A;"></div>
+    <div class="bel ebox" data-id="R-bgA" data-panel="R" style="position:absolute;left:1412px;top:30px;width:420px;height:500px;z-index:1;border-radius:32px;background:#C0693A;"></div>
     <div class="bel epill obg" data-id="R-a-pill" data-i18n="be_R-a-pill" data-panel="R" style="position:absolute;left:1434px;top:46px;width:130px;height:48px;z-index:5;font-size:14px;height:38px;"><span>Hinnasto</span></div>
     <div class="bel earrow abg" data-id="R-a-arrow" data-panel="R" style="position:absolute;left:1776px;top:44px;width:52px;height:52px;z-index:5;width:42px;height:42px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="19" y2="12"></line><polyline points="13 6 19 12 13 18"></polyline></svg></div>
     <div class="bel et" data-id="R-a-text" data-i18n="be_R-a-text" data-panel="R" style="position:absolute;left:1440px;top:108px;width:384px;height:72px;z-index:5;color:#FAECDE;font-size:14.9px;height:97px;">Maksat vain käytössä olevien myyntipisteiden mukaan alkaen 99 €/kk, ja käyttöönotto sekä tilitykset sisältyvät hintaan ilman piilokuluja.</div>
@@ -457,7 +457,7 @@
     <div class="bel eprow prbg" data-id="R-r3" data-panel="R" style="position:absolute;left:1440px;top:336px;width:384px;height:44px;z-index:5;font-size:14px;"><span class="pl">51–100</span><span class="pv">199 €</span></div>
     <div class="bel eprow prbg" data-id="R-r4" data-panel="R" style="position:absolute;left:1440px;top:388px;width:384px;height:44px;z-index:5;font-size:14px;"><span class="pl">101–200</span><span class="pv">299 €</span></div>
     <div class="bel eprow prbg" data-id="R-r5" data-panel="R" style="position:absolute;left:1440px;top:440px;width:384px;height:44px;z-index:5;font-size:14px;"><span class="pl">200+</span><span class="pv">399 €</span></div>
-    <div class="bel ebox" data-id="R-bgB" data-panel="R" style="position:absolute;left:1420px;top:548px;width:420px;height:232px;z-index:1;border-radius:32px;background:linear-gradient(rgba(60,36,21,0.3),rgba(60,36,21,0.3)),#3C2415 url('images/rk6-1080.webp') center/cover;"></div>
+    <div class="bel ebox" data-id="R-bgB" data-panel="R" style="position:absolute;left:1412px;top:548px;width:420px;height:232px;z-index:1;border-radius:32px;background:linear-gradient(rgba(60,36,21,0.3),rgba(60,36,21,0.3)),#3C2415 url('images/rk6-1080.webp') center/cover;"></div>
     
     <div class="bel eword" data-id="R-b-word" data-panel="R" style="position:absolute;left:1476px;top:598px;width:340px;height:64px;z-index:3;color:transparent;font-size:0;background:var(--wordmark) right center/contain no-repeat;justify-content:flex-end;text-align:right;">ReSella</div>
     <div class="bel et" data-id="R-b-tag" data-panel="R" style="position:absolute;left:1456px;top:686px;width:360px;height:34px;z-index:3;color:rgba(250,236,222,.92);font-size:24.1px;height:46px;text-align:right;">– Every find has a finder</div>
