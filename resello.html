@@ -196,6 +196,44 @@
   .bel.eprow .pv{font-weight:700;font-variant-numeric:tabular-nums}
   .bel.eprowhead{display:flex;align-items:center;justify-content:space-between;font-family:var(--text);font-weight:600;letter-spacing:.02em;opacity:.9;padding:0 4px}
   .bel.eword{font-family:var(--disp);font-weight:700;line-height:1;display:flex;align-items:center;letter-spacing:-.01em}
+  /* ===== Koodattu myyjänäkymä tabletissa (pelkistetty) ===== */
+  .rtab{width:100%;height:100%;border-radius:30px;background:#3C2415;padding:12px;box-shadow:0 18px 40px rgba(60,36,21,.34)}
+  .rtab-screen{width:100%;height:100%;border-radius:19px;background:#FFFBF4;display:flex;overflow:hidden;font-family:var(--text);color:#3C2415}
+  .rtab-side{width:90px;flex:none;background:#FAECDE;padding:12px 10px;display:flex;flex-direction:column}
+  .rtab-logo{font-family:var(--disp);font-weight:800;font-size:12px;letter-spacing:-.01em;color:#3C2415}
+  .rtab-nav{display:flex;flex-direction:column;gap:4px;margin-top:12px}
+  .rtab-nav span{font-size:7.5px;font-weight:500;color:rgba(60,36,21,.6);padding:3.5px 7px;border-radius:7px}
+  .rtab-nav span.on{background:#3C2415;color:#FAECDE;font-weight:600}
+  .rtab-main{flex:1;min-width:0;padding:13px 14px;display:flex;flex-direction:column;gap:8px}
+  .rtab-top{display:flex;align-items:flex-start;justify-content:space-between}
+  .rtab-hello{font-family:var(--disp);font-weight:800;font-size:18px;line-height:1;letter-spacing:-.02em}
+  .rtab-sub{font-size:7px;color:rgba(60,36,21,.5);margin-top:3px}
+  .rtab-ava{width:21px;height:21px;border-radius:50%;background:#6C888D;color:#FFFBF4;font-family:var(--disp);font-weight:700;font-size:9px;display:flex;align-items:center;justify-content:center;flex:none}
+  .rtab-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+  .rtab-tile{border-radius:12px;padding:8px 9px;display:flex;flex-direction:column;gap:5px;justify-content:center;min-height:42px}
+  .rtab-lbl{font-size:6px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;opacity:.7}
+  .rtab-tile strong{font-family:var(--disp);font-weight:800;font-size:15px;line-height:1}
+  .rtab-tile.t-sage{background:#BAB58D;color:#3C2415}
+  .rtab-tile.t-cream{background:#FAECDE;color:#3C2415}
+  .rtab-tile.t-terra{background:#C0693A;color:#FFFBF4}
+  .rtab-row{display:grid;grid-template-columns:1.4fr 1fr;gap:7px;flex:1;min-height:0}
+  .rtab-card{border-radius:12px;padding:9px 11px;display:flex;flex-direction:column}
+  .rtab-prog{background:#FAECDE}
+  .rtab-chead{display:flex;align-items:center;justify-content:space-between}
+  .rtab-chead>span:first-child{font-family:var(--disp);font-weight:700;font-size:9px}
+  .rtab-mut{font-size:6px;color:rgba(60,36,21,.5)}
+  .rtab-bar{height:5px;border-radius:5px;background:rgba(60,36,21,.12);margin:7px 0 8px;overflow:hidden}
+  .rtab-bar i{display:block;width:71%;height:100%;border-radius:5px;background:#6C888D}
+  .rtab-mini{display:flex;gap:11px;margin-top:auto}
+  .rtab-mini div{display:flex;flex-direction:column}
+  .rtab-mini b{font-family:var(--disp);font-weight:800;font-size:11px;line-height:1}
+  .rtab-mini span{font-size:5.5px;color:rgba(60,36,21,.55);margin-top:2px}
+  .rtab-promo{background:#C0693A;color:#FFFBF4}
+  .rtab-promo strong{font-family:var(--disp);font-weight:800;font-size:12px;line-height:1.12;margin-top:5px}
+  .rtab-btns{display:flex;gap:5px;margin-top:auto}
+  .rtab-btns span{font-size:6.5px;font-weight:600;padding:4px 8px;border-radius:8px}
+  .rtab-btns .b1{background:#FFFBF4;color:#3C2415}
+  .rtab-btns .b2{border:1px solid rgba(255,251,244,.55);color:#FFFBF4}
 
   .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
   .reveal.in{opacity:1;transform:none}
@@ -447,7 +485,7 @@ body,.kassa,.chain,.bento-bg{background-image:var(--grain);background-repeat:rep
 
   <div class="blayer">
    <div class="bento-bg" id="bento-bg"></div>
-   <div class="bento" id="bento"><div class="bento-track" id="bentoTrack"><div class="btk" style="left:57.8%;top:90.02%;width:13.42%;transform:translate(-50%,-50%) rotate(-6deg) scaleX(1)"><picture class=""><source type="image/avif" srcset="images/tarra10.avif"><source type="image/webp" srcset="images/tarra10.webp"><img src="images/tarra10.png" alt="" width="460" height="109" loading="lazy" decoding="async"></picture></div>
+   <div class="bento" id="bento"><div class="bento-track" id="bentoTrack">
     <div class="bel ebox" data-id="L-bgA" data-panel="L" style="position:absolute;left:-410px;top:30px;width:420px;height:250px;z-index:1;border-radius:32px;background:#6C888D;"></div>
     <div class="bel epill obg" data-id="L-a-pill" data-i18n="be_L-a-pill" data-panel="L" style="position:absolute;left:-186px;top:46px;width:180px;height:48px;z-index:5;font-size:14px;height:38px;"><span>Asiakashallinta</span></div>
     <div class="bel et" data-id="L-a-text" data-i18n="be_L-a-text" data-panel="L" style="position:absolute;left:-392px;top:110px;width:356px;height:100px;z-index:5;color:#FAECDE;font-size:14.9px;height:135px;">Kaikki asiakkaasi, heidän ostohistoriansa ja viestintänsä pysyvät yhdessä näkymässä, joten tunnistat vakioasiakkaasi ja pidät heidät palaamassa kerta toisensa jälkeen.</div>
@@ -469,8 +507,7 @@ body,.kassa,.chain,.bento-bg{background-image:var(--grain);background-repeat:rep
     <div class="bel eprow prbg" data-id="R-r5" data-panel="R" style="position:absolute;left:1450px;top:440px;width:384px;height:44px;z-index:5;font-size:14px;"><span class="pl">200+</span><span class="pv">399 €</span></div>
     <div class="bel ebox" data-id="R-bgB" data-panel="R" style="position:absolute;left:1430px;top:548px;width:420px;height:232px;z-index:1;border-radius:32px;background:linear-gradient(rgba(60,36,21,0.3),rgba(60,36,21,0.3)),#3C2415 url('images/rk6-1080.webp') center/cover;"></div>
     
-    <div class="bel eword" data-id="R-b-word" data-panel="R" style="position:absolute;left:1486px;top:598px;width:340px;height:64px;z-index:3;color:transparent;font-size:0;background:var(--wordmark) right center/contain no-repeat;justify-content:flex-end;text-align:right;">ReSella</div>
-    <div class="bel et" data-id="R-b-tag" data-panel="R" style="position:absolute;left:1466px;top:686px;width:360px;height:34px;z-index:3;color:rgba(250,236,222,.92);font-size:24.1px;height:46px;text-align:right;">– Every find has a finder</div>
+    <div class="bel eword" data-id="R-b-word" data-panel="R" style="position:absolute;left:1486px;top:700px;width:340px;height:56px;z-index:3;color:transparent;font-size:0;background:var(--wordmark) right bottom/contain no-repeat;justify-content:flex-end;text-align:right;">ReSella</div>
     <div class="bel ebox" data-id="kassa-img" style="position:absolute;left:30px;top:30px;width:446px;height:512px;z-index:1;border-radius:32px;background:#3C2415 url('images/rk2-1080.webp') center/cover;"></div>
     <div class="bel ebox" data-id="kassa-panel" style="position:absolute;left:44px;top:44px;width:418px;height:206px;z-index:2;border-radius:22px;background:#FFFBF4;"></div>
     <div class="bel epill ob" data-id="kassa-pill" data-i18n="be_kassa-pill" style="position:absolute;left:56px;top:55px;width:120px;height:48px;z-index:5;font-size:14px;height:38px;"><span>Kassa</span></div>
@@ -487,7 +524,7 @@ body,.kassa,.chain,.bento-bg{background-image:var(--grain);background-repeat:rep
     <div class="bel emask" data-id="vara-gfx" style="position:absolute;left:1346px;top:39px;width:48px;height:48px;z-index:2;background:#3C2415;-webkit-mask:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTA4MCIgem9vbUFuZFBhbj0ibWFnbmlmeSIgdmlld0JveD0iMCAwIDgxMCA4MDkuOTk5OTkzIiBoZWlnaHQ9IjEwODAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiIHZlcnNpb249IjEuMCI+PGRlZnM+PGNsaXBQYXRoIGlkPSJmZDBlZDAwNjY0Ij48cGF0aCBkPSJNIDAgMCBMIDgxMCAwIEwgODEwIDgwMi41IEwgMCA4MDIuNSBaIE0gMCAwICIgY2xpcC1ydWxlPSJub256ZXJvIi8+PC9jbGlwUGF0aD48L2RlZnM+PGcgY2xpcC1wYXRoPSJ1cmwoI2ZkMGVkMDA2NjQpIj48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNIDQwNS4wMDc4MTIgMC40Mjk2ODggTCA0NjIuNjQ0NTMxIDIxMy4zMDQ2ODggTCA2MjYuMjIyNjU2IDY1LjM4MjgxMiBMIDU1OS42MjEwOTQgMjc1LjYyNSBMIDc3Ny4yMDMxMjUgMjM5LjYyNSBMIDYwNy41MDc4MTIgMzgwLjQ4NDM3NSBMIDgxMC4wMTE3MTkgNDY3LjgzMjAzMSBMIDU5MS4xMDU0NjkgNDk0LjU4OTg0NCBMIDcxNC4yMzgyODEgNjc3LjU1MDc4MSBMIDUxNS42MTMyODEgNTgxLjcxMDkzOCBMIDUyMC4yODUxNTYgODAyLjE5OTIxOSBMIDQwNS4wMDc4MTIgNjE0LjE4NzUgTCAyODkuNzMwNDY5IDgwMi4xOTkyMTkgTCAyOTQuMzk4NDM4IDU4MS43MTA5MzggTCA5NS43NzczNDQgNjc3LjU1MDc4MSBMIDIxOC45MTAxNTYgNDk0LjU4OTg0NCBMIDAgNDY3LjgzMjAzMSBMIDIwMi41MDM5MDYgMzgwLjQ4NDM3NSBMIDMyLjgxMjUgMjM5LjYyNSBMIDI1MC4zOTA2MjUgMjc1LjYyNSBMIDE4My43OTI5NjkgNjUuMzgyODEyIEwgMzQ3LjM2NzE4OCAyMTMuMzA0Njg4IFogTSA0MDUuMDA3ODEyIDAuNDI5Njg4ICIgZmlsbC1vcGFjaXR5PSIxIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48L2c+PC9zdmc+') center/contain no-repeat;mask:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTA4MCIgem9vbUFuZFBhbj0ibWFnbmlmeSIgdmlld0JveD0iMCAwIDgxMCA4MDkuOTk5OTkzIiBoZWlnaHQ9IjEwODAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiIHZlcnNpb249IjEuMCI+PGRlZnM+PGNsaXBQYXRoIGlkPSJmZDBlZDAwNjY0Ij48cGF0aCBkPSJNIDAgMCBMIDgxMCAwIEwgODEwIDgwMi41IEwgMCA4MDIuNSBaIE0gMCAwICIgY2xpcC1ydWxlPSJub256ZXJvIi8+PC9jbGlwUGF0aD48L2RlZnM+PGcgY2xpcC1wYXRoPSJ1cmwoI2ZkMGVkMDA2NjQpIj48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNIDQwNS4wMDc4MTIgMC40Mjk2ODggTCA0NjIuNjQ0NTMxIDIxMy4zMDQ2ODggTCA2MjYuMjIyNjU2IDY1LjM4MjgxMiBMIDU1OS42MjEwOTQgMjc1LjYyNSBMIDc3Ny4yMDMxMjUgMjM5LjYyNSBMIDYwNy41MDc4MTIgMzgwLjQ4NDM3NSBMIDgxMC4wMTE3MTkgNDY3LjgzMjAzMSBMIDU5MS4xMDU0NjkgNDk0LjU4OTg0NCBMIDcxNC4yMzgyODEgNjc3LjU1MDc4MSBMIDUxNS42MTMyODEgNTgxLjcxMDkzOCBMIDUyMC4yODUxNTYgODAyLjE5OTIxOSBMIDQwNS4wMDc4MTIgNjE0LjE4NzUgTCAyODkuNzMwNDY5IDgwMi4xOTkyMTkgTCAyOTQuMzk4NDM4IDU4MS43MTA5MzggTCA5NS43NzczNDQgNjc3LjU1MDc4MSBMIDIxOC45MTAxNTYgNDk0LjU4OTg0NCBMIDAgNDY3LjgzMjAzMSBMIDIwMi41MDM5MDYgMzgwLjQ4NDM3NSBMIDMyLjgxMjUgMjM5LjYyNSBMIDI1MC4zOTA2MjUgMjc1LjYyNSBMIDE4My43OTI5NjkgNjUuMzgyODEyIEwgMzQ3LjM2NzE4OCAyMTMuMzA0Njg4IFogTSA0MDUuMDA3ODEyIDAuNDI5Njg4ICIgZmlsbC1vcGFjaXR5PSIxIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48L2c+PC9zdmc+') center/contain no-repeat;"></div>
     <div class="bel epill ob" data-id="vara-pill" data-i18n="be_vara-pill" style="position:absolute;left:979px;top:169px;width:140px;height:48px;z-index:3;font-size:14px;height:38px;"><span>Varaukset</span></div>
     <div class="bel earrow ab" data-id="vara-arrow" style="position:absolute;left:1345px;top:164px;width:52px;height:52px;z-index:3;width:42px;height:42px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="19" y2="12"></line><polyline points="13 6 19 12 13 18"></polyline></svg></div>
-    <div class="bel etablet" data-id="device" style="position:absolute;left:451px;top:226px;width:536px;height:350px;z-index:8;"><img alt="" src="images/im10.svg" width="1024" height="576" loading="lazy" decoding="async"></div>
+    <div class="bel etablet" data-id="device" style="position:absolute;left:451px;top:226px;width:536px;height:350px;z-index:8;"><div class="rtab"><div class="rtab-screen"><aside class="rtab-side"><div class="rtab-logo">ReSella</div><nav class="rtab-nav"><span class="on">Yhteenveto</span><span>Tuotteet</span><span>Tilitykset</span><span>Myymälä</span><span>Asetukset</span></nav></aside><main class="rtab-main"><div class="rtab-top"><div><div class="rtab-hello">Hei Anna,</div><div class="rtab-sub">Tässä tämänhetkinen tilanteesi</div></div><span class="rtab-ava">A</span></div><div class="rtab-stats"><div class="rtab-tile t-sage"><span class="rtab-lbl">Myynti</span><strong>€625</strong></div><div class="rtab-tile t-cream"><span class="rtab-lbl">Myydyt</span><strong>22 kpl</strong></div><div class="rtab-tile t-terra"><span class="rtab-lbl">Myynnissä</span><strong>48 kpl</strong></div></div><div class="rtab-row"><div class="rtab-card rtab-prog"><div class="rtab-chead"><span>5 päivää on mennyt</span><span class="rtab-mut">5 pv / 7 pv</span></div><div class="rtab-bar"><i></i></div><div class="rtab-mini"><div><b>5</b><span>myyntiä</span></div><div><b>2</b><span>varausta</span></div><div><b>€625</b><span>myynti</span></div><div><b>€94</b><span>tilitys</span></div></div></div><div class="rtab-card rtab-promo"><span class="rtab-lbl">Kampanja</span><strong>Aseta 50 % alennus</strong><div class="rtab-btns"><span class="b1">Aseta nyt</span><span class="b2">Ei kiitos</span></div></div></div></main></div></div></div>
     <div class="bel ebox" data-id="up-img" style="position:absolute;left:962px;top:252px;width:448px;height:528px;z-index:1;border-radius:32px;background:#3C2415 url('images/rk5-1080.webp') center/cover;"></div>
     
     <div class="bel earrow aw" data-id="up-arrow" style="position:absolute;left:1344px;top:266px;width:52px;height:52px;z-index:3;width:42px;height:42px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="19" y2="12"></line><polyline points="13 6 19 12 13 18"></polyline></svg></div>
