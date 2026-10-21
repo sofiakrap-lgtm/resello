@@ -3,21 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ReSella — kirpputorisi yhdessä paikassa</title>
-<meta name="description" content="ReSella hoitaa varaukset, kassan, tilitykset ja myynnin seurannan — ja tuo uudet ostajat suoraan kirpputorillesi.">
+<title>ReSella, kirpputorisi yhdessä paikassa</title>
+<meta name="description" content="ReSella hoitaa varaukset, kassan, tilitykset ja myynnin seurannan, ja tuo uudet ostajat suoraan kirpputorillesi.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Figtree:ital,wght@0,300..700;1,300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <style>
 /* ===== ui-bahnexpress-fi tokens (birch / asphalt) ===== */
 :root{
-  --palette-birch:#fffef7; --palette-asphalt:#12110e;
-  --palette-grey-50:#f1eee6; --palette-grey-100:#e2ded4; --palette-grey-200:#ccc6ba; --palette-grey-300:#b7afa0;
-  --palette-grey-400:#a09786; --palette-grey-500:#8a7f6b; --palette-grey-600:#726958; --palette-grey-700:#5a5346;
-  --palette-grey-800:#423d33; --palette-grey-900:#2a2721; --palette-grey-950:#1e1c17;
-  --palette-orange-500:#fd6a31; --palette-orange-600:#cf582a;
-  --palette-teal-300:#85cdd9; --palette-teal-600:#378f9e; --palette-teal-700:#2c707b; --palette-teal-800:#205058; --palette-teal-900:#153135;
-  --palette-green-700:#1c704d; --palette-green-800:#165038; --palette-green-900:#0f3123;
+  /* ReSella brand palette mapped onto the skill's semantic slots */
+  --palette-birch:#FAECDE; --palette-asphalt:#3C2415;         /* page beige / ink brown */
+  --palette-grey-50:#FFFBF4; --palette-grey-100:#F3E9DB; --palette-grey-200:#E7D8C4; --palette-grey-300:#D8C3A8;
+  --palette-grey-400:#BBAA8F; --palette-grey-500:#9B8D78; --palette-grey-600:#6E5B46; --palette-grey-700:#574433;
+  --palette-grey-800:#4E3220; --palette-grey-900:#3C2415; --palette-grey-950:#2A1A0F;
+  --palette-orange-200:#E3A982; --palette-orange-500:#C0693A; --palette-orange-600:#A85A30;   /* terracotta signal */
+  --palette-teal-300:#9FB6B8; --palette-teal-600:#85A0A4; --palette-teal-700:#5E7A7E; --palette-teal-800:#6C888D; --palette-teal-900:#4E6569; /* savusininen */
+  --palette-green-700:#9A5230; --palette-green-800:#AD5C33; --palette-green-900:#C0693A;       /* "green" slot = terracotta */
 
   --color-bg:var(--palette-birch); --color-bg-inverse:var(--palette-asphalt);
   --color-surface:var(--palette-grey-50); --color-surface-raised:var(--palette-birch);
@@ -39,16 +40,17 @@
   --ease-enter:cubic-bezier(0,0,.2,1); --ease-exit:cubic-bezier(.4,0,1,1); --ease-morph:cubic-bezier(.4,0,.2,1);
 }
 [data-theme="light-grey"]{ --color-bg:var(--palette-grey-50); --color-surface:var(--palette-birch); --color-surface-raised:var(--palette-grey-50); --color-overlay:rgb(226 222 212 / .95); --gradient-1:linear-gradient(to bottom,transparent 60%,var(--palette-grey-50)); }
-[data-theme="asphalt"]{ color-scheme:dark; --color-bg:var(--palette-asphalt); --color-surface:var(--palette-grey-900); --color-surface-raised:var(--palette-grey-900); --color-overlay:rgb(30 28 23 / .95); --color-text:var(--palette-grey-100); --color-text-muted:var(--palette-grey-400); --color-heading:var(--palette-birch); --color-accent:var(--palette-birch); --color-accent-hover:var(--palette-grey-100); --color-accent-contrast:var(--palette-asphalt); --color-border:var(--palette-grey-800); --gradient-1:linear-gradient(to bottom,transparent 60%,var(--palette-asphalt)); }
-[data-theme="teal"]{ color-scheme:dark; --color-bg:var(--palette-teal-800); --color-surface:var(--palette-birch); --color-surface-raised:var(--palette-birch); --color-overlay:rgb(44 112 123 / .95); --color-text:var(--palette-grey-100); --color-text-muted:var(--palette-grey-200); --color-heading:var(--palette-birch); --color-accent:var(--palette-birch); --color-accent-hover:var(--palette-grey-100); --color-accent-contrast:var(--palette-asphalt); --color-border:var(--palette-teal-600); --gradient-1:linear-gradient(to bottom,transparent 60%,var(--palette-teal-800)); }
-[data-theme="green"]{ color-scheme:dark; --color-bg:var(--palette-green-900); --color-surface:var(--palette-green-800); --color-surface-raised:var(--palette-green-700); --color-overlay:rgb(22 80 56 / .95); --color-text:var(--palette-grey-100); --color-text-muted:var(--palette-grey-400); --color-heading:var(--palette-birch); --color-accent:var(--palette-birch); --color-accent-hover:var(--palette-grey-100); --color-accent-contrast:var(--palette-asphalt); --color-border:var(--palette-green-700); --gradient-1:linear-gradient(to bottom,transparent 60%,var(--palette-green-900)); }
-[data-theme]{ color:var(--color-text); background:var(--color-bg); }
+[data-theme="asphalt"]{ color-scheme:dark; --color-bg:var(--palette-asphalt); --color-surface:var(--palette-grey-800); --color-surface-raised:var(--palette-grey-800); --color-overlay:rgb(60 36 21 / .95); --color-text:rgb(250 236 222 / .92); --color-text-muted:rgb(250 236 222 / .6); --color-heading:var(--palette-birch); --color-accent:var(--palette-birch); --color-accent-hover:var(--palette-grey-100); --color-accent-contrast:var(--palette-asphalt); --color-border:rgb(250 236 222 / .18); --gradient-1:linear-gradient(to bottom,transparent 60%,var(--palette-asphalt)); }
+[data-theme="teal"]{ color-scheme:dark; --color-bg:var(--palette-teal-800); --color-surface:var(--palette-birch); --color-surface-raised:var(--palette-birch); --color-overlay:rgb(108 136 141 / .95); --color-text:var(--palette-birch); --color-text-muted:rgb(255 251 244 / .8); --color-heading:var(--palette-birch); --color-accent:var(--palette-birch); --color-accent-hover:var(--palette-grey-100); --color-accent-contrast:var(--palette-asphalt); --color-border:rgb(255 255 255 / .28); --gradient-1:linear-gradient(to bottom,transparent 60%,var(--palette-teal-800)); }
+[data-theme="green"]{ color-scheme:dark; --color-bg:var(--palette-green-900); --color-surface:var(--palette-green-800); --color-surface-raised:var(--palette-green-700); --color-overlay:rgb(192 105 58 / .95); --color-text:var(--palette-birch); --color-text-muted:rgb(255 251 244 / .78); --color-heading:var(--palette-birch); --color-accent:var(--palette-birch); --color-accent-hover:var(--palette-grey-100); --color-accent-contrast:var(--palette-asphalt); --color-border:rgb(255 255 255 / .24); --gradient-1:linear-gradient(to bottom,transparent 60%,var(--palette-green-900)); }
+[data-theme]{ color:var(--color-text); background-color:var(--color-bg); }
+.paper{background-image:var(--grain);background-size:200px 200px;background-repeat:repeat}
 :is([data-theme="teal"],[data-theme="green"],[data-theme="asphalt"]) .on-light{ --color-heading:var(--palette-asphalt); --color-text:var(--palette-grey-900); --color-text-muted:var(--palette-grey-500); }
 
 /* ===== base ===== */
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-weight:300;font-size:20px;line-height:1.4;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+body{margin:0;background:var(--color-bg) var(--grain);background-size:auto,200px 200px;color:var(--color-text);font-family:var(--font-body);font-weight:300;font-size:20px;line-height:1.4;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
 ::selection{background:var(--palette-asphalt);color:var(--palette-birch)}
 :focus-visible{outline:4px solid var(--color-focus);outline-offset:0}
 img,video,svg{display:block;max-width:100%}
@@ -81,19 +83,23 @@ section{padding-block:var(--section-py);position:relative}
 .btn-l{height:64px;font-size:22px;padding-inline:28px}
 .pill-tag{display:inline-flex;align-items:center;height:40px;padding-inline:16px;border-radius:var(--radius-pill);border:2px solid currentColor;font-family:var(--font-body);font-weight:600;font-size:15px;letter-spacing:.02em}
 
-/* ===== header ===== */
-.site-head{position:fixed;inset:0 0 auto 0;height:64px;z-index:40;display:flex;align-items:center;transition:background-color .24s}
-.site-head.is-scrolled{background:var(--color-overlay)}
+/* ===== header (compact, transparent over hero → frosted on scroll) ===== */
+.site-head{position:fixed;inset:0 0 auto 0;height:58px;z-index:40;display:flex;align-items:center;transition:background-color .24s,box-shadow .24s;
+  --hc:var(--palette-birch); --hc-inv:var(--palette-asphalt)}      /* over hero: logo/nav cream, active ink */
+.site-head.is-scrolled{background:rgb(255 251 244 / .9);--hc:var(--palette-asphalt);--hc-inv:var(--palette-birch);box-shadow:0 1px 0 var(--palette-grey-200)}
 .site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%}
-.brand{font-family:var(--font-display);font-stretch:125%;font-weight:900;font-size:22px;letter-spacing:-.4px;color:var(--color-heading);text-transform:uppercase}
-.segmented{position:relative;display:flex;align-items:center;gap:0;background:var(--color-overlay);border-radius:var(--radius-pill);padding:4px}
-.segmented a{position:relative;z-index:1;display:inline-flex;align-items:center;height:40px;padding-inline:22px;font-family:var(--font-body);font-weight:600;font-size:18px;color:var(--color-heading);border-radius:var(--radius-pill);transition:color .2s}
-.segmented .seg-knob{position:absolute;z-index:0;top:4px;bottom:4px;left:4px;border-radius:var(--radius-pill);background:var(--palette-asphalt);transition:transform .26s var(--ease-standard),width .26s var(--ease-standard);opacity:0}
+.brand{display:inline-flex;align-items:center;color:var(--hc);transition:color .24s}
+.brand svg{display:block;width:116px;height:auto}
+.segmented{position:relative;display:flex;align-items:center;gap:0;background:transparent;border-radius:var(--radius-pill);padding:4px}
+.segmented a{position:relative;z-index:1;display:inline-flex;align-items:center;height:36px;padding-inline:18px;font-family:var(--font-body);font-weight:600;font-size:16px;color:var(--hc);border-radius:var(--radius-pill);transition:color .2s}
+.segmented .seg-knob{position:absolute;z-index:0;top:4px;bottom:4px;left:4px;border-radius:var(--radius-pill);background:var(--hc);transition:transform .26s var(--ease-standard),width .26s var(--ease-standard),background-color .24s;opacity:0}
 .segmented.ready .seg-knob{opacity:1}
-.segmented.ready a.active{color:var(--palette-birch)}
+.segmented.ready a.active{color:var(--hc-inv)}
 .head-actions{display:flex;align-items:center;gap:12px}
-.menu-btn{display:none;width:48px;height:48px;border-radius:var(--radius-pill);border:none;background:var(--color-surface);color:var(--color-heading);cursor:pointer;align-items:center;justify-content:center}
-.menu-btn svg{width:22px;height:22px}
+.site-head .btn-demo{height:42px;padding-inline:20px;font-size:16px;background:var(--hc);color:var(--hc-inv);border-radius:var(--radius-pill);display:inline-flex;align-items:center;font-family:var(--font-body);font-weight:600;transition:background-color .2s,color .2s}
+.site-head .btn-demo:hover{opacity:.92}
+.menu-btn{display:none;width:44px;height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--hc);background:transparent;color:var(--hc);cursor:pointer;align-items:center;justify-content:center}
+.menu-btn svg{width:20px;height:20px}
 /* mobile menu sheet */
 .menu-sheet{position:fixed;inset:64px 0 auto 0;z-index:39;background:var(--color-overlay);border-bottom-left-radius:24px;border-bottom-right-radius:24px;padding:16px var(--gutter) 28px;transform:translateY(-110%);transition:transform .24s var(--ease-standard);display:flex;flex-direction:column;gap:6px}
 .menu-sheet.open{transform:translateY(0)}
@@ -118,12 +124,13 @@ section{padding-block:var(--section-py);position:relative}
 .hero .btn-primary{background:var(--palette-birch);color:var(--palette-asphalt)}
 .hero .btn-primary:hover{background:var(--palette-grey-100)}
 .hero .btn-secondary{background:rgb(255 254 247 / .12);color:var(--palette-birch);border:1.5px solid rgb(255 254 247 / .5)}
-/* hero strip */
-.hero-strip{margin:clamp(40px,6vh,64px) auto 0;max-width:1040px;background:rgb(30 28 23 / .82);border-radius:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;overflow:hidden}
-.hero-strip .cell{background:rgb(30 28 23 / .5);padding:clamp(24px,3vw,40px)}
-.hero-strip .cell .lbl{font-family:var(--font-body);font-weight:600;font-size:15px;color:rgb(255 254 247 / .6);margin-bottom:12px}
+/* hero strip: bridging band straddling hero / next section */
+.strip-bridge{position:relative;z-index:6;margin-top:calc(-1 * clamp(56px,9vw,104px));margin-bottom:clamp(28px,4vw,48px)}
+.hero-strip{max-width:1040px;margin-inline:auto;background:#3C2415;border-radius:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;overflow:hidden}
+.hero-strip .cell{background:#45301e;padding:clamp(24px,3vw,40px)}
+.hero-strip .cell .lbl{font-family:var(--font-body);font-weight:600;font-size:15px;color:rgb(250 236 222 / .6);margin-bottom:12px}
 .hero-strip .cell h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(20px,2.4vw,30px);line-height:1.12;color:var(--palette-birch)}
-.hero-strip .cell p{font-weight:300;font-size:17px;line-height:1.4;color:rgb(255 254 247 / .82);margin-top:12px}
+.hero-strip .cell p{font-weight:300;font-size:17px;line-height:1.4;color:rgb(250 236 222 / .82);margin-top:12px}
 
 /* ===== feature cards (bento interpreted) ===== */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -293,7 +300,7 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 <!-- HEADER -->
 <header class="site-head" id="head">
   <div class="wrap">
-    <a class="brand" href="#top">ReSella</a>
+    <a class="brand" href="#top" aria-label="ReSella"><svg viewBox="0 295 1440 330" fill="currentColor" aria-hidden="true"><g clip-path="url(#rl)" transform="translate(17 57)"><path d="M261.746 354.464q0 23.988-12.469 47.5c-8.305 15.68-20.45 28.375-36.438 38.094l43.735 92.172H176.62l-37.625-79.938H95.73v79.938H23.324V257.12H151.23q54.546 0 82.531 27.985t27.985 69.36M95.73 397.261h52.203q18.34.002 30.094-11.515 11.766-11.53 11.766-30.813 0-19.277-11.766-30.797-11.754-11.514-30.094-11.515H95.73Zm0 0"/><path d="M473.785 469.214q-4.218 28.69-32.672 47.266-28.452 18.58-69.375 18.578-61.125.001-90.75-34.328-24.454-28.22-24.453-69.14-.002-46.08 28.203-75 28.22-28.923 85.594-28.923c37.938 0 66.07 9.641 84.406 28.922q27.516 28.923 27.516 75v20.22H328.957q2.343 18.345 12.688 25.874 10.341 7.517 29.625 7.516 30.092 0 31.515-15.985ZM371.27 377.511q-15.517.001-25.86 6.125-10.348 6.11-16.453 24.438h84.172q-4.705-17.86-15.047-24.203-10.348-6.36-26.812-6.36m0 0"/><path d="M735.694 440.058q0 45.142-26.328 68.656-30.112 26.344-96.875 26.344-52.674.001-89.36-20.219-36.673-20.233-43.734-63.968H563.1q2.825 28.687 49.86 28.687c19.125 0 32.289-2.035 39.5-6.11q10.811-6.106 10.812-21.64-.002-4.218-3.062-7.984-3.048-3.764-9.407-6.578c-4.23-1.883-8.46-3.61-12.687-5.172q-6.345-2.357-16.469-4.703c-6.742-1.57-12.383-2.829-16.922-3.766-4.543-.945-10.5-2.047-17.875-3.297q-11.05-1.874-15.281-2.828-24.457-4.231-44.203-13.156-47.501-20.232-47.5-62.547 0-42.795 25.875-64.906 29.155-24.921 95.922-24.922 51.73 0 89.594 22.578 37.858 22.563 37.859 62.547h-84.188q-2.343-29.625-42.796-29.625-23.033.002-36.438 6.11-13.406 6.11-13.406 14.108-.001 5.644 4 10.813 3.997 5.175 12.687 9.172 8.701 4.003 16.219 6.828c5.02 1.875 11.922 3.836 20.703 5.875 8.781 2.031 15.285 3.445 19.516 4.234q6.356 1.172 18.578 3.516 23.514 4.705 44.203 12.703 47.498 19.284 47.5 59.25m0 0"/><path d="M952.437 469.214q-4.218 28.69-32.671 47.266-28.454 18.58-69.375 18.578-61.125.001-90.75-34.328-24.456-28.22-24.454-69.14-.002-46.08 28.204-75 28.218-28.923 85.593-28.923c37.938 0 66.07 9.641 84.407 28.922q27.515 28.923 27.515 75v20.22H807.61q2.343 18.345 12.688 25.874 10.342 7.517 29.625 7.516 30.092 0 31.515-15.985Zm-102.515-91.703q-15.517.001-25.86 6.125-10.347 6.11-16.453 24.438h84.172q-4.704-17.86-15.047-24.203-10.348-6.36-26.812-6.36M1036.58 464.98q0 20.69 26.813 22.578v47.5q-12.703 2.344-29.156 2.344-70.078 0-70.078-89.344V257.121h72.422ZM1138.14 464.98q0 20.69 26.812 22.578v47.5q-12.704 2.344-29.157 2.344-70.077 0-70.078-89.344V257.121h72.422Zm0 0"/><path d="M1275.447 535.058q-61.61 0-91.234-32.922c-16.93-18.812-25.39-42.32-25.39-70.531 0-28.219 8.46-51.734 25.39-70.547q30.093-33.388 91.234-33.39 61.594.001 91.704 33.39 24.92 27.736 24.921 70.531 0 42.798-24.921 70.547-29.642 32.924-91.704 32.922m-32.921-62.312q11.28 12.454 32.906 12.453 21.637.001 32.922-12.453 11.297-12.47 11.297-41.157 0-54.077-44.204-54.078-44.202.002-44.203 54.078-.002 28.688 11.282 41.157m0 0"/></g><defs><clipPath id="rl"><path d="M0 0h1401v686H0z"/></clipPath></defs></svg></a>
     <nav class="segmented" id="seg" aria-label="Päävalikko">
       <span class="seg-knob" id="segKnob"></span>
       <a href="#ominaisuudet">Ominaisuudet</a>
@@ -301,7 +308,7 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
       <a href="#yhteys">Yhteys</a>
     </nav>
     <div class="head-actions">
-      <a class="btn btn-primary btn-s" href="#yhteys">Varaa esittely</a>
+      <a class="btn-demo" href="#yhteys">Varaa demo</a>
       <button class="menu-btn" id="menuBtn" aria-label="Avaa valikko" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
@@ -327,26 +334,31 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
       <span class="display l2">kirpputori</span>
       <span class="l3">yhdessä paikassa.</span>
     </h1>
-    <p class="hero-sub">ReSella hoitaa varaukset, kassan, tilitykset ja myynnin seurannan — ja tuo uudet ostajat suoraan kirpputorillesi.</p>
+    <p class="hero-sub">ReSella hoitaa varaukset, kassan, tilitykset ja myynnin seurannan, ja tuo uudet ostajat suoraan kirpputorillesi.</p>
     <div class="hero-cta">
       <a class="btn btn-primary btn-l" href="#yhteys">Varaa esittely</a>
       <a class="btn btn-secondary btn-l" href="#hinta">Katso hinta</a>
     </div>
-    <div class="hero-strip">
+  </div>
+</section>
+
+<!-- hero strip: bridging band between hero and features -->
+<div class="strip-bridge">
+  <div class="wrap">
+    <div class="hero-strip reveal">
       <div class="cell"><div class="lbl">Kassa &amp; tilitykset</div><h3>Yksi laite, sekunnit</h3><p>Myynti, viivakoodi ja maksu samalla laitteella; tilitykset syntyvät itsestään.</p></div>
       <div class="cell"><div class="lbl">Näkyvyys</div><h3>Valikoima leviää</h3><p>Tuotteet leviävät suoralla linkillä ja QR-koodilla ostajien selattavaksi.</p></div>
       <div class="cell"><div class="lbl">Varaukset &amp; paikat</div><h3>Kaikki yhdessä kartassa</h3><p>Myyntipaikat, myymäläkartta ja saatavuus yhdessä näkymässä.</p></div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- FEATURES (bento interpreted) -->
-<section data-theme="light-grey" id="ominaisuudet">
+<section class="paper" data-theme="light-grey" id="ominaisuudet">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="caption">Yksi järjestelmä koko kirppikselle</span>
       <h2 class="display">Koko myymälä<br>yhdessä näkymässä</h2>
-      <p class="sub">Kassa, varaukset, tilitykset ja asiakkaat pysyvät ajan tasalla samassa paikassa — eikä mikään jää roikkumaan eri työkaluihin.</p>
+      <p class="sub">Kassa, varaukset, tilitykset ja asiakkaat pysyvät ajan tasalla samassa paikassa, eikä mikään jää roikkumaan eri työkaluihin.</p>
     </div>
     <div class="cards sec-gap reveal">
       <div class="card">
@@ -367,7 +379,7 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
       <div class="card">
         <div class="card-top"><span class="pill-tag">Tilitykset</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
         <h3>Tilitykset ilman käsityötä</h3>
-        <p>Myyjäkohtaiset tilitykset lasketaan ja maksetaan automaattisesti jakson päätteeksi — ilman Exceliä tai arvailua.</p>
+        <p>Myyjäkohtaiset tilitykset lasketaan ja maksetaan automaattisesti jakson päätteeksi, ilman Exceliä tai arvailua.</p>
       </div>
       <!-- re-themed seller dashboard mock -->
       <div class="tabletcard">
@@ -398,7 +410,6 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 <section data-theme="asphalt">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="caption">Miksi ReSella</span>
       <h2 class="display">Rakennettu, jotta ala<br>kasvaa ja vaatteet kiertävät</h2>
     </div>
     <div class="story-cols narrow reveal">
@@ -415,23 +426,21 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 <section data-theme="green" id="kierto">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="caption">Vähän niin kuin Vinted, mutta oikeassa elämässä</span>
       <h2 class="display">Tuetaan kiertoa,<br>joka hyödyttää kaikkia</h2>
       <p class="sub">Kun tuemme tuotteiden näkyvyyttä, tuemme samalla kirppareita, myyjiä ja tuotteiden kiertoa, josta maksetaan kelpo vastine.</p>
     </div>
     <div class="timeline reveal">
-      <div class="tl-step"><span class="tl-bullet">1</span><div class="tl-rule"></div><h3>Näkyvä katalogi</h3><p>Tuotteet nousevat verkkoon selattavaksi — valikoima löytyy linkillä ja QR-koodilla.</p></div>
+      <div class="tl-step"><span class="tl-bullet">1</span><div class="tl-rule"></div><h3>Näkyvä katalogi</h3><p>Tuotteet nousevat verkkoon selattavaksi. Valikoima löytyy linkillä ja QR-koodilla.</p></div>
       <div class="tl-step"><span class="tl-bullet">2</span><div class="tl-rule"></div><h3>Konkreettiset löydöt</h3><p>Ostaja tulee paikalle, koskee ja löytää. Fyysinen kirppis saa digitaalisen näkyvyyden.</p></div>
-      <div class="tl-step"><span class="tl-bullet">3</span><h3>Kohonut asiakaskokemus</h3><p>Sujuva kassa ja tilitykset tuovat asiakkaat takaisin — kierto jatkuu ja kaikki hyötyvät.</p></div>
+      <div class="tl-step"><span class="tl-bullet">3</span><h3>Kohonut asiakaskokemus</h3><p>Sujuva kassa ja tilitykset tuovat asiakkaat takaisin. Kierto jatkuu ja kaikki hyötyvät.</p></div>
     </div>
   </div>
 </section>
 
 <!-- HALLINTA (three parts) -->
-<section data-theme="light-grey">
+<section class="paper" data-theme="light-grey">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="caption">Arjen hallinta</span>
       <h2 class="display">Koko myymälä<br>hallinnassa</h2>
     </div>
     <div class="cards sec-gap reveal">
@@ -458,9 +467,8 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 <section data-theme="teal" id="hinta">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="caption">Maksat liikevaihdon mukaan</span>
       <h2 class="display">Hinta skaalautuu<br>kanssasi</h2>
-      <p class="sub">Kuukausihinta määräytyy kuukausittaisen kassamyynnin mukaan. Mitä pienempi toiminta, sitä pienempi maksu — ja kasvat omaan tahtiisi.</p>
+      <p class="sub">Kuukausihinta määräytyy kuukausittaisen kassamyynnin mukaan. Mitä pienempi toiminta, sitä pienempi maksu, ja kasvat omaan tahtiisi.</p>
     </div>
 
     <div class="calc reveal">
@@ -499,7 +507,7 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
       </div>
       <div class="why-card">
         <h3>Jokaiselle kirppikselle</h3>
-        <p>Pieni kyläkirppis maksaa pienen osuuden, suuri halli isomman — mutta prosentti pienenee kun myynti kasvaa. Käyttöönotto on nopea, 1–3 päivää, ja tilitykset kuuluvat hintaan. Avaa taulukko nähdäksesi tarkat tasot.</p>
+        <p>Pieni kyläkirppis maksaa pienen osuuden, suuri halli isomman, mutta prosentti pienenee kun myynti kasvaa. Käyttöönotto on nopea, 1–3 päivää, ja tilitykset kuuluvat hintaan. Avaa taulukko nähdäksesi tarkat tasot.</p>
       </div>
     </div>
   </div>
@@ -526,11 +534,10 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 </dialog>
 
 <!-- YHTEYS -->
-<section data-theme="birch" id="yhteys">
+<section class="paper" data-theme="birch" id="yhteys">
   <div class="wrap">
     <div class="contact-grid">
       <div class="contact-copy reveal on-light">
-        <span class="caption">Otetaan yhteyttä</span>
         <h2 class="display" style="margin-top:16px">Varaa esittely</h2>
         <p>Näytämme ReSellan käytännössä. Kerro kirpputoristasi, niin olemme yhteydessä.</p>
       </div>
@@ -557,7 +564,7 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 </section>
 
 <!-- FOOTER -->
-<footer class="site-foot">
+<footer class="site-foot paper">
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
