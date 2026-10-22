@@ -305,6 +305,59 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 /* hero micro line */
 .hero-micro{margin-top:14px;font-family:var(--font-body);font-weight:600;font-size:13px;color:rgb(250 236 222 / .72);letter-spacing:.02em}
 
+/* left-aligned section header variant */
+.sec-head.left{text-align:left;align-items:flex-start;margin-inline:0;max-width:640px}
+.sec-head.left .sub{margin-left:0}
+
+/* media showcase row (copy + photo/mockup, alternating) */
+.showcase{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center;margin-top:clamp(36px,5vw,56px)}
+.showcase.flip .sc-media{order:-1}
+.sc-copy h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(22px,3vw,36px);line-height:1.06;color:var(--color-heading)}
+.sc-copy p{font-weight:300;font-size:clamp(15px,1.8vw,18px);line-height:1.5;margin-top:16px;max-width:460px}
+.sc-copy ul{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.sc-copy li{display:flex;gap:11px;align-items:flex-start;font-weight:300;font-size:15px;line-height:1.4}
+.sc-copy li .mk{flex:none;width:22px;height:22px;border-radius:50%;background:var(--color-surface);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.sc-copy li .mk svg{width:13px;height:13px;color:var(--color-highlight)}
+.media-frame{border-radius:var(--radius-lg);overflow:hidden;position:relative;aspect-ratio:4/5;background:var(--palette-grey-100)}
+.media-frame img{width:100%;height:100%;object-fit:cover}
+.media-frame.wide{aspect-ratio:4/3}
+.media-frame.banner{aspect-ratio:auto;height:clamp(170px,24vw,300px)}
+.sc-deco{position:absolute;z-index:2;width:64px;opacity:.9;pointer-events:none}
+.spark{display:inline-block;width:clamp(26px,3vw,40px);height:auto;vertical-align:middle;margin-left:10px;opacity:.85}
+
+/* before / after panels (ennen ja nyt) */
+.beforeafter{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:clamp(36px,5vw,52px)}
+.ba{position:relative;border-radius:var(--radius-lg);overflow:hidden;min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(22px,2.6vw,32px)}
+.ba .ba-media{position:absolute;inset:0;z-index:0}
+.ba .ba-media img{width:100%;height:100%;object-fit:cover;filter:grayscale(.5) brightness(.72) sepia(.2)}
+.ba .ba-media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgb(42 26 15 / .9),rgb(42 26 15 / .35))}
+.ba.after{background:#3C2415}
+.ba-inner{position:relative;z-index:1;color:var(--palette-birch)}
+.ba-lbl{display:inline-flex;align-items:center;height:30px;padding-inline:14px;border-radius:var(--radius-pill);border:1.5px solid rgb(250 236 222 / .5);font-family:var(--font-body);font-weight:600;font-size:13px;margin-bottom:16px}
+.ba-inner ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ba-inner li{display:flex;gap:10px;align-items:flex-start;font-weight:300;font-size:14.5px;line-height:1.35;color:rgb(250 236 222 / .92)}
+.ba-inner li .mk{flex:none;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.ba.before li .mk{background:rgb(250 236 222 / .15)}
+.ba.after li .mk{background:#C0693A;color:#fff}
+.ba-inner li .mk svg{width:11px;height:11px}
+.ba.after .ba-mini{margin-bottom:18px;background:var(--palette-birch);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.ba-mini .row{display:flex;gap:7px}
+.ba-mini .chip{height:34px;border-radius:9px;flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 9px;gap:2px}
+.ba-mini .chip small{font-size:6.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;opacity:.65;color:#3C2415}
+.ba-mini .chip b{font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:13px;color:#3C2415}
+.ba-mini .chip.a{background:var(--palette-grey-100)}
+.ba-mini .chip.b{background:#6C888D}.ba-mini .chip.b small,.ba-mini .chip.b b{color:#FFFBF4}
+.ba-mini .chip.c{background:#C0693A}.ba-mini .chip.c small,.ba-mini .chip.c b{color:#FFFBF4}
+.ba-mini .line{height:6px;border-radius:6px;background:var(--palette-grey-100)}
+.ba-mini .line.sh{width:62%}
+
+/* two-column FAQ */
+.faq2{display:grid;grid-template-columns:0.8fr 1.2fr;gap:clamp(28px,5vw,56px);align-items:start}
+.faq2 .faq{margin-top:0}
+.faq-aside h2{font-size:clamp(28px,4.5vw,48px)}
+.faq-aside p{font-weight:300;font-size:16px;line-height:1.45;margin:16px 0 20px;color:var(--color-text)}
+@media(max-width:860px){.faq2{grid-template-columns:1fr;gap:24px}}
+
 /* ===== problem cards ===== */
 .plist{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:clamp(36px,5vw,52px)}
 .pcard{background:var(--color-surface);border-radius:var(--radius-md);padding:18px 20px;display:flex;gap:13px;align-items:flex-start}
@@ -395,6 +448,9 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
   .plist{grid-template-columns:1fr 1fr}
   .statrow{grid-template-columns:1fr 1fr}
   .trust{grid-template-columns:1fr 1fr}
+  .showcase{grid-template-columns:1fr;gap:28px}
+  .showcase.flip .sc-media{order:0}
+  .beforeafter{grid-template-columns:1fr}
 }
 @media(max-width:640px){
   body{font-size:15px}
@@ -508,15 +564,34 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
       <h2 class="display">Ennen ja nyt</h2>
       <p class="sub">Sama työ, murto-osa vaivasta.</p>
     </div>
-    <div class="cmp2 reveal">
-      <div class="hd"><div class="l">Ennen</div><div class="r">ReSellalla</div></div>
-      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Varaukset vihossa tai Excelissä</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Myyjä varaa ja maksaa pöydän itse verkossa</div></div>
-      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Tilitykset käsin, yksi kerrallaan</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Kaikki tilitykset yhdellä pankkitiedostolla</div></div>
-      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Erillinen kassa, varausohjelma ja Excel</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Kassa, varaukset, myyjät ja raportit yhdessä</div></div>
-      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Tuotteet kuvataan erikseen nettiin</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Kassalla hinnoiteltu tuote on jo verkossa</div></div>
-      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Raportit koostetaan käsin</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Myynti, provisiot ja ALV yhdellä klikkauksella</div></div>
-      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Kassan näkee vain kassalta</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Kaikki näkyy puhelimesta, missä tahansa</div></div>
-      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Virheen korjaus vaatii soiton tukeen</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Korjaat ja perut itse kassalla</div></div>
+    <div class="beforeafter reveal">
+      <div class="ba before">
+        <div class="ba-media"><picture><source type="image/avif" srcset="images/rk3-1080.avif"><source type="image/webp" srcset="images/rk3-1080.webp"><img alt="" src="images/rk3.jpg" loading="lazy" decoding="async"></picture></div>
+        <div class="ba-inner">
+          <span class="ba-lbl">Ennen</span>
+          <ul>
+            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Varaukset vihossa, tilitykset käsin</li>
+            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Erillinen kassa, varausohjelma ja Excel</li>
+            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Tuotteet eivät näy netissä</li>
+            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Virheen korjaus vaatii soiton tukeen</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ba after">
+        <div class="ba-inner">
+          <div class="ba-mini" aria-hidden="true">
+            <div class="row"><div class="chip a"><small>Myynti</small><b>1 284 €</b></div><div class="chip b"><small>Kuussa</small><b>18 920 €</b></div><div class="chip c"><small>Käyttö</small><b>87 %</b></div></div>
+            <div class="line"></div><div class="line sh"></div>
+          </div>
+          <span class="ba-lbl">ReSellalla</span>
+          <ul>
+            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Myyjä varaa ja maksaa pöydän itse</li>
+            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Kaikki tilitykset yhdellä tiedostolla</li>
+            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Hinnoiteltu tuote on heti verkossa</li>
+            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Korjaat ja perut itse kassalla</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -524,11 +599,12 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 <!-- OMINAISUUDET -->
 <section class="paper" data-theme="light-grey" id="ominaisuudet">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head left reveal">
       <h2 class="display">Kaikki yhdessä<br>paikassa</h2>
       <p class="sub">Kuusi työkalua, yksi kirjautuminen.</p>
     </div>
-    <div class="cards sec-gap reveal">
+    <div class="media-frame banner reveal" style="margin-top:clamp(28px,4vw,40px)"><picture><source type="image/avif" srcset="images/rk1-1080.avif"><source type="image/webp" srcset="images/rk1-1080.webp"><img alt="Kirpputorin myymälä" src="images/rk1.jpg" loading="lazy" decoding="async"></picture></div>
+    <div class="cards reveal" style="margin-top:18px">
       <div class="card"><span class="pill-tag">Kassa</span><h3>Piippaa, maksa, valmis</h3><p>Myynti, viivakoodi ja maksu samalla laitteella. Toimii myös ilman nettiä.</p></div>
       <div class="card"><span class="pill-tag">Näkyvyys</span><h3>Hylly verkkoon itsestään</h3><p>Jokainen hinnoiteltu tuote näkyy ostajille verkossa ilman erillistä kuvausta.</p></div>
       <div class="card"><span class="pill-tag">Varaukset</span><h3>Pöydät järjestyksessä</h3><p>Myyjät varaavat ja maksavat pöydän itse, sinä näet tilanteen kartalta.</p></div>
@@ -542,7 +618,7 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 <!-- JÄRJESTELMÄN TEASERI -->
 <section data-theme="asphalt">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head left reveal">
       <h2 class="display">Kurkista sisään</h2>
       <p class="sub">Näin arki näyttää ReSellassa. Luvut ovat esimerkkejä.</p>
     </div>
@@ -632,7 +708,7 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 <!-- KÄYTTÖÖNOTTO -->
 <section data-theme="asphalt">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head left reveal">
       <h2 class="display">Valmis päivissä</h2>
       <p class="sub">Vaihto hoituu ilman, että kirppis menee kiinni. Kokonaiskesto 1–3 päivää.</p>
     </div>
@@ -648,7 +724,7 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 <!-- LUOTETTAVUUS & TUKI -->
 <section class="paper" data-theme="birch">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head left reveal">
       <h2 class="display">Tehty kestämään</h2>
       <p class="sub">Kassa on kirppiksen sydän. Kohtelemme sitä niin.</p>
     </div>
@@ -725,13 +801,13 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 <!-- TARINA -->
 <section data-theme="asphalt">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Kirppikseltä<br>koodiin</h2>
-      <p class="sub">Tunnemme alan, koska olemme tehneet sitä.</p>
-    </div>
-    <div class="story-cols narrow reveal">
-      <p>Sofialla on yli kymmenen vuoden kokemus kirpputori- ja vintagealalta: oma liike jo 18-vuotiaana ja työvuosia hinnoittelijana itsepalvelukirpputorilla. Kirpputoriarki on tullut tutuksi monelta kantilta, ja se näkyy siinä, miten ReSellaa rakennetaan.</p>
-      <p>Leonilla on kuuden vuoden kokemus ohjelmistokehityksestä. Ennen ensimmäistäkään koodiriviä haastattelimme noin kahtakymmentä kirppisyrittäjää. Arvomme ovat yksinkertaiset: kierto, yhteisö ja kirpputoriarjen aito helpottaminen.</p>
+    <div class="showcase reveal">
+      <div class="sc-media media-frame"><picture><source type="image/avif" srcset="images/rk6-1080.avif"><source type="image/webp" srcset="images/rk6-1080.webp"><img alt="Vintagevaatteita kirpputorilla" src="images/rk6.jpg" loading="lazy" decoding="async"></picture></div>
+      <div class="sc-copy">
+        <h3>Kirppikseltä koodiin</h3>
+        <p>Sofialla on yli kymmenen vuoden kokemus kirpputori- ja vintagealalta: oma liike jo 18-vuotiaana ja työvuosia hinnoittelijana itsepalvelukirpputorilla. Se näkyy siinä, miten ReSellaa rakennetaan.</p>
+        <p>Leonilla on kuuden vuoden kokemus ohjelmistokehityksestä. Ennen ensimmäistäkään koodiriviä haastattelimme noin kahtakymmentä kirppisyrittäjää. Arvomme ovat yksinkertaiset: kierto, yhteisö ja kirpputoriarjen aito helpottaminen.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -739,16 +815,20 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 <!-- FAQ -->
 <section class="paper" data-theme="birch">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Usein kysyttyä</h2>
-    </div>
-    <div class="faq reveal">
+    <div class="faq2 reveal">
+      <div class="faq-aside">
+        <h2 class="display">Usein kysyttyä</h2>
+        <p>Jäikö jokin mietityttämään? Kysy suoraan, vastaamme samana arkipäivänä.</p>
+        <a class="btn btn-primary" href="#yhteys">Varaa demo</a>
+      </div>
+      <div class="faq">
       <details open><summary>Mitä ReSella maksaa?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Hinta porrastuu kirppiksesi kassamyynnin mukaan. Hiljaisena kuukautena maksat vähemmän. Kerromme tarkan hinnan ennen sopimusta.</div></details>
       <details><summary>Pitääkö vanhat tuotteet kuvata uudelleen?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Ei. Vanhat tuotteet myydään loppuun nykyisillä lapuilla, ja uudet varaukset tulevat ReSellaan.</div></details>
       <details><summary>Mitä laitteita tarvitsen?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Tabletin tai kosketusnäytön, lukijan ja tarvittaessa kuittitulostimen ja kassalippaan. Usein nykyiset laitteet käyvät.</div></details>
       <details><summary>Toimiiko kassa, jos netti katkeaa?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Toimii. Myynnit tallentuvat ja synkronoituvat, kun yhteys palaa.</div></details>
       <details><summary>Voinko käyttää omaa logoa ja värejä?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Voit. Myyjien varaussivu näkyy kirppiksesi ilmeellä.</div></details>
       <details><summary>Kauanko käyttöönotto kestää?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">1–3 päivää. Hoidamme asennuksen kanssasi.</div></details>
+      </div>
     </div>
   </div>
 </section>
