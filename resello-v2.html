@@ -302,6 +302,65 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 .phone-qr img{width:100%;display:block;border-radius:6px}
 .phone-qr small{display:block;font-family:var(--font-body);font-weight:600;font-size:9px;color:#6E5B46;margin-top:5px}
 
+/* hero micro line */
+.hero-micro{margin-top:14px;font-family:var(--font-body);font-weight:600;font-size:13px;color:rgb(250 236 222 / .72);letter-spacing:.02em}
+
+/* ===== problem cards ===== */
+.plist{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:clamp(36px,5vw,52px)}
+.pcard{background:var(--color-surface);border-radius:var(--radius-md);padding:18px 20px;display:flex;gap:13px;align-items:flex-start}
+.pcard .ic{flex:none;width:34px;height:34px;border-radius:10px;background:rgba(192,105,58,.14);color:#C0693A;display:flex;align-items:center;justify-content:center}
+.pcard .ic svg{width:18px;height:18px}
+.pcard p{font-weight:300;font-size:14px;line-height:1.4}
+.pcard b{font-weight:600;color:var(--color-heading)}
+
+/* ===== comparison table ===== */
+.cmp2{max-width:900px;margin:clamp(36px,5vw,52px) auto 0;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--color-border)}
+.cmp2 .hd{display:grid;grid-template-columns:1fr 1fr}
+.cmp2 .hd div{padding:14px 18px;font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:16px;color:var(--color-heading)}
+.cmp2 .hd .r{background:#3C2415;color:var(--palette-birch)}
+.cmp2 .rw{display:grid;grid-template-columns:1fr 1fr}
+.cmp2 .rw>div{padding:13px 18px;border-top:1px solid var(--color-border);font-weight:300;font-size:14px;line-height:1.35;display:flex;gap:10px;align-items:flex-start}
+.cmp2 .rw .r{background:rgba(192,105,58,.05);color:var(--color-text)}
+.cmp2 .mk{flex:none;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.cmp2 .rw .l .mk{background:rgba(60,36,21,.1);color:var(--palette-grey-600)}
+.cmp2 .rw .r .mk{background:#C0693A;color:#fff}
+.cmp2 .mk svg{width:11px;height:11px}
+
+/* ===== stat row (hyödyt lukuina) ===== */
+.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:clamp(36px,5vw,52px)}
+.statcell{text-align:center;display:flex;flex-direction:column;gap:8px}
+.statcell .big{font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:clamp(34px,5vw,56px);letter-spacing:.5px;color:var(--color-heading);line-height:1}
+.statcell .lbl{font-weight:300;font-size:14px;line-height:1.35}
+
+/* ===== trust columns ===== */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:clamp(36px,5vw,52px)}
+.tcol h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:18px;color:var(--color-heading);margin-bottom:14px;display:flex;gap:10px;align-items:center}
+.tcol h3 .ic{flex:none;width:30px;height:30px;border-radius:9px;background:var(--color-surface);display:flex;align-items:center;justify-content:center}
+.tcol h3 .ic svg{width:17px;height:17px}
+.tcol ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.tcol li{font-weight:300;font-size:13.5px;line-height:1.4;padding-left:15px;position:relative}
+.tcol li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--color-highlight)}
+
+/* ===== FAQ ===== */
+.faq{max-width:780px;margin:clamp(32px,4vw,48px) auto 0}
+.faq details{border-top:1px solid var(--color-border)}
+.faq details:last-child{border-bottom:1px solid var(--color-border)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 2px;display:flex;justify-content:space-between;gap:16px;align-items:center;font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(16px,2vw,20px);color:var(--color-heading)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .chev{flex:none;width:20px;height:20px;transition:transform .2s var(--ease-standard);color:var(--color-text-muted)}
+.faq details[open] summary .chev{transform:rotate(180deg)}
+.faq .ans{padding:0 2px 18px;font-weight:300;font-size:15px;line-height:1.5;color:var(--color-text);max-width:94%}
+
+/* ===== pilot ===== */
+.pilot{max-width:880px;margin:0 auto;background:#3C2415;color:var(--palette-birch);border-radius:var(--radius-lg);padding:clamp(28px,4vw,48px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.pilot h2{font-family:var(--font-display);font-stretch:125%;font-weight:900;text-transform:uppercase;font-size:clamp(26px,4.5vw,44px);letter-spacing:-.3px;line-height:1}
+.pilot p{font-weight:300;font-size:clamp(15px,1.8vw,18px);line-height:1.4;max-width:540px;color:rgb(250 236 222 / .88)}
+.pilot .perks{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:2px}
+.pilot .perks span{border:1.5px solid rgb(250 236 222 / .4);border-radius:var(--radius-pill);padding:8px 16px;font-family:var(--font-body);font-weight:600;font-size:13.5px}
+.pilot .btn{background:var(--palette-birch);color:var(--palette-asphalt);margin-top:6px}
+
+/* kassa flow numbers inherit .steps */
+
 /* ===== footer ===== */
 .site-foot{background:var(--palette-birch);color:var(--palette-grey-900);padding:clamp(64px,9vw,120px) 0 48px}
 .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
@@ -333,6 +392,9 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
   .approw{grid-template-columns:1fr;justify-items:center;text-align:center}
   .appcopy li{text-align:left}
   .phone-qr{right:0}
+  .plist{grid-template-columns:1fr 1fr}
+  .statrow{grid-template-columns:1fr 1fr}
+  .trust{grid-template-columns:1fr 1fr}
 }
 @media(max-width:640px){
   body{font-size:15px}
@@ -343,6 +405,9 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
   .compare{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr}
   .step .dash{display:none}
+  .plist{grid-template-columns:1fr}
+  .statrow{grid-template-columns:1fr 1fr}
+  .trust{grid-template-columns:1fr}
   form.demo .frow{grid-template-columns:1fr}
   .foot-top{grid-template-columns:1fr}
   .foot-brand{grid-column:span 1}
@@ -392,16 +457,16 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
   <div class="hero-tint"></div><div class="hero-grain"></div><div class="hero-fade"></div>
   <div class="hero-inner wrap">
     <h1 class="hero-title">
-      <span class="display l1">Koko</span>
-      <span class="display l2">kirpputori</span>
+      <span class="display l1">Kassa, joka</span>
+      <span class="display l2">tuo ostajia</span>
     </h1>
     <div class="hero-more">
-      <span class="l3">yhdessä paikassa.</span>
-      <p class="hero-sub">ReSella hoitaa varaukset, kassan, tilitykset ja myynnin seurannan, ja tuo uudet ostajat suoraan kirpputorillesi.</p>
+      <p class="hero-sub">Hoida myynti, myyjät ja tilitykset yhdessä paikassa. Hyllysi näkyy samalla netissä.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary btn-l" href="#yhteys">Varaa esittely</a>
-        <a class="btn btn-secondary btn-l" href="#hinta">Katso hinta</a>
+        <a class="btn btn-primary btn-l" href="#yhteys">Varaa demo</a>
+        <a class="btn btn-secondary btn-l" href="#ominaisuudet">Katso, miten se toimii</a>
       </div>
+      <p class="hero-micro">Rakennettu itsepalvelukirpputoreille. Suomessa.</p>
     </div>
   </div>
   <div class="hero-scrollcue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></div>
@@ -412,184 +477,120 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
   <div class="wrap">
     <div class="hero-strip reveal">
       <div class="cell"><h3>Yksi laite, sekunnit</h3><p>Myynti, viivakoodi ja maksu samalla laitteella; tilitykset syntyvät itsestään.</p></div>
-      <div class="cell"><h3>Valikoima leviää</h3><p>Tuotteet leviävät suoralla linkillä ja QR-koodilla ostajien selattavaksi.</p></div>
+      <div class="cell"><h3>Hylly verkossa</h3><p>Kassalla hinnoiteltu tuote näkyy heti ostajille netissä, ilman erillistä kuvausta.</p></div>
       <div class="cell"><h3>Kaikki yhdessä kartassa</h3><p>Myyntipaikat, myymäläkartta ja saatavuus yhdessä näkymässä.</p></div>
     </div>
   </div>
 </div>
 
-<!-- FEATURES (bento interpreted) -->
+<!-- ONGELMA -->
+<section class="paper" data-theme="light-grey">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="display">Tuttu arki?</h2>
+      <p class="sub">Kirppiksen pyörittäminen vie aikaa, jonka voisi käyttää myymiseen.</p>
+    </div>
+    <div class="plist reveal">
+      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Kassa kaatuu kiireellä.</b> Vanha ohjelma jumittaa, ja tuki vastaa jos vastaa.</p></div>
+      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Virhettä ei saa korjattua.</b> Väärin lyöty tuote vaatii soiton ohjelman tekijälle.</p></div>
+      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Tilitykset vievät illan.</b> Myyjien rahat lasketaan ja maksetaan yksitellen.</p></div>
+      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Tuotteet eivät näy netissä.</b> Kuvaaminen vie niin paljon aikaa, että sen tekee vain kalleimmille.</p></div>
+      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Nuoret ostajat ovat Vintedissä.</b> Hyvät löydöt jäävät hyllyyn, koska kukaan ei tiedä niistä.</p></div>
+      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Myyjät hinnoittelevat halvalla.</b> Merkkitakki lähtee 4 eurolla, vaikka siitä saisi moninkertaisesti.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VERTAUS -->
+<section class="paper" data-theme="birch">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="display">Ennen ja nyt</h2>
+      <p class="sub">Sama työ, murto-osa vaivasta.</p>
+    </div>
+    <div class="cmp2 reveal">
+      <div class="hd"><div class="l">Ennen</div><div class="r">ReSellalla</div></div>
+      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Varaukset vihossa tai Excelissä</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Myyjä varaa ja maksaa pöydän itse verkossa</div></div>
+      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Tilitykset käsin, yksi kerrallaan</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Kaikki tilitykset yhdellä pankkitiedostolla</div></div>
+      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Erillinen kassa, varausohjelma ja Excel</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Kassa, varaukset, myyjät ja raportit yhdessä</div></div>
+      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Tuotteet kuvataan erikseen nettiin</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Kassalla hinnoiteltu tuote on jo verkossa</div></div>
+      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Raportit koostetaan käsin</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Myynti, provisiot ja ALV yhdellä klikkauksella</div></div>
+      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Kassan näkee vain kassalta</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Kaikki näkyy puhelimesta, missä tahansa</div></div>
+      <div class="rw"><div class="l"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Virheen korjaus vaatii soiton tukeen</div><div class="r"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Korjaat ja perut itse kassalla</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OMINAISUUDET -->
 <section class="paper" data-theme="light-grey" id="ominaisuudet">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2 class="display">Koko myymälä<br>yhdessä näkymässä</h2>
-      <p class="sub">Kassa, varaukset, tilitykset ja asiakkaat pysyvät ajan tasalla samassa paikassa, eikä mikään jää roikkumaan eri työkaluihin.</p>
+      <h2 class="display">Kaikki yhdessä<br>paikassa</h2>
+      <p class="sub">Kuusi työkalua, yksi kirjautuminen.</p>
     </div>
     <div class="cards sec-gap reveal">
-      <div class="card">
-        <div class="card-top"><span class="pill-tag">Kassa</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
-        <h3>Myynti ja maksu sekunneissa</h3>
-        <p>Myynti, viivakoodi ja maksu hoituvat samalla laitteella, ja jokainen tapahtuma kirjautuu automaattisesti oikealle myyjälle.</p>
-      </div>
-      <div class="card">
-        <div class="card-top"><span class="pill-tag">Näkyvyys</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
-        <h3>Uudet ostajat paikalle</h3>
-        <p>Oma valikoima leviää suoralla linkillä ja QR-koodilla ostajien selattavaksi, mikä tuo uusia asiakkaita suoraan kirpputorillesi.</p>
-      </div>
-      <div class="card">
-        <div class="card-top"><span class="pill-tag">Varaukset</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
-        <h3>Paikat järjestyksessä</h3>
-        <p>Myyntipaikat, myymäläkartta ja saatavuus ovat yhdessä näkymässä, joten varaaminen ja hallinta sujuu ilman erillisiä listoja.</p>
-      </div>
-      <div class="card">
-        <div class="card-top"><span class="pill-tag">Tilitykset</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
-        <h3>Tilitykset ilman käsityötä</h3>
-        <p>Myyjäkohtaiset tilitykset lasketaan ja maksetaan automaattisesti jakson päätteeksi, ilman Exceliä tai arvailua.</p>
-      </div>
-      <!-- re-themed seller dashboard mock -->
-      <div class="tabletcard">
-        <div class="tab">
+      <div class="card"><span class="pill-tag">Kassa</span><h3>Piippaa, maksa, valmis</h3><p>Myynti, viivakoodi ja maksu samalla laitteella. Toimii myös ilman nettiä.</p></div>
+      <div class="card"><span class="pill-tag">Näkyvyys</span><h3>Hylly verkkoon itsestään</h3><p>Jokainen hinnoiteltu tuote näkyy ostajille verkossa ilman erillistä kuvausta.</p></div>
+      <div class="card"><span class="pill-tag">Varaukset</span><h3>Pöydät järjestyksessä</h3><p>Myyjät varaavat ja maksavat pöydän itse, sinä näet tilanteen kartalta.</p></div>
+      <div class="card"><span class="pill-tag">Tilitykset</span><h3>Rahat kerralla ulos</h3><p>Kaikki myyjien tilitykset lähtevät kerralla yhdellä pankkitiedostolla.</p></div>
+      <div class="card"><span class="pill-tag">Asiakkaat</span><h3>Myyjät hallinnassa</h3><p>Myyjät, sopimukset, tilinumerot ja varaushistoria samassa paikassa.</p></div>
+      <div class="card"><span class="pill-tag">Raportit</span><h3>Valmista kirjanpitoon</h3><p>Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- JÄRJESTELMÄN TEASERI -->
+<section data-theme="asphalt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="display">Kurkista sisään</h2>
+      <p class="sub">Näin arki näyttää ReSellassa. Luvut ovat esimerkkejä.</p>
+    </div>
+    <div class="cards sec-gap reveal">
+      <div class="tabletcard" style="grid-column:span 3">
+        <div class="tab" style="max-width:640px">
           <div class="tab-screen">
             <div class="tab-side">
               <div class="tab-logo">ReSella</div>
-              <div class="tab-nav"><span class="on">Yhteenveto</span><span>Tuotteet</span><span>Tilitykset</span><span>Myymälä</span><span>Asetukset</span></div>
+              <div class="tab-nav"><span class="on">Yleisnäkymä</span><span>Pöytäkartta</span><span>Varaukset</span><span>Myyjät</span><span>Tilitykset</span><span>Raportit</span></div>
             </div>
             <div class="tab-main">
-              <div class="tab-hello">Hei Anna,</div>
+              <div class="tab-hello">Hyvää huomenta</div>
               <div class="tab-stats">
-                <div class="tab-tile a"><span class="l">Myynti</span><b>€625</b></div>
-                <div class="tab-tile b"><span class="l">Myydyt</span><b>22 kpl</b></div>
-                <div class="tab-tile c"><span class="l">Myynnissä</span><b>48 kpl</b></div>
+                <div class="tab-tile a"><span class="l">Myynti tänään</span><b>1 284 €</b></div>
+                <div class="tab-tile b"><span class="l">Tässä kuussa</span><b>18 920 €</b></div>
+                <div class="tab-tile c"><span class="l">Käyttöaste</span><b>87 %</b></div>
               </div>
-              <div class="tab-bar"><i></i></div>
-              <div class="tab-foot">5 päivää / 7 pv jaksosta kulunut</div>
+              <div class="tab-bar"><i style="width:87%"></i></div>
+              <div class="tab-foot">9 / 72 pöytää vapaana · 31 avointa tilitystä · 2 340 tuotetta verkossa</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- VERTAUS (comparison) -->
-<section class="paper" data-theme="birch">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Vanha tapa<br>ja ReSella</h2>
-      <p class="sub">Erillisten työkalujen, vihkojen ja Excelien sijaan kaikki toimii yhdessä järjestelmässä.</p>
-    </div>
-    <div class="compare reveal">
-      <div class="cmp old">
-        <h3>Ilman ReSellaa</h3>
-        <ul>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Erilliset työkalut ja Excel-taulukot</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Käsin tehdyt tilitykset</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Ei näkyvyyttä verkossa</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Varaukset ja paikat hajallaan</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Asiakastieto katoaa</li>
-        </ul>
-      </div>
-      <div class="cmp new">
-        <h3>ReSellan kanssa</h3>
-        <ul>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Yksi järjestelmä kaikelle</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Automaattiset tilitykset</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Julkinen katalogi ja QR-koodi</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Varaukset ja kartta yhdessä</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Asiakasrekisteri tallessa</li>
-        </ul>
-      </div>
+    <div class="steps reveal" style="margin-top:clamp(28px,4vw,40px)">
+      <div class="step"><span class="n">1</span><div class="dash"></div><h3>Piippaa</h3><p>Viivakoodi tai QR, tuote ja hinta näkyvät heti isolla.</p></div>
+      <div class="step"><span class="n">2</span><div class="dash"></div><h3>Tarkista</h3><p>Ostaja näkee summan asiakasnäytöltä.</p></div>
+      <div class="step"><span class="n">3</span><div class="dash"></div><h3>Maksa</h3><p>Kortti tai käteinen, summa siirtyy päätteeseen itsestään.</p></div>
+      <div class="step"><span class="n">4</span><h3>Valmis</h3><p>Kuitti tulostuu tai lähtee sähköpostiin, myyjän saldo päivittyy.</p></div>
     </div>
   </div>
 </section>
 
-<!-- STORY -->
-<section data-theme="asphalt">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Rakennettu, jotta ala<br>kasvaa ja vaatteet kiertävät</h2>
-    </div>
-    <div class="story-cols narrow reveal">
-      <p>Tiimissämme on vahvaa ja monipuolista kokemusta alalta. Olemme toimineet niin kierrätysvaikuttajina, alan työntekijöinä kuin yrittäjinäkin. Kirpputoriarki on tullut tutuksi monelta kantilta, ja se näkyy siinä, miten ReSellaa rakennetaan.</p>
-      <p>Uskomme fyysiseen kirpputoriyhteisöön ja sen tulevaisuuteen. Haluamme, että jokainen tuote löytää omistajan, joka sitä tarvitsee, ja että kestävä uudelleenmyynti on yhtä helppoa kuin uuden ostaminen. Arvomme ovat yksinkertaiset: kierto, yhteisö ja kirpputoriarjen aito helpottaminen.</p>
-    </div>
-  </div>
-  <div class="marquee reveal" aria-hidden="true">
-    <div class="marquee-track" id="mqTrack"></div>
-  </div>
-</section>
-
-<!-- KIERTO (chain → timeline) -->
-<section data-theme="green" id="kierto">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Tuetaan kiertoa,<br>joka hyödyttää kaikkia</h2>
-      <p class="sub">Kun tuemme tuotteiden näkyvyyttä, tuemme samalla kirppareita, myyjiä ja tuotteiden kiertoa, josta maksetaan kelpo vastine.</p>
-    </div>
-    <div class="timeline reveal">
-      <div class="tl-step"><span class="tl-bullet">1</span><div class="tl-rule"></div><h3>Näkyvä katalogi</h3><p>Tuotteet nousevat verkkoon selattavaksi. Valikoima löytyy linkillä ja QR-koodilla.</p></div>
-      <div class="tl-step"><span class="tl-bullet">2</span><div class="tl-rule"></div><h3>Konkreettiset löydöt</h3><p>Ostaja tulee paikalle, koskee ja löytää. Fyysinen kirppis saa digitaalisen näkyvyyden.</p></div>
-      <div class="tl-step"><span class="tl-bullet">3</span><h3>Kohonut asiakaskokemus</h3><p>Sujuva kassa ja tilitykset tuovat asiakkaat takaisin. Kierto jatkuu ja kaikki hyötyvät.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- KÄYTTÖÖNOTTO (steps) -->
-<section data-theme="asphalt">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Käyttöön<br>1–3 päivässä</h2>
-      <p class="sub">Pystytämme järjestelmän puolestasi. Et tarvitse teknistä osaamista, me hoidamme asennuksen ja perehdytyksen.</p>
-    </div>
-    <div class="steps reveal">
-      <div class="step"><span class="n">1</span><div class="dash"></div><h3>Varaa esittely</h3><p>Katsotaan tarpeesi yhdessä ja näytämme järjestelmän.</p></div>
-      <div class="step"><span class="n">2</span><div class="dash"></div><h3>Käyttöönotto</h3><p>Pystytämme ReSellan myymälällesi, 1–3 päivässä.</p></div>
-      <div class="step"><span class="n">3</span><div class="dash"></div><h3>Perehdytys</h3><p>Lyhyt koulutus tiimillesi, jotta arki lähtee heti käyntiin.</p></div>
-      <div class="step"><span class="n">4</span><h3>Myynti käyntiin</h3><p>Kassa, varaukset ja näkyvyys toiminnassa samana päivänä.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- HALLINTA (three parts) -->
-<section class="paper" data-theme="light-grey">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Koko myymälä<br>hallinnassa</h2>
-    </div>
-    <div class="cards sec-gap reveal">
-      <div class="card">
-        <span class="pill-tag">Asiakkaat</span>
-        <h3>Asiakkaat ja alennukset</h3>
-        <p>Aseta alennuksia, muuta varauksia ja lisää asiakkaita ilman erillisiä työkaluja. Hallitset koko myymälää yhdestä näkymästä, jossa kaikki pysyy ajan tasalla.</p>
-      </div>
-      <div class="card">
-        <span class="pill-tag">Käteisvirta</span>
-        <h3>Tilitykset ja käteisvirta</h3>
-        <p>Helpot käteistilitykset ja selkeä näkymä käteisvirtaan. Näet kassavirran reaaliajassa ja teet myyjien tilitykset muutamalla klikkauksella.</p>
-      </div>
-      <div class="card">
-        <span class="pill-tag">Paikat</span>
-        <h3>Varaukset ja paikat</h3>
-        <p>Koordinoi varauksia, paikkoja ja tuotteita helposti. Kaikki tiedot löytyvät samasta paikasta ja pysyvät ajan tasalla ruuhkaisimpanakin päivänä.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- KULUTTAJA-APPI (teaser) -->
+<!-- KULUTTAJA-APPI -->
 <section data-theme="green" id="appi">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2 class="display">Ostajan sovellus</h2>
-      <p class="sub">Myymäläsi valikoima leviää ostajille suoralla linkillä ja QR-koodilla. Uusi yleisö löytää kirppiksellesi.</p>
+      <h2 class="display">Ostajat löytävät<br>sinut</h2>
+      <p class="sub">Hyllysi tuotteet ostajan taskussa. Tulossa 2027.</p>
     </div>
     <div class="approw reveal">
       <div class="appcopy">
         <h3 style="color:var(--palette-birch)">Katalogi taskussa</h3>
         <ul style="color:var(--palette-birch)">
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Selaa myymälän tuotteet verkossa</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>QR-koodi vie suoraan katalogiin</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Löydä ja varaa ennen käyntiä</li>
+          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Selaa tuotteita läheltä omin sanoin</li>
+          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Varaa tuote ennen käyntiä</li>
+          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Näytä QR kassalla ja maksa, ei etsimistä</li>
         </ul>
       </div>
       <div class="phone">
@@ -612,14 +613,73 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
   </div>
 </section>
 
+<!-- HYÖDYT LUKUINA -->
+<section class="paper" data-theme="light-grey">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="display">Mitä saat tilalle</h2>
+      <p class="sub">Vähemmän rutiinia, enemmän myyntiä.</p>
+    </div>
+    <div class="statrow reveal">
+      <div class="statcell"><span class="big">1</span><span class="lbl">järjestelmä kolmen tai neljän sijaan</span></div>
+      <div class="statcell"><span class="big">1</span><span class="lbl">tiedosto kaikille tilityksille</span></div>
+      <div class="statcell"><span class="big">24/7</span><span class="lbl">tilanne näkyy puhelimesta</span></div>
+      <div class="statcell"><span class="big">1–3&nbsp;pv</span><span class="lbl">käyttöönottoon</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- KÄYTTÖÖNOTTO -->
+<section data-theme="asphalt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="display">Valmis päivissä</h2>
+      <p class="sub">Vaihto hoituu ilman, että kirppis menee kiinni. Kokonaiskesto 1–3 päivää.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><span class="n">1</span><div class="dash"></div><h3>Tutustu</h3><p>Esittely ja demo, 30 minuuttia.</p></div>
+      <div class="step"><span class="n">2</span><div class="dash"></div><h3>Määritä</h3><p>Pöydät, hinnat, provisio ja oma ilme. Autamme.</p></div>
+      <div class="step"><span class="n">3</span><div class="dash"></div><h3>Asenna</h3><p>Tuomme kassan ja kytkemme laitteet.</p></div>
+      <div class="step"><span class="n">4</span><h3>Myy</h3><p>Ensimmäinen myynti ja koulutus kassalla.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- LUOTETTAVUUS & TUKI -->
+<section class="paper" data-theme="birch">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="display">Tehty kestämään</h2>
+      <p class="sub">Kassa on kirppiksen sydän. Kohtelemme sitä niin.</p>
+    </div>
+    <div class="trust reveal">
+      <div class="tcol">
+        <h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>Tuki</h3>
+        <ul><li>Suomenkielinen tuki arkipäivisin</li><li>Kehittäjä vastaa itse, ei välikäsiä</li><li>Ohjeet suoraan ohjelmassa</li></ul>
+      </div>
+      <div class="tcol">
+        <h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 3l8 4v5c0 4.5-3 7.5-8 9-5-1.5-8-4.5-8-9V7z"/></svg></span>Toimintavarmuus</h3>
+        <ul><li>Kassa toimii myös ilman nettiä</li><li>Virheet korjaat itse kassalla</li><li>Kassa ja maksupääte synkassa</li></ul>
+      </div>
+      <div class="tcol">
+        <h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>Tietoturva</h3>
+        <ul><li>Tiedot säilytetään EU:ssa</li><li>Salattu yhteys ja varmuuskopiot</li><li>Käyttäjäroolit ja GDPR</li></ul>
+      </div>
+      <div class="tcol">
+        <h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 3v18M6 7h9a3 3 0 0 1 0 6H8a3 3 0 0 0 0 6h10"/></svg></span>Hinnoittelu</h3>
+        <ul><li>Ei aloitusmaksua</li><li>Hinta seuraa kassamyyntiäsi</li><li>Hiljainen kuukausi, pienempi lasku</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- HINTA (calculator) -->
 <section data-theme="teal" id="hinta">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2 class="display">Hinta skaalautuu<br>kanssasi</h2>
-      <p class="sub">Kuukausihinta määräytyy kuukausittaisen kassamyynnin mukaan. Mitä pienempi toiminta, sitä pienempi maksu, ja kasvat omaan tahtiisi.</p>
+      <h2 class="display">Maksat kun myyt</h2>
+      <p class="sub">Kuukausihinta seuraa kassamyyntiäsi. Mitä pienempi toiminta, sitä pienempi maksu.</p>
     </div>
-
     <div class="calc reveal">
       <div class="calc-panel calc-left">
         <div class="lbl">Kassamyynti kuukaudessa</div>
@@ -644,21 +704,82 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
         <div class="calc-note">Hinta on arvio. Käyttöönotto ja tilitykset sisältyvät hintaan ilman piilokuluja.</div>
       </div>
     </div>
-
     <div class="whybtn-wrap reveal">
       <button class="btn btn-primary" id="whyBtn">Mihin hintamme perustuu?</button>
     </div>
+  </div>
+</section>
 
-    <div class="why-grid reveal">
-      <div class="why-card">
-        <h3>Miksi maksan liikevaihdon mukaan?</h3>
-        <p>Arvoihimme kuuluu koko kirpputorialan kasvu, kyläkirppiksistä suuriin halleihin. Jotta jokaisen toiminta pysyy kannattavana, hinnan on joustettava myynnin mukaan. Maksat vain sen verran kuin toimintasi tuottaa, ja kasvat omaan tahtiisi. Sinun kannattavuutesi on meidänkin etumme.</p>
-      </div>
-      <div class="why-card">
-        <h3>Jokaiselle kirppikselle</h3>
-        <p>Pieni kyläkirppis maksaa pienen osuuden, suuri halli isomman, mutta prosentti pienenee kun myynti kasvaa. Käyttöönotto on nopea, 1–3 päivää, ja tilitykset kuuluvat hintaan. Avaa taulukko nähdäksesi tarkat tasot.</p>
-      </div>
+<!-- PILOTTI -->
+<section class="paper" data-theme="light-grey">
+  <div class="wrap">
+    <div class="pilot reveal">
+      <h2>Pilottipaikkoja auki</h2>
+      <p>Haemme kirpputoreja mukaan alkuvuodeksi 2027. Rajattu määrä paikkoja.</p>
+      <div class="perks"><span>6 kk maksutta</span><span>Kassalaite meiltä</span><span>Vastineeksi palautetta</span></div>
+      <a class="btn" href="#yhteys">Varaa demo</a>
     </div>
+  </div>
+</section>
+
+<!-- TARINA -->
+<section data-theme="asphalt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="display">Kirppikseltä<br>koodiin</h2>
+      <p class="sub">Tunnemme alan, koska olemme tehneet sitä.</p>
+    </div>
+    <div class="story-cols narrow reveal">
+      <p>Sofialla on yli kymmenen vuoden kokemus kirpputori- ja vintagealalta: oma liike jo 18-vuotiaana ja työvuosia hinnoittelijana itsepalvelukirpputorilla. Kirpputoriarki on tullut tutuksi monelta kantilta, ja se näkyy siinä, miten ReSellaa rakennetaan.</p>
+      <p>Leonilla on kuuden vuoden kokemus ohjelmistokehityksestä. Ennen ensimmäistäkään koodiriviä haastattelimme noin kahtakymmentä kirppisyrittäjää. Arvomme ovat yksinkertaiset: kierto, yhteisö ja kirpputoriarjen aito helpottaminen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="paper" data-theme="birch">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="display">Usein kysyttyä</h2>
+    </div>
+    <div class="faq reveal">
+      <details open><summary>Mitä ReSella maksaa?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Hinta porrastuu kirppiksesi kassamyynnin mukaan. Hiljaisena kuukautena maksat vähemmän. Kerromme tarkan hinnan ennen sopimusta.</div></details>
+      <details><summary>Pitääkö vanhat tuotteet kuvata uudelleen?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Ei. Vanhat tuotteet myydään loppuun nykyisillä lapuilla, ja uudet varaukset tulevat ReSellaan.</div></details>
+      <details><summary>Mitä laitteita tarvitsen?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Tabletin tai kosketusnäytön, lukijan ja tarvittaessa kuittitulostimen ja kassalippaan. Usein nykyiset laitteet käyvät.</div></details>
+      <details><summary>Toimiiko kassa, jos netti katkeaa?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Toimii. Myynnit tallentuvat ja synkronoituvat, kun yhteys palaa.</div></details>
+      <details><summary>Voinko käyttää omaa logoa ja värejä?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Voit. Myyjien varaussivu näkyy kirppiksesi ilmeellä.</div></details>
+      <details><summary>Kauanko käyttöönotto kestää?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">1–3 päivää. Hoidamme asennuksen kanssasi.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- YHTEYS -->
+<section class="paper" data-theme="light-grey" id="yhteys">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-copy reveal">
+        <h2 class="display">Varaa demo</h2>
+        <p>Näytämme ReSellan käytännössä, 30 minuutissa. Kerro kirpputoristasi, niin olemme yhteydessä.</p>
+      </div>
+      <form class="demo reveal" id="demoForm" novalidate>
+        <div class="frow">
+          <label>Nimi<input type="text" name="name" required autocomplete="name" placeholder="Nimesi"></label>
+          <label>Sähköposti<input type="email" name="email" required autocomplete="email" placeholder="sinä@example.com"></label>
+        </div>
+        <label>Kirpputori<input type="text" name="market" autocomplete="organization" placeholder="Kirpputorisi nimi"></label>
+        <label>Viesti<textarea name="message" rows="3" placeholder="Jotain mitä haluat kertoa?"></textarea></label>
+        <button type="submit" class="btn btn-primary btn-l" style="align-self:flex-start">Pyydä demo</button>
+        <p class="cf-note" id="cfNote" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section data-theme="asphalt" class="ctaband">
+  <div class="wrap reveal">
+    <h2 class="display">Katso omin silmin</h2>
+    <a class="btn btn-primary btn-l" href="#yhteys">Varaa demo</a>
   </div>
 </section>
 
@@ -682,36 +803,6 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
   </div>
 </dialog>
 
-<!-- YHTEYS -->
-<section class="paper" data-theme="birch" id="yhteys">
-  <div class="wrap">
-    <div class="contact-grid">
-      <div class="contact-copy reveal on-light">
-        <h2 class="display" style="margin-top:16px">Varaa esittely</h2>
-        <p>Näytämme ReSellan käytännössä. Kerro kirpputoristasi, niin olemme yhteydessä.</p>
-      </div>
-      <form class="demo reveal" id="demoForm" novalidate>
-        <div class="frow">
-          <label>Nimi<input type="text" name="name" required autocomplete="name" placeholder="Nimesi"></label>
-          <label>Sähköposti<input type="email" name="email" required autocomplete="email" placeholder="sinä@example.com"></label>
-        </div>
-        <label>Kirpputori<input type="text" name="market" autocomplete="organization" placeholder="Kirpputorisi nimi"></label>
-        <label>Viesti<textarea name="message" rows="3" placeholder="Jotain mitä haluat kertoa?"></textarea></label>
-        <button type="submit" class="btn btn-primary btn-l" style="align-self:flex-start">Pyydä esittely</button>
-        <p class="cf-note" id="cfNote" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- CTA BAND -->
-<section data-theme="asphalt" class="ctaband">
-  <div class="wrap reveal">
-    <h2 class="display">Valmis helpottamaan kirpputoriarkea?</h2>
-    <a class="btn btn-primary btn-l" href="#yhteys">Varaa esittely</a>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <footer class="site-foot paper">
   <div class="wrap">
@@ -720,13 +811,13 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
         <span class="brand">ReSella</span>
         <p class="slog">Kirpputorisi yhdessä paikassa.</p>
       </div>
-      <div class="foot-col"><h4>Tuote</h4><a href="#ominaisuudet">Ominaisuudet</a><a href="#kierto">Miten se toimii</a><a href="#hinta">Hinta</a></div>
-      <div class="foot-col"><h4>Yritys</h4><a href="#yhteys">Yhteystiedot</a><a href="#yhteys">Varaa esittely</a></div>
-      <div class="foot-col"><h4>Seuraa</h4><a href="https://instagram.com" rel="noopener">Instagram</a><a href="https://linkedin.com" rel="noopener">LinkedIn</a></div>
+      <div class="foot-col"><h4>Tuote</h4><a href="#ominaisuudet">Ominaisuudet</a><a href="#appi">Ostajan sovellus</a><a href="#hinta">Hinta</a></div>
+      <div class="foot-col"><h4>Yritys</h4><a href="#yhteys">Varaa demo</a><a href="#yhteys">Yhteystiedot</a></div>
+      <div class="foot-col"><h4>Seuraa</h4><a href="https://instagram.com" rel="noopener">Instagram</a><a href="https://tiktok.com" rel="noopener">TikTok</a><a href="https://linkedin.com" rel="noopener">LinkedIn</a></div>
     </div>
     <div class="foot-legal">
-      <p>© 2026 ReSella</p>
-      <div class="l-links"><a href="#">Tietosuoja</a><a href="#">Ehdot</a><a href="#">Evästeet</a></div>
+      <p>ReSella Oy · Espoo · Y-tunnus 3641828-1</p>
+      <div class="l-links"><a href="#">Tietosuoja</a><a href="#">Käyttöehdot</a><a href="#">Evästeet</a><a href="#">FI / EN</a></div>
     </div>
   </div>
 </footer>
