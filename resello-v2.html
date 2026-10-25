@@ -1,809 +1,511 @@
 <!doctype html>
-<html lang="fi" data-palette="fixed">
+<html lang="fi">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ReSella, kirpputorisi yhdessä paikassa</title>
-<meta name="description" content="ReSella hoitaa varaukset, kassan, tilitykset ja myynnin seurannan, ja tuo uudet ostajat suoraan kirpputorillesi.">
+<title>ReSella</title>
+<meta name="description" content="Kassa, joka tuo ostajia. Hoida myynti, myyjät ja tilitykset yhdessä paikassa. Hyllysi näkyy samalla netissä.">
+<link rel="icon" href="images/brand/ikoni-pilvi-ruskea.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Figtree:ital,wght@0,300..700;1,300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ===== ui-bahnexpress-fi tokens (birch / asphalt) ===== */
+/* ===== ReSella UI tokens (lukittu 25.10.2026) ===== */
 :root{
-  /* ReSella brand palette mapped onto the skill's semantic slots */
-  --palette-birch:#FAECDE; --palette-asphalt:#3C2415;         /* page beige / ink brown */
-  --palette-grey-50:#FFFBF4; --palette-grey-100:#F3E9DB; --palette-grey-200:#E7D8C4; --palette-grey-300:#D8C3A8;
-  --palette-grey-400:#BBAA8F; --palette-grey-500:#9B8D78; --palette-grey-600:#6E5B46; --palette-grey-700:#574433;
-  --palette-grey-800:#4E3220; --palette-grey-900:#3C2415; --palette-grey-950:#2A1A0F;
-  --palette-orange-200:#E3A982; --palette-orange-500:#C0693A; --palette-orange-600:#A85A30;   /* terracotta signal */
-  --palette-teal-300:#9FB6B8; --palette-teal-600:#85A0A4; --palette-teal-700:#5E7A7E; --palette-teal-800:#6C888D; --palette-teal-900:#4E6569; /* savusininen */
-  --palette-green-700:#9A5230; --palette-green-800:#AD5C33; --palette-green-900:#C0693A;       /* "green" slot = terracotta */
-
-  --color-bg:var(--palette-birch); --color-bg-inverse:var(--palette-asphalt);
-  --color-surface:var(--palette-grey-50); --color-surface-raised:var(--palette-birch);
-  --color-overlay:rgb(241 238 230 / .95);
-  --color-text:var(--palette-grey-900); --color-text-muted:var(--palette-grey-500);
-  --color-text-inverse:var(--palette-birch); --color-heading:var(--palette-asphalt);
-  --color-accent:var(--palette-asphalt); --color-accent-hover:var(--palette-grey-900); --color-accent-contrast:var(--palette-birch);
-  --color-highlight:var(--palette-orange-500); --color-border:var(--palette-grey-200); --color-border-strong:var(--palette-grey-300);
-  --color-focus:var(--palette-grey-500); --color-slider-spent:var(--palette-teal-300); --color-hero-wash:rgb(122 109 96 / .3);
-  --gradient-1:linear-gradient(to bottom,transparent 60%,var(--color-bg));
-
-  --font-display:"Archivo",system-ui,sans-serif; --font-heading:"Archivo",system-ui,sans-serif;
-  --font-body:"Figtree",system-ui,sans-serif; --font-mono:"Geist Mono",ui-monospace,monospace;
-  --stretch-display:125%;
-
-  --radius-sm:12px; --radius-md:20px; --radius-lg:24px; --radius-pill:999px;
-  --section-py:clamp(60px,8vw,104px); --container-max:1240px; --measure:820px; --gutter:clamp(20px,4vw,40px);
-  --ease-standard:cubic-bezier(.2,0,0,1); --ease-emphasis:cubic-bezier(.22,1,.36,1);
-  --ease-enter:cubic-bezier(0,0,.2,1); --ease-exit:cubic-bezier(.4,0,1,1); --ease-morph:cubic-bezier(.4,0,.2,1);
+  --bg:#ECECDC; --surface:#F6F6EE; --line:#DCDBC6; --ink:#3E2520; --ink-muted:#6E5E56;
+  --blue:#C5D0D3; --blue-deep:#3A4961; --red:#C24029; --on-red:#ECECDC;
+  --olive:#8D8B4C; --mustard:#D09C4C; --brown-hover:#2A1814;
+  --radius-pill:999px; --radius-card:24px; --radius-field:20px; --radius-thumb:18px; --radius-small:10px;
+  --gap-xs:6px; --gap-s:10px; --gap-m:24px; --gap-l:36px; --gap-xl:96px;
+  --ease-out:cubic-bezier(0,0,.2,1); --ease-std:cubic-bezier(.2,0,0,1);
+  --dur-fast:150ms; --dur-base:260ms; --dur-slow:460ms;
+  --section-py:clamp(56px,9vw,96px); --max:1120px; --gutter:clamp(20px,5vw,40px);
 }
-[data-theme="light-grey"]{ --color-bg:var(--palette-grey-50); --color-surface:var(--palette-birch); --color-surface-raised:var(--palette-grey-50); --color-overlay:rgb(226 222 212 / .95); --gradient-1:linear-gradient(to bottom,transparent 60%,var(--palette-grey-50)); }
-[data-theme="asphalt"]{ color-scheme:dark; --color-bg:var(--palette-asphalt); --color-surface:var(--palette-grey-800); --color-surface-raised:var(--palette-grey-800); --color-overlay:rgb(60 36 21 / .95); --color-text:rgb(250 236 222 / .92); --color-text-muted:rgb(250 236 222 / .6); --color-heading:var(--palette-birch); --color-accent:var(--palette-birch); --color-accent-hover:var(--palette-grey-100); --color-accent-contrast:var(--palette-asphalt); --color-border:rgb(250 236 222 / .18); --gradient-1:linear-gradient(to bottom,transparent 60%,var(--palette-asphalt)); }
-[data-theme="teal"]{ color-scheme:dark; --color-bg:var(--palette-teal-800); --color-surface:var(--palette-birch); --color-surface-raised:var(--palette-birch); --color-overlay:rgb(108 136 141 / .95); --color-text:var(--palette-birch); --color-text-muted:rgb(255 251 244 / .8); --color-heading:var(--palette-birch); --color-accent:var(--palette-birch); --color-accent-hover:var(--palette-grey-100); --color-accent-contrast:var(--palette-asphalt); --color-border:rgb(255 255 255 / .28); --gradient-1:linear-gradient(to bottom,transparent 60%,var(--palette-teal-800)); }
-[data-theme="green"]{ color-scheme:dark; --color-bg:var(--palette-green-900); --color-surface:var(--palette-green-800); --color-surface-raised:var(--palette-green-700); --color-overlay:rgb(192 105 58 / .95); --color-text:var(--palette-birch); --color-text-muted:rgb(255 251 244 / .78); --color-heading:var(--palette-birch); --color-accent:var(--palette-birch); --color-accent-hover:var(--palette-grey-100); --color-accent-contrast:var(--palette-asphalt); --color-border:rgb(255 255 255 / .24); --gradient-1:linear-gradient(to bottom,transparent 60%,var(--palette-green-900)); }
-[data-theme]{ color:var(--color-text); background-color:var(--color-bg); }
-.paper{background-image:var(--grain);background-size:200px 200px;background-repeat:repeat}
-:is([data-theme="teal"],[data-theme="green"],[data-theme="asphalt"]) .on-light{ --color-heading:var(--palette-asphalt); --color-text:var(--palette-grey-900); --color-text-muted:var(--palette-grey-500); }
+.dark{--bg:#3E2520; --surface:#4B302A; --line:#5E433B; --ink:#ECECDC; --ink-muted:#CDBFB2; --blue-deep:#C5D0D3}
+.rs,body{--_bg:var(--bg);--_sf:var(--surface);--_ln:var(--line);--_ink:var(--ink);--_mu:var(--ink-muted);--_bl:var(--blue);--_bd:var(--blue-deep);--_rd:var(--red);--_on:var(--on-red);--_ol:var(--olive);--_ms:var(--mustard);--_hv:var(--brown-hover);--_e:var(--ease-out);--_es:var(--ease-std);--_fd:"Archivo","Arial Black",system-ui,sans-serif;--_fb:"Epilogue",system-ui,-apple-system,sans-serif}
 
-/* ===== base ===== */
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--color-bg) var(--grain);background-size:auto,200px 200px;color:var(--color-text);font-family:var(--font-body);font-weight:300;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
-::selection{background:var(--palette-asphalt);color:var(--palette-birch)}
-:focus-visible{outline:4px solid var(--color-focus);outline-offset:0}
-img,video,svg{display:block;max-width:100%}
+body{margin:0;background:var(--_bg);color:var(--_ink);font:400 16px/1.45 var(--_fb);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+*:focus-visible{outline:2px solid var(--_bd);outline-offset:2px}
+img,svg,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
-h1,h2,h3,h4,p{margin:0}
+h1,h2,h3,p{margin:0}
 
-/* display / headings */
-.display{font-family:var(--font-display);font-stretch:125%;font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-.3px;text-wrap:balance}
-.heading{font-family:var(--font-heading);font-stretch:125%;font-weight:500;letter-spacing:.3px;line-height:1.14}
-.caption{font-family:var(--font-body);font-weight:600;color:var(--color-text-muted)}
-.muted{color:var(--color-text-muted)}
+/* type */
+.rs-disp{font-family:var(--_fd);font-stretch:125%;font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-.3px;margin:0;text-wrap:balance;font-size:clamp(28px,6vw,72px)}
+.rs-disp.m{font-size:clamp(26px,4.5vw,44px)}
+.rs-head{font-family:var(--_fd);font-stretch:125%;font-weight:500;letter-spacing:.2px;line-height:1.15;margin:0;text-wrap:balance;font-size:24px}
+.rs-head.s{font-size:17px}
+.rs-sub{font-weight:300;margin:0;color:var(--_mu);text-wrap:pretty;font-size:18px}
+.rs-num{font-family:var(--_fd);font-stretch:125%;font-weight:700;line-height:1;letter-spacing:0}
+.rs-cap{font-size:13px;color:var(--_mu)}
+.rs-body{font-size:16px;line-height:1.5}
+.rs-small{font-size:14px;line-height:1.45}
+
+/* buttons */
+.rs-btn{--h:34px;--px:18px;--fs:14px;padding:calc((var(--h) - var(--fs)*.7)/2 - 1px) var(--px);font:500 var(--fs)/1 var(--_fb);border-radius:var(--radius-pill);border:1px solid transparent;display:inline-block;white-space:nowrap;cursor:pointer;background:var(--_ink);color:var(--_bg);text-decoration:none;transition:background-color var(--dur-fast) var(--_e),color var(--dur-fast) var(--_e)}
+.rs-btn:hover{background:var(--_hv)}
+.rs-btn.s{--h:28px;--px:13px;--fs:13px}.rs-btn.l{--h:40px;--px:22px;--fs:15px}
+.rs-btn.lite{background:var(--_sf);color:var(--_ink);border-color:var(--_ln)}.rs-btn.lite:hover{background:var(--_ln)}
+.rs-btn.out{background:transparent;color:var(--_ink);border-color:var(--_ink)}.rs-btn.out:hover{background:var(--_ink);color:var(--_bg)}
+.rs-btn.red{background:var(--_rd);color:var(--_on)}.rs-btn.red:hover{background:#a8371f}
+.rs-tag{display:inline-block;padding:5px 10px;border:1px solid currentColor;border-radius:999px;font-size:13px;line-height:1;color:var(--_mu)}
+.rs-tag.on{background:var(--_ink);color:var(--_bg);border-color:var(--_ink)}
+.rs-tag.blue{background:var(--_bl);color:var(--_ink);border-color:var(--_bl)}
+.rs-ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:square;stroke-linejoin:miter;flex:none}
 
 /* layout */
 section{padding-block:var(--section-py);position:relative}
-.wrap{max-width:var(--container-max);margin-inline:auto;padding-inline:var(--gutter)}
-.narrow{max-width:var(--measure);margin-inline:auto}
-.sec-head{text-align:center;max-width:var(--measure);margin-inline:auto;display:flex;flex-direction:column;align-items:center;gap:20px}
-.sec-head .caption{font-size:clamp(16px,2vw,18px)}
-.sec-head h2{font-size:clamp(30px,5vw,54px)}
-.sec-head .sub{font-weight:300;font-size:clamp(15px,1.8vw,19px);line-height:1.4;max-width:600px;color:var(--color-text)}
-.sec-gap{margin-top:clamp(48px,6vw,64px)}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gutter)}
+.sec-title{display:flex;flex-direction:column;gap:12px;max-width:640px}
+.sec-title.center{margin-inline:auto;align-items:center;text-align:center}
+.sec-title .rs-disp{font-size:clamp(28px,5vw,56px)}
+.sec-gap{margin-top:var(--gap-l)}
 
-/* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-body);font-weight:600;border:none;border-radius:var(--radius-pill);cursor:pointer;white-space:nowrap;text-align:center;height:46px;padding-inline:22px;font-size:16px;transition:background-color .15s,color .15s,transform .15s}
-.btn-primary{background:var(--color-accent);color:var(--color-accent-contrast)}
-.btn-primary:hover{background:var(--color-accent-hover)}
-.btn-secondary{background:var(--color-surface);color:var(--color-heading)}
-.btn-ghost{background:transparent;color:inherit;text-decoration:underline;text-underline-offset:.2em}
-.btn-s{height:40px;font-size:15px;padding-inline:18px}
-.btn-l{height:52px;font-size:18px;padding-inline:26px}
-.pill-tag{display:inline-flex;align-items:center;height:32px;padding-inline:14px;border-radius:var(--radius-pill);border:2px solid currentColor;font-family:var(--font-body);font-weight:600;font-size:12.5px;letter-spacing:.02em}
-
-/* ===== header (compact, transparent over hero → frosted on scroll) ===== */
-.site-head{position:fixed;inset:0 0 auto 0;height:58px;z-index:40;display:flex;align-items:center;transition:background-color .24s,box-shadow .24s;
-  --hc:var(--palette-birch); --hc-inv:var(--palette-asphalt)}      /* over hero: logo/nav cream, active ink */
-.site-head.is-scrolled{background:rgb(255 251 244 / .9);--hc:var(--palette-asphalt);--hc-inv:var(--palette-birch);box-shadow:0 1px 0 var(--palette-grey-200)}
-.site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%}
-.brand{display:inline-flex;align-items:center;color:var(--hc);transition:color .24s}
-.brand svg{display:block;width:116px;height:auto}
-.segmented{position:relative;display:flex;align-items:center;gap:0;background:transparent;border-radius:var(--radius-pill);padding:4px}
-.segmented a{position:relative;z-index:1;display:inline-flex;align-items:center;height:36px;padding-inline:18px;font-family:var(--font-body);font-weight:600;font-size:16px;color:var(--hc);border-radius:var(--radius-pill);transition:color .2s}
-.segmented .seg-knob{position:absolute;z-index:0;top:4px;bottom:4px;left:4px;border-radius:var(--radius-pill);background:var(--hc);transition:transform .26s var(--ease-standard),width .26s var(--ease-standard),background-color .24s;opacity:0}
-.segmented.ready .seg-knob{opacity:1}
-.segmented.ready a.active{color:var(--hc-inv)}
-.head-actions{display:flex;align-items:center;gap:12px}
-.site-head .btn-demo{height:42px;padding-inline:20px;font-size:16px;background:var(--hc);color:var(--hc-inv);border-radius:var(--radius-pill);display:inline-flex;align-items:center;font-family:var(--font-body);font-weight:600;transition:background-color .2s,color .2s}
-.site-head .btn-demo:hover{opacity:.92}
-.menu-btn{display:none;width:44px;height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--hc);background:transparent;color:var(--hc);cursor:pointer;align-items:center;justify-content:center}
-.menu-btn svg{width:20px;height:20px}
-/* mobile menu sheet */
-.menu-sheet{position:fixed;inset:64px 0 auto 0;z-index:39;background:var(--color-overlay);border-bottom-left-radius:24px;border-bottom-right-radius:24px;padding:16px var(--gutter) 28px;transform:translateY(-110%);transition:transform .24s var(--ease-standard);display:flex;flex-direction:column;gap:6px}
-.menu-sheet.open{transform:translateY(0)}
-.menu-sheet a{height:52px;display:flex;align-items:center;padding-inline:16px;border-radius:var(--radius-pill);font-family:var(--font-body);font-weight:600;font-size:20px;color:var(--color-heading)}
-.menu-scrim{position:fixed;inset:0;z-index:38;background:rgb(18 17 14 / .7);opacity:0;pointer-events:none;transition:opacity .24s}
-.menu-scrim.open{opacity:1;pointer-events:auto}
+/* ===== header ===== */
+.hdr{position:fixed;inset:0 0 auto 0;z-index:40;padding:12px var(--gutter);transition:background-color var(--dur-base) var(--_e)}
+.hdr-in{max-width:var(--max);margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.hdr .logo{height:30px;display:block;transition:height var(--dur-base) var(--_e)}
+.hdr.scrolled{background:var(--_sf)}
+.hdr.scrolled .logo{height:26px}
+.hdr .logo-beige{display:block}.hdr .logo-ruskea{display:none}
+.hdr.scrolled .logo-beige{display:none}.hdr.scrolled .logo-ruskea{display:block}
+.hdr-right{display:flex;align-items:center;gap:14px}
+.hdr .demo{font-weight:400}
+.hdr .demo.on-hero{background:var(--bg);color:var(--ink)}
+.hdr.scrolled .demo.on-hero{background:var(--ink);color:var(--bg)}
+.burger{width:28px;height:21px;border:0;background:none;cursor:pointer;padding:0;color:var(--bg)}
+.hdr.scrolled .burger{color:var(--ink)}
+.burger rect{fill:currentColor}
+.hdr-cloud{height:0;overflow:hidden;opacity:0;transition:opacity var(--dur-base) var(--_e)}
+.hdr.scrolled .hdr-cloud{height:auto;opacity:1}
+.hdr-cloud img{height:18px}
+/* menu */
+.menu{position:fixed;inset:64px var(--gutter) auto auto;z-index:39;background:var(--_sf);border-radius:var(--radius-card);padding:16px 20px 22px;display:none;flex-direction:column;gap:4px;min-width:240px}
+.menu.open{display:flex}
+.menu a{font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:22px;color:var(--_ink);padding:6px 0;border-bottom:1px solid var(--_ln)}
+.menu a:last-child{border-bottom:0}
 
 /* ===== hero ===== */
-.hero{min-height:100svh;padding:0;display:flex;align-items:flex-end;overflow:hidden;color:var(--palette-birch)}
-.hero-bg{position:absolute;inset:0;z-index:0;background:var(--palette-asphalt)}
-.hero-bg video,.hero-bg img.poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero-tint{position:absolute;inset:0;z-index:1;background:rgb(0 0 0 / .15);pointer-events:none}
-.hero-grain{position:absolute;inset:0;z-index:2;background-image:var(--grain);background-size:200px 200px;opacity:.1;mix-blend-mode:overlay;pointer-events:none}
-.hero-fade{position:absolute;inset:0;z-index:3;background:linear-gradient(to bottom,transparent 60%,rgb(60 36 21 / .5) 88%,var(--palette-asphalt));pointer-events:none}
-.hero{align-items:center}
-.hero-inner{position:relative;z-index:4;width:100%;display:flex;flex-direction:column;align-items:center;text-align:center}
-.hero-title{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}
-/* progressive reveal: only the big title shows first; the rest opens on scroll */
-.hero-more{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease-enter),transform .6s var(--ease-enter);max-height:0;overflow:hidden}
-.hero.open .hero-more{opacity:1;transform:none;max-height:400px}
-.hero-scrollcue{position:absolute;left:50%;bottom:26px;z-index:4;transform:translateX(-50%);color:rgb(250 236 222 / .7);transition:opacity .4s}
-.hero.open .hero-scrollcue{opacity:0}
-.hero-scrollcue svg{width:24px;height:24px;animation:cueBob 1.8s ease-in-out infinite}
-@keyframes cueBob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
-.hero-title .l1{font-size:clamp(40px,9vw,78px);letter-spacing:.02em}
-.hero-title .l2{font-size:clamp(32px,7vw,58px)}
-.hero .l3{display:block;font-family:var(--font-heading);font-stretch:125%;font-weight:500;text-transform:none;letter-spacing:.3px;font-size:clamp(16px,2.6vw,26px);line-height:1.15;margin-top:8px;max-width:22ch;margin-inline:auto}
-.hero-sub{text-align:center;max-width:520px;margin:18px auto 0;font-size:clamp(14.5px,1.8vw,17px);line-height:1.4;color:rgb(255 254 247 / .9)}
-.hero-cta{display:flex;gap:14px;justify-content:center;margin-top:30px;flex-wrap:wrap}
-.hero .btn-primary{background:var(--palette-birch);color:var(--palette-asphalt)}
-.hero .btn-primary:hover{background:var(--palette-grey-100)}
-.hero .btn-secondary{background:rgb(255 254 247 / .12);color:var(--palette-birch);border:1.5px solid rgb(255 254 247 / .5)}
-/* hero strip: bridging band straddling hero / next section */
-.strip-bridge{position:relative;z-index:6;margin-top:calc(-1 * clamp(56px,9vw,104px));margin-bottom:clamp(28px,4vw,48px)}
-.hero-strip{max-width:1040px;margin-inline:auto;background:#3C2415;border-radius:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;overflow:hidden}
-.hero-strip .cell{background:#45301e;padding:clamp(24px,3vw,40px)}
-.hero-strip .cell .lbl{font-family:var(--font-body);font-weight:600;font-size:15px;color:rgb(250 236 222 / .6);margin-bottom:12px}
-.hero-strip .cell h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(16px,2vw,23px);line-height:1.12;color:var(--palette-birch)}
-.hero-strip .cell p{font-weight:300;font-size:14px;line-height:1.45;color:rgb(250 236 222 / .82);margin-top:12px}
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--ink)}
+.hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-grain{position:absolute;inset:0;z-index:1;background-image:var(--grain);background-size:200px 200px;opacity:.08;mix-blend-mode:overlay;pointer-events:none}
+.hero-tint{position:absolute;inset:0;z-index:1;background:rgb(0 0 0 / .15)}
+.hero-in{position:relative;z-index:2;width:100%;max-width:var(--max);margin-inline:auto;padding:120px var(--gutter) clamp(24px,4vw,40px);color:var(--bg);display:flex;flex-direction:column;gap:26px}
+.hero-top{display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center}
+.hero-top .rs-disp{color:var(--bg);font-size:clamp(30px,6.4vw,66px);max-width:14ch}
+.hero-top p{margin:0;font-size:clamp(15px,2vw,18px);color:rgb(236 236 220 / .92)}
+.hero-cols{display:grid;grid-template-columns:repeat(3,1fr);background:rgb(62 37 32 / .82);border-radius:22px;overflow:hidden}
+.hero-cols .c{padding:clamp(18px,2.4vw,26px);display:flex;flex-direction:column;gap:10px;color:var(--bg)}
+.hero-cols .c+.c{border-left:1px solid rgb(236 236 220 / .14)}
+.hero-cols .c .ic{opacity:.6}
+.hero-cols .c h3{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:clamp(16px,2vw,20px);line-height:1.08;color:var(--bg)}
+.hero-cols .c p{margin:0;font-size:13px;color:rgb(236 236 220 / .85)}
+.hero-mascot{position:absolute;right:clamp(12px,5vw,80px);bottom:0;z-index:2;width:clamp(68px,9vw,104px);pointer-events:none}
 
-/* ===== feature cards (bento interpreted) ===== */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.card{background:var(--color-surface);border-radius:var(--radius-lg);padding:clamp(18px,2.2vw,28px);display:flex;flex-direction:column;gap:11px;min-height:188px}
-.card .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.card h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(18px,2vw,22px);line-height:1.12;color:var(--color-heading)}
-.card p{font-weight:300;font-size:14.5px;line-height:1.5;color:var(--color-text)}
-.card .arrow{width:44px;height:44px;border-radius:var(--radius-pill);border:2px solid currentColor;display:flex;align-items:center;justify-content:center;flex:none;opacity:.8}
-.card .arrow svg{width:20px;height:20px}
-.card.span2{grid-column:span 2}
+/* ===== cards grid ===== */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap-m)}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap-m)}
+.card{background:var(--_sf);border-radius:var(--radius-card);padding:24px;display:flex;flex-direction:column;gap:10px}
+.card .rs-head{font-size:20px}
+.card .ic{color:var(--_ink)}
+.card.blue{background:var(--_bl)}
 
-/* tablet mock (brand dashboard, re-themed to birch/asphalt) */
-.tabletcard{grid-column:span 2;background:var(--palette-asphalt);border-radius:var(--radius-lg);padding:clamp(20px,2.4vw,32px);display:flex;align-items:center;justify-content:center}
-.tab{width:100%;max-width:560px;border-radius:26px;background:var(--palette-grey-900);padding:12px}
-.tab-screen{border-radius:16px;background:var(--palette-birch);display:flex;overflow:hidden;color:var(--palette-grey-900);min-height:230px}
-.tab-side{width:92px;flex:none;background:var(--palette-grey-50);padding:14px 10px;display:flex;flex-direction:column}
-.tab-logo{font-family:var(--font-display);font-stretch:125%;font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:-.3px}
-.tab-nav{display:flex;flex-direction:column;gap:3px;margin-top:12px}
-.tab-nav span{font-size:8px;font-weight:600;color:var(--palette-grey-500);padding:3px 6px;border-radius:6px}
-.tab-nav span.on{background:var(--palette-asphalt);color:var(--palette-birch)}
+/* problem list */
+.plist{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap-m)}
+.pc{background:var(--_sf);border-radius:var(--radius-card);padding:20px;display:flex;flex-direction:column;gap:8px}
+.pc .ic{color:var(--_rd)}
+.pc b{font-weight:600}
+.pc p{font-size:14px;line-height:1.45;margin:0}
+
+/* before / after */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-m)}
+.ba .photo{border-radius:var(--radius-card);overflow:hidden;position:relative;min-height:320px}
+.ba .photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.45) brightness(.78) sepia(.15)}
+.ba .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgb(42 26 15 / .9),rgb(42 26 15 / .25))}
+.ba .photo .in{position:absolute;inset:auto 0 0 0;z-index:1;padding:24px;color:var(--bg)}
+.ba .pane{background:var(--_sf);border-radius:var(--radius-card);padding:24px;display:flex;flex-direction:column;gap:14px}
+.balist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.balist li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.4}
+.balist .mk{flex:none;width:18px;height:18px;border-radius:999px;display:grid;place-items:center;margin-top:1px}
+.ba .photo .balist li{color:rgb(236 236 220 / .92)}
+.ba .photo .mk{background:rgb(236 236 220 / .16);color:var(--bg)}
+.ba .pane .mk{background:var(--_bl);color:var(--_ink)}
+.balist .mk svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:square}
+.mini{background:var(--_bg);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.mini .row{display:flex;gap:7px}
+.mini .chip{flex:1;border-radius:9px;padding:9px;display:flex;flex-direction:column;gap:3px}
+.mini .chip small{font-size:7px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--_mu)}
+.mini .chip b{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:13px;color:var(--_ink)}
+.mini .chip.a{background:var(--_sf)}.mini .chip.b{background:var(--_bl)}.mini .chip.c{background:var(--_ink)}.mini .chip.c small,.mini .chip.c b{color:var(--_bg)}
+.mini .line{height:6px;border-radius:6px;background:var(--_sf)}.mini .line.sh{width:60%}
+
+/* media */
+.showcase{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,56px);align-items:center}
+.showcase.flip .mediaframe{order:-1}
+.mediaframe{border-radius:var(--radius-card);overflow:hidden;aspect-ratio:4/5;background:var(--_sf)}
+.mediaframe.wide{aspect-ratio:16/9}
+.mediaframe img{width:100%;height:100%;object-fit:cover}
+.sc h3{font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:clamp(22px,3vw,30px);line-height:1.1;color:var(--_ink)}
+.sc p{font-size:16px;line-height:1.5;margin-top:14px;color:var(--_mu)}
+.sc ul{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.sc li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.sc li .mk{flex:none;width:20px;height:20px;border-radius:999px;background:var(--_bl);display:grid;place-items:center;margin-top:1px}
+.sc li .mk svg{width:12px;height:12px;fill:none;stroke:var(--_ink);stroke-width:2.4;stroke-linecap:square}
+
+/* dashboard mock */
+.device{background:var(--_sf);border-radius:var(--radius-card);padding:clamp(18px,3vw,30px);display:flex;justify-content:center}
+.tab{width:100%;max-width:620px;border-radius:24px;background:#241611;padding:10px}
+.tab-scr{border-radius:16px;background:var(--surface);display:flex;overflow:hidden;min-height:230px;color:var(--ink)}
+.tab-side{width:96px;flex:none;background:var(--bg);padding:14px 10px;display:flex;flex-direction:column;gap:3px}
+.tab-side .lg{height:16px;margin-bottom:8px}
+.tab-side span{font-size:8px;color:var(--ink-muted);padding:3px 6px;border-radius:6px}
+.tab-side span.on{background:var(--ink);color:var(--bg)}
 .tab-main{flex:1;min-width:0;padding:14px;display:flex;flex-direction:column;gap:9px}
-.tab-hello{font-family:var(--font-display);font-stretch:125%;font-weight:900;font-size:20px;text-transform:uppercase;letter-spacing:-.4px;line-height:1}
+.tab-main .hi{font-size:11px;color:var(--ink-muted)}
 .tab-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.tab-tile{border-radius:10px;padding:9px;display:flex;flex-direction:column;gap:4px}
-.tab-tile .l{font-size:6.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
-.tab-tile b{font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:15px}
-.tab-tile.a{background:var(--palette-grey-100)}
-.tab-tile.b{background:var(--palette-teal-800);color:var(--palette-birch)}
-.tab-tile.c{background:var(--palette-asphalt);color:var(--palette-birch)}
-.tab-bar{height:5px;border-radius:5px;background:var(--palette-grey-100);overflow:hidden;margin-top:2px}
-.tab-bar i{display:block;width:71%;height:100%;background:var(--palette-teal-600)}
-.tab-foot{margin-top:auto;font-size:7px;font-weight:600;color:var(--palette-grey-500)}
+.tab-tile{border-radius:10px;padding:9px;background:var(--bg);display:flex;flex-direction:column;gap:4px}
+.tab-tile small{font-size:7px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-muted)}
+.tab-tile b{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:15px}
+.tab-tile.bl{background:var(--blue)}
+.tab-bar{height:6px;border-radius:6px;background:var(--bg);overflow:hidden}.tab-bar i{display:block;height:100%;background:var(--ink)}
+.tab-foot{margin-top:auto;font-size:8px;color:var(--ink-muted)}
 
-/* ===== story ===== */
-.story-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);margin-top:clamp(40px,5vw,56px)}
-.story-cols p{font-weight:300;font-size:clamp(14.5px,1.7vw,17px);line-height:1.5;color:var(--color-text)}
+/* checkout flow */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-m);margin-top:var(--gap-l)}
+.flow .st{display:flex;flex-direction:column;gap:8px}
+.flow .n{width:30px;height:30px;border-radius:999px;background:var(--_ink);color:var(--_bg);display:grid;place-items:center;font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:14px}
+.flow h3{font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:16px;color:var(--_ink)}
+.flow p{font-size:13px;color:var(--_mu);margin:0}
 
-/* ===== marquee ===== */
-.marquee{margin-top:clamp(48px,6vw,72px);width:100vw;margin-left:calc(50% - 50vw);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.marquee-track{display:flex;align-items:flex-end;gap:40px;width:max-content;animation:mq 90s linear infinite}
-.marquee:hover .marquee-track{animation-play-state:paused}
-.marquee-track img{height:clamp(120px,15vh,180px);width:auto;object-fit:contain}
-@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* phones (app mockups) */
+.phones{position:relative;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;padding-bottom:10px}
+.phone{aspect-ratio:9/19.5;width:min(30%,180px);border-radius:30px;background:#1E1311;padding:6px;position:relative}
+.phone::before{content:"";position:absolute;top:12px;left:50%;transform:translateX(-50%);width:30%;height:10px;border-radius:999px;background:#1E1311;z-index:2}
+.phone .scr{height:100%;border-radius:25px;overflow:hidden;background:var(--surface);padding:28px 11px 10px;display:flex;flex-direction:column;gap:7px;font-size:9px;line-height:1.25}
+.phone .scr .num{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:15px}
+.phone .mid{width:60%}
+.note{font:500 12px var(--_fb);padding:7px 14px;border-radius:999px;background:var(--ink);color:var(--bg);white-space:nowrap}
 
-/* ===== timeline (chain) ===== */
-.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:clamp(48px,6vw,64px);counter-reset:step}
-.tl-step{display:flex;flex-direction:column;gap:18px;position:relative}
-.tl-bullet{width:54px;height:54px;border-radius:var(--radius-pill);border:2px solid var(--color-border);background:var(--color-surface-raised);color:var(--color-heading);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:21px}
-.tl-step h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(17px,2vw,22px);line-height:1.12;color:var(--color-heading)}
-.tl-step p{font-weight:300;font-size:14.5px;line-height:1.5}
-.tl-rule{position:absolute;top:27px;left:66px;right:-24px;height:4px;background:var(--color-border);border-radius:4px}
-.tl-step:last-child .tl-rule{display:none}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-m)}
+.stat{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.stat .big{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:clamp(34px,5vw,54px);line-height:1;color:var(--_ink)}
+.stat .lbl{font-size:14px;color:var(--_mu)}
 
-/* ===== calculator (pricing) ===== */
-.calc{display:grid;grid-template-columns:1.05fr 1fr;gap:2px;max-width:1000px;margin:clamp(40px,5vw,56px) auto 0;background:var(--color-border);border-radius:var(--radius-lg);overflow:hidden}
-.calc-panel{background:var(--color-surface);padding:clamp(24px,3vw,40px);color:var(--palette-grey-900)}
-.calc-left .lbl{font-family:var(--font-body);font-weight:600;font-size:18px;color:var(--palette-grey-900)}
-.calc-left .hint{font-size:14px;color:var(--palette-grey-500);margin-top:4px}
-.calc-inputrow{display:flex;align-items:center;gap:14px;margin-top:18px}
-.calc-num{flex:none;width:168px;height:60px;border-radius:var(--radius-md);border:2px solid var(--palette-grey-200);background:var(--palette-birch);display:flex;align-items:center;padding-inline:16px;gap:6px}
-.calc-num input{border:none;background:transparent;font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:26px;width:100%;color:var(--palette-grey-900);font-variant-numeric:tabular-nums}
-.calc-num input:focus{outline:none}
-.calc-num .cur{font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:22px;color:var(--palette-grey-500)}
-.calc-range{flex:1;-webkit-appearance:none;appearance:none;height:5px;border-radius:5px;background:var(--palette-grey-200);outline:none}
-.calc-range::-webkit-slider-runnable-track{height:5px;border-radius:5px}
-.calc-range::-moz-range-track{height:5px;border-radius:5px;background:var(--palette-grey-200)}
-.calc-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:var(--palette-asphalt);margin-top:-10.5px;cursor:pointer;border:3px solid var(--palette-birch)}
-.calc-range::-moz-range-thumb{width:26px;height:26px;border:3px solid var(--palette-birch);border-radius:50%;background:var(--palette-asphalt);cursor:pointer}
-.calc-scale{display:flex;justify-content:space-between;margin-top:10px;font-size:13px;color:var(--palette-grey-500);font-variant-numeric:tabular-nums}
-.calc-tiers{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px}
-.calc-tiers button{height:38px;padding-inline:14px;border-radius:var(--radius-pill);border:2px solid var(--palette-grey-200);background:transparent;color:var(--palette-grey-600);font-family:var(--font-body);font-weight:600;font-size:14px;cursor:pointer;transition:.15s}
-.calc-tiers button.on{background:var(--palette-asphalt);color:var(--palette-birch);border-color:var(--palette-asphalt)}
-.calc-right{background:var(--palette-birch);display:flex;flex-direction:column;justify-content:center}
-.calc-tasolbl{font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--palette-grey-500);text-transform:uppercase;letter-spacing:.06em}
-.calc-result{font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:clamp(40px,6.5vw,60px);letter-spacing:1px;line-height:1;color:var(--palette-grey-900);font-variant-numeric:tabular-nums;margin-top:8px}
-.calc-result .u{font-size:.4em;color:var(--palette-grey-500);letter-spacing:0}
-.calc-break{margin-top:22px;border-top:1px solid var(--palette-grey-200);padding-top:16px;display:flex;flex-direction:column;gap:9px}
-.calc-break .row{display:flex;justify-content:space-between;font-size:15px;color:var(--palette-grey-600);font-variant-numeric:tabular-nums}
-.calc-break .row b{color:var(--palette-grey-900);font-weight:600}
-.calc-note{font-size:13px;color:var(--palette-grey-500);margin-top:16px}
-.whybtn-wrap{text-align:center;margin-top:clamp(28px,4vw,40px)}
-/* why-card + tier table dialog */
-.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:clamp(40px,5vw,56px);align-items:stretch}
-.why-card{background:var(--color-surface);border-radius:var(--radius-lg);padding:clamp(24px,3vw,40px);color:var(--palette-grey-900)}
-.why-card h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(18px,2.2vw,25px);line-height:1.12;color:var(--palette-asphalt)}
-.why-card p{font-weight:300;font-size:14.5px;line-height:1.5;margin-top:14px;color:var(--palette-grey-800)}
-dialog.tiers{border:none;border-radius:var(--radius-lg);padding:0;max-width:640px;width:92vw;background:var(--palette-birch);color:var(--palette-grey-900)}
-dialog.tiers::backdrop{background:rgb(18 17 14 / .7)}
-.tiers-inner{padding:clamp(24px,4vw,40px)}
-.tiers-inner h3{font-family:var(--font-display);font-stretch:125%;font-weight:900;text-transform:uppercase;font-size:clamp(22px,4vw,32px);letter-spacing:-.3px;color:var(--palette-asphalt)}
-.tiers-inner p{font-weight:300;font-size:16px;line-height:1.45;margin-top:10px;color:var(--palette-grey-600)}
-.tier-scroll{margin-top:22px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-table.tier-tbl{width:100%;min-width:420px;border-collapse:collapse;font-variant-numeric:tabular-nums}
-table.tier-tbl th,table.tier-tbl td{text-align:left;padding:12px 8px;border-bottom:1px solid var(--palette-grey-200);font-size:15px}
-table.tier-tbl th{font-family:var(--font-body);font-weight:600;color:var(--palette-grey-500);font-size:13px;text-transform:uppercase;letter-spacing:.04em}
-table.tier-tbl td:first-child{font-weight:600}
-.tiers-close{margin-top:24px}
+/* trust */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-m)}
+.tcol h3{font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:18px;display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.tcol h3 .ic{color:var(--_ink)}
+.tcol ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.tcol li{font-size:13.5px;line-height:1.4;padding-left:14px;position:relative;color:var(--_mu)}
+.tcol li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:999px;background:var(--_ink)}
 
-/* ===== contact ===== */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);margin-top:clamp(40px,5vw,56px);align-items:start}
-.contact-copy h2{font-size:clamp(28px,5vw,48px)}
-.contact-copy p{font-weight:300;font-size:clamp(15px,1.8vw,18px);line-height:1.4;margin-top:18px;color:var(--color-text)}
-form.demo{display:flex;flex-direction:column;gap:14px}
-form.demo .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-form.demo label{display:flex;flex-direction:column;gap:7px;font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--color-text)}
-form.demo input,form.demo textarea{font-family:var(--font-body);font-weight:400;font-size:17px;color:var(--palette-grey-900);background:var(--palette-birch);border:2px solid transparent;border-radius:var(--radius-md);padding:14px 16px;min-height:56px}
-.on-light form.demo input,.on-light form.demo textarea{background:var(--palette-birch)}
-form.demo input:focus,form.demo textarea:focus{outline:none;border-color:var(--palette-teal-600)}
-form.demo .cf-note{font-size:14px;min-height:1.2em}
-form.demo .cf-note.ok{color:var(--palette-teal-300)}
-form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
+/* quote / calculator */
+.quote{max-width:620px}
+.qform{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+.qfield{flex:1;min-width:220px;background:var(--_sf);border-radius:999px;min-height:52px;padding:8px 20px;display:flex;flex-direction:column;justify-content:center}
+.qfield .lb{font-size:13px;color:var(--_mu)}
+.qfield input{border:0;background:transparent;font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:20px;color:var(--_ink);width:100%;outline:none}
+.qfield:focus-within{outline:2px solid var(--_bd)}
+.qresult{margin-top:24px;background:var(--_sf);border-radius:var(--radius-card);padding:24px;display:none}
+.qresult.show{display:block}
+.qresult .taso{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--_mu)}
+.qresult .price{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:clamp(40px,7vw,60px);line-height:1;margin-top:6px}
+.qresult .price small{font-size:.32em;color:var(--_mu)}
+.qbreak{margin-top:18px;border-top:1px solid var(--_ln);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.qbreak .r{display:flex;justify-content:space-between;font-size:14px;color:var(--_mu)}
+.qbreak .r b{color:var(--_ink);font-family:var(--_fd);font-stretch:125%;font-weight:700}
+.qnote{font-size:13px;color:var(--_mu);margin-top:14px}
 
-/* ===== CTA band ===== */
-.ctaband{text-align:center}
-.ctaband h2{font-size:clamp(30px,5vw,52px);max-width:16ch;margin-inline:auto}
-.ctaband .btn{margin-top:clamp(28px,4vw,40px)}
+/* FAQ */
+.faq2{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,5vw,56px);align-items:start}
+.acc{border-top:1px solid var(--_ln)}
+.acc details{border-bottom:1px solid var(--_ln)}
+.acc summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:20px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary i{width:28px;height:28px;border-radius:999px;border:1px solid var(--_ink);display:grid;place-items:center;flex:none;font-style:normal;transition:transform var(--dur-base) var(--_e)}
+.acc details[open] summary i{transform:rotate(45deg)}
+.acc p{margin:0 0 18px;font-size:14px;color:var(--_mu);max-width:56ch}
 
-/* ===== comparison (vertaus) ===== */
-.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:980px;margin:clamp(40px,5vw,56px) auto 0}
-.cmp{border-radius:var(--radius-lg);padding:clamp(22px,2.6vw,34px);display:flex;flex-direction:column;gap:16px}
-.cmp.old{background:var(--color-surface);color:var(--color-text)}
-.cmp.new{background:#3C2415;color:var(--palette-birch)}
-.cmp h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(17px,2vw,22px);line-height:1.1}
-.cmp.old h3{color:var(--color-heading)}
-.cmp ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
-.cmp li{display:flex;gap:12px;align-items:flex-start;font-weight:300;font-size:15px;line-height:1.4}
-.cmp .mk{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px}
-.cmp.old .mk{background:rgba(60,36,21,.1);color:var(--palette-grey-600)}
-.cmp.new .mk{background:#C0693A;color:#fff}
-.cmp .mk svg{width:13px;height:13px}
+/* timeline */
+.tl{width:100%;max-width:640px;margin-top:var(--gap-l);color:var(--_ink)}
 
-/* ===== steps (käyttöönotto) ===== */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:clamp(40px,5vw,56px);counter-reset:s}
-.step{position:relative;display:flex;flex-direction:column;gap:12px}
-.step .n{width:46px;height:46px;border-radius:var(--radius-pill);border:2px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:18px;color:var(--color-heading)}
-.step .dash{position:absolute;top:23px;left:58px;right:-18px;height:2px;background:var(--color-border)}
-.step:last-child .dash{display:none}
-.step h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(15px,1.8vw,19px);line-height:1.12;color:var(--color-heading)}
-.step p{font-weight:300;font-size:14px;line-height:1.45}
+/* band */
+.band{background:var(--_ink);color:var(--_bg);border-radius:var(--radius-card);padding:clamp(32px,5vw,56px) 20px;display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center}
+.band .rs-disp{color:var(--_bg)}
+.band .rs-btn{background:var(--_bg);color:var(--_ink)}
+.band.pilot .perks{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.band.pilot .perks span{border:1px solid rgb(236 236 220 / .4);border-radius:999px;padding:7px 14px;font:500 13px var(--_fb)}
 
-/* ===== consumer-app teaser (phone) ===== */
-.approw{display:grid;grid-template-columns:1fr auto;gap:clamp(32px,6vw,72px);align-items:center;margin-top:clamp(36px,5vw,52px)}
-.appcopy h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(20px,3vw,34px);line-height:1.08;color:var(--color-heading)}
-.appcopy ul{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
-.appcopy li{display:flex;gap:12px;align-items:flex-start;font-weight:300;font-size:15px;line-height:1.4}
-.appcopy li .mk{flex:none;width:22px;height:22px;border-radius:50%;background:var(--color-surface-raised);display:flex;align-items:center;justify-content:center;margin-top:1px}
-.appcopy li .mk svg{width:13px;height:13px;color:var(--color-heading)}
-.phone{position:relative;width:248px;flex:none;justify-self:center;border-radius:34px;background:#2A1A0F;padding:9px;box-shadow:none}
-.phone-screen{border-radius:26px;overflow:hidden;background:var(--palette-birch);color:#3C2415}
-.phone-top{display:flex;align-items:center;justify-content:space-between;padding:14px 14px 10px}
-.phone-top .b{font-family:var(--font-display);font-stretch:125%;font-weight:900;text-transform:uppercase;font-size:14px;letter-spacing:-.3px;color:#3C2415}
-.phone-top .q{width:24px;height:24px;border-radius:7px;background:#3C2415;display:flex;align-items:center;justify-content:center}
-.phone-top .q svg{width:14px;height:14px;color:#FAECDE}
-.phone-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 12px 12px}
-.phone-grid .it{border-radius:12px;overflow:hidden;background:#F3E9DB;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
-.phone-grid .it img{width:78%;height:78%;object-fit:contain}
-.phone-bar{display:flex;justify-content:space-around;padding:10px 0 14px;border-top:1px solid #E7D8C4}
-.phone-bar span{width:26px;height:4px;border-radius:4px;background:#E7D8C4}
-.phone-bar span.on{background:#C0693A;width:30px}
-.phone-qr{position:absolute;right:-24px;bottom:34px;width:92px;background:#FFFBF4;border-radius:14px;padding:9px;text-align:center}
-.phone-qr img{width:100%;display:block;border-radius:6px}
-.phone-qr small{display:block;font-family:var(--font-body);font-weight:600;font-size:9px;color:#6E5B46;margin-top:5px}
+/* form */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,56px);align-items:start}
+.demoform{display:flex;flex-direction:column;gap:10px;max-width:460px}
+.ff{background:var(--_sf);border-radius:var(--radius-field);min-height:58px;padding:9px 16px;display:flex;flex-direction:column;justify-content:center}
+.ff .lb{font-size:13px;color:var(--_mu)}
+.ff input,.ff textarea{border:0;background:transparent;font:400 16px var(--_fb);color:var(--_ink);outline:none;width:100%;resize:vertical}
+.ff:focus-within{outline:2px solid var(--_bd)}
+.cf-note{font-size:13px;min-height:1.2em}
 
-/* hero micro line */
-.hero-micro{margin-top:14px;font-family:var(--font-body);font-weight:600;font-size:13px;color:rgb(250 236 222 / .72);letter-spacing:.02em}
+/* footer */
+.foot{background:var(--_bg);padding:clamp(48px,7vw,80px) 0 40px;font-size:14px}
+.foot-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:24px;padding-bottom:28px}
+.foot-top .rs-head{font-size:20px;margin-bottom:12px}
+.foot-col b{font-weight:500;display:block;margin-bottom:8px}
+.foot-col a{display:block;color:var(--_mu);padding:3px 0}
+.foot .biglogo{width:100%;display:block;margin:6px 0 14px}
+.foot-legal{border-top:1px solid var(--_ink);padding-top:12px;display:flex;flex-wrap:wrap;gap:10px 20px;justify-content:space-between;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--_mu)}
 
-/* left-aligned section header variant */
-.sec-head.left{text-align:left;align-items:flex-start;margin-inline:0;max-width:640px}
-.sec-head.left .sub{margin-left:0}
-
-/* media showcase row (copy + photo/mockup, alternating) */
-.showcase{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center;margin-top:clamp(36px,5vw,56px)}
-.showcase.flip .sc-media{order:-1}
-.sc-copy h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(22px,3vw,36px);line-height:1.06;color:var(--color-heading)}
-.sc-copy p{font-weight:300;font-size:clamp(15px,1.8vw,18px);line-height:1.5;margin-top:16px;max-width:460px}
-.sc-copy ul{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
-.sc-copy li{display:flex;gap:11px;align-items:flex-start;font-weight:300;font-size:15px;line-height:1.4}
-.sc-copy li .mk{flex:none;width:22px;height:22px;border-radius:50%;background:var(--color-surface);display:flex;align-items:center;justify-content:center;margin-top:1px}
-.sc-copy li .mk svg{width:13px;height:13px;color:var(--color-highlight)}
-.media-frame{border-radius:var(--radius-lg);overflow:hidden;position:relative;aspect-ratio:4/5;background:var(--palette-grey-100)}
-.media-frame img{width:100%;height:100%;object-fit:cover}
-.media-frame.wide{aspect-ratio:4/3}
-.media-frame.banner{aspect-ratio:auto;height:clamp(170px,24vw,300px)}
-.sc-deco{position:absolute;z-index:2;width:64px;opacity:.9;pointer-events:none}
-.spark{display:inline-block;width:clamp(26px,3vw,40px);height:auto;vertical-align:middle;margin-left:10px;opacity:.85}
-
-/* before / after panels (ennen ja nyt) */
-.beforeafter{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:clamp(36px,5vw,52px)}
-.ba{position:relative;border-radius:var(--radius-lg);overflow:hidden;min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(22px,2.6vw,32px)}
-.ba .ba-media{position:absolute;inset:0;z-index:0}
-.ba .ba-media img{width:100%;height:100%;object-fit:cover;filter:grayscale(.5) brightness(.72) sepia(.2)}
-.ba .ba-media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgb(42 26 15 / .9),rgb(42 26 15 / .35))}
-.ba.after{background:#3C2415}
-.ba-inner{position:relative;z-index:1;color:var(--palette-birch)}
-.ba-lbl{display:inline-flex;align-items:center;height:30px;padding-inline:14px;border-radius:var(--radius-pill);border:1.5px solid rgb(250 236 222 / .5);font-family:var(--font-body);font-weight:600;font-size:13px;margin-bottom:16px}
-.ba-inner ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
-.ba-inner li{display:flex;gap:10px;align-items:flex-start;font-weight:300;font-size:14.5px;line-height:1.35;color:rgb(250 236 222 / .92)}
-.ba-inner li .mk{flex:none;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px}
-.ba.before li .mk{background:rgb(250 236 222 / .15)}
-.ba.after li .mk{background:#C0693A;color:#fff}
-.ba-inner li .mk svg{width:11px;height:11px}
-.ba.after .ba-mini{margin-bottom:18px;background:var(--palette-birch);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px}
-.ba-mini .row{display:flex;gap:7px}
-.ba-mini .chip{height:34px;border-radius:9px;flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 9px;gap:2px}
-.ba-mini .chip small{font-size:6.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;opacity:.65;color:#3C2415}
-.ba-mini .chip b{font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:13px;color:#3C2415}
-.ba-mini .chip.a{background:var(--palette-grey-100)}
-.ba-mini .chip.b{background:#6C888D}.ba-mini .chip.b small,.ba-mini .chip.b b{color:#FFFBF4}
-.ba-mini .chip.c{background:#C0693A}.ba-mini .chip.c small,.ba-mini .chip.c b{color:#FFFBF4}
-.ba-mini .line{height:6px;border-radius:6px;background:var(--palette-grey-100)}
-.ba-mini .line.sh{width:62%}
-
-/* two-column FAQ */
-.faq2{display:grid;grid-template-columns:0.8fr 1.2fr;gap:clamp(28px,5vw,56px);align-items:start}
-.faq2 .faq{margin-top:0}
-.faq-aside h2{font-size:clamp(28px,4.5vw,48px)}
-.faq-aside p{font-weight:300;font-size:16px;line-height:1.45;margin:16px 0 20px;color:var(--color-text)}
-@media(max-width:860px){.faq2{grid-template-columns:1fr;gap:24px}}
-
-/* ===== problem cards ===== */
-.plist{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:clamp(36px,5vw,52px)}
-.pcard{background:var(--color-surface);border-radius:var(--radius-md);padding:18px 20px;display:flex;gap:13px;align-items:flex-start}
-.pcard .ic{flex:none;width:34px;height:34px;border-radius:10px;background:rgba(192,105,58,.14);color:#C0693A;display:flex;align-items:center;justify-content:center}
-.pcard .ic svg{width:18px;height:18px}
-.pcard p{font-weight:300;font-size:14px;line-height:1.4}
-.pcard b{font-weight:600;color:var(--color-heading)}
-
-/* ===== comparison table ===== */
-.cmp2{max-width:900px;margin:clamp(36px,5vw,52px) auto 0;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--color-border)}
-.cmp2 .hd{display:grid;grid-template-columns:1fr 1fr}
-.cmp2 .hd div{padding:14px 18px;font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:16px;color:var(--color-heading)}
-.cmp2 .hd .r{background:#3C2415;color:var(--palette-birch)}
-.cmp2 .rw{display:grid;grid-template-columns:1fr 1fr}
-.cmp2 .rw>div{padding:13px 18px;border-top:1px solid var(--color-border);font-weight:300;font-size:14px;line-height:1.35;display:flex;gap:10px;align-items:flex-start}
-.cmp2 .rw .r{background:rgba(192,105,58,.05);color:var(--color-text)}
-.cmp2 .mk{flex:none;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px}
-.cmp2 .rw .l .mk{background:rgba(60,36,21,.1);color:var(--palette-grey-600)}
-.cmp2 .rw .r .mk{background:#C0693A;color:#fff}
-.cmp2 .mk svg{width:11px;height:11px}
-
-/* ===== stat row (hyödyt lukuina) ===== */
-.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:clamp(36px,5vw,52px)}
-.statcell{text-align:center;display:flex;flex-direction:column;gap:8px}
-.statcell .big{font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:clamp(34px,5vw,56px);letter-spacing:.5px;color:var(--color-heading);line-height:1}
-.statcell .lbl{font-weight:300;font-size:14px;line-height:1.35}
-
-/* ===== trust columns ===== */
-.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:clamp(36px,5vw,52px)}
-.tcol h3{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:18px;color:var(--color-heading);margin-bottom:14px;display:flex;gap:10px;align-items:center}
-.tcol h3 .ic{flex:none;width:30px;height:30px;border-radius:9px;background:var(--color-surface);display:flex;align-items:center;justify-content:center}
-.tcol h3 .ic svg{width:17px;height:17px}
-.tcol ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
-.tcol li{font-weight:300;font-size:13.5px;line-height:1.4;padding-left:15px;position:relative}
-.tcol li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--color-highlight)}
-
-/* ===== FAQ ===== */
-.faq{max-width:780px;margin:clamp(32px,4vw,48px) auto 0}
-.faq details{border-top:1px solid var(--color-border)}
-.faq details:last-child{border-bottom:1px solid var(--color-border)}
-.faq summary{list-style:none;cursor:pointer;padding:16px 2px;display:flex;justify-content:space-between;gap:16px;align-items:center;font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:clamp(16px,2vw,20px);color:var(--color-heading)}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary .chev{flex:none;width:20px;height:20px;transition:transform .2s var(--ease-standard);color:var(--color-text-muted)}
-.faq details[open] summary .chev{transform:rotate(180deg)}
-.faq .ans{padding:0 2px 18px;font-weight:300;font-size:15px;line-height:1.5;color:var(--color-text);max-width:94%}
-
-/* ===== pilot ===== */
-.pilot{max-width:880px;margin:0 auto;background:#3C2415;color:var(--palette-birch);border-radius:var(--radius-lg);padding:clamp(28px,4vw,48px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
-.pilot h2{font-family:var(--font-display);font-stretch:125%;font-weight:900;text-transform:uppercase;font-size:clamp(26px,4.5vw,44px);letter-spacing:-.3px;line-height:1}
-.pilot p{font-weight:300;font-size:clamp(15px,1.8vw,18px);line-height:1.4;max-width:540px;color:rgb(250 236 222 / .88)}
-.pilot .perks{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:2px}
-.pilot .perks span{border:1.5px solid rgb(250 236 222 / .4);border-radius:var(--radius-pill);padding:8px 16px;font-family:var(--font-body);font-weight:600;font-size:13.5px}
-.pilot .btn{background:var(--palette-birch);color:var(--palette-asphalt);margin-top:6px}
-
-/* kassa flow numbers inherit .steps */
-
-/* ===== footer ===== */
-.site-foot{background:var(--palette-birch);color:var(--palette-grey-900);padding:clamp(64px,9vw,120px) 0 48px}
-.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
-.foot-brand .brand{color:var(--palette-asphalt)}
-.foot-brand .slog{font-family:var(--font-heading);font-stretch:125%;font-weight:500;font-size:18px;line-height:1.18;color:var(--palette-grey-900);margin-top:16px;max-width:16ch}
-.foot-col h4{font-family:var(--font-body);font-weight:600;font-size:16px;color:var(--palette-asphalt);margin-bottom:14px}
-.foot-col a{display:block;font-weight:300;font-size:16px;color:var(--palette-grey-700);padding:5px 0}
-.foot-legal{margin-top:clamp(48px,6vw,96px);padding-top:20px;border-top:1px solid var(--palette-grey-200);display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center;font-size:14px;color:var(--palette-grey-500)}
-.foot-legal .l-links{display:flex;gap:20px;flex-wrap:wrap}
-
-/* reveal */
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease-enter),transform .7s var(--ease-enter)}
+/* decorative shapes */
+.shape{position:absolute;pointer-events:none;z-index:0}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s var(--_e),transform .6s var(--_e)}
 .reveal.in{opacity:1;transform:none}
 
-/* ===== responsive ===== */
-@media(max-width:1024px){
-  .segmented{display:none}
-  .menu-btn{display:flex}
-  .cards{grid-template-columns:repeat(2,1fr)}
-  .card.span2,.tabletcard{grid-column:span 2}
-  .calc{grid-template-columns:1fr}
-  .why-grid{grid-template-columns:1fr}
-  .timeline{grid-template-columns:1fr;gap:28px}
-  .tl-rule{display:none}
-  .contact-grid{grid-template-columns:1fr}
-  .foot-top{grid-template-columns:1fr 1fr}
-  .steps{grid-template-columns:1fr 1fr;gap:28px}
-  .step .dash{display:none}
-  .approw{grid-template-columns:1fr;justify-items:center;text-align:center}
-  .appcopy li{text-align:left}
-  .phone-qr{right:0}
-  .plist{grid-template-columns:1fr 1fr}
-  .statrow{grid-template-columns:1fr 1fr}
-  .trust{grid-template-columns:1fr 1fr}
-  .showcase{grid-template-columns:1fr;gap:28px}
-  .showcase.flip .sc-media{order:0}
-  .beforeafter{grid-template-columns:1fr}
+@media(max-width:900px){
+  .grid3,.plist,.trust,.stats{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:repeat(2,1fr)}
+  .faq2{grid-template-columns:1fr;gap:20px}
 }
-@media(max-width:640px){
-  body{font-size:15px}
-  .cards{grid-template-columns:1fr}
-  .card.span2,.tabletcard{grid-column:span 1}
-  .hero-strip{grid-template-columns:1fr}
-  .story-cols{grid-template-columns:1fr}
-  .compare{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr}
-  .step .dash{display:none}
-  .plist{grid-template-columns:1fr}
-  .statrow{grid-template-columns:1fr 1fr}
-  .trust{grid-template-columns:1fr}
-  form.demo .frow{grid-template-columns:1fr}
-  .foot-top{grid-template-columns:1fr}
-  .foot-brand{grid-column:span 1}
+@media(max-width:620px){
+  .grid3,.grid2,.plist,.trust,.ba,.showcase,.contact,.foot-top{grid-template-columns:1fr}
+  .showcase.flip .mediaframe{order:0}
+  .hero-cols{grid-template-columns:1fr}
+  .hero-cols .c+.c{border-left:0;border-top:1px solid rgb(236 236 220 / .14)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:1fr}
+  .phone{width:46%}
 }
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *{transition:none!important}
-  .reveal{opacity:1;transform:none}
-  .marquee-track{animation:none}
-  .hero-bg video{display:none}
-}
-:root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.28 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
+:root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<header class="site-head" id="head">
-  <div class="wrap">
-    <a class="brand" href="#top" aria-label="ReSella"><svg viewBox="0 295 1440 330" fill="currentColor" aria-hidden="true"><g clip-path="url(#rl)" transform="translate(17 57)"><path d="M261.746 354.464q0 23.988-12.469 47.5c-8.305 15.68-20.45 28.375-36.438 38.094l43.735 92.172H176.62l-37.625-79.938H95.73v79.938H23.324V257.12H151.23q54.546 0 82.531 27.985t27.985 69.36M95.73 397.261h52.203q18.34.002 30.094-11.515 11.766-11.53 11.766-30.813 0-19.277-11.766-30.797-11.754-11.514-30.094-11.515H95.73Zm0 0"/><path d="M473.785 469.214q-4.218 28.69-32.672 47.266-28.452 18.58-69.375 18.578-61.125.001-90.75-34.328-24.454-28.22-24.453-69.14-.002-46.08 28.203-75 28.22-28.923 85.594-28.923c37.938 0 66.07 9.641 84.406 28.922q27.516 28.923 27.516 75v20.22H328.957q2.343 18.345 12.688 25.874 10.341 7.517 29.625 7.516 30.092 0 31.515-15.985ZM371.27 377.511q-15.517.001-25.86 6.125-10.348 6.11-16.453 24.438h84.172q-4.705-17.86-15.047-24.203-10.348-6.36-26.812-6.36m0 0"/><path d="M735.694 440.058q0 45.142-26.328 68.656-30.112 26.344-96.875 26.344-52.674.001-89.36-20.219-36.673-20.233-43.734-63.968H563.1q2.825 28.687 49.86 28.687c19.125 0 32.289-2.035 39.5-6.11q10.811-6.106 10.812-21.64-.002-4.218-3.062-7.984-3.048-3.764-9.407-6.578c-4.23-1.883-8.46-3.61-12.687-5.172q-6.345-2.357-16.469-4.703c-6.742-1.57-12.383-2.829-16.922-3.766-4.543-.945-10.5-2.047-17.875-3.297q-11.05-1.874-15.281-2.828-24.457-4.231-44.203-13.156-47.501-20.232-47.5-62.547 0-42.795 25.875-64.906 29.155-24.921 95.922-24.922 51.73 0 89.594 22.578 37.858 22.563 37.859 62.547h-84.188q-2.343-29.625-42.796-29.625-23.033.002-36.438 6.11-13.406 6.11-13.406 14.108-.001 5.644 4 10.813 3.997 5.175 12.687 9.172 8.701 4.003 16.219 6.828c5.02 1.875 11.922 3.836 20.703 5.875 8.781 2.031 15.285 3.445 19.516 4.234q6.356 1.172 18.578 3.516 23.514 4.705 44.203 12.703 47.498 19.284 47.5 59.25m0 0"/><path d="M952.437 469.214q-4.218 28.69-32.671 47.266-28.454 18.58-69.375 18.578-61.125.001-90.75-34.328-24.456-28.22-24.454-69.14-.002-46.08 28.204-75 28.218-28.923 85.593-28.923c37.938 0 66.07 9.641 84.407 28.922q27.515 28.923 27.515 75v20.22H807.61q2.343 18.345 12.688 25.874 10.342 7.517 29.625 7.516 30.092 0 31.515-15.985Zm-102.515-91.703q-15.517.001-25.86 6.125-10.347 6.11-16.453 24.438h84.172q-4.704-17.86-15.047-24.203-10.348-6.36-26.812-6.36M1036.58 464.98q0 20.69 26.813 22.578v47.5q-12.703 2.344-29.156 2.344-70.078 0-70.078-89.344V257.121h72.422ZM1138.14 464.98q0 20.69 26.812 22.578v47.5q-12.704 2.344-29.157 2.344-70.077 0-70.078-89.344V257.121h72.422Zm0 0"/><path d="M1275.447 535.058q-61.61 0-91.234-32.922c-16.93-18.812-25.39-42.32-25.39-70.531 0-28.219 8.46-51.734 25.39-70.547q30.093-33.388 91.234-33.39 61.594.001 91.704 33.39 24.92 27.736 24.921 70.531 0 42.798-24.921 70.547-29.642 32.924-91.704 32.922m-32.921-62.312q11.28 12.454 32.906 12.453 21.637.001 32.922-12.453 11.297-12.47 11.297-41.157 0-54.077-44.204-54.078-44.202.002-44.203 54.078-.002 28.688 11.282 41.157m0 0"/></g><defs><clipPath id="rl"><path d="M0 0h1401v686H0z"/></clipPath></defs></svg></a>
-    <nav class="segmented" id="seg" aria-label="Päävalikko">
-      <span class="seg-knob" id="segKnob"></span>
-      <a href="#ominaisuudet">Ominaisuudet</a>
-      <a href="#hinta">Hinta</a>
-      <a href="#yhteys">Yhteys</a>
-    </nav>
-    <div class="head-actions">
-      <a class="btn-demo" href="#yhteys">Varaa demo</a>
-      <button class="menu-btn" id="menuBtn" aria-label="Avaa valikko" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a href="#top" aria-label="ReSella"><img class="logo logo-beige" src="images/brand/paalogo-vaaka-beige.svg" alt="ReSella"><img class="logo logo-ruskea" src="images/brand/paalogo-vaaka-ruskea.svg" alt="ReSella"></a>
+    <div class="hdr-right">
+      <a class="rs-btn s demo on-hero" href="#yhteys">Varaa demo</a>
+      <button class="burger" id="burger" aria-label="Valikko" aria-expanded="false"><svg viewBox="0 0 28 21" aria-hidden="true"><rect x="1" y="1" width="26" height="4.5" rx="2.25"/><rect x="1" y="8.25" width="26" height="4.5" rx="2.25"/><rect x="1" y="15.5" width="26" height="4.5" rx="2.25"/></svg></button>
     </div>
   </div>
 </header>
-<div class="menu-scrim" id="menuScrim"></div>
-<nav class="menu-sheet" id="menuSheet" aria-label="Valikko">
-  <a href="#ominaisuudet">Ominaisuudet</a>
-  <a href="#kierto">Miten se toimii</a>
+<nav class="menu" id="menu" aria-label="Valikko">
+  <a href="#ominaisuudet">Kassa</a>
+  <a href="#appi">Kuluttaja-app</a>
   <a href="#hinta">Hinta</a>
-  <a href="#yhteys">Yhteys</a>
+  <a href="#ukk">UKK</a>
+  <a href="#yhteys">Varaa demo</a>
 </nav>
 
-<!-- HERO (video kept) -->
+<!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-bg">
-    <img class="poster" src="images/im06-1080.webp" alt="">
-    <video autoplay muted loop playsinline preload="auto" poster="images/im06-1080.webp"><source src="images/resello-hero.mp4" type="video/mp4"></video>
-  </div>
-  <div class="hero-tint"></div><div class="hero-grain"></div><div class="hero-fade"></div>
-  <div class="hero-inner wrap">
-    <h1 class="hero-title">
-      <span class="display l1">Kassa, joka</span>
-      <span class="display l2">tuo ostajia</span>
-    </h1>
-    <div class="hero-more">
-      <p class="hero-sub">Hoida myynti, myyjät ja tilitykset yhdessä paikassa. Hyllysi näkyy samalla netissä.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary btn-l" href="#yhteys">Varaa demo</a>
-        <a class="btn btn-secondary btn-l" href="#ominaisuudet">Katso, miten se toimii</a>
-      </div>
-      <p class="hero-micro">Rakennettu itsepalvelukirpputoreille. Suomessa.</p>
+  <img class="poster" src="images/im06-1080.webp" alt="">
+  <video autoplay muted loop playsinline preload="auto" poster="images/im06-1080.webp"><source src="images/resello-hero.mp4" type="video/mp4"></video>
+  <div class="hero-tint"></div><div class="hero-grain"></div>
+  <div class="hero-in">
+    <div class="hero-top">
+      <h1 class="rs-disp">Kassa, joka tuo ostajia</h1>
+      <p>Myynti, myyjät ja tilitykset yhdessä paikassa.</p>
+      <a class="rs-btn l" style="background:var(--bg);color:var(--ink)" href="#yhteys">Varaa demo</a>
+    </div>
+    <div class="hero-cols">
+      <div class="c"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span><h3>Kassa ei pysähdy.</h3><p>Toimii myös ilman nettiä.</p></div>
+      <div class="c"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 14l2 2 4-4"/></svg></span><h3>Tilitykset. Yhdellä tiedostolla.</h3><p>Kaikki rahat kerralla verkkopankkiin.</p></div>
+      <div class="c"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg></span><h3>Hinnoittelet. Hylly on verkossa.</h3><p>Ostajat löytävät tuotteet ennen käyntiä.</p></div>
     </div>
   </div>
-  <div class="hero-scrollcue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></div>
+  <img class="hero-mascot" src="images/brand/pilvi-kurkistaa.svg" alt="" aria-hidden="true">
 </section>
 
-<!-- hero strip: bridging band between hero and features -->
-<div class="strip-bridge">
+<!-- ONGELMA (ruskea osio, heron jälkeen) -->
+<section class="dark" style="background:var(--bg)">
   <div class="wrap">
-    <div class="hero-strip reveal">
-      <div class="cell"><h3>Yksi laite, sekunnit</h3><p>Myynti, viivakoodi ja maksu samalla laitteella; tilitykset syntyvät itsestään.</p></div>
-      <div class="cell"><h3>Hylly verkossa</h3><p>Kassalla hinnoiteltu tuote näkyy heti ostajille netissä, ilman erillistä kuvausta.</p></div>
-      <div class="cell"><h3>Kaikki yhdessä kartassa</h3><p>Myyntipaikat, myymäläkartta ja saatavuus yhdessä näkymässä.</p></div>
-    </div>
-  </div>
-</div>
-
-<!-- ONGELMA -->
-<section class="paper" data-theme="light-grey">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Tuttu arki?</h2>
-      <p class="sub">Kirppiksen pyörittäminen vie aikaa, jonka voisi käyttää myymiseen.</p>
-    </div>
-    <div class="plist reveal">
-      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Kassa kaatuu kiireellä.</b> Vanha ohjelma jumittaa, ja tuki vastaa jos vastaa.</p></div>
-      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Virhettä ei saa korjattua.</b> Väärin lyöty tuote vaatii soiton ohjelman tekijälle.</p></div>
-      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Tilitykset vievät illan.</b> Myyjien rahat lasketaan ja maksetaan yksitellen.</p></div>
-      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Tuotteet eivät näy netissä.</b> Kuvaaminen vie niin paljon aikaa, että sen tekee vain kalleimmille.</p></div>
-      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Nuoret ostajat ovat Vintedissä.</b> Hyvät löydöt jäävät hyllyyn, koska kukaan ei tiedä niistä.</p></div>
-      <div class="pcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 8v5M12 16v.5"/><circle cx="12" cy="12" r="9"/></svg></span><p><b>Myyjät hinnoittelevat halvalla.</b> Merkkitakki lähtee 4 eurolla, vaikka siitä saisi moninkertaisesti.</p></div>
+    <div class="sec-title reveal"><h2 class="rs-disp">Tuttu arki?</h2><p class="rs-sub">Kirppiksen pyörittäminen vie aikaa, jonka voisi käyttää myymiseen.</p></div>
+    <div class="plist sec-gap reveal">
+      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Kassa kaatuu kiireellä.</b> Vanha ohjelma jumittaa, ja tuki vastaa jos vastaa.</p></div>
+      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Virhettä ei saa korjattua.</b> Väärin lyöty tuote vaatii soiton ohjelman tekijälle.</p></div>
+      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Tilitykset vievät illan.</b> Myyjien rahat lasketaan ja maksetaan yksitellen.</p></div>
+      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Tuotteet eivät näy netissä.</b> Kuvaaminen vie aikaa, joten sen tekee vain kalleimmille.</p></div>
+      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Nuoret ostajat ovat muualla.</b> Hyvät löydöt jäävät hyllyyn, koska kukaan ei tiedä niistä.</p></div>
+      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Myyjät hinnoittelevat halvalla.</b> Merkkitakki lähtee neljällä eurolla, vaikka siitä saisi enemmän.</p></div>
     </div>
   </div>
 </section>
 
 <!-- VERTAUS -->
-<section class="paper" data-theme="birch">
+<section>
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Ennen ja nyt</h2>
-      <p class="sub">Sama työ, murto-osa vaivasta.</p>
-    </div>
-    <div class="beforeafter reveal">
-      <div class="ba before">
-        <div class="ba-media"><picture><source type="image/avif" srcset="images/rk3-1080.avif"><source type="image/webp" srcset="images/rk3-1080.webp"><img alt="" src="images/rk3.jpg" loading="lazy" decoding="async"></picture></div>
-        <div class="ba-inner">
-          <span class="ba-lbl">Ennen</span>
-          <ul>
-            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Varaukset vihossa, tilitykset käsin</li>
-            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Erillinen kassa, varausohjelma ja Excel</li>
-            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Tuotteet eivät näy netissä</li>
-            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Virheen korjaus vaatii soiton tukeen</li>
+    <div class="sec-title reveal"><h2 class="rs-disp">Ennen ja nyt</h2><p class="rs-sub">Sama työ, murto-osa vaivasta.</p></div>
+    <div class="ba sec-gap reveal">
+      <div class="photo">
+        <picture><source type="image/avif" srcset="images/rk3-1080.avif"><source type="image/webp" srcset="images/rk3-1080.webp"><img alt="" src="images/rk3.jpg" loading="lazy"></picture>
+        <div class="in">
+          <span class="rs-tag" style="color:var(--bg);border-color:rgb(236 236 220 / .5);margin-bottom:12px">Ennen</span>
+          <ul class="balist">
+            <li><span class="mk"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Varaukset vihossa, tilitykset käsin</li>
+            <li><span class="mk"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Erillinen kassa, varausohjelma ja Excel</li>
+            <li><span class="mk"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Tuotteet eivät näy netissä</li>
           </ul>
         </div>
       </div>
-      <div class="ba after">
-        <div class="ba-inner">
-          <div class="ba-mini" aria-hidden="true">
-            <div class="row"><div class="chip a"><small>Myynti</small><b>1 284 €</b></div><div class="chip b"><small>Kuussa</small><b>18 920 €</b></div><div class="chip c"><small>Käyttö</small><b>87 %</b></div></div>
-            <div class="line"></div><div class="line sh"></div>
-          </div>
-          <span class="ba-lbl">ReSellalla</span>
-          <ul>
-            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Myyjä varaa ja maksaa pöydän itse</li>
-            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Kaikki tilitykset yhdellä tiedostolla</li>
-            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Hinnoiteltu tuote on heti verkossa</li>
-            <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Korjaat ja perut itse kassalla</li>
-          </ul>
+      <div class="pane">
+        <div class="mini" aria-hidden="true">
+          <div class="row"><div class="chip a"><small>Myynti tänään</small><b>1 284 €</b></div><div class="chip b"><small>Tässä kuussa</small><b>18 920 €</b></div><div class="chip c"><small>Käyttöaste</small><b>87 %</b></div></div>
+          <div class="line"></div><div class="line sh"></div>
         </div>
+        <span class="rs-tag blue" style="align-self:flex-start">ReSellalla</span>
+        <ul class="balist">
+          <li><span class="mk"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 7"/></svg></span>Myyjä varaa ja maksaa pöydän itse</li>
+          <li><span class="mk"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 7"/></svg></span>Kaikki tilitykset yhdellä tiedostolla</li>
+          <li><span class="mk"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 7"/></svg></span>Hinnoiteltu tuote on heti verkossa</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
 <!-- OMINAISUUDET -->
-<section class="paper" data-theme="light-grey" id="ominaisuudet">
+<section id="ominaisuudet">
   <div class="wrap">
-    <div class="sec-head left reveal">
-      <h2 class="display">Kaikki yhdessä<br>paikassa</h2>
-      <p class="sub">Kuusi työkalua, yksi kirjautuminen.</p>
-    </div>
-    <div class="media-frame banner reveal" style="margin-top:clamp(28px,4vw,40px)"><picture><source type="image/avif" srcset="images/rk1-1080.avif"><source type="image/webp" srcset="images/rk1-1080.webp"><img alt="Kirpputorin myymälä" src="images/rk1.jpg" loading="lazy" decoding="async"></picture></div>
-    <div class="cards reveal" style="margin-top:18px">
-      <div class="card"><span class="pill-tag">Kassa</span><h3>Piippaa, maksa, valmis</h3><p>Myynti, viivakoodi ja maksu samalla laitteella. Toimii myös ilman nettiä.</p></div>
-      <div class="card"><span class="pill-tag">Näkyvyys</span><h3>Hylly verkkoon itsestään</h3><p>Jokainen hinnoiteltu tuote näkyy ostajille verkossa ilman erillistä kuvausta.</p></div>
-      <div class="card"><span class="pill-tag">Varaukset</span><h3>Pöydät järjestyksessä</h3><p>Myyjät varaavat ja maksavat pöydän itse, sinä näet tilanteen kartalta.</p></div>
-      <div class="card"><span class="pill-tag">Tilitykset</span><h3>Rahat kerralla ulos</h3><p>Kaikki myyjien tilitykset lähtevät kerralla yhdellä pankkitiedostolla.</p></div>
-      <div class="card"><span class="pill-tag">Asiakkaat</span><h3>Myyjät hallinnassa</h3><p>Myyjät, sopimukset, tilinumerot ja varaushistoria samassa paikassa.</p></div>
-      <div class="card"><span class="pill-tag">Raportit</span><h3>Valmista kirjanpitoon</h3><p>Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p></div>
+    <div class="sec-title reveal"><h2 class="rs-disp">Kaikki yhdessä paikassa</h2><p class="rs-sub">Kuusi työkalua, yksi kirjautuminen.</p></div>
+    <div class="mediaframe wide reveal" style="margin-top:var(--gap-l)"><picture><source type="image/avif" srcset="images/rk1-1080.avif"><source type="image/webp" srcset="images/rk1-1080.webp"><img alt="Maksu kassalla" src="images/rk1.jpg" loading="lazy"></picture></div>
+    <div class="grid3 reveal" style="margin-top:var(--gap-m)">
+      <div class="card"><span class="rs-tag" style="align-self:flex-start">Kassa</span><p class="rs-head">Piippaa, maksa, valmis</p><p class="rs-sub" style="font-size:14px">Myynti, viivakoodi ja maksu samalla laitteella. Toimii myös ilman nettiä.</p></div>
+      <div class="card"><span class="rs-tag" style="align-self:flex-start">Näkyvyys</span><p class="rs-head">Hylly verkkoon itsestään</p><p class="rs-sub" style="font-size:14px">Jokainen hinnoiteltu tuote näkyy ostajille verkossa ilman erillistä kuvausta.</p></div>
+      <div class="card"><span class="rs-tag" style="align-self:flex-start">Varaukset</span><p class="rs-head">Pöydät järjestyksessä</p><p class="rs-sub" style="font-size:14px">Myyjät varaavat ja maksavat pöydän itse, sinä näet tilanteen kartalta.</p></div>
+      <div class="card"><span class="rs-tag" style="align-self:flex-start">Tilitykset</span><p class="rs-head">Rahat kerralla ulos</p><p class="rs-sub" style="font-size:14px">Kaikki myyjien tilitykset lähtevät kerralla yhdellä pankkitiedostolla.</p></div>
+      <div class="card"><span class="rs-tag" style="align-self:flex-start">Asiakkaat</span><p class="rs-head">Myyjät hallinnassa</p><p class="rs-sub" style="font-size:14px">Myyjät, sopimukset, tilinumerot ja varaushistoria samassa paikassa.</p></div>
+      <div class="card"><span class="rs-tag" style="align-self:flex-start">Raportit</span><p class="rs-head">Valmista kirjanpitoon</p><p class="rs-sub" style="font-size:14px">Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p></div>
     </div>
   </div>
 </section>
 
 <!-- JÄRJESTELMÄN TEASERI -->
-<section data-theme="asphalt">
+<section>
   <div class="wrap">
-    <div class="sec-head left reveal">
-      <h2 class="display">Kurkista sisään</h2>
-      <p class="sub">Näin arki näyttää ReSellassa. Luvut ovat esimerkkejä.</p>
-    </div>
-    <div class="cards sec-gap reveal">
-      <div class="tabletcard" style="grid-column:span 3">
-        <div class="tab" style="max-width:640px">
-          <div class="tab-screen">
-            <div class="tab-side">
-              <div class="tab-logo">ReSella</div>
-              <div class="tab-nav"><span class="on">Yleisnäkymä</span><span>Pöytäkartta</span><span>Varaukset</span><span>Myyjät</span><span>Tilitykset</span><span>Raportit</span></div>
+    <div class="sec-title reveal"><h2 class="rs-disp">Kurkista sisään</h2><p class="rs-sub">Näin arki näyttää ReSellassa. Luvut ovat esimerkkejä.</p></div>
+    <div class="device sec-gap reveal">
+      <div class="tab">
+        <div class="tab-scr">
+          <div class="tab-side"><img class="lg" src="images/brand/ikoni-pilvi-ruskea.svg" alt=""><span class="on">Yleisnäkymä</span><span>Pöytäkartta</span><span>Varaukset</span><span>Myyjät</span><span>Tilitykset</span><span>Raportit</span></div>
+          <div class="tab-main">
+            <div class="hi">Hyvää huomenta</div>
+            <div class="tab-stats">
+              <div class="tab-tile"><small>Myynti tänään</small><b>1 284 €</b></div>
+              <div class="tab-tile bl"><small>Tässä kuussa</small><b>18 920 €</b></div>
+              <div class="tab-tile"><small>Käyttöaste</small><b>87 %</b></div>
             </div>
-            <div class="tab-main">
-              <div class="tab-hello">Hyvää huomenta</div>
-              <div class="tab-stats">
-                <div class="tab-tile a"><span class="l">Myynti tänään</span><b>1 284 €</b></div>
-                <div class="tab-tile b"><span class="l">Tässä kuussa</span><b>18 920 €</b></div>
-                <div class="tab-tile c"><span class="l">Käyttöaste</span><b>87 %</b></div>
-              </div>
-              <div class="tab-bar"><i style="width:87%"></i></div>
-              <div class="tab-foot">9 / 72 pöytää vapaana · 31 avointa tilitystä · 2 340 tuotetta verkossa</div>
-            </div>
+            <div class="tab-bar"><i style="width:87%"></i></div>
+            <div class="tab-foot">9 / 72 pöytää vapaana · 31 avointa tilitystä · 2 340 tuotetta verkossa</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="steps reveal" style="margin-top:clamp(28px,4vw,40px)">
-      <div class="step"><span class="n">1</span><div class="dash"></div><h3>Piippaa</h3><p>Viivakoodi tai QR, tuote ja hinta näkyvät heti isolla.</p></div>
-      <div class="step"><span class="n">2</span><div class="dash"></div><h3>Tarkista</h3><p>Ostaja näkee summan asiakasnäytöltä.</p></div>
-      <div class="step"><span class="n">3</span><div class="dash"></div><h3>Maksa</h3><p>Kortti tai käteinen, summa siirtyy päätteeseen itsestään.</p></div>
-      <div class="step"><span class="n">4</span><h3>Valmis</h3><p>Kuitti tulostuu tai lähtee sähköpostiin, myyjän saldo päivittyy.</p></div>
+    <div class="flow reveal">
+      <div class="st"><span class="n">1</span><h3>Piippaa</h3><p>Viivakoodi tai QR, tuote ja hinta heti isolla.</p></div>
+      <div class="st"><span class="n">2</span><h3>Tarkista</h3><p>Ostaja näkee summan asiakasnäytöltä.</p></div>
+      <div class="st"><span class="n">3</span><h3>Maksa</h3><p>Summa siirtyy päätteeseen itsestään.</p></div>
+      <div class="st"><span class="n">4</span><h3>Valmis</h3><p>Kuitti ulos, myyjän saldo päivittyy.</p></div>
     </div>
   </div>
 </section>
 
-<!-- KULUTTAJA-APPI -->
-<section data-theme="green" id="appi">
+<!-- KULUTTAJA-APP -->
+<section id="appi">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Ostajat löytävät<br>sinut</h2>
-      <p class="sub">Hyllysi tuotteet ostajan taskussa. Tulossa 2027.</p>
-    </div>
-    <div class="approw reveal">
-      <div class="appcopy">
-        <h3 style="color:var(--palette-birch)">Katalogi taskussa</h3>
-        <ul style="color:var(--palette-birch)">
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Selaa tuotteita läheltä omin sanoin</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Varaa tuote ennen käyntiä</li>
-          <li><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 12l4 4L19 7"/></svg></span>Näytä QR kassalla ja maksa, ei etsimistä</li>
-        </ul>
-      </div>
-      <div class="phone">
-        <div class="phone-screen">
-          <div class="phone-top"><span class="b">ReSella</span><span class="q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></span></div>
-          <div class="phone-grid">
-            <div class="it"><picture><source type="image/avif" srcset="images/vk05.avif"><source type="image/webp" srcset="images/vk05.webp"><img alt="" src="images/vk05.png" loading="lazy"></picture></div>
-            <div class="it"><picture><source type="image/avif" srcset="images/vk13.avif"><source type="image/webp" srcset="images/vk13.webp"><img alt="" src="images/vk13.png" loading="lazy"></picture></div>
-            <div class="it"><picture><source type="image/avif" srcset="images/vk09.avif"><source type="image/webp" srcset="images/vk09.webp"><img alt="" src="images/vk09.png" loading="lazy"></picture></div>
-            <div class="it"><picture><source type="image/avif" srcset="images/vk22.avif"><source type="image/webp" srcset="images/vk22.webp"><img alt="" src="images/vk22.png" loading="lazy"></picture></div>
-          </div>
-          <div class="phone-bar"><span class="on"></span><span></span><span></span></div>
-        </div>
-        <div class="phone-qr">
-          <svg viewBox="0 0 29 29" shape-rendering="crispEdges" aria-hidden="true"><rect width="29" height="29" fill="#FFFBF4"/><g fill="#3C2415"><path d="M0 0h7v7H0z"/><rect x="1" y="1" width="5" height="5" fill="#FFFBF4"/><rect x="2" y="2" width="3" height="3"/><path d="M22 0h7v7h-7z"/><rect x="23" y="1" width="5" height="5" fill="#FFFBF4"/><rect x="24" y="2" width="3" height="3"/><path d="M0 22h7v7H0z"/><rect x="1" y="23" width="5" height="5" fill="#FFFBF4"/><rect x="2" y="24" width="3" height="3"/><rect x="9" y="0" width="1" height="1"/><rect x="11" y="0" width="2" height="1"/><rect x="14" y="2" width="1" height="2"/><rect x="9" y="2" width="2" height="1"/><rect x="16" y="1" width="1" height="2"/><rect x="18" y="0" width="2" height="1"/><rect x="10" y="4" width="2" height="2"/><rect x="13" y="5" width="1" height="1"/><rect x="0" y="9" width="1" height="2"/><rect x="2" y="9" width="2" height="1"/><rect x="5" y="9" width="1" height="2"/><rect x="9" y="9" width="2" height="2"/><rect x="12" y="9" width="2" height="1"/><rect x="15" y="10" width="2" height="2"/><rect x="18" y="9" width="1" height="2"/><rect x="21" y="9" width="2" height="1"/><rect x="24" y="9" width="2" height="2"/><rect x="27" y="9" width="1" height="2"/><rect x="9" y="12" width="1" height="3"/><rect x="12" y="13" width="2" height="2"/><rect x="16" y="13" width="1" height="2"/><rect x="19" y="12" width="2" height="1"/><rect x="23" y="13" width="2" height="2"/><rect x="26" y="12" width="2" height="1"/><rect x="10" y="16" width="2" height="2"/><rect x="14" y="17" width="1" height="2"/><rect x="17" y="16" width="2" height="1"/><rect x="21" y="17" width="2" height="2"/><rect x="25" y="16" width="1" height="2"/><rect x="9" y="20" width="2" height="1"/><rect x="13" y="20" width="1" height="3"/><rect x="16" y="21" width="2" height="2"/><rect x="20" y="20" width="1" height="2"/><rect x="23" y="21" width="2" height="1"/><rect x="26" y="20" width="2" height="2"/><rect x="10" y="24" width="1" height="2"/><rect x="13" y="25" width="2" height="1"/><rect x="16" y="24" width="1" height="3"/><rect x="19" y="25" width="2" height="2"/><rect x="22" y="24" width="1" height="2"/><rect x="25" y="25" width="2" height="2"/><rect x="9" y="27" width="2" height="1"/></g></svg>
-          <small>Skannaa ja selaa</small>
-        </div>
-      </div>
+    <div class="sec-title center reveal"><h2 class="rs-disp">Ostajat löytävät sinut</h2><p class="rs-sub">Hyllysi tuotteet ostajan taskussa. Tulossa 2027.</p></div>
+    <div class="phones sec-gap reveal">
+      <div class="phone"><div class="scr"><span style="font-weight:500">Hei, Aino</span><p class="rs-disp" style="font-size:18px;color:var(--ink)">Löydä aarteet</p><div style="display:flex;gap:4px"><span class="rs-tag blue" style="font-size:9px;padding:3px 7px">Kaikki</span><span class="rs-tag" style="font-size:9px;padding:3px 7px">Vaatteet</span></div><div style="background:var(--blue);border-radius:12px;padding:9px"><b>Vintage-takit läheltä</b><br>12 kirppistä · 3 km</div></div></div>
+      <div class="phone mid" style="margin-top:38px"><div class="scr" style="padding:0"><div style="height:54%"><picture><source type="image/webp" srcset="images/vk13.webp"><img src="images/vk13.png" alt="" style="width:100%;height:100%;object-fit:cover"></picture></div><div style="padding:10px"><b>Marimekko-muki</b><br>Tiltun kirppis<br><span class="num">6,00 €</span></div></div></div>
+      <div class="phone"><div class="scr"><p class="rs-disp" style="font-size:15px;color:var(--ink)">Varaus valmis</p><div style="background:var(--bg);border-radius:12px;flex:1;display:grid;place-items:center"><svg viewBox="0 0 29 29" width="70" height="70" shape-rendering="crispEdges"><rect width="29" height="29" fill="var(--surface)"/><g fill="var(--ink)"><path d="M0 0h7v7H0z"/><rect x="1" y="1" width="5" height="5" fill="var(--surface)"/><rect x="2" y="2" width="3" height="3"/><path d="M22 0h7v7h-7z"/><rect x="23" y="1" width="5" height="5" fill="var(--surface)"/><rect x="24" y="2" width="3" height="3"/><path d="M0 22h7v7H0z"/><rect x="1" y="23" width="5" height="5" fill="var(--surface)"/><rect x="2" y="24" width="3" height="3"/><rect x="10" y="2" width="2" height="2"/><rect x="14" y="1" width="1" height="3"/><rect x="9" y="10" width="2" height="2"/><rect x="13" y="9" width="2" height="1"/><rect x="16" y="11" width="2" height="2"/><rect x="20" y="10" width="2" height="1"/><rect x="24" y="11" width="2" height="2"/><rect x="11" y="14" width="2" height="2"/><rect x="15" y="15" width="1" height="2"/><rect x="19" y="14" width="2" height="1"/><rect x="24" y="15" width="2" height="2"/><rect x="10" y="19" width="2" height="2"/><rect x="14" y="20" width="2" height="1"/><rect x="18" y="19" width="1" height="3"/><rect x="22" y="20" width="2" height="2"/><rect x="26" y="19" width="1" height="2"/><rect x="11" y="24" width="2" height="2"/><rect x="15" y="25" width="2" height="1"/><rect x="19" y="24" width="1" height="3"/><rect x="23" y="25" width="2" height="2"/></g></svg></div><span>Näytä QR-koodi kassalla.</span></div></div>
+      <span class="note" style="position:absolute;left:2%;bottom:48%">Haku läheltä</span>
+      <span class="note" style="position:absolute;right:2%;bottom:0">Nouto QR-koodilla</span>
     </div>
   </div>
 </section>
 
-<!-- HYÖDYT LUKUINA -->
-<section class="paper" data-theme="light-grey">
+<!-- HYÖDYT LUKUINA (ruskea osio) -->
+<section class="dark" style="background:var(--bg)">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Mitä saat tilalle</h2>
-      <p class="sub">Vähemmän rutiinia, enemmän myyntiä.</p>
-    </div>
-    <div class="statrow reveal">
-      <div class="statcell"><span class="big">1</span><span class="lbl">järjestelmä kolmen tai neljän sijaan</span></div>
-      <div class="statcell"><span class="big">1</span><span class="lbl">tiedosto kaikille tilityksille</span></div>
-      <div class="statcell"><span class="big">24/7</span><span class="lbl">tilanne näkyy puhelimesta</span></div>
-      <div class="statcell"><span class="big">1–3&nbsp;pv</span><span class="lbl">käyttöönottoon</span></div>
+    <div class="sec-title reveal"><h2 class="rs-disp">Mitä saat tilalle</h2><p class="rs-sub">Vähemmän rutiinia, enemmän myyntiä.</p></div>
+    <div class="stats sec-gap reveal">
+      <div class="stat"><span class="big">1</span><span class="lbl">järjestelmä kolmen tai neljän sijaan</span></div>
+      <div class="stat"><span class="big">1</span><span class="lbl">tiedosto kaikille tilityksille</span></div>
+      <div class="stat"><span class="big">24/7</span><span class="lbl">tilanne näkyy puhelimesta</span></div>
+      <div class="stat"><span class="big">1–3 pv</span><span class="lbl">käyttöönottoon</span></div>
     </div>
   </div>
 </section>
 
 <!-- KÄYTTÖÖNOTTO -->
-<section data-theme="asphalt">
+<section>
   <div class="wrap">
-    <div class="sec-head left reveal">
-      <h2 class="display">Valmis päivissä</h2>
-      <p class="sub">Vaihto hoituu ilman, että kirppis menee kiinni. Kokonaiskesto 1–3 päivää.</p>
-    </div>
-    <div class="steps reveal">
-      <div class="step"><span class="n">1</span><div class="dash"></div><h3>Tutustu</h3><p>Esittely ja demo, 30 minuuttia.</p></div>
-      <div class="step"><span class="n">2</span><div class="dash"></div><h3>Määritä</h3><p>Pöydät, hinnat, provisio ja oma ilme. Autamme.</p></div>
-      <div class="step"><span class="n">3</span><div class="dash"></div><h3>Asenna</h3><p>Tuomme kassan ja kytkemme laitteet.</p></div>
-      <div class="step"><span class="n">4</span><h3>Myy</h3><p>Ensimmäinen myynti ja koulutus kassalla.</p></div>
-    </div>
+    <div class="sec-title reveal"><h2 class="rs-disp">Valmis päivissä</h2><p class="rs-sub">Vaihto hoituu ilman, että kirppis menee kiinni. Kokonaiskesto 1–3 päivää.</p></div>
+    <svg class="tl reveal" viewBox="0 0 600 130" aria-label="Käyttöönotto">
+      <path d="M20 75C120 25 180 115 300 65S480 35 580 75" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+      <g font-family="Archivo" font-stretch="125%" font-weight="700" font-size="14" fill="currentColor">
+        <circle cx="20" cy="75" r="7"/><text x="8" y="106">Tutustu</text>
+        <circle cx="200" cy="77" r="7"/><text x="176" y="108">Määritä</text>
+        <circle cx="390" cy="50" r="7"/><text x="368" y="30">Asenna</text>
+        <circle cx="580" cy="75" r="9" fill="var(--red)"/><text x="552" y="106">Myy</text>
+      </g>
+    </svg>
   </div>
 </section>
 
 <!-- LUOTETTAVUUS & TUKI -->
-<section class="paper" data-theme="birch">
+<section>
   <div class="wrap">
-    <div class="sec-head left reveal">
-      <h2 class="display">Tehty kestämään</h2>
-      <p class="sub">Kassa on kirppiksen sydän. Kohtelemme sitä niin.</p>
+    <div class="sec-title reveal"><h2 class="rs-disp">Tehty kestämään</h2><p class="rs-sub">Kassa on kirppiksen sydän. Kohtelemme sitä niin.</p></div>
+    <div class="trust sec-gap reveal">
+      <div class="tcol"><h3><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>Tuki</h3><ul><li>Suomenkielinen tuki arkipäivisin</li><li>Kehittäjä vastaa itse, ei välikäsiä</li><li>Ohjeet suoraan ohjelmassa</li></ul></div>
+      <div class="tcol"><h3><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3 7.5-8 9-5-1.5-8-4.5-8-9V7z"/></svg></span>Varmuus</h3><ul><li>Kassa toimii myös ilman nettiä</li><li>Virheet korjaat itse kassalla</li><li>Kassa ja maksupääte synkassa</li></ul></div>
+      <div class="tcol"><h3><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>Tietoturva</h3><ul><li>Tiedot säilytetään EU:ssa</li><li>Salattu yhteys ja varmuuskopiot</li><li>Käyttäjäroolit ja GDPR</li></ul></div>
+      <div class="tcol"><h3><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><path d="M12 3v18M6 7h9a3 3 0 0 1 0 6H8a3 3 0 0 0 0 6h10"/></svg></span>Hinta</h3><ul><li>Ei aloitusmaksua</li><li>Hinta seuraa kassamyyntiäsi</li><li>Hiljainen kuukausi, pienempi lasku</li></ul></div>
     </div>
-    <div class="trust reveal">
-      <div class="tcol">
-        <h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>Tuki</h3>
-        <ul><li>Suomenkielinen tuki arkipäivisin</li><li>Kehittäjä vastaa itse, ei välikäsiä</li><li>Ohjeet suoraan ohjelmassa</li></ul>
+  </div>
+</section>
+
+<!-- HINTA -->
+<section id="hinta">
+  <div class="wrap">
+    <div class="sec-title reveal"><h2 class="rs-disp">Maksat kun myyt</h2><p class="rs-sub">Hinta lasketaan kuukausittaisesta kassamyynnistä. Hiljainen kuukausi, pienempi lasku.</p></div>
+    <div class="quote sec-gap reveal">
+      <div class="qform">
+        <label class="qfield"><span class="lb">Kassamyynti kuukaudessa</span><input id="qInput" inputmode="numeric" value="6 000 €" aria-label="Kassamyynti kuukaudessa"></label>
+        <button class="rs-btn l" id="qCalc">Laske</button>
       </div>
-      <div class="tcol">
-        <h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 3l8 4v5c0 4.5-3 7.5-8 9-5-1.5-8-4.5-8-9V7z"/></svg></span>Toimintavarmuus</h3>
-        <ul><li>Kassa toimii myös ilman nettiä</li><li>Virheet korjaat itse kassalla</li><li>Kassa ja maksupääte synkassa</li></ul>
-      </div>
-      <div class="tcol">
-        <h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>Tietoturva</h3>
-        <ul><li>Tiedot säilytetään EU:ssa</li><li>Salattu yhteys ja varmuuskopiot</li><li>Käyttäjäroolit ja GDPR</li></ul>
-      </div>
-      <div class="tcol">
-        <h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 3v18M6 7h9a3 3 0 0 1 0 6H8a3 3 0 0 0 0 6h10"/></svg></span>Hinnoittelu</h3>
-        <ul><li>Ei aloitusmaksua</li><li>Hinta seuraa kassamyyntiäsi</li><li>Hiljainen kuukausi, pienempi lasku</li></ul>
+      <div class="qresult" id="qResult">
+        <span class="taso" id="qTaso">Taso 2 · Pieni</span>
+        <div class="price"><span id="qPrice">80</span> <small>€ / kk</small></div>
+        <div class="qbreak" id="qBreak"></div>
+        <p class="qnote">Esimerkkilaskelma. Käyttöönotto ja tilitykset sisältyvät hintaan, ei piilokuluja.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HINTA (calculator) -->
-<section data-theme="teal" id="hinta">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Maksat kun myyt</h2>
-      <p class="sub">Kuukausihinta seuraa kassamyyntiäsi. Mitä pienempi toiminta, sitä pienempi maksu.</p>
-    </div>
-    <div class="calc reveal">
-      <div class="calc-panel calc-left">
-        <div class="lbl">Kassamyynti kuukaudessa</div>
-        <div class="hint">Arvioi myymäläsi myynti euroina / kk</div>
-        <div class="calc-inputrow">
-          <div class="calc-num"><input id="calcNum" type="text" inputmode="numeric" value="7 000"><span class="cur">€</span></div>
-          <input class="calc-range" id="calcRange" type="range" min="0" max="60000" step="500" value="7000" aria-label="Kassamyynti kuukaudessa">
-        </div>
-        <div class="calc-scale"><span>0 €</span><span>30 000 €</span><span>60 000 €+</span></div>
-        <div class="calc-tiers" id="calcTiers">
-          <button data-v="2500">Alku</button>
-          <button data-v="7000" class="on">Pieni</button>
-          <button data-v="15000">Keski</button>
-          <button data-v="30000">Suuri</button>
-          <button data-v="50000">Iso</button>
-        </div>
-      </div>
-      <div class="calc-panel calc-right">
-        <div class="calc-tasolbl" id="calcTaso">Taso 2 · Pieni</div>
-        <div class="calc-result"><span id="calcPrice">80</span> <span class="u">€ / kk</span></div>
-        <div class="calc-break" id="calcBreak"></div>
-        <div class="calc-note">Hinta on arvio. Käyttöönotto ja tilitykset sisältyvät hintaan ilman piilokuluja.</div>
-      </div>
-    </div>
-    <div class="whybtn-wrap reveal">
-      <button class="btn btn-primary" id="whyBtn">Mihin hintamme perustuu?</button>
-    </div>
-  </div>
-</section>
-
-<!-- PILOTTI -->
-<section class="paper" data-theme="light-grey">
-  <div class="wrap">
-    <div class="pilot reveal">
-      <h2>Pilottipaikkoja auki</h2>
-      <p>Haemme kirpputoreja mukaan alkuvuodeksi 2027. Rajattu määrä paikkoja.</p>
-      <div class="perks"><span>6 kk maksutta</span><span>Kassalaite meiltä</span><span>Vastineeksi palautetta</span></div>
-      <a class="btn" href="#yhteys">Varaa demo</a>
+<!-- PILOTTI (ruskea band) -->
+<section>
+  <div class="wrap reveal">
+    <div class="band pilot">
+      <p class="rs-disp m">Pilottipaikkoja auki</p>
+      <p style="max-width:460px;color:rgb(236 236 220 / .88)">Haemme kirpputoreja mukaan alkuvuodeksi 2027. Rajattu määrä paikkoja.</p>
+      <div class="perks"><span>Kuusi kuukautta maksutta</span><span>Kassalaite meiltä</span><span>Vastineeksi palautetta</span></div>
+      <a class="rs-btn" href="#yhteys">Varaa demo</a>
     </div>
   </div>
 </section>
 
 <!-- TARINA -->
-<section data-theme="asphalt">
+<section>
   <div class="wrap">
     <div class="showcase reveal">
-      <div class="sc-media media-frame"><picture><source type="image/avif" srcset="images/rk6-1080.avif"><source type="image/webp" srcset="images/rk6-1080.webp"><img alt="Vintagevaatteita kirpputorilla" src="images/rk6.jpg" loading="lazy" decoding="async"></picture></div>
-      <div class="sc-copy">
+      <div class="mediaframe"><picture><source type="image/avif" srcset="images/rk6-1080.avif"><source type="image/webp" srcset="images/rk6-1080.webp"><img alt="Vintagevaatteita kirpputorilla" src="images/rk6.jpg" loading="lazy"></picture></div>
+      <div class="sc">
         <h3>Kirppikseltä koodiin</h3>
         <p>Sofialla on yli kymmenen vuoden kokemus kirpputori- ja vintagealalta: oma liike jo 18-vuotiaana ja työvuosia hinnoittelijana itsepalvelukirpputorilla. Se näkyy siinä, miten ReSellaa rakennetaan.</p>
         <p>Leonilla on kuuden vuoden kokemus ohjelmistokehityksestä. Ennen ensimmäistäkään koodiriviä haastattelimme noin kahtakymmentä kirppisyrittäjää. Arvomme ovat yksinkertaiset: kierto, yhteisö ja kirpputoriarjen aito helpottaminen.</p>
@@ -812,43 +514,41 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="paper" data-theme="birch">
+<!-- UKK -->
+<section id="ukk">
   <div class="wrap">
     <div class="faq2 reveal">
-      <div class="faq-aside">
-        <h2 class="display">Usein kysyttyä</h2>
-        <p>Jäikö jokin mietityttämään? Kysy suoraan, vastaamme samana arkipäivänä.</p>
-        <a class="btn btn-primary" href="#yhteys">Varaa demo</a>
+      <div class="sec-title">
+        <h2 class="rs-disp">Usein kysyttyä</h2>
+        <p class="rs-sub" style="font-size:16px">Jäikö jokin mietityttämään? Kysy suoraan, vastaamme samana arkipäivänä.</p>
+        <a class="rs-btn" href="#yhteys" style="align-self:flex-start;margin-top:4px">Varaa demo</a>
       </div>
-      <div class="faq">
-      <details open><summary>Mitä ReSella maksaa?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Hinta porrastuu kirppiksesi kassamyynnin mukaan. Hiljaisena kuukautena maksat vähemmän. Kerromme tarkan hinnan ennen sopimusta.</div></details>
-      <details><summary>Pitääkö vanhat tuotteet kuvata uudelleen?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Ei. Vanhat tuotteet myydään loppuun nykyisillä lapuilla, ja uudet varaukset tulevat ReSellaan.</div></details>
-      <details><summary>Mitä laitteita tarvitsen?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Tabletin tai kosketusnäytön, lukijan ja tarvittaessa kuittitulostimen ja kassalippaan. Usein nykyiset laitteet käyvät.</div></details>
-      <details><summary>Toimiiko kassa, jos netti katkeaa?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Toimii. Myynnit tallentuvat ja synkronoituvat, kun yhteys palaa.</div></details>
-      <details><summary>Voinko käyttää omaa logoa ja värejä?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">Voit. Myyjien varaussivu näkyy kirppiksesi ilmeellä.</div></details>
-      <details><summary>Kauanko käyttöönotto kestää?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 9l6 6 6-6"/></svg></span></summary><div class="ans">1–3 päivää. Hoidamme asennuksen kanssasi.</div></details>
+      <div class="acc">
+        <details open><summary>Mitä ReSella maksaa?<i>+</i></summary><p>Hinta porrastuu kirppiksesi kassamyynnin mukaan. Hiljaisena kuukautena maksat vähemmän. Kerromme tarkan hinnan ennen sopimusta.</p></details>
+        <details><summary>Pitääkö vanhat tuotteet kuvata uudelleen?<i>+</i></summary><p>Ei. Vanhat tuotteet myydään loppuun nykyisillä lapuilla, ja uudet varaukset tulevat ReSellaan.</p></details>
+        <details><summary>Mitä laitteita tarvitsen?<i>+</i></summary><p>Tabletin tai kosketusnäytön, lukijan ja tarvittaessa kuittitulostimen ja kassalippaan. Usein nykyiset laitteet käyvät.</p></details>
+        <details><summary>Toimiiko kassa, jos netti katkeaa?<i>+</i></summary><p>Toimii. Myynnit tallentuvat ja synkronoituvat, kun yhteys palaa.</p></details>
+        <details><summary>Voinko käyttää omaa logoa ja värejä?<i>+</i></summary><p>Voit. Myyjien varaussivu näkyy kirppiksesi ilmeellä.</p></details>
+        <details><summary>Kauanko käyttöönotto kestää?<i>+</i></summary><p>Yhdestä kolmeen päivää. Hoidamme asennuksen kanssasi.</p></details>
       </div>
     </div>
   </div>
 </section>
 
 <!-- YHTEYS -->
-<section class="paper" data-theme="light-grey" id="yhteys">
+<section id="yhteys">
   <div class="wrap">
-    <div class="contact-grid">
-      <div class="contact-copy reveal">
-        <h2 class="display">Varaa demo</h2>
-        <p>Näytämme ReSellan käytännössä, 30 minuutissa. Kerro kirpputoristasi, niin olemme yhteydessä.</p>
+    <div class="contact reveal">
+      <div class="sec-title">
+        <h2 class="rs-disp">Varaa demo</h2>
+        <p class="rs-sub" style="font-size:16px">Näytämme ReSellan käytännössä, 30 minuutissa. Kerro kirpputoristasi, niin olemme yhteydessä.</p>
       </div>
-      <form class="demo reveal" id="demoForm" novalidate>
-        <div class="frow">
-          <label>Nimi<input type="text" name="name" required autocomplete="name" placeholder="Nimesi"></label>
-          <label>Sähköposti<input type="email" name="email" required autocomplete="email" placeholder="sinä@example.com"></label>
-        </div>
-        <label>Kirpputori<input type="text" name="market" autocomplete="organization" placeholder="Kirpputorisi nimi"></label>
-        <label>Viesti<textarea name="message" rows="3" placeholder="Jotain mitä haluat kertoa?"></textarea></label>
-        <button type="submit" class="btn btn-primary btn-l" style="align-self:flex-start">Pyydä demo</button>
+      <form class="demoform" id="demoForm" novalidate>
+        <label class="ff"><span class="lb">Nimi</span><input name="name" autocomplete="name"></label>
+        <label class="ff"><span class="lb">Sähköposti</span><input name="email" type="email" autocomplete="email"></label>
+        <label class="ff"><span class="lb">Kirpputori</span><input name="market" autocomplete="organization"></label>
+        <label class="ff"><span class="lb">Viesti</span><textarea name="message" rows="3"></textarea></label>
+        <button type="submit" class="rs-btn l" style="align-self:flex-start">Pyydä demo</button>
         <p class="cf-note" id="cfNote" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -856,186 +556,52 @@ form.demo .cf-note.err{color:var(--palette-orange-200,#ffbda3)}
 </section>
 
 <!-- CTA BAND -->
-<section data-theme="asphalt" class="ctaband">
+<section>
   <div class="wrap reveal">
-    <h2 class="display">Katso omin silmin</h2>
-    <a class="btn btn-primary btn-l" href="#yhteys">Varaa demo</a>
+    <div class="band"><p class="rs-disp m">Valmis kokeilemaan?</p><a class="rs-btn" href="#yhteys">Varaa demo</a></div>
   </div>
 </section>
 
-<dialog class="tiers" id="tiersModal">
-  <div class="tiers-inner">
-    <h3>Mihin hintamme perustuu</h3>
-    <p>Hinta lasketaan portaittain kuukausittaisesta kassamyynnistä. Jokaiselta portaalta veloitetaan oma prosenttinsa, joten maksu nousee tasaisesti myynnin mukana.</p>
-    <div class="tier-scroll">
-    <table class="tier-tbl">
-      <thead><tr><th>Taso</th><th>Kassamyynti €&nbsp;/&nbsp;kk</th><th>%&nbsp;osuudesta</th><th>Maksu ylärajalla</th></tr></thead>
-      <tbody>
-        <tr><td>1 Alku</td><td>alle 4 000</td><td>1,25 %</td><td>50 €</td></tr>
-        <tr><td>2 Pieni</td><td>4 000 – 10 000</td><td>1,0 %</td><td>110 €</td></tr>
-        <tr><td>3 Keski</td><td>10 000 – 20 000</td><td>0,75 %</td><td>185 €</td></tr>
-        <tr><td>4 Suuri</td><td>20 000 – 40 000</td><td>0,5 %</td><td>285 €</td></tr>
-        <tr><td>5 Iso</td><td>yli 40 000</td><td>0,25 %</td><td>ei kattoa</td></tr>
-      </tbody>
-    </table>
-    </div>
-    <button class="btn btn-primary tiers-close" id="tiersClose">Sulje</button>
-  </div>
-</dialog>
-
 <!-- FOOTER -->
-<footer class="site-foot paper">
+<footer class="foot">
   <div class="wrap">
     <div class="foot-top">
-      <div class="foot-brand">
-        <span class="brand">ReSella</span>
-        <p class="slog">Kirpputorisi yhdessä paikassa.</p>
-      </div>
-      <div class="foot-col"><h4>Tuote</h4><a href="#ominaisuudet">Ominaisuudet</a><a href="#appi">Ostajan sovellus</a><a href="#hinta">Hinta</a></div>
-      <div class="foot-col"><h4>Yritys</h4><a href="#yhteys">Varaa demo</a><a href="#yhteys">Yhteystiedot</a></div>
-      <div class="foot-col"><h4>Seuraa</h4><a href="https://instagram.com" rel="noopener">Instagram</a><a href="https://tiktok.com" rel="noopener">TikTok</a><a href="https://linkedin.com" rel="noopener">LinkedIn</a></div>
+      <div><p class="rs-head">Pysy mukana: uudet ominaisuudet ensimmäisenä</p><a class="rs-btn out s" href="#yhteys">Tilaa uutiskirje</a></div>
+      <div class="foot-col"><b>Sivut</b><a href="#ominaisuudet">Kassa</a><a href="#appi">Kuluttaja-app</a><a href="#ukk">UKK</a></div>
+      <div class="foot-col"><b>Yritys</b><a href="#yhteys">Meistä</a><a href="#yhteys">Yhteystiedot</a></div>
     </div>
-    <div class="foot-legal">
-      <p>ReSella Oy · Espoo · Y-tunnus 3641828-1</p>
-      <div class="l-links"><a href="#">Tietosuoja</a><a href="#">Käyttöehdot</a><a href="#">Evästeet</a><a href="#">FI / EN</a></div>
-    </div>
+    <img class="biglogo" src="images/brand/paalogo-vaaka-ruskea.svg" alt="ReSella">
+    <div class="foot-legal"><span>© 2026 ReSella Oy · Espoo · Y 3641828-1</span><span>Tietosuoja</span><span>Ehdot</span><span>FI / EN</span></div>
   </div>
 </footer>
 
 <script>
 (function(){
   "use strict";
-  var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hdr=document.getElementById('hdr');
+  function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY>24); }
+  onScroll(); addEventListener('scroll',onScroll,{passive:true});
 
-  /* header scroll state + hero progressive reveal */
-  var head = document.getElementById('head');
-  var hero = document.querySelector('.hero');
-  function onScroll(){
-    head.classList.toggle('is-scrolled', window.scrollY > 24);
-    if(hero && window.scrollY > 40) hero.classList.add('open');
-  }
-  onScroll(); addEventListener('scroll', onScroll, {passive:true});
-  /* fallback: open the hero shortly even without scroll, and immediately if reduced motion */
-  if(hero){ if(rm){ hero.classList.add('open'); } else { setTimeout(function(){ hero.classList.add('open'); }, 3200); } }
+  var burger=document.getElementById('burger'), menu=document.getElementById('menu');
+  burger.addEventListener('click',function(){ var o=menu.classList.toggle('open'); burger.setAttribute('aria-expanded',o?'true':'false'); });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }); });
 
-  /* segmented nav sliding knob */
-  var seg = document.getElementById('seg'), knob = document.getElementById('segKnob');
-  var links = seg ? [].slice.call(seg.querySelectorAll('a')) : [];
-  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
-  function moveKnob(a){
-    if(!a) return;
-    knob.style.width = a.offsetWidth + 'px';
-    knob.style.transform = 'translateX(' + (a.offsetLeft - 4) + 'px)';
-    seg.classList.add('ready');
-    links.forEach(function(l){ l.classList.toggle('active', l===a); });
-  }
-  function activeByScroll(){
-    var y = window.scrollY + 120, cur = links[0];
-    sections.forEach(function(s, i){ if(s && s.offsetTop <= y) cur = links[i]; });
-    moveKnob(cur);
-  }
-  if(seg){
-    requestAnimationFrame(function(){ moveKnob(links[0]); activeByScroll(); });
-    addEventListener('scroll', activeByScroll, {passive:true});
-    addEventListener('resize', activeByScroll);
-    links.forEach(function(a){ a.addEventListener('mouseenter', function(){ moveKnob(a); }); });
-    seg.addEventListener('mouseleave', activeByScroll);
-  }
+  var reveals=[].slice.call(document.querySelectorAll('.reveal'));
+  if(rm||!('IntersectionObserver' in window)){ reveals.forEach(function(e){e.classList.add('in');}); }
+  else { var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'}); reveals.forEach(function(e){io.observe(e);}); setTimeout(function(){reveals.forEach(function(e){e.classList.add('in');});},2800); }
 
-  /* mobile menu */
-  var mBtn = document.getElementById('menuBtn'), sheet = document.getElementById('menuSheet'), scrim = document.getElementById('menuScrim');
-  function closeMenu(){ sheet.classList.remove('open'); scrim.classList.remove('open'); mBtn.setAttribute('aria-expanded','false'); }
-  mBtn.addEventListener('click', function(){
-    var open = sheet.classList.toggle('open'); scrim.classList.toggle('open', open); mBtn.setAttribute('aria-expanded', open?'true':'false');
-  });
-  scrim.addEventListener('click', closeMenu);
-  sheet.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+  /* price calc: hinta vain kassamyynnistä, portaittain */
+  var BANDS=[{u:4000,r:.0125,n:'Alku',t:1},{u:10000,r:.01,n:'Pieni',t:2},{u:20000,r:.0075,n:'Keski',t:3},{u:40000,r:.005,n:'Suuri',t:4},{u:Infinity,r:.0025,n:'Iso',t:5}];
+  function fmt(n){return Math.round(n).toLocaleString('fi-FI').replace(/ /g,' ');}
+  function calc(x){var tot=0,prev=0,parts=[];for(var i=0;i<BANDS.length;i++){var b=BANDS[i],top=Math.min(x,b.u),amt=Math.max(0,top-prev);if(amt>0){var fee=amt*b.r;tot+=fee;parts.push({n:b.n,r:b.r,fee:fee});}prev=b.u;if(x<=b.u)break;}return {tot:tot,parts:parts};}
+  function tier(x){for(var i=0;i<BANDS.length;i++){if(x<=BANDS[i].u)return BANDS[i];}return BANDS[4];}
+  var qi=document.getElementById('qInput'),qc=document.getElementById('qCalc'),qr=document.getElementById('qResult'),qp=document.getElementById('qPrice'),qt=document.getElementById('qTaso'),qb=document.getElementById('qBreak');
+  function run(){var x=parseInt((qi.value||'').replace(/[^\d]/g,''),10)||0;x=Math.max(0,Math.min(200000,x));var r=calc(x),t=tier(x);qi.value=fmt(x)+' €';qp.textContent=fmt(r.tot);qt.textContent='Taso '+t.t+' · '+t.n;qb.innerHTML=r.parts.map(function(p){return '<div class="r"><span>'+p.n+' · '+(p.r*100).toFixed(2).replace('.',',')+' %</span><b>'+fmt(p.fee)+' €</b></div>';}).join('')+'<div class="r" style="border-top:1px solid var(--line);padding-top:8px"><span>Yhteensä / kk</span><b>'+fmt(r.tot)+' €</b></div>';qr.classList.add('show');}
+  if(qc){qc.addEventListener('click',run);qi.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();run();}});run();}
 
-  /* reveal on view */
-  var reveals = [].slice.call(document.querySelectorAll('.reveal'));
-  if(rm || !('IntersectionObserver' in window)){ reveals.forEach(function(e){ e.classList.add('in'); }); }
-  else {
-    var io = new IntersectionObserver(function(ents){ ents.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } }); }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
-    reveals.forEach(function(e){ io.observe(e); });
-    /* safety net: never leave content hidden if the observer misses */
-    setTimeout(function(){ reveals.forEach(function(e){ e.classList.add('in'); }); }, 2600);
-  }
-
-  /* marquee: build product track (plain product cutouts, no sticker overlays) */
-  var vk = ['vk10','vk08','vk05','vk13','vk01','vk14','vk11','vk09','vk22','vk04','vk06','vk25','vk20','vk23','vk28','vk29','vk26','vk24','vk03'];
-  var track = document.getElementById('mqTrack');
-  if(track){
-    var html = '';
-    function block(){ return vk.map(function(n){ return '<picture><source type="image/avif" srcset="images/'+n+'.avif"><source type="image/webp" srcset="images/'+n+'.webp"><img alt="" src="images/'+n+'.png" loading="lazy" decoding="async"></picture>'; }).join(''); }
-    track.innerHTML = block() + block();
-  }
-
-  /* ===== pricing calculator (progressive tiers) ===== */
-  var BANDS = [
-    {upTo:4000,  rate:0.0125, name:'Alku',  n:1},
-    {upTo:10000, rate:0.0100, name:'Pieni', n:2},
-    {upTo:20000, rate:0.0075, name:'Keski', n:3},
-    {upTo:40000, rate:0.0050, name:'Suuri', n:4},
-    {upTo:Infinity, rate:0.0025, name:'Iso', n:5}
-  ];
-  function fmt(n){ return Math.round(n).toLocaleString('fi-FI').replace(/ /g,' '); }
-  function price(x){
-    var total=0, prev=0, parts=[];
-    for(var i=0;i<BANDS.length;i++){
-      var b=BANDS[i], top=Math.min(x,b.upTo), amt=Math.max(0, top-prev);
-      if(amt>0){ var fee=amt*b.rate; total+=fee; parts.push({name:b.name,rate:b.rate,amt:amt,fee:fee}); }
-      prev=b.upTo; if(x<=b.upTo) break;
-    }
-    return {total:total, parts:parts};
-  }
-  function tierOf(x){ for(var i=0;i<BANDS.length;i++){ if(x<=BANDS[i].upTo) return BANDS[i]; } return BANDS[BANDS.length-1]; }
-
-  var num=document.getElementById('calcNum'), range=document.getElementById('calcRange'),
-      out=document.getElementById('calcPrice'), taso=document.getElementById('calcTaso'),
-      brk=document.getElementById('calcBreak'), tiers=document.getElementById('calcTiers');
-
-  function render(x){
-    x=Math.max(0, Math.min(60000, Math.round(x)));
-    var r=price(x), t=tierOf(x);
-    out.textContent = fmt(r.total);
-    taso.textContent = 'Taso ' + t.n + ' · ' + t.name;
-    brk.innerHTML = r.parts.map(function(p){
-      return '<div class="row"><span>'+p.name+' · '+(p.rate*100).toFixed(2).replace('.',',')+' %</span><b>'+fmt(p.fee)+' €</b></div>';
-    }).join('') + '<div class="row" style="border-top:1px solid var(--palette-grey-200);padding-top:9px;margin-top:3px"><span>Yhteensä / kk</span><b>'+fmt(r.total)+' €</b></div>';
-    // sync controls
-    range.value = x;
-    num.value = fmt(x);
-    [].slice.call(tiers.querySelectorAll('button')).forEach(function(b){ b.classList.toggle('on', tierOf(parseInt(b.dataset.v,10)).n === t.n); });
-    // slider fill
-    var pct = (x/60000)*100;
-    range.style.background = 'linear-gradient(90deg, var(--palette-teal-300) '+pct+'%, var(--palette-grey-200) '+pct+'%)';
-  }
-  if(range){
-    range.addEventListener('input', function(){ render(parseInt(range.value,10)); });
-    num.addEventListener('input', function(){ var v=parseInt(num.value.replace(/[^\d]/g,''),10)||0; render(v); });
-    num.addEventListener('blur', function(){ render(parseInt(num.value.replace(/[^\d]/g,''),10)||0); });
-    tiers.addEventListener('click', function(e){ var b=e.target.closest('button'); if(b) render(parseInt(b.dataset.v,10)); });
-    render(7000);
-  }
-
-  /* tier table dialog */
-  var modal=document.getElementById('tiersModal'), whyBtn=document.getElementById('whyBtn'), tClose=document.getElementById('tiersClose');
-  if(whyBtn && modal){
-    whyBtn.addEventListener('click', function(){ if(modal.showModal) modal.showModal(); });
-    tClose.addEventListener('click', function(){ modal.close(); });
-    modal.addEventListener('click', function(e){ if(e.target===modal) modal.close(); });
-  }
-
-  /* demo form (no backend) */
-  var form=document.getElementById('demoForm'), note=document.getElementById('cfNote');
-  if(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var n=form.name.value.trim(), em=form.email.value.trim();
-      if(!n || !/.+@.+\..+/.test(em)){ note.textContent='Täytä nimi ja kelvollinen sähköposti.'; note.className='cf-note err'; return; }
-      note.textContent='Kiitos! Olemme yhteydessä pian.'; note.className='cf-note ok'; form.reset();
-    });
-  }
+  var form=document.getElementById('demoForm'),note=document.getElementById('cfNote');
+  if(form){form.addEventListener('submit',function(e){e.preventDefault();var n=form.name.value.trim(),em=form.email.value.trim();if(!n||!/.+@.+\..+/.test(em)){note.textContent='Täytä nimi ja kelvollinen sähköposti.';note.style.color='var(--red)';return;}note.textContent='Kiitos. Olemme yhteydessä pian.';note.style.color='var(--olive)';form.reset();});}
 })();
 </script>
 </body>
