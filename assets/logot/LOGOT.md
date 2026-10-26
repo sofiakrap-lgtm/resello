@@ -6,6 +6,7 @@
 3. Pilvi pysty: neliömäiset tilat (somekuvat, julisteet, pitch deckin kansi)
 4. Kukka pysty: kuten 3, vaihtoehtona
 5. Sanamerkki: kun hahmolle ei ole tilaa tai hahmo on jo näkyvissä (footer, pienet painotuotteet)
+6. Sanamerkki käsinkirjoitus (matala), vain footer: allekirjoitus sivun lopussa, koko sisällön leveydeltä (48 px marginaalit, mobiilissa 16 px). Ruskea #3E2520 beigellä pohjalla. Ei pilvi-ikonia viereen, ei animaatiota eikä hover-efektiä. Alt-teksti "ReSella". Tiedostot: ReSella_sanamerkki_matala_ruskea / _beige (SVG + PNG). Lisätty 26.10.2026.
 Ikoni: pilvihahmo yksin. Favicon, sovelluskuvake, somen profiilikuva.
 
 ## Värit
