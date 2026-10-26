@@ -137,15 +137,16 @@ section[id]{scroll-margin-top:72px}
 .cmp .mk .ico{width:16px;height:16px}
 /* karuselli (ominaisuudet) */
 .caro-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(26px,3.5vw,42px)}
-.caro-title{font-family:var(--fb);font-weight:500;font-size:clamp(26px,4vw,42px);line-height:1.12;letter-spacing:-.01em;margin:16px 0 0;max-width:18ch;text-wrap:balance}
-.caro-head .sub{margin-top:12px}
+.caro-eyebrow{cursor:default;margin-bottom:16px}
+.caro-eyebrow:hover{background:transparent;color:var(--ink)}
+.caro-title{font-family:var(--fd);font-stretch:125%;font-weight:900;text-transform:uppercase;letter-spacing:-.3px;font-size:clamp(22px,2.8vw,36px);line-height:1.02;margin:0;max-width:min(100%,760px)}
 .caro-nav{display:flex;gap:10px;flex:none}
 .caro-btn{width:46px;height:46px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);display:grid;place-items:center;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-out)}
 .caro-btn:hover{background:var(--brown-hover)}
 .caro-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.caro-track{display:flex;gap:clamp(10px,1.1vw,14px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:4px;scrollbar-width:none}
+.caro-track{display:flex;gap:clamp(10px,1.1vw,14px);overflow-x:auto;scroll-behavior:smooth;padding-bottom:4px;scrollbar-width:none}
 .caro-track::-webkit-scrollbar{display:none}
-.caro-card{flex:0 0 clamp(185px,19vw,232px);scroll-snap-align:start;aspect-ratio:3/4;border-radius:var(--radius-card);overflow:hidden;position:relative;display:flex}
+.caro-card{flex:0 0 clamp(185px,19vw,232px);aspect-ratio:3/4;border-radius:var(--radius-card);overflow:hidden;position:relative;display:flex}
 .caro-card.c-color{background:var(--cc)}
 .caro-card.c-color .cc-body{padding:clamp(16px,1.8vw,22px);display:flex;flex-direction:column;gap:9px;align-self:flex-start;color:var(--ct)}
 .caro-card.c-color h3{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:clamp(18px,2vw,22px);line-height:1.08}
@@ -339,38 +340,58 @@ section[id]{scroll-margin-top:72px}
   <div class="wrap">
     <div class="caro-head">
       <div>
-        <span class="tag">Ominaisuudet</span>
+        <span class="btn out caro-eyebrow">Ominaisuudet</span>
         <h2 class="caro-title">Kaikki kirpputorin työkalut yhdessä paikassa</h2>
-        <p class="sub">Kuusi työkalua, yksi kirjautuminen. Selaa ominaisuuksia.</p>
       </div>
       <div class="caro-nav">
         <button class="caro-btn" data-dir="-1" aria-label="Edellinen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
         <button class="caro-btn" data-dir="1" aria-label="Seuraava"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
     </div>
-    <div class="caro-track" id="caroTrack">
-      <article class="caro-card c-color" style="--cc:var(--blue);--ct:var(--ink)">
-        <div class="cc-body"><h3>Kassa</h3><p>Piippaa, maksa ja valmis. Toimii myös ilman nettiä.</p><span class="ci-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M3 20h18"/><path d="M8 9h4"/></svg></span></div>
-      </article>
-      <article class="caro-card c-img">
-        <img src="assets/kuvat/04_loydot_tuotteet/01_takki_esittely.jpg" alt="Takki esillä kirpputorilla" loading="lazy">
-        <div class="ci-cap"><h3>Näkyvyys</h3><p>Jokainen hinnoiteltu tuote näkyy ostajille verkossa ilman erillistä kuvausta.</p></div>
-      </article>
-      <article class="caro-card c-color" style="--cc:var(--red);--ct:var(--on-red)">
-        <div class="cc-body"><h3>Varaukset</h3><p>Myyjät varaavat ja maksavat pöydän itse, sinä näet tilanteen kartalta.</p><span class="ci-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 9v11"/></svg></span></div>
-      </article>
-      <article class="caro-card c-img">
-        <img src="assets/kuvat/02_kassa_maksu/10_kuitti_tulostuu.jpg" alt="Kuitti tulostuu kassalla" loading="lazy">
-        <div class="ci-cap"><h3>Tilitykset</h3><p>Kaikki myyjien rahat lähtevät kerralla yhdellä pankkitiedostolla.</p></div>
-      </article>
-      <article class="caro-card c-color" style="--cc:var(--ink);--ct:var(--bg)">
-        <div class="cc-body"><h3>Asiakashallinta</h3><p>Myyjät, sopimukset, tilinumerot ja varaushistoria samassa paikassa.</p><span class="ci-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M16 8h5M16 12h5"/></svg></span></div>
-      </article>
-      <article class="caro-card c-img">
-        <img src="assets/kuvat/03_vihrea_naytto/01_lappari_vihrea_naytto.jpg" alt="Hallintapaneeli tietokoneen näytöllä" loading="lazy">
-        <div class="ci-cap"><h3>Raportointi</h3><p>Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p></div>
-      </article>
-    </div>
+  </div>
+  <div class="caro-track" id="caroTrack">
+    <article class="caro-card c-color" style="--cc:var(--blue);--ct:var(--ink)">
+      <div class="cc-body"><h3>Kassa</h3><p>Piippaa, maksa ja valmis. Toimii myös ilman nettiä.</p><span class="ci-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M3 20h18"/><path d="M8 9h4"/></svg></span></div>
+    </article>
+    <article class="caro-card c-img">
+      <img src="assets/kuvat/04_loydot_tuotteet/01_takki_esittely.jpg" alt="Takki esillä kirpputorilla" loading="lazy">
+      <div class="ci-cap"><h3>Näkyvyys</h3><p>Jokainen hinnoiteltu tuote näkyy ostajille verkossa.</p></div>
+    </article>
+    <article class="caro-card c-color" style="--cc:var(--red);--ct:var(--on-red)">
+      <div class="cc-body"><h3>Varaukset</h3><p>Myyjät varaavat ja maksavat pöydän itse, sinä näet tilanteen kartalta.</p><span class="ci-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 9v11"/></svg></span></div>
+    </article>
+    <article class="caro-card c-img">
+      <img src="assets/kuvat/02_kassa_maksu/10_kuitti_tulostuu.jpg" alt="Kuitti tulostuu kassalla" loading="lazy">
+      <div class="ci-cap"><h3>Tilitykset</h3><p>Kaikki myyjien rahat lähtevät kerralla yhdellä pankkitiedostolla.</p></div>
+    </article>
+    <article class="caro-card c-color" style="--cc:var(--ink);--ct:var(--bg)">
+      <div class="cc-body"><h3>Asiakashallinta</h3><p>Myyjät, sopimukset, tilinumerot ja varaushistoria samassa paikassa.</p><span class="ci-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M16 8h5M16 12h5"/></svg></span></div>
+    </article>
+    <article class="caro-card c-img">
+      <img src="assets/kuvat/02_kassa_maksu/01_kassa_tiski_tabletti.jpg" alt="Tabletti kassatiskillä" loading="lazy">
+      <div class="ci-cap"><h3>Raportointi</h3><p>Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p></div>
+    </article>
+    <article class="caro-card c-color" style="--cc:var(--mustard);--ct:var(--ink)">
+      <div class="cc-body"><h3>Hintaehdotus</h3><p>Myyjä kuvaa tuotteen ja saa hintaehdotuksen.</p><span class="ci-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7l9 9-7 7-9-9z"/><circle cx="8.5" cy="8.5" r="1.3"/></svg></span></div>
+    </article>
+    <article class="caro-card c-img">
+      <img src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Kirpputorin pöydät ja rekit" loading="lazy">
+      <div class="ci-cap"><h3>Pöytäkartta</h3><p>Näe pöydät ja rekit kartalta: vapaa, varattu, päättymässä.</p></div>
+    </article>
+    <article class="caro-card c-color" style="--cc:var(--blue);--ct:var(--ink)">
+      <div class="cc-body"><h3>Tarrat</h3><p>Tulosta hintalaput omalle tarra-arkillesi.</p><span class="ci-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M14 4v6h6"/></svg></span></div>
+    </article>
+    <article class="caro-card c-img">
+      <img src="assets/kuvat/02_kassa_maksu/07_hintalappu_neule.jpg" alt="Hintalappu neuleessa" loading="lazy">
+      <div class="ci-cap"><h3>Alennukset</h3><p>Myyjä laskee hintoja itse kesken varauksen.</p></div>
+    </article>
+    <article class="caro-card c-color" style="--cc:var(--red);--ct:var(--on-red)">
+      <div class="cc-body"><h3>Käyttäjäroolit</h3><p>Työntekijä näkee kassan, mutta ei tilityksiä.</p><span class="ci-ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg></span></div>
+    </article>
+    <article class="caro-card c-img">
+      <img src="assets/kuvat/01_kirppis_tila/03_hylly_laukut_varikas.jpg" alt="Värikäs hylly laukkuja" loading="lazy">
+      <div class="ci-cap"><h3>Oma ilme</h3><p>Varaussivu omalla logollasi ja väreilläsi.</p></div>
+    </article>
   </div>
 </section>
 
@@ -691,25 +712,30 @@ section[id]{scroll-margin-top:72px}
   var seen=false; try{ seen=localStorage.getItem('rs-cookie')==='1'; }catch(e){}
   if(!seen){ ck.hidden=false; }
   ok.addEventListener('click',function(){ ck.hidden=true; try{ localStorage.setItem('rs-cookie','1'); }catch(e){} });
-  // karuselli
+  // karuselli: aareton kierto
   var track=document.getElementById('caroTrack');
   if(track){
-    function step(dir){
-      var card=track.querySelector('.caro-card'); if(!card) return;
-      var gap=parseFloat(getComputedStyle(track).columnGap||getComputedStyle(track).gap)||14;
-      var w=card.offsetWidth+gap;
-      var max=track.scrollWidth-track.clientWidth, cur=track.scrollLeft;
-      if(dir>0){ track.scrollTo({left: cur>=max-2 ? 0 : cur+w, behavior:'smooth'}); }
-      else{ track.scrollTo({left: cur<=2 ? max : cur-w, behavior:'smooth'}); }
-    }
+    var originals=Array.prototype.slice.call(track.querySelectorAll('.caro-card'));
+    originals.forEach(function(c){ track.appendChild(c.cloneNode(true)); });
+    var oneSet=0;
+    function measure(){ var all=track.querySelectorAll('.caro-card'); if(all.length>originals.length){ oneSet=all[originals.length].offsetLeft-all[0].offsetLeft; } }
+    measure(); addEventListener('resize',measure);
+    function normalize(){ if(oneSet>0){ if(track.scrollLeft>=oneSet){ track.scrollLeft-=oneSet; } else if(track.scrollLeft<0){ track.scrollLeft+=oneSet; } } }
     var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
-    var timer=null;
-    function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
-    function startAuto(){ if(reduce) return; stopAuto(); timer=setInterval(function(){ step(1); },3500); }
-    document.querySelectorAll('.caro-btn').forEach(function(b){ b.addEventListener('click',function(){ step(parseInt(b.getAttribute('data-dir'),10)); startAuto(); }); });
+    var raf=null, paused=false, speed=0.9;
+    function frame(){ if(!paused){ track.scrollLeft+=speed; normalize(); } raf=requestAnimationFrame(frame); }
+    function startAuto(){ if(reduce) return; paused=false; if(!raf){ raf=requestAnimationFrame(frame); } }
+    function pauseAuto(){ paused=true; }
+    function manual(dir){
+      var gap=parseFloat(getComputedStyle(track).columnGap||getComputedStyle(track).gap)||14;
+      var w=originals[0].offsetWidth+gap;
+      pauseAuto(); track.scrollBy({left:dir*w,behavior:'smooth'});
+      setTimeout(function(){ normalize(); startAuto(); },520);
+    }
+    document.querySelectorAll('.caro-btn').forEach(function(b){ b.addEventListener('click',function(){ manual(parseInt(b.getAttribute('data-dir'),10)); }); });
     var sec=document.getElementById('ominaisuudet');
-    if(sec){ sec.addEventListener('mouseenter',stopAuto); sec.addEventListener('mouseleave',startAuto); }
-    track.addEventListener('touchstart',stopAuto,{passive:true});
+    if(sec){ sec.addEventListener('mouseenter',pauseAuto); sec.addEventListener('mouseleave',startAuto); }
+    track.addEventListener('touchstart',pauseAuto,{passive:true});
     startAuto();
   }
 })();
