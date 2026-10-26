@@ -4,26 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ReSella</title>
-<meta name="description" content="Kassa, joka tuo ostajia. Hoida myynti, myyjät ja tilitykset yhdessä paikassa. Hyllysi näkyy samalla netissä.">
+<meta name="description" content="Kassa, joka tuo ostajia. Myynti, myyjät ja tilitykset yhdessä paikassa.">
 <link rel="icon" href="images/brand/ikoni-pilvi-ruskea.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ===== ReSella UI tokens (lukittu 25.10.2026) ===== */
+/* ===== ReSella UI tokens (lukittu) ===== */
 :root{
   --bg:#ECECDC; --surface:#F6F6EE; --line:#DCDBC6; --ink:#3E2520; --ink-muted:#6E5E56;
   --blue:#C5D0D3; --blue-deep:#3A4961; --red:#C24029; --on-red:#ECECDC;
   --olive:#8D8B4C; --mustard:#D09C4C; --brown-hover:#2A1814;
   --radius-pill:999px; --radius-card:24px; --radius-field:20px; --radius-thumb:18px; --radius-small:10px;
-  --gap-xs:6px; --gap-s:10px; --gap-m:24px; --gap-l:36px; --gap-xl:96px;
+  --gap-m:24px; --gap-l:36px; --gap-xl:clamp(72px,11vw,120px);
   --ease-out:cubic-bezier(0,0,.2,1); --ease-std:cubic-bezier(.2,0,0,1);
   --dur-fast:150ms; --dur-base:260ms; --dur-slow:460ms;
-  --section-py:clamp(56px,9vw,96px); --max:1120px; --gutter:clamp(20px,5vw,40px);
+  --section-py:clamp(64px,10vw,110px); --max:1100px; --gutter:clamp(20px,5vw,40px);
 }
 .dark{--bg:#3E2520; --surface:#4B302A; --line:#5E433B; --ink:#ECECDC; --ink-muted:#CDBFB2; --blue-deep:#C5D0D3}
-.rs,body{--_bg:var(--bg);--_sf:var(--surface);--_ln:var(--line);--_ink:var(--ink);--_mu:var(--ink-muted);--_bl:var(--blue);--_bd:var(--blue-deep);--_rd:var(--red);--_on:var(--on-red);--_ol:var(--olive);--_ms:var(--mustard);--_hv:var(--brown-hover);--_e:var(--ease-out);--_es:var(--ease-std);--_fd:"Archivo","Arial Black",system-ui,sans-serif;--_fb:"Epilogue",system-ui,-apple-system,sans-serif}
-
+.rs,body{--_bg:var(--bg);--_sf:var(--surface);--_ln:var(--line);--_ink:var(--ink);--_mu:var(--ink-muted);--_bl:var(--blue);--_bd:var(--blue-deep);--_rd:var(--red);--_on:var(--on-red);--_ms:var(--mustard);--_hv:var(--brown-hover);--_e:var(--ease-out);--_fd:"Archivo","Arial Black",system-ui,sans-serif;--_fb:"Epilogue",system-ui,-apple-system,sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--_bg);color:var(--_ink);font:400 16px/1.45 var(--_fb);-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -31,135 +30,72 @@ body{margin:0;background:var(--_bg);color:var(--_ink);font:400 16px/1.45 var(--_
 img,svg,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,p{margin:0}
-
-/* type */
-.rs-disp{font-family:var(--_fd);font-stretch:125%;font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-.3px;margin:0;text-wrap:balance;font-size:clamp(28px,6vw,72px)}
+.rs-disp{font-family:var(--_fd);font-stretch:125%;font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-.3px;text-wrap:balance;font-size:clamp(30px,6.5vw,72px)}
 .rs-disp.m{font-size:clamp(26px,4.5vw,44px)}
-.rs-head{font-family:var(--_fd);font-stretch:125%;font-weight:500;letter-spacing:.2px;line-height:1.15;margin:0;text-wrap:balance;font-size:24px}
-.rs-head.s{font-size:17px}
-.rs-sub{font-weight:300;margin:0;color:var(--_mu);text-wrap:pretty;font-size:18px}
-.rs-num{font-family:var(--_fd);font-stretch:125%;font-weight:700;line-height:1;letter-spacing:0}
+.rs-head{font-family:var(--_fd);font-stretch:125%;font-weight:500;letter-spacing:.2px;line-height:1.14;font-size:24px}
+.rs-sub{font-weight:300;color:var(--_mu);font-size:clamp(16px,2vw,19px)}
+.rs-num{font-family:var(--_fd);font-stretch:125%;font-weight:700;line-height:1}
 .rs-cap{font-size:13px;color:var(--_mu)}
-.rs-body{font-size:16px;line-height:1.5}
-.rs-small{font-size:14px;line-height:1.45}
-
-/* buttons */
-.rs-btn{--h:34px;--px:18px;--fs:14px;padding:calc((var(--h) - var(--fs)*.7)/2 - 1px) var(--px);font:500 var(--fs)/1 var(--_fb);border-radius:var(--radius-pill);border:1px solid transparent;display:inline-block;white-space:nowrap;cursor:pointer;background:var(--_ink);color:var(--_bg);text-decoration:none;transition:background-color var(--dur-fast) var(--_e),color var(--dur-fast) var(--_e)}
+.rs-btn{--h:40px;--px:22px;--fs:15px;padding:calc((var(--h) - var(--fs)*.7)/2 - 1px) var(--px);font:500 var(--fs)/1 var(--_fb);border-radius:var(--radius-pill);border:1px solid transparent;display:inline-block;white-space:nowrap;cursor:pointer;background:var(--_ink);color:var(--_bg);text-decoration:none;transition:background-color var(--dur-fast) var(--_e),color var(--dur-fast) var(--_e)}
 .rs-btn:hover{background:var(--_hv)}
-.rs-btn.s{--h:28px;--px:13px;--fs:13px}.rs-btn.l{--h:40px;--px:22px;--fs:15px}
-.rs-btn.lite{background:var(--_sf);color:var(--_ink);border-color:var(--_ln)}.rs-btn.lite:hover{background:var(--_ln)}
+.rs-btn.s{--h:30px;--px:14px;--fs:13px}
 .rs-btn.out{background:transparent;color:var(--_ink);border-color:var(--_ink)}.rs-btn.out:hover{background:var(--_ink);color:var(--_bg)}
-.rs-btn.red{background:var(--_rd);color:var(--_on)}.rs-btn.red:hover{background:#a8371f}
-.rs-tag{display:inline-block;padding:5px 10px;border:1px solid currentColor;border-radius:999px;font-size:13px;line-height:1;color:var(--_mu)}
-.rs-tag.on{background:var(--_ink);color:var(--_bg);border-color:var(--_ink)}
+.rs-tag{display:inline-block;padding:5px 11px;border:1px solid currentColor;border-radius:999px;font-size:13px;line-height:1;color:var(--_mu)}
 .rs-tag.blue{background:var(--_bl);color:var(--_ink);border-color:var(--_bl)}
-.rs-ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:square;stroke-linejoin:miter;flex:none}
+.rs-ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:square;flex:none}
 
-/* layout */
 section{padding-block:var(--section-py);position:relative}
 .wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gutter)}
-.sec-title{display:flex;flex-direction:column;gap:12px;max-width:640px}
-.sec-title.center{margin-inline:auto;align-items:center;text-align:center}
-.sec-title .rs-disp{font-size:clamp(28px,5vw,56px)}
-.sec-gap{margin-top:var(--gap-l)}
+.title{display:flex;flex-direction:column;gap:12px;max-width:620px}
+.title.center{margin-inline:auto;align-items:center;text-align:center}
+.title .rs-disp{font-size:clamp(28px,5vw,56px)}
 
-/* ===== header ===== */
+/* header */
 .hdr{position:fixed;inset:0 0 auto 0;z-index:40;padding:12px var(--gutter);transition:background-color var(--dur-base) var(--_e)}
 .hdr-in{max-width:var(--max);margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.hdr .logo{height:30px;display:block;transition:height var(--dur-base) var(--_e)}
-.hdr.scrolled{background:var(--_sf)}
-.hdr.scrolled .logo{height:26px}
-.hdr .logo-beige{display:block}.hdr .logo-ruskea{display:none}
-.hdr.scrolled .logo-beige{display:none}.hdr.scrolled .logo-ruskea{display:block}
+.hdr .logo{height:30px;transition:height var(--dur-base) var(--_e)}
+.hdr.scrolled{background:var(--_sf)}.hdr.scrolled .logo{height:26px}
+.hdr .lb{display:block}.hdr .lr{display:none}.hdr.scrolled .lb{display:none}.hdr.scrolled .lr{display:block}
 .hdr-right{display:flex;align-items:center;gap:14px}
-.hdr .demo{font-weight:400}
-.hdr .demo.on-hero{background:var(--bg);color:var(--ink)}
-.hdr.scrolled .demo.on-hero{background:var(--ink);color:var(--bg)}
-.burger{width:28px;height:21px;border:0;background:none;cursor:pointer;padding:0;color:var(--bg)}
-.hdr.scrolled .burger{color:var(--ink)}
+.hdr .demo{font-weight:400;background:var(--bg);color:var(--ink)}
+.hdr.scrolled .demo{background:var(--ink);color:var(--bg)}
+.burger{width:28px;height:21px;border:0;background:none;cursor:pointer;padding:0;color:var(--bg)}.hdr.scrolled .burger{color:var(--ink)}
 .burger rect{fill:currentColor}
-.hdr-cloud{height:0;overflow:hidden;opacity:0;transition:opacity var(--dur-base) var(--_e)}
-.hdr.scrolled .hdr-cloud{height:auto;opacity:1}
-.hdr-cloud img{height:18px}
-/* menu */
-.menu{position:fixed;inset:64px var(--gutter) auto auto;z-index:39;background:var(--_sf);border-radius:var(--radius-card);padding:16px 20px 22px;display:none;flex-direction:column;gap:4px;min-width:240px}
+.menu{position:fixed;inset:60px var(--gutter) auto auto;z-index:39;background:var(--_sf);border-radius:var(--radius-card);padding:16px 20px 22px;display:none;flex-direction:column;gap:4px;min-width:230px}
 .menu.open{display:flex}
-.menu a{font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:22px;color:var(--_ink);padding:6px 0;border-bottom:1px solid var(--_ln)}
+.menu a{font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:22px;padding:6px 0;border-bottom:1px solid var(--_ln)}
 .menu a:last-child{border-bottom:0}
 
-/* ===== hero ===== */
+/* hero */
 .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--ink)}
 .hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.hero-grain{position:absolute;inset:0;z-index:1;background-image:var(--grain);background-size:200px 200px;opacity:.08;mix-blend-mode:overlay;pointer-events:none}
 .hero-tint{position:absolute;inset:0;z-index:1;background:rgb(0 0 0 / .15)}
 .hero-in{position:relative;z-index:2;width:100%;max-width:var(--max);margin-inline:auto;padding:120px var(--gutter) clamp(24px,4vw,40px);color:var(--bg);display:flex;flex-direction:column;gap:26px}
 .hero-top{display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center}
 .hero-top .rs-disp{color:var(--bg);font-size:clamp(30px,6.4vw,66px);max-width:14ch}
-.hero-top p{margin:0;font-size:clamp(15px,2vw,18px);color:rgb(236 236 220 / .92)}
+.hero-top p{font-size:clamp(15px,2vw,18px);color:rgb(236 236 220 / .92)}
+.hero-top .rs-btn{background:var(--bg);color:var(--ink)}
 .hero-cols{display:grid;grid-template-columns:repeat(3,1fr);background:rgb(62 37 32 / .82);border-radius:22px;overflow:hidden}
 .hero-cols .c{padding:clamp(18px,2.4vw,26px);display:flex;flex-direction:column;gap:10px;color:var(--bg)}
 .hero-cols .c+.c{border-left:1px solid rgb(236 236 220 / .14)}
 .hero-cols .c .ic{opacity:.6}
 .hero-cols .c h3{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:clamp(16px,2vw,20px);line-height:1.08;color:var(--bg)}
-.hero-cols .c p{margin:0;font-size:13px;color:rgb(236 236 220 / .85)}
-.hero-mascot{position:absolute;right:clamp(12px,5vw,80px);bottom:0;z-index:2;width:clamp(68px,9vw,104px);pointer-events:none}
+.hero-cols .c p{font-size:13px;color:rgb(236 236 220 / .85)}
+.hero-mascot{position:absolute;right:clamp(12px,5vw,80px);bottom:0;z-index:2;width:clamp(68px,9vw,100px);pointer-events:none}
 
-/* ===== cards grid ===== */
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap-m)}
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap-m)}
-.card{background:var(--_sf);border-radius:var(--radius-card);padding:24px;display:flex;flex-direction:column;gap:10px}
-.card .rs-head{font-size:20px}
-.card .ic{color:var(--_ink)}
-.card.blue{background:var(--_bl)}
-
-/* problem list */
-.plist{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap-m)}
-.pc{background:var(--_sf);border-radius:var(--radius-card);padding:20px;display:flex;flex-direction:column;gap:8px}
-.pc .ic{color:var(--_rd)}
-.pc b{font-weight:600}
-.pc p{font-size:14px;line-height:1.45;margin:0}
-
-/* before / after */
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-m)}
-.ba .photo{border-radius:var(--radius-card);overflow:hidden;position:relative;min-height:320px}
-.ba .photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.45) brightness(.78) sepia(.15)}
-.ba .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgb(42 26 15 / .9),rgb(42 26 15 / .25))}
-.ba .photo .in{position:absolute;inset:auto 0 0 0;z-index:1;padding:24px;color:var(--bg)}
-.ba .pane{background:var(--_sf);border-radius:var(--radius-card);padding:24px;display:flex;flex-direction:column;gap:14px}
-.balist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
-.balist li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.4}
-.balist .mk{flex:none;width:18px;height:18px;border-radius:999px;display:grid;place-items:center;margin-top:1px}
-.ba .photo .balist li{color:rgb(236 236 220 / .92)}
-.ba .photo .mk{background:rgb(236 236 220 / .16);color:var(--bg)}
-.ba .pane .mk{background:var(--_bl);color:var(--_ink)}
-.balist .mk svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:square}
-.mini{background:var(--_bg);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px}
-.mini .row{display:flex;gap:7px}
-.mini .chip{flex:1;border-radius:9px;padding:9px;display:flex;flex-direction:column;gap:3px}
-.mini .chip small{font-size:7px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--_mu)}
-.mini .chip b{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:13px;color:var(--_ink)}
-.mini .chip.a{background:var(--_sf)}.mini .chip.b{background:var(--_bl)}.mini .chip.c{background:var(--_ink)}.mini .chip.c small,.mini .chip.c b{color:var(--_bg)}
-.mini .line{height:6px;border-radius:6px;background:var(--_sf)}.mini .line.sh{width:60%}
-
-/* media */
-.showcase{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,56px);align-items:center}
-.showcase.flip .mediaframe{order:-1}
-.mediaframe{border-radius:var(--radius-card);overflow:hidden;aspect-ratio:4/5;background:var(--_sf)}
-.mediaframe.wide{aspect-ratio:16/9}
-.mediaframe img{width:100%;height:100%;object-fit:cover}
-.sc h3{font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:clamp(22px,3vw,30px);line-height:1.1;color:var(--_ink)}
-.sc p{font-size:16px;line-height:1.5;margin-top:14px;color:var(--_mu)}
-.sc ul{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
-.sc li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
-.sc li .mk{flex:none;width:20px;height:20px;border-radius:999px;background:var(--_bl);display:grid;place-items:center;margin-top:1px}
-.sc li .mk svg{width:12px;height:12px;fill:none;stroke:var(--_ink);stroke-width:2.4;stroke-linecap:square}
-
-/* dashboard mock */
-.device{background:var(--_sf);border-radius:var(--radius-card);padding:clamp(18px,3vw,30px);display:flex;justify-content:center}
-.tab{width:100%;max-width:620px;border-radius:24px;background:#241611;padding:10px}
-.tab-scr{border-radius:16px;background:var(--surface);display:flex;overflow:hidden;min-height:230px;color:var(--ink)}
-.tab-side{width:96px;flex:none;background:var(--bg);padding:14px 10px;display:flex;flex-direction:column;gap:3px}
-.tab-side .lg{height:16px;margin-bottom:8px}
+/* feature moment */
+.feat{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,56px);align-items:center}
+.feat .chips{display:flex;flex-direction:column;gap:14px;margin-top:22px}
+.feat .chip{display:flex;gap:12px;align-items:flex-start}
+.feat .chip .ic{width:40px;height:40px;border-radius:12px;background:var(--_sf);display:grid;place-items:center;flex:none;color:var(--_ink)}
+.feat .chip b{font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:17px;display:block}
+.feat .chip span{font-size:14px;color:var(--_mu)}
+/* dashboard device */
+.device{background:var(--_sf);border-radius:var(--radius-card);padding:clamp(16px,2.6vw,26px)}
+.tab{width:100%;border-radius:22px;background:#241611;padding:9px}
+.tab-scr{border-radius:15px;background:var(--surface);display:flex;overflow:hidden;min-height:240px;color:var(--ink)}
+.tab-side{width:92px;flex:none;background:var(--bg);padding:13px 9px;display:flex;flex-direction:column;gap:3px}
+.tab-side .lg{height:15px;margin-bottom:8px}
 .tab-side span{font-size:8px;color:var(--ink-muted);padding:3px 6px;border-radius:6px}
 .tab-side span.on{background:var(--ink);color:var(--bg)}
 .tab-main{flex:1;min-width:0;padding:14px;display:flex;flex-direction:column;gap:9px}
@@ -172,174 +108,145 @@ section{padding-block:var(--section-py);position:relative}
 .tab-bar{height:6px;border-radius:6px;background:var(--bg);overflow:hidden}.tab-bar i{display:block;height:100%;background:var(--ink)}
 .tab-foot{margin-top:auto;font-size:8px;color:var(--ink-muted)}
 
-/* checkout flow */
-.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-m);margin-top:var(--gap-l)}
-.flow .st{display:flex;flex-direction:column;gap:8px}
-.flow .n{width:30px;height:30px;border-radius:999px;background:var(--_ink);color:var(--_bg);display:grid;place-items:center;font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:14px}
-.flow h3{font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:16px;color:var(--_ink)}
-.flow p{font-size:13px;color:var(--_mu);margin:0}
+/* before/after */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-m)}
+.ba .photo{border-radius:var(--radius-card);overflow:hidden;position:relative;min-height:300px}
+.ba .photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.45) brightness(.78) sepia(.15)}
+.ba .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgb(42 26 15 / .9),rgb(42 26 15 / .25))}
+.ba .photo .in,.ba .pane{padding:24px}
+.ba .photo .in{position:absolute;inset:auto 0 0 0;color:var(--bg)}
+.ba .pane{background:var(--_sf);border-radius:var(--radius-card);display:flex;flex-direction:column;gap:14px}
+.balist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.balist li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.4}
+.balist .mk{flex:none;width:18px;height:18px;border-radius:999px;display:grid;place-items:center;margin-top:1px}
+.ba .photo li{color:rgb(236 236 220 / .92)}.ba .photo .mk{background:rgb(236 236 220 / .16);color:var(--bg)}
+.ba .pane .mk{background:var(--_bl);color:var(--_ink)}
+.balist .mk svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:square}
 
-/* phones (app mockups) */
-.phones{position:relative;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;padding-bottom:10px}
-.phone{aspect-ratio:9/19.5;width:min(30%,180px);border-radius:30px;background:#1E1311;padding:6px;position:relative}
-.phone::before{content:"";position:absolute;top:12px;left:50%;transform:translateX(-50%);width:30%;height:10px;border-radius:999px;background:#1E1311;z-index:2}
-.phone .scr{height:100%;border-radius:25px;overflow:hidden;background:var(--surface);padding:28px 11px 10px;display:flex;flex-direction:column;gap:7px;font-size:9px;line-height:1.25}
-.phone .scr .num{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:15px}
-.phone .mid{width:60%}
-.note{font:500 12px var(--_fb);padding:7px 14px;border-radius:999px;background:var(--ink);color:var(--bg);white-space:nowrap}
+/* stat band */
+.band{background:var(--_ink);color:var(--_bg);border-radius:var(--radius-card);padding:clamp(32px,5vw,52px) clamp(24px,4vw,44px)}
+.band .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-m);margin-top:24px}
+.band .stat .big{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1;color:var(--_bg)}
+.band .stat .lbl{font-size:13px;color:rgb(236 236 220 / .78);margin-top:8px}
+.band .rs-disp{color:var(--_bg)}
 
-/* stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-m)}
-.stat{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-.stat .big{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:clamp(34px,5vw,54px);line-height:1;color:var(--_ink)}
-.stat .lbl{font-size:14px;color:var(--_mu)}
-
-/* trust */
-.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-m)}
-.tcol h3{font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:18px;display:flex;gap:10px;align-items:center;margin-bottom:12px}
-.tcol h3 .ic{color:var(--_ink)}
-.tcol ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-.tcol li{font-size:13.5px;line-height:1.4;padding-left:14px;position:relative;color:var(--_mu)}
-.tcol li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:999px;background:var(--_ink)}
-
-/* quote / calculator */
-.quote{max-width:620px}
-.qform{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+/* quote */
+.qform{display:flex;gap:10px;flex-wrap:wrap;max-width:560px;margin-top:var(--gap-l)}
 .qfield{flex:1;min-width:220px;background:var(--_sf);border-radius:999px;min-height:52px;padding:8px 20px;display:flex;flex-direction:column;justify-content:center}
 .qfield .lb{font-size:13px;color:var(--_mu)}
 .qfield input{border:0;background:transparent;font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:20px;color:var(--_ink);width:100%;outline:none}
 .qfield:focus-within{outline:2px solid var(--_bd)}
-.qresult{margin-top:24px;background:var(--_sf);border-radius:var(--radius-card);padding:24px;display:none}
+.qresult{margin-top:22px;max-width:560px;background:var(--_sf);border-radius:var(--radius-card);padding:24px;display:none}
 .qresult.show{display:block}
 .qresult .taso{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--_mu)}
-.qresult .price{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:clamp(40px,7vw,60px);line-height:1;margin-top:6px}
+.qresult .price{font-family:var(--_fd);font-stretch:125%;font-weight:700;font-size:clamp(40px,7vw,56px);line-height:1;margin-top:6px}
 .qresult .price small{font-size:.32em;color:var(--_mu)}
-.qbreak{margin-top:18px;border-top:1px solid var(--_ln);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.qbreak{margin-top:16px;border-top:1px solid var(--_ln);padding-top:12px;display:flex;flex-direction:column;gap:7px}
 .qbreak .r{display:flex;justify-content:space-between;font-size:14px;color:var(--_mu)}
 .qbreak .r b{color:var(--_ink);font-family:var(--_fd);font-stretch:125%;font-weight:700}
-.qnote{font-size:13px;color:var(--_mu);margin-top:14px}
-
-/* FAQ */
-.faq2{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,5vw,56px);align-items:start}
-.acc{border-top:1px solid var(--_ln)}
-.acc details{border-bottom:1px solid var(--_ln)}
-.acc summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-family:var(--_fd);font-stretch:125%;font-weight:500;font-size:20px}
-.acc summary::-webkit-details-marker{display:none}
-.acc summary i{width:28px;height:28px;border-radius:999px;border:1px solid var(--_ink);display:grid;place-items:center;flex:none;font-style:normal;transition:transform var(--dur-base) var(--_e)}
-.acc details[open] summary i{transform:rotate(45deg)}
-.acc p{margin:0 0 18px;font-size:14px;color:var(--_mu);max-width:56ch}
+.qnote{font-size:13px;color:var(--_mu);margin-top:12px}
 
 /* timeline */
-.tl{width:100%;max-width:640px;margin-top:var(--gap-l);color:var(--_ink)}
+.tl{width:100%;max-width:620px;margin-top:var(--gap-l);color:var(--_ink)}
 
-/* band */
-.band{background:var(--_ink);color:var(--_bg);border-radius:var(--radius-card);padding:clamp(32px,5vw,56px) 20px;display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center}
-.band .rs-disp{color:var(--_bg)}
-.band .rs-btn{background:var(--_bg);color:var(--_ink)}
-.band.pilot .perks{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.band.pilot .perks span{border:1px solid rgb(236 236 220 / .4);border-radius:999px;padding:7px 14px;font:500 13px var(--_fb)}
-
-/* form */
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,56px);align-items:start}
-.demoform{display:flex;flex-direction:column;gap:10px;max-width:460px}
-.ff{background:var(--_sf);border-radius:var(--radius-field);min-height:58px;padding:9px 16px;display:flex;flex-direction:column;justify-content:center}
-.ff .lb{font-size:13px;color:var(--_mu)}
-.ff input,.ff textarea{border:0;background:transparent;font:400 16px var(--_fb);color:var(--_ink);outline:none;width:100%;resize:vertical}
-.ff:focus-within{outline:2px solid var(--_bd)}
-.cf-note{font-size:13px;min-height:1.2em}
+/* cta + form */
+.ctaband{background:var(--_ink);color:var(--_bg);border-radius:var(--radius-card);padding:clamp(34px,5vw,56px) 20px;display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
+.ctaband .rs-disp{color:var(--_bg)}
+.ctaband form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:540px;width:100%}
+.ctaband .ff{flex:1;min-width:180px;background:var(--_sf);border-radius:999px;min-height:48px;padding:6px 18px;display:flex;align-items:center}
+.ctaband .ff input{border:0;background:transparent;font:400 15px var(--_fb);color:var(--_ink);width:100%;outline:none}
+.ctaband .rs-btn{background:var(--_bg);color:var(--_ink)}
+.cf-note{font-size:13px;color:rgb(236 236 220 / .85);min-height:1.1em}
 
 /* footer */
-.foot{background:var(--_bg);padding:clamp(48px,7vw,80px) 0 40px;font-size:14px}
-.foot-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:24px;padding-bottom:28px}
-.foot-top .rs-head{font-size:20px;margin-bottom:12px}
-.foot-col b{font-weight:500;display:block;margin-bottom:8px}
-.foot-col a{display:block;color:var(--_mu);padding:3px 0}
-.foot .biglogo{width:100%;display:block;margin:6px 0 14px}
+.foot{padding:clamp(44px,6vw,72px) 0 36px;font-size:14px}
+.foot .biglogo{width:100%;display:block;margin:0 0 14px}
 .foot-legal{border-top:1px solid var(--_ink);padding-top:12px;display:flex;flex-wrap:wrap;gap:10px 20px;justify-content:space-between;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--_mu)}
 
-/* decorative shapes */
-.shape{position:absolute;pointer-events:none;z-index:0}
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s var(--_e),transform .6s var(--_e)}
 .reveal.in{opacity:1;transform:none}
-
-@media(max-width:900px){
-  .grid3,.plist,.trust,.stats{grid-template-columns:repeat(2,1fr)}
-  .flow{grid-template-columns:repeat(2,1fr)}
-  .faq2{grid-template-columns:1fr;gap:20px}
-}
+@media(max-width:860px){.band .stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){
-  .grid3,.grid2,.plist,.trust,.ba,.showcase,.contact,.foot-top{grid-template-columns:1fr}
-  .showcase.flip .mediaframe{order:0}
+  .feat,.ba{grid-template-columns:1fr}
   .hero-cols{grid-template-columns:1fr}
   .hero-cols .c+.c{border-left:0;border-top:1px solid rgb(236 236 220 / .14)}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .flow{grid-template-columns:1fr}
-  .phone{width:46%}
+  .band .stats{grid-template-columns:repeat(2,1fr)}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
-:root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="hdr" id="hdr">
   <div class="hdr-in">
-    <a href="#top" aria-label="ReSella"><img class="logo logo-beige" src="images/brand/paalogo-vaaka-beige.svg" alt="ReSella"><img class="logo logo-ruskea" src="images/brand/paalogo-vaaka-ruskea.svg" alt="ReSella"></a>
+    <a href="#top" aria-label="ReSella"><img class="logo lb" src="images/brand/paalogo-vaaka-beige.svg" alt="ReSella"><img class="logo lr" src="images/brand/paalogo-vaaka-ruskea.svg" alt="ReSella"></a>
     <div class="hdr-right">
-      <a class="rs-btn s demo on-hero" href="#yhteys">Varaa demo</a>
-      <button class="burger" id="burger" aria-label="Valikko" aria-expanded="false"><svg viewBox="0 0 28 21" aria-hidden="true"><rect x="1" y="1" width="26" height="4.5" rx="2.25"/><rect x="1" y="8.25" width="26" height="4.5" rx="2.25"/><rect x="1" y="15.5" width="26" height="4.5" rx="2.25"/></svg></button>
+      <a class="rs-btn s demo" href="#yhteys">Varaa demo</a>
+      <button class="burger" id="burger" aria-label="Valikko" aria-expanded="false"><svg viewBox="0 0 28 21"><rect x="1" y="1" width="26" height="4.5" rx="2.25"/><rect x="1" y="8.25" width="26" height="4.5" rx="2.25"/><rect x="1" y="15.5" width="26" height="4.5" rx="2.25"/></svg></button>
     </div>
   </div>
 </header>
-<nav class="menu" id="menu" aria-label="Valikko">
-  <a href="#ominaisuudet">Kassa</a>
-  <a href="#appi">Kuluttaja-app</a>
-  <a href="#hinta">Hinta</a>
-  <a href="#ukk">UKK</a>
-  <a href="#yhteys">Varaa demo</a>
-</nav>
+<nav class="menu" id="menu"><a href="#tuote">Kassa</a><a href="#hinta">Hinta</a><a href="#yhteys">Varaa demo</a></nav>
 
 <!-- HERO -->
 <section class="hero" id="top">
   <img class="poster" src="images/im06-1080.webp" alt="">
   <video autoplay muted loop playsinline preload="auto" poster="images/im06-1080.webp"><source src="images/resello-hero.mp4" type="video/mp4"></video>
-  <div class="hero-tint"></div><div class="hero-grain"></div>
+  <div class="hero-tint"></div>
   <div class="hero-in">
     <div class="hero-top">
       <h1 class="rs-disp">Kassa, joka tuo ostajia</h1>
       <p>Myynti, myyjät ja tilitykset yhdessä paikassa.</p>
-      <a class="rs-btn l" style="background:var(--bg);color:var(--ink)" href="#yhteys">Varaa demo</a>
+      <a class="rs-btn" href="#yhteys">Varaa demo</a>
     </div>
     <div class="hero-cols">
-      <div class="c"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span><h3>Kassa ei pysähdy.</h3><p>Toimii myös ilman nettiä.</p></div>
-      <div class="c"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 14l2 2 4-4"/></svg></span><h3>Tilitykset. Yhdellä tiedostolla.</h3><p>Kaikki rahat kerralla verkkopankkiin.</p></div>
-      <div class="c"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg></span><h3>Hinnoittelet. Hylly on verkossa.</h3><p>Ostajat löytävät tuotteet ennen käyntiä.</p></div>
+      <div class="c"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg></span><h3>Kassa ei pysähdy.</h3><p>Toimii myös ilman nettiä.</p></div>
+      <div class="c"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 14l2 2 4-4"/></svg></span><h3>Tilitykset. Yhdellä tiedostolla.</h3><p>Kaikki rahat kerralla verkkopankkiin.</p></div>
+      <div class="c"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg></span><h3>Hinnoittelet. Hylly on verkossa.</h3><p>Ostajat löytävät tuotteet ennen käyntiä.</p></div>
     </div>
   </div>
   <img class="hero-mascot" src="images/brand/pilvi-kurkistaa.svg" alt="" aria-hidden="true">
 </section>
 
-<!-- ONGELMA (ruskea osio, heron jälkeen) -->
-<section class="dark" style="background:var(--bg)">
+<!-- TUOTE: yksi vahva hetki -->
+<section id="tuote">
   <div class="wrap">
-    <div class="sec-title reveal"><h2 class="rs-disp">Tuttu arki?</h2><p class="rs-sub">Kirppiksen pyörittäminen vie aikaa, jonka voisi käyttää myymiseen.</p></div>
-    <div class="plist sec-gap reveal">
-      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Kassa kaatuu kiireellä.</b> Vanha ohjelma jumittaa, ja tuki vastaa jos vastaa.</p></div>
-      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Virhettä ei saa korjattua.</b> Väärin lyöty tuote vaatii soiton ohjelman tekijälle.</p></div>
-      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Tilitykset vievät illan.</b> Myyjien rahat lasketaan ja maksetaan yksitellen.</p></div>
-      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Tuotteet eivät näy netissä.</b> Kuvaaminen vie aikaa, joten sen tekee vain kalleimmille.</p></div>
-      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Nuoret ostajat ovat muualla.</b> Hyvät löydöt jäävät hyllyyn, koska kukaan ei tiedä niistä.</p></div>
-      <div class="pc"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.5"/></svg></span><p><b>Myyjät hinnoittelevat halvalla.</b> Merkkitakki lähtee neljällä eurolla, vaikka siitä saisi enemmän.</p></div>
+    <div class="feat">
+      <div class="reveal">
+        <h2 class="rs-disp">Kaikki yhdessä paikassa</h2>
+        <p class="rs-sub" style="margin-top:12px">Kassa, varaukset ja tilitykset samassa näkymässä. Yksi kirjautuminen.</p>
+        <div class="chips">
+          <div class="chip"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M3 19h18"/></svg></span><div><b>Kassa</b><span>Piippaa, maksa, valmis. Myös ilman nettiä.</span></div></div>
+          <div class="chip"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg></span><div><b>Näkyvyys</b><span>Hinnoiteltu tuote on heti verkossa.</span></div></div>
+          <div class="chip"><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 14l2 2 4-4"/></svg></span><div><b>Tilitykset</b><span>Kaikki rahat kerralla yhdellä tiedostolla.</span></div></div>
+        </div>
+      </div>
+      <div class="device reveal">
+        <div class="tab">
+          <div class="tab-scr">
+            <div class="tab-side"><img class="lg" src="images/brand/ikoni-pilvi-ruskea.svg" alt=""><span class="on">Yleisnäkymä</span><span>Pöytäkartta</span><span>Varaukset</span><span>Myyjät</span><span>Tilitykset</span></div>
+            <div class="tab-main">
+              <div class="hi">Hyvää huomenta</div>
+              <div class="tab-stats">
+                <div class="tab-tile"><small>Myynti tänään</small><b>1 284 €</b></div>
+                <div class="tab-tile bl"><small>Tässä kuussa</small><b>18 920 €</b></div>
+                <div class="tab-tile"><small>Käyttöaste</small><b>87 %</b></div>
+              </div>
+              <div class="tab-bar"><i style="width:87%"></i></div>
+              <div class="tab-foot">9 / 72 pöytää vapaana · 31 avointa tilitystä</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- VERTAUS -->
+<!-- ENNEN JA NYT -->
 <section>
   <div class="wrap">
-    <div class="sec-title reveal"><h2 class="rs-disp">Ennen ja nyt</h2><p class="rs-sub">Sama työ, murto-osa vaivasta.</p></div>
-    <div class="ba sec-gap reveal">
+    <div class="title reveal"><h2 class="rs-disp">Ennen ja nyt</h2><p class="rs-sub">Sama työ, murto-osa vaivasta.</p></div>
+    <div class="ba reveal" style="margin-top:var(--gap-l)">
       <div class="photo">
         <picture><source type="image/avif" srcset="images/rk3-1080.avif"><source type="image/webp" srcset="images/rk3-1080.webp"><img alt="" src="images/rk3.jpg" loading="lazy"></picture>
         <div class="in">
@@ -352,90 +259,48 @@ section{padding-block:var(--section-py);position:relative}
         </div>
       </div>
       <div class="pane">
-        <div class="mini" aria-hidden="true">
-          <div class="row"><div class="chip a"><small>Myynti tänään</small><b>1 284 €</b></div><div class="chip b"><small>Tässä kuussa</small><b>18 920 €</b></div><div class="chip c"><small>Käyttöaste</small><b>87 %</b></div></div>
-          <div class="line"></div><div class="line sh"></div>
-        </div>
         <span class="rs-tag blue" style="align-self:flex-start">ReSellalla</span>
         <ul class="balist">
           <li><span class="mk"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 7"/></svg></span>Myyjä varaa ja maksaa pöydän itse</li>
           <li><span class="mk"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 7"/></svg></span>Kaikki tilitykset yhdellä tiedostolla</li>
           <li><span class="mk"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 7"/></svg></span>Hinnoiteltu tuote on heti verkossa</li>
+          <li><span class="mk"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 7"/></svg></span>Korjaat ja perut itse kassalla</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- OMINAISUUDET -->
-<section id="ominaisuudet">
-  <div class="wrap">
-    <div class="sec-title reveal"><h2 class="rs-disp">Kaikki yhdessä paikassa</h2><p class="rs-sub">Kuusi työkalua, yksi kirjautuminen.</p></div>
-    <div class="mediaframe wide reveal" style="margin-top:var(--gap-l)"><picture><source type="image/avif" srcset="images/rk1-1080.avif"><source type="image/webp" srcset="images/rk1-1080.webp"><img alt="Maksu kassalla" src="images/rk1.jpg" loading="lazy"></picture></div>
-    <div class="grid3 reveal" style="margin-top:var(--gap-m)">
-      <div class="card"><span class="rs-tag" style="align-self:flex-start">Kassa</span><p class="rs-head">Piippaa, maksa, valmis</p><p class="rs-sub" style="font-size:14px">Myynti, viivakoodi ja maksu samalla laitteella. Toimii myös ilman nettiä.</p></div>
-      <div class="card"><span class="rs-tag" style="align-self:flex-start">Näkyvyys</span><p class="rs-head">Hylly verkkoon itsestään</p><p class="rs-sub" style="font-size:14px">Jokainen hinnoiteltu tuote näkyy ostajille verkossa ilman erillistä kuvausta.</p></div>
-      <div class="card"><span class="rs-tag" style="align-self:flex-start">Varaukset</span><p class="rs-head">Pöydät järjestyksessä</p><p class="rs-sub" style="font-size:14px">Myyjät varaavat ja maksavat pöydän itse, sinä näet tilanteen kartalta.</p></div>
-      <div class="card"><span class="rs-tag" style="align-self:flex-start">Tilitykset</span><p class="rs-head">Rahat kerralla ulos</p><p class="rs-sub" style="font-size:14px">Kaikki myyjien tilitykset lähtevät kerralla yhdellä pankkitiedostolla.</p></div>
-      <div class="card"><span class="rs-tag" style="align-self:flex-start">Asiakkaat</span><p class="rs-head">Myyjät hallinnassa</p><p class="rs-sub" style="font-size:14px">Myyjät, sopimukset, tilinumerot ja varaushistoria samassa paikassa.</p></div>
-      <div class="card"><span class="rs-tag" style="align-self:flex-start">Raportit</span><p class="rs-head">Valmista kirjanpitoon</p><p class="rs-sub" style="font-size:14px">Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- JÄRJESTELMÄN TEASERI -->
+<!-- HYÖDYT (ruskea band) -->
 <section>
-  <div class="wrap">
-    <div class="sec-title reveal"><h2 class="rs-disp">Kurkista sisään</h2><p class="rs-sub">Näin arki näyttää ReSellassa. Luvut ovat esimerkkejä.</p></div>
-    <div class="device sec-gap reveal">
-      <div class="tab">
-        <div class="tab-scr">
-          <div class="tab-side"><img class="lg" src="images/brand/ikoni-pilvi-ruskea.svg" alt=""><span class="on">Yleisnäkymä</span><span>Pöytäkartta</span><span>Varaukset</span><span>Myyjät</span><span>Tilitykset</span><span>Raportit</span></div>
-          <div class="tab-main">
-            <div class="hi">Hyvää huomenta</div>
-            <div class="tab-stats">
-              <div class="tab-tile"><small>Myynti tänään</small><b>1 284 €</b></div>
-              <div class="tab-tile bl"><small>Tässä kuussa</small><b>18 920 €</b></div>
-              <div class="tab-tile"><small>Käyttöaste</small><b>87 %</b></div>
-            </div>
-            <div class="tab-bar"><i style="width:87%"></i></div>
-            <div class="tab-foot">9 / 72 pöytää vapaana · 31 avointa tilitystä · 2 340 tuotetta verkossa</div>
-          </div>
-        </div>
+  <div class="wrap reveal">
+    <div class="band">
+      <h2 class="rs-disp m">Vähemmän rutiinia, enemmän myyntiä</h2>
+      <div class="stats">
+        <div class="stat"><span class="big">1</span><div class="lbl">järjestelmä kolmen sijaan</div></div>
+        <div class="stat"><span class="big">1</span><div class="lbl">tiedosto kaikille tilityksille</div></div>
+        <div class="stat"><span class="big">24/7</span><div class="lbl">tilanne näkyy puhelimesta</div></div>
+        <div class="stat"><span class="big">1–3 pv</span><div class="lbl">käyttöönottoon</div></div>
       </div>
     </div>
-    <div class="flow reveal">
-      <div class="st"><span class="n">1</span><h3>Piippaa</h3><p>Viivakoodi tai QR, tuote ja hinta heti isolla.</p></div>
-      <div class="st"><span class="n">2</span><h3>Tarkista</h3><p>Ostaja näkee summan asiakasnäytöltä.</p></div>
-      <div class="st"><span class="n">3</span><h3>Maksa</h3><p>Summa siirtyy päätteeseen itsestään.</p></div>
-      <div class="st"><span class="n">4</span><h3>Valmis</h3><p>Kuitti ulos, myyjän saldo päivittyy.</p></div>
-    </div>
   </div>
 </section>
 
-<!-- KULUTTAJA-APP -->
-<section id="appi">
+<!-- HINTA -->
+<section id="hinta">
   <div class="wrap">
-    <div class="sec-title center reveal"><h2 class="rs-disp">Ostajat löytävät sinut</h2><p class="rs-sub">Hyllysi tuotteet ostajan taskussa. Tulossa 2027.</p></div>
-    <div class="phones sec-gap reveal">
-      <div class="phone"><div class="scr"><span style="font-weight:500">Hei, Aino</span><p class="rs-disp" style="font-size:18px;color:var(--ink)">Löydä aarteet</p><div style="display:flex;gap:4px"><span class="rs-tag blue" style="font-size:9px;padding:3px 7px">Kaikki</span><span class="rs-tag" style="font-size:9px;padding:3px 7px">Vaatteet</span></div><div style="background:var(--blue);border-radius:12px;padding:9px"><b>Vintage-takit läheltä</b><br>12 kirppistä · 3 km</div></div></div>
-      <div class="phone mid" style="margin-top:38px"><div class="scr" style="padding:0"><div style="height:54%"><picture><source type="image/webp" srcset="images/vk13.webp"><img src="images/vk13.png" alt="" style="width:100%;height:100%;object-fit:cover"></picture></div><div style="padding:10px"><b>Marimekko-muki</b><br>Tiltun kirppis<br><span class="num">6,00 €</span></div></div></div>
-      <div class="phone"><div class="scr"><p class="rs-disp" style="font-size:15px;color:var(--ink)">Varaus valmis</p><div style="background:var(--bg);border-radius:12px;flex:1;display:grid;place-items:center"><svg viewBox="0 0 29 29" width="70" height="70" shape-rendering="crispEdges"><rect width="29" height="29" fill="var(--surface)"/><g fill="var(--ink)"><path d="M0 0h7v7H0z"/><rect x="1" y="1" width="5" height="5" fill="var(--surface)"/><rect x="2" y="2" width="3" height="3"/><path d="M22 0h7v7h-7z"/><rect x="23" y="1" width="5" height="5" fill="var(--surface)"/><rect x="24" y="2" width="3" height="3"/><path d="M0 22h7v7H0z"/><rect x="1" y="23" width="5" height="5" fill="var(--surface)"/><rect x="2" y="24" width="3" height="3"/><rect x="10" y="2" width="2" height="2"/><rect x="14" y="1" width="1" height="3"/><rect x="9" y="10" width="2" height="2"/><rect x="13" y="9" width="2" height="1"/><rect x="16" y="11" width="2" height="2"/><rect x="20" y="10" width="2" height="1"/><rect x="24" y="11" width="2" height="2"/><rect x="11" y="14" width="2" height="2"/><rect x="15" y="15" width="1" height="2"/><rect x="19" y="14" width="2" height="1"/><rect x="24" y="15" width="2" height="2"/><rect x="10" y="19" width="2" height="2"/><rect x="14" y="20" width="2" height="1"/><rect x="18" y="19" width="1" height="3"/><rect x="22" y="20" width="2" height="2"/><rect x="26" y="19" width="1" height="2"/><rect x="11" y="24" width="2" height="2"/><rect x="15" y="25" width="2" height="1"/><rect x="19" y="24" width="1" height="3"/><rect x="23" y="25" width="2" height="2"/></g></svg></div><span>Näytä QR-koodi kassalla.</span></div></div>
-      <span class="note" style="position:absolute;left:2%;bottom:48%">Haku läheltä</span>
-      <span class="note" style="position:absolute;right:2%;bottom:0">Nouto QR-koodilla</span>
-    </div>
-  </div>
-</section>
-
-<!-- HYÖDYT LUKUINA (ruskea osio) -->
-<section class="dark" style="background:var(--bg)">
-  <div class="wrap">
-    <div class="sec-title reveal"><h2 class="rs-disp">Mitä saat tilalle</h2><p class="rs-sub">Vähemmän rutiinia, enemmän myyntiä.</p></div>
-    <div class="stats sec-gap reveal">
-      <div class="stat"><span class="big">1</span><span class="lbl">järjestelmä kolmen tai neljän sijaan</span></div>
-      <div class="stat"><span class="big">1</span><span class="lbl">tiedosto kaikille tilityksille</span></div>
-      <div class="stat"><span class="big">24/7</span><span class="lbl">tilanne näkyy puhelimesta</span></div>
-      <div class="stat"><span class="big">1–3 pv</span><span class="lbl">käyttöönottoon</span></div>
+    <div class="title reveal"><h2 class="rs-disp">Maksat kun myyt</h2><p class="rs-sub">Hinta lasketaan kuukausittaisesta kassamyynnistä. Hiljainen kuukausi, pienempi lasku.</p></div>
+    <div class="reveal">
+      <div class="qform">
+        <label class="qfield"><span class="lb">Kassamyynti kuukaudessa</span><input id="qInput" inputmode="numeric" value="6 000 €" aria-label="Kassamyynti kuukaudessa"></label>
+        <button class="rs-btn" id="qCalc">Laske</button>
+      </div>
+      <div class="qresult" id="qResult">
+        <span class="taso" id="qTaso">Taso 2 · Pieni</span>
+        <div class="price"><span id="qPrice">80</span> <small>€ / kk</small></div>
+        <div class="qbreak" id="qBreak"></div>
+        <p class="qnote">Esimerkkilaskelma. Käyttöönotto ja tilitykset sisältyvät hintaan, ei piilokuluja.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -443,7 +308,7 @@ section{padding-block:var(--section-py);position:relative}
 <!-- KÄYTTÖÖNOTTO -->
 <section>
   <div class="wrap">
-    <div class="sec-title reveal"><h2 class="rs-disp">Valmis päivissä</h2><p class="rs-sub">Vaihto hoituu ilman, että kirppis menee kiinni. Kokonaiskesto 1–3 päivää.</p></div>
+    <div class="title reveal"><h2 class="rs-disp">Valmis päivissä</h2><p class="rs-sub">Vaihto hoituu ilman, että kirppis menee kiinni. Kokonaiskesto 1–3 päivää.</p></div>
     <svg class="tl reveal" viewBox="0 0 600 130" aria-label="Käyttöönotto">
       <path d="M20 75C120 25 180 115 300 65S480 35 580 75" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
       <g font-family="Archivo" font-stretch="125%" font-weight="700" font-size="14" fill="currentColor">
@@ -456,120 +321,25 @@ section{padding-block:var(--section-py);position:relative}
   </div>
 </section>
 
-<!-- LUOTETTAVUUS & TUKI -->
-<section>
-  <div class="wrap">
-    <div class="sec-title reveal"><h2 class="rs-disp">Tehty kestämään</h2><p class="rs-sub">Kassa on kirppiksen sydän. Kohtelemme sitä niin.</p></div>
-    <div class="trust sec-gap reveal">
-      <div class="tcol"><h3><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>Tuki</h3><ul><li>Suomenkielinen tuki arkipäivisin</li><li>Kehittäjä vastaa itse, ei välikäsiä</li><li>Ohjeet suoraan ohjelmassa</li></ul></div>
-      <div class="tcol"><h3><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3 7.5-8 9-5-1.5-8-4.5-8-9V7z"/></svg></span>Varmuus</h3><ul><li>Kassa toimii myös ilman nettiä</li><li>Virheet korjaat itse kassalla</li><li>Kassa ja maksupääte synkassa</li></ul></div>
-      <div class="tcol"><h3><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>Tietoturva</h3><ul><li>Tiedot säilytetään EU:ssa</li><li>Salattu yhteys ja varmuuskopiot</li><li>Käyttäjäroolit ja GDPR</li></ul></div>
-      <div class="tcol"><h3><span class="ic"><svg class="rs-ico" viewBox="0 0 24 24"><path d="M12 3v18M6 7h9a3 3 0 0 1 0 6H8a3 3 0 0 0 0 6h10"/></svg></span>Hinta</h3><ul><li>Ei aloitusmaksua</li><li>Hinta seuraa kassamyyntiäsi</li><li>Hiljainen kuukausi, pienempi lasku</li></ul></div>
-    </div>
-  </div>
-</section>
-
-<!-- HINTA -->
-<section id="hinta">
-  <div class="wrap">
-    <div class="sec-title reveal"><h2 class="rs-disp">Maksat kun myyt</h2><p class="rs-sub">Hinta lasketaan kuukausittaisesta kassamyynnistä. Hiljainen kuukausi, pienempi lasku.</p></div>
-    <div class="quote sec-gap reveal">
-      <div class="qform">
-        <label class="qfield"><span class="lb">Kassamyynti kuukaudessa</span><input id="qInput" inputmode="numeric" value="6 000 €" aria-label="Kassamyynti kuukaudessa"></label>
-        <button class="rs-btn l" id="qCalc">Laske</button>
-      </div>
-      <div class="qresult" id="qResult">
-        <span class="taso" id="qTaso">Taso 2 · Pieni</span>
-        <div class="price"><span id="qPrice">80</span> <small>€ / kk</small></div>
-        <div class="qbreak" id="qBreak"></div>
-        <p class="qnote">Esimerkkilaskelma. Käyttöönotto ja tilitykset sisältyvät hintaan, ei piilokuluja.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PILOTTI (ruskea band) -->
-<section>
-  <div class="wrap reveal">
-    <div class="band pilot">
-      <p class="rs-disp m">Pilottipaikkoja auki</p>
-      <p style="max-width:460px;color:rgb(236 236 220 / .88)">Haemme kirpputoreja mukaan alkuvuodeksi 2027. Rajattu määrä paikkoja.</p>
-      <div class="perks"><span>Kuusi kuukautta maksutta</span><span>Kassalaite meiltä</span><span>Vastineeksi palautetta</span></div>
-      <a class="rs-btn" href="#yhteys">Varaa demo</a>
-    </div>
-  </div>
-</section>
-
-<!-- TARINA -->
-<section>
-  <div class="wrap">
-    <div class="showcase reveal">
-      <div class="mediaframe"><picture><source type="image/avif" srcset="images/rk6-1080.avif"><source type="image/webp" srcset="images/rk6-1080.webp"><img alt="Vintagevaatteita kirpputorilla" src="images/rk6.jpg" loading="lazy"></picture></div>
-      <div class="sc">
-        <h3>Kirppikseltä koodiin</h3>
-        <p>Sofialla on yli kymmenen vuoden kokemus kirpputori- ja vintagealalta: oma liike jo 18-vuotiaana ja työvuosia hinnoittelijana itsepalvelukirpputorilla. Se näkyy siinä, miten ReSellaa rakennetaan.</p>
-        <p>Leonilla on kuuden vuoden kokemus ohjelmistokehityksestä. Ennen ensimmäistäkään koodiriviä haastattelimme noin kahtakymmentä kirppisyrittäjää. Arvomme ovat yksinkertaiset: kierto, yhteisö ja kirpputoriarjen aito helpottaminen.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- UKK -->
-<section id="ukk">
-  <div class="wrap">
-    <div class="faq2 reveal">
-      <div class="sec-title">
-        <h2 class="rs-disp">Usein kysyttyä</h2>
-        <p class="rs-sub" style="font-size:16px">Jäikö jokin mietityttämään? Kysy suoraan, vastaamme samana arkipäivänä.</p>
-        <a class="rs-btn" href="#yhteys" style="align-self:flex-start;margin-top:4px">Varaa demo</a>
-      </div>
-      <div class="acc">
-        <details open><summary>Mitä ReSella maksaa?<i>+</i></summary><p>Hinta porrastuu kirppiksesi kassamyynnin mukaan. Hiljaisena kuukautena maksat vähemmän. Kerromme tarkan hinnan ennen sopimusta.</p></details>
-        <details><summary>Pitääkö vanhat tuotteet kuvata uudelleen?<i>+</i></summary><p>Ei. Vanhat tuotteet myydään loppuun nykyisillä lapuilla, ja uudet varaukset tulevat ReSellaan.</p></details>
-        <details><summary>Mitä laitteita tarvitsen?<i>+</i></summary><p>Tabletin tai kosketusnäytön, lukijan ja tarvittaessa kuittitulostimen ja kassalippaan. Usein nykyiset laitteet käyvät.</p></details>
-        <details><summary>Toimiiko kassa, jos netti katkeaa?<i>+</i></summary><p>Toimii. Myynnit tallentuvat ja synkronoituvat, kun yhteys palaa.</p></details>
-        <details><summary>Voinko käyttää omaa logoa ja värejä?<i>+</i></summary><p>Voit. Myyjien varaussivu näkyy kirppiksesi ilmeellä.</p></details>
-        <details><summary>Kauanko käyttöönotto kestää?<i>+</i></summary><p>Yhdestä kolmeen päivää. Hoidamme asennuksen kanssasi.</p></details>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- YHTEYS -->
+<!-- CTA + VARAA DEMO -->
 <section id="yhteys">
-  <div class="wrap">
-    <div class="contact reveal">
-      <div class="sec-title">
-        <h2 class="rs-disp">Varaa demo</h2>
-        <p class="rs-sub" style="font-size:16px">Näytämme ReSellan käytännössä, 30 minuutissa. Kerro kirpputoristasi, niin olemme yhteydessä.</p>
-      </div>
-      <form class="demoform" id="demoForm" novalidate>
-        <label class="ff"><span class="lb">Nimi</span><input name="name" autocomplete="name"></label>
-        <label class="ff"><span class="lb">Sähköposti</span><input name="email" type="email" autocomplete="email"></label>
-        <label class="ff"><span class="lb">Kirpputori</span><input name="market" autocomplete="organization"></label>
-        <label class="ff"><span class="lb">Viesti</span><textarea name="message" rows="3"></textarea></label>
-        <button type="submit" class="rs-btn l" style="align-self:flex-start">Pyydä demo</button>
-        <p class="cf-note" id="cfNote" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- CTA BAND -->
-<section>
   <div class="wrap reveal">
-    <div class="band"><p class="rs-disp m">Valmis kokeilemaan?</p><a class="rs-btn" href="#yhteys">Varaa demo</a></div>
+    <div class="ctaband">
+      <p class="rs-disp m">Valmis kokeilemaan?</p>
+      <p style="max-width:420px;color:rgb(236 236 220 / .88)">Näytämme ReSellan käytännössä, 30 minuutissa. Jätä yhteystietosi.</p>
+      <form id="demoForm" novalidate>
+        <span class="ff"><input name="name" placeholder="Nimi" autocomplete="name"></span>
+        <span class="ff"><input name="email" type="email" placeholder="Sähköposti" autocomplete="email"></span>
+        <button type="submit" class="rs-btn">Varaa demo</button>
+      </form>
+      <p class="cf-note" id="cfNote" role="status" aria-live="polite"></p>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="foot">
   <div class="wrap">
-    <div class="foot-top">
-      <div><p class="rs-head">Pysy mukana: uudet ominaisuudet ensimmäisenä</p><a class="rs-btn out s" href="#yhteys">Tilaa uutiskirje</a></div>
-      <div class="foot-col"><b>Sivut</b><a href="#ominaisuudet">Kassa</a><a href="#appi">Kuluttaja-app</a><a href="#ukk">UKK</a></div>
-      <div class="foot-col"><b>Yritys</b><a href="#yhteys">Meistä</a><a href="#yhteys">Yhteystiedot</a></div>
-    </div>
     <img class="biglogo" src="images/brand/paalogo-vaaka-ruskea.svg" alt="ReSella">
     <div class="foot-legal"><span>© 2026 ReSella Oy · Espoo · Y 3641828-1</span><span>Tietosuoja</span><span>Ehdot</span><span>FI / EN</span></div>
   </div>
@@ -582,16 +352,12 @@ section{padding-block:var(--section-py);position:relative}
   var hdr=document.getElementById('hdr');
   function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY>24); }
   onScroll(); addEventListener('scroll',onScroll,{passive:true});
-
   var burger=document.getElementById('burger'), menu=document.getElementById('menu');
   burger.addEventListener('click',function(){ var o=menu.classList.toggle('open'); burger.setAttribute('aria-expanded',o?'true':'false'); });
-  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }); });
-
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ menu.classList.remove('open'); }); });
   var reveals=[].slice.call(document.querySelectorAll('.reveal'));
   if(rm||!('IntersectionObserver' in window)){ reveals.forEach(function(e){e.classList.add('in');}); }
   else { var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'}); reveals.forEach(function(e){io.observe(e);}); setTimeout(function(){reveals.forEach(function(e){e.classList.add('in');});},2800); }
-
-  /* price calc: hinta vain kassamyynnistä, portaittain */
   var BANDS=[{u:4000,r:.0125,n:'Alku',t:1},{u:10000,r:.01,n:'Pieni',t:2},{u:20000,r:.0075,n:'Keski',t:3},{u:40000,r:.005,n:'Suuri',t:4},{u:Infinity,r:.0025,n:'Iso',t:5}];
   function fmt(n){return Math.round(n).toLocaleString('fi-FI').replace(/ /g,' ');}
   function calc(x){var tot=0,prev=0,parts=[];for(var i=0;i<BANDS.length;i++){var b=BANDS[i],top=Math.min(x,b.u),amt=Math.max(0,top-prev);if(amt>0){var fee=amt*b.r;tot+=fee;parts.push({n:b.n,r:b.r,fee:fee});}prev=b.u;if(x<=b.u)break;}return {tot:tot,parts:parts};}
@@ -599,9 +365,8 @@ section{padding-block:var(--section-py);position:relative}
   var qi=document.getElementById('qInput'),qc=document.getElementById('qCalc'),qr=document.getElementById('qResult'),qp=document.getElementById('qPrice'),qt=document.getElementById('qTaso'),qb=document.getElementById('qBreak');
   function run(){var x=parseInt((qi.value||'').replace(/[^\d]/g,''),10)||0;x=Math.max(0,Math.min(200000,x));var r=calc(x),t=tier(x);qi.value=fmt(x)+' €';qp.textContent=fmt(r.tot);qt.textContent='Taso '+t.t+' · '+t.n;qb.innerHTML=r.parts.map(function(p){return '<div class="r"><span>'+p.n+' · '+(p.r*100).toFixed(2).replace('.',',')+' %</span><b>'+fmt(p.fee)+' €</b></div>';}).join('')+'<div class="r" style="border-top:1px solid var(--line);padding-top:8px"><span>Yhteensä / kk</span><b>'+fmt(r.tot)+' €</b></div>';qr.classList.add('show');}
   if(qc){qc.addEventListener('click',run);qi.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();run();}});run();}
-
   var form=document.getElementById('demoForm'),note=document.getElementById('cfNote');
-  if(form){form.addEventListener('submit',function(e){e.preventDefault();var n=form.name.value.trim(),em=form.email.value.trim();if(!n||!/.+@.+\..+/.test(em)){note.textContent='Täytä nimi ja kelvollinen sähköposti.';note.style.color='var(--red)';return;}note.textContent='Kiitos. Olemme yhteydessä pian.';note.style.color='var(--olive)';form.reset();});}
+  if(form){form.addEventListener('submit',function(e){e.preventDefault();var n=form.name.value.trim(),em=form.email.value.trim();if(!n||!/.+@.+\..+/.test(em)){note.textContent='Täytä nimi ja kelvollinen sähköposti.';return;}note.textContent='Kiitos. Olemme yhteydessä pian.';form.reset();});}
 })();
 </script>
 </body>
