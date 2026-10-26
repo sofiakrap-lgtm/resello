@@ -76,7 +76,7 @@ section[id]{scroll-margin-top:72px}
 .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--ink);padding:0}
 .hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .hero-tint{position:absolute;inset:0;z-index:1;background:rgb(0 0 0 / .18)}
-.hero-in{position:relative;z-index:2;width:100%;padding:120px clamp(18px,3vw,38px) 0;color:var(--bg)}
+.hero-in{position:relative;z-index:2;width:100%;padding:120px clamp(18px,3vw,38px) clamp(100px,13vw,150px);color:var(--bg)}
 .hero-row{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(24px,5vw,72px)}
 .hero-title{display:flex;flex-direction:column}
 .hero-right{margin-bottom:clamp(14px,2vw,22px)}
@@ -90,7 +90,7 @@ section[id]{scroll-margin-top:72px}
 .hero-cta .btn.out:hover{background:var(--bg);color:var(--ink)}
 
 /* ===== footer ===== */
-.foot{padding:clamp(20px,3vw,32px) 0 28px;font-size:14px}
+.foot{padding:clamp(20px,6vw,88px) 0 28px;font-size:14px}
 .foot-inner{padding-inline:clamp(16px,2vw,24px)}
 .foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:clamp(24px,5vw,64px);padding-bottom:clamp(18px,2.5vw,26px)}
 .foot-intro{max-width:34ch}
@@ -202,6 +202,31 @@ section[id]{scroll-margin-top:72px}
 .road-mob ul li{font-size:14px;color:var(--ink-muted);padding-left:14px;position:relative}
 .road-mob ul li::before{content:"·";position:absolute;left:3px;color:var(--blue-deep);font-weight:700}
 @media(max-width:760px){.road{display:none}.road-mob{display:flex}}
+/* ===== kansiot (folders) ===== */
+.folders-sec{position:relative;z-index:5;padding:0 0 clamp(18px,2.5vw,32px);margin-top:clamp(-130px,-9vw,-80px)}
+.folders{max-width:1000px;margin:0 auto;padding-inline:clamp(16px,3vw,24px)}
+.folder{position:relative;margin-top:-20px}
+.folder:first-child{margin-top:0}
+.folder .ftab{display:inline-block;margin-left:var(--tx,5%);font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:clamp(16px,2vw,22px);line-height:1;padding:12px 26px 15px;border-radius:16px 16px 0 0;background:var(--fc);color:var(--ft);position:relative;z-index:1}
+.folder .fpanel{position:relative;background:var(--fc);color:var(--ft);border-radius:0 20px 20px 20px;margin-top:-2px;padding:clamp(18px,2.2vw,24px) clamp(20px,3vw,32px)}
+.folder .fbtn{border:1.5px solid var(--ft);background:transparent;color:var(--ft);border-radius:999px;padding:9px 18px;font:500 13.5px/1 var(--fb);cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:background-color var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out)}
+.folder .fbtn:hover{background:var(--ft);color:var(--fc)}
+.folder .fbtn .pm{position:relative;width:12px;height:12px;flex:none}
+.folder .fbtn .pm::before,.folder .fbtn .pm::after{content:"";position:absolute;background:currentColor;border-radius:2px}
+.folder .fbtn .pm::before{top:5px;left:0;width:12px;height:2px}
+.folder .fbtn .pm::after{top:0;left:5px;width:2px;height:12px;transition:transform var(--dur-base) var(--ease-out)}
+.folder.open .fbtn .pm::after{transform:scaleY(0)}
+.folder .fbody{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur-base) var(--ease-out)}
+.folder.open .fbody{grid-template-rows:1fr}
+.folder .fbody>div{overflow:hidden}
+.folder .fbody p{margin:14px 0 0;font-size:15px;line-height:1.55;max-width:58ch}
+.folder.c-mustard{--fc:#D09C4C;--ft:#3E2520}
+.folder.c-blue{--fc:#C5D0D3;--ft:#3E2520}
+.folder.c-blue .ftab{box-shadow:inset 0 0 0 1.5px #3E2520}
+.folder.c-blue .fpanel{box-shadow:inset 0 0 0 1.5px #3E2520}
+.folder.c-red{--fc:#C24029;--ft:#ECECDC}
+.folder.c-brown{--fc:#3E2520;--ft:#ECECDC}
+@media(max-width:620px){.folder .ftab{margin-left:var(--txm,4%)}}
 /* luotettavuus */
 .tcol h3{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:19px;margin-bottom:4px;display:flex;align-items:center;gap:10px}
 .tcol h3 .ico{width:24px;height:24px;color:var(--blue-deep)}
@@ -311,6 +336,40 @@ section[id]{scroll-margin-top:72px}
 
 <main id="sisalto">
 
+<!-- KANSIOT (ominaisuudet) -->
+<section class="folders-sec" id="ominaisuudet">
+  <div class="folders">
+    <div class="folder c-mustard" style="--tx:5%;--txm:3%">
+      <span class="ftab">Kassa</span>
+      <div class="fpanel">
+        <button class="fbtn" aria-expanded="false">Lue lisää <span class="pm" aria-hidden="true"></span></button>
+        <div class="fbody"><div><p>Piippaa, maksa ja valmis. Toimii myös ilman nettiä. Viivakoodit ja QR-koodit toimivat rinnakkain.</p></div></div>
+      </div>
+    </div>
+    <div class="folder c-blue" style="--tx:44%;--txm:30%">
+      <span class="ftab">Näkyvyys</span>
+      <div class="fpanel">
+        <button class="fbtn" aria-expanded="false">Lue lisää <span class="pm" aria-hidden="true"></span></button>
+        <div class="fbody"><div><p>Jokainen kassalla hinnoiteltu tuote näkyy ostajille verkossa ilman erillistä kuvausta.</p></div></div>
+      </div>
+    </div>
+    <div class="folder c-red" style="--tx:16%;--txm:6%">
+      <span class="ftab">Varaukset ja asiakashallinta</span>
+      <div class="fpanel">
+        <button class="fbtn" aria-expanded="false">Lue lisää <span class="pm" aria-hidden="true"></span></button>
+        <div class="fbody"><div><p>Myyjät varaavat ja maksavat pöydän itse, ja sinä näet tilanteen kartalta. Myyjät, sopimukset, tilinumerot ja varaushistoria ovat samassa paikassa.</p></div></div>
+      </div>
+    </div>
+    <div class="folder c-brown" style="--tx:56%;--txm:34%">
+      <span class="ftab">Tilitykset ja raportointi</span>
+      <div class="fpanel">
+        <button class="fbtn" aria-expanded="false">Lue lisää <span class="pm" aria-hidden="true"></span></button>
+        <div class="fbody"><div><p>Kaikki myyjien rahat lähtevät kerralla yhdellä pankkitiedostolla. Myynti, provisiot, ALV ja kausivertailu ovat valmiina kirjanpitäjälle.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 1. ONGELMA (ruskea) -->
 <section class="dark band" id="ongelma">
   <div class="wrap">
@@ -361,24 +420,6 @@ section[id]{scroll-margin-top:72px}
           <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Korjaat ja perut itse kassalla</li>
         </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- 3. OMINAISUUDET -->
-<section class="band-surface" id="ominaisuudet">
-  <div class="wrap">
-    <div class="shead">
-      <h2 class="disp m">Kaikki yhdessä paikassa</h2>
-      <p class="sub">Kuusi työkalua, yksi kirjautuminen.</p>
-    </div>
-    <div class="grid c3">
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M3 20h18"/><path d="M8 9h4"/></svg></span><h3>Kassa</h3><p>Piippaa, maksa ja valmis. Toimii myös ilman nettiä.</p></div>
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg></span><h3>Näkyvyys</h3><p>Jokainen hinnoiteltu tuote näkyy ostajille verkossa ilman erillistä kuvausta.</p></div>
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 9v11"/></svg></span><h3>Varaukset</h3><p>Myyjät varaavat ja maksavat pöydän itse, sinä näet tilanteen kartalta.</p></div>
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 10h16"/><path d="M8 14h3"/></svg></span><h3>Tilitykset</h3><p>Kaikki myyjien rahat lähtevät kerralla yhdellä pankkitiedostolla.</p></div>
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M16 8h5M16 12h5"/></svg></span><h3>Asiakashallinta</h3><p>Myyjät, sopimukset, tilinumerot ja varaushistoria samassa paikassa.</p></div>
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Raportointi</h3><p>Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p></div>
     </div>
   </div>
 </section>
@@ -646,6 +687,13 @@ section[id]{scroll-margin-top:72px}
   var seen=false; try{ seen=localStorage.getItem('rs-cookie')==='1'; }catch(e){}
   if(!seen){ ck.hidden=false; }
   ok.addEventListener('click',function(){ ck.hidden=true; try{ localStorage.setItem('rs-cookie','1'); }catch(e){} });
+  // kansiot (folders)
+  document.querySelectorAll('.folder .fbtn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var f=btn.closest('.folder'); var o=f.classList.toggle('open');
+      btn.setAttribute('aria-expanded',o?'true':'false');
+    });
+  });
 })();
 </script>
 </body>
