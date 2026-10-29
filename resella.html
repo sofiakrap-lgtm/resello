@@ -328,6 +328,9 @@ section[id]{scroll-margin-top:72px}
 .arc-shape.s2{left:45%;top:clamp(14px,3.5vw,44px);width:clamp(54px,7.2vw,98px)}
 .arc-shape.s3{left:72%;top:clamp(40px,6vw,82px);width:clamp(42px,5.4vw,74px)}
 @media(max-width:620px){.arc-shape.s1{left:8%}.arc-shape.s3{left:76%}}
+.arc-shape{cursor:grab;touch-action:none;will-change:transform}
+.arc-shape.grab{cursor:grabbing}
+@media(prefers-reduced-motion:reduce){.arc-shape{cursor:default}}
 
 @media(max-width:880px){
   .grid.c3,.grid.c4{grid-template-columns:repeat(2,1fr)}
@@ -911,6 +914,116 @@ section[id]{scroll-margin-top:72px}
     track.addEventListener('touchstart',pauseAuto,{passive:true});
     startAuto();
   }
+})();
+</script>
+<script>
+/* Kaarien muodot: tartuttavat ja heitettävät. Jokainen muoto roikkuu jousella
+   paikallaan kaaren kupolin pinnalla, sitä voi raahata ja heittää, se pomppii
+   kaaren reunoista eikä koskaan mene kupolin (ruskean) puolelle. Reduced motion:
+   muodot pysyvät paikallaan. */
+(function(){
+  var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
+  if(reduce) return;
+  var pt={x:-1e4,y:-1e4,on:false};
+  addEventListener('pointermove',function(e){ pt.x=e.clientX; pt.y=e.clientY; pt.on=true; },{passive:true});
+
+  var scenes=[];
+  Array.prototype.slice.call(document.querySelectorAll('.arc')).forEach(function(arc){
+    var dome=arc.querySelector('.arc-dome');
+    var shapes=Array.prototype.slice.call(arc.querySelectorAll('.arc-shape'));
+    if(!dome||!shapes.length) return;
+    var S={arc:arc,dome:dome,bodies:[],W:0,H:0,cx:0,cy:0,R:0,grab:null,vis:false};
+    function geom(){
+      var a=arc.getBoundingClientRect(), d=dome.getBoundingClientRect();
+      S.W=a.width; S.H=a.height;
+      S.R=d.width/2; S.cx=(d.left-a.left)+d.width/2; S.cy=(d.top-a.top)+d.height/2;
+    }
+    geom();
+    function groundY(x){ var dx=x-S.cx, q=S.R*S.R-dx*dx; return S.cy-(q>0?Math.sqrt(q):0); }
+    shapes.forEach(function(el){
+      var r0=el.getBoundingClientRect(), ar=arc.getBoundingClientRect();
+      var size=r0.width, r=size/2;
+      var hx=(r0.left-ar.left)+r;
+      // perustasoksi kupolin pinta: muoto istuu kaaren päällä
+      var hy=groundY(hx)-r-2;
+      el.style.left='0'; el.style.top='0';
+      var b={el:el,size:size,r:r,hx:hx,hy:hy,x:hx,y:hy,vx:0,vy:0,a:0,w:0};
+      el.addEventListener('pointerdown',function(e){
+        S.grab=b; b.vx=b.vy=0; var ar2=arc.getBoundingClientRect();
+        b.gx=(e.clientX-ar2.left)-b.x; b.gy=(e.clientY-ar2.top)-b.y;
+        b.px=e.clientX; b.py=e.clientY;
+        el.setPointerCapture(e.pointerId); el.classList.add('grab'); e.preventDefault();
+      });
+      el.addEventListener('pointermove',function(e){
+        if(S.grab!==b) return; var ar2=arc.getBoundingClientRect();
+        var nx=(e.clientX-ar2.left)-b.gx, ny=(e.clientY-ar2.top)-b.gy;
+        b.vx=(e.clientX-b.px)*60; b.vy=(e.clientY-b.py)*60; b.px=e.clientX; b.py=e.clientY;
+        b.x=nx; b.y=ny;
+      });
+      function rel(){ if(S.grab!==b) return; var m=1500,sp=Math.hypot(b.vx,b.vy); if(sp>m){ b.vx*=m/sp; b.vy*=m/sp; } b.w=b.vx*0.012; S.grab=null; el.classList.remove('grab'); }
+      el.addEventListener('pointerup',rel); el.addEventListener('pointercancel',rel);
+      S.bodies.push(b);
+    });
+    function resize(){ geom(); S.bodies.forEach(function(b){ var r0=b.el.getBoundingClientRect(), ar=arc.getBoundingClientRect(); /* säilytä suhteellinen koti */ b.size=r0.width; b.r=b.size/2; b.hy=groundY(b.hx)-b.r-2; }); }
+    addEventListener('resize',resize);
+    scenes.push({S:S,groundY:groundY});
+  });
+  if(!scenes.length) return;
+
+  var kHome=55, cHome=6, pad=10, rest=0.55;
+  function stepScene(o,dt){
+    var S=o.S;
+    for(var i=0;i<S.bodies.length;i++){
+      var b=S.bodies[i];
+      if(b===S.grab){ b.a+=b.w*dt; b.w+=(0-b.a)*8*dt-b.w*4*dt; continue; }
+      // jousi kotiin + vaimennus
+      b.vx+=((b.hx-b.x)*kHome-b.vx*cHome)*dt;
+      b.vy+=((b.hy-b.y)*kHome-b.vy*cHome)*dt;
+      b.x+=b.vx*dt; b.y+=b.vy*dt;
+      // reunat
+      if(b.x<b.r+pad){ b.x=b.r+pad; b.vx=Math.abs(b.vx)*rest; }
+      if(b.x>S.W-b.r-pad){ b.x=S.W-b.r-pad; b.vx=-Math.abs(b.vx)*rest; }
+      if(b.y<b.r+pad){ b.y=b.r+pad; b.vy=Math.abs(b.vy)*rest; }
+      // kupoli: pysy pinnan yläpuolella (ei ruskean puolelle)
+      var dx=b.x-S.cx, dy=b.y-S.cy, d=Math.hypot(dx,dy)||1, min=S.R+b.r;
+      if(d<min){
+        var nx=dx/d, ny=dy/d; b.x=S.cx+nx*min; b.y=S.cy+ny*min;
+        var vn=b.vx*nx+b.vy*ny; if(vn<0){ b.vx-=(1+rest)*vn*nx; b.vy-=(1+rest)*vn*ny; b.w+= (b.vx)*0.004; }
+      }
+      // kulma: kallistuu siirtymän mukaan, palautuu
+      var lean=Math.max(-0.5,Math.min(0.5,(b.x-b.hx)/120));
+      b.a+=b.w*dt; b.w+=((lean-b.a)*20-b.w*7)*dt;
+    }
+    // keskinäinen törmäys
+    for(var j=0;j<S.bodies.length;j++) for(var k=j+1;k<S.bodies.length;k++){
+      var A=S.bodies[j], B=S.bodies[k]; if(A===S.grab&&B===S.grab) continue;
+      var ddx=B.x-A.x, ddy=B.y-A.y, dd=Math.hypot(ddx,ddy)||1, mn=A.r+B.r+2;
+      if(dd<mn){ var ux=ddx/dd, uy=ddy/dd, pe=(mn-dd)/2, wa=A===S.grab?0:1, wb=B===S.grab?0:1, ws=(wa+wb)||1;
+        A.x-=ux*pe*wa; A.y-=uy*pe*wa; B.x+=ux*pe*wb; B.y+=uy*pe*wb; }
+    }
+    // paikan lukitus: reunat ja kupoli ratkotaan vielä muutaman kerran, maa voittaa aina
+    for(var it=0;it<3;it++){
+      for(var m=0;m<S.bodies.length;m++){ var c=S.bodies[m];
+        if(c.x<c.r+pad) c.x=c.r+pad; if(c.x>S.W-c.r-pad) c.x=S.W-c.r-pad; if(c.y<c.r+pad) c.y=c.r+pad;
+        var ex=c.x-S.cx, ey=c.y-S.cy, el2=Math.hypot(ex,ey)||1, mi=S.R+c.r;
+        if(el2<mi){ c.x=S.cx+ex/el2*mi; c.y=S.cy+ey/el2*mi; }
+      }
+    }
+  }
+  function render(o){
+    var S=o.S;
+    for(var i=0;i<S.bodies.length;i++){ var b=S.bodies[i];
+      b.el.style.transform='translate3d('+(b.x-b.r)+'px,'+(b.y-b.r)+'px,0) rotate('+b.a+'rad)'; }
+  }
+  var last=0;
+  function loop(now){
+    var dt=Math.min(1/30,(now-(last||now))/1000); last=now;
+    for(var i=0;i<scenes.length;i++){ var o=scenes[i], a=o.S.arc.getBoundingClientRect();
+      if(a.bottom>-100 && a.top<innerHeight+100){ for(var s=0;s<5;s++) stepScene(o,dt/5); render(o); } }
+    requestAnimationFrame(loop);
+  }
+  scenes.forEach(render);
+  requestAnimationFrame(loop);
 })();
 </script>
 </body>
