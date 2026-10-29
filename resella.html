@@ -25,7 +25,7 @@
   --gap-xs:6px; --gap-s:10px; --gap-m:24px; --gap-l:36px; --gap-xl:clamp(72px,11vw,96px);
   --ease-out:cubic-bezier(.22,.61,.36,1); --ease-std:cubic-bezier(.45,0,.55,1); --ease-reveal:cubic-bezier(.19,1,.22,1); --ease-emphasis:cubic-bezier(.22,.9,.28,1);
   --dur-fast:200ms; --dur-base:300ms; --dur-slow:450ms;
-  --section-py:clamp(56px,9vw,96px); --max:1120px; --gutter:clamp(20px,5vw,40px);
+  --section-py:clamp(56px,9vw,96px); --wide:1300px; --mid:1200px; --narrow:960px; --side:clamp(20px,4.4vw,63px); --max:1300px; --gutter:clamp(20px,4.4vw,63px);
   --fd:"Inter Tight",Arial,sans-serif; --fb:"Inter Tight",Arial,sans-serif;
 }
 .dark{--bg:#3E2520; --surface:#4B302A; --line:#5E433B; --ink:#ECECDC; --ink-muted:#CDBFB2; --blue-deep:#C5D0D3}
@@ -53,7 +53,9 @@ h1,h2,h3,p{margin:0}
 /* layout */
 section{padding-block:var(--section-py);position:relative}
 section[id]{scroll-margin-top:72px}
-.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gutter)}
+.wrap{width:100%;max-width:calc(var(--wide) + 2 * var(--side));margin-inline:auto;padding-inline:var(--side)}
+.wrap.mid{max-width:calc(var(--mid) + 2 * var(--side))}
+.wrap.narrow{max-width:calc(var(--narrow) + 2 * var(--side))}
 
 /* ===== ylapalkki: kelluva pilleri (giveasy) ===== */
 :root{--header-offset:30px}
@@ -164,7 +166,7 @@ section[id]{scroll-margin-top:72px}
 .tag.red{background:var(--red);color:var(--on-red);border-color:var(--red)}
 .tag.blue{background:var(--blue);color:var(--ink);border-color:var(--blue)}
 .mb-tag{margin-bottom:18px}
-.grid{display:grid;gap:clamp(12px,1.5vw,18px)}
+.grid{display:grid;gap:20px}
 .grid.c2{grid-template-columns:repeat(2,1fr)}
 .grid.c3{grid-template-columns:repeat(3,1fr)}
 .grid.c4{grid-template-columns:repeat(4,1fr)}
@@ -175,7 +177,7 @@ section[id]{scroll-margin-top:72px}
 .card h3{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em;line-height:1.18}
 .card p{font-size:16px;font-weight:500;color:var(--ink-muted);line-height:1.45}
 /* vertaus */
-.cmp{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.5vw,18px)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .cmp .col{border-radius:var(--radius-card);padding:clamp(22px,2.4vw,28px);background:var(--surface)}
 .cmp .col.now{background:var(--blue)}
 .cmp h3{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em;color:var(--ink);margin-bottom:16px}
@@ -242,7 +244,7 @@ section[id]{scroll-margin-top:72px}
 .app-note .ap{display:flex;gap:10px;font-size:15px;align-items:flex-start}
 .app-note .mk{flex:none;margin-top:2px;color:var(--olive)}
 /* hyodyt luvut */
-.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px)}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .nums .n .big{font-family:var(--fd);font-stretch:125%;font-weight:700;font-size:clamp(40px,6vw,66px);line-height:.95;display:block;margin-bottom:10px}
 .nums .n .cap{font-size:15px;font-weight:500;color:var(--ink);line-height:1.4;display:block;max-width:20ch}
 /* käyttöönotto */
@@ -862,7 +864,7 @@ section[id]{scroll-margin-top:72px}
 
 <!-- 11. FAQ -->
 <section class="band" id="faq">
-  <div class="wrap">
+  <div class="wrap narrow">
     <div class="shead">
       <h2 class="disp m">Usein kysyttyä</h2>
       <p class="sub">Lyhyet vastaukset yleisimpiin kysymyksiin.</p>
