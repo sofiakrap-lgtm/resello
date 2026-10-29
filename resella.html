@@ -332,6 +332,25 @@ section[id]{scroll-margin-top:72px}
 .pcard.hl .btn:hover{background:var(--blue);color:var(--ink);border-color:var(--blue)}
 .pcard.hl .extag{align-self:flex-start;border:1px solid rgba(236,236,220,.5);color:var(--on-red);margin-bottom:16px}
 @media(max-width:720px){.price{grid-template-columns:1fr}}
+/* asiakastarinoiden kaarikaruselli */
+.rotary{margin-top:clamp(32px,4vw,56px);position:relative;overflow:hidden}
+.rotary-stage{position:relative;height:clamp(440px,56vw,600px);max-width:1200px;margin-inline:auto}
+.rcard{position:absolute;left:50%;top:0;width:clamp(290px,40vw,425px);height:clamp(430px,55vw,600px);margin-left:calc(clamp(290px,40vw,425px) / -2);background:var(--surface);border-radius:var(--radius-lg);overflow:hidden;transform-origin:50% 260%;transition:transform .35s var(--ease-std),opacity .35s var(--ease-std);display:flex;flex-direction:column;will-change:transform,opacity}
+.rcard img{width:100%;height:44%;object-fit:cover;display:block}
+.rc-body{padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:14px;flex:1}
+.rc-quote{font-family:var(--fd);font-weight:500;font-size:clamp(18px,1.9vw,23px);line-height:1.32;letter-spacing:-.01em;margin:0}
+.rc-who{margin-top:auto;font-size:14px;color:var(--ink-muted)}
+.rc-who b{display:block;color:var(--ink);font-weight:600;font-size:15px;margin-bottom:2px}
+.rcard .extag{align-self:flex-start;border-color:var(--line);color:var(--ink-muted)}
+.rotary-ctrl{display:flex;align-items:center;justify-content:center;gap:clamp(14px,2vw,20px);margin-top:clamp(20px,2.5vw,32px)}
+.rot-arrow{width:40px;height:40px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink);display:grid;place-items:center;cursor:pointer;flex:none;transition:background-color var(--dur-fast) var(--ease-std)}
+.rot-arrow:hover{background:var(--line)}
+.rot-arrow .ico{width:20px;height:20px}
+.rot-arrow:disabled{opacity:.35;cursor:default}
+.rot-dots{display:flex;gap:10px}
+.rot-dots button{width:50px;height:4px;border:0;border-radius:10px;background:var(--line);cursor:pointer;padding:0;transition:background-color var(--dur-fast) var(--ease-std)}
+.rot-dots button[aria-current="true"]{background:var(--ink)}
+@media(max-width:620px){.rot-dots button{width:30px}}
 /* cookie */
 .cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:60;background:var(--ink);color:var(--bg);border-radius:var(--radius-card);padding:16px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;max-width:600px;margin-inline:auto}
 .cookie p{font-size:13.5px;line-height:1.45;flex:1;min-width:220px}
@@ -805,6 +824,65 @@ section[id]{scroll-margin-top:72px}
   </div>
 </section>
 
+<!-- ASIAKASTARINAT (kaarikaruselli) -->
+<section class="band" id="tarinat">
+  <div class="wrap">
+    <div class="shead ctr">
+      <h2 class="disp m">Tehty kirppisyrittäjille</h2>
+      <p class="sub">Esimerkkikortit. Vaihdamme tilalle oikeat tarinat pilotin jälkeen.</p>
+    </div>
+  </div>
+  <div class="rotary" id="rotary">
+    <div class="rotary-stage">
+      <article class="rcard">
+        <img src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Itsepalvelukirpputorin myymälä" loading="lazy">
+        <div class="rc-body">
+          <span class="tag extag">Esimerkki</span>
+          <p class="rc-quote">Illat menivät ennen tilityksiä laskiessa. Nyt yksi tiedosto hoitaa kaikki myyjät kerralla.</p>
+          <p class="rc-who"><b>Kirppisyrittäjä</b>Keskikokoinen halli, 60 pöytää</p>
+        </div>
+      </article>
+      <article class="rcard">
+        <img src="assets/kuvat/02_kassa_maksu/01_kassa_tiski_tabletti.jpg" alt="Kassa tabletilla myyntitiskillä" loading="lazy">
+        <div class="rc-body">
+          <span class="tag extag">Esimerkki</span>
+          <p class="rc-quote">Kassa ei enää jumita ruuhkassa. Väärin lyödyn tuotteen korjaan itse, ilman soittoa tukeen.</p>
+          <p class="rc-who"><b>Kirppisyrittäjä</b>Kyläkirppis, 25 pöytää</p>
+        </div>
+      </article>
+      <article class="rcard">
+        <img src="assets/kuvat/04_loydot_tuotteet/01_takki_esittely.jpg" alt="Vintagetakki esillä" loading="lazy">
+        <div class="rc-body">
+          <span class="tag extag">Esimerkki</span>
+          <p class="rc-quote">Nuoret ostajat löytävät nyt hyllymme netistä. Hyvät löydöt eivät jää pölyttymään.</p>
+          <p class="rc-who"><b>Kirppisyrittäjä</b>Vintageliike, oma ilme</p>
+        </div>
+      </article>
+      <article class="rcard">
+        <img src="assets/kuvat/01_kirppis_tila/03_hylly_laukut_varikas.jpg" alt="Värikäs hylly laukkuja" loading="lazy">
+        <div class="rc-body">
+          <span class="tag extag">Esimerkki</span>
+          <p class="rc-quote">Myyjät varaavat ja maksavat pöydän itse verkossa. Minulta säästyy tunteja joka viikko.</p>
+          <p class="rc-who"><b>Kirppisyrittäjä</b>Iso halli, 120 pöytää</p>
+        </div>
+      </article>
+      <article class="rcard">
+        <img src="assets/kuvat/02_kassa_maksu/10_kuitti_tulostuu.jpg" alt="Kuitti tulostuu kassalta" loading="lazy">
+        <div class="rc-body">
+          <span class="tag extag">Esimerkki</span>
+          <p class="rc-quote">Näen myynnin ja vapaat pöydät puhelimesta, vaikka en olisi paikalla. Yksi järjestelmä kolmen sijaan.</p>
+          <p class="rc-who"><b>Kirppisyrittäjä</b>Kaksi toimipistettä</p>
+        </div>
+      </article>
+    </div>
+    <div class="rotary-ctrl">
+      <button class="rot-arrow" type="button" data-dir="-1" aria-label="Edellinen tarina"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+      <div class="rot-dots" role="tablist" aria-label="Tarinat"></div>
+      <button class="rot-arrow" type="button" data-dir="1" aria-label="Seuraava tarina"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+    </div>
+  </div>
+</section>
+
 <!-- HINNOITTELU -->
 <section class="band" id="hinnoittelu">
   <div class="wrap">
@@ -974,6 +1052,40 @@ section[id]{scroll-margin-top:72px}
       q.setAttribute('aria-expanded', open?'false':'true');
     });
   });
+  // asiakastarinoiden kaarikaruselli: aktiivinen keskella, naapurit kaarella
+  var rot=document.getElementById('rotary');
+  if(rot){
+    var rcards=Array.prototype.slice.call(rot.querySelectorAll('.rcard'));
+    var dotsWrap=rot.querySelector('.rot-dots');
+    var arrows=rot.querySelectorAll('.rot-arrow');
+    var active=Math.floor(rcards.length/2);
+    rcards.forEach(function(c,i){
+      var d=document.createElement('button'); d.type='button'; d.setAttribute('role','tab');
+      d.setAttribute('aria-label','Tarina '+(i+1));
+      d.addEventListener('click',function(){ active=i; rlayout(); });
+      dotsWrap.appendChild(d);
+    });
+    var rdots=Array.prototype.slice.call(dotsWrap.children);
+    function rlayout(){
+      rcards.forEach(function(c,i){
+        var off=i-active, ao=Math.abs(off), vis=ao<=1;
+        c.style.transform='rotate('+(off*30)+'deg) scale('+(1-ao*0.15)+')';
+        c.style.opacity=vis?'1':'0';
+        c.style.zIndex=String(100-ao);
+        c.style.pointerEvents=off===0?'auto':'none';
+        if(vis){ c.removeAttribute('aria-hidden'); c.removeAttribute('inert'); }
+        else{ c.setAttribute('aria-hidden','true'); c.setAttribute('inert',''); }
+      });
+      rdots.forEach(function(d,i){ d.setAttribute('aria-current', i===active?'true':'false'); });
+      arrows.forEach(function(a){ var dir=parseInt(a.getAttribute('data-dir'),10); a.disabled=(dir<0&&active===0)||(dir>0&&active===rcards.length-1); });
+    }
+    function rgo(dir){ active=Math.max(0,Math.min(rcards.length-1,active+dir)); rlayout(); }
+    arrows.forEach(function(a){ a.addEventListener('click',function(){ rgo(parseInt(a.getAttribute('data-dir'),10)); }); });
+    var rsx=null;
+    rot.addEventListener('touchstart',function(e){ rsx=e.touches[0].clientX; },{passive:true});
+    rot.addEventListener('touchend',function(e){ if(rsx==null)return; var dx=e.changedTouches[0].clientX-rsx; if(Math.abs(dx)>40) rgo(dx<0?1:-1); rsx=null; });
+    rlayout();
+  }
   // hinnoittelu: kirppiksen koko vaihtaa esimerkkihinnan
   var pdata=[
     {v:'38 €', s:'Kun kassamyynti on noin 3 000 € kuussa, eli noin 1,25 %.'},
