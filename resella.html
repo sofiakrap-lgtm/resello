@@ -331,6 +331,12 @@ section[id]{scroll-margin-top:72px}
 .arc-shape{cursor:grab;touch-action:none;will-change:transform}
 .arc-shape.grab{cursor:grabbing}
 @media(prefers-reduced-motion:reduce){.arc-shape{cursor:default}}
+/* iso maskotti ennen footeria: istuu tumman kupolin paalla, kallistuu kursoriin */
+.bigm{position:relative;height:clamp(320px,36vw,520px);overflow:hidden;background:var(--bg)}
+.bigm-dome{position:absolute;left:50%;top:clamp(210px,26vw,330px);transform:translateX(-50%);width:max(140vw,1200px);aspect-ratio:1;border-radius:50%;background:var(--ink);z-index:1}
+.bigm-mascot{position:absolute;left:50%;bottom:clamp(78px,12.5vw,150px);width:clamp(132px,19vw,250px);z-index:2;transform:translateX(-50%);transform-origin:50% 100%;will-change:transform}
+.bigm-mascot svg{display:block;width:100%;height:auto}
+@media(max-width:620px){.bigm-dome{top:clamp(180px,52vw,230px)}.bigm-mascot{bottom:clamp(64px,19vw,104px)}}
 
 @media(max-width:880px){
   .grid.c3,.grid.c4{grid-template-columns:repeat(2,1fr)}
@@ -811,6 +817,20 @@ section[id]{scroll-margin-top:72px}
   </div>
 </section>
 
+<!-- kaari: ruskea -> vaalea -->
+<div class="arc arc-down" aria-hidden="true">
+  <span class="arc-shape s1"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#D09C4C"/></svg></span>
+  <span class="arc-shape s2"><svg viewBox="0 0 100 100"><rect x="5" y="5" width="90" height="90" rx="30" fill="#C24029"/></svg></span>
+  <span class="arc-shape s3"><svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="25" fill="#C5D0D3"/><circle cx="66" cy="34" r="25" fill="#C5D0D3"/><circle cx="34" cy="66" r="25" fill="#C5D0D3"/><circle cx="66" cy="66" r="25" fill="#C5D0D3"/></svg></span>
+  <div class="arc-dome"></div>
+</div>
+
+<!-- 13. ISO MASKOTTI -->
+<section class="bigm" id="bigm" aria-hidden="true">
+  <div class="bigm-dome"></div>
+  <div class="bigm-mascot" id="bigMascot"><svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="25" fill="#C5D0D3"/><circle cx="66" cy="34" r="25" fill="#C5D0D3"/><circle cx="34" cy="66" r="25" fill="#C5D0D3"/><circle cx="66" cy="66" r="25" fill="#C5D0D3"/></svg></div>
+</section>
+
 </main>
 
 <!-- FOOTER -->
@@ -1024,6 +1044,26 @@ section[id]{scroll-margin-top:72px}
   }
   scenes.forEach(render);
   requestAnimationFrame(loop);
+
+  // iso maskotti ennen footeria: kallistuu kevyesti kursoria kohti ja keinuu hiljaa
+  var big=document.getElementById('bigMascot');
+  if(big){
+    var cur={rot:0,tx:0,ty:0}, tgt={rot:0,tx:0,ty:0}, t0=performance.now();
+    function bigLoop(now){
+      var r=big.getBoundingClientRect();
+      if(r.bottom>0 && r.top<innerHeight){
+        var cx=r.left+r.width/2, cy=r.top+r.height/2;
+        var dx=pt.x-cx, dy=pt.y-cy, d=Math.hypot(dx,dy)||1, f=pt.on?Math.min(1,d/500):0;
+        tgt.rot=Math.max(-6,Math.min(6,(dx/d)*f*6));
+        tgt.tx=(dx/d)*f*9; tgt.ty=Math.max(-4,(dy/d)*f*6);
+        var bob=Math.sin((now-t0)/1400)*3;
+        cur.rot+=(tgt.rot-cur.rot)*0.07; cur.tx+=(tgt.tx-cur.tx)*0.07; cur.ty+=(tgt.ty-cur.ty)*0.07;
+        big.style.transform='translateX(-50%) translate('+cur.tx.toFixed(2)+'px,'+(cur.ty+bob).toFixed(2)+'px) rotate('+cur.rot.toFixed(2)+'deg)';
+      }
+      requestAnimationFrame(bigLoop);
+    }
+    requestAnimationFrame(bigLoop);
+  }
 })();
 </script>
 </body>
