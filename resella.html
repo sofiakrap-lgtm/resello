@@ -365,26 +365,26 @@ section[id]{scroll-margin-top:72px}
 .reveal{opacity:0;transform:translateY(60px);transition:opacity 1s var(--ease-reveal),transform 1s var(--ease-reveal)}
 .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
-/* kaarisiirtyma */
-.arc{position:relative;height:clamp(170px,21vw,290px);overflow:hidden;z-index:1}
-.arc-dome{position:absolute;left:50%;transform:translateX(-50%);top:clamp(64px,9vw,118px);width:max(150vw,1300px);aspect-ratio:1;border-radius:50%;z-index:1}
-.arc-up{background:var(--bg)}.arc-up .arc-dome{background:var(--ink)}
-.arc-down{background:var(--ink)}.arc-down .arc-dome{background:var(--bg)}
-.arc-shape{position:absolute;z-index:0;display:block}
-.arc-shape svg{display:block;width:100%;height:100%}
-.arc-shape.s1{left:15%;top:clamp(34px,5.5vw,74px);width:clamp(46px,6vw,82px)}
-.arc-shape.s2{left:45%;top:clamp(14px,3.5vw,44px);width:clamp(54px,7.2vw,98px)}
-.arc-shape.s3{left:72%;top:clamp(40px,6vw,82px);width:clamp(42px,5.4vw,74px)}
-@media(max-width:620px){.arc-shape.s1{left:8%}.arc-shape.s3{left:76%}}
-.arc-shape{cursor:grab;touch-action:none;will-change:transform}
-.arc-shape.grab{cursor:grabbing}
-@media(prefers-reduced-motion:reduce){.arc-shape{cursor:default}}
-/* iso maskotti ennen footeria: istuu tumman kupolin paalla, kallistuu kursoriin */
-.bigm{position:relative;height:clamp(320px,36vw,520px);overflow:hidden;background:var(--bg)}
-.bigm-dome{position:absolute;left:50%;top:clamp(210px,26vw,330px);transform:translateX(-50%);width:max(140vw,1200px);aspect-ratio:1;border-radius:50%;background:var(--ink);z-index:1}
-.bigm-mascot{position:absolute;left:50%;bottom:clamp(78px,12.5vw,150px);width:clamp(132px,19vw,250px);z-index:2;transform:translateX(-50%);transform-origin:50% 100%;will-change:transform}
-.bigm-mascot svg{display:block;width:100%;height:auto}
-@media(max-width:620px){.bigm-dome{top:clamp(180px,52vw,230px)}.bigm-mascot{bottom:clamp(64px,19vw,104px)}}
+/* maskottikohtaukset (mascot-scene.js) */
+.scene{position:relative;overflow:clip}
+.scene--roll{height:500px;background:var(--bg);margin-top:40px}
+.scene--pop{height:640px;background:#3E2520}
+.scene__bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.scene--roll .scene__ground{fill:#3E2520}
+.scene--pop .scene__ground{fill:#ECECDC}
+.scene__slot{position:absolute;left:0;top:0;opacity:0;will-change:transform;line-height:0;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;z-index:2}
+.scene--pop .scene__slot{opacity:1;cursor:default;touch-action:auto;z-index:0}
+.scene--pop .scene__bg{z-index:1}
+.scene__slot.is-grabbed{cursor:grabbing}
+.scene__slot svg{width:100%;height:100%;overflow:visible}
+.scene__hint{position:absolute;left:50%;top:24px;transform:translateX(-50%);font-size:13px;color:var(--ink-muted);white-space:nowrap;z-index:3}
+/* iso maskotti ennen footeria (mascot-follow.js) */
+.outro{position:relative;height:610px;overflow:hidden;margin-top:120px;background:var(--bg)}
+.outro::after{content:"";position:absolute;left:50%;top:460px;width:max(150vw,1200px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:#3E2520;z-index:0}
+.outro .mascot{position:absolute;left:50%;top:210px;width:280px;margin-left:-140px;z-index:1}
+.outro .mascot svg{width:280px;height:280px;overflow:visible;display:block}
+@media(max-width:1200px){.scene--roll{height:440px}}
+@media(max-width:640px){.scene__hint{top:12px}.scene--roll{height:360px}.scene--pop{height:420px}.outro{height:460px}.outro::after{top:340px}.outro .mascot{top:130px;width:200px;margin-left:-100px}.outro .mascot svg{width:200px;height:200px}}
 
 @media(max-width:880px){
   .grid.c3,.grid.c4{grid-template-columns:repeat(2,1fr)}
@@ -530,13 +530,13 @@ section[id]{scroll-margin-top:72px}
   </div>
 </section>
 
-<!-- kaari: vaalea -> ruskea -->
-<div class="arc arc-up" aria-hidden="true">
-  <span class="arc-shape s1"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#D09C4C"/></svg></span>
-  <span class="arc-shape s2"><svg viewBox="0 0 100 100"><rect x="5" y="5" width="90" height="90" rx="30" fill="#C24029"/></svg></span>
-  <span class="arc-shape s3"><svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="25" fill="#C5D0D3"/><circle cx="66" cy="34" r="25" fill="#C5D0D3"/><circle cx="34" cy="66" r="25" fill="#C5D0D3"/><circle cx="66" cy="66" r="25" fill="#C5D0D3"/></svg></span>
-  <div class="arc-dome"></div>
-</div>
+<!-- KOHTAUS 1: maskotit vierivat kaareen -->
+<section class="scene scene--roll" data-scene="roll" data-edge="180" data-ctrl="530" aria-hidden="true">
+  <svg class="scene__bg" viewBox="0 0 1000 500" preserveAspectRatio="none"><path class="scene__ground" d=""/></svg>
+  <span class="scene__hint">Tartu muotoon ja heitä se</span>
+  <div class="scene__slot" data-m="tyyny" data-c="#C24029"></div>
+  <div class="scene__slot" data-m="apila" data-c="#C5D0D3"></div>
+</section>
 
 <!-- 1. ONGELMA (ruskea) -->
 <section class="dark band" id="ongelma">
@@ -555,14 +555,6 @@ section[id]{scroll-margin-top:72px}
     </div>
   </div>
 </section>
-
-<!-- kaari: ruskea -> vaalea -->
-<div class="arc arc-down" aria-hidden="true">
-  <span class="arc-shape s1"><svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="25" fill="#C5D0D3"/><circle cx="66" cy="34" r="25" fill="#C5D0D3"/><circle cx="34" cy="66" r="25" fill="#C5D0D3"/><circle cx="66" cy="66" r="25" fill="#C5D0D3"/></svg></span>
-  <span class="arc-shape s2"><svg viewBox="0 0 100 100"><rect x="5" y="5" width="90" height="90" rx="30" fill="#C24029"/></svg></span>
-  <span class="arc-shape s3"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#D09C4C"/></svg></span>
-  <div class="arc-dome"></div>
-</div>
 
 <!-- 2. VERTAUS -->
 <section class="band" id="vertaus">
@@ -600,14 +592,6 @@ section[id]{scroll-margin-top:72px}
   </div>
 </section>
 
-<!-- kaari: vaalea -> ruskea -->
-<div class="arc arc-up" aria-hidden="true">
-  <span class="arc-shape s1"><svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="25" fill="#C5D0D3"/><circle cx="66" cy="34" r="25" fill="#C5D0D3"/><circle cx="34" cy="66" r="25" fill="#C5D0D3"/><circle cx="66" cy="66" r="25" fill="#C5D0D3"/></svg></span>
-  <span class="arc-shape s2"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#D09C4C"/></svg></span>
-  <span class="arc-shape s3"><svg viewBox="0 0 100 100"><rect x="5" y="5" width="90" height="90" rx="30" fill="#C24029"/></svg></span>
-  <div class="arc-dome"></div>
-</div>
-
 <!-- 4. JÄRJESTELMÄN TEASERI (ruskea) -->
 <section class="dark band" id="jarjestelma">
   <div class="wrap">
@@ -634,14 +618,6 @@ section[id]{scroll-margin-top:72px}
     </div>
   </div>
 </section>
-
-<!-- kaari: ruskea -> vaalea -->
-<div class="arc arc-down" aria-hidden="true">
-  <span class="arc-shape s1"><svg viewBox="0 0 100 100"><rect x="5" y="5" width="90" height="90" rx="30" fill="#C24029"/></svg></span>
-  <span class="arc-shape s2"><svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="25" fill="#C5D0D3"/><circle cx="66" cy="34" r="25" fill="#C5D0D3"/><circle cx="34" cy="66" r="25" fill="#C5D0D3"/><circle cx="66" cy="66" r="25" fill="#C5D0D3"/></svg></span>
-  <span class="arc-shape s3"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#D09C4C"/></svg></span>
-  <div class="arc-dome"></div>
-</div>
 
 <!-- 5. KULUTTAJA-APPI -->
 <section class="band" id="appi">
@@ -777,14 +753,6 @@ section[id]{scroll-margin-top:72px}
   </div>
 </section>
 
-<!-- kaari: vaalea -> ruskea -->
-<div class="arc arc-up" aria-hidden="true">
-  <span class="arc-shape s1"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#D09C4C"/></svg></span>
-  <span class="arc-shape s2"><svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="25" fill="#C5D0D3"/><circle cx="66" cy="34" r="25" fill="#C5D0D3"/><circle cx="34" cy="66" r="25" fill="#C5D0D3"/><circle cx="66" cy="66" r="25" fill="#C5D0D3"/></svg></span>
-  <span class="arc-shape s3"><svg viewBox="0 0 100 100"><rect x="5" y="5" width="90" height="90" rx="30" fill="#C24029"/></svg></span>
-  <div class="arc-dome"></div>
-</div>
-
 <!-- 9. PILOTTI (ruskea cta) -->
 <section class="dark band" id="pilotti">
   <div class="wrap">
@@ -798,13 +766,12 @@ section[id]{scroll-margin-top:72px}
   </div>
 </section>
 
-<!-- kaari: ruskea -> vaalea -->
-<div class="arc arc-down" aria-hidden="true">
-  <span class="arc-shape s1"><svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="25" fill="#C5D0D3"/><circle cx="66" cy="34" r="25" fill="#C5D0D3"/><circle cx="34" cy="66" r="25" fill="#C5D0D3"/><circle cx="66" cy="66" r="25" fill="#C5D0D3"/></svg></span>
-  <span class="arc-shape s2"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#D09C4C"/></svg></span>
-  <span class="arc-shape s3"><svg viewBox="0 0 100 100"><rect x="5" y="5" width="90" height="90" rx="30" fill="#C24029"/></svg></span>
-  <div class="arc-dome"></div>
-</div>
+<!-- KOHTAUS 2: kaksi isoa maskottia ponnahtaa -->
+<section class="scene scene--pop" data-scene="pop" data-edge="300" data-ctrl="690" data-rotate="-14,12" data-zoom="1,1.05" aria-hidden="true">
+  <svg class="scene__bg" viewBox="0 0 1000 500" preserveAspectRatio="none"><path class="scene__ground" d=""/></svg>
+  <div class="scene__slot" data-m="apila" data-c="#C24029"></div>
+  <div class="scene__slot" data-m="tyyny" data-c="#C5D0D3"></div>
+</section>
 
 <!-- 10. TARINA -->
 <section class="band" id="tarina">
@@ -939,14 +906,6 @@ section[id]{scroll-margin-top:72px}
   </div>
 </section>
 
-<!-- kaari: vaalea -> ruskea -->
-<div class="arc arc-up" aria-hidden="true">
-  <span class="arc-shape s1"><svg viewBox="0 0 100 100"><rect x="5" y="5" width="90" height="90" rx="30" fill="#C24029"/></svg></span>
-  <span class="arc-shape s2"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#D09C4C"/></svg></span>
-  <span class="arc-shape s3"><svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="25" fill="#C5D0D3"/><circle cx="66" cy="34" r="25" fill="#C5D0D3"/><circle cx="34" cy="66" r="25" fill="#C5D0D3"/><circle cx="66" cy="66" r="25" fill="#C5D0D3"/></svg></span>
-  <div class="arc-dome"></div>
-</div>
-
 <!-- 12. LOPPU-CTA (ruskea) -->
 <section class="dark band" id="varaa">
   <div class="wrap">
@@ -961,18 +920,9 @@ section[id]{scroll-margin-top:72px}
   </div>
 </section>
 
-<!-- kaari: ruskea -> vaalea -->
-<div class="arc arc-down" aria-hidden="true">
-  <span class="arc-shape s1"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#D09C4C"/></svg></span>
-  <span class="arc-shape s2"><svg viewBox="0 0 100 100"><rect x="5" y="5" width="90" height="90" rx="30" fill="#C24029"/></svg></span>
-  <span class="arc-shape s3"><svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="25" fill="#C5D0D3"/><circle cx="66" cy="34" r="25" fill="#C5D0D3"/><circle cx="34" cy="66" r="25" fill="#C5D0D3"/><circle cx="66" cy="66" r="25" fill="#C5D0D3"/></svg></span>
-  <div class="arc-dome"></div>
-</div>
-
-<!-- 13. ISO MASKOTTI -->
-<section class="bigm" id="bigm" aria-hidden="true">
-  <div class="bigm-dome"></div>
-  <div class="bigm-mascot" id="bigMascot"><svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="25" fill="#C5D0D3"/><circle cx="66" cy="34" r="25" fill="#C5D0D3"/><circle cx="34" cy="66" r="25" fill="#C5D0D3"/><circle cx="66" cy="66" r="25" fill="#C5D0D3"/></svg></div>
+<!-- ISO MASKOTTI ENNEN FOOTERIA (mascot-follow.js) -->
+<section class="outro" aria-hidden="true">
+  <div class="mascot" data-mascot data-strength="1"><svg viewBox="0 0 100 100"><g data-body><circle cx="27" cy="27" r="27" fill="#C24029"/><circle cx="73" cy="27" r="27" fill="#C24029"/><circle cx="27" cy="73" r="27" fill="#C24029"/><circle cx="73" cy="73" r="27" fill="#C24029"/><rect x="27" y="27" width="46" height="46" fill="#C24029"/></g></svg></div>
 </section>
 
 </main>
@@ -1014,7 +964,7 @@ section[id]{scroll-margin-top:72px}
     if(mqMobile.matches){ pill.style.width=''; return; }
     pill.style.width=(isOpen || !gm.classList.contains('collapsed')) ? barW+'px' : '56px';
   }
-  function darkRegions(){ var a=[document.getElementById('top')]; document.querySelectorAll('section.dark').forEach(function(s){ a.push(s); }); return a; }
+  function darkRegions(){ var a=[document.getElementById('top')]; document.querySelectorAll('section.dark,.scene--pop').forEach(function(s){ a.push(s); }); return a; }
   var regions=darkRegions();
   function onScroll(){
     var y=window.scrollY||0;
@@ -1140,134 +1090,19 @@ section[id]{scroll-margin-top:72px}
 })();
 </script>
 <script>
-/* Kaarien muodot: tartuttavat ja heitettävät. Jokainen muoto roikkuu jousella
-   paikallaan kaaren kupolin pinnalla, sitä voi raahata ja heittää, se pomppii
-   kaaren reunoista eikä koskaan mene kupolin (ruskean) puolelle. Reduced motion:
-   muodot pysyvät paikallaan. */
+/* ReSellan viisi muotoa ilman silmia (viewBox 0 0 100 100): tyyny, ympyra, pilleri, apila, tahti. */
 (function(){
-  var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
-  if(reduce) return;
-  var pt={x:-1e4,y:-1e4,on:false};
-  addEventListener('pointermove',function(e){ pt.x=e.clientX; pt.y=e.clientY; pt.on=true; },{passive:true});
-
-  var scenes=[];
-  Array.prototype.slice.call(document.querySelectorAll('.arc')).forEach(function(arc){
-    var dome=arc.querySelector('.arc-dome');
-    var shapes=Array.prototype.slice.call(arc.querySelectorAll('.arc-shape'));
-    if(!dome||!shapes.length) return;
-    var S={arc:arc,dome:dome,bodies:[],W:0,H:0,cx:0,cy:0,R:0,grab:null,vis:false};
-    function geom(){
-      var a=arc.getBoundingClientRect(), d=dome.getBoundingClientRect();
-      S.W=a.width; S.H=a.height;
-      S.R=d.width/2; S.cx=(d.left-a.left)+d.width/2; S.cy=(d.top-a.top)+d.height/2;
-    }
-    geom();
-    function groundY(x){ var dx=x-S.cx, q=S.R*S.R-dx*dx; return S.cy-(q>0?Math.sqrt(q):0); }
-    shapes.forEach(function(el){
-      var r0=el.getBoundingClientRect(), ar=arc.getBoundingClientRect();
-      var size=r0.width, r=size/2;
-      var hx=(r0.left-ar.left)+r;
-      // perustasoksi kupolin pinta: muoto istuu kaaren päällä
-      var hy=groundY(hx)-r-2;
-      el.style.left='0'; el.style.top='0';
-      var b={el:el,size:size,r:r,hx:hx,hy:hy,x:hx,y:hy,vx:0,vy:0,a:0,w:0};
-      el.addEventListener('pointerdown',function(e){
-        S.grab=b; b.vx=b.vy=0; var ar2=arc.getBoundingClientRect();
-        b.gx=(e.clientX-ar2.left)-b.x; b.gy=(e.clientY-ar2.top)-b.y;
-        b.px=e.clientX; b.py=e.clientY;
-        el.setPointerCapture(e.pointerId); el.classList.add('grab'); e.preventDefault();
-      });
-      el.addEventListener('pointermove',function(e){
-        if(S.grab!==b) return; var ar2=arc.getBoundingClientRect();
-        var nx=(e.clientX-ar2.left)-b.gx, ny=(e.clientY-ar2.top)-b.gy;
-        b.vx=(e.clientX-b.px)*60; b.vy=(e.clientY-b.py)*60; b.px=e.clientX; b.py=e.clientY;
-        b.x=nx; b.y=ny;
-      });
-      function rel(){ if(S.grab!==b) return; var m=1500,sp=Math.hypot(b.vx,b.vy); if(sp>m){ b.vx*=m/sp; b.vy*=m/sp; } b.w=b.vx*0.012; S.grab=null; el.classList.remove('grab'); }
-      el.addEventListener('pointerup',rel); el.addEventListener('pointercancel',rel);
-      S.bodies.push(b);
-    });
-    function resize(){ geom(); S.bodies.forEach(function(b){ var r0=b.el.getBoundingClientRect(), ar=arc.getBoundingClientRect(); /* säilytä suhteellinen koti */ b.size=r0.width; b.r=b.size/2; b.hy=groundY(b.hx)-b.r-2; }); }
-    addEventListener('resize',resize);
-    scenes.push({S:S,groundY:groundY});
-  });
-  if(!scenes.length) return;
-
-  var kHome=55, cHome=6, pad=10, rest=0.55;
-  function stepScene(o,dt){
-    var S=o.S;
-    for(var i=0;i<S.bodies.length;i++){
-      var b=S.bodies[i];
-      if(b===S.grab){ b.a+=b.w*dt; b.w+=(0-b.a)*8*dt-b.w*4*dt; continue; }
-      // jousi kotiin + vaimennus
-      b.vx+=((b.hx-b.x)*kHome-b.vx*cHome)*dt;
-      b.vy+=((b.hy-b.y)*kHome-b.vy*cHome)*dt;
-      b.x+=b.vx*dt; b.y+=b.vy*dt;
-      // reunat
-      if(b.x<b.r+pad){ b.x=b.r+pad; b.vx=Math.abs(b.vx)*rest; }
-      if(b.x>S.W-b.r-pad){ b.x=S.W-b.r-pad; b.vx=-Math.abs(b.vx)*rest; }
-      if(b.y<b.r+pad){ b.y=b.r+pad; b.vy=Math.abs(b.vy)*rest; }
-      // kupoli: pysy pinnan yläpuolella (ei ruskean puolelle)
-      var dx=b.x-S.cx, dy=b.y-S.cy, d=Math.hypot(dx,dy)||1, min=S.R+b.r;
-      if(d<min){
-        var nx=dx/d, ny=dy/d; b.x=S.cx+nx*min; b.y=S.cy+ny*min;
-        var vn=b.vx*nx+b.vy*ny; if(vn<0){ b.vx-=(1+rest)*vn*nx; b.vy-=(1+rest)*vn*ny; b.w+= (b.vx)*0.004; }
-      }
-      // kulma: kallistuu siirtymän mukaan, palautuu
-      var lean=Math.max(-0.5,Math.min(0.5,(b.x-b.hx)/120));
-      b.a+=b.w*dt; b.w+=((lean-b.a)*20-b.w*7)*dt;
-    }
-    // keskinäinen törmäys
-    for(var j=0;j<S.bodies.length;j++) for(var k=j+1;k<S.bodies.length;k++){
-      var A=S.bodies[j], B=S.bodies[k]; if(A===S.grab&&B===S.grab) continue;
-      var ddx=B.x-A.x, ddy=B.y-A.y, dd=Math.hypot(ddx,ddy)||1, mn=A.r+B.r+2;
-      if(dd<mn){ var ux=ddx/dd, uy=ddy/dd, pe=(mn-dd)/2, wa=A===S.grab?0:1, wb=B===S.grab?0:1, ws=(wa+wb)||1;
-        A.x-=ux*pe*wa; A.y-=uy*pe*wa; B.x+=ux*pe*wb; B.y+=uy*pe*wb; }
-    }
-    // paikan lukitus: reunat ja kupoli ratkotaan vielä muutaman kerran, maa voittaa aina
-    for(var it=0;it<3;it++){
-      for(var m=0;m<S.bodies.length;m++){ var c=S.bodies[m];
-        if(c.x<c.r+pad) c.x=c.r+pad; if(c.x>S.W-c.r-pad) c.x=S.W-c.r-pad; if(c.y<c.r+pad) c.y=c.r+pad;
-        var ex=c.x-S.cx, ey=c.y-S.cy, el2=Math.hypot(ex,ey)||1, mi=S.R+c.r;
-        if(el2<mi){ c.x=S.cx+ex/el2*mi; c.y=S.cy+ey/el2*mi; }
-      }
-    }
-  }
-  function render(o){
-    var S=o.S;
-    for(var i=0;i<S.bodies.length;i++){ var b=S.bodies[i];
-      b.el.style.transform='translate3d('+(b.x-b.r)+'px,'+(b.y-b.r)+'px,0) rotate('+b.a+'rad)'; }
-  }
-  var last=0;
-  function loop(now){
-    var dt=Math.min(1/30,(now-(last||now))/1000); last=now;
-    for(var i=0;i<scenes.length;i++){ var o=scenes[i], a=o.S.arc.getBoundingClientRect();
-      if(a.bottom>-100 && a.top<innerHeight+100){ for(var s=0;s<5;s++) stepScene(o,dt/5); render(o); } }
-    requestAnimationFrame(loop);
-  }
-  scenes.forEach(render);
-  requestAnimationFrame(loop);
-
-  // iso maskotti ennen footeria: kallistuu kevyesti kursoria kohti ja keinuu hiljaa
-  var big=document.getElementById('bigMascot');
-  if(big){
-    var cur={rot:0,tx:0,ty:0}, tgt={rot:0,tx:0,ty:0}, t0=performance.now();
-    function bigLoop(now){
-      var r=big.getBoundingClientRect();
-      if(r.bottom>0 && r.top<innerHeight){
-        var cx=r.left+r.width/2, cy=r.top+r.height/2;
-        var dx=pt.x-cx, dy=pt.y-cy, d=Math.hypot(dx,dy)||1, f=pt.on?Math.min(1,d/500):0;
-        tgt.rot=Math.max(-6,Math.min(6,(dx/d)*f*6));
-        tgt.tx=(dx/d)*f*9; tgt.ty=Math.max(-4,(dy/d)*f*6);
-        var bob=Math.sin((now-t0)/1400)*3;
-        cur.rot+=(tgt.rot-cur.rot)*0.07; cur.tx+=(tgt.tx-cur.tx)*0.07; cur.ty+=(tgt.ty-cur.ty)*0.07;
-        big.style.transform='translateX(-50%) translate('+cur.tx.toFixed(2)+'px,'+(cur.ty+bob).toFixed(2)+'px) rotate('+cur.rot.toFixed(2)+'deg)';
-      }
-      requestAnimationFrame(bigLoop);
-    }
-    requestAnimationFrame(bigLoop);
-  }
+  var shapes={
+    tyyny:function(c){return '<rect x="3" y="3" width="94" height="94" rx="34" fill="'+c+'"/>';},
+    ympyra:function(c){return '<circle cx="50" cy="50" r="47" fill="'+c+'"/>';},
+    pilleri:function(c){return '<rect x="22" y="2" width="56" height="96" rx="28" fill="'+c+'"/>';},
+    apila:function(c){return '<circle cx="27" cy="27" r="27" fill="'+c+'"/><circle cx="73" cy="27" r="27" fill="'+c+'"/><circle cx="27" cy="73" r="27" fill="'+c+'"/><circle cx="73" cy="73" r="27" fill="'+c+'"/><rect x="27" y="27" width="46" height="46" fill="'+c+'"/>';},
+    tahti:function(c){return '<path d="M50 0 Q57 43 100 50 Q57 57 50 100 Q43 57 0 50 Q43 43 50 0Z" fill="'+c+'"/>';}
+  };
+  document.querySelectorAll('.scene__slot[data-m]').forEach(function(s){ s.innerHTML='<svg viewBox="0 0 100 100">'+shapes[s.dataset.m](s.dataset.c)+'</svg>'; });
 })();
 </script>
+<script src="motion/mascot-scene.js"></script>
+<script src="motion/mascot-follow.js"></script>
 </body>
 </html>
