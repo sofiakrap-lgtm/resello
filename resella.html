@@ -14,19 +14,19 @@
 <link rel="apple-touch-icon" href="assets/ikoni/apple-touch-icon_180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ===== tokens.json ===== */
 :root{
   --bg:#ECECDC; --surface:#F6F6EE; --line:#DCDBC6; --ink:#3E2520; --ink-muted:#6E5E56;
   --blue:#C5D0D3; --blue-deep:#3A4961; --red:#C24029; --on-red:#ECECDC;
   --olive:#8D8B4C; --mustard:#D09C4C; --brown-hover:#2A1814;
-  --radius-pill:999px; --radius-card:24px; --radius-field:20px; --radius-thumb:18px; --radius-small:10px;
+  --radius-pill:999px; --radius-card:10px; --radius-field:10px; --radius-thumb:15px; --radius-small:5px; --radius-lg:20px;
   --gap-xs:6px; --gap-s:10px; --gap-m:24px; --gap-l:36px; --gap-xl:clamp(72px,11vw,96px);
-  --ease-out:cubic-bezier(0,0,.2,1); --ease-std:cubic-bezier(.2,0,0,1);
-  --dur-fast:150ms; --dur-base:260ms; --dur-slow:460ms;
+  --ease-out:cubic-bezier(.22,.61,.36,1); --ease-std:cubic-bezier(.45,0,.55,1);
+  --dur-fast:200ms; --dur-base:300ms; --dur-slow:450ms;
   --section-py:clamp(56px,9vw,96px); --max:1120px; --gutter:clamp(20px,5vw,40px);
-  --fd:"Archivo","Arial Black",system-ui,sans-serif; --fb:"Epilogue",system-ui,-apple-system,sans-serif;
+  --fd:"Inter Tight",Arial,sans-serif; --fb:"Inter Tight",Arial,sans-serif;
 }
 .dark{--bg:#3E2520; --surface:#4B302A; --line:#5E433B; --ink:#ECECDC; --ink-muted:#CDBFB2; --blue-deep:#C5D0D3}
 *{box-sizing:border-box}
@@ -37,16 +37,16 @@ img,svg,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,p{margin:0}
 /* type */
-.disp{font-family:var(--fd);font-stretch:125%;font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-.3px;text-wrap:balance;font-size:clamp(30px,6.5vw,72px)}
-.disp.m{font-size:clamp(26px,4.5vw,44px)}
-.head{font-family:var(--fd);font-stretch:125%;font-weight:500;letter-spacing:.2px;line-height:1.15;font-size:24px}
-.sub{font-weight:300;color:var(--ink-muted);font-size:clamp(16px,2vw,18px);text-wrap:pretty}
-.num{font-family:var(--fd);font-stretch:125%;font-weight:700;line-height:1}
+.disp{font-family:var(--fd);font-weight:600;line-height:1;letter-spacing:-.035em;text-wrap:balance;font-size:clamp(30px,6.5vw,72px)}
+.disp.m{font-size:clamp(26px,4.5vw,50px);letter-spacing:-.03em;line-height:1.05}
+.head{font-family:var(--fd);font-weight:600;letter-spacing:-.01em;line-height:1.15;font-size:24px}
+.sub{font-weight:400;color:var(--ink-muted);font-size:clamp(16px,2vw,20px);line-height:1.5;text-wrap:pretty}
+.num{font-family:var(--fd);font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
 .cap{font-size:13px;color:var(--ink-muted)}
 /* buttons */
-.btn{--h:40px;--px:22px;--fs:15px;padding:calc((var(--h) - var(--fs)*.7)/2 - 1px) var(--px);font:500 var(--fs)/1 var(--fb);border-radius:var(--radius-pill);border:1px solid transparent;display:inline-block;white-space:nowrap;cursor:pointer;background:var(--ink);color:var(--bg);text-decoration:none;transition:background-color var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out)}
-.btn:hover{background:var(--brown-hover)}
-.btn.s{--h:30px;--px:14px;--fs:13px}
+.btn{--h:55px;--px:30px;--fs:18px;min-width:200px;text-align:center;padding:calc((var(--h) - var(--fs)*.75)/2 - 1px) var(--px);font:600 var(--fs)/1.2 var(--fb);letter-spacing:-.2px;border-radius:var(--radius-pill);border:1px solid transparent;display:inline-block;white-space:nowrap;cursor:pointer;background:var(--ink);color:var(--bg);text-decoration:none;transition:background-color var(--dur-fast) var(--ease-std),color var(--dur-fast) var(--ease-std)}
+.btn:hover{background:var(--blue);color:var(--ink)}
+.btn.s{--h:40px;--px:20px;--fs:16px;min-width:0}
 .btn.out{background:transparent;color:var(--ink);border-color:var(--ink)}.btn.out:hover{background:var(--ink);color:var(--bg)}
 .ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:square;flex:none}
 /* layout */
@@ -139,7 +139,7 @@ section[id]{scroll-margin-top:72px}
 .caro-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(26px,3.5vw,42px)}
 .caro-eyebrow{cursor:default;margin-bottom:16px}
 .caro-eyebrow:hover{background:transparent;color:var(--ink)}
-.caro-title{font-family:var(--fd);font-stretch:125%;font-weight:900;text-transform:uppercase;letter-spacing:-.3px;font-size:clamp(22px,2.8vw,36px);line-height:1.02;margin:0;max-width:min(100%,760px)}
+.caro-title{font-family:var(--fd);font-weight:600;letter-spacing:-.03em;font-size:clamp(28px,3.6vw,50px);line-height:1.05;margin:0;max-width:min(100%,680px)}
 .caro-nav{display:flex;gap:10px;flex:none}
 .caro-btn{width:46px;height:46px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);display:grid;place-items:center;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-out)}
 .caro-btn:hover{background:var(--brown-hover)}
@@ -266,6 +266,9 @@ section[id]{scroll-margin-top:72px}
 .cookie a{color:var(--bg);text-decoration:underline}
 .cookie .btn{background:var(--bg);color:var(--ink)}
 .cookie[hidden]{display:none}
+/* giveasy: otsikot lihavia (600) */
+.card h3,.caro-card.c-color h3,.caro-card.c-img .ci-cap h3,.step h4,.tcol h3,.tl h4,.foot-intro .head,.acc summary,.ph-cap h4,.bio b,.dash-top b,.rt h4{font-weight:600;letter-spacing:-.01em}
+.cmp h3{letter-spacing:0}
 
 @media(max-width:880px){
   .grid.c3,.grid.c4{grid-template-columns:repeat(2,1fr)}
@@ -277,6 +280,7 @@ section[id]{scroll-margin-top:72px}
   .story img{max-height:340px}
 }
 @media(max-width:620px){
+  .btn{--h:49px;--fs:16px}
   .hero-row{flex-direction:column;align-items:flex-start;gap:26px}
   .hero-title{margin-bottom:0}
   .hero-right{align-items:flex-start;text-align:left;max-width:none}
