@@ -174,7 +174,7 @@ section[id]{scroll-margin-top:72px}
 .cmp{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.5vw,18px)}
 .cmp .col{border-radius:var(--radius-card);padding:clamp(22px,2.4vw,28px);background:var(--surface)}
 .cmp .col.now{background:var(--blue)}
-.cmp h3{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:14px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:16px}
+.cmp h3{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em;color:var(--ink);margin-bottom:16px}
 .cmp .col.now h3{color:var(--ink)}
 .cmp ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
 .cmp li{display:flex;gap:10px;font-size:14.5px;line-height:1.45;align-items:flex-start}
@@ -209,6 +209,7 @@ section[id]{scroll-margin-top:72px}
 .dash{background:var(--surface);border-radius:var(--radius-card);padding:clamp(16px,2vw,24px)}
 .dash-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
 .dash-top b{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:15px}
+.dash-note{font-size:14px;font-weight:500;color:var(--ink-muted)}
 .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border-radius:var(--radius-small);overflow:hidden}
 .dash-grid .t{background:var(--bg);padding:16px 18px;display:flex;flex-direction:column;gap:6px}
 .dash-grid .t .lb{font-size:12px;color:var(--ink-muted);line-height:1.3}
@@ -467,7 +468,6 @@ section[id]{scroll-margin-top:72px}
   <div class="wrap">
     <div class="caro-head">
       <div>
-        <span class="btn out caro-eyebrow">Ominaisuudet</span>
         <h2 class="caro-title">Kaikki kirpputorin työkalut yhdessä paikassa</h2>
       </div>
       <div class="caro-nav">
@@ -592,7 +592,7 @@ section[id]{scroll-margin-top:72px}
       <p class="sub">Näin arki näyttää ReSellassa.</p>
     </div>
     <div class="dash">
-      <div class="dash-top"><b>Omistajan hallintapaneeli</b><span class="tag">Esimerkkiluvut</span></div>
+      <div class="dash-top"><b>Omistajan hallintapaneeli</b><span class="dash-note">Luvut ovat esimerkkejä</span></div>
       <div class="dash-grid">
         <div class="t"><span class="lb">Myynti tänään</span><span class="n">1 284 €</span></div>
         <div class="t"><span class="lb">Pöytien käyttöaste</span><span class="n">87 %</span></div>
@@ -615,9 +615,8 @@ section[id]{scroll-margin-top:72px}
 <section class="band" id="appi">
   <div class="wrap">
     <div class="shead">
-      <span class="tag blue mb-tag">Tulossa</span>
       <h2 class="disp m">Ostajat löytävät sinut</h2>
-      <p class="sub">Hyllysi tuotteet ostajan taskussa.</p>
+      <p class="sub">Hyllysi tuotteet ostajan taskussa. Kuluttaja-app on tulossa.</p>
     </div>
     <div class="appwrap">
       <div class="phones">
@@ -781,7 +780,6 @@ section[id]{scroll-margin-top:72px}
       <article class="rcard">
         <img src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Itsepalvelukirpputorin myymälä" loading="lazy">
         <div class="rc-body">
-          <span class="tag extag">Esimerkki</span>
           <p class="rc-quote">Illat menivät ennen tilityksiä laskiessa. Nyt yksi tiedosto hoitaa kaikki myyjät kerralla.</p>
           <p class="rc-who"><b>Kirppisyrittäjä</b>Keskikokoinen halli, 60 pöytää</p>
         </div>
@@ -789,7 +787,6 @@ section[id]{scroll-margin-top:72px}
       <article class="rcard">
         <img src="assets/kuvat/02_kassa_maksu/01_kassa_tiski_tabletti.jpg" alt="Kassa tabletilla myyntitiskillä" loading="lazy">
         <div class="rc-body">
-          <span class="tag extag">Esimerkki</span>
           <p class="rc-quote">Kassa ei enää jumita ruuhkassa. Väärin lyödyn tuotteen korjaan itse, ilman soittoa tukeen.</p>
           <p class="rc-who"><b>Kirppisyrittäjä</b>Kyläkirppis, 25 pöytää</p>
         </div>
@@ -797,7 +794,6 @@ section[id]{scroll-margin-top:72px}
       <article class="rcard">
         <img src="assets/kuvat/04_loydot_tuotteet/01_takki_esittely.jpg" alt="Vintagetakki esillä" loading="lazy">
         <div class="rc-body">
-          <span class="tag extag">Esimerkki</span>
           <p class="rc-quote">Nuoret ostajat löytävät nyt hyllymme netistä. Hyvät löydöt eivät jää pölyttymään.</p>
           <p class="rc-who"><b>Kirppisyrittäjä</b>Vintageliike, oma ilme</p>
         </div>
@@ -805,7 +801,6 @@ section[id]{scroll-margin-top:72px}
       <article class="rcard">
         <img src="assets/kuvat/01_kirppis_tila/03_hylly_laukut_varikas.jpg" alt="Värikäs hylly laukkuja" loading="lazy">
         <div class="rc-body">
-          <span class="tag extag">Esimerkki</span>
           <p class="rc-quote">Myyjät varaavat ja maksavat pöydän itse verkossa. Minulta säästyy tunteja joka viikko.</p>
           <p class="rc-who"><b>Kirppisyrittäjä</b>Iso halli, 120 pöytää</p>
         </div>
@@ -813,7 +808,6 @@ section[id]{scroll-margin-top:72px}
       <article class="rcard">
         <img src="assets/kuvat/02_kassa_maksu/10_kuitti_tulostuu.jpg" alt="Kuitti tulostuu kassalta" loading="lazy">
         <div class="rc-body">
-          <span class="tag extag">Esimerkki</span>
           <p class="rc-quote">Näen myynnin ja vapaat pöydät puhelimesta, vaikka en olisi paikalla. Yksi järjestelmä kolmen sijaan.</p>
           <p class="rc-who"><b>Kirppisyrittäjä</b>Kaksi toimipistettä</p>
         </div>
@@ -847,7 +841,6 @@ section[id]{scroll-margin-top:72px}
         <p class="pct">Prosentti laskee myynnin kasvaessa: 1,25 % alkaen, 0,25 % asti.</p>
       </div>
       <div class="pcard hl">
-        <span class="tag extag">Esimerkki</span>
         <h3>Paljonko se maksaisi?</h3>
         <div class="price-tog" role="group" aria-label="Kirppiksen koko">
           <button type="button" aria-pressed="true" data-i="0">Pieni</button>
