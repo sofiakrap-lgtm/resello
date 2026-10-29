@@ -213,10 +213,9 @@ section[id]{scroll-margin-top:72px}
 .dash-grid .t{background:var(--bg);padding:16px 18px;display:flex;flex-direction:column;gap:6px}
 .dash-grid .t .lb{font-size:12px;color:var(--ink-muted);line-height:1.3}
 .dash-grid .t .n{font-family:var(--fd);font-stretch:125%;font-weight:700;font-size:clamp(22px,2.6vw,30px);line-height:1;white-space:nowrap}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.8vw,22px);margin-top:clamp(28px,3.6vw,44px)}
-.step .no{font-family:var(--fd);font-stretch:125%;font-weight:700;font-size:30px;color:var(--blue-deep);line-height:1;margin-bottom:8px}
-.step h4{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:17px;margin-bottom:6px}
-.step p{font-size:13.5px;color:var(--ink-muted);line-height:1.45}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.8vw,22px);margin-top:clamp(28px,3.6vw,44px)}
+.flow-step h4{font-family:var(--fd);font-stretch:125%;font-weight:600;font-size:20px;letter-spacing:-.01em;margin-bottom:6px}
+.flow-step p{font-size:16px;color:var(--ink-muted);line-height:1.45}
 /* appi puhelimet */
 .appwrap{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,48px)}
 .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,30px);max-width:720px}
@@ -254,24 +253,15 @@ section[id]{scroll-margin-top:72px}
 .tl-extra .e{display:flex;gap:10px;font-size:14px;color:var(--ink-muted);max-width:40ch;align-items:flex-start}
 .tl-extra .mk{flex:none;margin-top:2px;color:var(--olive)}
 /* roadmap / polku */
-.road{position:relative;aspect-ratio:1050/470;max-width:1000px;margin:clamp(28px,3.5vw,48px) auto 0}
-.road-line{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.road-line path{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.rc{position:absolute;width:52px;height:52px;border-radius:999px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-family:var(--fd);font-stretch:125%;font-weight:700;font-size:15px;transform:translate(-50%,-50%);z-index:2}
-.rc.big{width:62px;height:62px;font-size:17px}
-.rt{position:absolute;width:190px;transform:translateX(-28px);z-index:2}
-.rt h4{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:17px;margin-bottom:8px}
-.rt ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
-.rt li{font-size:13px;color:var(--ink-muted);padding-left:13px;position:relative;line-height:1.3}
-.rt li::before{content:"·";position:absolute;left:2px;top:-1px;color:var(--blue-deep);font-weight:700}
-.road-mob{display:none;list-style:none;margin:clamp(24px,5vw,36px) 0 0;padding:0;flex-direction:column;gap:22px}
-.road-mob>li{display:flex;gap:14px}
-.road-mob .n{flex:none;width:44px;height:44px;border-radius:999px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-family:var(--fd);font-stretch:125%;font-weight:700;font-size:15px}
-.road-mob h4{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:17px;margin:9px 0 6px}
-.road-mob ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
-.road-mob ul li{font-size:14px;color:var(--ink-muted);padding-left:14px;position:relative}
-.road-mob ul li::before{content:"·";position:absolute;left:3px;color:var(--blue-deep);font-weight:700}
-@media(max-width:760px){.road{display:none}.road-mob{display:flex}}
+.steps{max-width:1160px;margin-inline:auto;display:grid;gap:clamp(22px,3vw,44px);--steps-top:clamp(84px,10vw,110px)}
+.step{position:sticky;top:var(--steps-top);background:var(--surface);border-radius:10px;min-height:clamp(300px,32vw,400px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,360px);gap:clamp(22px,4vw,56px);padding:clamp(28px,4vw,56px);overflow:hidden;transform-origin:50% 0;align-items:center}
+.step__text{display:flex;flex-direction:column;gap:14px}
+.step h3{font-family:var(--fd);font-weight:600;font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;line-height:1.06;color:var(--ink)}
+.step__text p{font-size:18px;line-height:1.4;color:var(--ink-muted);max-width:30ch}
+.step__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
+.step__list li{position:relative;padding-left:24px;font-size:16px;line-height:1.4;color:var(--ink)}
+.step__list li::before{content:"";position:absolute;left:0;top:7px;width:10px;height:10px;border-radius:999px;background:var(--red)}
+@media(max-width:760px){.step{grid-template-columns:1fr;gap:18px;align-items:start;min-height:0}}
 /* luotettavuus */
 .tcol h3{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:19px;margin-bottom:4px;display:flex;align-items:center;gap:10px}
 .tcol h3 .ico{width:24px;height:24px;color:var(--blue-deep)}
@@ -361,7 +351,7 @@ section[id]{scroll-margin-top:72px}
 .cookie .btn{background:var(--bg);color:var(--ink)}
 .cookie[hidden]{display:none}
 /* giveasy: otsikot lihavia (600) */
-.card h3,.caro-card.c-color h3,.caro-card.c-img .ci-cap h3,.step h4,.tcol h3,.tl h4,.foot-intro .head,.ph-cap h4,.bio b,.dash-top b,.rt h4{font-weight:600;letter-spacing:-.01em}
+.card h3,.caro-card.c-color h3,.caro-card.c-img .ci-cap h3,.tcol h3,.tl h4,.foot-intro .head,.ph-cap h4,.bio b,.dash-top b{font-weight:600;letter-spacing:-.01em}
 .cmp h3{letter-spacing:0}
 /* scroll reveal */
 .reveal{opacity:0;transform:translateY(60px);transition:opacity 1s var(--ease-reveal),transform 1s var(--ease-reveal)}
@@ -390,7 +380,7 @@ section[id]{scroll-margin-top:72px}
 
 @media(max-width:880px){
   .grid.c3,.grid.c4{grid-template-columns:repeat(2,1fr)}
-  .steps{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:repeat(2,1fr)}
   .nums{grid-template-columns:repeat(2,1fr)}
   .tl{grid-template-columns:repeat(2,1fr);row-gap:30px}
   .tl .node::after{display:none}
@@ -408,7 +398,7 @@ section[id]{scroll-margin-top:72px}
   .foot .wordmark{width:calc((100% - 32px) * 0.72);margin-top:16px;margin-bottom:8px}
   .cmp{grid-template-columns:1fr}
   .grid.c2,.grid.c3,.grid.c4{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
   .nums{grid-template-columns:repeat(2,1fr)}
   .phones{grid-template-columns:1fr;max-width:230px}
   .tl{grid-template-columns:1fr;row-gap:26px}
@@ -612,11 +602,11 @@ section[id]{scroll-margin-top:72px}
         <div class="t"><span class="lb">Tuotteita verkossa</span><span class="n">2 340</span></div>
       </div>
     </div>
-    <div class="steps">
-      <div class="step"><div class="no">1</div><h4>Piippaa</h4><p>Viivakoodi tai QR-koodi, tuote ja hinta näkyvät heti isolla.</p></div>
-      <div class="step"><div class="no">2</div><h4>Tarkista</h4><p>Ostaja näkee summan asiakasnäytöltä.</p></div>
-      <div class="step"><div class="no">3</div><h4>Maksa</h4><p>Kortti tai käteinen. Summa siirtyy maksupäätteeseen automaattisesti.</p></div>
-      <div class="step"><div class="no">4</div><h4>Valmis</h4><p>Kuitti tulostuu tai lähtee sähköpostiin. Myyjän saldo päivittyy samalla.</p></div>
+    <div class="flow">
+      <div class="flow-step"><h4>Piippaa</h4><p>Viivakoodi tai QR-koodi, tuote ja hinta näkyvät heti isolla.</p></div>
+      <div class="flow-step"><h4>Tarkista</h4><p>Ostaja näkee summan asiakasnäytöltä.</p></div>
+      <div class="flow-step"><h4>Maksa</h4><p>Kortti tai käteinen. Summa siirtyy maksupäätteeseen automaattisesti.</p></div>
+      <div class="flow-step"><h4>Valmis</h4><p>Kuitti tulostuu tai lähtee sähköpostiin. Myyjän saldo päivittyy samalla.</p></div>
     </div>
   </div>
 </section>
@@ -681,38 +671,21 @@ section[id]{scroll-margin-top:72px}
 </section>
 
 <!-- 7. KÄYTTÖÖNOTTO -->
-<section class="band" id="kayttoonotto">
+<section class="dark band" id="kayttoonotto">
   <div class="wrap">
     <div class="shead">
       <h2 class="disp m">Valmis päivissä</h2>
       <p class="sub">Vaihto hoituu ilman, että kirppis menee kiinni.</p>
     </div>
-    <div class="road">
-      <svg class="road-line" viewBox="0 0 1050 470" aria-hidden="true"><path d="M75 235 L75 95 Q75 55 115 55 L975 55 Q1015 55 1015 95 L1015 260 Q1015 300 975 300 L285 300"/></svg>
-      <span class="rc big" style="left:7.1%;top:50%">00</span>
-      <div class="rt" style="left:7.1%;top:57%"><h4>Esittely</h4><ul><li>Demo 30 min</li><li>Tarjous</li><li>Sopimus</li></ul></div>
-      <span class="rc" style="left:27.1%;top:11.7%">01</span>
-      <div class="rt" style="left:27.1%;top:19.5%"><h4>Määritys</h4><ul><li>Pöydät ja hinnat</li><li>Provisio</li><li>Oma ilme</li></ul></div>
-      <span class="rc" style="left:52.9%;top:11.7%">02</span>
-      <div class="rt" style="left:52.9%;top:19.5%"><h4>Asennus</h4><ul><li>Kassa ja laitteet</li><li>Tarrat</li></ul></div>
-      <span class="rc" style="left:78.1%;top:11.7%">03</span>
-      <div class="rt" style="left:78.1%;top:19.5%"><h4>Koulutus</h4><ul><li>Kassan käyttö</li><li>Myyjien ohjeet</li></ul></div>
-      <span class="rc" style="left:78.1%;top:63.8%">04</span>
-      <div class="rt" style="left:78.1%;top:71.5%"><h4>Ensimmäinen myynti</h4><ul><li>Tuki paikan päällä</li></ul></div>
-      <span class="rc" style="left:52.9%;top:63.8%">05</span>
-      <div class="rt" style="left:52.9%;top:71.5%"><h4>Tilitykset</h4><ul><li>Yksi pankkitiedosto</li></ul></div>
-      <span class="rc" style="left:27.1%;top:63.8%">06</span>
-      <div class="rt" style="left:27.1%;top:71.5%"><h4>Kasvu</h4><ul><li>Kuluttaja-app 2027</li></ul></div>
+    <div class="steps">
+      <article class="step"><div class="step__text"><h3>Esittely</h3><p>Aloitetaan demolla ja selkeällä tarjouksella.</p></div><ul class="step__list"><li>Demo 30 min</li><li>Tarjous</li><li>Sopimus</li></ul></article>
+      <article class="step"><div class="step__text"><h3>Määritys</h3><p>Rakennamme kirppiksesi näköisen järjestelmän.</p></div><ul class="step__list"><li>Pöydät ja hinnat</li><li>Provisio</li><li>Oma ilme</li></ul></article>
+      <article class="step"><div class="step__text"><h3>Asennus</h3><p>Tuomme ja asennamme laitteet valmiiksi.</p></div><ul class="step__list"><li>Kassa ja laitteet</li><li>Tarrat</li></ul></article>
+      <article class="step"><div class="step__text"><h3>Koulutus</h3><p>Käymme käytön läpi kanssasi ja myyjien kanssa.</p></div><ul class="step__list"><li>Kassan käyttö</li><li>Myyjien ohjeet</li></ul></article>
+      <article class="step"><div class="step__text"><h3>Ensimmäinen myynti</h3><p>Olemme paikalla, kun ensimmäiset tuotteet myydään.</p></div><ul class="step__list"><li>Tuki paikan päällä</li></ul></article>
+      <article class="step"><div class="step__text"><h3>Tilitykset</h3><p>Myyjien rahat lähtevät yhdellä tiedostolla.</p></div><ul class="step__list"><li>Yksi pankkitiedosto</li></ul></article>
+      <article class="step"><div class="step__text"><h3>Kasvu</h3><p>Järjestelmä kasvaa kirppiksesi mukana.</p></div><ul class="step__list"><li>Kuluttaja-app 2027</li></ul></article>
     </div>
-    <ol class="road-mob">
-      <li><span class="n">00</span><div><h4>Esittely</h4><ul><li>Demo 30 min</li><li>Tarjous</li><li>Sopimus</li></ul></div></li>
-      <li><span class="n">01</span><div><h4>Määritys</h4><ul><li>Pöydät ja hinnat</li><li>Provisio</li><li>Oma ilme</li></ul></div></li>
-      <li><span class="n">02</span><div><h4>Asennus</h4><ul><li>Kassa ja laitteet</li><li>Tarrat</li></ul></div></li>
-      <li><span class="n">03</span><div><h4>Koulutus</h4><ul><li>Kassan käyttö</li><li>Myyjien ohjeet</li></ul></div></li>
-      <li><span class="n">04</span><div><h4>Ensimmäinen myynti</h4><ul><li>Tuki paikan päällä</li></ul></div></li>
-      <li><span class="n">05</span><div><h4>Tilitykset</h4><ul><li>Yksi pankkitiedosto</li></ul></div></li>
-      <li><span class="n">06</span><div><h4>Kasvu</h4><ul><li>Kuluttaja-app 2027</li></ul></div></li>
-    </ol>
     <div class="tl-extra">
       <div class="e"><span class="mk"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Vanhoja tuotteita ei tarvitse kuvata uudelleen. Uudet varaukset tulevat ReSellaan, vanhat myydään loppuun.</div>
       <div class="e"><span class="mk"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Viivakoodilukija ja QR-lukija toimivat molempien tarrojen kanssa.</div>
@@ -987,7 +960,7 @@ section[id]{scroll-margin-top:72px}
   // scroll reveal (>=980px, ei reduced-motion, ei herossa/footerissa)
   try{
     if(window.innerWidth>=980 && !matchMedia('(prefers-reduced-motion:reduce)').matches){
-      var rsel='.shead,.caro-head,.card,.cmp .col,.dash,.steps .step,.phone-item,.app-note .ap,.nums .n,.tl .node,.tl-extra .e,.tcol,.story>div,.story>img,.acc,.pcard,.ctaband';
+      var rsel='.shead,.caro-head,.card,.cmp .col,.dash,.flow .flow-step,.phone-item,.app-note .ap,.nums .n,.tl .node,.tl-extra .e,.tcol,.story>div,.story>img,.acc,.pcard,.ctaband';
       var ritems=Array.prototype.slice.call(document.querySelectorAll(rsel)).filter(function(el){ return !el.closest('.hero') && !el.closest('.foot') && !el.closest('#gm'); });
       var pid=0, pc={};
       ritems.forEach(function(el){
@@ -999,6 +972,26 @@ section[id]{scroll-margin-top:72px}
       ritems.forEach(function(el){ rio.observe(el); });
     }
   }catch(e){}
+  // vaihekortit: sticky-pino, aiemmat kortit pienenevat 2 % per kerros (sections.js .steps)
+  (function(){
+    var sReduce=false; try{ sReduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
+    Array.prototype.slice.call(document.querySelectorAll('.steps')).forEach(function(root){
+      var cards=Array.prototype.slice.call(root.querySelectorAll('.step'));
+      cards.forEach(function(c,k){ c.style.top='calc(var(--steps-top,100px) + '+(k*25)+'px)'; });
+      function paint(){
+        cards.forEach(function(c,k){
+          var depth=0;
+          for(var j=k+1;j<cards.length;j++){
+            var top=cards[j].getBoundingClientRect().top, stick=parseFloat(getComputedStyle(cards[j]).top);
+            var start=stick+cards[j].offsetHeight;
+            depth+=Math.max(0,Math.min(1,(start-top)/cards[j].offsetHeight));
+          }
+          c.style.transform='scale('+(1-0.02*depth)+')';
+        });
+      }
+      if(!sReduce){ addEventListener('scroll',paint,{passive:true}); paint(); }
+    });
+  })();
   // FAQ accordion: plus kaantyy rastiksi, vastaus aukeaa grid-rows
   Array.prototype.slice.call(document.querySelectorAll('.acc-q')).forEach(function(q){
     q.addEventListener('click',function(){
