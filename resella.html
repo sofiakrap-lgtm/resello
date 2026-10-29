@@ -23,7 +23,7 @@
   --olive:#8D8B4C; --mustard:#D09C4C; --brown-hover:#2A1814;
   --radius-pill:999px; --radius-card:10px; --radius-field:10px; --radius-thumb:15px; --radius-small:5px; --radius-lg:20px;
   --gap-xs:6px; --gap-s:10px; --gap-m:24px; --gap-l:36px; --gap-xl:clamp(72px,11vw,96px);
-  --ease-out:cubic-bezier(.22,.61,.36,1); --ease-std:cubic-bezier(.45,0,.55,1);
+  --ease-out:cubic-bezier(.22,.61,.36,1); --ease-std:cubic-bezier(.45,0,.55,1); --ease-reveal:cubic-bezier(.19,1,.22,1); --ease-emphasis:cubic-bezier(.22,.9,.28,1);
   --dur-fast:200ms; --dur-base:300ms; --dur-slow:450ms;
   --section-py:clamp(56px,9vw,96px); --max:1120px; --gutter:clamp(20px,5vw,40px);
   --fd:"Inter Tight",Arial,sans-serif; --fb:"Inter Tight",Arial,sans-serif;
@@ -313,6 +313,10 @@ section[id]{scroll-margin-top:72px}
 /* giveasy: otsikot lihavia (600) */
 .card h3,.caro-card.c-color h3,.caro-card.c-img .ci-cap h3,.step h4,.tcol h3,.tl h4,.foot-intro .head,.acc summary,.ph-cap h4,.bio b,.dash-top b,.rt h4{font-weight:600;letter-spacing:-.01em}
 .cmp h3{letter-spacing:0}
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(60px);transition:opacity 1s var(--ease-reveal),transform 1s var(--ease-reveal)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
 
 @media(max-width:880px){
   .grid.c3,.grid.c4{grid-template-columns:repeat(2,1fr)}
@@ -794,6 +798,21 @@ section[id]{scroll-margin-top:72px}
   gmMenu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',closeMenu); });
   measurePill(); onScroll();
   setTimeout(function(){ gm.classList.remove('intro'); }, 900);
+  // scroll reveal (>=980px, ei reduced-motion, ei herossa/footerissa)
+  try{
+    if(window.innerWidth>=980 && !matchMedia('(prefers-reduced-motion:reduce)').matches){
+      var rsel='.shead,.caro-head,.card,.cmp .col,.dash,.steps .step,.phone-item,.app-note .ap,.nums .n,.tl .node,.tl-extra .e,.tcol,.story>div,.story>img,.acc,.ctaband';
+      var ritems=Array.prototype.slice.call(document.querySelectorAll(rsel)).filter(function(el){ return !el.closest('.hero') && !el.closest('.foot') && !el.closest('#gm'); });
+      var pid=0, pc={};
+      ritems.forEach(function(el){
+        el.classList.add('reveal');
+        var p=el.parentNode; if(!p.__rid){ p.__rid=++pid; } var k=p.__rid, i=pc[k]||0; pc[k]=i+1;
+        el.style.transitionDelay=(i*0.06)+'s';
+      });
+      var rio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); rio.unobserve(e.target); } }); },{rootMargin:'0px 0px -10% 0px'});
+      ritems.forEach(function(el){ rio.observe(el); });
+    }
+  }catch(e){}
   // evästeilmoitus
   var ck=document.getElementById('cookie'), ok=document.getElementById('cookie-ok');
   var seen=false; try{ seen=localStorage.getItem('rs-cookie')==='1'; }catch(e){}
