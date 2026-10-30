@@ -178,17 +178,6 @@ section[id]{scroll-margin-top:72px}
 .card h3{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em;line-height:1.18}
 .card p{font-size:16px;font-weight:500;color:var(--ink-muted);line-height:1.45}
 /* vertaus */
-.cmp{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.cmp .col{border-radius:var(--radius-card);padding:clamp(22px,2.4vw,28px);background:var(--surface)}
-.cmp .col.now{background:var(--blue)}
-.cmp h3{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em;color:var(--ink);margin-bottom:16px}
-.cmp .col.now h3{color:var(--ink)}
-.cmp ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
-.cmp li{display:flex;gap:10px;font-size:15px;font-weight:500;line-height:1.45;align-items:flex-start}
-.cmp .col:not(.now) li{color:var(--ink-muted)}
-.cmp .mk{flex:none;margin-top:2px;color:var(--ink-muted)}
-.cmp .now .mk{color:var(--blue-deep)}
-.cmp .mk .ico{width:16px;height:16px}
 /* karuselli (ominaisuudet) */
 .caro-head{display:flex;flex-direction:column;align-items:center;gap:clamp(20px,2.4vw,34px);margin-bottom:clamp(30px,4vw,56px);text-align:center}
 .caro-eyebrow{cursor:default;margin-bottom:16px}
@@ -360,7 +349,6 @@ section[id]{scroll-margin-top:72px}
 .cookie[hidden]{display:none}
 /* giveasy: otsikot lihavia (600) */
 .card h3,.caro-card.c-color h3,.caro-card.c-img .ci-cap h3,.tcol h3,.tl h4,.foot-intro .head,.ph-cap h4,.bio b,.dash-top b{font-weight:600;letter-spacing:-.01em}
-.cmp h3{letter-spacing:0}
 /* scroll reveal */
 .reveal{opacity:0;transform:translateY(60px);transition:opacity 1s var(--ease-reveal),transform 1s var(--ease-reveal)}
 .reveal.in{opacity:1;transform:none}
@@ -404,7 +392,6 @@ section[id]{scroll-margin-top:72px}
   .foot-top{flex-direction:column;gap:28px}
   .foot-cols{gap:48px}
   .foot .wordmark{width:calc((100% - 32px) * 0.72);margin-top:16px;margin-bottom:8px}
-  .cmp{grid-template-columns:1fr}
   .grid.c2,.grid.c3,.grid.c4{grid-template-columns:1fr}
   .flow{grid-template-columns:1fr}
   .nums{grid-template-columns:repeat(2,1fr)}
@@ -414,6 +401,80 @@ section[id]{scroll-margin-top:72px}
   .tl{grid-template-columns:1fr;row-gap:26px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.hero video{display:none}}
+/* ennen ja nyt: pädi ja vertailutaulukko */
+section.en{padding-block:0}
+.en-stage{position:relative;background:var(--blue);height:clamp(340px,38vw,540px);overflow:hidden}
+.en-pad{position:absolute;left:50%;bottom:-140px;width:min(780px,78vw);aspect-ratio:4/3;transform:translateX(-50%);
+  background:var(--brown-hover);border-radius:clamp(26px,3.2vw,44px);padding:clamp(10px,1.3vw,18px);}
+.en-pad::before{content:"";position:absolute;top:50%;left:clamp(4px,.5vw,7px);width:clamp(4px,.45vw,6px);height:clamp(4px,.45vw,6px);border-radius:50%;background:#4B302A;transform:translateY(-50%)}
+.en-screen{height:100%;border-radius:clamp(16px,2vw,28px);background:var(--surface);overflow:hidden;display:grid;grid-template-columns:1fr 34%;}
+.enu-main{padding:clamp(14px,2.2vw,30px);display:flex;flex-direction:column;gap:clamp(8px,1.2vw,16px);min-width:0}
+.enu-top{display:flex;align-items:center;justify-content:space-between}
+.enu-top img{height:clamp(14px,1.8vw,24px)}
+.enu-top span{font-size:clamp(9px,1vw,13px);font-weight:600;color:var(--ink-muted)}
+.enu-h{font-size:clamp(16px,2.3vw,30px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.enu-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(6px,.8vw,10px)}
+.enu-stat{background:#fff;border-radius:clamp(8px,.9vw,12px);padding:clamp(8px,1vw,14px)}
+.enu-stat small{display:block;font-size:clamp(8px,.85vw,11px);font-weight:500;color:var(--ink-muted)}
+.enu-stat b{display:block;white-space:nowrap;margin-top:4px;font-size:clamp(13px,1.7vw,22px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.enu-list{display:flex;flex-direction:column;gap:clamp(5px,.6vw,8px)}
+.enu-row{display:grid;grid-template-columns:clamp(22px,2.6vw,34px) 1fr auto;gap:clamp(8px,1vw,12px);align-items:center;background:#fff;border-radius:clamp(8px,.9vw,12px);padding:clamp(5px,.6vw,8px)}
+.enu-row .th{aspect-ratio:1;border-radius:clamp(5px,.6vw,8px)}
+.enu-row b{font-size:clamp(9px,1vw,13px);font-weight:600;display:block}
+.enu-row small{font-size:clamp(8px,.85vw,11px);color:var(--ink-muted);font-weight:500}
+.enu-row .p{font-size:clamp(9px,1vw,13px);font-weight:700;font-variant-numeric:tabular-nums;padding-right:6px}
+.enu-side{background:var(--bg);padding:clamp(14px,2.2vw,30px) clamp(12px,1.6vw,22px);display:flex;flex-direction:column;gap:clamp(8px,1vw,12px)}
+.enu-side small{font-size:clamp(8px,.9vw,12px);font-weight:600;color:var(--ink-muted)}
+.enu-big{font-size:clamp(20px,3vw,40px);font-weight:700;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.enu-bar{height:clamp(5px,.6vw,8px);border-radius:999px;background:var(--line);overflow:hidden}
+.enu-bar i{display:block;height:100%;width:72%;background:var(--red);border-radius:inherit}
+.enu-btn{margin-top:auto;margin-bottom:clamp(150px,18vw,190px);height:clamp(28px,3.4vw,46px);border-radius:999px;background:var(--red);color:var(--on-red);display:grid;place-items:center;font-size:clamp(10px,1.15vw,15px);font-weight:600}
+.en-body{max-width:1300px;margin:0 auto;padding:clamp(60px,8vw,110px) var(--gutter) clamp(80px,10vw,140px)}
+.en-head{display:grid;grid-template-columns:1fr minmax(0,300px);gap:40px;align-items:end;margin-bottom:clamp(48px,6vw,80px)}
+.en-head h2{font-size:clamp(48px,7.6vw,110px);font-weight:600;letter-spacing:-.04em;line-height:.92}
+.en-head p{font-size:18px;font-weight:500;line-height:1.35;color:var(--ink-muted);padding-bottom:10px}
+.en-cmp{display:grid;grid-template-columns:minmax(150px,.75fr) 1.15fr 1fr;position:relative}
+.en-cmp > *{position:relative;z-index:1}
+.en-ch.hl,.en-cy{background:var(--surface)}
+.en-ch.hl{border-radius:20px 20px 0 0}
+.en-cy.last{border-radius:0 0 20px 20px}
+.en-ch{padding:34px 28px 22px;font-size:20px;font-weight:600;letter-spacing:-.01em}
+.en-ch.hl{display:flex;align-items:center}
+.en-ch.hl img{height:26px}
+.en-ch.mut{color:var(--ink-muted);font-weight:500;font-size:18px;display:flex;align-items:flex-end}
+.en-cl,.en-cy,.en-cn{padding:22px 28px;border-top:1px solid var(--line);font-size:17px;line-height:1.35;display:flex;align-items:center}
+.en-cmp > .en-ch{border-top:0}
+.en-cl{font-weight:600}
+.en-cy{font-weight:600;gap:12px}
+.en-cy svg{flex:none;width:20px;height:20px;fill:none;stroke:var(--red);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.en-cn{color:var(--ink-muted);font-weight:500}
+.en-cmp .last{padding-bottom:34px}
+.en-note{margin-top:24px;font-size:14px;font-weight:500;color:var(--ink-muted)}
+.en-rv{opacity:0;transform:translateY(60px);transition:opacity 1s var(--ease-reveal),transform 1s var(--ease-reveal)}
+.en-rv.in{opacity:1;transform:none}
+.en-pad.en-rv{transform:translate(-50%,120px)}
+.en-pad.en-rv.in{transform:translate(-50%,0)}
+@media (max-width:760px){
+  .en-stage{height:290px}
+  .en-pad{width:92vw;bottom:-90px}
+  .en-head{grid-template-columns:1fr;gap:16px}
+  .en-head p{font-size:16px;padding:0}
+  .en-cmp{grid-template-columns:1fr}
+  .en-cmp .en-ch{display:none}
+  .en-cn{display:block}
+  .en-cmp .last{padding:0}
+  .en-row{display:grid;gap:6px;padding:18px 20px;border-top:1px solid var(--line)}
+  .en-cl,.en-cy,.en-cn{padding:0;border:0;font-size:16px;background:none}
+  .en-cl{font-size:14px;color:var(--ink-muted);font-weight:600}
+  .en-cn::before{content:"Ennen: ";font-weight:600}
+  .en-rows{background:var(--surface);border-radius:15px;overflow:hidden}
+  .en-rows .en-row:first-child{border-top:0}
+}
+@media (min-width:761px){ .en-row,.en-rows{display:contents} }
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .en-rv{opacity:1;transform:none}.en-pad.en-rv{transform:translateX(-50%)}
+}
 </style>
 </head>
 <body>
@@ -558,36 +619,54 @@ section[id]{scroll-margin-top:72px}
 </section>
 
 <!-- 2. VERTAUS -->
-<section class="band" id="vertaus">
-  <div class="wrap">
-    <div class="shead">
-      <h2 class="disp m">Ennen ja nyt</h2>
-      <p class="sub">Sama työ, murto-osa vaivasta.</p>
-    </div>
-    <div class="cmp">
-      <div class="col">
-        <h3>Ennen</h3>
-        <ul>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></span>Varaukset vihossa tai Excelissä</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></span>Tilitykset käsin, yksi kerrallaan</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></span>Erillinen kassa, varausohjelma ja Excel</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></span>Hinta arvataan käsin</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></span>Tuotteet kuvataan erikseen nettiin</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></span>Kassaa pääsee katsomaan vain kassalta</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></span>Virheen korjaus vaatii soiton tukeen</li>
-        </ul>
+<section class="en band-en" id="vertaus" aria-labelledby="en-title">
+  <div class="en-stage">
+    <!-- pädi -->
+    <div class="en-pad en-rv" aria-hidden="true">
+      <div class="en-screen">
+        <div class="enu-main">
+          <div class="enu-top"><img src="assets/logot/ReSella_1_paalogo_vaaka_ruskea.svg" alt=""><span>Tänään, Kirppis Kontula</span></div>
+          <div class="enu-h">Hyvää huomenta</div>
+          <div class="enu-stats">
+            <div class="enu-stat"><small>Myynti tänään</small><b>1 284 €</b></div>
+            <div class="enu-stat"><small>Pöydät käytössä</small><b>87 %</b></div>
+            <div class="enu-stat"><small>Varaukset netistä</small><b>6</b></div>
+          </div>
+          <div class="enu-list">
+            <div class="enu-row"><span class="th" style="background:#C5D0D3"></span><div><b>Villapaita</b><small>Pöytä 14</small></div><span class="p">12,00 €</span></div>
+            <div class="enu-row"><span class="th" style="background:#D09C4C"></span><div><b>Nahkatakki</b><small>Pöytä 3</small></div><span class="p">35,00 €</span></div>
+            <div class="enu-row"><span class="th" style="background:#DCDBC6"></span><div><b>Kirja</b><small>Pöytä 9</small></div><span class="p">4,00 €</span></div>
+          </div>
+        </div>
+        <div class="enu-side">
+          <small>Tilitettävää</small>
+          <div class="enu-big">3 420 €</div>
+          <div class="enu-bar"><i></i></div>
+          <small>48 myyjää</small>
+          <div class="enu-btn">Tilitä kaikki</div>
+        </div>
       </div>
-      <div class="col now">
-        <h3>ReSellalla</h3>
-        <ul>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Myyjä varaa ja maksaa pöydän itse verkossa</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Kaikki tilitykset yhdellä tiedostolla verkkopankkiin</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Kassa, varaukset, myyjät ja raportit yhdessä</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Hintaehdotus kuvasta</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Kassalla hinnoiteltu tuote on jo verkossa</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Kaikki näkyy puhelimesta, missä tahansa</li>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Korjaat ja perut itse kassalla</li>
-        </ul>
+    </div>
+  </div>
+
+  <div class="en-body">
+    <div class="en-head">
+      <h2 id="en-title" class="en-rv">Ennen ja nyt</h2>
+      <p class="en-rv">Sama työ, murto-osa vaivasta. Näin kirppiksen arki muuttuu, kun kaikki on yhdessä paikassa.</p>
+    </div>
+
+    <div class="en-cmp en-rv" role="table" aria-label="Ennen ja ReSellalla">
+      <div class="en-ch" role="columnheader"></div>
+      <div class="en-ch hl" role="columnheader"><img src="assets/logot/ReSella_1_paalogo_vaaka_ruskea.svg" alt="ReSella"></div>
+      <div class="en-ch mut" role="columnheader">Ennen</div>
+      <div class="en-rows">
+        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Varaukset</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Myyjä varaa ja maksaa pöydän itse verkossa</div><div class="en-cn" role="cell">Vihko tai Excel</div></div>
+        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Tilitykset</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Kaikki yhdellä tiedostolla verkkopankkiin</div><div class="en-cn" role="cell">Käsin, yksi kerrallaan</div></div>
+        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Järjestelmät</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Kassa, varaukset, myyjät ja raportit yhdessä</div><div class="en-cn" role="cell">Erillinen kassa, varausohjelma ja Excel</div></div>
+        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Hinnoittelu</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Hintaehdotus kuvasta</div><div class="en-cn" role="cell">Hinta arvataan käsin</div></div>
+        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Näkyvyys netissä</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Kassalla hinnoiteltu tuote on jo verkossa</div><div class="en-cn" role="cell">Tuotteet kuvataan erikseen nettiin</div></div>
+        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Seuranta</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Kaikki näkyy puhelimesta, missä tahansa</div><div class="en-cn" role="cell">Kassaa pääsee katsomaan vain kassalta</div></div>
+        <div class="en-row" role="en-row"><div class="en-cl last" role="rowheader">Virheet</div><div class="en-cy last" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Korjaat ja perut itse kassalla</div><div class="en-cn last" role="cell">Korjaus vaatii soiton tukeen</div></div>
       </div>
     </div>
   </div>
@@ -962,7 +1041,7 @@ section[id]{scroll-margin-top:72px}
   // scroll reveal (>=980px, ei reduced-motion, ei herossa/footerissa)
   try{
     if(window.innerWidth>=980 && !matchMedia('(prefers-reduced-motion:reduce)').matches){
-      var rsel='.shead,.caro-head,.card,.cmp .col,.dash,.flow .flow-step,.phone-item,.app-note .ap,.nums .n,.tl .node,.tl-extra .e,.tcol,.story>div,.story>img,.acc,.pcard,.ctaband';
+      var rsel='.shead,.caro-head,.card,.dash,.flow .flow-step,.phone-item,.app-note .ap,.nums .n,.tl .node,.tl-extra .e,.tcol,.story>div,.story>img,.acc,.pcard,.ctaband';
       var ritems=Array.prototype.slice.call(document.querySelectorAll(rsel)).filter(function(el){ return !el.closest('.hero') && !el.closest('.foot') && !el.closest('#gm'); });
       var pid=0, pc={};
       ritems.forEach(function(el){
@@ -1102,5 +1181,6 @@ section[id]{scroll-margin-top:72px}
 </script>
 <script src="motion/mascot-scene.js"></script>
 <script src="motion/mascot-follow.js"></script>
+<script>(function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:0,rootMargin:'0px 0px -12% 0px'});document.querySelectorAll('.en-rv').forEach(function(el){io.observe(el)});})();</script>
 </body>
 </html>
