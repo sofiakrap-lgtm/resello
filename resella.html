@@ -226,7 +226,7 @@ section[id]{scroll-margin-top:72px}
 .flow-step p{font-size:16px;color:var(--ink-muted);line-height:1.45}
 /* appi puhelimet */
 .appwrap{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,48px)}
-.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,30px);max-width:720px}
+.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,30px);max-width:720px;width:100%;margin-inline:auto}
 .phone-item{display:flex;flex-direction:column;gap:14px}
 .phone{aspect-ratio:9/15;border-radius:26px;background:#1E1311;padding:5px;position:relative}
 .phone::before{content:"";position:absolute;top:11px;left:50%;transform:translateX(-50%);width:34%;height:8px;border-radius:999px;background:#1E1311;z-index:2}
@@ -241,8 +241,8 @@ section[id]{scroll-margin-top:72px}
 .phscr-ttl{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:11px}
 .ph-cap h4{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:17px;margin-bottom:5px}
 .ph-cap p{font-size:15px;font-weight:500;color:var(--ink-muted);line-height:1.4}
-.app-note{display:flex;flex-direction:column;gap:12px;align-self:center}
-.app-note .ap{display:flex;gap:10px;font-size:15px;align-items:flex-start}
+.app-note{display:flex;flex-direction:column;gap:12px;align-self:center;justify-self:center}
+.app-note .ap{display:flex;gap:10px;font-size:16px;align-items:flex-start}
 .app-note .mk{flex:none;margin-top:2px;color:var(--olive)}
 /* hyodyt luvut */
 .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
@@ -262,12 +262,12 @@ section[id]{scroll-margin-top:72px}
 .tl-extra .mk{flex:none;margin-top:2px;color:var(--olive)}
 /* roadmap / polku */
 .steps{max-width:1160px;margin-inline:auto;display:grid;gap:clamp(22px,3vw,44px);--steps-top:clamp(84px,10vw,110px)}
-.step{position:sticky;top:var(--steps-top);background:var(--surface);border-radius:10px;min-height:clamp(300px,32vw,400px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,360px);gap:clamp(22px,4vw,56px);padding:clamp(28px,4vw,56px);overflow:hidden;transform-origin:50% 0;align-items:center}
+.step{position:sticky;top:var(--steps-top);background:var(--surface);border-radius:10px;min-height:clamp(240px,24vw,320px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,360px);gap:clamp(22px,4vw,56px);padding:clamp(28px,4vw,56px);overflow:hidden;transform-origin:50% 0;align-items:center}
 .step__text{display:flex;flex-direction:column;gap:14px}
 .step h3{font-family:var(--fd);font-weight:600;font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;line-height:1.06;color:var(--ink)}
 .step__text p{font-size:18px;line-height:1.4;color:var(--ink-muted);max-width:30ch}
 .step__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
-.step__list li{position:relative;padding-left:24px;font-size:16px;line-height:1.4;color:var(--ink)}
+.step__list li{position:relative;padding-left:24px;font-size:18px;line-height:1.4;color:var(--ink)}
 .step__list li::before{content:"";position:absolute;left:0;top:7px;width:10px;height:10px;border-radius:999px;background:var(--red)}
 @media(max-width:760px){.step{grid-template-columns:1fr;gap:18px;align-items:start;min-height:0}}
 /* luotettavuus */
@@ -328,7 +328,7 @@ section[id]{scroll-margin-top:72px}
 .pcard.hl .big{font-family:var(--fd);font-weight:600;font-size:clamp(38px,5vw,56px);line-height:1;letter-spacing:-.02em;color:var(--on-red)}
 .pcard.hl .perkk{font-size:16px;font-weight:500;margin-left:6px}
 .pcard.hl .salesline{margin:12px 0 0;font-size:15px;color:rgba(236,236,220,.85);line-height:1.45}
-.pcard.hl .exnote{margin:14px 0 22px;font-size:13px;color:rgba(236,236,220,.7);line-height:1.4}
+.pcard.hl .exnote{margin:14px 0 22px;font-size:14px;color:rgba(236,236,220,.7);line-height:1.4}
 .pcard.hl .btn{margin-top:auto;background:var(--bg);color:var(--ink);border-color:var(--bg);width:100%;min-width:0}
 .pcard.hl .btn:hover{background:var(--blue);color:var(--ink);border-color:var(--blue)}
 .pcard.hl .extag{align-self:flex-start;border:1px solid rgba(236,236,220,.5);color:var(--on-red);margin-bottom:16px}
@@ -377,7 +377,7 @@ section[id]{scroll-margin-top:72px}
 .scene--pop .scene__bg{z-index:1}
 .scene__slot.is-grabbed{cursor:grabbing}
 .scene__slot svg{width:100%;height:100%;overflow:visible}
-.scene__hint{position:absolute;left:50%;top:24px;transform:translateX(-50%);font-size:13px;color:var(--ink-muted);white-space:nowrap;z-index:3}
+.scene__hint{position:absolute;left:50%;top:24px;transform:translateX(-50%);font-size:14px;color:var(--ink-muted);white-space:nowrap;z-index:3}
 /* iso maskotti ennen footeria (mascot-follow.js) */
 .outro{position:relative;height:610px;overflow:hidden;margin-top:120px;background:var(--bg)}
 .outro::after{content:"";position:absolute;left:50%;top:460px;width:max(150vw,1200px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:#3E2520;z-index:0}
@@ -408,7 +408,9 @@ section[id]{scroll-margin-top:72px}
   .grid.c2,.grid.c3,.grid.c4{grid-template-columns:1fr}
   .flow{grid-template-columns:1fr}
   .nums{grid-template-columns:repeat(2,1fr)}
-  .phones{grid-template-columns:1fr;max-width:230px}
+  .phones{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;max-width:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none}
+  .phones::-webkit-scrollbar{display:none}
+  .phone-item{scroll-snap-align:start}
   .tl{grid-template-columns:1fr;row-gap:26px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.hero video{display:none}}
@@ -1054,7 +1056,8 @@ section[id]{scroll-margin-top:72px}
   // evästeilmoitus
   var ck=document.getElementById('cookie'), ok=document.getElementById('cookie-ok');
   var seen=false; try{ seen=localStorage.getItem('rs-cookie')==='1'; }catch(e){}
-  if(!seen){ ck.hidden=false; }
+  // näytetään vasta kun hero on ohitettu osittain, ettei ilmoitus peitä hero-otsikkoa tai CTA:ta
+  if(!seen){ var showCk=function(){ if(scrollY>innerHeight*0.5){ ck.hidden=false; removeEventListener('scroll',showCk); } }; addEventListener('scroll',showCk,{passive:true}); showCk(); }
   ok.addEventListener('click',function(){ ck.hidden=true; try{ localStorage.setItem('rs-cookie','1'); }catch(e){} });
   // karuselli: aareton kierto
   var track=document.getElementById('caroTrack');
