@@ -171,6 +171,14 @@ section[id]{scroll-margin-top:72px}
 .grid.c2{grid-template-columns:repeat(2,1fr)}
 .grid.c3{grid-template-columns:repeat(3,1fr)}
 .grid.c4{grid-template-columns:repeat(4,1fr)}
+/* "nain se toimii" -tyylinen kortti­virta nuolilla */
+.howflow{display:flex;align-items:stretch;gap:0}
+.hcard{flex:1 1 0;min-width:0;background:var(--surface);border-radius:12px;padding:clamp(18px,1.7vw,26px);display:flex;flex-direction:column;gap:9px}
+.hcard h3{font-family:var(--fd);font-weight:600;font-size:clamp(17px,1.4vw,20px);letter-spacing:-.01em;line-height:1.14;margin:0;color:var(--ink)}
+.hcard p{font-size:15px;font-weight:500;line-height:1.4;color:var(--ink-muted);margin:0}
+.howarrow{flex:none;align-self:center;width:38px;height:38px;border-radius:999px;background:var(--ink);color:var(--bg);display:grid;place-items:center;margin:0 clamp(6px,0.8vw,12px)}
+.howarrow svg{width:18px;height:18px}
+@media(max-width:860px){.howflow{flex-direction:column}.hcard{flex:none}.howarrow{margin:clamp(6px,2vw,12px) 0;transform:rotate(90deg)}}
 /* kortit */
 .card{background:var(--surface);border-radius:var(--radius-card);padding:clamp(22px,2.4vw,28px);display:flex;flex-direction:column;gap:9px}
 .card .ic{color:var(--blue-deep);margin-bottom:4px}
@@ -590,9 +598,8 @@ section.en{padding-block:0}
 </section>
 
 <!-- KOHTAUS 1: maskotit vierivat kaareen -->
-<section class="scene scene--roll" data-scene="roll" data-edge="180" data-ctrl="530" aria-hidden="true">
+<section class="scene scene--roll" data-scene="roll" data-edge="120" data-ctrl="430" aria-hidden="true">
   <svg class="scene__bg" viewBox="0 0 1000 500" preserveAspectRatio="none"><path class="scene__ground" d=""/></svg>
-  <span class="scene__hint">Tartu muotoon ja heitä se</span>
   <div class="scene__slot" data-m="tyyny" data-c="#C24029"></div>
   <div class="scene__slot" data-m="apila" data-c="#C5D0D3"></div>
 </section>
@@ -604,13 +611,18 @@ section.en{padding-block:0}
       <h2 class="disp m">Tuttu arki?</h2>
       <p class="sub">Kirppiksen pyörittäminen vie aikaa, jonka voisi käyttää myymiseen.</p>
     </div>
-    <div class="grid c3">
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v5M12 16.5v.5"/><path d="M4 19 12 4l8 15z"/></svg></span><h3>Kassa kaatuu kiireellä</h3><p>Vanha ohjelma jumittaa, ja tuki vastaa, jos vastaa.</p></div>
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/><path d="m16 16 4 4M20 16l-4 4"/></svg></span><h3>Virhettä ei saa korjattua</h3><p>Väärin lyöty tuote tai peruttu osto vaatii soiton ohjelman tekijälle.</p></div>
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg></span><h3>Tilitykset vievät illan</h3><p>Myyjien rahat lasketaan ja maksetaan yksitellen.</p></div>
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><path d="m4 20 16-16"/></svg></span><h3>Tuotteet eivät näy netissä</h3><p>Kuvaaminen vie niin paljon aikaa, että sen tekee vain kalleimmille tuotteille.</p></div>
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4.5 4.5"/></svg></span><h3>Nuoret ostajat etsivät netistä</h3><p>Hyvät löydöt jäävät hyllyyn, koska kukaan ei tiedä niistä.</p></div>
-      <div class="card"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3"/><rect x="5" y="11" width="14" height="9" rx="2"/></svg></span><h3>Hinnat menevät alakanttiin</h3><p>Merkkitakki lähtee pilkkahinnalla, vaikka siitä saisi moninkertaisesti.</p></div>
+    <div class="howflow">
+      <div class="hcard"><h3>Kassa kaatuu kiireellä</h3><p>Vanha ohjelma jumittaa, ja tuki vastaa, jos vastaa.</p></div>
+      <span class="howarrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
+      <div class="hcard"><h3>Virhettä ei saa korjattua</h3><p>Väärin lyöty tuote vaatii soiton ohjelman tekijälle.</p></div>
+      <span class="howarrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
+      <div class="hcard"><h3>Tilitykset vievät illan</h3><p>Myyjien rahat lasketaan ja maksetaan yksitellen.</p></div>
+      <span class="howarrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
+      <div class="hcard"><h3>Tuotteet eivät näy netissä</h3><p>Kuvaaminen vie aikaa, joten sen tekee vain kalleimmille.</p></div>
+      <span class="howarrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
+      <div class="hcard"><h3>Nuoret ostajat etsivät netistä</h3><p>Hyvät löydöt jäävät hyllyyn, koska kukaan ei tiedä niistä.</p></div>
+      <span class="howarrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
+      <div class="hcard"><h3>Hinnat menevät alakanttiin</h3><p>Merkkitakki lähtee pilkkahinnalla, vaikka siitä saisi enemmän.</p></div>
     </div>
   </div>
 </section>
