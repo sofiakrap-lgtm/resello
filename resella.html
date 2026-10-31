@@ -366,13 +366,8 @@ section[id]{scroll-margin-top:72px}
 .scene__slot.is-grabbed{cursor:grabbing}
 .scene__slot svg{width:100%;height:100%;overflow:visible}
 .scene__hint{position:absolute;left:50%;top:24px;transform:translateX(-50%);font-size:14px;color:var(--ink-muted);white-space:nowrap;z-index:3}
-/* iso maskotti ennen footeria (mascot-follow.js) */
-.outro{position:relative;height:610px;overflow:hidden;margin-top:120px;background:var(--bg)}
-.outro::after{content:"";position:absolute;left:50%;top:460px;width:max(150vw,1200px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:#3E2520;z-index:0}
-.outro .mascot{position:absolute;left:50%;top:210px;width:280px;margin-left:-140px;z-index:1}
-.outro .mascot svg{width:280px;height:280px;overflow:visible;display:block}
 @media(max-width:1200px){.scene--roll{height:440px}}
-@media(max-width:640px){.scene__hint{top:12px}.scene--roll{height:360px}.scene--pop{height:420px}.outro{height:460px}.outro::after{top:340px}.outro .mascot{top:130px;width:200px;margin-left:-100px}.outro .mascot svg{width:200px;height:200px}}
+@media(max-width:640px){.scene__hint{top:12px}.scene--roll{height:360px}.scene--pop{height:420px}}
 
 @media(max-width:880px){
   .grid.c3,.grid.c4{grid-template-columns:repeat(2,1fr)}
@@ -976,11 +971,6 @@ section.en{padding-block:0}
   </div>
 </section>
 
-<!-- ISO MASKOTTI ENNEN FOOTERIA (mascot-follow.js) -->
-<section class="outro" aria-hidden="true">
-  <div class="mascot" data-mascot data-strength="1"><svg viewBox="0 0 100 100"><g data-body><circle cx="27" cy="27" r="27" fill="#C24029"/><circle cx="73" cy="27" r="27" fill="#C24029"/><circle cx="27" cy="73" r="27" fill="#C24029"/><circle cx="73" cy="73" r="27" fill="#C24029"/><rect x="27" y="27" width="46" height="46" fill="#C24029"/></g></svg></div>
-</section>
-
 </main>
 
 <!-- FOOTER -->
@@ -1180,7 +1170,6 @@ section.en{padding-block:0}
 })();
 </script>
 <script src="motion/mascot-scene.js"></script>
-<script src="motion/mascot-follow.js"></script>
 <script>(function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:0,rootMargin:'0px 0px -12% 0px'});document.querySelectorAll('.en-rv').forEach(function(el){io.observe(el)});})();</script>
 </body>
 </html>
