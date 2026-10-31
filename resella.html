@@ -311,9 +311,13 @@ section[id]{scroll-margin-top:72px}
 .pcard.hl{background:var(--red);color:var(--on-red)}
 .pcard.hl h3{color:var(--on-red)}
 .pcard.hl .lead{color:rgba(236,236,220,.8)}
-.price-tog{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 22px}
-.price-tog button{min-height:40px;border:0;border-radius:10px;background:rgba(236,236,220,.18);color:var(--on-red);font:500 14px/1.15 var(--fb);cursor:pointer;padding:6px 8px;transition:background-color var(--dur-fast) var(--ease-std),color var(--dur-fast) var(--ease-std)}
-.price-tog button[aria-pressed="true"],.price-tog button:hover{background:var(--ink);color:var(--bg)}
+.price-field{display:block;margin:0 0 22px}
+.price-lbl{display:block;font-size:14px;font-weight:500;color:rgba(236,236,220,.85);margin-bottom:8px}
+.price-input{display:flex;align-items:center;gap:8px;background:rgba(236,236,220,.14);border-radius:10px;padding:0 14px;height:48px}
+.price-input input{flex:1;min-width:0;width:100%;background:none;border:0;outline:none;color:var(--on-red);font:600 20px/1 var(--fb);letter-spacing:-.01em}
+.price-input input::placeholder{color:rgba(236,236,220,.5)}
+.price-input .suf{font-size:14px;font-weight:500;color:rgba(236,236,220,.8);white-space:nowrap}
+.price-input:focus-within{outline:2px solid var(--on-red);outline-offset:1px}
 .pcard.hl .big{font-family:var(--fd);font-weight:600;font-size:clamp(38px,5vw,56px);line-height:1;letter-spacing:-.02em;color:var(--on-red)}
 .pcard.hl .perkk{font-size:16px;font-weight:500;margin-left:6px}
 .pcard.hl .salesline{margin:12px 0 0;font-size:15px;color:rgba(236,236,220,.85);line-height:1.45}
@@ -909,14 +913,14 @@ section.en{padding-block:0}
   <div class="wrap">
     <div class="shead ctr">
       <h2 class="disp m">Hinta joustaa myynnin mukaan</h2>
-      <p class="sub">Maksat myyntipisteiden verran. Tilitykset ja käyttöönotto sisältyvät. Ei piilokuluja.</p>
+      <p class="sub">Maksu perustuu liikevaihtoon, ei pöytiin tai myyjämäärään. Kolme ensimmäistä kuukautta ilmaiseksi.</p>
     </div>
     <div class="price">
       <div class="pcard">
         <h3>Liikevaihtopohjainen</h3>
         <p class="lead">Yksi malli, joka sopii sekä kyläkirppikselle että isolle hallille. Mitä enemmän myyt, sitä pienempi prosentti.</p>
         <ul>
-          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Käyttöönotto sisältyy hintaan</li>
+          <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Kolme kuukautta ilmaista käyttöaikaa</li>
           <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Myyjäkohtaiset tilitykset sisältyvät</li>
           <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Ei kuukausimaksua, ei piilokuluja</li>
           <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Sama järjestelmä kasvaa mukana</li>
@@ -925,13 +929,11 @@ section.en{padding-block:0}
       </div>
       <div class="pcard hl">
         <h3>Paljonko se maksaisi?</h3>
-        <div class="price-tog" role="group" aria-label="Kirppiksen koko">
-          <button type="button" aria-pressed="true" data-i="0">Pieni</button>
-          <button type="button" aria-pressed="false" data-i="1">Keskikokoinen</button>
-          <button type="button" aria-pressed="false" data-i="2">Iso halli</button>
-        </div>
-        <div><span class="big" id="priceVal">38 €</span><span class="perkk">/ kk</span></div>
-        <p class="salesline" id="priceSales">Kun kassamyynti on noin 3 000 € kuussa, eli noin 1,25 %.</p>
+        <label class="price-field" for="revInput"><span class="price-lbl">Kassamyynti kuukaudessa</span>
+          <span class="price-input"><input type="text" inputmode="numeric" id="revInput" value="10 000" aria-label="Kassamyynti kuukaudessa euroina"><span class="suf">€ / kk</span></span>
+        </label>
+        <div><span class="big" id="priceVal">108 €</span><span class="perkk">/ kk</span></div>
+        <p class="salesline" id="priceSales">Maksu on noin 1,08 % myynnistä. Kolme ensimmäistä kuukautta ovat ilmaisia.</p>
         <p class="exnote">Esimerkkilaskelma. Tarkan hinnan katsomme yhdessä demossa.</p>
         <a class="btn" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a>
       </div>
@@ -1104,23 +1106,26 @@ section.en{padding-block:0}
     rot.addEventListener('touchend',function(e){ if(rsx==null)return; var dx=e.changedTouches[0].clientX-rsx; if(Math.abs(dx)>40) rgo(dx<0?1:-1); rsx=null; });
     rlayout();
   }
-  // hinnoittelu: kirppiksen koko vaihtaa esimerkkihinnan
-  var pdata=[
-    {v:'38 €', s:'Kun kassamyynti on noin 3 000 € kuussa, eli noin 1,25 %.'},
-    {v:'78 €', s:'Kun kassamyynti on noin 12 000 € kuussa, eli noin 0,65 %.'},
-    {v:'135 €', s:'Kun kassamyynti on noin 45 000 € kuussa, eli noin 0,30 %.'}
-  ];
-  var pVal=document.getElementById('priceVal'), pSales=document.getElementById('priceSales');
-  var pTog=document.querySelectorAll('.price-tog button');
-  if(pVal&&pTog.length){
-    Array.prototype.slice.call(pTog).forEach(function(btn){
-      btn.addEventListener('click',function(){
-        pTog.forEach(function(b){ b.setAttribute('aria-pressed','false'); });
-        btn.setAttribute('aria-pressed','true');
-        var d=pdata[parseInt(btn.getAttribute('data-i'),10)];
-        pVal.textContent=d.v; pSales.textContent=d.s;
-      });
-    });
+  // hinnoittelu: liikevaihtopohjainen laskuri, kayttaja syottaa oman myynnin
+  var pVal=document.getElementById('priceVal'), pSales=document.getElementById('priceSales'), revInput=document.getElementById('revInput');
+  if(pVal&&revInput){
+    function fmt(n){ return Math.round(n).toLocaleString('fi-FI'); }
+    function pct(r){ // prosentti laskee 1,25 %:sta 0,25 %:iin myynnin kasvaessa
+      var lo=3000, hi=45000, pLo=1.25, pHi=0.25;
+      var t=Math.max(0,Math.min(1,(r-lo)/(hi-lo)));
+      return pLo+(pHi-pLo)*t;
+    }
+    function update(){
+      var r=parseFloat((revInput.value||'').replace(/[^\d]/g,''))||0;
+      var p=pct(r), price=r*p/100;
+      pVal.textContent=fmt(price)+' €';
+      pSales.textContent=r>0
+        ? 'Maksu on noin '+p.toFixed(2).replace('.',',')+' % myynnistä. Kolme ensimmäistä kuukautta ovat ilmaisia.'
+        : 'Syötä kuukausimyynti, niin näet arvion. Kolme ensimmäistä kuukautta ovat ilmaisia.';
+    }
+    revInput.addEventListener('input',update);
+    revInput.addEventListener('blur',function(){ var r=parseFloat((revInput.value||'').replace(/[^\d]/g,'')); if(r>0) revInput.value=fmt(r); });
+    update();
   }
   // evästeilmoitus
   var ck=document.getElementById('cookie'), ok=document.getElementById('cookie-ok');
