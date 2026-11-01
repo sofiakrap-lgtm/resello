@@ -135,7 +135,7 @@ section[id]{scroll-margin-top:72px}
 .hero-title .disp{display:block;color:var(--bg);font-size:clamp(24px,6.5vw,60px);white-space:nowrap}
 .hero-right{display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:18px;max-width:42ch}
 .hero-right .lead{font-size:clamp(15px,2vw,18px);color:rgb(236 236 220 / .92)}
-.hero-cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.hero-cta{display:flex;gap:10px;flex-wrap:nowrap;justify-content:flex-end}
 .hero-cta .btn{background:var(--bg);color:var(--ink)}
 .hero-cta .btn:hover{background:#fff}
 .hero-cta .btn.out{background:transparent;color:var(--bg);border-color:rgb(236 236 220 / .6)}
@@ -393,7 +393,7 @@ section[id]{scroll-margin-top:72px}
   .hero-row{flex-direction:column;align-items:flex-start;gap:26px}
   .hero-title{margin-bottom:0}
   .hero-right{align-items:flex-start;text-align:left;max-width:none}
-  .hero-cta{justify-content:flex-start}
+  .hero-cta{justify-content:flex-start;flex-wrap:wrap}
   .foot-top{flex-direction:column;gap:28px}
   .foot-cols{gap:48px}
   .foot .wordmark{width:calc((100% - 32px) * 0.72);margin-top:16px;margin-bottom:8px}
@@ -494,7 +494,6 @@ section.en{padding-block:0}
     <div class="gm-bar">
       <a class="gm-pill-logo" href="#top" aria-label="ReSella"><img class="lr" src="assets/ikoni/ReSella_silmapari_ruskea.svg" alt="ReSella"><img class="lb" src="assets/ikoni/ReSella_silmapari_beige.svg" alt="ReSella"></a>
       <button class="gm-burger" id="gmBurger" aria-label="Avaa valikko" aria-expanded="false"><span></span><span></span></button>
-      <a class="gm-login" href="#varaa">Kirjaudu</a>
       <a class="gm-cta" href="#varaa">Varaa demo</a>
     </div>
     <div class="gm-menu" id="gmMenu">
