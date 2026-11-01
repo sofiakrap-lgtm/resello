@@ -280,12 +280,15 @@ section[id]{scroll-margin-top:72px}
 .tlist .mk{color:var(--olive);flex:none;margin-top:2px}
 .tlist .mk .ico{width:16px;height:16px}
 /* tarina */
-.story{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:center}
-.story img{border-radius:var(--radius-card);width:100%;max-height:440px;object-fit:cover}
-.bios{display:flex;flex-direction:column;gap:18px;margin-top:22px}
-.bio b{font-weight:500;display:block;margin-bottom:3px}
+.story-bg{position:relative;overflow:hidden}
+.story-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.story-scrim{position:absolute;inset:0;background:rgba(236,236,220,.8);z-index:1}
+.story-content{position:relative;z-index:2;max-width:760px;margin-inline:auto;text-align:center}
+.bios{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px);margin-top:clamp(26px,3.4vw,44px);text-align:left}
+.bio b{font-weight:600;display:block;margin-bottom:3px}
 .bio p{font-size:15px;font-weight:500;color:var(--ink-muted);line-height:1.5}
-.story .note{margin-top:18px;font-size:14px;color:var(--ink-muted)}
+.story-content .note{margin-top:clamp(18px,2.4vw,28px);font-size:15px;font-weight:500;color:var(--ink-muted)}
+@media(max-width:640px){.bios{grid-template-columns:1fr;gap:18px;text-align:center}}
 /* cta band */
 .ctaband{background:var(--bg);color:var(--ink);border-radius:var(--radius-card);padding:clamp(40px,6vw,76px) clamp(24px,4vw,56px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
 .ctaband .disp{color:var(--ink)}
@@ -850,22 +853,19 @@ section.en{padding-block:0}
 </section>
 
 <!-- 10. TARINA -->
-<section class="band" id="tarina">
-  <div class="wrap">
-    <div class="story">
-      <div>
-        <div class="shead left">
-          <h2 class="disp m">Kirppikseltä koodiin</h2>
-          <p class="sub">Tunnemme alan, koska olemme tehneet sitä.</p>
-        </div>
-        <div class="bios">
-          <div class="bio"><b>Sofia</b><p>Yli 10 vuotta kirpputori- ja vintagealalla, oma liike 18-vuotiaana ja hinnoittelija itsepalvelukirpputorilla.</p></div>
-          <div class="bio"><b>Leon</b><p>Kuusi vuotta ohjelmistokehitystä, muun muassa konsulttina Veikkauksella.</p></div>
-        </div>
-        <p class="note">Haastattelimme kymmeniä kirppisyrittäjiä ennen ensimmäistä koodiriviä.</p>
-      </div>
-      <img src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Itsepalvelukirpputorin myymälä, vaaterekkejä ja pöytiä" loading="lazy">
+<section class="band story-bg" id="tarina">
+  <img class="story-img" src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Itsepalvelukirpputorin myymälä, vaaterekkejä ja pöytiä" loading="lazy">
+  <div class="story-scrim" aria-hidden="true"></div>
+  <div class="wrap story-content">
+    <div class="shead ctr">
+      <h2 class="disp m">Kirppikseltä koodiin</h2>
+      <p class="sub">Tunnemme alan, koska olemme tehneet sitä.</p>
     </div>
+    <div class="bios">
+      <div class="bio"><b>Sofia</b><p>Yli 10 vuotta kirpputori- ja vintagealalla, oma liike 18-vuotiaana ja hinnoittelija itsepalvelukirpputorilla.</p></div>
+      <div class="bio"><b>Leon</b><p>Kuusi vuotta ohjelmistokehitystä, muun muassa konsulttina Veikkauksella.</p></div>
+    </div>
+    <p class="note">Haastattelimme kymmeniä kirppisyrittäjiä ennen ensimmäistä koodiriviä.</p>
   </div>
 </section>
 
@@ -1045,7 +1045,7 @@ section.en{padding-block:0}
   // scroll reveal (>=980px, ei reduced-motion, ei herossa/footerissa)
   try{
     if(window.innerWidth>=980 && !matchMedia('(prefers-reduced-motion:reduce)').matches){
-      var rsel='.shead,.caro-head,.card,.dash,.flow .flow-step,.phone-item,.app-note .ap,.nums .n,.tl .node,.tl-extra .e,.tcol,.story>div,.story>img,.acc,.pcard,.ctaband';
+      var rsel='.shead,.caro-head,.card,.dash,.flow .flow-step,.phone-item,.app-note .ap,.nums .n,.tl .node,.tl-extra .e,.tcol,.story-content,.acc,.pcard,.ctaband';
       var ritems=Array.prototype.slice.call(document.querySelectorAll(rsel)).filter(function(el){ return !el.closest('.hero') && !el.closest('.foot') && !el.closest('#gm'); });
       var pid=0, pc={};
       ritems.forEach(function(el){
