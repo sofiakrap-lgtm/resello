@@ -355,13 +355,13 @@ section[id]{scroll-margin-top:72px}
 @media(max-width:720px){.price{grid-template-columns:1fr}}
 /* asiakastarinoiden kaarikaruselli */
 .rotary{margin-top:clamp(32px,4vw,56px);position:relative;overflow:hidden;padding-block:clamp(40px,6vw,80px)}
-.rotary-stage{position:relative;height:clamp(400px,44vw,500px);margin-inline:auto}
-.rcard{position:absolute;left:50%;top:0;width:clamp(260px,29vw,350px);height:clamp(400px,44vw,500px);margin-left:calc(clamp(260px,29vw,350px) / -2);background:var(--cb);color:var(--ci);border-radius:24px;overflow:hidden;transform-origin:50% 50%;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s var(--ease-std);display:flex;flex-direction:column;will-change:transform,opacity;box-shadow:0 26px 64px rgba(62,37,32,.24)}
-.rc-media{flex:none;height:50%;overflow:hidden}
+.rotary-stage{position:relative;height:clamp(380px,39vw,450px);margin-inline:auto}
+.rcard{position:absolute;left:50%;top:0;width:clamp(260px,29vw,350px);height:clamp(380px,39vw,450px);margin-left:calc(clamp(260px,29vw,350px) / -2);background:var(--cb);color:var(--ci);border-radius:24px;overflow:hidden;transform-origin:50% 50%;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s var(--ease-std);display:flex;flex-direction:column;will-change:transform,opacity;box-shadow:0 26px 64px rgba(62,37,32,.24)}
+.rc-media{flex:none;height:55%;overflow:hidden}
 .rc-media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-.rc-body{flex:1 1 auto;height:50%;display:flex;flex-direction:column;gap:7px;padding:clamp(18px,2vw,26px);justify-content:flex-start}
-.rc-body h3{font-family:var(--fd);font-weight:600;font-size:clamp(21px,2.1vw,26px);letter-spacing:-.01em;line-height:1.08;margin:0;color:var(--ci)}
-.rc-body p{font-size:15px;font-weight:500;line-height:1.38;color:var(--ci);opacity:.78;margin:0}
+.rc-body{flex:1 1 auto;height:45%;display:flex;flex-direction:column;gap:8px;padding:clamp(18px,1.9vw,24px);justify-content:flex-start}
+.rc-body h3{font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,24px);letter-spacing:-.01em;line-height:1.08;margin:0;color:var(--ci)}
+.rc-body p{font-size:15px;font-weight:500;line-height:1.46;color:var(--ci);opacity:.8;margin:0}
 .rc-btn{margin-top:auto;text-align:center;background:var(--ci);color:var(--cb);border-radius:999px;padding:13px 20px;font:600 15px/1 var(--fb);text-decoration:none;transition:opacity var(--dur-fast) var(--ease-out)}
 .rc-btn:hover{opacity:.88}
 .rot-head{margin-bottom:clamp(40px,6vw,86px)}
@@ -724,11 +724,6 @@ section.en{padding-block:0}
 <!-- 10. TARINA -->
 <section class="band story-bg" id="tarina">
   <img class="story-img" src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Itsepalvelukirpputorin myymälä, vaaterekkejä ja pöytiä" loading="lazy">
-  <div class="wrap story-content">
-    <div class="shead ctr">
-      <h2 class="disp m">Kirppikseltä koodiin</h2>
-    </div>
-  </div>
 </section>
 
 <!-- ASIAKASTARINAT (kaarikaruselli) -->
@@ -742,42 +737,42 @@ section.en{padding-block:0}
     <div class="rotary-stage">
       <article class="rcard" style="--cb:#C5D0D3;--ci:#3E2520">
         <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/01_kassa_tiski_tabletti.jpg" alt="Kassa tabletilla myyntitiskillä" loading="lazy"></div>
-        <div class="rc-body"><h3>Kassa</h3><p>Myynti, viivakoodi ja maksu samalla näytöllä.</p></div>
+        <div class="rc-body"><h3>Kassa</h3><p>Piippaa, maksa ja valmis. Myynti, viivakoodi ja maksu samalla näytöllä, myös ilman nettiä.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#3E2520;--ci:#ECECDC">
         <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/10_kuitti_tulostuu.jpg" alt="Kuitti tulostuu kassalta" loading="lazy"></div>
-        <div class="rc-body"><h3>Tilitykset</h3><p>Myyjien rahat lähtevät yhdellä pankkitiedostolla.</p></div>
+        <div class="rc-body"><h3>Tilitykset</h3><p>Myyjien rahat lähtevät yhdellä pankkitiedostolla. Kuitti tulostuu tai lähtee sähköpostiin.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#D09C4C;--ci:#3E2520">
         <div class="rc-media"><img src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Myymälän rekkejä ja pöytiä" loading="lazy"></div>
-        <div class="rc-body"><h3>Pöytävaraukset</h3><p>Myyjä varaa ja maksaa paikkansa verkossa.</p></div>
+        <div class="rc-body"><h3>Pöytävaraukset</h3><p>Myyjä varaa ja maksaa pöytänsä verkossa. Näet vapaat paikat ja rekit yhdellä silmäyksellä.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#C24029;--ci:#ECECDC">
         <div class="rc-media"><img src="assets/kuvat/04_loydot_tuotteet/01_takki_esittely.jpg" alt="Takki esillä verkkokatalogissa" loading="lazy"></div>
-        <div class="rc-body"><h3>Näkyvyys verkossa</h3><p>Hyllysi tuotteet löytyvät ostajan puhelimesta.</p></div>
+        <div class="rc-body"><h3>Näkyvyys verkossa</h3><p>Kassalla hinnoiteltu tuote näkyy heti ostajalle verkossa, kuvan kanssa.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#3A4961;--ci:#ECECDC">
         <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/07_hintalappu_neule.jpg" alt="Hintalappu neuleessa" loading="lazy"></div>
-        <div class="rc-body"><h3>Hinnoittelu</h3><p>Hintaehdotus kuvasta ja hintalaput samalla.</p></div>
+        <div class="rc-body"><h3>Hinnoittelu</h3><p>Hintaehdotus suoraan kuvasta ja hintalaput tulostuvat samalla.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#C5D0D3;--ci:#3E2520">
         <div class="rc-media"><img src="assets/kuvat/04_loydot_tuotteet/05_myyja_kuvaa_puhelimella.jpg" alt="Myyjä kuvaa tuotetta puhelimella" loading="lazy"></div>
-        <div class="rc-body"><h3>Myyjänäkymä</h3><p>Myyjä seuraa myyntiään reaaliajassa puhelimesta.</p></div>
+        <div class="rc-body"><h3>Myyjänäkymä</h3><p>Myyjä lisää tuotteet ja seuraa myyntiään suoraan puhelimesta.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#D09C4C;--ci:#3E2520">
         <div class="rc-media"><img src="assets/kuvat/01_kirppis_tila/03_hylly_laukut_varikas.jpg" alt="Värikäs hylly laukkuja" loading="lazy"></div>
-        <div class="rc-body"><h3>Oma ilme</h3><p>Varaussivu omalla logollasi ja väreilläsi.</p></div>
+        <div class="rc-body"><h3>Oma ilme</h3><p>Myymäläsi värit ja tyyli näkyvät myös varaussivulla ja verkkonäkymässä.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#C24029;--ci:#ECECDC">
         <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/14_laitteet_ylhaalta.jpg" alt="Kassalaitteet ylhäältä" loading="lazy"></div>
-        <div class="rc-body"><h3>Raportointi</h3><p>Käyttöaste ja myynti pysyvät ajan tasalla.</p></div>
+        <div class="rc-body"><h3>Raportointi</h3><p>Myynti, provisiot ja käyttöaste pysyvät ajan tasalla reaaliajassa.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
     </div>
