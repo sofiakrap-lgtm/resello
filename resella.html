@@ -261,7 +261,7 @@ section[id]{scroll-margin-top:72px}
 .tl-extra .mk{flex:none;margin-top:2px;color:var(--olive)}
 /* roadmap / polku */
 .steps{max-width:1160px;margin-inline:auto;display:grid;gap:clamp(22px,3vw,44px);--steps-top:clamp(84px,10vw,110px)}
-.step{position:sticky;top:var(--steps-top);background:var(--surface);border-radius:10px;min-height:clamp(240px,24vw,320px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,360px);gap:clamp(22px,4vw,56px);padding:clamp(28px,4vw,56px);overflow:hidden;transform-origin:50% 0;align-items:center}
+.step{position:sticky;top:var(--steps-top);background:#54382F;border:1px solid rgba(236,236,220,.14);border-radius:10px;min-height:clamp(240px,24vw,320px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,360px);gap:clamp(22px,4vw,56px);padding:clamp(28px,4vw,56px);overflow:hidden;transform-origin:50% 0;align-items:center;box-shadow:0 20px 54px rgba(0,0,0,.3)}
 .step__text{display:flex;flex-direction:column;gap:14px}
 .step h3{font-family:var(--fd);font-weight:600;font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;line-height:1.06;color:var(--ink)}
 .step__text p{font-size:18px;line-height:1.4;color:var(--ink-muted);max-width:30ch}
@@ -1193,25 +1193,26 @@ section.en{padding-block:0}
 </script>
 <script src="motion/mascot-scene.js"></script>
 <script>
-/* roll-kohtauksen kaari joustaa hieman scrollatessa (koko kohtaus skaalautuu pohjasta,
-   joten muodot ja kaari pysyvat kohdakkain). reduced motion: ei liiketta. */
+/* roll-kohtauksen kaari: reunat nousevat hieman kerran kun osio tulee nakyviin,
+   keskikohta pysyy paikallaan. reduced motion: ei liiketta. */
 (function(){
   var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
-  if(reduce) return;
   var roll=document.querySelector('.scene--roll'); if(!roll) return;
-  roll.style.transformOrigin='50% 100%'; roll.style.willChange='transform';
-  var lastY=scrollY, cur=0, vel=0, impulse=0;
-  addEventListener('scroll',function(){ var y=scrollY, d=y-lastY; lastY=y;
-    var r=roll.getBoundingClientRect();
-    if(r.bottom>0 && r.top<innerHeight){ impulse+=d*0.00035; if(impulse>0.045)impulse=0.045; if(impulse<-0.045)impulse=-0.045; }
-  },{passive:true});
-  function loop(){
-    var r=roll.getBoundingClientRect(), on=r.bottom>-100 && r.top<innerHeight+100;
-    if(on){ impulse*=0.86; vel+=(impulse-cur)*0.18; vel*=0.82; cur+=vel;
-      roll.style.transform='scaleY('+(1+cur).toFixed(4)+')'; }
-    requestAnimationFrame(loop);
+  var path=roll.querySelector('.scene__ground'); if(!path) return;
+  var edge=+roll.dataset.edge||120, qy=+roll.dataset.ctrl||430, RISE=46;
+  function setEdge(e){ path.setAttribute('d','M0 '+e.toFixed(1)+' Q500 '+qy+' 1000 '+e.toFixed(1)+' L1000 500 L0 500 Z'); }
+  if(reduce){ setEdge(edge); return; }
+  // alkutila: reunat hieman alempana (loivempi kaari); nousevat kerran kohtaukseen tultaessa
+  setEdge(edge+RISE);
+  var done=false;
+  function run(){ if(done) return; done=true;
+    var start=null, from=edge+RISE, to=edge, dur=780;
+    function tick(now){ if(start==null) start=now; var t=Math.min(1,(now-start)/dur);
+      var e2=1-Math.pow(1-t,3); setEdge(from+(to-from)*e2); if(t<1) requestAnimationFrame(tick); }
+    requestAnimationFrame(tick);
   }
-  requestAnimationFrame(loop);
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ run(); io.disconnect(); } }); },{threshold:0.22});
+  io.observe(roll);
 })();
 </script>
 <script>(function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:0,rootMargin:'0px 0px -12% 0px'});document.querySelectorAll('.en-rv').forEach(function(el){io.observe(el)});})();</script>
