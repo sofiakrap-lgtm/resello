@@ -611,6 +611,31 @@ section.fd{background:var(--blue)}
 .fd-swap.out{opacity:0}
 @media(max-width:860px){.fd-grid{grid-template-columns:1fr}.fd-quote{min-height:380px}.fd-table{margin-top:150px}}
 @media(prefers-reduced-motion:reduce){.fd *{transition:none!important}}
+
+/* ===== videopaneelit: avautuva paneeli, hover avaa, muuten video loppuun ja seuraava ===== */
+.vp{padding-block:clamp(56px,7vw,100px)}
+.vp-row{display:flex;gap:14px;height:clamp(460px,42vw,600px)}
+.vp-p{position:relative;flex:0 0 clamp(96px,10vw,150px);border-radius:var(--radius-lg);overflow:hidden;background:var(--ink);cursor:pointer;transition:flex-basis 700ms cubic-bezier(.2,0,0,1),flex-grow 700ms cubic-bezier(.2,0,0,1)}
+.vp-p.on{flex:1 1 auto;cursor:default}
+.vp-p video,.vp-p img.ps{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vp-p::after{content:"";position:absolute;inset:0;background:rgb(62 37 32 / .28);transition:opacity 460ms cubic-bezier(0,0,.2,1);pointer-events:none}
+.vp-p.on::after{opacity:.35}
+.vp-body{position:absolute;left:clamp(20px,2.4vw,36px);top:clamp(20px,2.4vw,36px);right:clamp(20px,2.4vw,36px);z-index:2;color:var(--bg);max-width:30ch;opacity:0;transform:translateY(10px);transition:opacity 460ms cubic-bezier(0,0,.2,1),transform 460ms cubic-bezier(0,0,.2,1)}
+.vp-p.on .vp-body{opacity:1;transform:none;transition-delay:260ms}
+.vp-body h3{font-family:var(--fd);font-weight:600;font-size:clamp(28px,3vw,44px);letter-spacing:-.02em;line-height:1;margin:0 0 12px}
+.vp-body p{margin:0;font-size:16px;line-height:1.4;font-weight:500}
+.vp-lab{position:absolute;left:clamp(18px,2vw,28px);bottom:clamp(20px,2.4vw,32px);z-index:2;color:var(--bg);font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,28px);letter-spacing:-.01em;white-space:nowrap;writing-mode:vertical-rl;transform:rotate(180deg);transition:opacity 260ms cubic-bezier(0,0,.2,1)}
+.vp-p.on .vp-lab{opacity:0}
+.vp-bar{position:absolute;left:clamp(20px,2.4vw,36px);right:clamp(20px,2.4vw,36px);bottom:clamp(20px,2.4vw,32px);height:3px;border-radius:3px;background:rgb(236 236 220 / .3);z-index:2;opacity:0;transition:opacity 260ms}
+.vp-bar i{display:block;height:100%;width:0;border-radius:inherit;background:var(--bg)}
+.vp-p.on .vp-bar{opacity:1}
+@media(max-width:760px){
+  .vp-row{flex-direction:column;height:auto}
+  .vp-p{flex:0 0 72px;transition:flex-basis 600ms cubic-bezier(.2,0,0,1)}
+  .vp-p.on{flex:0 0 420px}
+  .vp-lab{writing-mode:horizontal-tb;transform:none;left:20px;bottom:auto;top:22px}
+}
+@media(prefers-reduced-motion:reduce){.vp-p,.vp-body,.vp-lab{transition:none}}
 </style>
 </head>
 <body>
@@ -665,6 +690,29 @@ section.fd{background:var(--blue)}
 </section>
 
 <main id="sisalto">
+
+<!-- VIDEOPANEELIT -->
+<section class="band vp" id="videot">
+  <div class="wrap">
+    <div class="vp-row" id="vpRow">
+      <article class="vp-p on" data-i="0">
+        <video muted playsinline preload="metadata" poster="assets/video/04_hero_poster.jpg"><source src="assets/video/04_hero.mp4" type="video/mp4"></video>
+        <div class="vp-body"><h3>Kirppiksen omistaja</h3><p>Kassa, varaukset ja tilitykset yhdessä paikassa.</p></div>
+        <span class="vp-lab">Omistaja</span><span class="vp-bar"><i></i></span>
+      </article>
+      <article class="vp-p" data-i="1">
+        <video muted playsinline preload="metadata" poster="assets/video/04_hero_poster.jpg"><source src="assets/video/04_hero.mp4" type="video/mp4"></video>
+        <div class="vp-body"><h3>Myyjä</h3><p>Varaa pöytä, hinnoittele puhelimella ja seuraa myyntiäsi.</p></div>
+        <span class="vp-lab">Myyjä</span><span class="vp-bar"><i></i></span>
+      </article>
+      <article class="vp-p" data-i="2">
+        <video muted playsinline preload="metadata" poster="assets/video/04_hero_poster.jpg"><source src="assets/video/04_hero.mp4" type="video/mp4"></video>
+        <div class="vp-body"><h3>Ostaja</h3><p>Näe kirppisten hyllyt netissä ja varaa löytösi.</p></div>
+        <span class="vp-lab">Ostaja</span><span class="vp-bar"><i></i></span>
+      </article>
+    </div>
+  </div>
+</section>
 
 <!-- KARUSELLI (ominaisuudet) -->
 <section class="band" id="ominaisuudet">
@@ -1267,6 +1315,26 @@ section.fd{background:var(--blue)}
   function fit(){ if(innerWidth<=860){ st.style.height=''; inn.style.transform=''; return; }
     var k=st.clientWidth/1440; inn.style.transform='scale('+k+')'; st.style.height=(1055*k)+'px'; }
   fit(); addEventListener('resize',fit); if(window.ResizeObserver) new ResizeObserver(fit).observe(st);
+})();
+</script>
+<script>
+/* videopaneelit: hover avaa paneelin, muuten video toistuu loppuun ja seuraava avautuu */
+(function(){
+  var row=document.getElementById('vpRow'); if(!row) return;
+  var ps=[].slice.call(row.querySelectorAll('.vp-p')), vs=ps.map(function(p){return p.querySelector('video');}), bars=ps.map(function(p){return p.querySelector('.vp-bar i');});
+  var reduce=false; try{reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;}catch(e){}
+  var cur=0, visible=false, raf=0;
+  function open(i){ if(i===cur && ps[i].classList.contains('on')) return;
+    ps.forEach(function(p,k){ p.classList.toggle('on',k===i); if(k!==i){ vs[k].pause(); } });
+    cur=i; vs[i].currentTime=0; if(visible && !reduce){ var pr=vs[i].play(); if(pr&&pr.catch) pr.catch(function(){}); } }
+  vs.forEach(function(v,i){ v.addEventListener('ended',function(){ if(i===cur) open((cur+1)%ps.length); }); });
+  ps.forEach(function(p,i){
+    p.addEventListener('mouseenter',function(){ if(matchMedia('(hover:hover)').matches) open(i); });
+    p.addEventListener('click',function(){ open(i); });
+  });
+  function tick(){ var v=vs[cur]; if(v.duration) bars[cur].style.width=(v.currentTime/v.duration*100)+'%'; raf=requestAnimationFrame(tick); }
+  if(!reduce){ raf=requestAnimationFrame(tick); }
+  try{ new IntersectionObserver(function(es){ visible=es[0].isIntersecting; var v=vs[cur]; if(visible && !reduce){ var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); } else v.pause(); },{threshold:.35}).observe(row); }catch(e){}
 })();
 </script>
 </body>
