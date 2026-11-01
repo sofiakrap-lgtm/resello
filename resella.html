@@ -843,7 +843,7 @@ section.en{padding-block:0}
 </section>
 
 <!-- KOHTAUS 2: kaksi isoa maskottia ponnahtaa -->
-<section class="scene scene--pop" data-scene="pop" data-edge="300" data-ctrl="690" data-rotate="-14,12" data-zoom="1,1.05" aria-hidden="true">
+<section class="scene scene--pop" data-scene="pop" data-edge="300" data-ctrl="690" data-rotate="-14,12" data-zoom="0.76,0.8" aria-hidden="true">
   <svg class="scene__bg" viewBox="0 0 1000 500" preserveAspectRatio="none"><path class="scene__ground" d=""/></svg>
   <div class="scene__slot" data-m="apila" data-c="#C24029"></div>
   <div class="scene__slot" data-m="tyyny" data-c="#C5D0D3"></div>
@@ -1189,6 +1189,28 @@ section.en{padding-block:0}
 })();
 </script>
 <script src="motion/mascot-scene.js"></script>
+<script>
+/* roll-kohtauksen kaari joustaa hieman scrollatessa (koko kohtaus skaalautuu pohjasta,
+   joten muodot ja kaari pysyvat kohdakkain). reduced motion: ei liiketta. */
+(function(){
+  var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
+  if(reduce) return;
+  var roll=document.querySelector('.scene--roll'); if(!roll) return;
+  roll.style.transformOrigin='50% 100%'; roll.style.willChange='transform';
+  var lastY=scrollY, cur=0, vel=0, impulse=0;
+  addEventListener('scroll',function(){ var y=scrollY, d=y-lastY; lastY=y;
+    var r=roll.getBoundingClientRect();
+    if(r.bottom>0 && r.top<innerHeight){ impulse+=d*0.00035; if(impulse>0.045)impulse=0.045; if(impulse<-0.045)impulse=-0.045; }
+  },{passive:true});
+  function loop(){
+    var r=roll.getBoundingClientRect(), on=r.bottom>-100 && r.top<innerHeight+100;
+    if(on){ impulse*=0.86; vel+=(impulse-cur)*0.18; vel*=0.82; cur+=vel;
+      roll.style.transform='scaleY('+(1+cur).toFixed(4)+')'; }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
 <script>(function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:0,rootMargin:'0px 0px -12% 0px'});document.querySelectorAll('.en-rv').forEach(function(el){io.observe(el)});})();</script>
 </body>
 </html>
