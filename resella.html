@@ -295,12 +295,12 @@ section[id]{scroll-margin-top:72px}
 }
 /* bento: kassatapahtuma (kollaasi: varilliset ruudut, tyyny-kuva, kelluvat kortit) */
 .bento-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto;margin-top:clamp(40px,5vw,72px);border-radius:var(--radius-lg);overflow:hidden}
-.bt-cart{grid-column:1;grid-row:1;background:var(--blue);padding:clamp(40px,5vw,72px) clamp(24px,4vw,64px);display:grid;place-items:center}
-.bento-cart{width:min(100%,400px);background:var(--surface);border-radius:var(--radius-lg);padding:clamp(20px,2.2vw,28px);display:flex;flex-direction:column;gap:14px}
+.bt-cart{grid-column:1;grid-row:1;background:var(--ink);padding:clamp(40px,5vw,72px) clamp(24px,4vw,64px);display:grid;place-items:center}
+.bento-cart{--cp:clamp(20px,2.2vw,28px);width:min(100%,400px);background:var(--surface);border-radius:var(--radius-lg);padding:var(--cp);display:flex;flex-direction:column;gap:14px}
 .bc-top{display:flex;justify-content:space-between;align-items:center;font-size:15px}
 .bc-top b{font-family:var(--fd);font-weight:600;font-size:clamp(18px,1.8vw,22px)}
 .bc-top span{color:var(--ink-muted)}
-.bc-rows{display:flex;flex-direction:column;gap:11px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.bc-rows{display:flex;flex-direction:column;gap:11px;padding:14px var(--cp);margin-inline:calc(var(--cp) * -1);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .bc-row{display:flex;justify-content:space-between;font-size:16px;font-weight:500}
 .bc-total{display:flex;justify-content:space-between;align-items:baseline}
 .bc-total span{font-weight:500}
