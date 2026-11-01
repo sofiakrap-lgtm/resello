@@ -194,9 +194,9 @@ section[id]{scroll-margin-top:72px}
 .caro-nav{display:flex;gap:11px;flex:none;align-items:center}
 .caro-bar{position:relative;width:clamp(68px,8.6vw,120px);height:10px;border-radius:999px;background:rgba(62,37,32,.12);overflow:hidden}
 .caro-bar .fill{position:absolute;left:0;top:0;height:100%;width:0;border-radius:999px;background:rgba(62,37,32,.42)}
-.caro-btn{width:46px;height:46px;border-radius:999px;border:0;display:grid;place-items:center;cursor:pointer;flex:none;background:var(--ink);color:var(--bg);transition:opacity var(--dur-fast) var(--ease-out)}
-.caro-btn:hover{opacity:.82}
-.caro-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.caro-dot{width:10px;height:10px;border-radius:999px;flex:none}
+.caro-dot.on{background:rgba(62,37,32,.42)}
+.caro-dot.off{background:rgba(62,37,32,.12)}
 .caro-track{display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:4px;scrollbar-width:none}
 .caro-track::-webkit-scrollbar{display:none}
 .caro-card{flex:0 0 clamp(190px,18vw,232px);aspect-ratio:3/4;border-radius:var(--radius-card);overflow:hidden;position:relative;display:flex}
@@ -277,7 +277,7 @@ section[id]{scroll-margin-top:72px}
 .tlist .mk{color:var(--olive);flex:none;margin-top:2px}
 .tlist .mk .ico{width:16px;height:16px}
 /* tarina */
-.story-bg{position:relative;z-index:1;overflow:hidden;min-height:clamp(340px,42vw,540px);margin-top:clamp(-360px,-24vw,-190px);display:flex;align-items:center}
+.story-bg{position:relative;overflow:hidden;min-height:clamp(340px,42vw,540px);display:flex;align-items:center}
 .story-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .story-content{position:relative;z-index:2;max-width:760px;margin-inline:auto;text-align:center}
 .story-content .disp{color:#F6F6EE;text-shadow:0 2px 30px rgba(0,0,0,.55),0 1px 4px rgba(0,0,0,.5)}
@@ -354,12 +354,12 @@ section[id]{scroll-margin-top:72px}
 .rotary{margin-top:clamp(32px,4vw,56px);position:relative;overflow:hidden;padding-block:clamp(40px,6vw,80px)}
 .rotary-stage{position:relative;height:clamp(380px,39vw,450px);margin-inline:auto}
 .rcard{position:absolute;left:50%;top:0;width:clamp(260px,29vw,350px);height:clamp(380px,39vw,450px);margin-left:calc(clamp(260px,29vw,350px) / -2);background:var(--cb);color:var(--ci);border-radius:24px;overflow:hidden;transform-origin:50% 50%;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s var(--ease-std);display:flex;flex-direction:column;will-change:transform,opacity;box-shadow:0 26px 64px rgba(62,37,32,.24)}
-.rc-media{flex:1 1 auto;min-height:0;overflow:hidden}
-.rc-media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-.rc-body{flex:none;display:flex;flex-direction:column;gap:9px;padding:clamp(18px,1.9vw,24px);padding-bottom:clamp(30px,3.6vw,48px)}
+.rc-media{flex:1 1 0%;min-height:0;overflow:hidden;position:relative}
+.rc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.rc-body{flex:none;display:flex;flex-direction:column;gap:9px;padding:clamp(18px,1.9vw,24px) clamp(18px,1.9vw,24px) 0}
 .rc-body h3{font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,24px);letter-spacing:-.01em;line-height:1.08;margin:0;color:var(--ci)}
 .rc-body p{font-size:15px;font-weight:500;line-height:1.46;color:var(--ci);opacity:.8;margin:0}
-.rc-btn{margin-top:clamp(12px,1.5vw,18px);text-align:center;background:var(--ci);color:var(--cb);border-radius:999px;padding:13px 20px;font:600 15px/1 var(--fb);text-decoration:none;transition:opacity var(--dur-fast) var(--ease-out)}
+.rc-btn{flex:none;margin:clamp(12px,1.5vw,18px) clamp(18px,1.9vw,24px) clamp(28px,3.4vw,44px);text-align:center;background:var(--ci);color:var(--cb);border-radius:999px;padding:13px 20px;font:600 15px/1 var(--fb);text-decoration:none;transition:opacity var(--dur-fast) var(--ease-out)}
 .rc-btn:hover{opacity:.88}
 .rot-head{margin-bottom:clamp(40px,6vw,86px)}
 #tarinat{padding-top:clamp(110px,15vw,190px)}
@@ -564,10 +564,10 @@ section.en{padding-block:0}
       <div>
         <h2 class="caro-title">Kaikki kirpputorin työkalut yhdessä paikassa</h2>
       </div>
-      <div class="caro-nav" id="caroNav">
-        <button class="caro-btn l" type="button" data-dir="-1" aria-label="Edellinen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <div class="caro-bar" id="caroBar" aria-hidden="true"><span class="fill"></span></div>
-        <button class="caro-btn r" type="button" data-dir="1" aria-label="Seuraava"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="caro-nav" id="caroNav" aria-hidden="true">
+        <span class="caro-dot on"></span>
+        <div class="caro-bar" id="caroBar"><span class="fill"></span></div>
+        <span class="caro-dot off"></span>
       </div>
     </div>
   </div>
@@ -711,14 +711,7 @@ section.en{padding-block:0}
   </div>
 </section>
 
-<!-- KOHTAUS 2: kaksi isoa maskottia ponnahtaa -->
-<section class="scene scene--pop" data-scene="pop" data-ground="top" data-edge="300" data-ctrl="690" data-rotate="-14,12" data-zoom="0.76,0.8" aria-hidden="true">
-  <svg class="scene__bg" viewBox="0 0 1000 500" preserveAspectRatio="none"><path class="scene__ground" d=""/></svg>
-  <div class="scene__slot" data-m="apila" data-c="#C24029"></div>
-  <div class="scene__slot" data-m="tyyny" data-c="#C5D0D3"></div>
-</section>
-
-<!-- 10. TARINA -->
+<!-- 10. TARINA (suora vaihto ruskeasta kuvaan) -->
 <section class="band story-bg" id="tarina">
   <img class="story-img" src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Itsepalvelukirpputorin myymälä, vaaterekkejä ja pöytiä" loading="lazy">
 </section>
@@ -734,22 +727,22 @@ section.en{padding-block:0}
     <div class="rotary-stage">
       <article class="rcard" style="--cb:#C5D0D3;--ci:#3E2520">
         <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/01_kassa_tiski_tabletti.jpg" alt="Kassa tabletilla myyntitiskillä" loading="lazy"></div>
-        <div class="rc-body"><h3>Kassa</h3><p>Piippaa, maksa ja valmis. Myynti, viivakoodi ja maksu samalla näytöllä, myös ilman nettiä.</p></div>
+        <div class="rc-body"><h3>Kassa</h3><p>Myynti, viivakoodi ja maksu samalla näytöllä, myös ilman nettiä.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#3E2520;--ci:#ECECDC">
         <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/10_kuitti_tulostuu.jpg" alt="Kuitti tulostuu kassalta" loading="lazy"></div>
-        <div class="rc-body"><h3>Tilitykset</h3><p>Myyjien rahat lähtevät yhdellä pankkitiedostolla. Kuitti tulostuu tai lähtee sähköpostiin.</p></div>
+        <div class="rc-body"><h3>Tilitykset</h3><p>Myyjien rahat lähtevät yhdellä pankkitiedostolla.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#D09C4C;--ci:#3E2520">
         <div class="rc-media"><img src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Myymälän rekkejä ja pöytiä" loading="lazy"></div>
-        <div class="rc-body"><h3>Pöytävaraukset</h3><p>Myyjä varaa ja maksaa pöytänsä verkossa. Näet vapaat paikat ja rekit yhdellä silmäyksellä.</p></div>
+        <div class="rc-body"><h3>Pöytävaraukset</h3><p>Myyjä varaa ja maksaa pöytänsä verkossa, näet vapaat paikat kartalta.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#C24029;--ci:#ECECDC">
         <div class="rc-media"><img src="assets/kuvat/04_loydot_tuotteet/01_takki_esittely.jpg" alt="Takki esillä verkkokatalogissa" loading="lazy"></div>
-        <div class="rc-body"><h3>Näkyvyys verkossa</h3><p>Kassalla hinnoiteltu tuote näkyy heti ostajalle verkossa, kuvan kanssa.</p></div>
+        <div class="rc-body"><h3>Näkyvyys verkossa</h3><p>Kassalla hinnoiteltu tuote näkyy heti ostajalle verkossa.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#3A4961;--ci:#ECECDC">
@@ -764,7 +757,7 @@ section.en{padding-block:0}
       </article>
       <article class="rcard" style="--cb:#D09C4C;--ci:#3E2520">
         <div class="rc-media"><img src="assets/kuvat/01_kirppis_tila/03_hylly_laukut_varikas.jpg" alt="Värikäs hylly laukkuja" loading="lazy"></div>
-        <div class="rc-body"><h3>Oma ilme</h3><p>Myymäläsi värit ja tyyli näkyvät myös varaussivulla ja verkkonäkymässä.</p></div>
+        <div class="rc-body"><h3>Oma ilme</h3><p>Myymäläsi värit ja tyyli näkyvät myös varaussivulla.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#C24029;--ci:#ECECDC">
@@ -773,10 +766,10 @@ section.en{padding-block:0}
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
     </div>
-    <div class="rotary-ctrl">
-      <button class="caro-btn l" type="button" data-dir="-1" aria-label="Edellinen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <div class="caro-bar" id="rotBar" aria-hidden="true"><span class="fill"></span></div>
-      <button class="caro-btn r" type="button" data-dir="1" aria-label="Seuraava"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    <div class="rotary-ctrl" aria-hidden="true">
+      <span class="caro-dot on"></span>
+      <div class="caro-bar" id="rotBar"><span class="fill"></span></div>
+      <span class="caro-dot off"></span>
     </div>
   </div>
 </section>
@@ -978,11 +971,8 @@ section.en{padding-block:0}
       if(!rPaused){ rElapsed+=dt; var p=rElapsed/rDWELL; if(p>=1){ rElapsed=0; rSetFill(0); rgo(1); } else rSetFill(p); }
       rRaf=requestAnimationFrame(rLoop);
     }
-    // sivunapit: klikkaus siirtaa kortteja ja nollaa palkin
-    function rManual(dir){ rElapsed=0; rSetFill(0); rgo(dir); }
-    rot.querySelectorAll('.caro-btn').forEach(function(a){ a.addEventListener('click',function(){ rManual(parseInt(a.getAttribute('data-dir'),10)); }); });
-    // palkki pyorii jatkuvasti, tauko vain aktiivisen vedon ajaksi (ei jumitu)
-    rot.addEventListener('pointerdown',function(e){ if(e.target.closest('.caro-btn'))return; rPaused=true; });
+    // liikkuu aina vain yhteen suuntaan. Palkki pyorii jatkuvasti, tauko vain aktiivisen vedon ajaksi (ei jumitu)
+    rot.addEventListener('pointerdown',function(){ rPaused=true; });
     addEventListener('pointerup',function(){ rPaused=false; }); addEventListener('pointercancel',function(){ rPaused=false; });
     rlayout(); if(!rReduce){ rRaf=requestAnimationFrame(rLoop); } else { rSetFill(1); }
   }
@@ -1034,10 +1024,7 @@ section.en{padding-block:0}
       if(!paused && !stepping){ elapsed+=dt; var p=elapsed/DWELL; if(p>=1){ elapsed=0; setFill(0); step(1); } else setFill(p); }
       raf=requestAnimationFrame(loop);
     }
-    // sivunapit: klikkaus siirtaa kortteja ja nollaa palkin
-    function manual(dir){ elapsed=0; setFill(0); step(dir); }
-    document.querySelectorAll('#caroNav .caro-btn').forEach(function(b){ b.addEventListener('click',function(){ manual(parseInt(b.getAttribute('data-dir'),10)); }); });
-    // palkki pyorii jatkuvasti, tauko vain aktiivisen vedon ajaksi (ei jumitu)
+    // liikkuu aina vain yhteen suuntaan. Palkki pyorii jatkuvasti, tauko vain aktiivisen vedon ajaksi (ei jumitu)
     function pause(){ paused=true; } function play(){ paused=false; }
     track.addEventListener('pointerdown',pause);
     addEventListener('pointerup',play); addEventListener('pointercancel',play);
