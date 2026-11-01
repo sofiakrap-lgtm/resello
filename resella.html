@@ -272,17 +272,20 @@ section[id]{scroll-margin-top:72px}
 @media(max-width:760px){.step{grid-template-columns:1fr;gap:18px;align-items:start;min-height:0}}
 /* roadmap-kartta (kayttoonotto) - referenssityyli: ohut pyoristetty rata */
 .roadmap{position:relative;margin-top:clamp(44px,6vw,90px);max-width:1060px;margin-inline:auto;padding:clamp(8px,1.4vw,20px) clamp(8px,2vw,32px)}
-.rm-line{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.rm-line{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
 .rm-line path{fill:none;stroke:rgba(62,37,32,.4);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
 .rm-grid{position:relative;z-index:1;display:grid;grid-template-columns:.86fr 1fr 1fr 1fr;row-gap:clamp(40px,5vw,74px);column-gap:clamp(14px,2vw,30px);align-items:start}
 .rm-node{display:flex;flex-direction:column;align-items:flex-start;gap:15px;text-align:left}
+.rm-dot{position:relative;width:14px;height:14px;border-radius:999px;background:var(--ink);flex:none}
+.rm-t p{margin:0;font-size:14px;line-height:1.45;color:var(--ink);opacity:.75;max-width:24ch}
 .rm-num{position:relative;min-width:38px;height:28px;padding:0 10px;border-radius:9px;background:var(--ink);color:#F6F6EE;display:grid;place-items:center;font-family:var(--fd);font-weight:600;font-size:13px;letter-spacing:.02em}
 .rm-num::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);width:1.5px;height:13px;background:rgba(62,37,32,.4)}
 .rm-t h3{font-family:var(--fd);font-weight:600;font-size:clamp(16px,1.5vw,19px);letter-spacing:-.01em;line-height:1.15;margin:0 0 9px;color:var(--ink);max-width:18ch}
 .rm-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
 .rm-list li{position:relative;padding-left:14px;font-size:14px;line-height:1.5;color:var(--ink);opacity:.82}
 .rm-list li::before{content:"·";position:absolute;left:3px;top:-2px;font-size:18px;line-height:1}
-.rm-node.n1{grid-area:1/1/3/2;align-self:center}
+.rm-node.n1{grid-area:1/1/3/2;align-self:center;flex-direction:row-reverse;align-items:center;justify-content:flex-start;gap:18px;text-align:right}
+.rm-node.n1 .rm-t p{margin-left:auto}
 .rm-node.n2{grid-area:1/2}.rm-node.n3{grid-area:1/3}.rm-node.n4{grid-area:1/4}
 .rm-node.n5{grid-area:2/4}.rm-node.n6{grid-area:2/3}.rm-node.n7{grid-area:2/2}
 @media(max-width:820px){
@@ -290,8 +293,10 @@ section[id]{scroll-margin-top:72px}
   .rm-grid{grid-template-columns:1fr;row-gap:0}
   .rm-node{grid-area:auto!important;flex-direction:row;align-items:flex-start;gap:16px;text-align:left;padding:clamp(18px,4vw,24px) 0;border-top:1px solid rgba(62,37,32,.16)}
   .rm-node:first-child{border-top:0}
-  .rm-num{flex:none}
-  .rm-num::after{display:none}
+  .rm-dot{margin-top:4px;align-self:flex-start}
+  .rm-node.n1{flex-direction:row;text-align:left;align-items:flex-start}
+  .rm-node.n1 .rm-t p{margin-left:0}
+  .rm-t p{max-width:none}
 }
 /* bento: kassatapahtuma (kollaasi: varilliset ruudut, tyyny-kuva, kelluvat kortit) */
 .bento-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto;margin-top:clamp(40px,5vw,72px);border-radius:var(--radius-lg);overflow:hidden}
@@ -769,15 +774,15 @@ section.fd{background:var(--blue)}
       <p class="sub">Hoidamme vaihdon puolestasi, eikä kirppis mene kiinni.</p>
     </div>
     <div class="roadmap">
-      <svg class="rm-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M26 10 H77 C88 10 88 71 77 71 H26 C12 71 2 50 5 33 C7 20 14 10 26 10 Z" vector-effect="non-scaling-stroke"/></svg>
+      <svg class="rm-line" aria-hidden="true"><path id="rmPath" d=""/></svg>
       <div class="rm-grid">
-        <div class="rm-node n1"><span class="rm-num">01</span><div class="rm-t"><h3>Esittely</h3><ul class="rm-list"><li>Demo 30 min</li><li>Tarjous</li><li>Sopimus</li></ul></div></div>
-        <div class="rm-node n2"><span class="rm-num">02</span><div class="rm-t"><h3>Määritys</h3><ul class="rm-list"><li>Pöydät ja hinnat</li><li>Provisio</li><li>Oma ilme</li></ul></div></div>
-        <div class="rm-node n3"><span class="rm-num">03</span><div class="rm-t"><h3>Asennus</h3><ul class="rm-list"><li>Kassa ja laitteet</li><li>Tarrat</li></ul></div></div>
-        <div class="rm-node n4"><span class="rm-num">04</span><div class="rm-t"><h3>Koulutus</h3><ul class="rm-list"><li>Kassan käyttö</li><li>Myyjien ohjeet</li></ul></div></div>
-        <div class="rm-node n5"><span class="rm-num">05</span><div class="rm-t"><h3>Ensimmäinen myynti</h3><ul class="rm-list"><li>Tuki paikan päällä</li></ul></div></div>
-        <div class="rm-node n6"><span class="rm-num">06</span><div class="rm-t"><h3>Tilitykset</h3><ul class="rm-list"><li>Yksi pankkitiedosto</li></ul></div></div>
-        <div class="rm-node n7"><span class="rm-num">07</span><div class="rm-t"><h3>Kasvu</h3><ul class="rm-list"><li>Kuluttaja-app 2027</li></ul></div></div>
+        <div class="rm-node n1"><span class="rm-dot" aria-hidden="true"></span><div class="rm-t"><h3>Esittely</h3><p>Näytät meille kirppiksesi, ja me näytämme sen ReSellassa. Demo kestää puoli tuntia, eikä se sido mihinkään.</p></div></div>
+        <div class="rm-node n2"><span class="rm-dot" aria-hidden="true"></span><div class="rm-t"><h3>Määritys</h3><p>Syötämme pöydät, hinnat ja provisiot puolestasi. Sinun tarvitsee vain tarkistaa ne.</p></div></div>
+        <div class="rm-node n3"><span class="rm-dot" aria-hidden="true"></span><div class="rm-t"><h3>Asennus</h3><p>Tuomme kassan ja laitteet valmiina ja asennamme ne kanssasi, eikä kirppis mene kiinni.</p></div></div>
+        <div class="rm-node n4"><span class="rm-dot" aria-hidden="true"></span><div class="rm-t"><h3>Koulutus</h3><p>Opetamme kassan käytön henkilökunnalle ja teemme myyjille valmiit ohjeet.</p></div></div>
+        <div class="rm-node n5"><span class="rm-dot" aria-hidden="true"></span><div class="rm-t"><h3>Ensimmäinen myynti</h3><p>Olemme paikan päällä ensimmäisenä myyntipäivänä, jotta kaikki sujuu alusta asti.</p></div></div>
+        <div class="rm-node n6"><span class="rm-dot" aria-hidden="true"></span><div class="rm-t"><h3>Tilitykset</h3><p>Käymme ensimmäiset tilitykset läpi yhdessä. Rahat lähtevät myyjille yhdellä pankkitiedostolla.</p></div></div>
+        <div class="rm-node n7"><span class="rm-dot" aria-hidden="true"></span><div class="rm-t"><h3>Kasvu</h3><p>Seuraamme lukuja kanssasi ja tuomme uudet ominaisuudet käyttöön sitä mukaa kuin ne valmistuvat.</p></div></div>
       </div>
     </div>
   </div>
@@ -1235,6 +1240,25 @@ section.fd{background:var(--blue)}
   fill(0); go(0);
   if(!reduce){ try{ new IntersectionObserver(function(es){ visible=es[0].isIntersecting; },{threshold:.4}).observe(root); }catch(e){ visible=true; } raf=requestAnimationFrame(loop); }
   else { bars[0].firstChild.style.width='100%'; }
+})();
+</script>
+<script>
+/* kayttoonoton polku: viiva kulkee pisteiden kautta */
+(function(){
+  var rm=document.querySelector('.roadmap'), path=document.getElementById('rmPath'); if(!rm||!path) return;
+  function c(sel){ var d=rm.querySelector(sel+' .rm-dot').getBoundingClientRect(), r=rm.getBoundingClientRect(); return {x:d.left-r.left+d.width/2, y:d.top-r.top+d.height/2}; }
+  function draw(){
+    if(innerWidth<=820){ path.setAttribute('d',''); return; }
+    var p=[1,2,3,4,5,6,7].map(function(i){ return c('.n'+i); }), r=rm.getBoundingClientRect();
+    var t4=rm.querySelector('.n4 .rm-t').getBoundingClientRect(), t5=rm.querySelector('.n5 .rm-t').getBoundingClientRect();
+    var edge=Math.max(t4.right,t5.right)-r.left+28, k=p[3].x+(edge-p[3].x)/0.75;
+    var a=p[0], b=p[1], d4=p[3], d5=p[4], g=p[6];
+    var dd='M'+a.x+' '+a.y+' C'+a.x+' '+b.y+' '+(a.x+(b.x-a.x)*.35)+' '+b.y+' '+b.x+' '+b.y+
+      ' L'+d4.x+' '+d4.y+' C'+k+' '+d4.y+' '+k+' '+d5.y+' '+d5.x+' '+d5.y+
+      ' L'+g.x+' '+g.y+' C'+(a.x+(g.x-a.x)*.35)+' '+g.y+' '+a.x+' '+g.y+' '+a.x+' '+a.y+'Z';
+    path.setAttribute('d',dd);
+  }
+  draw(); addEventListener('resize',draw); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(draw);
 })();
 </script>
 </body>
