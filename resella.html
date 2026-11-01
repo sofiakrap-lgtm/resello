@@ -264,7 +264,7 @@ section[id]{scroll-margin-top:72px}
 .tl-extra .mk{flex:none;margin-top:2px;color:var(--olive)}
 /* roadmap / polku */
 .steps{max-width:1160px;margin-inline:auto;display:grid;gap:clamp(22px,3vw,44px);--steps-top:clamp(84px,10vw,110px)}
-.step{position:sticky;top:var(--steps-top);background:#54382F;border:1px solid rgba(236,236,220,.14);border-radius:10px;min-height:clamp(240px,24vw,320px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,360px);gap:clamp(22px,4vw,56px);padding:clamp(28px,4vw,56px);overflow:hidden;transform-origin:50% 0;align-items:center;box-shadow:0 20px 54px rgba(0,0,0,.3)}
+.step{position:sticky;top:var(--steps-top);background:#4B302A;border:1px solid rgba(236,236,220,.07);border-radius:10px;min-height:clamp(240px,24vw,320px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,360px);gap:clamp(22px,4vw,56px);padding:clamp(28px,4vw,56px);overflow:hidden;transform-origin:50% 0;align-items:center;box-shadow:0 6px 18px rgba(0,0,0,.12)}
 .step__text{display:flex;flex-direction:column;gap:14px}
 .step h3{font-family:var(--fd);font-weight:600;font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;line-height:1.06;color:var(--ink)}
 .step__text p{font-size:18px;line-height:1.4;color:var(--ink-muted);max-width:30ch}
@@ -280,10 +280,10 @@ section[id]{scroll-margin-top:72px}
 .tlist .mk{color:var(--olive);flex:none;margin-top:2px}
 .tlist .mk .ico{width:16px;height:16px}
 /* tarina */
-.story-bg{position:relative;overflow:hidden}
+.story-bg{position:relative;overflow:hidden;min-height:clamp(340px,42vw,540px);display:flex;align-items:center}
 .story-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.story-scrim{position:absolute;inset:0;background:rgba(236,236,220,.8);z-index:1}
 .story-content{position:relative;z-index:2;max-width:760px;margin-inline:auto;text-align:center}
+.story-content .disp{color:#F6F6EE;text-shadow:0 2px 30px rgba(0,0,0,.55),0 1px 4px rgba(0,0,0,.5)}
 .bios{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px);margin-top:clamp(26px,3.4vw,44px);text-align:left}
 .bio b{font-weight:600;display:block;margin-bottom:3px}
 .bio p{font-size:15px;font-weight:500;color:var(--ink-muted);line-height:1.5}
@@ -724,17 +724,10 @@ section.en{padding-block:0}
 <!-- 10. TARINA -->
 <section class="band story-bg" id="tarina">
   <img class="story-img" src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Itsepalvelukirpputorin myymälä, vaaterekkejä ja pöytiä" loading="lazy">
-  <div class="story-scrim" aria-hidden="true"></div>
   <div class="wrap story-content">
     <div class="shead ctr">
       <h2 class="disp m">Kirppikseltä koodiin</h2>
-      <p class="sub">Tunnemme alan, koska olemme tehneet sitä.</p>
     </div>
-    <div class="bios">
-      <div class="bio"><b>Sofia</b><p>Yli 10 vuotta kirpputori- ja vintagealalla, oma liike 18-vuotiaana ja hinnoittelija itsepalvelukirpputorilla.</p></div>
-      <div class="bio"><b>Leon</b><p>Kuusi vuotta ohjelmistokehitystä, muun muassa konsulttina Veikkauksella.</p></div>
-    </div>
-    <p class="note">Haastattelimme kymmeniä kirppisyrittäjiä ennen ensimmäistä koodiriviä.</p>
   </div>
 </section>
 
@@ -940,7 +933,7 @@ section.en{padding-block:0}
     var sReduce=false; try{ sReduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
     Array.prototype.slice.call(document.querySelectorAll('.steps')).forEach(function(root){
       var cards=Array.prototype.slice.call(root.querySelectorAll('.step'));
-      cards.forEach(function(c,k){ c.style.top='calc(var(--steps-top,100px) + '+(k*25)+'px)'; });
+      cards.forEach(function(c,k){ c.style.top='calc(var(--steps-top,100px) + '+(k*15)+'px)'; });
       function paint(){
         cards.forEach(function(c,k){
           var depth=0;
@@ -949,7 +942,7 @@ section.en{padding-block:0}
             var start=stick+cards[j].offsetHeight;
             depth+=Math.max(0,Math.min(1,(start-top)/cards[j].offsetHeight));
           }
-          c.style.transform='scale('+(1-0.02*depth)+')';
+          c.style.transform='scale('+(1-0.012*depth)+')';
         });
       }
       if(!sReduce){ addEventListener('scroll',paint,{passive:true}); paint(); }
