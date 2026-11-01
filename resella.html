@@ -191,12 +191,13 @@ section[id]{scroll-margin-top:72px}
 .caro-eyebrow{cursor:default;margin-bottom:16px}
 .caro-eyebrow:hover{background:transparent;color:var(--ink)}
 .caro-title{font-family:var(--fd);font-weight:600;letter-spacing:-.035em;font-size:clamp(40px,17.71px + 5.714vw,100px);line-height:.95;margin:0;max-width:1000px;text-align:center;text-wrap:balance}
-.caro-nav{display:flex;gap:14px;flex:none;align-items:center}
-.caro-line{position:relative;width:clamp(90px,11vw,150px);height:3px;border-radius:3px;background:var(--line);overflow:hidden}
-.caro-line i{position:absolute;left:0;top:0;height:100%;width:38%;border-radius:3px;background:var(--ink);animation:caroRun 2.6s linear infinite}
-.caro-nav.paused .caro-line i{animation-play-state:paused}
-@keyframes caroRun{0%{transform:translateX(-110%)}100%{transform:translateX(330%)}}
-@media(prefers-reduced-motion:reduce){.caro-line i{animation:none;width:100%;opacity:.35}}
+.caro-nav{display:flex;gap:16px;flex:none;align-items:center}
+.caro-dots{display:flex;align-items:center;gap:8px}
+.caro-dots .d{width:7px;height:7px;flex:none;border-radius:999px;background:var(--line);position:relative;overflow:hidden;transition:width .45s var(--ease-out),background-color .3s linear}
+.caro-dots .d.on{width:34px;background:var(--line)}
+.caro-dots .d .f{position:absolute;inset:0;border-radius:999px;background:var(--ink);transform-origin:left center;transform:scaleX(0)}
+.caro-dots .d.on .f{transform:scaleX(var(--p,0))}
+@media(prefers-reduced-motion:reduce){.caro-dots .d.on .f{transform:scaleX(1)}}
 .caro-btn{width:46px;height:46px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);display:grid;place-items:center;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-out)}
 .caro-btn:hover{background:var(--brown-hover)}
 .caro-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -554,7 +555,7 @@ section.en{padding-block:0}
       </div>
       <div class="caro-nav" id="caroNav">
         <button class="caro-btn" data-dir="-1" aria-label="Edellinen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <span class="caro-line" aria-hidden="true"><i></i></span>
+        <div class="caro-dots" id="caroDots" aria-hidden="true"></div>
         <button class="caro-btn" data-dir="1" aria-label="Seuraava"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
     </div>
@@ -1161,11 +1162,21 @@ section.en{padding-block:0}
     originals.forEach(function(c){ track.appendChild(c.cloneNode(true)); });
     var oneSet=0;
     function measure(){ var all=track.querySelectorAll('.caro-card'); if(all.length>originals.length){ oneSet=all[originals.length].offsetLeft-all[0].offsetLeft; } }
-    measure(); addEventListener('resize',measure);
+    measure(); addEventListener('resize',function(){ measure(); updateDots(); });
     function normalize(){ if(oneSet>0){ if(track.scrollLeft>=oneSet){ track.scrollLeft-=oneSet; } else if(track.scrollLeft<0){ track.scrollLeft+=oneSet; } } }
     var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
+    // pistenaytto: aktiivinen pilleri tayttyy ja astuu loivasti oikealle
+    var dotsWrap=document.getElementById('caroDots'), dots=[], NDOT=Math.min(originals.length,5), curIdx=-1;
+    if(dotsWrap){ for(var k=0;k<NDOT;k++){ var dd=document.createElement('span'); dd.className='d'; var ff=document.createElement('span'); ff.className='f'; dd.appendChild(ff); dotsWrap.appendChild(dd); dots.push(dd); } }
+    function updateDots(){
+      if(!dots.length||oneSet<=0) return;
+      var step=oneSet/NDOT, pos=((track.scrollLeft % oneSet)+oneSet)%oneSet;
+      var idx=Math.floor(pos/step)%NDOT, p=(pos-idx*step)/step; if(p<0)p=0; if(p>1)p=1;
+      if(idx!==curIdx){ if(curIdx>=0&&dots[curIdx]) dots[curIdx].classList.remove('on'); dots[idx].classList.add('on'); curIdx=idx; }
+      dots[idx].style.setProperty('--p', p.toFixed(3));
+    }
     var raf=null, paused=false, speed=0.9;
-    function frame(){ if(!paused){ track.scrollLeft+=speed; normalize(); } raf=requestAnimationFrame(frame); }
+    function frame(){ if(!paused){ track.scrollLeft+=speed; normalize(); } updateDots(); raf=requestAnimationFrame(frame); }
     var caroNav=document.getElementById('caroNav');
     function startAuto(){ if(reduce) return; paused=false; if(caroNav) caroNav.classList.remove('paused'); if(!raf){ raf=requestAnimationFrame(frame); } }
     function pauseAuto(){ paused=true; if(caroNav) caroNav.classList.add('paused'); }
@@ -1179,7 +1190,7 @@ section.en{padding-block:0}
     var sec=document.getElementById('ominaisuudet');
     if(sec){ sec.addEventListener('mouseenter',pauseAuto); sec.addEventListener('mouseleave',startAuto); }
     track.addEventListener('touchstart',pauseAuto,{passive:true});
-    startAuto();
+    updateDots(); startAuto();
   }
 })();
 </script>
