@@ -620,46 +620,7 @@ section.fd{background:var(--blue)}
 @media(max-width:860px){.fd-grid{grid-template-columns:1fr}.fd-quote{min-height:380px}.fd-table{margin-top:150px}}
 @media(prefers-reduced-motion:reduce){.fd *{transition:none!important}}
 
-/* ===== videokaruselli (Sierra-tyyli): aktiivinen keskellä, naapurit kurkistavat reunoilta ===== */
-.vp{padding-block:clamp(64px,8vw,120px);overflow:hidden}
-.vp-head{text-align:center;max-width:820px;margin:0 auto clamp(36px,4.5vw,64px);padding-inline:var(--side)}
-.vp-head .disp{margin:0 auto}
-.vp-head p{margin:18px auto 0;font-size:18px;color:var(--ink-muted)}
-.vp-stage{position:relative;height:clamp(420px,44vw,640px)}
-.vp-s{--w:64vw;position:absolute;top:0;height:100%;width:var(--w);left:calc(50% - var(--w) / 2);border-radius:var(--radius-lg);overflow:hidden;background:var(--ink);cursor:pointer;transition:left 800ms cubic-bezier(.2,0,0,1),width 800ms cubic-bezier(.2,0,0,1),opacity 500ms}
-.vp-s[data-pos="0"]{cursor:default;z-index:2}
-.vp-s[data-pos="-1"]{--w:24vw;left:calc(50% - 32vw - 16px - 24vw)}
-.vp-s[data-pos="1"]{--w:24vw;left:calc(50% + 32vw + 16px)}
-.vp-s .vp-m{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.vp-s::after{content:"";position:absolute;inset:0;background:rgb(62 37 32 / .38);z-index:1;transition:opacity 600ms cubic-bezier(0,0,.2,1);pointer-events:none}
-.vp-s[data-pos="0"]::after{opacity:0}
-.vp-s .kb{transform:scale(1);transition:transform 9s linear}
-.vp-s[data-pos="0"] .kb{transform:scale(1.08)}
-.vp-dots{display:flex;justify-content:center;gap:8px;margin-top:clamp(20px,2.4vw,32px)}
-.vp-dots i{width:40px;height:3px;border-radius:3px;background:rgb(62 37 32 / .15);overflow:hidden}
-.vp-dots b{display:block;height:100%;width:0;background:var(--ink)}
-.vp-pill,.vp-chat,.vp-btn{position:absolute;z-index:3;opacity:0;transition:opacity 400ms cubic-bezier(0,0,.2,1)}
-.vp-s[data-pos="0"] .vp-pill,.vp-s[data-pos="0"] .vp-chat,.vp-s[data-pos="0"] .vp-btn{opacity:1;transition-delay:450ms}
-.vp-s[data-pos="0"] .vp-chat{transform:none}
-.vp-pill{left:18px;top:18px;display:inline-flex;align-items:center;gap:8px;background:rgb(62 37 32 / .55);color:var(--bg);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:500}
-.vp-pill::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--bg)}
-.vp-chat{transform:translateY(12px);transition:opacity 400ms cubic-bezier(0,0,.2,1),transform 600ms cubic-bezier(.2,0,0,1);right:clamp(16px,2vw,28px);bottom:clamp(16px,2vw,28px);width:min(280px,60%);background:var(--surface);color:var(--ink);border-radius:16px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start}
-.vp-chat img{width:28px;height:28px;flex:none}
-.vp-chat small{display:block;font-size:12px;color:var(--ink-muted);margin-bottom:3px}
-.vp-chat b{display:block;font-size:15px;font-weight:500;line-height:1.35}
-.vp-btn{left:18px;bottom:18px;width:36px;height:36px;border-radius:999px;border:0;background:rgb(62 37 32 / .55);color:var(--bg);display:grid;place-items:center;cursor:pointer;padding:0}
-.vp-btn svg{width:14px;height:14px;fill:currentColor}
-.vp-bar{position:absolute;left:66px;right:clamp(16px,2vw,28px);bottom:34px;height:3px;border-radius:3px;background:rgb(236 236 220 / .3);z-index:3;opacity:0;transition:opacity 300ms}
-.vp-bar i{display:block;height:100%;width:0;border-radius:inherit;background:var(--bg)}
-.vp-s[data-pos="0"] .vp-bar{opacity:0}
-@media(max-width:760px){
-  .vp-stage{height:520px}
-  .vp-s{--w:82vw}
-  .vp-s[data-pos="-1"]{--w:82vw;left:calc(50% - 41vw - 12px - 82vw)}
-  .vp-s[data-pos="1"]{--w:82vw;left:calc(50% + 41vw + 12px)}
-  .vp-chat{width:calc(100% - 32px);bottom:66px}
-}
-@media(prefers-reduced-motion:reduce){.vp-s,.vp-pill,.vp-chat,.vp-btn{transition:none}}
+
 
 /* ===== loppuosa: pieni teksti, nappi ja jättiotsikko ===== */
 .end{padding:clamp(96px,11vw,170px) 0 clamp(20px,2.4vw,40px);text-align:center;overflow:hidden;background:var(--red);color:var(--on-red)}
@@ -727,35 +688,6 @@ section.fd{background:var(--blue)}
 </section>
 
 <main id="sisalto">
-
-<!-- VIDEOKARUSELLI -->
-<section class="band vp" id="videot">
-  <div class="vp-head">
-    <h2 class="disp m">Kirppisarki, joka sujuu</h2>
-    <p>Omistaja, myyjä ja ostaja samassa järjestelmässä.</p>
-  </div>
-  <div class="vp-stage" id="vpStage">
-      <article class="vp-s" data-i="0" data-pos="0">
-        <img class="vp-m kb" src="assets/kuvat/02_kassa_maksu/01_kassa_tiski_tabletti.jpg" alt="Kirppiksen kassa tabletilla" loading="lazy">
-        <span class="vp-pill">Kirppiksen omistaja</span>
-        <div class="vp-chat"><img src="assets/ikoni/ReSella_ikoni_pilvi_ruskea.svg" alt=""><div><small>Ilmoitus</small><b>Kaikki myyjät tilitetty yhdellä tiedostolla.</b></div></div>
-        <button class="vp-btn" aria-label="Tauko"><svg viewBox="0 0 14 14"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></svg></button>
-      </article>
-      <article class="vp-s" data-i="1" data-pos="1">
-        <video class="vp-m" muted playsinline preload="metadata" poster="assets/video/04_hero_poster.jpg"><source src="assets/video/04_hero.mp4" type="video/mp4"></video>
-        <span class="vp-pill">Myyjä</span>
-        <div class="vp-chat"><img src="assets/ikoni/ReSella_ikoni_pilvi_ruskea.svg" alt=""><div><small>Ilmoitus</small><b>Villapaitasi myytiin juuri pöydästä 14.</b></div></div>
-        <button class="vp-btn" aria-label="Tauko"><svg viewBox="0 0 14 14"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></svg></button>
-      </article>
-      <article class="vp-s" data-i="2" data-pos="-1">
-        <img class="vp-m kb" src="assets/kuvat/01_kirppis_tila/08_ostaja_rekilla.jpg" alt="Ostaja vaaterekillä" loading="lazy">
-        <span class="vp-pill">Ostaja</span>
-        <div class="vp-chat"><img src="assets/ikoni/ReSella_ikoni_pilvi_ruskea.svg" alt=""><div><small>Ilmoitus</small><b>Takki on varattu sinulle noudettavaksi.</b></div></div>
-        <button class="vp-btn" aria-label="Tauko"><svg viewBox="0 0 14 14"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></svg></button>
-      </article>
-  </div>
-  <div class="vp-dots" id="vpDots" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i></div>
-</section>
 
 <!-- KARUSELLI (ominaisuudet) -->
 <section class="band" id="ominaisuudet">
@@ -1337,40 +1269,6 @@ section.fd{background:var(--blue)}
   function fit(){ if(innerWidth<=860){ st.style.height=''; inn.style.transform=''; return; }
     var k=st.clientWidth/1440; inn.style.transform='scale('+k+')'; st.style.height=(1055*k)+'px'; }
   fit(); addEventListener('resize',fit); if(window.ResizeObserver) new ResizeObserver(fit).observe(st);
-})();
-</script>
-<script>
-/* videokaruselli: aktiivinen video toistuu loppuun (kuva 7 s) ja seuraava liukuu keskelle; hover tai klikkaus naapuriin siirtää sen keskelle */
-(function(){
-  var st=document.getElementById('vpStage'); if(!st) return;
-  var sl=[].slice.call(st.querySelectorAll('.vp-s')), n=sl.length, IMG=7000;
-  var md=sl.map(function(e){ return e.querySelector('.vp-m'); });
-  var dots=[].slice.call(document.querySelectorAll('#vpDots b'));
-  var reduce=false; try{reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;}catch(e){}
-  var cur=0, visible=false, paused=reduce, t0=0, acc=0;
-  function isV(i){ return md[i].tagName==='VIDEO'; }
-  function place(){ sl.forEach(function(e,i){ var d=((i-cur)%n+n)%n; if(d===n-1) d=-1; e.setAttribute('data-pos',d); }); }
-  function run(){ var on=visible&&!paused; if(isV(cur)){ var v=md[cur]; if(on){ var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); } else v.pause(); } }
-  function go(i){ if(i===cur) return; if(isV(cur)) md[cur].pause(); cur=i; acc=0; t0=performance.now(); place(); if(isV(cur)) md[cur].currentTime=0; run(); }
-  sl.forEach(function(e,i){
-    if(isV(i)) md[i].addEventListener('ended',function(){ if(i===cur) go((cur+1)%n); });
-    e.addEventListener('mouseenter',function(){ if(matchMedia('(hover:hover)').matches && i!==cur) go(i); });
-    e.addEventListener('click',function(ev){ if(ev.target.closest('.vp-btn')) return; go(i); });
-    var btn=e.querySelector('.vp-btn');
-    btn.addEventListener('click',function(){ paused=!paused; if(!paused) t0=performance.now();
-      document.querySelectorAll('#vpStage .vp-btn').forEach(function(x){ x.setAttribute('aria-label',paused?'Toista':'Tauko');
-        x.innerHTML=paused?'<svg viewBox="0 0 14 14"><path d="M3 1.5v11l9-5.5z"/></svg>':'<svg viewBox="0 0 14 14"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></svg>'; });
-      run(); });
-  });
-  function tick(now){
-    var p=0;
-    if(isV(cur)){ var v=md[cur]; p=v.duration? v.currentTime/v.duration : 0; }
-    else { if(visible&&!paused){ acc+=now-t0; } t0=now; p=acc/IMG; if(p>=1){ go((cur+1)%n); p=0; } }
-    dots.forEach(function(d,i){ d.style.width = i<cur? '100%' : i===cur ? (p*100)+'%' : '0'; });
-    requestAnimationFrame(tick);
-  }
-  place(); t0=performance.now(); if(!reduce) requestAnimationFrame(tick);
-  try{ new IntersectionObserver(function(es){ visible=es[0].isIntersecting; t0=performance.now(); run(); },{threshold:.35}).observe(st); }catch(e){ visible=true; run(); }
 })();
 </script>
 <script>
