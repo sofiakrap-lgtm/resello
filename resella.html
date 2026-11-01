@@ -194,6 +194,9 @@ section[id]{scroll-margin-top:72px}
 .caro-nav{display:flex;gap:16px;flex:none;align-items:center}
 .caro-bar{position:relative;width:clamp(100px,13vw,180px);height:5px;border-radius:999px;background:rgba(62,37,32,.12);overflow:hidden}
 .caro-bar .fill{position:absolute;left:0;top:0;height:100%;width:0;border-radius:999px;background:rgba(62,37,32,.42)}
+.caro-dot{width:13px;height:13px;border-radius:999px;flex:none;box-sizing:border-box}
+.caro-dot.on{background:var(--ink)}
+.caro-dot.off{background:transparent;border:2px solid rgba(62,37,32,.28)}
 .caro-btn{width:46px;height:46px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);display:grid;place-items:center;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-out)}
 .caro-btn:hover{background:var(--brown-hover)}
 .caro-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -561,10 +564,10 @@ section.en{padding-block:0}
       <div>
         <h2 class="caro-title">Kaikki kirpputorin työkalut yhdessä paikassa</h2>
       </div>
-      <div class="caro-nav" id="caroNav">
-        <button class="caro-btn" data-dir="-1" aria-label="Edellinen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <div class="caro-bar" id="caroBar" aria-hidden="true"><span class="fill"></span></div>
-        <button class="caro-btn" data-dir="1" aria-label="Seuraava"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="caro-nav" id="caroNav" aria-hidden="true">
+        <span class="caro-dot on"></span>
+        <div class="caro-bar" id="caroBar"><span class="fill"></span></div>
+        <span class="caro-dot off"></span>
       </div>
     </div>
   </div>
@@ -774,10 +777,10 @@ section.en{padding-block:0}
         <div class="rc-body"><h3>Raportointi</h3><p>Käyttöaste ja myynti pysyvät ajan tasalla.</p></div>
       </article>
     </div>
-    <div class="rotary-ctrl">
-      <button class="caro-btn" type="button" data-dir="-1" aria-label="Edellinen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <div class="caro-bar" id="rotBar" aria-hidden="true"><span class="fill"></span></div>
-      <button class="caro-btn" type="button" data-dir="1" aria-label="Seuraava"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    <div class="rotary-ctrl" aria-hidden="true">
+      <span class="caro-dot on"></span>
+      <div class="caro-bar" id="rotBar"><span class="fill"></span></div>
+      <span class="caro-dot off"></span>
     </div>
   </div>
 </section>
@@ -952,7 +955,6 @@ section.en{padding-block:0}
   var rot=document.getElementById('rotary');
   if(rot){
     var rcards=Array.prototype.slice.call(rot.querySelectorAll('.rcard'));
-    var arrows=rot.querySelectorAll('.caro-btn');
     var rfill=document.querySelector('#rotBar .fill');
     var N=rcards.length, active=0;
     function circOff(i){ var d=((i-active)%N+N)%N; if(d>N/2) d-=N; return d; } // lyhin kehasuunta, pyorii aina ympari
@@ -977,12 +979,10 @@ section.en{padding-block:0}
       if(!rPaused){ rElapsed+=dt; var p=rElapsed/rDWELL; if(p>=1){ rElapsed=0; rSetFill(0); rgo(1); } else rSetFill(p); }
       rRaf=requestAnimationFrame(rLoop);
     }
-    function rManual(dir){ rElapsed=0; rSetFill(0); rgo(dir); }
-    arrows.forEach(function(a){ a.addEventListener('click',function(){ rManual(parseInt(a.getAttribute('data-dir'),10)); }); });
+    // liikkuu aina vain yhteen suuntaan: ei nuolia, vain automaattinen eteneminen
     rot.addEventListener('mouseenter',function(){ rPaused=true; }); rot.addEventListener('mouseleave',function(){ rPaused=false; });
-    var rsx=null;
-    rot.addEventListener('touchstart',function(e){ rsx=e.touches[0].clientX; rPaused=true; },{passive:true});
-    rot.addEventListener('touchend',function(e){ if(rsx==null)return; var dx=e.changedTouches[0].clientX-rsx; if(Math.abs(dx)>40) rManual(dx<0?1:-1); rsx=null; },{passive:true});
+    rot.addEventListener('touchstart',function(){ rPaused=true; },{passive:true});
+    rot.addEventListener('touchend',function(){ rPaused=false; },{passive:true});
     rlayout(); if(!rReduce){ rRaf=requestAnimationFrame(rLoop); } else { rSetFill(1); }
   }
   // hinnoittelu: liikevaihtopohjainen laskuri, kayttaja syottaa oman myynnin
@@ -1033,8 +1033,7 @@ section.en{padding-block:0}
       if(!paused && !stepping){ elapsed+=dt; var p=elapsed/DWELL; if(p>=1){ elapsed=0; setFill(0); step(1); } else setFill(p); }
       raf=requestAnimationFrame(loop);
     }
-    function manual(dir){ elapsed=0; setFill(0); step(dir); }
-    document.querySelectorAll('#caroNav .caro-btn').forEach(function(b){ b.addEventListener('click',function(){ manual(parseInt(b.getAttribute('data-dir'),10)); }); });
+    // liikkuu aina vain yhteen suuntaan: ei nuolia, vain automaattinen eteneminen oikealle
     var sec=document.getElementById('ominaisuudet');
     function pause(){ paused=true; } function play(){ paused=false; }
     if(sec){ sec.addEventListener('mouseenter',pause); sec.addEventListener('mouseleave',play); }
