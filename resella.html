@@ -264,7 +264,7 @@ section[id]{scroll-margin-top:72px}
 .tl-extra .mk{flex:none;margin-top:2px;color:var(--olive)}
 /* roadmap / polku */
 .steps{max-width:1160px;margin-inline:auto;display:grid;gap:clamp(22px,3vw,44px);--steps-top:clamp(84px,10vw,110px)}
-.step{position:sticky;top:var(--steps-top);background:#4B302A;border:1px solid rgba(236,236,220,.07);border-radius:10px;min-height:clamp(240px,24vw,320px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,360px);gap:clamp(22px,4vw,56px);padding:clamp(28px,4vw,56px);overflow:hidden;transform-origin:50% 0;align-items:center;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+.step{position:sticky;top:var(--steps-top);background:#4B302A;border:1px solid rgba(236,236,220,.07);border-radius:10px;min-height:clamp(240px,24vw,320px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,360px);gap:clamp(22px,4vw,56px);--sp:clamp(28px,4vw,56px);padding:var(--sp);overflow:hidden;transform-origin:50% 0;align-items:center;box-shadow:0 6px 18px rgba(0,0,0,.12)}
 .step__text{display:flex;flex-direction:column;gap:14px}
 .step h3{font-family:var(--fd);font-weight:600;font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;line-height:1.06;color:var(--ink)}
 .step__text p{font-size:18px;line-height:1.4;color:var(--ink-muted);max-width:30ch}
@@ -272,13 +272,13 @@ section[id]{scroll-margin-top:72px}
 .step__list li{position:relative;padding-left:24px;font-size:18px;line-height:1.4;color:var(--ink)}
 .step__list li::before{content:"";position:absolute;left:0;top:7px;width:10px;height:10px;border-radius:999px;background:var(--red)}
 @media(max-width:760px){.step{grid-template-columns:1fr;gap:18px;align-items:start;min-height:0}}
-.step--video{grid-template-columns:minmax(0,1fr) minmax(0,48%);align-items:stretch}
+.step--video{grid-template-columns:minmax(0,1fr) minmax(0,46%);align-items:stretch}
 .step__col{display:flex;flex-direction:column;gap:clamp(16px,2.2vw,24px);justify-content:center;min-width:0}
-.step__media{align-self:stretch;border-radius:8px;overflow:hidden;background:#2E1C18;min-height:clamp(200px,20vw,280px);line-height:0}
+.step__media{align-self:stretch;margin:calc(-1*var(--sp)) calc(-1*var(--sp)) calc(-1*var(--sp)) 0;overflow:hidden;background:#F3F2E7;line-height:0;border-top-left-radius:clamp(12px,1.4vw,18px)}
 .step__media video{width:100%;height:100%;object-fit:cover;display:block}
-.step__media--portrait{display:flex;align-items:center;justify-content:center;padding:clamp(10px,1.2vw,16px)}
-.step__media--portrait video{width:auto;height:100%;max-height:clamp(260px,30vw,420px);object-fit:contain;border-radius:6px}
-@media(max-width:760px){.step--video{grid-template-columns:1fr;align-items:start}.step__media{min-height:clamp(180px,55vw,240px)}.step__media--portrait video{height:auto;width:auto;max-width:72%;max-height:60vh}}
+.step__media--portrait{background:#4B302A}
+.step__media--portrait video{width:auto;max-width:100%;height:100%;margin-left:auto;object-fit:cover}
+@media(max-width:760px){.step--video{grid-template-columns:1fr;align-items:start}.step__media{margin:0 calc(-1*var(--sp)) calc(-1*var(--sp));min-height:clamp(180px,52vw,240px)}.step__media--portrait video{height:auto;width:auto;max-width:70%;max-height:62vh;margin:0 auto}}
 /* roadmap-kartta (kayttoonotto) - referenssityyli: ohut pyoristetty rata */
 .roadmap{position:relative;margin-top:clamp(44px,6vw,90px);max-width:1060px;margin-inline:auto;padding:clamp(8px,1.4vw,20px) clamp(8px,2vw,32px)}
 .rm-line{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
