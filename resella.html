@@ -612,30 +612,38 @@ section.fd{background:var(--blue)}
 @media(max-width:860px){.fd-grid{grid-template-columns:1fr}.fd-quote{min-height:380px}.fd-table{margin-top:150px}}
 @media(prefers-reduced-motion:reduce){.fd *{transition:none!important}}
 
-/* ===== videopaneelit: avautuva paneeli, hover avaa, muuten video loppuun ja seuraava ===== */
-.vp{padding-block:clamp(56px,7vw,100px)}
-.vp-row{display:flex;gap:14px;height:clamp(460px,42vw,600px)}
-.vp-p{position:relative;flex:0 0 clamp(96px,10vw,150px);border-radius:var(--radius-lg);overflow:hidden;background:var(--ink);cursor:pointer;transition:flex-basis 700ms cubic-bezier(.2,0,0,1),flex-grow 700ms cubic-bezier(.2,0,0,1)}
-.vp-p.on{flex:1 1 auto;cursor:default}
-.vp-p video,.vp-p img.ps{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.vp-p::after{content:"";position:absolute;inset:0;background:rgb(62 37 32 / .28);transition:opacity 460ms cubic-bezier(0,0,.2,1);pointer-events:none}
-.vp-p.on::after{opacity:.35}
-.vp-body{position:absolute;left:clamp(20px,2.4vw,36px);top:clamp(20px,2.4vw,36px);right:clamp(20px,2.4vw,36px);z-index:2;color:var(--bg);max-width:30ch;opacity:0;transform:translateY(10px);transition:opacity 460ms cubic-bezier(0,0,.2,1),transform 460ms cubic-bezier(0,0,.2,1)}
-.vp-p.on .vp-body{opacity:1;transform:none;transition-delay:260ms}
-.vp-body h3{font-family:var(--fd);font-weight:600;font-size:clamp(28px,3vw,44px);letter-spacing:-.02em;line-height:1;margin:0 0 12px}
-.vp-body p{margin:0;font-size:16px;line-height:1.4;font-weight:500}
-.vp-lab{position:absolute;left:clamp(18px,2vw,28px);bottom:clamp(20px,2.4vw,32px);z-index:2;color:var(--bg);font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,28px);letter-spacing:-.01em;white-space:nowrap;writing-mode:vertical-rl;transform:rotate(180deg);transition:opacity 260ms cubic-bezier(0,0,.2,1)}
-.vp-p.on .vp-lab{opacity:0}
-.vp-bar{position:absolute;left:clamp(20px,2.4vw,36px);right:clamp(20px,2.4vw,36px);bottom:clamp(20px,2.4vw,32px);height:3px;border-radius:3px;background:rgb(236 236 220 / .3);z-index:2;opacity:0;transition:opacity 260ms}
+/* ===== videokaruselli (Sierra-tyyli): aktiivinen keskellä, naapurit kurkistavat reunoilta ===== */
+.vp{padding-block:clamp(64px,8vw,120px);overflow:hidden}
+.vp-head{text-align:center;max-width:820px;margin:0 auto clamp(36px,4.5vw,64px);padding-inline:var(--side)}
+.vp-head .disp{margin:0 auto}
+.vp-head p{margin:18px auto 0;font-size:18px;color:var(--ink-muted)}
+.vp-stage{position:relative;height:clamp(420px,44vw,640px)}
+.vp-s{--w:64vw;position:absolute;top:0;height:100%;width:var(--w);left:calc(50% - var(--w) / 2);border-radius:var(--radius-lg);overflow:hidden;background:var(--ink);cursor:pointer;transition:left 800ms cubic-bezier(.2,0,0,1),width 800ms cubic-bezier(.2,0,0,1),opacity 500ms}
+.vp-s[data-pos="0"]{cursor:default;z-index:2}
+.vp-s[data-pos="-1"]{--w:24vw;left:calc(50% - 32vw - 16px - 24vw)}
+.vp-s[data-pos="1"]{--w:24vw;left:calc(50% + 32vw + 16px)}
+.vp-s video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vp-pill,.vp-chat,.vp-btn{position:absolute;z-index:3;opacity:0;transition:opacity 400ms cubic-bezier(0,0,.2,1)}
+.vp-s[data-pos="0"] .vp-pill,.vp-s[data-pos="0"] .vp-chat,.vp-s[data-pos="0"] .vp-btn{opacity:1;transition-delay:450ms}
+.vp-pill{left:18px;top:18px;display:inline-flex;align-items:center;gap:8px;background:rgb(62 37 32 / .55);color:var(--bg);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:500}
+.vp-pill::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--bg)}
+.vp-chat{right:clamp(16px,2vw,28px);bottom:clamp(16px,2vw,28px);width:min(280px,60%);background:var(--surface);color:var(--ink);border-radius:16px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start}
+.vp-chat img{width:28px;height:28px;flex:none}
+.vp-chat small{display:block;font-size:12px;color:var(--ink-muted);margin-bottom:3px}
+.vp-chat b{display:block;font-size:15px;font-weight:500;line-height:1.35}
+.vp-btn{left:18px;bottom:18px;width:36px;height:36px;border-radius:999px;border:0;background:rgb(62 37 32 / .55);color:var(--bg);display:grid;place-items:center;cursor:pointer;padding:0}
+.vp-btn svg{width:14px;height:14px;fill:currentColor}
+.vp-bar{position:absolute;left:66px;right:clamp(16px,2vw,28px);bottom:34px;height:3px;border-radius:3px;background:rgb(236 236 220 / .3);z-index:3;opacity:0;transition:opacity 300ms}
 .vp-bar i{display:block;height:100%;width:0;border-radius:inherit;background:var(--bg)}
-.vp-p.on .vp-bar{opacity:1}
+.vp-s[data-pos="0"] .vp-bar{opacity:0}
 @media(max-width:760px){
-  .vp-row{flex-direction:column;height:auto}
-  .vp-p{flex:0 0 72px;transition:flex-basis 600ms cubic-bezier(.2,0,0,1)}
-  .vp-p.on{flex:0 0 420px}
-  .vp-lab{writing-mode:horizontal-tb;transform:none;left:20px;bottom:auto;top:22px}
+  .vp-stage{height:520px}
+  .vp-s{--w:82vw}
+  .vp-s[data-pos="-1"]{--w:82vw;left:calc(50% - 41vw - 12px - 82vw)}
+  .vp-s[data-pos="1"]{--w:82vw;left:calc(50% + 41vw + 12px)}
+  .vp-chat{width:calc(100% - 32px);bottom:66px}
 }
-@media(prefers-reduced-motion:reduce){.vp-p,.vp-body,.vp-lab{transition:none}}
+@media(prefers-reduced-motion:reduce){.vp-s,.vp-pill,.vp-chat,.vp-btn{transition:none}}
 </style>
 </head>
 <body>
@@ -691,26 +699,31 @@ section.fd{background:var(--blue)}
 
 <main id="sisalto">
 
-<!-- VIDEOPANEELIT -->
+<!-- VIDEOKARUSELLI -->
 <section class="band vp" id="videot">
-  <div class="wrap">
-    <div class="vp-row" id="vpRow">
-      <article class="vp-p on" data-i="0">
+  <div class="vp-head">
+    <h2 class="disp m">Kirppisarki, joka sujuu</h2>
+    <p>Omistaja, myyjä ja ostaja samassa järjestelmässä.</p>
+  </div>
+  <div class="vp-stage" id="vpStage">
+      <article class="vp-s" data-i="0" data-pos="0">
         <video muted playsinline preload="metadata" poster="assets/video/04_hero_poster.jpg"><source src="assets/video/04_hero.mp4" type="video/mp4"></video>
-        <div class="vp-body"><h3>Kirppiksen omistaja</h3><p>Kassa, varaukset ja tilitykset yhdessä paikassa.</p></div>
-        <span class="vp-lab">Omistaja</span><span class="vp-bar"><i></i></span>
+        <span class="vp-pill">Kirppiksen omistaja</span>
+        <div class="vp-chat"><img src="assets/ikoni/ReSella_ikoni_pilvi_ruskea.svg" alt=""><div><small>Ilmoitus</small><b>Kaikki myyjät tilitetty yhdellä tiedostolla.</b></div></div>
+        <button class="vp-btn" aria-label="Tauko"><svg viewBox="0 0 14 14"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></svg></button>
       </article>
-      <article class="vp-p" data-i="1">
+      <article class="vp-s" data-i="1" data-pos="1">
         <video muted playsinline preload="metadata" poster="assets/video/04_hero_poster.jpg"><source src="assets/video/04_hero.mp4" type="video/mp4"></video>
-        <div class="vp-body"><h3>Myyjä</h3><p>Varaa pöytä, hinnoittele puhelimella ja seuraa myyntiäsi.</p></div>
-        <span class="vp-lab">Myyjä</span><span class="vp-bar"><i></i></span>
+        <span class="vp-pill">Myyjä</span>
+        <div class="vp-chat"><img src="assets/ikoni/ReSella_ikoni_pilvi_ruskea.svg" alt=""><div><small>Ilmoitus</small><b>Villapaitasi myytiin juuri pöydästä 14.</b></div></div>
+        <button class="vp-btn" aria-label="Tauko"><svg viewBox="0 0 14 14"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></svg></button>
       </article>
-      <article class="vp-p" data-i="2">
+      <article class="vp-s" data-i="2" data-pos="-1">
         <video muted playsinline preload="metadata" poster="assets/video/04_hero_poster.jpg"><source src="assets/video/04_hero.mp4" type="video/mp4"></video>
-        <div class="vp-body"><h3>Ostaja</h3><p>Näe kirppisten hyllyt netissä ja varaa löytösi.</p></div>
-        <span class="vp-lab">Ostaja</span><span class="vp-bar"><i></i></span>
+        <span class="vp-pill">Ostaja</span>
+        <div class="vp-chat"><img src="assets/ikoni/ReSella_ikoni_pilvi_ruskea.svg" alt=""><div><small>Ilmoitus</small><b>Takki on varattu sinulle noudettavaksi.</b></div></div>
+        <button class="vp-btn" aria-label="Tauko"><svg viewBox="0 0 14 14"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></svg></button>
       </article>
-    </div>
   </div>
 </section>
 
@@ -1318,23 +1331,25 @@ section.fd{background:var(--blue)}
 })();
 </script>
 <script>
-/* videopaneelit: hover avaa paneelin, muuten video toistuu loppuun ja seuraava avautuu */
+/* videokaruselli: aktiivinen video toistuu loppuun ja seuraava liukuu keskelle; hover tai klikkaus naapuriin siirtää sen keskelle */
 (function(){
-  var row=document.getElementById('vpRow'); if(!row) return;
-  var ps=[].slice.call(row.querySelectorAll('.vp-p')), vs=ps.map(function(p){return p.querySelector('video');}), bars=ps.map(function(p){return p.querySelector('.vp-bar i');});
+  var st=document.getElementById('vpStage'); if(!st) return;
+  var sl=[].slice.call(st.querySelectorAll('.vp-s')), vs=sl.map(function(e){return e.querySelector('video');}), n=sl.length;
   var reduce=false; try{reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;}catch(e){}
-  var cur=0, visible=false, raf=0;
-  function open(i){ if(i===cur && ps[i].classList.contains('on')) return;
-    ps.forEach(function(p,k){ p.classList.toggle('on',k===i); if(k!==i){ vs[k].pause(); } });
-    cur=i; vs[i].currentTime=0; if(visible && !reduce){ var pr=vs[i].play(); if(pr&&pr.catch) pr.catch(function(){}); } }
-  vs.forEach(function(v,i){ v.addEventListener('ended',function(){ if(i===cur) open((cur+1)%ps.length); }); });
-  ps.forEach(function(p,i){
-    p.addEventListener('mouseenter',function(){ if(matchMedia('(hover:hover)').matches) open(i); });
-    p.addEventListener('click',function(){ open(i); });
+  var cur=0, visible=false, paused=reduce;
+  function place(){ sl.forEach(function(e,i){ var d=((i-cur)%n+n)%n; if(d===n-1) d=-1; e.setAttribute('data-pos',d); }); }
+  function play(){ var v=vs[cur]; if(visible && !paused){ var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); } else v.pause(); }
+  function go(i){ if(i===cur) return; vs[cur].pause(); cur=i; place(); vs[cur].currentTime=0; play(); }
+  vs.forEach(function(v,i){ v.addEventListener('ended',function(){ if(i===cur) go((cur+1)%n); }); });
+  sl.forEach(function(e,i){
+    e.addEventListener('mouseenter',function(){ if(matchMedia('(hover:hover)').matches && i!==cur) go(i); });
+    e.addEventListener('click',function(ev){ if(ev.target.closest('.vp-btn')) return; go(i); });
+    var btn=e.querySelector('.vp-btn');
+    btn.addEventListener('click',function(){ paused=!paused; btn.setAttribute('aria-label',paused?'Toista':'Tauko');
+      btn.innerHTML=paused?'<svg viewBox="0 0 14 14"><path d="M3 1.5v11l9-5.5z"/></svg>':'<svg viewBox="0 0 14 14"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></svg>'; play(); });
   });
-  function tick(){ var v=vs[cur]; if(v.duration) bars[cur].style.width=(v.currentTime/v.duration*100)+'%'; raf=requestAnimationFrame(tick); }
-  if(!reduce){ raf=requestAnimationFrame(tick); }
-  try{ new IntersectionObserver(function(es){ visible=es[0].isIntersecting; var v=vs[cur]; if(visible && !reduce){ var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); } else v.pause(); },{threshold:.35}).observe(row); }catch(e){}
+  place();
+  try{ new IntersectionObserver(function(es){ visible=es[0].isIntersecting; play(); },{threshold:.35}).observe(st); }catch(e){ visible=true; play(); }
 })();
 </script>
 </body>
