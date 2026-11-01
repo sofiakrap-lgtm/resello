@@ -646,10 +646,12 @@ section.fd{background:var(--blue)}
 @media(prefers-reduced-motion:reduce){.vp-s,.vp-pill,.vp-chat,.vp-btn{transition:none}}
 
 /* ===== loppuosa: pieni teksti, nappi ja jättiotsikko ===== */
-.end{padding:clamp(80px,10vw,160px) 0 clamp(24px,3vw,48px);text-align:center;overflow:hidden}
+.end{padding:clamp(80px,10vw,160px) 0 clamp(24px,3vw,48px);text-align:center;overflow:hidden;background:var(--red);color:var(--on-red)}
+.end .btn{background:var(--on-red);color:var(--ink)}
+.end .btn:hover{background:var(--surface);color:var(--ink)}
 .end-in{display:flex;flex-direction:column;align-items:center;gap:20px;padding-inline:var(--side)}
-.end-lead{margin:0;max-width:30ch;font-size:16px;line-height:1.4;color:var(--ink-muted)}
-.end-big{margin:clamp(48px,7vw,110px) 0 0;font-family:var(--fd);font-weight:400;font-size:9vw;line-height:.95;letter-spacing:-.045em;white-space:nowrap;color:var(--ink)}
+.end-lead{margin:0;max-width:30ch;font-size:16px;line-height:1.4;color:rgb(236 236 220 / .8)}
+.end-big{margin:clamp(48px,7vw,110px) 0 0;font-family:var(--fd);font-weight:700;font-size:9vw;line-height:.95;letter-spacing:-.045em;white-space:nowrap;color:var(--on-red)}
 </style>
 </head>
 <body>
@@ -1034,7 +1036,7 @@ section.fd{background:var(--blue)}
     <p class="end-lead">30 minuutin demo, jossa näet oman kirppiksesi ReSellassa.</p>
     <a class="btn s" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a>
   </div>
-  <h2 class="end-big">Rakennetaanko yhdessä?</h2>
+  <h2 class="end-big">rakennetaanko yhdessä?</h2>
 </section>
 
 </main>
