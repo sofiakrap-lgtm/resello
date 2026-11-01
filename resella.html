@@ -315,6 +315,7 @@ section[id]{scroll-margin-top:72px}
 .chip-a{top:clamp(30px,4vw,60px);left:clamp(14px,2vw,30px)}
 .chip-b{bottom:clamp(30px,4vw,56px);right:clamp(14px,2vw,30px)}
 .bento-phone{grid-column:2;grid-row:1/3;background:var(--line);display:flex;align-items:center;justify-content:center;padding:clamp(40px,5vw,72px) clamp(24px,3vw,48px)}
+.bp-img{width:min(100%,340px);height:auto}
 .bp-frame{width:min(100%,300px);aspect-ratio:9/18.5;background:var(--brown-hover);border-radius:clamp(30px,3vw,42px);padding:10px}
 .bp-screen{width:100%;height:100%;background:var(--blue);border-radius:clamp(22px,2.4vw,34px);overflow:hidden;padding:clamp(16px,2vw,22px);display:flex;flex-direction:column;gap:14px;color:var(--ink)}
 .bp-head{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
@@ -327,7 +328,7 @@ section[id]{scroll-margin-top:72px}
 @media(max-width:860px){
   .bento-grid{grid-template-columns:1fr}
   .bt-cart,.bento-shot,.bento-phone{grid-column:1;grid-row:auto}
-  .bp-frame{width:min(100%,280px)}
+  .bp-img{width:min(100%,280px)}
 }
 /* luotettavuus */
 .tcol h3{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:19px;margin-bottom:4px;display:flex;align-items:center;gap:10px}
@@ -704,19 +705,8 @@ section.en{padding-block:0}
         <div class="bento-chip chip-a"><small>Myyjälle</small><b class="n">+20,00 €</b></div>
         <div class="bento-chip chip-b"><small>Omistajalle</small><b>Myynti kasvaa</b></div>
       </div>
-      <div class="bento-phone" aria-hidden="true">
-        <div class="bp-frame">
-          <div class="bp-screen">
-            <div class="bp-head"><span class="bp-logo"><svg viewBox="0 0 100 100" width="20" height="20" aria-hidden="true"><circle cx="34" cy="50" r="12" fill="#3E2520"/><circle cx="66" cy="50" r="12" fill="#3E2520"/></svg></span>Myyjänäkymä</div>
-            <div class="bp-big"><small>Myynti tänään</small><b>+20,00 €</b></div>
-            <div class="bp-list">
-              <div class="bp-li"><span>Villapaita</span><b>12,00 €</b></div>
-              <div class="bp-li"><span>Lastenkirja</span><b>4,00 €</b></div>
-              <div class="bp-li"><span>Huivi</span><b>4,00 €</b></div>
-            </div>
-            <div class="bp-note">Malli tulossa</div>
-          </div>
-        </div>
+      <div class="bento-phone">
+        <img class="bp-img" src="assets/kuvat/kuluttaja-app-puhelin.webp" alt="ReSella-sovellus puhelimessa: Tee helppoja löytöjä" loading="lazy">
       </div>
     </div>
   </div>
