@@ -192,12 +192,8 @@ section[id]{scroll-margin-top:72px}
 .caro-eyebrow:hover{background:transparent;color:var(--ink)}
 .caro-title{font-family:var(--fd);font-weight:600;letter-spacing:-.035em;font-size:clamp(40px,17.71px + 5.714vw,100px);line-height:.95;margin:0;max-width:1000px;text-align:center;text-wrap:balance}
 .caro-nav{display:flex;gap:16px;flex:none;align-items:center}
-.caro-dots{display:flex;align-items:center;gap:8px}
-.caro-dots .d{width:7px;height:7px;flex:none;border-radius:999px;background:var(--line);position:relative;overflow:hidden;transition:width .45s var(--ease-out),background-color .3s linear}
-.caro-dots .d.on{width:34px;background:var(--line)}
-.caro-dots .d .f{position:absolute;inset:0;border-radius:999px;background:var(--ink);transform-origin:left center;transform:scaleX(0)}
-.caro-dots .d.on .f{transform:scaleX(var(--p,0))}
-@media(prefers-reduced-motion:reduce){.caro-dots .d.on .f{transform:scaleX(1)}}
+.caro-bar{position:relative;width:clamp(100px,13vw,180px);height:5px;border-radius:999px;background:rgba(62,37,32,.12);overflow:hidden}
+.caro-bar .fill{position:absolute;left:0;top:0;height:100%;width:0;border-radius:999px;background:rgba(62,37,32,.42)}
 .caro-btn{width:46px;height:46px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);display:grid;place-items:center;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-out)}
 .caro-btn:hover{background:var(--brown-hover)}
 .caro-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -347,10 +343,12 @@ section[id]{scroll-margin-top:72px}
 .rotary{margin-top:clamp(32px,4vw,56px);position:relative;overflow:hidden}
 .rotary-stage{position:relative;height:clamp(360px,42vw,480px);max-width:1200px;margin-inline:auto}
 .rcard{position:absolute;left:50%;top:0;width:clamp(230px,27vw,310px);height:clamp(360px,42vw,480px);margin-left:calc(clamp(230px,27vw,310px) / -2);background:var(--surface);border-radius:var(--radius-lg);overflow:hidden;transform-origin:50% 220%;transition:transform .35s var(--ease-std),opacity .35s var(--ease-std);display:flex;flex-direction:column;will-change:transform,opacity}
-.rcard img{width:100%;height:46%;object-fit:cover;object-position:center;display:block;transform:scale(1.04)}
-.rc-body{padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:10px;flex:1}
-.rc-body h3{font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,24px);letter-spacing:-.01em;line-height:1.1;margin:0}
-.rc-body p{font-size:16px;font-weight:500;line-height:1.4;color:var(--ink-muted);margin:0}
+.rcard img{width:100%;height:50%;object-fit:cover;object-position:center;display:block;transform:scale(1.04)}
+.rc-body{height:50%;padding:clamp(22px,2.4vw,30px);display:flex;flex-direction:column;justify-content:center;gap:9px;background:var(--blue)}
+.rc-body h3{font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,24px);letter-spacing:-.01em;line-height:1.1;margin:0;color:var(--ink)}
+.rc-body p{font-size:16px;font-weight:500;line-height:1.4;color:rgba(62,37,32,.72);margin:0}
+.rot-head{margin-bottom:clamp(40px,6vw,86px)}
+#tarinat{padding-top:clamp(110px,15vw,190px)}
 .rotary-ctrl{position:relative;z-index:5;display:flex;align-items:center;justify-content:center;gap:clamp(16px,2.2vw,24px);margin-top:clamp(48px,7vw,92px)}
 .rot-arrow{width:34px;height:34px;background:none;border:0;color:var(--ink);display:grid;place-items:center;cursor:pointer;flex:none;transition:opacity var(--dur-fast) var(--ease-std)}
 .rot-arrow:hover{opacity:.6}
@@ -555,7 +553,7 @@ section.en{padding-block:0}
       </div>
       <div class="caro-nav" id="caroNav">
         <button class="caro-btn" data-dir="-1" aria-label="Edellinen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <div class="caro-dots" id="caroDots" aria-hidden="true"></div>
+        <div class="caro-bar" id="caroBar" aria-hidden="true"><span class="fill"></span></div>
         <button class="caro-btn" data-dir="1" aria-label="Seuraava"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
     </div>
@@ -873,9 +871,8 @@ section.en{padding-block:0}
 <!-- ASIAKASTARINAT (kaarikaruselli) -->
 <section class="band" id="tarinat">
   <div class="wrap">
-    <div class="shead ctr">
+    <div class="shead ctr rot-head">
       <h2 class="disp m">Tutustu ominaisuuksiin</h2>
-      <p class="sub">Jokainen osa on tehty kirppistä varten.</p>
     </div>
   </div>
   <div class="rotary" id="rotary">
@@ -914,9 +911,9 @@ section.en{padding-block:0}
       </article>
     </div>
     <div class="rotary-ctrl">
-      <button class="rot-arrow" type="button" data-dir="-1" aria-label="Edellinen tarina"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
-      <div class="rot-dots" role="tablist" aria-label="Tarinat"></div>
-      <button class="rot-arrow" type="button" data-dir="1" aria-label="Seuraava tarina"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+      <button class="caro-btn" type="button" data-dir="-1" aria-label="Edellinen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="caro-bar" id="rotBar" aria-hidden="true"><span class="fill"></span></div>
+      <button class="caro-btn" type="button" data-dir="1" aria-label="Seuraava"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
   </div>
 </section>
@@ -1090,44 +1087,38 @@ section.en{padding-block:0}
   var rot=document.getElementById('rotary');
   if(rot){
     var rcards=Array.prototype.slice.call(rot.querySelectorAll('.rcard'));
-    var dotsWrap=rot.querySelector('.rot-dots');
-    var arrows=rot.querySelectorAll('.rot-arrow');
+    var arrows=rot.querySelectorAll('.caro-btn');
+    var rfill=document.querySelector('#rotBar .fill');
     var N=rcards.length, active=0;
-    rcards.forEach(function(c,i){
-      var d=document.createElement('button'); d.type='button'; d.setAttribute('role','tab');
-      d.setAttribute('aria-label','Ominaisuus '+(i+1));
-      d.addEventListener('click',function(){ active=i; rlayout(); });
-      dotsWrap.appendChild(d);
-    });
-    var rdots=Array.prototype.slice.call(dotsWrap.children);
     function circOff(i){ var d=((i-active)%N+N)%N; if(d>N/2) d-=N; return d; } // lyhin kehasuunta, pyorii aina ympari
     function rlayout(){
       rcards.forEach(function(c,i){
         var off=circOff(i), ao=Math.abs(off), vis=ao<=1;
-        var voff=Math.max(-2,Math.min(2,off)); // piilokortit odottavat juuri naapurien takana, ei pitkaa pyyhkaisya
-        c.style.transform='rotate('+(voff*20)+'deg) scale('+(1-Math.min(ao,2)*0.13)+')';
+        var voff=Math.max(-2,Math.min(2,off)); // piilokortit odottavat juuri naapurien takana
+        c.style.transform='rotate('+(voff*30)+'deg) scale('+(1-Math.min(ao,2)*0.15)+')'; // giveasyn kaari: 30 astetta, -0.15
         c.style.opacity=vis?'1':'0';
         c.style.zIndex=String(100-ao);
         c.style.pointerEvents=off===0?'auto':'none';
         if(vis){ c.removeAttribute('aria-hidden'); c.removeAttribute('inert'); }
         else{ c.setAttribute('aria-hidden','true'); c.setAttribute('inert',''); }
       });
-      rdots.forEach(function(d,i){ d.setAttribute('aria-current', i===active?'true':'false'); });
     }
     function rgo(dir){ active=((active+dir)%N+N)%N; rlayout(); } // ei paatepistetta
-    // automaattinen eteneminen: valittu kortti "juoksee", pysahtyy kun kayttaja koskee
+    // sama kuin ominaisuudet: juokseva palkki tayttyy ja astuu seuraavaan
     var rReduce=false; try{ rReduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
-    var rTimer=null;
-    function rPlay(){ if(rReduce||rTimer) return; rTimer=setInterval(function(){ rgo(1); },3600); }
-    function rStop(){ if(rTimer){ clearInterval(rTimer); rTimer=null; } }
-    function rBump(){ rStop(); setTimeout(rPlay,6000); } // jatkaa itsestaan hetken kuluttua
-    arrows.forEach(function(a){ a.addEventListener('click',function(){ rgo(parseInt(a.getAttribute('data-dir'),10)); rBump(); }); });
-    rdots.forEach(function(d,i){ d.addEventListener('click',rBump); });
-    rot.addEventListener('mouseenter',rStop); rot.addEventListener('mouseleave',rPlay);
+    var rDWELL=3800, rElapsed=0, rLast=0, rPaused=false, rRaf=null;
+    function rSetFill(p){ if(rfill) rfill.style.width=(Math.max(0,Math.min(1,p))*100).toFixed(1)+'%'; }
+    function rLoop(now){ var dt=now-(rLast||now); rLast=now;
+      if(!rPaused){ rElapsed+=dt; var p=rElapsed/rDWELL; if(p>=1){ rElapsed=0; rSetFill(0); rgo(1); } else rSetFill(p); }
+      rRaf=requestAnimationFrame(rLoop);
+    }
+    function rManual(dir){ rElapsed=0; rSetFill(0); rgo(dir); }
+    arrows.forEach(function(a){ a.addEventListener('click',function(){ rManual(parseInt(a.getAttribute('data-dir'),10)); }); });
+    rot.addEventListener('mouseenter',function(){ rPaused=true; }); rot.addEventListener('mouseleave',function(){ rPaused=false; });
     var rsx=null;
-    rot.addEventListener('touchstart',function(e){ rsx=e.touches[0].clientX; rStop(); },{passive:true});
-    rot.addEventListener('touchend',function(e){ if(rsx==null)return; var dx=e.changedTouches[0].clientX-rsx; if(Math.abs(dx)>40) rgo(dx<0?1:-1); rsx=null; rBump(); });
-    rlayout(); rPlay();
+    rot.addEventListener('touchstart',function(e){ rsx=e.touches[0].clientX; rPaused=true; },{passive:true});
+    rot.addEventListener('touchend',function(e){ if(rsx==null)return; var dx=e.changedTouches[0].clientX-rsx; if(Math.abs(dx)>40) rManual(dx<0?1:-1); rsx=null; },{passive:true});
+    rlayout(); if(!rReduce){ rRaf=requestAnimationFrame(rLoop); } else { rSetFill(1); }
   }
   // hinnoittelu: liikevaihtopohjainen laskuri, kayttaja syottaa oman myynnin
   var pVal=document.getElementById('priceVal'), pSales=document.getElementById('priceSales'), revInput=document.getElementById('revInput');
@@ -1163,35 +1154,27 @@ section.en{padding-block:0}
     originals.forEach(function(c){ track.appendChild(c.cloneNode(true)); });
     var oneSet=0;
     function measure(){ var all=track.querySelectorAll('.caro-card'); if(all.length>originals.length){ oneSet=all[originals.length].offsetLeft-all[0].offsetLeft; } }
-    measure(); addEventListener('resize',function(){ measure(); updateDots(); });
+    measure(); addEventListener('resize',measure);
     function normalize(){ if(oneSet>0){ if(track.scrollLeft>=oneSet){ track.scrollLeft-=oneSet; } else if(track.scrollLeft<0){ track.scrollLeft+=oneSet; } } }
     var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
-    // pistenaytto: aktiivinen pilleri tayttyy ja astuu loivasti oikealle
-    var dotsWrap=document.getElementById('caroDots'), dots=[], NDOT=Math.min(originals.length,5), curIdx=-1;
-    if(dotsWrap){ for(var k=0;k<NDOT;k++){ var dd=document.createElement('span'); dd.className='d'; var ff=document.createElement('span'); ff.className='f'; dd.appendChild(ff); dotsWrap.appendChild(dd); dots.push(dd); } }
-    function updateDots(){
-      if(!dots.length||oneSet<=0) return;
-      var step=oneSet/NDOT, pos=((track.scrollLeft % oneSet)+oneSet)%oneSet;
-      var idx=Math.floor(pos/step)%NDOT, p=(pos-idx*step)/step; if(p<0)p=0; if(p>1)p=1;
-      if(idx!==curIdx){ if(curIdx>=0&&dots[curIdx]) dots[curIdx].classList.remove('on'); dots[idx].classList.add('on'); curIdx=idx; }
-      dots[idx].style.setProperty('--p', p.toFixed(3));
+    // kortit paikallaan, juokseva palkki tayttyy vasemmalta oikealle ja astuu sitten seuraavaan
+    var fill=document.querySelector('#caroBar .fill');
+    var DWELL=3800, elapsed=0, last=0, paused=false, stepping=false, raf=null;
+    function cardStep(){ var gap=parseFloat(getComputedStyle(track).gap)||20; return originals[0].offsetWidth+gap; }
+    function step(dir){ stepping=true; track.scrollBy({left:dir*cardStep(),behavior:'smooth'}); setTimeout(function(){ normalize(); stepping=false; },540); }
+    function setFill(p){ if(fill) fill.style.width=(Math.max(0,Math.min(1,p))*100).toFixed(1)+'%'; }
+    function loop(now){
+      var dt=now-(last||now); last=now;
+      if(!paused && !stepping){ elapsed+=dt; var p=elapsed/DWELL; if(p>=1){ elapsed=0; setFill(0); step(1); } else setFill(p); }
+      raf=requestAnimationFrame(loop);
     }
-    var raf=null, paused=false, speed=0.9;
-    function frame(){ if(!paused){ track.scrollLeft+=speed; normalize(); } updateDots(); raf=requestAnimationFrame(frame); }
-    var caroNav=document.getElementById('caroNav');
-    function startAuto(){ if(reduce) return; paused=false; if(caroNav) caroNav.classList.remove('paused'); if(!raf){ raf=requestAnimationFrame(frame); } }
-    function pauseAuto(){ paused=true; if(caroNav) caroNav.classList.add('paused'); }
-    function manual(dir){
-      var gap=parseFloat(getComputedStyle(track).columnGap||getComputedStyle(track).gap)||14;
-      var w=originals[0].offsetWidth+gap;
-      pauseAuto(); track.scrollBy({left:dir*w,behavior:'smooth'});
-      setTimeout(function(){ normalize(); startAuto(); },520);
-    }
-    document.querySelectorAll('.caro-btn').forEach(function(b){ b.addEventListener('click',function(){ manual(parseInt(b.getAttribute('data-dir'),10)); }); });
+    function manual(dir){ elapsed=0; setFill(0); step(dir); }
+    document.querySelectorAll('#caroNav .caro-btn').forEach(function(b){ b.addEventListener('click',function(){ manual(parseInt(b.getAttribute('data-dir'),10)); }); });
     var sec=document.getElementById('ominaisuudet');
-    if(sec){ sec.addEventListener('mouseenter',pauseAuto); sec.addEventListener('mouseleave',startAuto); }
-    track.addEventListener('touchstart',pauseAuto,{passive:true});
-    updateDots(); startAuto();
+    function pause(){ paused=true; } function play(){ paused=false; }
+    if(sec){ sec.addEventListener('mouseenter',pause); sec.addEventListener('mouseleave',play); }
+    track.addEventListener('touchstart',pause,{passive:true});
+    if(!reduce){ raf=requestAnimationFrame(loop); } else { setFill(1); }
   }
 })();
 </script>
