@@ -299,51 +299,52 @@ section[id]{scroll-margin-top:72px}
   .rm-node.n1 .rm-dot{width:14px;height:14px}
   .rm-t p{max-width:none}
 }
-/* bento: kassatapahtuma (kollaasi: varilliset ruudut, tyyny-kuva, kelluvat kortit) */
-.bento-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto;margin-top:clamp(40px,5vw,72px);border-radius:var(--radius-lg);overflow:hidden}
-.bt-cart{grid-column:1;grid-row:1;background:var(--line);padding:clamp(40px,5vw,72px) clamp(24px,4vw,64px);display:grid;place-items:center}
-.bento-cart{--cp:clamp(20px,2.2vw,28px);width:min(100%,400px);background:var(--surface);border-radius:var(--radius-lg);padding:var(--cp);display:flex;flex-direction:column;gap:14px}
+/* bento: kassatapahtuma (Figman asettelu 1440 x 1055, skaalautuu leveyden mukaan) */
+.bento-sec{padding-inline:0}
+.bk-stage{position:relative;max-width:1440px;margin:0 auto;overflow:hidden;border-radius:20px;background:var(--line)}
+.bk-in{position:relative;width:1440px;height:1055px;transform-origin:0 0}
+.bk-in>*{position:absolute}
+.bk-wm{width:1308px;height:auto;pointer-events:none;user-select:none}
+.bk-wm.w1{left:756px;top:-45px}
+.bk-wm.w2{left:-679px;top:698px}
+.bk-img{left:182px;top:170px;width:478px;height:382px;border-radius:143px;overflow:hidden}
+.bk-img img{width:100%;height:100%;object-fit:cover;display:block}
+.bk-phone{left:889px;top:153px;width:385px;height:auto}
+.bento-cart{left:447px;top:639px;width:400px;--cp:28px;background:var(--surface);border-radius:20px;padding:var(--cp);display:flex;flex-direction:column;gap:14px}
 .bc-top{display:flex;justify-content:space-between;align-items:center;font-size:15px}
-.bc-top b{font-family:var(--fd);font-weight:600;font-size:clamp(18px,1.8vw,22px)}
+.bc-top b{font-family:var(--fd);font-weight:600;font-size:22px}
 .bc-top span{color:var(--ink-muted)}
 .bc-rows{display:flex;flex-direction:column;gap:11px;padding:14px var(--cp);margin-inline:calc(var(--cp) * -1);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .bc-row{display:flex;justify-content:space-between;font-size:16px;font-weight:500}
 .bc-total{display:flex;justify-content:space-between;align-items:baseline}
 .bc-total span{font-weight:500}
-.bc-total b{font-family:var(--fd);font-weight:600;font-size:clamp(22px,2.4vw,30px)}
-.bento-shot{grid-column:1;grid-row:2;position:relative;background:var(--line);padding:clamp(30px,3.2vw,46px) clamp(28px,2.8vw,40px) clamp(80px,8.8vw,127px) clamp(80px,9.2vw,132px)}
-.bs-img{position:relative;aspect-ratio:5/4;border-radius:30%;overflow:hidden}
-.bs-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.bento-chip{position:absolute;background:var(--surface);border-radius:var(--radius-lg);padding:clamp(14px,1.4vw,20px);display:flex;flex-direction:column;z-index:1}
+.bc-total b{font-family:var(--fd);font-weight:600;font-size:30px}
+.bento-chip{background:var(--surface);border-radius:20px;padding:20px;display:flex;flex-direction:column;z-index:1}
 .bento-chip small{font-size:12px;line-height:1.3;color:var(--ink-muted)}
 .bento-chip b{font-family:var(--fd);font-weight:600;color:var(--ink);line-height:1}
-.chip-a{width:clamp(150px,13vw,190px);aspect-ratio:1/.82;justify-content:space-between}
-.chip-a b.n{font-size:clamp(24px,2.4vw,32px);letter-spacing:-.02em;margin-top:auto;margin-bottom:6px}
+.chip-a{left:69px;top:93px;width:187px;height:154px;justify-content:space-between}
+.chip-a b.n{font-size:32px;letter-spacing:-.02em;margin-top:auto;margin-bottom:6px}
 .ch-dots{display:flex;gap:4px}
 .ch-dots i{width:12px;height:3px;border-radius:2px;background:var(--line)}
 .ch-dots i.on{width:18px;background:var(--ink)}
-.chip-b{width:clamp(210px,19vw,270px);gap:10px}
+.chip-b{left:577px;top:484px;width:270px;gap:10px}
 .ch-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .ch-pill{font-size:11px;font-weight:500;line-height:1;padding:6px 10px;border-radius:999px;background:var(--ink);color:var(--bg)}
-.chip-b b.t{font-size:clamp(20px,2vw,26px);letter-spacing:-.02em}
-@media(max-width:620px){.bento-shot{padding:64px 28px 72px}.chip-a{width:136px;aspect-ratio:auto;gap:14px;padding:12px;top:20px;left:12px}.chip-a b.n{font-size:22px}.chip-a small{display:none}.chip-b{width:190px;padding:12px;gap:6px;bottom:20px;right:12px}.chip-b b.t{font-size:18px}.chip-b>small{display:none}}
-.chip-a{top:clamp(24px,3.4vw,52px);left:clamp(14px,2vw,30px)}
-.chip-b{bottom:clamp(30px,4vw,56px);right:clamp(14px,2vw,30px)}
-.bento-phone{grid-column:2;grid-row:1/3;background:var(--line);display:flex;align-items:center;justify-content:center;padding:clamp(40px,5vw,72px) clamp(24px,3vw,48px)}
-.bp-img{width:min(100%,340px);height:auto}
-.bp-frame{width:min(100%,300px);aspect-ratio:9/18.5;background:var(--brown-hover);border-radius:clamp(30px,3vw,42px);padding:10px}
-.bp-screen{width:100%;height:100%;background:var(--blue);border-radius:clamp(22px,2.4vw,34px);overflow:hidden;padding:clamp(16px,2vw,22px);display:flex;flex-direction:column;gap:14px;color:var(--ink)}
-.bp-head{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
-.bp-big{background:var(--surface);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:4px}
-.bp-big small{font-size:12px;color:var(--ink-muted)}
-.bp-big b{font-family:var(--fd);font-weight:600;font-size:clamp(24px,3vw,32px)}
-.bp-list{background:var(--surface);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:9px}
-.bp-li{display:flex;justify-content:space-between;font-size:14px;font-weight:500}
-.bp-note{margin-top:auto;text-align:center;font-size:12px;color:var(--ink-muted)}
+.chip-b b.t{font-size:26px;letter-spacing:-.02em}
 @media(max-width:860px){
-  .bento-grid{grid-template-columns:1fr}
-  .bt-cart,.bento-shot,.bento-phone{grid-column:1;grid-row:auto}
-  .bp-img{width:min(100%,280px)}
+  .bk-stage{border-radius:0}
+  .bk-in{width:auto;height:auto!important;transform:none!important;display:grid;gap:24px;padding:48px 20px;grid-template-areas:"cart" "shot" "phone"}
+  .bk-in>*{position:relative;left:auto;top:auto}
+  .bk-wm{display:none}
+  .bento-cart{grid-area:cart;width:100%;max-width:420px;justify-self:center;--cp:22px}
+  .bk-img{grid-area:shot;width:100%;height:auto;aspect-ratio:5/4;border-radius:30%;margin:56px 0}
+  .chip-a{grid-area:shot;align-self:start;justify-self:start;width:150px;height:auto;gap:14px;padding:14px;z-index:2}
+  .chip-a b.n{font-size:24px;margin:0}
+  .chip-a small{display:none}
+  .chip-b{grid-area:shot;align-self:end;justify-self:end;width:210px;padding:14px;gap:6px;z-index:2}
+  .chip-b b.t{font-size:20px}
+  .chip-b>small{display:none}
+  .bk-phone{grid-area:phone;justify-self:center;width:min(300px,80%)}
 }
 /* luotettavuus */
 .tcol h3{font-family:var(--fd);font-stretch:125%;font-weight:500;font-size:19px;margin-bottom:4px;display:flex;align-items:center;gap:10px}
@@ -733,10 +734,12 @@ section.fd{background:var(--blue)}
 
 <!-- BENTO: kassatapahtuma -->
 <section class="band bento-sec" id="kassademo">
-  <div class="wrap">
-    <div class="shead ctr"><h2 class="disp m">Yksi piippaus, hyöty molemmille</h2></div>
-    <div class="bento-grid">
-      <div class="bt-cart">
+  <div class="bk-stage" id="bkStage">
+    <div class="bk-in" id="bkIn">
+      <img class="bk-wm w1" src="assets/logot/ReSella_sanamerkki_matala_ruskea.svg" alt="" aria-hidden="true">
+      <img class="bk-wm w2" src="assets/logot/ReSella_sanamerkki_matala_ruskea.svg" alt="" aria-hidden="true">
+      <div class="bk-img"><img src="assets/kuvat/02_kassa_maksu/09_maksu_kortti.jpg" alt="Asiakas maksaa kortilla kassalla" loading="lazy"></div>
+      <img class="bk-phone" src="assets/kuvat/kuluttaja-app-puhelin.webp" alt="ReSella-sovellus puhelimessa: Tee helppoja löytöjä" loading="lazy">
       <div class="bento-cart">
         <div class="bc-top"><b>Ostoskori</b><span>Pöytä 14</span></div>
         <div class="bc-rows">
@@ -746,22 +749,15 @@ section.fd{background:var(--blue)}
         </div>
         <div class="bc-total"><span>Yhteensä</span><b>51,00 €</b></div>
       </div>
+      <div class="bento-chip chip-a">
+        <span class="ch-dots" aria-hidden="true"><i></i><i class="on"></i><i></i></span>
+        <b class="n">+20,00 €</b>
+        <small>Myyjälle tilille, villapaita pöydästä 14</small>
       </div>
-      <div class="bento-shot">
-        <div class="bs-img"><img src="assets/kuvat/02_kassa_maksu/09_maksu_kortti.jpg" alt="Asiakas maksaa kortilla kassalla" loading="lazy"></div>
-        <div class="bento-chip chip-a">
-          <span class="ch-dots" aria-hidden="true"><i></i><i class="on"></i><i></i></span>
-          <b class="n">+20,00 €</b>
-          <small>Myyjälle tilille, villapaita pöydästä 14</small>
-        </div>
-        <div class="bento-chip chip-b">
-          <span class="ch-top"><small>Omistajalle</small><span class="ch-pill">Provisio</span></span>
-          <b class="t">Myynti kasvaa</b>
-          <small>Provisio kirjautuu jokaisesta piippauksesta</small>
-        </div>
-      </div>
-      <div class="bento-phone">
-        <img class="bp-img" src="assets/kuvat/kuluttaja-app-puhelin.webp" alt="ReSella-sovellus puhelimessa: Tee helppoja löytöjä" loading="lazy">
+      <div class="bento-chip chip-b">
+        <span class="ch-top"><small>Omistajalle</small><span class="ch-pill">Provisio</span></span>
+        <b class="t">Myynti kasvaa</b>
+        <small>Provisio kirjautuu jokaisesta piippauksesta</small>
       </div>
     </div>
   </div>
@@ -1262,6 +1258,15 @@ section.fd{background:var(--blue)}
     path.setAttribute('d',dd);
   }
   draw(); addEventListener('resize',draw); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(draw);
+})();
+</script>
+<script>
+/* kassaosio: Figman 1440 x 1055 -asettelu skaalataan leveyteen */
+(function(){
+  var st=document.getElementById('bkStage'), inn=document.getElementById('bkIn'); if(!st) return;
+  function fit(){ if(innerWidth<=860){ st.style.height=''; inn.style.transform=''; return; }
+    var k=st.clientWidth/1440; inn.style.transform='scale('+k+')'; st.style.height=(1055*k)+'px'; }
+  fit(); addEventListener('resize',fit); if(window.ResizeObserver) new ResizeObserver(fit).observe(st);
 })();
 </script>
 </body>
