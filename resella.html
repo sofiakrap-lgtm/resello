@@ -194,12 +194,11 @@ section[id]{scroll-margin-top:72px}
 .caro-nav{display:flex;gap:11px;flex:none;align-items:center}
 .caro-bar{position:relative;width:clamp(68px,8.6vw,120px);height:10px;border-radius:999px;background:rgba(62,37,32,.12);overflow:hidden}
 .caro-bar .fill{position:absolute;left:0;top:0;height:100%;width:0;border-radius:999px;background:rgba(62,37,32,.42)}
-.caro-dot{width:10px;height:10px;border-radius:999px;flex:none}
-.caro-dot.on{background:rgba(62,37,32,.42)}
-.caro-dot.off{background:rgba(62,37,32,.12)}
-.caro-btn{width:46px;height:46px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);display:grid;place-items:center;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-out)}
-.caro-btn:hover{background:var(--brown-hover)}
-.caro-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.caro-btn{width:46px;height:46px;border-radius:999px;border:0;display:grid;place-items:center;cursor:pointer;flex:none;transition:opacity var(--dur-fast) var(--ease-out)}
+.caro-btn.l{background:rgba(62,37,32,.42);color:var(--bg)}
+.caro-btn.r{background:rgba(62,37,32,.12);color:var(--ink)}
+.caro-btn:hover{opacity:.82}
+.caro-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .caro-track{display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:4px;scrollbar-width:none}
 .caro-track::-webkit-scrollbar{display:none}
 .caro-card{flex:0 0 clamp(190px,18vw,232px);aspect-ratio:3/4;border-radius:var(--radius-card);overflow:hidden;position:relative;display:flex}
@@ -567,10 +566,10 @@ section.en{padding-block:0}
       <div>
         <h2 class="caro-title">Kaikki kirpputorin työkalut yhdessä paikassa</h2>
       </div>
-      <div class="caro-nav" id="caroNav" aria-hidden="true">
-        <span class="caro-dot on"></span>
-        <div class="caro-bar" id="caroBar"><span class="fill"></span></div>
-        <span class="caro-dot off"></span>
+      <div class="caro-nav" id="caroNav">
+        <button class="caro-btn l" type="button" data-dir="-1" aria-label="Edellinen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="caro-bar" id="caroBar" aria-hidden="true"><span class="fill"></span></div>
+        <button class="caro-btn r" type="button" data-dir="1" aria-label="Seuraava"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
     </div>
   </div>
@@ -776,10 +775,10 @@ section.en{padding-block:0}
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
     </div>
-    <div class="rotary-ctrl" aria-hidden="true">
-      <span class="caro-dot on"></span>
-      <div class="caro-bar" id="rotBar"><span class="fill"></span></div>
-      <span class="caro-dot off"></span>
+    <div class="rotary-ctrl">
+      <button class="caro-btn l" type="button" data-dir="-1" aria-label="Edellinen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="caro-bar" id="rotBar" aria-hidden="true"><span class="fill"></span></div>
+      <button class="caro-btn r" type="button" data-dir="1" aria-label="Seuraava"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
   </div>
 </section>
@@ -982,8 +981,11 @@ section.en{padding-block:0}
       if(!rPaused){ rElapsed+=dt; var p=rElapsed/rDWELL; if(p>=1){ rElapsed=0; rSetFill(0); rgo(1); } else rSetFill(p); }
       rRaf=requestAnimationFrame(rLoop);
     }
-    // liikkuu aina vain yhteen suuntaan. Palkki pyorii jatkuvasti, tauko vain aktiivisen vedon ajaksi (ei jumitu)
-    rot.addEventListener('pointerdown',function(){ rPaused=true; });
+    // sivunapit: klikkaus siirtaa kortteja ja nollaa palkin
+    function rManual(dir){ rElapsed=0; rSetFill(0); rgo(dir); }
+    rot.querySelectorAll('.caro-btn').forEach(function(a){ a.addEventListener('click',function(){ rManual(parseInt(a.getAttribute('data-dir'),10)); }); });
+    // palkki pyorii jatkuvasti, tauko vain aktiivisen vedon ajaksi (ei jumitu)
+    rot.addEventListener('pointerdown',function(e){ if(e.target.closest('.caro-btn'))return; rPaused=true; });
     addEventListener('pointerup',function(){ rPaused=false; }); addEventListener('pointercancel',function(){ rPaused=false; });
     rlayout(); if(!rReduce){ rRaf=requestAnimationFrame(rLoop); } else { rSetFill(1); }
   }
@@ -1035,7 +1037,10 @@ section.en{padding-block:0}
       if(!paused && !stepping){ elapsed+=dt; var p=elapsed/DWELL; if(p>=1){ elapsed=0; setFill(0); step(1); } else setFill(p); }
       raf=requestAnimationFrame(loop);
     }
-    // liikkuu aina vain yhteen suuntaan. Palkki pyorii jatkuvasti, tauko vain aktiivisen vedon ajaksi (ei jumitu)
+    // sivunapit: klikkaus siirtaa kortteja ja nollaa palkin
+    function manual(dir){ elapsed=0; setFill(0); step(dir); }
+    document.querySelectorAll('#caroNav .caro-btn').forEach(function(b){ b.addEventListener('click',function(){ manual(parseInt(b.getAttribute('data-dir'),10)); }); });
+    // palkki pyorii jatkuvasti, tauko vain aktiivisen vedon ajaksi (ei jumitu)
     function pause(){ paused=true; } function play(){ paused=false; }
     track.addEventListener('pointerdown',pause);
     addEventListener('pointerup',play); addEventListener('pointercancel',play);
