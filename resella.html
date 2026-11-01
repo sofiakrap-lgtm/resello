@@ -52,7 +52,7 @@ h1,h2,h3,p{margin:0}
 .ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:square;flex:none}
 /* layout */
 section{padding-block:clamp(56px,9vw,100px);position:relative}
-#ominaisuudet,#appi,#kayttoonotto{padding-top:clamp(100px,16vw,200px)}
+#ominaisuudet,#kayttoonotto{padding-top:clamp(100px,16vw,200px)}
 section[id]{scroll-margin-top:72px}
 .wrap{width:100%;max-width:calc(var(--wide) + 2 * var(--side));margin-inline:auto;padding-inline:var(--side)}
 .wrap.mid{max-width:calc(var(--mid) + 2 * var(--side))}
@@ -295,6 +295,17 @@ section[id]{scroll-margin-top:72px}
 .btn.red:hover{background:#A6341F}
 .mailrow{margin-top:14px;font-size:14px;color:var(--ink-muted)}
 .mailrow a{color:var(--ink);text-decoration:underline;text-underline-offset:.18em}
+.btn.l{--h:62px;--px:42px;--fs:19px}
+/* loppu-cta: nayttava brandivarinen panaani */
+.cta-final{background:var(--red);color:var(--on-red);position:relative;overflow:hidden;gap:14px;padding:clamp(56px,8vw,108px) clamp(24px,5vw,72px);box-shadow:0 34px 90px rgba(0,0,0,.36)}
+.cta-final .disp{color:var(--on-red);max-width:16ch}
+.cta-final .sub{color:rgba(236,236,220,.84);max-width:46ch}
+.cta-mark{width:clamp(54px,6vw,78px);height:auto;margin-bottom:6px}
+.cta-final .cta-row{margin-top:14px}
+.cta-final .btn.cream{background:var(--bg);color:var(--ink);border-color:var(--bg)}
+.cta-final .btn.cream:hover{background:var(--blue);color:var(--ink);border-color:var(--blue)}
+.cta-final .mailrow{margin-top:18px;color:rgba(236,236,220,.82)}
+.cta-final .mailrow a{color:var(--on-red);text-decoration-color:rgba(236,236,220,.6)}
 .pilot-points{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:4px}
 /* faq (giveasy: surface-rivit, 40px ympyra plus->rasti, grid-rows avaus) */
 .acc{max-width:960px;margin-inline:auto;display:flex;flex-direction:column;gap:10px}
@@ -507,7 +518,6 @@ section.en{padding-block:0}
       <div class="gm-menu-in">
         <nav aria-label="Valikko">
           <a href="#ominaisuudet">Ominaisuudet</a>
-          <a href="#appi">Kuluttaja-app</a>
           <a href="#kayttoonotto">Käyttöönotto</a>
           <a href="#hinnoittelu">Hinnoittelu</a>
           <a href="#faq">UKK</a>
@@ -609,152 +619,6 @@ section.en{padding-block:0}
   <svg class="scene__bg" viewBox="0 0 1000 500" preserveAspectRatio="none"><path class="scene__ground" d=""/></svg>
   <div class="scene__slot" data-m="tyyny" data-c="#C24029"></div>
   <div class="scene__slot" data-m="apila" data-c="#C5D0D3"></div>
-</section>
-
-<!-- 1. ONGELMA (ruskea) -->
-<section class="dark band" id="ongelma">
-  <div class="wrap">
-    <div class="shead">
-      <h2 class="disp m">Tuttu arki?</h2>
-      <p class="sub">Kirppiksen pyörittäminen vie aikaa, jonka voisi käyttää myymiseen.</p>
-    </div>
-    <div class="howflow">
-      <div class="hcard"><h3>Kassa kaatuu kiireellä</h3><p>Vanha ohjelma jumittaa, ja tuki vastaa, jos vastaa.</p></div>
-      <span class="howarrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
-      <div class="hcard"><h3>Virhettä ei saa korjattua</h3><p>Väärin lyöty tuote vaatii soiton ohjelman tekijälle.</p></div>
-      <span class="howarrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
-      <div class="hcard"><h3>Tilitykset vievät illan</h3><p>Myyjien rahat lasketaan ja maksetaan yksitellen.</p></div>
-      <span class="howarrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
-      <div class="hcard"><h3>Tuotteet eivät näy netissä</h3><p>Kuvaaminen vie aikaa, joten sen tekee vain kalleimmille.</p></div>
-      <span class="howarrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
-      <div class="hcard"><h3>Nuoret ostajat etsivät netistä</h3><p>Hyvät löydöt jäävät hyllyyn, koska kukaan ei tiedä niistä.</p></div>
-      <span class="howarrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h14M12 6l6 6-6 6"/></svg></span>
-      <div class="hcard"><h3>Hinnat menevät alakanttiin</h3><p>Merkkitakki lähtee pilkkahinnalla, vaikka siitä saisi enemmän.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 2. VERTAUS -->
-<section class="en band-en" id="vertaus" aria-labelledby="en-title">
-  <div class="en-stage">
-    <!-- pädi -->
-    <div class="en-pad en-rv" aria-hidden="true">
-      <div class="en-screen">
-        <div class="enu-main">
-          <div class="enu-top"><img src="assets/logot/ReSella_1_paalogo_vaaka_ruskea.svg" alt=""><span>Tänään, Kirppis Kontula</span></div>
-          <div class="enu-h">Hyvää huomenta</div>
-          <div class="enu-stats">
-            <div class="enu-stat"><small>Myynti tänään</small><b>1 284 €</b></div>
-            <div class="enu-stat"><small>Pöydät käytössä</small><b>87 %</b></div>
-            <div class="enu-stat"><small>Varaukset netistä</small><b>6</b></div>
-          </div>
-          <div class="enu-list">
-            <div class="enu-row"><span class="th" style="background:#C5D0D3"></span><div><b>Villapaita</b><small>Pöytä 14</small></div><span class="p">12,00 €</span></div>
-            <div class="enu-row"><span class="th" style="background:#D09C4C"></span><div><b>Nahkatakki</b><small>Pöytä 3</small></div><span class="p">35,00 €</span></div>
-            <div class="enu-row"><span class="th" style="background:#DCDBC6"></span><div><b>Kirja</b><small>Pöytä 9</small></div><span class="p">4,00 €</span></div>
-          </div>
-        </div>
-        <div class="enu-side">
-          <small>Tilitettävää</small>
-          <div class="enu-big">3 420 €</div>
-          <div class="enu-bar"><i></i></div>
-          <small>48 myyjää</small>
-          <div class="enu-btn">Tilitä kaikki</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="en-body">
-    <div class="en-head">
-      <h2 id="en-title" class="en-rv">Ennen ja nyt</h2>
-      <p class="en-rv">Sama työ, murto-osa vaivasta. Näin kirppiksen arki muuttuu, kun kaikki on yhdessä paikassa.</p>
-    </div>
-
-    <div class="en-cmp en-rv" role="table" aria-label="Ennen ja ReSellalla">
-      <div class="en-ch" role="columnheader"></div>
-      <div class="en-ch hl" role="columnheader"><img src="assets/logot/ReSella_1_paalogo_vaaka_ruskea.svg" alt="ReSella"></div>
-      <div class="en-ch mut" role="columnheader">Ennen</div>
-      <div class="en-rows">
-        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Varaukset</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Myyjä varaa ja maksaa pöydän itse verkossa</div><div class="en-cn" role="cell">Vihko tai Excel</div></div>
-        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Tilitykset</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Kaikki yhdellä tiedostolla verkkopankkiin</div><div class="en-cn" role="cell">Käsin, yksi kerrallaan</div></div>
-        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Järjestelmät</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Kassa, varaukset, myyjät ja raportit yhdessä</div><div class="en-cn" role="cell">Erillinen kassa, varausohjelma ja Excel</div></div>
-        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Hinnoittelu</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Hintaehdotus kuvasta</div><div class="en-cn" role="cell">Hinta arvataan käsin</div></div>
-        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Näkyvyys netissä</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Kassalla hinnoiteltu tuote on jo verkossa</div><div class="en-cn" role="cell">Tuotteet kuvataan erikseen nettiin</div></div>
-        <div class="en-row" role="en-row"><div class="en-cl" role="rowheader">Seuranta</div><div class="en-cy" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Kaikki näkyy puhelimesta, missä tahansa</div><div class="en-cn" role="cell">Kassaa pääsee katsomaan vain kassalta</div></div>
-        <div class="en-row" role="en-row"><div class="en-cl last" role="rowheader">Virheet</div><div class="en-cy last" role="cell"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Korjaat ja perut itse kassalla</div><div class="en-cn last" role="cell">Korjaus vaatii soiton tukeen</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 4. JÄRJESTELMÄN TEASERI (ruskea) -->
-<section class="dark band" id="jarjestelma">
-  <div class="wrap">
-    <div class="shead">
-      <h2 class="disp m">Kurkista sisään</h2>
-      <p class="sub">Näin arki näyttää ReSellassa.</p>
-    </div>
-    <div class="dash">
-      <div class="dash-top"><b>Omistajan hallintapaneeli</b><span class="dash-note">Luvut ovat esimerkkejä</span></div>
-      <div class="dash-grid">
-        <div class="t"><span class="lb">Myynti tänään</span><span class="n">1 284 €</span></div>
-        <div class="t"><span class="lb">Pöytien käyttöaste</span><span class="n">87 %</span></div>
-        <div class="t"><span class="lb">Vapaat pöydät</span><span class="n">9 / 72</span></div>
-        <div class="t"><span class="lb">Avoimet tilitykset</span><span class="n">31</span></div>
-        <div class="t"><span class="lb">Uudet varaukset netistä</span><span class="n">6</span></div>
-        <div class="t"><span class="lb">Tuotteita verkossa</span><span class="n">2 340</span></div>
-      </div>
-    </div>
-    <div class="flow">
-      <div class="flow-step"><h4>Piippaa</h4><p>Viivakoodi tai QR-koodi, tuote ja hinta näkyvät heti isolla.</p></div>
-      <div class="flow-step"><h4>Tarkista</h4><p>Ostaja näkee summan asiakasnäytöltä.</p></div>
-      <div class="flow-step"><h4>Maksa</h4><p>Kortti tai käteinen. Summa siirtyy maksupäätteeseen automaattisesti.</p></div>
-      <div class="flow-step"><h4>Valmis</h4><p>Kuitti tulostuu tai lähtee sähköpostiin. Myyjän saldo päivittyy samalla.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 5. KULUTTAJA-APPI -->
-<section class="band" id="appi">
-  <div class="wrap">
-    <div class="shead">
-      <h2 class="disp">Ostajat löytävät sinut</h2>
-      <p class="sub">Hyllysi tuotteet ostajan taskussa. Kuluttaja-app on tulossa.</p>
-    </div>
-    <div class="appwrap">
-      <div class="phones">
-        <div class="phone-item">
-          <div class="phone"><div class="scr">
-            <div class="phscr-ttl">Löydä läheltä</div>
-            <div class="phscr-field"><svg class="ico" style="width:11px;height:11px" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4.5 4.5"/></svg>talvihaalari 5-v Vantaalla</div>
-            <div class="phscr-prod"><div class="im"></div><div class="nm">Villahaalari 92 cm</div><div class="pr">12 €</div></div>
-          </div></div>
-          <div class="ph-cap"><h4>Selaa</h4><p>Ostaja hakee tuotteita läheltä omin sanoin.</p></div>
-        </div>
-        <div class="phone-item">
-          <div class="phone"><div class="scr">
-            <div class="phscr-ttl">Varaus</div>
-            <div class="phscr-prod"><div class="im"></div><div class="nm">Nahkatakki, koko M</div><div class="pr">35 €</div></div>
-            <div class="phscr-field" style="justify-content:center;background:var(--ink);color:var(--bg)">Varaa tuote</div>
-          </div></div>
-          <div class="ph-cap"><h4>Varaa</h4><p>Ostaja varaa tuotteen ennen käyntiä. Sinä vahvistat, kun tuote on löytynyt.</p></div>
-        </div>
-        <div class="phone-item">
-          <div class="phone"><div class="scr">
-            <div class="phscr-ttl">Nouto kassalla</div>
-            <div class="phscr-qr"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#ECECDC" stroke-width="1.5"><rect x="3" y="3" width="6" height="6"/><rect x="15" y="3" width="6" height="6"/><rect x="3" y="15" width="6" height="6"/><path d="M15 15h3v3M18 21h3v-3M21 15v.01"/></svg></div>
-            <div class="phscr-ttl" style="text-align:center;color:var(--ink-muted);font-weight:400">Näytä koodi ja maksa</div>
-          </div></div>
-          <div class="ph-cap"><h4>QR-nouto</h4><p>Ostaja näyttää QR-koodin kassalla ja maksaa. Ei etsimistä.</p></div>
-        </div>
-      </div>
-      <div class="app-note">
-        <div class="ap"><span class="mk"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Uusia ostajia, jotka eivät olisi muuten löytäneet kirppistäsi.</div>
-        <div class="ap"><span class="mk"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Myyjät tuovat parempaa tavaraa, kun tuotteet näkyvät laajemmin.</div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- 6. HYÖDYT LUKUINA (sininen) -->
@@ -972,11 +836,12 @@ section.en{padding-block:0}
 <!-- 12. LOPPU-CTA (ruskea) -->
 <section class="dark band" id="varaa">
   <div class="wrap">
-    <div class="ctaband">
-      <h2 class="disp m">Katso omin silmin</h2>
+    <div class="ctaband cta-final">
+      <img class="cta-mark" src="assets/ikoni/ReSella_ikoni_pilvi_beige.svg" alt="" aria-hidden="true">
+      <h2 class="disp">Katso omin silmin</h2>
       <p class="sub">30 minuutin demo, jossa näet oman kirppiksesi ReSellassa.</p>
       <div class="cta-row">
-        <a class="btn l red" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a>
+        <a class="btn l cream" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a>
       </div>
       <p class="mailrow">Tai laita viestiä: <a href="mailto:hei@resella.fi">hei@resella.fi</a></p>
     </div>
@@ -991,7 +856,7 @@ section.en{padding-block:0}
     <div class="foot-top">
       <div class="foot-intro"><p class="head">Pysy mukana: uudet ominaisuudet ensimmäisenä</p><a class="btn out s" href="#varaa">Tilaa uutiskirje</a></div>
       <div class="foot-cols">
-        <div class="foot-col"><b>Sivut</b><a href="#ominaisuudet">Kassa</a><a href="#appi">Kuluttaja-app</a><a href="#faq">UKK</a></div>
+        <div class="foot-col"><b>Sivut</b><a href="#ominaisuudet">Ominaisuudet</a><a href="#hinnoittelu">Hinnoittelu</a><a href="#faq">UKK</a></div>
         <div class="foot-col"><b>Yritys</b><a href="#tarina">Meistä</a><a href="#varaa">Yhteystiedot</a></div>
       </div>
     </div>
