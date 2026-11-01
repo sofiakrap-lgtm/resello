@@ -272,13 +272,13 @@ section[id]{scroll-margin-top:72px}
 .step__list li{position:relative;padding-left:24px;font-size:18px;line-height:1.4;color:var(--ink)}
 .step__list li::before{content:"";position:absolute;left:0;top:7px;width:10px;height:10px;border-radius:999px;background:var(--red)}
 @media(max-width:760px){.step{grid-template-columns:1fr;gap:18px;align-items:start;min-height:0}}
-.step--video{grid-template-columns:minmax(0,1fr) minmax(0,46%);align-items:stretch}
-.step__col{display:flex;flex-direction:column;gap:clamp(16px,2.2vw,24px);justify-content:center;min-width:0}
-.step__media{align-self:stretch;margin:calc(-1*var(--sp)) calc(-1*var(--sp)) calc(-1*var(--sp)) 0;overflow:hidden;background:#F3F2E7;line-height:0;border-top-left-radius:clamp(12px,1.4vw,18px)}
-.step__media video{width:100%;height:100%;object-fit:cover;display:block}
-.step__media--portrait{background:#4B302A}
-.step__media--portrait video{width:auto;max-width:100%;height:100%;margin-left:auto;object-fit:cover}
-@media(max-width:760px){.step--video{grid-template-columns:1fr;align-items:start}.step__media{margin:0 calc(-1*var(--sp)) calc(-1*var(--sp));min-height:clamp(180px,52vw,240px)}.step__media--portrait video{height:auto;width:auto;max-width:70%;max-height:62vh;margin:0 auto}}
+.step--video{grid-template-columns:minmax(0,1fr) minmax(0,46%);align-items:start}
+.step__col{display:flex;flex-direction:column;gap:clamp(16px,2.2vw,24px);justify-content:center;min-width:0;align-self:center}
+.step__media{margin:calc(-1*var(--sp)) calc(-1*var(--sp)) calc(-1*var(--sp)) 0;overflow:hidden;background:#4B302A;line-height:0;padding-top:clamp(20px,2.4vw,34px)}
+.step__media video{width:100%;height:auto;display:block}
+.step__media--portrait{padding-top:0;display:flex;align-items:flex-end;justify-content:flex-end}
+.step__media--portrait video{width:auto;max-width:100%;height:clamp(300px,34vw,440px);margin-left:auto}
+@media(max-width:760px){.step--video{grid-template-columns:1fr}.step__col{align-self:auto}.step__media{margin:0 calc(-1*var(--sp)) calc(-1*var(--sp));padding-top:clamp(16px,5vw,26px)}.step__media--portrait{justify-content:center}.step__media--portrait video{height:auto;width:auto;max-width:70%;max-height:62vh;margin:0 auto}}
 /* roadmap-kartta (kayttoonotto) - referenssityyli: ohut pyoristetty rata */
 .roadmap{position:relative;margin-top:clamp(44px,6vw,90px);max-width:1060px;margin-inline:auto;padding:clamp(8px,1.4vw,20px) clamp(8px,2vw,32px)}
 .rm-line{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
