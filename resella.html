@@ -52,7 +52,8 @@ h1,h2,h3,p{margin:0}
 .ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:square;flex:none}
 /* layout */
 section{padding-block:clamp(56px,9vw,100px);position:relative}
-#kayttoonotto{padding-top:clamp(100px,16vw,200px)}
+#kayttoonotto .disp{max-width:none}
+@media(min-width:900px){#kayttoonotto .disp{white-space:nowrap}}
 #ominaisuudet{padding-top:clamp(84px,10vw,140px)}
 section[id]{scroll-margin-top:72px}
 .wrap{width:100%;max-width:calc(var(--wide) + 2 * var(--side));margin-inline:auto;padding-inline:var(--side)}
@@ -300,8 +301,8 @@ section[id]{scroll-margin-top:72px}
   .rm-t p{max-width:none}
 }
 /* bento: kassatapahtuma (Figman asettelu 1440 x 1055, skaalautuu leveyden mukaan) */
-.bento-sec{padding-inline:0}
-.bk-stage{position:relative;max-width:1440px;margin:0 auto;overflow:hidden;border-radius:20px;background:var(--line)}
+.bento-sec{padding:0}
+.bk-stage{position:relative;max-width:1440px;margin:0 auto;overflow:hidden;background:var(--line)}
 .bk-in{position:relative;width:1440px;height:1055px;transform-origin:0 0}
 .bk-in>*{position:absolute}
 .bk-wm{width:1308px;height:auto;pointer-events:none;user-select:none}
@@ -768,7 +769,6 @@ section.fd{background:var(--blue)}
   <div class="wrap">
     <div class="shead ctr">
       <h2 class="disp d80">Käyttöönotto ilman vaivaa</h2>
-      <p class="sub">Hoidamme vaihdon puolestasi, eikä kirppis mene kiinni.</p>
     </div>
     <div class="roadmap">
       <svg class="rm-line" aria-hidden="true"><path id="rmPath" d=""/></svg>
