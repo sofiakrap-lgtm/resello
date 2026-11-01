@@ -644,6 +644,12 @@ section.fd{background:var(--blue)}
   .vp-chat{width:calc(100% - 32px);bottom:66px}
 }
 @media(prefers-reduced-motion:reduce){.vp-s,.vp-pill,.vp-chat,.vp-btn{transition:none}}
+
+/* ===== loppuosa: pieni teksti, nappi ja jättiotsikko ===== */
+.end{padding:clamp(80px,10vw,160px) 0 clamp(24px,3vw,48px);text-align:center;overflow:hidden}
+.end-in{display:flex;flex-direction:column;align-items:center;gap:20px;padding-inline:var(--side)}
+.end-lead{margin:0;max-width:30ch;font-size:16px;line-height:1.4;color:var(--ink-muted)}
+.end-big{margin:clamp(48px,7vw,110px) 0 0;font-family:var(--fd);font-weight:400;font-size:9vw;line-height:.95;letter-spacing:-.045em;white-space:nowrap;color:var(--ink)}
 </style>
 </head>
 <body>
@@ -1022,19 +1028,13 @@ section.fd{background:var(--blue)}
   </div>
 </section>
 
-<!-- 12. LOPPU-CTA (ruskea) -->
-<section class="dark band" id="varaa">
-  <div class="wrap">
-    <div class="ctaband cta-final">
-      <img class="cta-mark" src="assets/ikoni/ReSella_ikoni_pilvi_beige.svg" alt="" aria-hidden="true">
-      <h2 class="disp">Katso omin silmin</h2>
-      <p class="sub">30 minuutin demo, jossa näet oman kirppiksesi ReSellassa.</p>
-      <div class="cta-row">
-        <a class="btn l cream" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a>
-      </div>
-      <p class="mailrow">Tai laita viestiä: <a href="mailto:hei@resella.fi">hei@resella.fi</a></p>
-    </div>
+<!-- 12. LOPPU-CTA -->
+<section class="band end" id="varaa">
+  <div class="end-in">
+    <p class="end-lead">30 minuutin demo, jossa näet oman kirppiksesi ReSellassa.</p>
+    <a class="btn s" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a>
   </div>
+  <h2 class="end-big">Rakennetaanko yhdessä?</h2>
 </section>
 
 </main>
@@ -1350,6 +1350,13 @@ section.fd{background:var(--blue)}
   });
   place();
   try{ new IntersectionObserver(function(es){ visible=es[0].isIntersecting; play(); },{threshold:.35}).observe(st); }catch(e){ visible=true; play(); }
+})();
+</script>
+<script>
+/* loppuosan jättiotsikko taytetaan reunasta reunaan */
+(function(){ var h=document.querySelector('.end-big'); if(!h) return;
+  function fit(){ h.style.fontSize=''; var w=h.parentNode.clientWidth*0.95, fs=parseFloat(getComputedStyle(h).fontSize); h.style.fontSize=(fs*w/h.scrollWidth)+'px'; }
+  fit(); addEventListener('resize',fit); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
 })();
 </script>
 </body>
