@@ -174,7 +174,9 @@
   /* ---------- 2) POP: jousiponnahdus ---------- */
   function pop(el) {
     const edge = +el.dataset.edge || 300, qy = +el.dataset.ctrl || 690;
-    const p = el.querySelector('.scene__ground'); if (p) p.setAttribute('d', `M0 ${edge} Q500 ${qy} 1000 ${edge} L1000 500 L0 500 Z`);
+    // data-ground="top": tayta kaaren YLApuoli (kupu), jolloin alapuoli jaa lapinakyvaksi taustakuvalle
+    const top = el.dataset.ground === 'top';
+    const p = el.querySelector('.scene__ground'); if (p) p.setAttribute('d', top ? `M0 0 L1000 0 L1000 ${edge} Q500 ${qy} 0 ${edge} Z` : `M0 ${edge} Q500 ${qy} 1000 ${edge} L1000 500 L0 500 Z`);
     const slots = [...el.querySelectorAll('.scene__slot')];
     const rot = (el.dataset.rotate || '208,-29').split(',').map(Number);
     const zoom = (el.dataset.zoom || '1,1.05').split(',').map(Number);
