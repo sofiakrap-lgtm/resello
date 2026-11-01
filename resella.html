@@ -354,13 +354,16 @@ section[id]{scroll-margin-top:72px}
 .pcard.hl .extag{align-self:flex-start;border:1px solid rgba(236,236,220,.5);color:var(--on-red);margin-bottom:16px}
 @media(max-width:720px){.price{grid-template-columns:1fr}}
 /* asiakastarinoiden kaarikaruselli */
-.rotary{margin-top:clamp(32px,4vw,56px);position:relative;overflow:hidden}
-.rotary-stage{position:relative;height:clamp(300px,34vw,400px);max-width:1200px;margin-inline:auto}
-.rcard{position:absolute;left:50%;top:0;width:clamp(230px,27vw,310px);height:clamp(270px,31vw,360px);margin-left:calc(clamp(230px,27vw,310px) / -2);background:#fff;border-radius:var(--radius-lg);overflow:hidden;transform-origin:50% 162%;transition:transform .35s var(--ease-std),opacity .35s var(--ease-std);display:flex;flex-direction:column;will-change:transform,opacity;box-shadow:0 16px 42px rgba(62,37,32,.13)}
-.rcard img{width:100%;height:50%;object-fit:cover;object-position:center;display:block;transform:scale(1.04)}
-.rc-body{height:50%;padding:clamp(20px,2.2vw,28px);display:flex;flex-direction:column;justify-content:flex-start;gap:8px;background:#fff}
-.rc-body h3{font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,24px);letter-spacing:-.01em;line-height:1.1;margin:0;color:var(--ink)}
-.rc-body p{font-size:16px;font-weight:500;line-height:1.4;color:rgba(62,37,32,.72);margin:0}
+.rotary{margin-top:clamp(32px,4vw,56px);position:relative;overflow:hidden;padding-block:clamp(40px,6vw,80px)}
+.rotary-stage{position:relative;height:clamp(360px,40vw,460px);margin-inline:auto}
+.rcard{position:absolute;left:50%;top:0;width:clamp(260px,29vw,350px);height:clamp(360px,40vw,460px);margin-left:calc(clamp(260px,29vw,350px) / -2);background:var(--cb);color:var(--ci);border-radius:24px;overflow:hidden;transform-origin:50% 50%;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s var(--ease-std);display:flex;flex-direction:column;padding:clamp(13px,1.3vw,17px);gap:clamp(12px,1.3vw,16px);will-change:transform,opacity;box-shadow:0 26px 64px rgba(62,37,32,.24)}
+.rc-media{border-radius:15px;overflow:hidden;flex:none}
+.rc-media img{width:100%;height:clamp(160px,18vw,220px);object-fit:cover;object-position:center;display:block}
+.rc-body{flex:1 1 auto;display:flex;flex-direction:column;gap:7px;padding:2px clamp(6px,.7vw,10px)}
+.rc-body h3{font-family:var(--fd);font-weight:600;font-size:clamp(21px,2.1vw,26px);letter-spacing:-.01em;line-height:1.08;margin:0;color:var(--ci)}
+.rc-body p{font-size:15px;font-weight:500;line-height:1.38;color:var(--ci);opacity:.78;margin:0}
+.rc-btn{margin-top:auto;text-align:center;background:var(--ci);color:var(--cb);border-radius:999px;padding:13px 20px;font:600 15px/1 var(--fb);text-decoration:none;transition:opacity var(--dur-fast) var(--ease-out)}
+.rc-btn:hover{opacity:.88}
 .rot-head{margin-bottom:clamp(40px,6vw,86px)}
 #tarinat{padding-top:clamp(110px,15vw,190px)}
 .rotary-ctrl{position:relative;z-index:5;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:clamp(40px,6vw,78px)}
@@ -744,37 +747,45 @@ section.en{padding-block:0}
   </div>
   <div class="rotary" id="rotary">
     <div class="rotary-stage">
-      <article class="rcard">
-        <img src="assets/kuvat/02_kassa_maksu/01_kassa_tiski_tabletti.jpg" alt="Kassa tabletilla myyntitiskillä" loading="lazy">
+      <article class="rcard" style="--cb:#C5D0D3;--ci:#3E2520">
+        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/01_kassa_tiski_tabletti.jpg" alt="Kassa tabletilla myyntitiskillä" loading="lazy"></div>
         <div class="rc-body"><h3>Kassa</h3><p>Myynti, viivakoodi ja maksu samalla näytöllä.</p></div>
+        <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
-      <article class="rcard">
-        <img src="assets/kuvat/02_kassa_maksu/10_kuitti_tulostuu.jpg" alt="Kuitti tulostuu kassalta" loading="lazy">
+      <article class="rcard" style="--cb:#3E2520;--ci:#ECECDC">
+        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/10_kuitti_tulostuu.jpg" alt="Kuitti tulostuu kassalta" loading="lazy"></div>
         <div class="rc-body"><h3>Tilitykset</h3><p>Myyjien rahat lähtevät yhdellä pankkitiedostolla.</p></div>
+        <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
-      <article class="rcard">
-        <img src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Myymälän rekkejä ja pöytiä" loading="lazy">
+      <article class="rcard" style="--cb:#D09C4C;--ci:#3E2520">
+        <div class="rc-media"><img src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Myymälän rekkejä ja pöytiä" loading="lazy"></div>
         <div class="rc-body"><h3>Pöytävaraukset</h3><p>Myyjä varaa ja maksaa paikkansa verkossa.</p></div>
+        <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
-      <article class="rcard">
-        <img src="assets/kuvat/04_loydot_tuotteet/01_takki_esittely.jpg" alt="Takki esillä verkkokatalogissa" loading="lazy">
+      <article class="rcard" style="--cb:#C24029;--ci:#ECECDC">
+        <div class="rc-media"><img src="assets/kuvat/04_loydot_tuotteet/01_takki_esittely.jpg" alt="Takki esillä verkkokatalogissa" loading="lazy"></div>
         <div class="rc-body"><h3>Näkyvyys verkossa</h3><p>Hyllysi tuotteet löytyvät ostajan puhelimesta.</p></div>
+        <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
-      <article class="rcard">
-        <img src="assets/kuvat/02_kassa_maksu/07_hintalappu_neule.jpg" alt="Hintalappu neuleessa" loading="lazy">
+      <article class="rcard" style="--cb:#3A4961;--ci:#ECECDC">
+        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/07_hintalappu_neule.jpg" alt="Hintalappu neuleessa" loading="lazy"></div>
         <div class="rc-body"><h3>Hinnoittelu</h3><p>Hintaehdotus kuvasta ja hintalaput samalla.</p></div>
+        <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
-      <article class="rcard">
-        <img src="assets/kuvat/04_loydot_tuotteet/05_myyja_kuvaa_puhelimella.jpg" alt="Myyjä kuvaa tuotetta puhelimella" loading="lazy">
+      <article class="rcard" style="--cb:#C5D0D3;--ci:#3E2520">
+        <div class="rc-media"><img src="assets/kuvat/04_loydot_tuotteet/05_myyja_kuvaa_puhelimella.jpg" alt="Myyjä kuvaa tuotetta puhelimella" loading="lazy"></div>
         <div class="rc-body"><h3>Myyjänäkymä</h3><p>Myyjä seuraa myyntiään reaaliajassa puhelimesta.</p></div>
+        <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
-      <article class="rcard">
-        <img src="assets/kuvat/01_kirppis_tila/03_hylly_laukut_varikas.jpg" alt="Värikäs hylly laukkuja" loading="lazy">
+      <article class="rcard" style="--cb:#D09C4C;--ci:#3E2520">
+        <div class="rc-media"><img src="assets/kuvat/01_kirppis_tila/03_hylly_laukut_varikas.jpg" alt="Värikäs hylly laukkuja" loading="lazy"></div>
         <div class="rc-body"><h3>Oma ilme</h3><p>Varaussivu omalla logollasi ja väreilläsi.</p></div>
+        <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
-      <article class="rcard">
-        <img src="assets/kuvat/02_kassa_maksu/14_laitteet_ylhaalta.jpg" alt="Kassalaitteet ylhäältä" loading="lazy">
+      <article class="rcard" style="--cb:#C24029;--ci:#ECECDC">
+        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/14_laitteet_ylhaalta.jpg" alt="Kassalaitteet ylhäältä" loading="lazy"></div>
         <div class="rc-body"><h3>Raportointi</h3><p>Käyttöaste ja myynti pysyvät ajan tasalla.</p></div>
+        <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
     </div>
     <div class="rotary-ctrl" aria-hidden="true">
@@ -959,30 +970,32 @@ section.en{padding-block:0}
     var N=rcards.length, active=0;
     function circOff(i){ var d=((i-active)%N+N)%N; if(d>N/2) d-=N; return d; } // lyhin kehasuunta, pyorii aina ympari
     function rlayout(){
+      var W=rot.clientWidth||innerWidth, SPREAD=Math.min(W*0.40,600), DEG=19;
       rcards.forEach(function(c,i){
         var off=circOff(i), ao=Math.abs(off), vis=ao<=1;
-        var voff=Math.max(-2,Math.min(2,off)); // piilokortit odottavat juuri naapurien takana
-        c.style.transform='rotate('+(voff*30)+'deg) scale('+(1-Math.min(ao,2)*0.15)+')'; // giveasyn kaari: 30 astetta, -0.15
+        var voff=Math.max(-1,Math.min(1,off)); // naapurit sivuille, reunat vuotavat yli
+        var tx=voff*SPREAD, deg=voff*DEG, sc=1-ao*0.12;
+        c.style.transform='translateX('+tx.toFixed(1)+'px) rotate('+deg+'deg) scale('+sc.toFixed(3)+')';
         c.style.opacity=vis?'1':'0';
-        c.style.zIndex=String(100-ao);
+        c.style.zIndex=String(off===0?30:20-ao);
         c.style.pointerEvents=off===0?'auto':'none';
         if(vis){ c.removeAttribute('aria-hidden'); c.removeAttribute('inert'); }
         else{ c.setAttribute('aria-hidden','true'); c.setAttribute('inert',''); }
       });
     }
+    addEventListener('resize',rlayout);
     function rgo(dir){ active=((active+dir)%N+N)%N; rlayout(); } // ei paatepistetta
     // sama kuin ominaisuudet: juokseva palkki tayttyy ja astuu seuraavaan
     var rReduce=false; try{ rReduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
     var rDWELL=3800, rElapsed=0, rLast=0, rPaused=false, rRaf=null;
     function rSetFill(p){ if(rfill) rfill.style.width=(Math.max(0,Math.min(1,p))*100).toFixed(1)+'%'; }
-    function rLoop(now){ var dt=now-(rLast||now); rLast=now;
+    function rLoop(now){ var dt=now-(rLast||now); rLast=now; if(dt>100)dt=100;
       if(!rPaused){ rElapsed+=dt; var p=rElapsed/rDWELL; if(p>=1){ rElapsed=0; rSetFill(0); rgo(1); } else rSetFill(p); }
       rRaf=requestAnimationFrame(rLoop);
     }
-    // liikkuu aina vain yhteen suuntaan: ei nuolia, vain automaattinen eteneminen
-    rot.addEventListener('mouseenter',function(){ rPaused=true; }); rot.addEventListener('mouseleave',function(){ rPaused=false; });
-    rot.addEventListener('touchstart',function(){ rPaused=true; },{passive:true});
-    rot.addEventListener('touchend',function(){ rPaused=false; },{passive:true});
+    // liikkuu aina vain yhteen suuntaan. Palkki pyorii jatkuvasti, tauko vain aktiivisen vedon ajaksi (ei jumitu)
+    rot.addEventListener('pointerdown',function(){ rPaused=true; });
+    addEventListener('pointerup',function(){ rPaused=false; }); addEventListener('pointercancel',function(){ rPaused=false; });
     rlayout(); if(!rReduce){ rRaf=requestAnimationFrame(rLoop); } else { rSetFill(1); }
   }
   // hinnoittelu: liikevaihtopohjainen laskuri, kayttaja syottaa oman myynnin
@@ -1029,15 +1042,14 @@ section.en{padding-block:0}
     function step(dir){ stepping=true; track.scrollBy({left:dir*cardStep(),behavior:'smooth'}); setTimeout(function(){ normalize(); stepping=false; },540); }
     function setFill(p){ if(fill) fill.style.width=(Math.max(0,Math.min(1,p))*100).toFixed(1)+'%'; }
     function loop(now){
-      var dt=now-(last||now); last=now;
+      var dt=now-(last||now); last=now; if(dt>100)dt=100; // valilehden taustalta palatessa ei hyppaa
       if(!paused && !stepping){ elapsed+=dt; var p=elapsed/DWELL; if(p>=1){ elapsed=0; setFill(0); step(1); } else setFill(p); }
       raf=requestAnimationFrame(loop);
     }
-    // liikkuu aina vain yhteen suuntaan: ei nuolia, vain automaattinen eteneminen oikealle
-    var sec=document.getElementById('ominaisuudet');
+    // liikkuu aina vain yhteen suuntaan. Palkki pyorii jatkuvasti, tauko vain aktiivisen vedon ajaksi (ei jumitu)
     function pause(){ paused=true; } function play(){ paused=false; }
-    if(sec){ sec.addEventListener('mouseenter',pause); sec.addEventListener('mouseleave',play); }
-    track.addEventListener('touchstart',pause,{passive:true});
+    track.addEventListener('pointerdown',pause);
+    addEventListener('pointerup',play); addEventListener('pointercancel',play);
     if(!reduce){ raf=requestAnimationFrame(loop); } else { setFill(1); }
   }
 })();
