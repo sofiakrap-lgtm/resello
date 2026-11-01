@@ -571,6 +571,42 @@ section.en{padding-block:0}
   *{animation:none!important;transition:none!important}
   .en-rv{opacity:1;transform:none}.en-pad.en-rv{transform:translateX(-50%)}
 }
+
+/* ===== perustajat: Kirpputorista koodiin (vaihtuvat kortit, varit vaihtuvat henkilon mukaan) ===== */
+.fd{--fl:#3E2520;--fr:#C24029;--fs:#D09C4C;--fq:#D09C4C;--ft:#ECECDC}
+.fd[data-p="1"]{--fl:#3A4961;--fr:#8D8B4C;--fs:#C5D0D3;--fq:#C5D0D3}
+.fd-head{margin:0 0 clamp(40px,6vw,96px)}
+.fd-head .disp{text-align:left;max-width:14ch}
+.fd-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.fd-quote{position:relative;background:var(--fl);color:var(--ft);border-radius:var(--radius-lg);padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;min-height:clamp(420px,36vw,520px);transition:background-color 460ms cubic-bezier(0,0,.2,1)}
+.fd-bars{display:flex;gap:10px}
+.fd-bar{flex:1;height:4px;border:0;padding:0;border-radius:4px;background:rgb(236 236 220 / .28);cursor:pointer;position:relative;overflow:hidden}
+.fd-bar i{position:absolute;inset:0;width:0;background:var(--ft);border-radius:inherit}
+.fd-bar.done i{width:100%}
+.fd-text{margin:auto 0;padding:clamp(32px,4vw,56px) 0;font-size:clamp(20px,2vw,26px);font-weight:500;line-height:1.35;letter-spacing:-.01em;max-width:30ch}
+.fd-who{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.fd-who b{display:block;font-size:16px;font-weight:600}
+.fd-who span{display:block;font-size:14px;opacity:.6;margin-top:4px}
+.fd-mark{width:clamp(54px,6vw,84px);height:auto;color:var(--fq);transition:color 460ms cubic-bezier(0,0,.2,1)}
+.fd-card{position:relative;overflow:hidden;background:var(--fr);border-radius:var(--radius-lg);display:flex;flex-direction:column;justify-content:space-between;padding:12px;transition:background-color 460ms cubic-bezier(0,0,.2,1)}
+.fd-shapes{position:absolute;inset:0 0 auto 0;height:62%;pointer-events:none}
+.fd-shapes svg{position:absolute;fill:var(--fs);transition:fill 460ms cubic-bezier(0,0,.2,1),transform 900ms cubic-bezier(.2,0,0,1)}
+.fd-shapes .s1{width:58%;right:-14%;top:-22%}
+.fd-shapes .s2{width:34%;left:6%;top:24%}
+.fd[data-p="1"] .fd-shapes .s1{transform:rotate(45deg)}
+.fd[data-p="1"] .fd-shapes .s2{transform:rotate(-30deg) scale(.9)}
+.fd-pill{position:relative;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 16px 6px 6px;font-size:15px;font-weight:600;margin:8px}
+.fd-pill .av{width:32px;height:32px;border-radius:999px;background:var(--fl);display:grid;place-items:center;transition:background-color 460ms cubic-bezier(0,0,.2,1)}
+.fd-pill .av img{width:20px;height:auto}
+.fd-table{position:relative;background:var(--surface);color:var(--ink);border-radius:14px;padding:6px 22px;margin-top:clamp(120px,14vw,190px)}
+.fd-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:15px 0;border-top:1px solid var(--line);align-items:baseline}
+.fd-row:first-child{border-top:0}
+.fd-row dt{font-size:14px;opacity:.6}
+.fd-row dd{margin:0;font-size:16px;font-weight:600}
+.fd-swap{transition:opacity 260ms cubic-bezier(0,0,.2,1)}
+.fd-swap.out{opacity:0}
+@media(max-width:860px){.fd-grid{grid-template-columns:1fr}.fd-quote{min-height:380px}.fd-table{margin-top:150px}}
+@media(prefers-reduced-motion:reduce){.fd *{transition:none!important}}
 </style>
 </head>
 <body>
@@ -767,6 +803,34 @@ section.en{padding-block:0}
 <!-- 10. TARINA (suora vaihto ruskeasta kuvaan) -->
 <section class="band story-bg" id="tarina">
   <img class="story-img" src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Itsepalvelukirpputorin myymälä, vaaterekkejä ja pöytiä" loading="lazy">
+</section>
+
+<!-- PERUSTAJAT: Kirpputorista koodiin -->
+<section class="band fd" id="perustajat" data-p="0">
+  <div class="wrap">
+    <div class="fd-head"><h2 class="disp m">Kirpputorista koodiin</h2></div>
+    <div class="fd-grid">
+      <figure class="fd-quote" style="margin:0">
+        <div class="fd-bars" role="tablist" aria-label="Perustajat">
+          <button class="fd-bar" role="tab" aria-selected="true" aria-label="Sofia" data-i="0"><i></i></button>
+          <button class="fd-bar" role="tab" aria-selected="false" aria-label="Leon" data-i="1"><i></i></button>
+        </div>
+        <blockquote class="fd-text fd-swap" id="fdText" aria-live="polite" style="margin-inline:0"></blockquote>
+        <figcaption class="fd-who">
+          <div class="fd-swap" id="fdWho"></div>
+          <svg class="fd-mark" viewBox="0 0 90 90" aria-hidden="true"><g fill="currentColor"><path d="M4 4h20l14 56H14z"/><circle cx="25" cy="70" r="16"/><path d="M46 4h20l14 56H56z"/><circle cx="67" cy="70" r="16"/></g></svg>
+        </figcaption>
+      </figure>
+      <div class="fd-card">
+        <div class="fd-shapes" aria-hidden="true">
+          <svg class="s1" viewBox="0 0 100 100"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg>
+          <svg class="s2" viewBox="0 0 100 100"><path d="M50 0 Q57 43 100 50 Q57 57 50 100 Q43 57 0 50 Q43 43 50 0Z"/></svg>
+        </div>
+        <span class="fd-pill"><span class="av"><img src="assets/ikoni/ReSella_ikoni_pilvi_beige.svg" alt=""></span><span class="fd-swap" id="fdPill"></span></span>
+        <dl class="fd-table fd-swap" id="fdTable" style="margin-bottom:0"></dl>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ASIAKASTARINAT (kaarikaruselli) -->
@@ -1123,5 +1187,36 @@ section.en{padding-block:0}
 })();
 </script>
 <script>(function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:0,rootMargin:'0px 0px -12% 0px'});document.querySelectorAll('.en-rv').forEach(function(el){io.observe(el)});})();</script>
+<script>
+/* perustajat: vaihtuu automaattisesti, palkki tayttyy, varit vaihtuvat */
+(function(){
+  var root=document.getElementById('perustajat'); if(!root) return;
+  var P=[
+    {q:'Olen hinnoitellut, myynyt ja pyörittänyt kirppisarkea yli kymmenen vuotta. ReSella on se työkalu, jota itse kaipasin kassan takana.',
+     n:'Sofia Kraptsak', r:'Toimitusjohtaja, brändi ja myynti', pill:'Sofia, CEO',
+     t:[['Kirppisalalla','Yli 10 vuotta'],['Oma liike','18-vuotiaana'],['Fintage Store','Vuoden nuori yritys 2021'],['Vastaa','Brändi, myynti ja asiakkaat']]},
+    {q:'Kuuntelimme kirppisyrittäjiä ennen ensimmäistäkään koodiriviä. Siksi kassa on nopea, toimii ilman nettiä ja hoitaa tilitykset puolestasi.',
+     n:'Leon Gustafsson', r:'Teknologiajohtaja', pill:'Leon, CTO',
+     t:[['Ohjelmistokehitys','6 vuotta'],['Ennen koodia','20 kirppisyrittäjän haastattelua'],['Rakentaa','Kassan ja koko alustan'],['Vastaa','Tekniikka ja tietoturva']]}
+  ];
+  var bars=[].slice.call(root.querySelectorAll('.fd-bar')), sw=[].slice.call(root.querySelectorAll('.fd-swap'));
+  var tx=document.getElementById('fdText'), who=document.getElementById('fdWho'), pill=document.getElementById('fdPill'), tb=document.getElementById('fdTable');
+  var reduce=false; try{reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;}catch(e){}
+  var cur=0, DWELL=8000, start=0, raf=0, visible=false;
+  function fill(i){ var p=P[i];
+    tx.textContent=p.q; who.innerHTML='<b>'+p.n+'</b><span>'+p.r+'</span>'; pill.textContent=p.pill;
+    tb.innerHTML=p.t.map(function(r){return '<div class="fd-row"><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>';}).join(''); }
+  function go(i){ cur=i; root.setAttribute('data-p',i);
+    bars.forEach(function(b,k){ b.setAttribute('aria-selected',k===i?'true':'false'); b.classList.toggle('done',k<i); b.firstChild.style.width=k<i?'100%':'0'; });
+    if(reduce){ fill(i); return; }
+    sw.forEach(function(e){e.classList.add('out');}); setTimeout(function(){ fill(i); sw.forEach(function(e){e.classList.remove('out');}); },260);
+    start=performance.now(); }
+  function loop(now){ if(visible){ var p=(now-start)/DWELL; if(p>=1){ go((cur+1)%P.length); } else bars[cur].firstChild.style.width=(p*100)+'%'; } else start=now-((parseFloat(bars[cur].firstChild.style.width)||0)/100)*DWELL; raf=requestAnimationFrame(loop); }
+  bars.forEach(function(b){ b.addEventListener('click',function(){ go(+b.dataset.i); }); });
+  fill(0); go(0);
+  if(!reduce){ try{ new IntersectionObserver(function(es){ visible=es[0].isIntersecting; },{threshold:.4}).observe(root); }catch(e){ visible=true; } raf=requestAnimationFrame(loop); }
+  else { bars[0].firstChild.style.width='100%'; }
+})();
+</script>
 </body>
 </html>
