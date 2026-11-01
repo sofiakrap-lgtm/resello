@@ -355,11 +355,11 @@ section[id]{scroll-margin-top:72px}
 @media(max-width:720px){.price{grid-template-columns:1fr}}
 /* asiakastarinoiden kaarikaruselli */
 .rotary{margin-top:clamp(32px,4vw,56px);position:relative;overflow:hidden;padding-block:clamp(40px,6vw,80px)}
-.rotary-stage{position:relative;height:clamp(360px,40vw,460px);margin-inline:auto}
-.rcard{position:absolute;left:50%;top:0;width:clamp(260px,29vw,350px);height:clamp(360px,40vw,460px);margin-left:calc(clamp(260px,29vw,350px) / -2);background:var(--cb);color:var(--ci);border-radius:24px;overflow:hidden;transform-origin:50% 50%;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s var(--ease-std);display:flex;flex-direction:column;padding:clamp(13px,1.3vw,17px);gap:clamp(12px,1.3vw,16px);will-change:transform,opacity;box-shadow:0 26px 64px rgba(62,37,32,.24)}
-.rc-media{border-radius:15px;overflow:hidden;flex:none}
-.rc-media img{width:100%;height:clamp(160px,18vw,220px);object-fit:cover;object-position:center;display:block}
-.rc-body{flex:1 1 auto;display:flex;flex-direction:column;gap:7px;padding:2px clamp(6px,.7vw,10px)}
+.rotary-stage{position:relative;height:clamp(400px,44vw,500px);margin-inline:auto}
+.rcard{position:absolute;left:50%;top:0;width:clamp(260px,29vw,350px);height:clamp(400px,44vw,500px);margin-left:calc(clamp(260px,29vw,350px) / -2);background:var(--cb);color:var(--ci);border-radius:24px;overflow:hidden;transform-origin:50% 50%;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s var(--ease-std);display:flex;flex-direction:column;will-change:transform,opacity;box-shadow:0 26px 64px rgba(62,37,32,.24)}
+.rc-media{flex:none;height:50%;overflow:hidden}
+.rc-media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.rc-body{flex:1 1 auto;height:50%;display:flex;flex-direction:column;gap:7px;padding:clamp(18px,2vw,26px);justify-content:flex-start}
 .rc-body h3{font-family:var(--fd);font-weight:600;font-size:clamp(21px,2.1vw,26px);letter-spacing:-.01em;line-height:1.08;margin:0;color:var(--ci)}
 .rc-body p{font-size:15px;font-weight:500;line-height:1.38;color:var(--ci);opacity:.78;margin:0}
 .rc-btn{margin-top:auto;text-align:center;background:var(--ci);color:var(--cb);border-radius:999px;padding:13px 20px;font:600 15px/1 var(--fb);text-decoration:none;transition:opacity var(--dur-fast) var(--ease-out)}
@@ -970,12 +970,13 @@ section.en{padding-block:0}
     var N=rcards.length, active=0;
     function circOff(i){ var d=((i-active)%N+N)%N; if(d>N/2) d-=N; return d; } // lyhin kehasuunta, pyorii aina ympari
     function rlayout(){
-      var W=rot.clientWidth||innerWidth, SPREAD=Math.min(W*0.40,600), DEG=19;
+      var W=rot.clientWidth||innerWidth;
+      var SPREAD=W<720?W*0.62:Math.min(W*0.40,600), DEG=W<720?15:19; // mobiilissa naapurit kauemmas, ettei keskikortti peity
       rcards.forEach(function(c,i){
         var off=circOff(i), ao=Math.abs(off), vis=ao<=1;
         var voff=Math.max(-1,Math.min(1,off)); // naapurit sivuille, reunat vuotavat yli
-        var tx=voff*SPREAD, deg=voff*DEG, sc=1-ao*0.12;
-        c.style.transform='translateX('+tx.toFixed(1)+'px) rotate('+deg+'deg) scale('+sc.toFixed(3)+')';
+        var tx=voff*SPREAD, deg=voff*DEG, sc=1-ao*0.12, ty=off===0?-28:0; // keskimmainen hieman ylemmas
+        c.style.transform='translateX('+tx.toFixed(1)+'px) translateY('+ty+'px) rotate('+deg+'deg) scale('+sc.toFixed(3)+')';
         c.style.opacity=vis?'1':'0';
         c.style.zIndex=String(off===0?30:20-ao);
         c.style.pointerEvents=off===0?'auto':'none';
