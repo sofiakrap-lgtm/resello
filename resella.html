@@ -1255,11 +1255,11 @@ section.fd{background:var(--blue)}
 })();
 </script>
 <script>
-/* kassaosio: Figman 1440 x 1055 -asettelu skaalataan leveyteen */
+/* kassaosio: Figman 1440 x 1055 -asettelu skaalataan 80 %:iin leveydestä, keskitetty */
 (function(){
   var st=document.getElementById('bkStage'), inn=document.getElementById('bkIn'); if(!st) return;
   function fit(){ if(innerWidth<=860){ st.style.height=''; inn.style.transform=''; return; }
-    var k=st.clientWidth/1440; inn.style.transform='scale('+k+')'; st.style.height=(1055*k)+'px'; }
+    var W=st.clientWidth, k=W/1440*0.8, dx=(W-1440*k)/2; inn.style.transform='translateX('+dx+'px) scale('+k+')'; st.style.height=(1055*k)+'px'; }
   fit(); addEventListener('resize',fit); if(window.ResizeObserver) new ResizeObserver(fit).observe(st);
 })();
 </script>
