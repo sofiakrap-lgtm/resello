@@ -394,21 +394,29 @@ section[id]{scroll-margin-top:72px}
 .cta-final .mailrow a{color:var(--on-red);text-decoration-color:rgba(236,236,220,.6)}
 .pilot-points{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:4px}
 /* faq (giveasy: surface-rivit, 40px ympyra plus->rasti, grid-rows avaus) */
-.acc{max-width:960px;margin-inline:auto;display:flex;flex-direction:column;gap:10px}
-.acc-item{background:var(--surface);border-radius:5px}
-.acc-q{width:100%;background:none;border:0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:104px;padding:16px 40px;font-family:var(--fd);font-weight:600;font-size:18px;line-height:1.3;color:var(--ink);text-align:left}
-.acc-q i{width:40px;height:40px;border-radius:999px;position:relative;flex:none;transition:background-color var(--dur-fast) var(--ease-std)}
-.acc-q:hover i{background:var(--line)}
-.acc-q i::before,.acc-q i::after{content:"";position:absolute;left:50%;top:50%;width:18px;height:2px;background:var(--ink);border-radius:2px;transform:translate(-50%,-50%);transition:transform var(--dur-base) var(--ease-std)}
+.faq-panel{max-width:1100px;margin-inline:auto;background:var(--blue);border-radius:36px;padding:clamp(44px,6vw,76px) clamp(14px,4vw,48px) clamp(36px,5vw,56px)}
+.faq-panel .shead{margin-bottom:clamp(28px,4vw,44px)}
+.acc{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;gap:8px}
+.acc-item{background:rgb(246 246 238 / .55);border-radius:16px;transition:background-color var(--dur-base) var(--ease-std)}
+.acc-item:hover,.acc-item:has(.acc-q[aria-expanded="true"]){background:var(--surface)}
+.acc-q{width:100%;background:none;border:0;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;min-height:64px;padding:12px 12px 12px 14px;font-family:var(--fd);font-weight:600;font-size:16px;line-height:1.3;color:var(--ink);text-align:left}
+.acc-n{width:26px;height:26px;border-radius:7px;background:var(--bg);display:grid;place-items:center;font-size:12px;font-weight:500;color:var(--ink-muted);font-variant-numeric:tabular-nums}
+.acc-q i{width:36px;height:36px;border-radius:999px;position:relative;flex:none;background:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);transition:background-color var(--dur-base) var(--ease-std)}
+.acc-q i::before,.acc-q i::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1.6px;background:var(--bg);border-radius:2px;transform:translate(-50%,-50%);transition:transform var(--dur-base) var(--ease-std),background-color var(--dur-base) var(--ease-std)}
 .acc-q i::after{transform:translate(-50%,-50%) rotate(90deg)}
-.acc-q[aria-expanded="true"] i::before{transform:translate(-50%,-50%) rotate(-45deg)}
-.acc-q[aria-expanded="true"] i::after{transform:translate(-50%,-50%) rotate(45deg)}
+.acc-q[aria-expanded="true"] i{background:transparent}
+.acc-q[aria-expanded="true"] i::before{background:var(--ink);transform:translate(-50%,-50%) rotate(-45deg)}
+.acc-q[aria-expanded="true"] i::after{background:var(--ink);transform:translate(-50%,-50%) rotate(45deg)}
 .acc-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur-base) var(--ease-std)}
 .acc-q[aria-expanded="true"]+.acc-a{grid-template-rows:1fr}
 .acc-a-in{overflow:hidden}
-.acc-a p{margin:0;padding:0 40px 30px;font-size:16px;font-weight:300;line-height:1.55;color:var(--ink-muted);max-width:62ch}
-@media(max-width:620px){.acc-q{min-height:62px;padding:14px 20px;font-size:16px}.acc-a p{padding:0 20px 24px}}
-@media(prefers-reduced-motion:reduce){.acc-q i::before,.acc-q i::after,.acc-a{transition:none}}
+.acc-a p{margin:0;padding:0 62px 22px 54px;font-size:15px;font-weight:400;line-height:1.55;color:var(--ink-muted);max-width:62ch}
+.faq-more{margin-top:clamp(28px,4vw,40px);text-align:center;font-size:15px;color:var(--ink-muted)}
+.faq-more a{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:.2em}
+.faq-more a svg{width:14px;height:14px;transition:transform 260ms cubic-bezier(0,0,.2,1)}
+.faq-more a:hover svg{transform:translateX(3px)}
+@media(max-width:620px){.faq-panel{border-radius:24px}.acc-q{gap:10px;min-height:58px;padding:10px 10px 10px 12px;font-size:15px}.acc-a p{padding:0 16px 18px 48px}}
+@media(prefers-reduced-motion:reduce){.acc-q i,.acc-q i::before,.acc-q i::after,.acc-a,.acc-item{transition:none}}
 /* hinnoittelu */
 .price{display:grid;grid-template-columns:repeat(2,minmax(0,460px));gap:20px;justify-content:center;max-width:940px;margin-inline:auto;align-items:stretch}
 .pcard{background:var(--surface);border-radius:var(--radius-lg);padding:clamp(26px,3.2vw,40px);display:flex;flex-direction:column}
@@ -943,19 +951,21 @@ section.fd{background:var(--blue)}
 
 <!-- 11. FAQ -->
 <section class="band" id="faq">
-  <div class="wrap narrow">
+  <div class="wrap">
+   <div class="faq-panel">
     <div class="shead">
       <h2 class="disp m">Usein kysyttyä</h2>
-      <p class="sub">Lyhyet vastaukset yleisimpiin kysymyksiin.</p>
     </div>
     <div class="acc">
-      <div class="acc-item"><button class="acc-q" aria-expanded="true"><span>Pitääkö kaikki vanhat tuotteet kuvata uudelleen?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Ei. Vanhat tuotteet myydään loppuun nykyisillä lapuilla, ja uudet varaukset tulevat ReSellaan.</p></div></div></div>
-      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span>Toimiiko kassa, jos netti katkeaa?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Toimii. Myynnit tallentuvat ja synkronoituvat, kun yhteys palaa.</p></div></div></div>
-      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span>Mitä laitteita tarvitsen?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Tabletin tai kosketusnäytön, lukijan ja tarvittaessa kuittitulostimen ja kassalippaan. Käymme laitteet läpi kanssasi.</p></div></div></div>
-      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span>Voinko käyttää omaa logoa ja värejä?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Voit. Myyjien varaussivu näkyy kirppiksesi ilmeellä.</p></div></div></div>
-      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span>Kauanko käyttöönotto kestää?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Yleensä 1-3 päivää. Hoidamme asennuksen kanssasi.</p></div></div></div>
-      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span>Mitä ReSella maksaa?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Käymme hinnan läpi demossa, kun näemme kirppiksesi koon ja tarpeet.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="true"><span class="acc-n">1</span><span>Pitääkö kaikki vanhat tuotteet kuvata uudelleen?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Ei. Vanhat tuotteet myydään loppuun nykyisillä lapuilla, ja uudet varaukset tulevat ReSellaan.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span class="acc-n">2</span><span>Toimiiko kassa, jos netti katkeaa?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Toimii. Myynnit tallentuvat ja synkronoituvat, kun yhteys palaa.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span class="acc-n">3</span><span>Mitä laitteita tarvitsen?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Tabletin tai kosketusnäytön, lukijan ja tarvittaessa kuittitulostimen ja kassalippaan. Käymme laitteet läpi kanssasi.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span class="acc-n">4</span><span>Voinko käyttää omaa logoa ja värejä?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Voit. Myyjien varaussivu näkyy kirppiksesi ilmeellä.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span class="acc-n">5</span><span>Kauanko käyttöönotto kestää?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Yleensä 1-3 päivää. Hoidamme asennuksen kanssasi.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span class="acc-n">6</span><span>Mitä ReSella maksaa?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p>Käymme hinnan läpi demossa, kun näemme kirppiksesi koon ja tarpeet.</p></div></div></div>
     </div>
+    <p class="faq-more">Onko muita kysymyksiä?<br><a href="#varaa">Ota yhteyttä <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a></p>
+   </div>
   </div>
 </section>
 
@@ -1067,6 +1077,7 @@ section.fd{background:var(--blue)}
   Array.prototype.slice.call(document.querySelectorAll('.acc-q')).forEach(function(q){
     q.addEventListener('click',function(){
       var open=q.getAttribute('aria-expanded')==='true';
+      document.querySelectorAll('.acc-q').forEach(function(o){ o.setAttribute('aria-expanded','false'); });
       q.setAttribute('aria-expanded', open?'false':'true');
     });
   });
