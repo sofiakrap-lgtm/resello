@@ -45,9 +45,9 @@ h1,h2,h3,p{margin:0}
 .num{font-family:var(--fd);font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
 .cap{font-size:13px;color:var(--ink-muted)}
 /* buttons */
-.btn{--h:55px;--px:30px;--fs:18px;min-width:200px;text-align:center;padding:calc((var(--h) - var(--fs)*.75)/2 - 1px) var(--px);font:600 var(--fs)/1.2 var(--fb);letter-spacing:-.2px;border-radius:var(--radius-pill);border:1px solid transparent;display:inline-block;white-space:nowrap;cursor:pointer;background:var(--ink);color:var(--bg);text-decoration:none;transition:background-color var(--dur-fast) var(--ease-std),color var(--dur-fast) var(--ease-std)}
+.btn{--h:44px;--px:22px;--fs:16px;min-width:0;text-align:center;padding:calc((var(--h) - var(--fs)*.75)/2 - 1px) var(--px);font:600 var(--fs)/1.2 var(--fb);letter-spacing:-.2px;border-radius:var(--radius-pill);border:1px solid transparent;display:inline-block;white-space:nowrap;cursor:pointer;background:var(--ink);color:var(--bg);text-decoration:none;transition:background-color var(--dur-fast) var(--ease-std),color var(--dur-fast) var(--ease-std)}
 .btn:hover{background:var(--blue);color:var(--ink)}
-.btn.s{--h:40px;--px:20px;--fs:16px;min-width:0}
+.btn.s{--h:36px;--px:16px;--fs:15px;min-width:0}
 .btn.out{background:transparent;color:var(--ink);border-color:var(--ink)}.btn.out:hover{background:var(--ink);color:var(--bg)}
 .ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:square;flex:none}
 /* layout */
@@ -381,7 +381,7 @@ section[id]{scroll-margin-top:72px}
 .btn.red:hover{background:#A6341F}
 .mailrow{margin-top:14px;font-size:14px;color:var(--ink-muted)}
 .mailrow a{color:var(--ink);text-decoration:underline;text-underline-offset:.18em}
-.btn.l{--h:62px;--px:42px;--fs:19px}
+.btn.l{--h:50px;--px:28px;--fs:17px}
 /* loppu-cta: nayttava brandivarinen panaani */
 .cta-final{background:var(--red);color:var(--on-red);position:relative;overflow:hidden;gap:14px;padding:clamp(56px,8vw,108px) clamp(24px,5vw,72px);box-shadow:0 34px 90px rgba(0,0,0,.36)}
 .cta-final .disp{color:var(--on-red);max-width:16ch}
@@ -496,7 +496,7 @@ section[id]{scroll-margin-top:72px}
   .story img{max-height:340px}
 }
 @media(max-width:620px){
-  .btn{--h:49px;--fs:16px}
+  .btn{--h:42px;--fs:15px}
   .hero-row{flex-direction:column;align-items:flex-start;gap:26px}
   .hero-title{margin-bottom:0}
   .hero-right{align-items:flex-start;text-align:left;max-width:none}
