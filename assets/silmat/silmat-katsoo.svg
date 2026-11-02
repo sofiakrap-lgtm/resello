@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="236" viewBox="80 74 140 118" fill="none"><title>ReSella silmät katsovat sivulle</title><style>
+.pp{animation:lk 5s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes lk{
+0%,20%{transform:translateX(0)}
+28%,46%{transform:translateX(11px)}
+54%,72%{transform:translateX(-11px)}
+80%,100%{transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce){.pp{animation:none}}
+</style><defs><clipPath id="silmat-l"><ellipse cx="123.4" cy="132.9" rx="33.2" ry="51.3"/></clipPath><clipPath id="silmat-r"><ellipse cx="176.6" cy="132.9" rx="33.2" ry="51.3"/></clipPath></defs><ellipse cx="123.4" cy="132.9" rx="33.2" ry="51.3" fill="#ECECDC"/><g clip-path="url(#silmat-l)"><g class="pp"><ellipse cx="123.4" cy="132.9" rx="20.6" ry="30.8" fill="#3E2520"/><circle cx="134.7" cy="117.5" r="7.4" fill="#ECECDC"/></g></g><ellipse cx="123.4" cy="132.9" rx="33.2" ry="51.3" stroke="#3E2520" stroke-width="7.3"/><ellipse cx="176.6" cy="132.9" rx="33.2" ry="51.3" fill="#ECECDC"/><g clip-path="url(#silmat-r)"><g class="pp"><ellipse cx="176.6" cy="132.9" rx="20.6" ry="30.8" fill="#3E2520"/><circle cx="187.9" cy="117.5" r="7.4" fill="#ECECDC"/></g></g><ellipse cx="176.6" cy="132.9" rx="33.2" ry="51.3" stroke="#3E2520" stroke-width="7.3"/></svg>

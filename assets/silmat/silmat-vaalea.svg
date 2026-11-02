@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="236" viewBox="80 74 140 118" fill="none"><title>ReSella silmät, vaalea</title><defs>
+<mask id="svml"><ellipse cx="123.4" cy="132.9" rx="29.55" ry="47.65" fill="#fff"/><g ><ellipse cx="123.4" cy="132.9" rx="20.6" ry="30.8" fill="#000"/></g><ellipse cx="176.6" cy="132.9" rx="36.85" ry="54.95" fill="#000"/></mask>
+<mask id="svmr"><ellipse cx="176.6" cy="132.9" rx="29.55" ry="47.65" fill="#fff"/><g ><ellipse cx="176.6" cy="132.9" rx="20.6" ry="30.8" fill="#000"/></g></mask>
+<mask id="svov"><rect x="80" y="70" width="140" height="130" fill="#fff"/><ellipse cx="176.6" cy="132.9" rx="36.85" ry="54.95" fill="#000"/></mask>
+<clipPath id="svcl"><ellipse cx="123.4" cy="132.9" rx="29.55" ry="47.65" fill="#000"/></clipPath><clipPath id="svcr"><ellipse cx="176.6" cy="132.9" rx="29.55" ry="47.65" fill="#000"/></clipPath></defs><rect x="80" y="74" width="140" height="118" fill="#ECECDC" mask="url(#svml)"/>
+<g mask="url(#svov)"><g clip-path="url(#svcl)"><g ><circle cx="134.7" cy="117.5" r="7.4" fill="#ECECDC"/></g></g></g>
+<rect x="80" y="74" width="140" height="118" fill="#ECECDC" mask="url(#svmr)"/>
+<g clip-path="url(#svcr)"><g ><circle cx="187.9" cy="117.5" r="7.4" fill="#ECECDC"/></g></g></svg>

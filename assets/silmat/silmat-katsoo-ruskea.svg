@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="236" viewBox="80 74 140 118" fill="none"><title>ReSella silmät, ruskea</title><style>
+.pp{animation:lk 5s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes lk{
+0%,20%{transform:translateX(0)}
+28%,46%{transform:translateX(11px)}
+54%,72%{transform:translateX(-11px)}
+80%,100%{transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce){.pp{animation:none}}
+</style><defs><clipPath id="srcl"><ellipse cx="123.4" cy="132.9" rx="33.2" ry="51.3"/></clipPath><mask id="srml"><rect x="80" y="70" width="140" height="130" fill="#fff"/><circle cx="134.7" cy="117.5" r="7.4" fill="#000"/></mask><clipPath id="srcr"><ellipse cx="176.6" cy="132.9" rx="33.2" ry="51.3"/></clipPath><mask id="srmr"><rect x="80" y="70" width="140" height="130" fill="#fff"/><circle cx="187.9" cy="117.5" r="7.4" fill="#000"/></mask><mask id="srov"><rect x="80" y="70" width="140" height="130" fill="#fff"/><ellipse cx="176.6" cy="132.9" rx="36.85" ry="54.95" fill="#000"/></mask></defs><g mask="url(#srov)"><g clip-path="url(#srcl)"><g class="pp"><ellipse cx="123.4" cy="132.9" rx="20.6" ry="30.8" fill="#3E2520" mask="url(#srml)"/></g></g><ellipse cx="123.4" cy="132.9" rx="33.2" ry="51.3" stroke="#3E2520" stroke-width="7.3"/></g><g clip-path="url(#srcr)"><g class="pp"><ellipse cx="176.6" cy="132.9" rx="20.6" ry="30.8" fill="#3E2520" mask="url(#srmr)"/></g></g><ellipse cx="176.6" cy="132.9" rx="33.2" ry="51.3" stroke="#3E2520" stroke-width="7.3"/></svg>
