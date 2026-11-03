@@ -443,7 +443,7 @@ section[id]{scroll-margin-top:72px}
 .pcard.hl .extag{align-self:flex-start;border:1px solid rgba(236,236,220,.5);color:var(--on-red);margin-bottom:16px}
 @media(max-width:720px){.price{grid-template-columns:1fr}}
 /* asiakastarinoiden kaarikaruselli */
-.rotary{margin-top:clamp(32px,4vw,56px);position:relative;overflow:hidden;padding-block:clamp(40px,6vw,80px)}
+.rotary{margin-top:clamp(32px,4vw,56px);position:relative;overflow:hidden;padding:clamp(76px,9vw,128px) 0 clamp(40px,6vw,80px)}
 .rotary-stage{position:relative;height:clamp(380px,39vw,450px);margin-inline:auto}
 .rcard{position:absolute;left:50%;top:0;width:clamp(260px,29vw,350px);height:clamp(380px,39vw,450px);margin-left:calc(clamp(260px,29vw,350px) / -2);background:var(--cb);color:var(--ci);border-radius:24px;overflow:hidden;transform-origin:50% 50%;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s var(--ease-std);display:flex;flex-direction:column;will-change:transform,opacity}
 .rc-media{flex:1 1 0%;min-height:0;overflow:hidden;position:relative}
@@ -1092,7 +1092,7 @@ section.fd{background:var(--blue)}
       rcards.forEach(function(c,i){
         var off=circOff(i), ao=Math.abs(off), vis=ao<=1;
         var voff=Math.max(-1,Math.min(1,off)); // naapurit sivuille, reunat vuotavat yli
-        var tx=voff*SPREAD, deg=voff*DEG, sc=1-ao*0.12, ty=off===0?-28:0; // keskimmainen hieman ylemmas
+        var tx=voff*SPREAD, deg=voff*DEG, sc=1-ao*0.12, ty=off===0?(W<720?-36:-80):0; // keskimmainen selvasti naapureita ylempana
         c.style.transform='translateX('+tx.toFixed(1)+'px) translateY('+ty+'px) rotate('+deg+'deg) scale('+sc.toFixed(3)+')';
         c.style.opacity=vis?'1':'0';
         c.style.zIndex=String(off===0?30:20-ao);
