@@ -384,13 +384,19 @@ section[id]{scroll-margin-top:72px}
 .bk-wm{width:1308px;height:366px;pointer-events:none;user-select:none;background-color:var(--wm);-webkit-mask:url(assets/logot/ReSella_sanamerkki_matala_ruskea.svg) center/contain no-repeat;mask:url(assets/logot/ReSella_sanamerkki_matala_ruskea.svg) center/contain no-repeat;transition:background-color .6s var(--ease-std)}
 .bk-wm.w1{left:756px;top:-45px}
 .bk-wm.w2{left:-679px;top:698px}
-.bk-img{left:182px;top:170px;width:478px;height:382px;border-radius:143px;overflow:hidden}
+.bk-h{font-family:var(--fd);font-weight:600;letter-spacing:-.03em;line-height:1.12;color:var(--c-ink);margin:0;width:940px;transition:color .3s var(--ease-std)}
+.bk-h.h1{left:-369px;top:160px;font-size:67px;text-align:center}
+.bk-h.h2{left:600px;top:871px;font-size:60px;text-align:right}
+.bk-stage.pre .bk-h{opacity:0;transform:translateY(30px)}
+.bk-stage.go .bk-h{transition:opacity 1s var(--ease-reveal),transform 1.2s var(--ease-reveal)}
+.bk-stage.go .bk-h.h2{transition-delay:.9s}
+.bk-img{left:62px;top:310px;width:443px;height:325px;border-radius:122px;overflow:hidden}
 .bk-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .3s var(--ease-std)}
 .bk-img img.on{opacity:1}
-.bk-phone{left:889px;top:153px;width:385px;aspect-ratio:900/1849}
+.bk-phone{left:990px;top:204px;width:276px;aspect-ratio:900/1849}
 .bk-phone img{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .6s var(--ease-std)}
 .bk-phone img.on{opacity:1}
-.bento-cart{left:447px;top:639px;width:400px;--cp:28px;background:var(--c-card);color:var(--c-ink);border-radius:20px;padding:var(--cp);display:flex;flex-direction:column;gap:14px}
+.bento-cart{left:485px;top:211px;width:415px;--cp:28px;background:var(--c-card);color:var(--c-ink);border-radius:20px;padding:var(--cp);display:flex;flex-direction:column;gap:14px}
 .bc-top{display:flex;justify-content:space-between;align-items:center;font-size:15px}
 .bc-top b{font-family:var(--fd);font-weight:600;font-size:22px}
 .bc-top span{color:var(--c-muted)}
@@ -402,20 +408,22 @@ section[id]{scroll-margin-top:72px}
 .bento-chip{background:var(--c-card);border-radius:20px;padding:20px;display:flex;flex-direction:column;z-index:1}
 .bento-chip small{font-size:12px;line-height:1.3;color:var(--c-muted)}
 .bento-chip b{font-family:var(--fd);font-weight:600;color:var(--c-ink);line-height:1}
-.chip-a{left:69px;top:93px;width:187px;height:154px;justify-content:space-between}
+.chip-a{left:-65px;top:278px;width:187px;height:154px;justify-content:space-between}
 .chip-a b.n{font-size:32px;letter-spacing:-.02em;margin-top:auto;margin-bottom:6px}
 .ch-dots{display:flex;gap:4px}
 .ch-dots i{width:12px;height:3px;border-radius:2px;background:var(--c-line);transition:width .45s var(--ease-std),background-color .45s var(--ease-std)}
 .ch-dots i.on{width:18px;background:var(--c-ink)}
-.chip-b{left:577px;top:484px;width:270px;gap:10px}
+.chip-b{left:408px;top:573px;width:270px;gap:10px}
 .ch-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .ch-pill{font-size:11px;font-weight:500;line-height:1;padding:6px 10px;border-radius:999px;background:var(--c-ink);color:var(--c-pt);transition:background-color .6s var(--ease-std),color .6s var(--ease-std)}
 .chip-b b.t{font-size:26px;letter-spacing:-.02em}
 @media(max-width:860px){
   .bk-stage{border-radius:0}
-  .bk-in{width:auto;height:auto!important;transform:none!important;display:grid;gap:24px;padding:48px 20px;grid-template-areas:"cart" "shot" "phone"}
+  .bk-in{width:auto;height:auto!important;transform:none!important;display:grid;gap:24px;padding:48px 20px;grid-template-areas:"h1" "cart" "shot" "phone" "h2"}
   .bk-in>*{position:relative;left:auto;top:auto}
   .bk-wm{display:none}
+  .bk-h{left:auto!important;top:auto!important;width:auto!important;font-size:clamp(28px,8vw,40px)!important;text-align:left!important}
+  .bk-h.h1{grid-area:h1}.bk-h.h2{grid-area:h2;text-align:right!important}
   .bento-cart{grid-area:cart;width:100%;max-width:420px;justify-self:center;--cp:22px}
   .bk-img{grid-area:shot;width:100%;height:auto;aspect-ratio:5/4;border-radius:30%;margin:56px 0}
   .chip-a{grid-area:shot;align-self:start;justify-self:start;width:150px;height:auto;gap:14px;padding:14px;z-index:2}
@@ -959,6 +967,8 @@ section.fd{background:var(--blue)}
     <div class="bk-in" id="bkIn">
       <span class="bk-wm w1" aria-hidden="true"></span>
       <span class="bk-wm w2" aria-hidden="true"></span>
+      <h2 class="bk-h h1">Vuonna 2027...</h2>
+      <p class="bk-h h2">...sovellus mahdollistaa<br>laajan näkyvyyden.</p>
       <div class="bk-img"><img class="on" src="assets/kuvat/02_kassa_maksu/09_maksu_kortti.jpg" alt="Asiakas maksaa kortilla kassalla" loading="lazy"><img src="assets/kuvat/02_kassa_maksu/07_hintalappu_neule.jpg" alt="Hintalappu neuleessa" loading="lazy"><img src="assets/kuvat/01_kirppis_tila/04_rekki_kengat_laukut.jpg" alt="Myyjän rekki, laukut ja kengät" loading="lazy"></div>
       <div class="bk-phone"><img class="on" src="assets/kuvat/kuluttaja-app-puhelin.webp" alt="Resella-sovellus puhelimessa: Tee helppoja löytöjä" loading="lazy"><img src="assets/kuvat/kuluttaja-app-puhelin-tuote.webp" alt="Resella-sovellus: uusi tuote, hintaehdotus kuvasta 8,00 EUR" loading="lazy"><img src="assets/kuvat/kuluttaja-app-puhelin-poyta.webp" alt="Resella-sovellus: oma pöytä, saldo 51,00 EUR" loading="lazy"></div>
       <div class="bento-cart">
