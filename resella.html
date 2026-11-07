@@ -475,7 +475,7 @@ section[id]{scroll-margin-top:72px}
 .pcard.hl .extag{align-self:flex-start;border:1px solid rgba(236,236,220,.5);color:var(--on-red);margin-bottom:16px}
 @media(max-width:720px){.price{grid-template-columns:1fr}}
 /* asiakastarinoiden kaarikaruselli */
-.rotary{margin-top:clamp(32px,4vw,56px);position:relative;overflow:hidden;padding:clamp(76px,9vw,128px) 0 clamp(40px,6vw,80px)}
+.rotary{margin-top:clamp(16px,2vw,28px);position:relative;overflow:hidden;padding:clamp(76px,9vw,116px) 0 clamp(40px,6vw,80px)}
 .rotary-stage{position:relative;height:clamp(380px,39vw,450px);margin-inline:auto}
 .rcard{position:absolute;left:50%;top:0;width:clamp(260px,29vw,350px);height:clamp(380px,39vw,450px);margin-left:calc(clamp(260px,29vw,350px) / -2);background:var(--cb);color:var(--ci);border-radius:24px;overflow:hidden;transform-origin:50% 50%;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s var(--ease-std);display:flex;flex-direction:column;will-change:transform,opacity}
 .rc-media{flex:1 1 0%;min-height:0;overflow:hidden;position:relative}
@@ -810,53 +810,33 @@ section.fd{background:var(--blue)}
   </div>
 </section>
 
-<!-- ASIAKASTARINAT (kaarikaruselli) -->
+<!-- TUKI (kaarikaruselli) -->
 <section class="band" id="tarinat">
   <div class="wrap">
     <div class="shead ctr rot-head">
-      <h2 class="disp m">Tutustu ominaisuuksiin</h2>
+      <h2 class="disp m">Apua, kun tarvitset</h2>
     </div>
   </div>
   <div class="rotary" id="rotary">
     <div class="rotary-stage">
       <article class="rcard" style="--cb:#C5D0D3;--ci:#3E2520">
-        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/01_kassa_tiski_tabletti.jpg" alt="Kassa tabletilla myyntitiskillä" loading="lazy"></div>
-        <div class="rc-body"><h3>Kassa</h3><p>Myynti, viivakoodi ja maksu samalla näytöllä, myös ilman nettiä.</p></div>
+        <div class="rc-media"><img src="assets/kuvat/03_vihrea_naytto/01_lappari_vihrea_naytto.jpg" alt="Kannettava tietokone kirpputorin tiskillä" loading="lazy"></div>
+        <div class="rc-body"><h3>Opetusvideot</h3><p>Lyhyet videot näyttävät kassan, tilitykset ja myyjien ohjeet vaihe vaiheelta.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#3E2520;--ci:#ECECDC">
-        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/10_kuitti_tulostuu.jpg" alt="Kuitti tulostuu kassalta" loading="lazy"></div>
-        <div class="rc-body"><h3>Tilitykset</h3><p>Myyjien rahat lähtevät yhdellä pankkitiedostolla.</p></div>
+        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/02_tiski_myyja_odottaa.jpg" alt="Myyjä kassatiskin takana" loading="lazy"></div>
+        <div class="rc-body"><h3>Puhelintuki</h3><p>Soita suoraan meille, kun tarvitset apua kassalla tai tilityksissä.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#D09C4C;--ci:#3E2520">
-        <div class="rc-media"><img src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Myymälän rekkejä ja pöytiä" loading="lazy"></div>
-        <div class="rc-body"><h3>Pöytävaraukset</h3><p>Myyjä varaa ja maksaa pöytänsä verkossa, näet vapaat paikat kartalta.</p></div>
+        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/04_poyta_tabletti_ylhaalta.jpg" alt="Tabletti pöydällä ylhäältä kuvattuna" loading="lazy"></div>
+        <div class="rc-body"><h3>Sähköposti</h3><p>Kirjoita kysymyksesi, niin vastaamme suomeksi.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#C24029;--ci:#ECECDC">
-        <div class="rc-media"><img src="assets/kuvat/04_loydot_tuotteet/01_takki_esittely.jpg" alt="Takki esillä verkkokatalogissa" loading="lazy"></div>
-        <div class="rc-body"><h3>Näkyvyys verkossa</h3><p>Kassalla hinnoiteltu tuote näkyy heti ostajalle verkossa.</p></div>
-        <a class="rc-btn" href="#varaa">Lue lisää</a>
-      </article>
-      <article class="rcard" style="--cb:#3A4961;--ci:#ECECDC">
-        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/07_hintalappu_neule.jpg" alt="Hintalappu neuleessa" loading="lazy"></div>
-        <div class="rc-body"><h3>Hinnoittelu</h3><p>Hintaehdotus suoraan kuvasta ja hintalaput tulostuvat samalla.</p></div>
-        <a class="rc-btn" href="#varaa">Lue lisää</a>
-      </article>
-      <article class="rcard" style="--cb:#C5D0D3;--ci:#3E2520">
-        <div class="rc-media"><img src="assets/kuvat/04_loydot_tuotteet/05_myyja_kuvaa_puhelimella.jpg" alt="Myyjä kuvaa tuotetta puhelimella" loading="lazy"></div>
-        <div class="rc-body"><h3>Myyjänäkymä</h3><p>Myyjä lisää tuotteet ja seuraa myyntiään suoraan puhelimesta.</p></div>
-        <a class="rc-btn" href="#varaa">Lue lisää</a>
-      </article>
-      <article class="rcard" style="--cb:#D09C4C;--ci:#3E2520">
-        <div class="rc-media"><img src="assets/kuvat/01_kirppis_tila/03_hylly_laukut_varikas.jpg" alt="Värikäs hylly laukkuja" loading="lazy"></div>
-        <div class="rc-body"><h3>Oma ilme</h3><p>Myymäläsi värit ja tyyli näkyvät myös varaussivulla.</p></div>
-        <a class="rc-btn" href="#varaa">Lue lisää</a>
-      </article>
-      <article class="rcard" style="--cb:#C24029;--ci:#ECECDC">
-        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/14_laitteet_ylhaalta.jpg" alt="Kassalaitteet ylhäältä" loading="lazy"></div>
-        <div class="rc-body"><h3>Raportointi</h3><p>Myynti, provisiot ja käyttöaste pysyvät ajan tasalla reaaliajassa.</p></div>
+        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/03_tiski_tabletti_puhelin.jpg" alt="Tabletti ja puhelin kassatiskillä" loading="lazy"></div>
+        <div class="rc-body"><h3>Apuri järjestelmässä</h3><p>Kysy apurilta suoraan järjestelmässä, niin se näyttää, miten asia tehdään.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
     </div>
