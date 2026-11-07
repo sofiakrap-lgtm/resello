@@ -1308,7 +1308,7 @@ section.fd{background:var(--blue)}
   /* kolme teemaa vaihtuvat: maksu, tuotteiden lisäys, oman pöydän hallinta */
   var D=[
    {a:['+20,00 €','Myyjälle tilille, villapaita pöydästä 14'],b:['Omistajalle','Provisio','Myynti kasvaa','Provisio kirjautuu jokaisesta piippauksesta'],c:['Ostoskori','Pöytä 14',[['Villapaita','12,00 €'],['Nahkatakki','35,00 €'],['Lastenkirja','4,00 €']],'Yhteensä','51,00 €']},
-   {a:['8,00 €','Hintaehdotus kuvasta, villaneule'],b:['Myyjälle','Kuvasta','Tuote verkkoon','Hinnoiteltu tuote näkyy heti sovelluksessa'],c:['Lisätyt tänään','Pöytä 14',[['Villapaita','12,00 €'],['Nahkatakki','35,00 €'],['Lastenkirja','4,00 €']],'Tuotteita','3 kpl']},
+   {a:['8,00 €','Hintaehdotus kuvasta, raitaneule'],b:['Myyjälle','Kuvasta','Tuote verkkoon','Hinnoiteltu tuote näkyy heti sovelluksessa'],c:['Lisätyt tänään','Pöytä 14',[['Villapaita','12,00 €'],['Nahkatakki','35,00 €'],['Lastenkirja','4,00 €']],'Tuotteita','3 kpl']},
    {a:['+51,00 €','Pöytä 14 myi tänään 3 tuotetta'],b:['Myyjälle','Tilitys','Oma pöytä hallussa','Myynnit ja tilitys yhdestä paikasta'],c:['Pöytä 14','Tänään',[['Myyty','3 kpl'],['Hyllyssä','12 kpl'],['Varaus voimassa','30.11.']],'Myynti','51,00 €']}];
   var q=function(s){return st.querySelector(s);}, imgs=st.querySelectorAll('.bk-img img'), phs=st.querySelectorAll('.bk-phone img'), dots=st.querySelectorAll('.ch-dots i'), cur=0, timer=null, seen=false, vis=false;
   var red=false; try{ red=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
