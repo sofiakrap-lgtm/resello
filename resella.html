@@ -539,7 +539,7 @@ section[id]{scroll-margin-top:72px}
 .rc-body p{font-size:15px;font-weight:500;line-height:1.46;color:var(--ci);opacity:.8;margin:0}
 .rc-btn{flex:none;margin:clamp(12px,1.5vw,18px) clamp(18px,1.9vw,24px) clamp(16px,1.8vw,24px);text-align:center;background:var(--ci);color:var(--cb);border-radius:999px;height:40px;padding:0 20px;display:flex;align-items:center;justify-content:center;font:600 15px/1 var(--fb);text-decoration:none;transition:opacity var(--dur-fast) var(--ease-out)}
 .rc-btn:hover{opacity:.88}
-.rot-head{margin-bottom:clamp(40px,6vw,86px)}
+.rot-head{margin-bottom:clamp(8px,1vw,16px)}
 #tarinat{padding-top:clamp(110px,15vw,190px)}
 .rotary-ctrl{position:relative;z-index:5;display:flex;align-items:center;justify-content:center;gap:11px;margin-top:clamp(24px,2.2vw,30px)}
 .rot-arrow{width:34px;height:34px;background:none;border:0;color:var(--ink);display:grid;place-items:center;cursor:pointer;flex:none;transition:opacity var(--dur-fast) var(--ease-std)}
@@ -1221,6 +1221,11 @@ section.fd{background:var(--blue)}
       var SPREAD=W<720?W*0.62:Math.min(W*0.40,600), DEG=W<720?15:19; // mobiilissa naapurit kauemmas, ettei keskikortti peity
       rcards.forEach(function(c,i){
         var off=circOff(i), ao=Math.abs(off), vis=ao<=1;
+        // piilossa olevat kortit odottavat oikealla, josta ne tulevat seuraavaksi; vasemmalta poistuva häipyy paikallaan eikä lennä ruudun yli
+        var prev=c._off; c._off=off;
+        if(!vis){ if(prev===-1){ c.style.opacity='0'; c.style.pointerEvents='none'; c.style.zIndex='1'; c.setAttribute('aria-hidden','true'); c.setAttribute('inert','');
+            setTimeout(function(){ c.style.transition='none'; c.style.transform='translateX('+SPREAD.toFixed(1)+'px) translateY(0px) rotate('+DEG+'deg) scale(0.760)'; c.offsetWidth; c.style.transition=''; },450); return; }
+          off=2; }
         var voff=Math.max(-1,Math.min(1,off)); // naapurit sivuille, reunat vuotavat yli
         var tx=voff*SPREAD, deg=voff*DEG, sc=1-ao*0.12, ty=off===0?(W<720?-36:-80):0; // keskimmainen selvasti naapureita ylempana
         c.style.transform='translateX('+tx.toFixed(1)+'px) translateY('+ty+'px) rotate('+deg+'deg) scale('+sc.toFixed(3)+')';
