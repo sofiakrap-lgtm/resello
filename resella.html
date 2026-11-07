@@ -306,6 +306,18 @@ section[id]{scroll-margin-top:72px}
 .roadmap.rm-go .rm-dot::after{transform:scaleY(1);transition:transform .5s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .45s)}
 .roadmap.rm-go .rm-t{opacity:1;transform:none;transition:opacity 1s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .3s),transform 1s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .3s)}
 .roadmap.rm-done .rm-line path{stroke-dasharray:none}
+/* kenelle sopii: sininen pohja, iso otsikko vasemmalla, kiemurteleva viiva */
+.ks{position:relative;overflow:hidden;background:var(--blue);color:var(--ink);padding:clamp(80px,9vw,130px) 0 clamp(110px,13vw,190px)}
+.ks-deco{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.ks-deco path{fill:none;stroke:#C24029;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
+.ks .wrap{position:relative;z-index:1}
+.ks .disp{margin:0;max-width:13ch;text-align:left}
+.ks-lead{margin:clamp(18px,2vw,26px) 0 0;max-width:38ch;font-size:clamp(16px,1.6vw,19px);line-height:1.5}
+.ks .btn{margin-top:clamp(22px,2.4vw,32px)}
+.ks.ks-anim path{stroke-dasharray:var(--l);stroke-dashoffset:var(--l)}
+.ks.ks-go path{stroke-dashoffset:0;transition:stroke-dashoffset 2.6s cubic-bezier(.45,0,.6,.95)}
+@media(max-width:700px){.ks-deco{top:auto;height:55%}.ks .disp{max-width:none}.ks{padding-bottom:200px}}
+
 /* laitteet: neljä korttia, apila-ikoni täyttyy laite kerrallaan, alla tabletin yläreuna koko leveydellä */
 .lt{background:var(--bg);color:var(--ink);padding:clamp(100px,15.4vw,222px) 0 0;overflow:hidden}
 .lt .disp{text-align:center;margin:0 auto}
@@ -897,6 +909,18 @@ section.fd{background:var(--blue)}
 </section>
 
 <!-- HINNOITTELU -->
+<!-- KENELLE SOPII -->
+<section class="ks" id="kenelle">
+  <svg class="ks-deco" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path d="M-60 520 C110 470 210 560 230 650 C250 760 120 770 130 690 C140 600 330 560 470 640 C560 690 640 720 720 640 C860 500 1000 230 1180 170 C1300 130 1400 150 1500 110"/>
+  </svg>
+  <div class="wrap">
+    <h2 class="disp">Sopii jokaiselle kirppikselle</h2>
+    <p class="ks-lead">Pieni kyläkirppis, iso halli tai antiikkiliike. Sama järjestelmä joustaa kirppiksesi koon ja tavan mukaan.</p>
+    <a class="btn" href="#varaa">Varaa demo</a>
+  </div>
+</section>
+
 <section class="band" id="hinnoittelu">
   <div class="wrap">
     <div class="shead ctr">
@@ -1446,6 +1470,14 @@ section.fd{background:var(--blue)}
 /* laitteet: tabletin yläreuna nousee esiin */
 (function(){ var lt=document.getElementById('laitteet'); if(!lt) return; if(!('IntersectionObserver' in window)){ lt.classList.add('in'); return; }
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ lt.classList.add('in'); io.disconnect(); } }); },{threshold:.35}); io.observe(lt); })();
+</script>
+<script>
+/* kenelle sopii: viiva piirtyy näkyviin */
+(function(){ var k=document.getElementById('kenelle'); if(!k||!('IntersectionObserver' in window)) return;
+  try{ if(matchMedia('(prefers-reduced-motion: reduce)').matches) return; }catch(e){}
+  k.querySelectorAll('.ks-deco path').forEach(function(l){ l.style.setProperty('--l',Math.ceil(l.getTotalLength())); });
+  k.classList.add('ks-anim');
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(!e.isIntersecting) return; io.disconnect(); k.getBoundingClientRect(); requestAnimationFrame(function(){ k.classList.add('ks-go'); }); }); },{threshold:.3}); io.observe(k); })();
 </script>
 </body>
 </html>
