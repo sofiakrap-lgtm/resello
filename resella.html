@@ -1373,12 +1373,14 @@ section.fd{background:var(--blue)}
 /* kayttoonoton polku: viiva kulkee pisteiden kautta */
 (function(){
   var rm=document.querySelector('.roadmap'), path=document.getElementById('rmPath'); if(!rm||!path) return;
-  function c(sel){ var d=rm.querySelector(sel+' .rm-dot').getBoundingClientRect(), r=rm.getBoundingClientRect(); return {x:d.left-r.left+d.width/2, y:d.top-r.top+d.height/2}; }
+  /* zoomin (koko sivu 80 %) jälkeen getBoundingClientRect on eri mittakaavassa kuin SVG:n koordinaatit, joten jaetaan kertoimella */
+  function zk(){ var r=rm.getBoundingClientRect(); return (r.width/(rm.offsetWidth||r.width))||1; }
+  function c(sel){ var k=zk(), d=rm.querySelector(sel+' .rm-dot').getBoundingClientRect(), r=rm.getBoundingClientRect(); return {x:(d.left-r.left+d.width/2)/k, y:(d.top-r.top+d.height/2)/k}; }
   function draw(){
     if(innerWidth<=820){ path.setAttribute('d',''); return; }
     var p=[1,2,3,4,5,6,7].map(function(i){ return c('.n'+i); }), r=rm.getBoundingClientRect();
     var t4=rm.querySelector('.n4 .rm-t').getBoundingClientRect(), t5=rm.querySelector('.n5 .rm-t').getBoundingClientRect();
-    var edge=Math.max(t4.right,t5.right)-r.left+28;
+    var edge=(Math.max(t4.right,t5.right)-r.left)/zk()+28;
     var a=p[0], b=p[1], d4=p[3], d5=p[4], g=p[6];
     var rad=(d5.y-d4.y)/2, ax=Math.max(d4.x+40, edge-rad);
     var sx=a.x+18;
@@ -1402,7 +1404,7 @@ section.fd{background:var(--blue)}
     var r=rm.getBoundingClientRect(), pts=[], N=240;
     for(var k=0;k<=N;k++){ var q=path.getPointAtLength(L*k/N); pts.push(q); }
     nodes.forEach(function(n,i){
-      var d=n.querySelector('.rm-dot').getBoundingClientRect(), x=d.left-r.left+d.width/2, y=d.top-r.top+d.height/2, best=0, bd=1e9;
+      var kz=zk(), d=n.querySelector('.rm-dot').getBoundingClientRect(), x=(d.left-r.left+d.width/2)/kz, y=(d.top-r.top+d.height/2)/kz, best=0, bd=1e9;
       pts.forEach(function(q,k){ var e=(q.x-x)*(q.x-x)+(q.y-y)*(q.y-y); if(e<bd){bd=e;best=k;} });
       n.style.setProperty('--d',(i===0?0:4.4*inv(best/N)).toFixed(2)+'s');
     });
