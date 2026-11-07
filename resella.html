@@ -330,18 +330,24 @@ section[id]{scroll-margin-top:72px}
 .lt-img{position:absolute;height:auto;max-width:none;pointer-events:none;user-select:none}
 .lt-card h3{font-family:var(--fd);font-weight:600;font-size:clamp(19px,1.7vw,22px);letter-spacing:-.01em;line-height:1.15;margin:0 0 10px}
 .lt-card p{margin:0;font-size:15px;line-height:1.45;color:var(--ink-muted);max-width:28ch}
-.lt-pad{position:relative;margin-top:clamp(56px,7.9vw,114px);height:clamp(80px,9vw,129px);background:#2B1A16;border-radius:clamp(28px,3vw,44px) clamp(28px,3vw,44px) 0 0;padding:clamp(14px,1.5vw,21px) clamp(14px,1.4vw,20px) 0 clamp(14px,1.5vw,22px);transform:translateY(40px);opacity:0;transition:transform 1.2s var(--ease-reveal),opacity .8s var(--ease-std)}
-.lt.in .lt-pad{transform:none;opacity:1}
-.lt-pad::before{content:"";position:absolute;top:clamp(5px,.6vw,9px);left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#4B302A}
-.lt-scr{height:100%;background:#F6F6EE;border-radius:clamp(14px,1.6vw,24px) clamp(14px,1.6vw,24px) 0 0;display:flex;align-items:flex-start;gap:clamp(12px,1.4vw,20px);padding:clamp(14px,1.6vw,22px) clamp(16px,1.8vw,26px);font-family:"DM Sans",var(--fb);color:#3E2520;overflow:hidden}
-.lt-scr img{height:clamp(18px,1.6vw,24px);width:auto;flex:none}
-.lt-scr .k{font-weight:600;font-size:clamp(13px,1.1vw,16px);white-space:nowrap;padding-top:2px}
-.lt-scr .q{flex:1;max-width:46%;height:clamp(30px,2.6vw,40px);border:1px solid #DCDBC6;border-radius:10px;display:flex;align-items:center;padding:0 14px;font-size:clamp(12px,1vw,14px);color:#6E5E56;white-space:nowrap;overflow:hidden}
-.lt-scr .o{margin-left:auto;font-weight:600;font-size:clamp(13px,1.1vw,16px);padding-top:2px;padding-left:clamp(16px,2vw,30px);border-left:1px solid #DCDBC6;min-width:22%}
+.lt-pad{position:relative;width:min(1300px,calc(100% - 2 * var(--side)));margin:clamp(56px,7.9vw,114px) auto 0;background:#2B1A16;border-radius:clamp(26px,3vw,46px);padding:clamp(10px,1.3vw,20px);transform-origin:50% 0;will-change:transform}
+.lt-pad::before{content:"";position:absolute;top:clamp(3px,.45vw,7px);left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#4B302A}
+.lt-scr{border-radius:clamp(14px,1.6vw,26px);overflow:hidden;background:#F4F4EA;aspect-ratio:16/10}
+.lt-scr img{display:block;width:100%;height:100%;object-fit:cover}
+.lt{padding-bottom:clamp(60px,8vw,120px)}
+/* korttien ilmestyminen */
+.lt-grid.pre .lt-card{opacity:0;transform:translateY(48px)}
+.lt-grid.pre .lt-img{transform:translateY(40%)}
+.lt-grid .lt-card{transition:opacity .8s var(--ease-std),transform 1.1s var(--ease-reveal)}
+.lt-grid .lt-img{transition:transform 1.3s var(--ease-reveal) .25s}
+.lt-grid .lt-card:nth-child(2){transition-delay:.1s}.lt-grid .lt-card:nth-child(2) .lt-img{transition-delay:.35s}
+.lt-grid .lt-card:nth-child(3){transition-delay:.2s}.lt-grid .lt-card:nth-child(3) .lt-img{transition-delay:.45s}
+.lt-grid .lt-card:nth-child(4){transition-delay:.3s}.lt-grid .lt-card:nth-child(4) .lt-img{transition-delay:.55s}
+.lt-grid .lt-card:nth-child(5){transition-delay:.4s}.lt-grid .lt-card:nth-child(5) .lt-img{transition-delay:.65s}
 @media(max-width:1100px){.lt-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:800px){.lt-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.lt-grid{grid-template-columns:1fr}.lt-card{aspect-ratio:auto;height:360px}.lt-scr .q{display:none}}
-@media(prefers-reduced-motion:reduce){.lt-pad{transform:none;opacity:1;transition:none}}
+@media(max-width:560px){.lt-grid{grid-template-columns:1fr}.lt-card{aspect-ratio:auto;height:360px}}
+@media(prefers-reduced-motion:reduce){.lt-grid.pre .lt-card,.lt-grid.pre .lt-img{opacity:1;transform:none}}
 
 /* siirtyma vanhasta jarjestelmasta: punainen pohja, askeleet palkkeina, apukadet molemmin puolin */
 .sr{position:relative;overflow:hidden;background:var(--red);color:var(--on-red);padding:clamp(80px,9vw,130px) 0 clamp(90px,10vw,150px)}
@@ -1008,7 +1014,7 @@ section.fd{background:var(--blue)}
     </div>
     <p class="lt-lead">Tuomme laitteet paikan päälle ja asennamme ne valmiiksi. Sinun ei tarvitse hankkia mitään itse.</p>
   </div>
-  <div class="lt-pad" aria-hidden="true"><div class="lt-scr"><img src="assets/ikoni/ReSella_ikoni_pilvi_ruskea.svg" alt=""><span class="k">Kassa 1</span><span class="q">Piippaa tuote tai kirjoita koodi</span><span class="o">Ostos</span></div></div>
+  <div class="lt-pad"><div class="lt-scr"><img src="assets/kuvat/kassa-nakyma.webp" alt="Resellan kassanäkymä tabletilla: ostos, yhteenveto ja maksutapa" loading="lazy"></div></div>
 </section>
 
 <section class="band-blue" id="kayttoonotto">
@@ -1476,9 +1482,18 @@ section.fd{background:var(--blue)}
 })();
 </script>
 <script>
-/* laitteet: tabletin yläreuna nousee esiin */
-(function(){ var lt=document.getElementById('laitteet'); if(!lt) return; if(!('IntersectionObserver' in window)){ lt.classList.add('in'); return; }
-  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ lt.classList.add('in'); io.disconnect(); } }); },{threshold:.35}); io.observe(lt); })();
+/* laitteet: kortit nousevat esiin, tabletti pienenee hieman skrollatessa */
+(function(){ var lt=document.getElementById('laitteet'); if(!lt) return; var g=lt.querySelector('.lt-grid'), pad=lt.querySelector('.lt-pad');
+  var red=false; try{ red=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  if(g && !red && 'IntersectionObserver' in window){ g.classList.add('pre');
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ g.classList.remove('pre'); io.disconnect(); } }); },{threshold:.2}); io.observe(g); }
+  if(!pad || red) return; var tick=false;
+  function upd(){ tick=false; var r=pad.getBoundingClientRect(), vh=window.innerHeight||document.documentElement.clientHeight;
+    var k=(r.width/(pad.offsetWidth||r.width))||1; var top=r.top, H=vh/ (k>0?1:1);
+    var p=Math.max(0,Math.min(1,(H*0.95-top)/(H*0.75)));
+    pad.style.transform='scale('+(1-0.16*p).toFixed(4)+')'; }
+  addEventListener('scroll',function(){ if(!tick){ tick=true; requestAnimationFrame(upd); } },{passive:true}); addEventListener('resize',upd); upd();
+})();
 </script>
 <script>
 /* kenelle sopii: viiva piirtyy näkyviin */
