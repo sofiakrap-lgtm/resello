@@ -369,6 +369,8 @@ section[id]{scroll-margin-top:72px}
   .bk-phone{grid-area:phone;justify-self:center;width:min(300px,80%)}
 }
 /* kassaosion tuloanimaatio */
+.bk-stage.pre{transform:scale(.9)}
+.bk-stage.go{transform:none;transition:transform 1.4s var(--ease-reveal),background-color .6s var(--ease-std)}
 .bk-stage.pre .bk-wm,.bk-stage.pre .bk-img,.bk-stage.pre .bk-phone,.bk-stage.pre .bento-cart,.bk-stage.pre .bento-chip{opacity:0}
 .bk-stage.pre .bk-wm.w1{transform:translateX(18%)}
 .bk-stage.pre .bk-wm.w2{transform:translateX(-18%)}
@@ -1336,7 +1338,7 @@ section.fd{background:var(--blue)}
     q('.bc-total span').textContent=d.c[3]; q('.bc-total b').textContent=d.c[4]; }
   function show(i){ cur=i; dots.forEach(function(x,k){ x.classList.toggle('on',k===i); }); imgs.forEach(function(x,k){ x.classList.toggle('on',k===i); }); st.setAttribute('data-t',i+1);
     if(red){ fill(i); return; } st.classList.add('sw'); setTimeout(function(){ fill(i); st.classList.remove('sw'); },300); }
-  function loop(){ clearInterval(timer); timer=null; if(vis && !document.hidden && !red) timer=setInterval(function(){ show((cur+1)%3); },5000); }
+  function loop(){ clearInterval(timer); timer=null; if(vis && !document.hidden && !red) timer=setInterval(function(){ show((cur+1)%3); },3000); }
   dots.forEach(function(x,k){ x.classList.toggle('on',k===0); });
   if(!red) st.classList.add('pre');
   if('IntersectionObserver' in window){
