@@ -319,16 +319,16 @@ section[id]{scroll-margin-top:72px}
 @media(max-width:700px){.ks-deco{top:auto;height:55%}.ks .disp{max-width:none}.ks{padding-bottom:200px}}
 
 /* laitteet: neljä korttia, apila-ikoni täyttyy laite kerrallaan, alla tabletin yläreuna koko leveydellä */
-.lt{background:var(--bg);color:var(--ink);padding:clamp(100px,15.4vw,222px) 0 0;overflow:hidden}
+.lt{background:var(--bg);color:var(--ink);padding:clamp(72px,8.4vw,120px) 0 0;overflow:hidden}
 .lt .disp{text-align:center;margin:0 auto}
 @media(min-width:900px){.lt .disp{white-space:nowrap}}
-.lt-lead{text-align:center;margin:clamp(16px,2.2vw,32px) auto 0;max-width:42ch;font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:var(--ink-muted)}
-.lt-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(10px,1.2vw,16px);margin-top:clamp(48px,6vw,90px)}
+.lt-lead{text-align:center;margin:clamp(22px,2.1vw,30px) auto 0;max-width:56ch;font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:var(--ink-muted)}
+.lt-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(10px,1.2vw,16px);margin-top:clamp(24px,2.2vw,32px)}
 .lt-card{position:relative;overflow:hidden;background:var(--surface);border-radius:var(--radius-lg);padding:clamp(20px,2vw,28px);aspect-ratio:3/4}
 .lt-img{position:absolute;height:auto;max-width:none;pointer-events:none;user-select:none}
 .lt-card h3{font-family:var(--fd);font-weight:600;font-size:clamp(19px,1.7vw,22px);letter-spacing:-.01em;line-height:1.15;margin:0 0 10px}
 .lt-card p{margin:0;font-size:15px;line-height:1.45;color:var(--ink-muted);max-width:28ch}
-.lt-pad{position:relative;margin-top:clamp(56px,8vw,116px);height:clamp(80px,9vw,129px);background:#2B1A16;border-radius:clamp(28px,3vw,44px) clamp(28px,3vw,44px) 0 0;padding:clamp(14px,1.5vw,21px) clamp(14px,1.4vw,20px) 0 clamp(14px,1.5vw,22px);transform:translateY(40px);opacity:0;transition:transform 1.2s var(--ease-reveal),opacity .8s var(--ease-std)}
+.lt-pad{position:relative;margin-top:clamp(56px,7.9vw,114px);height:clamp(80px,9vw,129px);background:#2B1A16;border-radius:clamp(28px,3vw,44px) clamp(28px,3vw,44px) 0 0;padding:clamp(14px,1.5vw,21px) clamp(14px,1.4vw,20px) 0 clamp(14px,1.5vw,22px);transform:translateY(40px);opacity:0;transition:transform 1.2s var(--ease-reveal),opacity .8s var(--ease-std)}
 .lt.in .lt-pad{transform:none;opacity:1}
 .lt-pad::before{content:"";position:absolute;top:clamp(5px,.6vw,9px);left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#4B302A}
 .lt-scr{height:100%;background:#F6F6EE;border-radius:clamp(14px,1.6vw,24px) clamp(14px,1.6vw,24px) 0 0;display:flex;align-items:flex-start;gap:clamp(12px,1.4vw,20px);padding:clamp(14px,1.6vw,22px) clamp(16px,1.8vw,26px);font-family:"DM Sans",var(--fb);color:#3E2520;overflow:hidden}
@@ -988,7 +988,6 @@ section.fd{background:var(--blue)}
 <section class="lt" id="laitteet">
   <div class="wrap">
     <h2 class="disp d80">Kassa valmiina käyttöön</h2>
-    <p class="lt-lead">Tuomme laitteet paikan päälle ja asennamme ne valmiiksi. Sinun ei tarvitse hankkia mitään itse.</p>
     <div class="lt-grid">
       <article class="lt-card"><div><h3>Tabletti</h3><p>Kassa toimii tabletilla tai omalla kosketusnäytöllä, myös ilman nettiä.</p></div><img class="lt-img" src="assets/tarrat/laitteet/tabletti.webp" alt="Tabletti telineessä, näytöllä Resellan kassa" loading="lazy" style="left:6%;top:47%;width:124%"></article>
       <article class="lt-card"><div><h3>Viivakoodinlukija</h3><p>Lukee sekä viivakoodit että QR-koodit. Piippaa, ja tuote on ostoskorissa.</p></div><img class="lt-img" src="assets/tarrat/laitteet/viivakoodinlukija.webp" alt="Viivakoodinlukija jalustalla" loading="lazy" style="left:26%;top:40%;width:78%"></article>
@@ -996,6 +995,7 @@ section.fd{background:var(--blue)}
       <article class="lt-card"><div><h3>Kuittitulostin</h3><p>Kuitti asiakkaalle heti, kun maksu on valmis.</p></div><img class="lt-img" src="assets/tarrat/laitteet/kuittitulostin.webp" alt="Kuittitulostin" loading="lazy" style="left:8%;top:44%;width:112%"></article>
       <article class="lt-card"><div><h3>Kassalipas</h3><p>Käteiselle oma lipas kassan viereen.</p></div><img class="lt-img" src="assets/tarrat/laitteet/kassalipas.webp" alt="Kassalipas" loading="lazy" style="left:-26%;top:55%;width:136%"></article>
     </div>
+    <p class="lt-lead">Tuomme laitteet paikan päälle ja asennamme ne valmiiksi. Sinun ei tarvitse hankkia mitään itse.</p>
   </div>
   <div class="lt-pad" aria-hidden="true"><div class="lt-scr"><img src="assets/ikoni/ReSella_ikoni_pilvi_ruskea.svg" alt=""><span class="k">Kassa 1</span><span class="q">Piippaa tuote tai kirjoita koodi</span><span class="o">Ostos</span></div></div>
 </section>
