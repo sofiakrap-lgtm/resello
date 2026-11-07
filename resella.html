@@ -331,7 +331,9 @@ section[id]{scroll-margin-top:72px}
 .bk-img{left:182px;top:170px;width:478px;height:382px;border-radius:143px;overflow:hidden}
 .bk-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .6s var(--ease-std)}
 .bk-img img.on{opacity:1}
-.bk-phone{left:889px;top:153px;width:385px;height:auto}
+.bk-phone{left:889px;top:153px;width:385px;aspect-ratio:900/1849}
+.bk-phone img{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .6s var(--ease-std)}
+.bk-phone img.on{opacity:1}
 .bento-cart{left:447px;top:639px;width:400px;--cp:28px;background:var(--c-card);color:var(--c-ink);border-radius:20px;padding:var(--cp);display:flex;flex-direction:column;gap:14px}
 .bc-top{display:flex;justify-content:space-between;align-items:center;font-size:15px}
 .bc-top b{font-family:var(--fd);font-weight:600;font-size:22px}
@@ -366,7 +368,7 @@ section[id]{scroll-margin-top:72px}
   .chip-b{grid-area:shot;align-self:end;justify-self:end;width:210px;padding:14px;gap:6px;z-index:2}
   .chip-b b.t{font-size:20px}
   .chip-b>small{display:none}
-  .bk-phone{grid-area:phone;justify-self:center;width:min(300px,80%)}
+  .bk-phone{grid-area:phone;justify-self:center;width:min(300px,80%);position:relative}
 }
 /* kassaosion tuloanimaatio */
 .bk-stage.pre{transform:scale(.9)}
@@ -905,7 +907,7 @@ section.fd{background:var(--blue)}
       <span class="bk-wm w1" aria-hidden="true"></span>
       <span class="bk-wm w2" aria-hidden="true"></span>
       <div class="bk-img"><img class="on" src="assets/kuvat/02_kassa_maksu/09_maksu_kortti.jpg" alt="Asiakas maksaa kortilla kassalla" loading="lazy"><img src="assets/kuvat/02_kassa_maksu/07_hintalappu_neule.jpg" alt="Hintalappu neuleessa" loading="lazy"><img src="assets/kuvat/01_kirppis_tila/04_rekki_kengat_laukut.jpg" alt="Myyjän rekki, laukut ja kengät" loading="lazy"></div>
-      <img class="bk-phone" src="assets/kuvat/kuluttaja-app-puhelin.webp" alt="Resella-sovellus puhelimessa: Tee helppoja löytöjä" loading="lazy">
+      <div class="bk-phone"><img class="on" src="assets/kuvat/kuluttaja-app-puhelin.webp" alt="Resella-sovellus puhelimessa: Tee helppoja löytöjä" loading="lazy"><img src="assets/kuvat/kuluttaja-app-puhelin-tuote.webp" alt="Resella-sovellus: uusi tuote, hintaehdotus kuvasta 8,00 EUR" loading="lazy"><img src="assets/kuvat/kuluttaja-app-puhelin-poyta.webp" alt="Resella-sovellus: oma pöytä, saldo 51,00 EUR" loading="lazy"></div>
       <div class="bento-cart">
         <div class="bc-top"><b>Ostoskori</b><span>Pöytä 14</span></div>
         <div class="bc-rows">
@@ -1328,7 +1330,7 @@ section.fd{background:var(--blue)}
    {a:['+20,00 €','Myyjälle tilille, villapaita pöydästä 14'],b:['Omistajalle','Provisio','Myynti kasvaa','Provisio kirjautuu jokaisesta piippauksesta'],c:['Ostoskori','Pöytä 14',[['Villapaita','12,00 €'],['Nahkatakki','35,00 €'],['Lastenkirja','4,00 €']],'Yhteensä','51,00 €']},
    {a:['8,00 €','Hintaehdotus kuvasta, villaneule'],b:['Myyjälle','Kuvasta','Tuote verkkoon','Hinnoiteltu tuote näkyy heti sovelluksessa'],c:['Lisätyt tänään','Pöytä 14',[['Villapaita','12,00 €'],['Nahkatakki','35,00 €'],['Lastenkirja','4,00 €']],'Tuotteita','3 kpl']},
    {a:['+51,00 €','Pöytä 14 myi tänään 3 tuotetta'],b:['Myyjälle','Tilitys','Oma pöytä hallussa','Myynnit ja tilitys yhdestä paikasta'],c:['Pöytä 14','Tänään',[['Myyty','3 kpl'],['Hyllyssä','12 kpl'],['Varaus voimassa','30.11.']],'Myynti','51,00 €']}];
-  var q=function(s){return st.querySelector(s);}, imgs=st.querySelectorAll('.bk-img img'), dots=st.querySelectorAll('.ch-dots i'), cur=0, timer=null, seen=false, vis=false;
+  var q=function(s){return st.querySelector(s);}, imgs=st.querySelectorAll('.bk-img img'), phs=st.querySelectorAll('.bk-phone img'), dots=st.querySelectorAll('.ch-dots i'), cur=0, timer=null, seen=false, vis=false;
   var red=false; try{ red=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
   function fill(i){ var d=D[i];
     q('.chip-a b.n').textContent=d.a[0]; q('.chip-a small').textContent=d.a[1];
@@ -1336,7 +1338,7 @@ section.fd{background:var(--blue)}
     q('.bc-top b').textContent=d.c[0]; q('.bc-top span').textContent=d.c[1];
     st.querySelectorAll('.bc-row').forEach(function(r,k){ r.children[0].textContent=d.c[2][k][0]; r.children[1].textContent=d.c[2][k][1]; });
     q('.bc-total span').textContent=d.c[3]; q('.bc-total b').textContent=d.c[4]; }
-  function show(i){ cur=i; dots.forEach(function(x,k){ x.classList.toggle('on',k===i); }); imgs.forEach(function(x,k){ x.classList.toggle('on',k===i); }); st.setAttribute('data-t',i+1);
+  function show(i){ cur=i; dots.forEach(function(x,k){ x.classList.toggle('on',k===i); }); imgs.forEach(function(x,k){ x.classList.toggle('on',k===i); }); phs.forEach(function(x,k){ x.classList.toggle('on',k===i); }); st.setAttribute('data-t',i+1);
     if(red){ fill(i); return; } st.classList.add('sw'); setTimeout(function(){ fill(i); st.classList.remove('sw'); },300); }
   function loop(){ clearInterval(timer); timer=null; if(vis && !document.hidden && !red) timer=setInterval(function(){ show((cur+1)%3); },3000); }
   dots.forEach(function(x,k){ x.classList.toggle('on',k===0); });
