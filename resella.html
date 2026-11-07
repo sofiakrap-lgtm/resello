@@ -302,7 +302,7 @@ section[id]{scroll-margin-top:72px}
 .roadmap.rm-anim .rm-dot{transform:scale(0)}
 .roadmap.rm-anim .rm-dot::after{transform:scaleY(0);transform-origin:top}
 .roadmap.rm-anim .rm-t{opacity:0;transform:translateY(14px)}
-.roadmap.rm-go .rm-line path{stroke-dashoffset:0;transition:stroke-dashoffset 4.8s cubic-bezier(.45,0,.2,1)}
+.roadmap.rm-go .rm-line path{stroke-dashoffset:0;transition:stroke-dashoffset 4.4s cubic-bezier(.45,0,.6,.95)}
 .roadmap.rm-go .rm-dot{transform:scale(1);transition:transform .8s cubic-bezier(.34,1.56,.64,1) var(--d,0s)}
 .roadmap.rm-go .rm-dot::after{transform:scaleY(1);transition:transform .5s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .45s)}
 .roadmap.rm-go .rm-t{opacity:1;transform:none;transition:opacity 1s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .3s),transform 1s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .3s)}
@@ -1294,6 +1294,10 @@ section.fd{background:var(--blue)}
   /* ilmestymisanimaatio, kun kartta tulee näkyviin */
   if(!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var nodes=[].slice.call(rm.querySelectorAll('.rm-node'));
+  /* kayran cubic-bezier(.45,0,.6,.95) kaanteisfunktio: matkan osuus -> ajan osuus */
+  function inv(f){ var x1=.45,y1=0,x2=.6,y2=.95,lo=0,hi=1,u,y;
+    for(var j=0;j<30;j++){ u=(lo+hi)/2; y=3*(1-u)*(1-u)*u*y1+3*(1-u)*u*u*y2+u*u*u; if(y<f) lo=u; else hi=u; }
+    return 3*(1-u)*(1-u)*u*x1+3*(1-u)*u*u*x2+u*u*u; }
   function timing(){
     var L=path.getTotalLength?path.getTotalLength():0;
     if(innerWidth<=820||!L){ nodes.forEach(function(n,i){ n.style.setProperty('--d',(i*.25)+'s'); }); return; }
@@ -1303,12 +1307,12 @@ section.fd{background:var(--blue)}
     nodes.forEach(function(n,i){
       var d=n.querySelector('.rm-dot').getBoundingClientRect(), x=d.left-r.left+d.width/2, y=d.top-r.top+d.height/2, best=0, bd=1e9;
       pts.forEach(function(q,k){ var e=(q.x-x)*(q.x-x)+(q.y-y)*(q.y-y); if(e<bd){bd=e;best=k;} });
-      n.style.setProperty('--d',(i===0?0:4.8*best/N).toFixed(2)+'s');
+      n.style.setProperty('--d',(i===0?0:4.4*inv(best/N)).toFixed(2)+'s');
     });
   }
   timing(); rm.classList.add('rm-anim');
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(!e.isIntersecting) return; io.disconnect(); timing(); rm.getBoundingClientRect();
-    requestAnimationFrame(function(){ rm.classList.add('rm-go'); setTimeout(function(){ rm.classList.add('rm-done'); },6500); }); }); },{threshold:.35});
+    requestAnimationFrame(function(){ rm.classList.add('rm-go'); setTimeout(function(){ rm.classList.add('rm-done'); },6000); }); }); },{threshold:.35});
   io.observe(rm);
 })();
 </script>
