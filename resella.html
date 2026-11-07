@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" href="assets/ikoni/apple-touch-icon_180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ===== tokens.json ===== */
 :root{
@@ -306,6 +306,29 @@ section[id]{scroll-margin-top:72px}
 .roadmap.rm-go .rm-dot::after{transform:scaleY(1);transition:transform .5s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .45s)}
 .roadmap.rm-go .rm-t{opacity:1;transform:none;transition:opacity 1s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .3s),transform 1s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .3s)}
 .roadmap.rm-done .rm-line path{stroke-dasharray:none}
+/* laitteet: neljä korttia, apila-ikoni täyttyy laite kerrallaan, alla tabletin yläreuna koko leveydellä */
+.lt{background:var(--bg);color:var(--ink);padding:clamp(80px,10vw,150px) 0 0;overflow:hidden}
+.lt .disp{text-align:center;margin:0 auto;max-width:14ch}
+.lt-lead{text-align:center;margin:clamp(16px,2vw,24px) auto 0;max-width:42ch;font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:var(--ink-muted)}
+.lt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.2vw,16px);margin-top:clamp(48px,6vw,90px)}
+.lt-card{background:var(--surface);border-radius:var(--radius-lg);padding:clamp(22px,2.4vw,32px);min-height:clamp(240px,22vw,300px);display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.lt-ic{display:grid;grid-template-columns:repeat(2,13px);gap:3px}
+.lt-ic svg{width:13px;height:13px;fill:var(--line)}
+.lt-ic svg.on{fill:var(--ink)}
+.lt-card h3{font-family:var(--fd);font-weight:600;font-size:clamp(19px,1.7vw,22px);letter-spacing:-.01em;line-height:1.15;margin:0 0 10px}
+.lt-card p{margin:0;font-size:15px;line-height:1.45;color:var(--ink-muted);max-width:28ch;min-height:4.35em}
+.lt-pad{position:relative;margin-top:clamp(48px,6vw,90px);height:clamp(90px,11vw,160px);background:#2B1A16;border-radius:clamp(28px,3vw,44px) clamp(28px,3vw,44px) 0 0;padding:clamp(14px,1.5vw,22px) clamp(14px,1.5vw,22px) 0;transform:translateY(40px);opacity:0;transition:transform 1.2s var(--ease-reveal),opacity .8s var(--ease-std)}
+.lt.in .lt-pad{transform:none;opacity:1}
+.lt-pad::before{content:"";position:absolute;top:clamp(5px,.6vw,9px);left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#4B302A}
+.lt-scr{height:100%;background:#F6F6EE;border-radius:clamp(14px,1.6vw,24px) clamp(14px,1.6vw,24px) 0 0;display:flex;align-items:flex-start;gap:clamp(12px,1.4vw,20px);padding:clamp(14px,1.6vw,22px) clamp(16px,1.8vw,26px);font-family:"DM Sans",var(--fb);color:#3E2520;overflow:hidden}
+.lt-scr img{height:clamp(18px,1.6vw,24px);width:auto;flex:none}
+.lt-scr .k{font-weight:600;font-size:clamp(13px,1.1vw,16px);white-space:nowrap;padding-top:2px}
+.lt-scr .q{flex:1;max-width:46%;height:clamp(30px,2.6vw,40px);border:1px solid #DCDBC6;border-radius:10px;display:flex;align-items:center;padding:0 14px;font-size:clamp(12px,1vw,14px);color:#6E5E56;white-space:nowrap;overflow:hidden}
+.lt-scr .o{margin-left:auto;font-weight:600;font-size:clamp(13px,1.1vw,16px);padding-top:2px;padding-left:clamp(16px,2vw,30px);border-left:1px solid #DCDBC6;min-width:22%}
+@media(max-width:1000px){.lt-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.lt-grid{grid-template-columns:1fr}.lt-card{min-height:0}.lt-card p{min-height:0}.lt-scr .q{display:none}}
+@media(prefers-reduced-motion:reduce){.lt-pad{transform:none;opacity:1;transition:none}}
+
 /* siirtyma vanhasta jarjestelmasta: punainen pohja, askeleet palkkeina, apukadet molemmin puolin */
 .sr{position:relative;overflow:hidden;background:var(--red);color:var(--on-red);padding:clamp(80px,9vw,130px) 0 clamp(90px,10vw,150px)}
 .sr-deco{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
@@ -937,6 +960,21 @@ section.fd{background:var(--blue)}
 </section>
 
 <!-- 7. KÄYTTÖÖNOTTO -->
+<!-- LAITTEET -->
+<section class="lt" id="laitteet">
+  <div class="wrap">
+    <h2 class="disp d80">Kassa valmiina käyttöön</h2>
+    <p class="lt-lead">Tuomme laitteet paikan päälle ja asennamme ne valmiiksi. Sinun ei tarvitse hankkia mitään itse.</p>
+    <div class="lt-grid">
+      <article class="lt-card"><div class="lt-ic" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true" class="on"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg></div><div><h3>Tabletti</h3><p>Kassa toimii tabletilla tai omalla kosketusnäytöllä, myös ilman nettiä.</p></div></article>
+      <article class="lt-card"><div class="lt-ic" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true" class="on"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true" class="on"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg></div><div><h3>Viivakoodinlukija</h3><p>Lukee sekä viivakoodit että QR-koodit. Piippaa, ja tuote on ostoskorissa.</p></div></article>
+      <article class="lt-card"><div class="lt-ic" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true" class="on"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true" class="on"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true" class="on"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg></div><div><h3>Kuittitulostin</h3><p>Kuitti asiakkaalle heti, kun maksu on valmis.</p></div></article>
+      <article class="lt-card"><div class="lt-ic" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true" class="on"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true" class="on"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true" class="on"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg><svg viewBox="0 0 100 100" aria-hidden="true" class="on"><circle cx="27" cy="27" r="27"/><circle cx="73" cy="27" r="27"/><circle cx="27" cy="73" r="27"/><circle cx="73" cy="73" r="27"/><rect x="27" y="27" width="46" height="46"/></svg></div><div><h3>Kassalipas</h3><p>Käteiselle oma lipas kassan viereen.</p></div></article>
+    </div>
+    <div class="lt-pad" aria-hidden="true"><div class="lt-scr"><img src="assets/ikoni/ReSella_ikoni_pilvi_ruskea.svg" alt=""><span class="k">Kassa 1</span><span class="q">Piippaa tuote tai kirjoita koodi</span><span class="o">Ostos</span></div></div>
+  </div>
+</section>
+
 <section class="band-blue" id="kayttoonotto">
   <div class="wrap">
     <div class="shead ctr">
@@ -1402,6 +1440,11 @@ section.fd{background:var(--blue)}
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(!e.isIntersecting) return; io.disconnect(); sr.getBoundingClientRect(); requestAnimationFrame(function(){ sr.classList.add('sr-go'); }); }); },{threshold:.3});
   io.observe(sr);
 })();
+</script>
+<script>
+/* laitteet: tabletin yläreuna nousee esiin */
+(function(){ var lt=document.getElementById('laitteet'); if(!lt) return; if(!('IntersectionObserver' in window)){ lt.classList.add('in'); return; }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ lt.classList.add('in'); io.disconnect(); } }); },{threshold:.35}); io.observe(lt); })();
 </script>
 </body>
 </html>
