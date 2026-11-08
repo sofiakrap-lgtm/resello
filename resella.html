@@ -985,12 +985,17 @@ section.fd{background:var(--blue)}
 .m-legal{font-size:12px;line-height:18px;opacity:.55;margin:0}
 
 /* kelluva palkki */
-.m-bar{position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));height:64px;border-radius:32px;background:#F6F6EE;box-shadow:0 8px 24px rgba(62,37,32,.15);display:none;align-items:center;gap:8px;padding:0 8px;z-index:70;transform:translateY(120px);transition:transform .45s var(--ease-reveal)}
+.m-bar{position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));height:56px;display:none;align-items:center;gap:8px;padding:0;z-index:70;transform:translateY(120px);transition:transform .45s var(--ease-reveal)}
 @media(max-width:767px){.m-bar{display:flex}}
 .m-bar.on{transform:none}
-@media(max-width:767px){.cookie{bottom:calc(92px + env(safe-area-inset-bottom))!important;left:12px!important;width:calc(100% - 24px)!important}}
-.m-bar .m-pill{flex:1}
-.m-ic{width:48px;height:48px;border-radius:50%;background:#E2E2CE;color:var(--ink);border:0;display:grid;place-items:center;cursor:pointer}
+@media(max-width:767px){
+.cookie{left:50%!important;top:50%!important;bottom:auto!important;right:auto!important;transform:translate(-50%,-50%);width:calc(100% - 40px)!important;max-width:360px;z-index:95;flex-direction:column;align-items:stretch;gap:20px;padding:26px 22px 22px;border-radius:30px;background:var(--bg);color:var(--ink);}
+.cookie::before{content:'';position:absolute;inset:-200vmax;background:rgba(62,37,32,.55);z-index:-1}
+.cookie p{font-size:16px;line-height:24px;min-width:0}
+.cookie .btn{width:100%;height:52px;justify-content:center;background:var(--ink);color:var(--bg);border-radius:26px;font-size:16px}
+}
+.m-bar .m-pill{flex:1;height:56px;box-shadow:0 6px 18px rgba(62,37,32,.22)}
+.m-ic{width:56px;height:56px;flex:none;border-radius:50%;background:#F6F6EE;box-shadow:0 6px 18px rgba(62,37,32,.18);color:var(--ink);border:0;display:grid;place-items:center;cursor:pointer}
 .m-ic svg{width:22px;height:22px}
 
 /* valikko */
@@ -1709,7 +1714,8 @@ section.fd{background:var(--blue)}
   var ck=document.getElementById('cookie'), ok=document.getElementById('cookie-ok');
   var seen=false; try{ seen=localStorage.getItem('rs-cookie')==='1'; }catch(e){}
   // näytetään vasta kun hero on ohitettu osittain, ettei ilmoitus peitä hero-otsikkoa tai CTA:ta
-  if(!seen){ var showCk=function(){ if(scrollY>innerHeight*0.5){ ck.hidden=false; removeEventListener('scroll',showCk); } }; addEventListener('scroll',showCk,{passive:true}); showCk(); }
+  if(!seen && matchMedia('(max-width:767px)').matches){ setTimeout(function(){ ck.hidden=false; },900); }
+  else if(!seen){ var showCk=function(){ if(scrollY>innerHeight*0.5){ ck.hidden=false; removeEventListener('scroll',showCk); } }; addEventListener('scroll',showCk,{passive:true}); showCk(); }
   ok.addEventListener('click',function(){ ck.hidden=true; try{ localStorage.setItem('rs-cookie','1'); }catch(e){} });
   // karuselli: aareton kierto
   var track=document.getElementById('caroTrack');
