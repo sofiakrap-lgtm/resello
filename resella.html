@@ -864,8 +864,11 @@ section.fd{background:var(--blue)}
 .m-fc h3{font:600 28px/32px var(--fd);letter-spacing:-.025em;margin:0 0 12px}
 .m-fc{display:flex;flex-direction:column}
 .m-fc p{font-size:15px;line-height:22px;opacity:.75;margin:auto 0 0;padding-top:16px}
-.m-all{background:#F6F6EE;border-radius:28px;padding:22px 18px 20px}
-.m-all h3{font:600 21px/28px var(--fd);letter-spacing:-.015em;margin:0 0 14px 4px}
+.m-all{align-self:flex-start;border-radius:28px;transition:background-color 300ms var(--m-ease,ease)}
+.m-all summary{list-style:none;display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(62,37,32,.35);font:500 15px/1 var(--fd);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.m-all summary::-webkit-details-marker{display:none}
+.m-all[open]{align-self:stretch;background:#F6F6EE;padding:18px 18px 20px}
+.m-all[open] summary{box-shadow:none;padding:0 4px;height:auto;margin:0 0 14px;font:600 21px/28px var(--fd);letter-spacing:-.015em}
 .m-all ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .m-all li{font:600 14px/1 var(--fd);padding:11px 14px;border-radius:999px;background:#ECECDC;color:var(--ink)}
 .m-all li:nth-child(4n+1){background:var(--blue)}
@@ -1118,7 +1121,7 @@ section.fd{background:var(--blue)}
     <div class="m-fc" style="--b:#F6F6EE;--f:#3E2520"><h3>Asiakashallinta</h3><div class="m-tags"><span>Sopimukset</span><span>Varaushistoria</span></div><p>Myyjien tiedot, sopimukset ja varaukset yhdessä paikassa.</p></div>
     <div class="m-fc last" style="--b:#3E2520;--f:#ECECDC"><h3>Raportointi</h3><div class="m-tags"><span>Provisio</span><span>ALV</span><span>Kausivertailu</span></div><p>Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p></div>
   </div>
-  <div class="m-all"><h3>Kaikki 12 ominaisuutta</h3><ul><li>Kassa ilman nettiä</li><li>Viivakoodi ja QR</li><li>Tuotteet verkossa</li><li>Pöytäkartta ja varaukset</li><li>Myyjä maksaa paikan itse</li><li>Tilitykset yhdellä pankkitiedostolla</li><li>Myyjä- ja asiakashallinta</li><li>Raportit: myynti, provisio, ALV</li><li>Hintaehdotus kuvasta</li><li>Hintatarrat ja kuitit</li><li>Oma ilme</li><li>Kuluttaja-appi 2027</li></ul></div>
+  <details class="m-all"><summary>Kaikki 12 ominaisuutta</summary><ul><li>Kassa ilman nettiä</li><li>Viivakoodi ja QR</li><li>Tuotteet verkossa</li><li>Pöytäkartta ja varaukset</li><li>Myyjä maksaa paikan itse</li><li>Tilitykset yhdellä pankkitiedostolla</li><li>Myyjä- ja asiakashallinta</li><li>Raportit: myynti, provisio, ALV</li><li>Hintaehdotus kuvasta</li><li>Hintatarrat ja kuitit</li><li>Oma ilme</li><li>Kuluttaja-appi 2027</li></ul></details>
 </section>
 
 <section class="m-sec m-sec--flush" id="m-vaihto">
