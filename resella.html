@@ -838,12 +838,23 @@ section.fd{background:var(--blue)}
 .m-col{position:absolute;left:50%;width:390px;margin-left:-195px;height:260px;pointer-events:none}
 .m-col--hero{top:450px}
 .m-ci{position:absolute;border-radius:26px;overflow:hidden;box-shadow:0 10px 24px rgba(62,37,32,.18);background:#F6F6EE}
-.m-ci img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .9s var(--ease-std)}
-.m-ci img.out{opacity:0}
-.m-col--hero .a{left:22px;top:20px;width:128px;height:150px;transform:rotate(-6deg)}
-.m-col--hero .b{left:232px;top:10px;width:136px;height:150px;transform:rotate(7deg)}
-.m-col--hero .c{left:104px;top:50px;width:184px;height:214px}
 
+.m-ci{transition:left .9s var(--ease-reveal),top .9s var(--ease-reveal),width .9s var(--ease-reveal),height .9s var(--ease-reveal),transform .9s var(--ease-reveal),opacity .6s var(--ease-std)}
+.m-ci img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.m-ci.p-wait,.m-ci.p-in{transition:none;opacity:0;z-index:1}
+.m-ci.p-out{opacity:0;z-index:1}
+.m-ci.p-l,.m-ci.p-r{z-index:2}
+.m-ci.p-m{z-index:3}
+.m-col--hero .p-l{left:22px;top:20px;width:128px;height:150px;transform:rotate(-6deg)}
+.m-col--hero .p-m{left:104px;top:50px;width:184px;height:214px;transform:none}
+.m-col--hero .p-r{left:232px;top:10px;width:136px;height:150px;transform:rotate(7deg)}
+.m-col--hero .p-in,.m-col--hero .p-wait{left:330px;top:0;width:136px;height:150px;transform:rotate(14deg)}
+.m-col--hero .p-out{left:-70px;top:34px;width:128px;height:150px;transform:rotate(-14deg)}
+.m-col--end .p-l{left:42px;top:30px;width:120px;height:140px;transform:rotate(-7deg)}
+.m-col--end .p-m{left:130px;top:50px;width:130px;height:160px;transform:none}
+.m-col--end .p-r{left:228px;top:20px;width:120px;height:140px;transform:rotate(6deg)}
+.m-col--end .p-in,.m-col--end .p-wait{left:320px;top:10px;width:120px;height:140px;transform:rotate(12deg)}
+.m-col--end .p-out{left:-50px;top:40px;width:120px;height:140px;transform:rotate(-12deg)}
 /* ominaisuudet */
 .m-stack{display:flex;flex-direction:column}
 .m-fc{background:var(--b);color:var(--f);border-radius:30px;padding:20px 20px 46px 22px;margin-bottom:-34px;box-shadow:0 -6px 18px rgba(62,37,32,.10);position:relative}
@@ -959,10 +970,6 @@ section.fd{background:var(--blue)}
 .m-end .m-lead{max-width:280px}
 .m-end .m-pill{margin-top:10px}
 .m-col--end{top:330px;margin-left:-195px}
-.m-col--end .m-ci{border-radius:22px;box-shadow:none}
-.m-col--end .a{left:42px;top:30px;width:120px;height:140px;transform:rotate(-7deg)}
-.m-col--end .b{left:228px;top:20px;width:120px;height:140px;transform:rotate(6deg)}
-.m-col--end .c{left:130px;top:50px;width:130px;height:160px}
 
 /* footer */
 .m-foot{padding:40px 20px 120px;display:flex;flex-direction:column;gap:28px}
@@ -986,7 +993,9 @@ section.fd{background:var(--blue)}
 .m-menu{position:fixed;inset:0;background:var(--bg);z-index:80;display:flex;flex-direction:column;padding:24px 20px 40px}
 .m-menu[hidden]{display:none}
 .m-menu .m-head{position:relative;left:auto;right:auto;top:auto;margin:0 -8px}
-.m-x{width:40px;height:40px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);font:400 22px/1 var(--fd);cursor:pointer}
+.m-x{width:40px;height:40px;border:0;background:none;position:relative;cursor:pointer}
+.m-x span{position:absolute;left:11px;top:19.2px;width:18px;height:1.6px;border-radius:1px;background:var(--ink)}
+.m-x span:first-child{transform:rotate(45deg)}.m-x span:last-child{transform:rotate(-45deg)}
 .m-menu nav{display:flex;flex-direction:column;margin-top:56px}
 .m-menu nav a{font:600 40px/56px var(--fd);letter-spacing:-.035em;color:var(--ink);text-decoration:none}
 .m-menu-b{margin-top:auto;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
@@ -1011,9 +1020,7 @@ section.fd{background:var(--blue)}
     <p class="m-lead c">Kassa, tilitykset ja uudet ostajat yhdessä järjestelmässä. Ostajat löytävät tuotteesi appista, joka julkaistaan 2027.</p>
     <a class="m-pill" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a>
   </div>
-  <div class="m-col m-col--hero" data-col="assets/m/hero1.webp,assets/m/hero2.webp,assets/m/hero3.webp,assets/m/hero4.webp,assets/m/hero5.webp,assets/m/hero6.webp,assets/m/hero7.webp">
-    <div class="m-ci a"><img alt=""></div><div class="m-ci b"><img alt=""></div><div class="m-ci c"><img alt=""></div>
-  </div>
+  <div class="m-col m-col--hero" data-col="assets/m/hero1.webp,assets/m/hero2.webp,assets/m/hero3.webp,assets/m/hero4.webp,assets/m/hero5.webp,assets/m/hero6.webp,assets/m/hero7.webp"></div>
 </section>
 
 <section class="m-sec" id="m-ominaisuudet">
@@ -1157,9 +1164,7 @@ section.fd{background:var(--blue)}
     <h2 class="m-h2 c">Rakennetaanko<br>yhdessä?</h2>
     <p class="m-lead c">30 minuutin demo, jossa näet oman kirppiksesi Resellassa.</p>
     <a class="m-pill lite" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a>
-    <div class="m-col m-col--end" data-col="assets/m/end1.webp,assets/m/end2.webp,assets/m/end3.webp,assets/m/end4.webp,assets/m/end5.webp,assets/m/end6.webp,assets/m/end7.webp">
-      <div class="m-ci a"><img alt=""></div><div class="m-ci b"><img alt=""></div><div class="m-ci c"><img alt=""></div>
-    </div>
+    <div class="m-col m-col--end" data-col="assets/m/end1.webp,assets/m/end2.webp,assets/m/end3.webp,assets/m/end4.webp,assets/m/end5.webp,assets/m/end6.webp,assets/m/end7.webp"></div>
   </div>
 </section>
 
@@ -1178,9 +1183,9 @@ section.fd{background:var(--blue)}
 </div>
 
 <div class="m-menu" id="mMenu" hidden>
-  <div class="m-head"><a href="#m-top" class="m-logo" aria-label="Resella" data-mclose><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a><button class="m-x" type="button" aria-label="Sulje valikko" data-mclose>×</button></div>
-  <nav><a href="#m-ominaisuudet" data-mclose>Ominaisuudet</a><a href="#m-kayttoonotto" data-mclose>Käyttöönotto</a><a href="#m-hinnoittelu" data-mclose>Hinnoittelu</a><a href="#m-ukk" data-mclose>UKK</a><a href="#m-perustajat" data-mclose>Meistä</a></nav>
-  <div class="m-menu-b"><a class="m-pill" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a><a class="m-call" href="mailto:hei@resella.fi">Ota yhteyttä</a></div>
+  <div class="m-head"><a href="#m-top" class="m-logo" aria-label="Resella" data-mclose><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a><button class="m-x" type="button" aria-label="Sulje valikko" data-mclose><span></span><span></span></button></div>
+  <nav><a href="#m-ominaisuudet" data-mclose>Ominaisuudet</a><a href="#m-kayttoonotto" data-mclose>Käyttöönotto</a><a href="#m-hinnoittelu" data-mclose>Hinnoittelu</a><a href="#m-ukk" data-mclose>UKK</a><a href="#m-perustajat" data-mclose>Meistä</a><a href="mailto:hei@resella.fi" data-mclose>Ota yhteyttä</a></nav>
+  <div class="m-menu-b"><a class="m-pill" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a></div>
 </div>
 </div>
 
@@ -1937,15 +1942,16 @@ section.fd{background:var(--blue)}
   var root=document.getElementById('m2'); if(!root) return;
   var mq=matchMedia('(max-width:767px)');
   var red=false; try{ red=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
-  // kollaasit: kolme paikkaa, kuvat vaihtuvat vuorotellen
+  // kollaasit: kuvat kiertävät karusellin tavoin oikealta keskelle ja vasemmalle
   root.querySelectorAll('[data-col]').forEach(function(col){
-    var list=col.getAttribute('data-col').split(','), slots=col.querySelectorAll('.m-ci'), k=0;
-    function set(i,src){ var s=slots[i], cur=s.querySelector('img'), n=new Image(); n.alt=''; n.src=src; n.className='out'; s.appendChild(n);
-      n.onload=function(){ requestAnimationFrame(function(){ n.className=''; if(cur){ cur.className='out'; setTimeout(function(){ cur.remove(); },950); } }); }; }
-    slots.forEach(function(s,i){ s.querySelector('img').src=list[i%list.length]; });
-    if(red) return;
-    var slot=0;
-    setInterval(function(){ if(!mq.matches||document.hidden) return; k=(k+1)%list.length; set(slot,list[(k+2)%list.length]); slot=(slot+1)%slots.length; },2600);
+    var list=col.getAttribute('data-col').split(','), els=list.map(function(src,i){ var d=document.createElement('div'); d.className='m-ci p-wait'; var im=new Image(); im.alt=''; im.src=src; if(i>3) im.loading='lazy'; d.appendChild(im); col.appendChild(d); return d; });
+    var order=els.slice(), P=['p-l','p-m','p-r','p-in'];
+    function paint(){ order.forEach(function(e,k){ e.className='m-ci '+(P[k]||'p-wait'); }); }
+    paint(); if(red||els.length<4) return;
+    setInterval(function(){ if(!mq.matches||document.hidden) return;
+      var out=order.shift(); out.className='m-ci p-out'; paint();
+      setTimeout(function(){ out.className='m-ci p-wait'; order.push(out); paint(); },950);
+    },2800);
   });
   // karusellit: palkki-indikaattori
   root.querySelectorAll('[data-car]').forEach(function(car){
