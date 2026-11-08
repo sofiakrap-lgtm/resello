@@ -1081,13 +1081,13 @@ section.fd{background:var(--blue)}
 </section>
 
 <section class="m-sec m-sec--flush" id="m-vaihto">
-  <div class="m-car m-car--slides" data-car data-nodots>
-    <figure class="m-sl"><img src="assets/m/sl1.webp?v=2" alt=""><div class="m-sl-top"><h3 class="m-sl-h">Helpotusta vaihtoon</h3><p>Vaihto hoituu ilman, että kirppis menee kiinni.</p></div><figcaption><h3>Esittely</h3><p>Aloitetaan 30 minuutin demolla, jossa näet oman kirppiksesi Resellassa.</p><span class="m-sl-d" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span></figcaption></figure>
-    <img src="assets/m/s2.webp?v=6" alt="Määritys: rakennamme järjestelmän kirppiksesi näköiseksi, pöydät, hinnat, provisio ja oma ilme." loading="lazy">
-    <figure class="m-sl"><img src="assets/m/sl3.webp?v=1" alt="" loading="lazy"><figcaption><h3>Asennus</h3><p>Tuomme kassan ja laitteet paikan päälle ja asennamme ne valmiiksi.</p><span class="m-sl-d" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></span></figcaption></figure>
-    <img src="assets/m/s4.webp?v=7" alt="Koulutus: käymme kassan läpi sinun ja henkilökuntasi kanssa." loading="lazy">
-    <figure class="m-sl"><img src="assets/m/sl5.webp?v=1" alt="" loading="lazy"><figcaption><h3>Ensimmäinen myynti</h3><p>Olemme paikalla, kun ensimmäiset tuotteet myydään. Et jää yksin.</p><span class="m-sl-d" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i></span></figcaption></figure>
-    <img src="assets/m/s6.webp?v=6" alt="Tilitykset: käymme ensimmäiset tilitykset läpi yhdessä." loading="lazy">
+  <div class="m-car m-car--slides" data-car data-auto>
+    <figure class="m-sl"><img src="assets/m/sl1.webp?v=2" alt=""><div class="m-sl-top"><h3 class="m-sl-h">Helpotusta vaihtoon</h3><p>Vaihto hoituu ilman, että kirppis menee kiinni.</p></div><figcaption><h3>Esittely</h3><p>Aloitetaan 30 minuutin demolla, jossa näet oman kirppiksesi Resellassa.</p></figcaption></figure>
+    <img src="assets/m/s2.webp?v=8" alt="Määritys: rakennamme järjestelmän kirppiksesi näköiseksi, pöydät, hinnat, provisio ja oma ilme." loading="lazy">
+    <figure class="m-sl"><img src="assets/m/sl3.webp?v=1" alt="" loading="lazy"><figcaption><h3>Asennus</h3><p>Tuomme kassan ja laitteet paikan päälle ja asennamme ne valmiiksi.</p></figcaption></figure>
+    <img src="assets/m/s4.webp?v=8" alt="Koulutus: käymme kassan läpi sinun ja henkilökuntasi kanssa." loading="lazy">
+    <figure class="m-sl"><img src="assets/m/sl5.webp?v=1" alt="" loading="lazy"><figcaption><h3>Ensimmäinen myynti</h3><p>Olemme paikalla, kun ensimmäiset tuotteet myydään. Et jää yksin.</p></figcaption></figure>
+    <img src="assets/m/s6.webp?v=8" alt="Tilitykset: käymme ensimmäiset tilitykset läpi yhdessä." loading="lazy">
   </div>
 </section>
 
@@ -2009,7 +2009,20 @@ section.fd{background:var(--blue)}
       if(max>0&&car.scrollLeft>=max-2) i=n-1;
       var f=(car.scrollLeft>=max-2)?1:Math.min(1,Math.max(0,pos-i+0.5));
       d.querySelectorAll('i').forEach(function(x,j){ x.className=j<i?'past':(j===i?'on':''); x.firstChild.style.width=(j===i?Math.round(f*100):0)+'%'; }); }
-    car.addEventListener('scroll',upd,{passive:true}); upd();
+    car.addEventListener('scroll',function(){ if(!car._auto) upd(); },{passive:true}); upd();
+    if(car.hasAttribute('data-auto')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+      var dur=4500, el=0, last=performance.now(), cur=0, hold=false, io=false;
+      function go(i){ cur=i; el=0; car._auto=true; car.scrollTo({left:car.children[i].offsetLeft-car.children[0].offsetLeft,behavior:'smooth'}); setTimeout(function(){ car._auto=false; },800); }
+      function frame(now){ var dt=now-last; last=now;
+        if(!hold&&io&&!document.hidden&&mq.matches){ el+=dt; var f=Math.min(1,el/dur);
+          d.querySelectorAll('i').forEach(function(x,j){ x.className=j<cur?'past':(j===cur?'on':''); x.firstChild.style.width=(j===cur?Math.round(f*100):0)+'%'; });
+          if(f>=1) go((cur+1)%n); }
+        requestAnimationFrame(frame); }
+      ['touchstart','pointerdown'].forEach(function(e){ car.addEventListener(e,function(){ hold=true; },{passive:true}); });
+      ['touchend','pointerup'].forEach(function(e){ car.addEventListener(e,function(){ setTimeout(function(){ var w=car.children[1].offsetLeft-car.children[0].offsetLeft; cur=Math.min(n-1,Math.round(car.scrollLeft/w)); el=0; hold=false; },600); },{passive:true}); });
+      new IntersectionObserver(function(es){ io=es[0].isIntersecting; }).observe(car);
+      requestAnimationFrame(frame);
+    }
   });
   // sovellus: välilehdet
   var heads=['Myyjä laittaa<br>tuotteet myyntiin','Ostaja löytää<br>ne sovelluksesta','Kirppis, myyjä ja<br>ostaja hyötyvät'];
