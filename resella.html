@@ -892,9 +892,11 @@ section.fd{background:var(--blue)}
 .m-car--app>img{width:300px;height:520px;border-radius:32px;object-fit:cover}
 .m-car--found>img{width:320px;height:400px;border-radius:32px;object-fit:cover}
 .m-car[hidden]{display:none}
-.m-dots{display:flex;gap:4px;align-items:center}
-.m-dots i{display:block;width:18px;height:3px;border-radius:2px;background:var(--ink);opacity:.3;transition:width .3s,opacity .3s}
-.m-dots i.on{width:36px;opacity:1}
+.m-dots{display:flex;gap:11px;align-items:center;margin-top:16px}
+.m-dots i{position:relative;display:block;width:10px;height:10px;border-radius:999px;background:rgba(62,37,32,.12);overflow:hidden;transition:width .3s var(--ease-std)}
+.m-dots i.past{background:rgba(62,37,32,.42)}
+.m-dots i.on{width:40px}
+.m-dots i b{position:absolute;left:0;top:0;height:100%;width:0;border-radius:999px;background:rgba(62,37,32,.42)}
 
 /* kenelle */
 .m-bpanel{background:var(--blue);border-radius:36px;padding:56px 24px 40px;display:flex;flex-direction:column;align-items:center;gap:18px}
@@ -1988,10 +1990,13 @@ section.fd{background:var(--blue)}
   // karusellit: palkki-indikaattori
   root.querySelectorAll('[data-car]:not([data-nodots])').forEach(function(car){
     var n=car.children.length, d=document.createElement('div'); d.className='m-dots'; d.setAttribute('aria-hidden','true');
-    for(var i=0;i<n;i++){ var e=document.createElement('i'); if(!i) e.className='on'; d.appendChild(e); }
+    for(var i=0;i<n;i++){ var e=document.createElement('i'); e.appendChild(document.createElement('b')); d.appendChild(e); }
     car.insertAdjacentElement('afterend',d); car._dots=d;
-    car.addEventListener('scroll',function(){ var w=car.children[0].getBoundingClientRect().width+10, i=Math.round(car.scrollLeft/w);
-      d.querySelectorAll('i').forEach(function(x,j){ x.className=j===i?'on':''; }); },{passive:true});
+    function upd(){ var w=car.children[1]?car.children[1].offsetLeft-car.children[0].offsetLeft:car.clientWidth, max=car.scrollWidth-car.clientWidth, pos=car.scrollLeft/w, i=Math.min(n-1,Math.round(pos));
+      if(max>0&&car.scrollLeft>=max-2) i=n-1;
+      var f=(car.scrollLeft>=max-2)?1:Math.min(1,Math.max(0,pos-i+0.5));
+      d.querySelectorAll('i').forEach(function(x,j){ x.className=j<i?'past':(j===i?'on':''); x.firstChild.style.width=(j===i?Math.round(f*100):0)+'%'; }); }
+    car.addEventListener('scroll',upd,{passive:true}); upd();
   });
   // sovellus: välilehdet
   var heads=['Myyjä laittaa<br>tuotteet myyntiin','Ostaja löytää<br>ne sovelluksesta','Kirppis, myyjä ja<br>ostaja hyötyvät'];
