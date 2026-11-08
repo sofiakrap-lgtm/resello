@@ -862,7 +862,8 @@ section.fd{background:var(--blue)}
 .m-fc:nth-child(1){--i:0}.m-fc:nth-child(2){--i:1}.m-fc:nth-child(3){--i:2}.m-fc:nth-child(4){--i:3}.m-fc:nth-child(5){--i:4}.m-fc:nth-child(6){--i:5}
 .m-fc.last{min-height:200px}
 .m-fc h3{font:600 28px/32px var(--fd);letter-spacing:-.025em;margin:0 0 12px}
-.m-fc p{font-size:15px;line-height:22px;opacity:.7;margin:12px 0 0}
+.m-fc{display:flex;flex-direction:column}
+.m-fc p{font-size:15px;line-height:22px;opacity:.75;margin:auto 0 0;padding-top:16px}
 .m-more summary{list-style:none;align-self:flex-start;width:max-content}
 .m-more summary::-webkit-details-marker{display:none}
 .m-flist{margin:16px 0 0;padding:0;list-style:none;columns:2;column-gap:16px;font-size:15px;line-height:1.4}
@@ -1036,11 +1037,11 @@ section.fd{background:var(--blue)}
 <section class="m-sec" id="m-ominaisuudet">
   <h2 class="m-h2">Kaikki työkalut<br>yhdessä paikassa</h2>
   <div class="m-stack">
-    <div class="m-fc" style="--b:#C5D0D3;--f:#3E2520"><h3>Kassa</h3><div class="m-tags"><span>Toimii ilman nettiä</span><span>Viivakoodi ja QR</span></div></div>
-    <div class="m-fc" style="--b:#3E2520;--f:#ECECDC"><h3>Näkyvyys</h3><div class="m-tags"><span>Tuotteet verkossa</span></div></div>
-    <div class="m-fc" style="--b:#C24029;--f:#ECECDC"><h3>Varaukset</h3><div class="m-tags"><span>Pöytäkartta</span><span>Myyjä maksaa itse</span></div></div>
-    <div class="m-fc" style="--b:#C5D0D3;--f:#3E2520"><h3>Tilitykset</h3><div class="m-tags"><span>Yksi pankkitiedosto</span></div></div>
-    <div class="m-fc" style="--b:#F6F6EE;--f:#3E2520"><h3>Asiakashallinta</h3><div class="m-tags"><span>Sopimukset</span><span>Varaushistoria</span></div></div>
+    <div class="m-fc" style="--b:#C5D0D3;--f:#3E2520"><h3>Kassa</h3><div class="m-tags"><span>Toimii ilman nettiä</span><span>Viivakoodi ja QR</span></div><p>Piippaa, maksa ja valmis. Kassa pysyy auki, vaikka netti katkeaa.</p></div>
+    <div class="m-fc" style="--b:#3E2520;--f:#ECECDC"><h3>Näkyvyys</h3><div class="m-tags"><span>Tuotteet verkossa</span></div><p>Hinnoitellut tuotteet näkyvät verkossa ostajille automaattisesti.</p></div>
+    <div class="m-fc" style="--b:#C24029;--f:#ECECDC"><h3>Varaukset</h3><div class="m-tags"><span>Pöytäkartta</span><span>Myyjä maksaa itse</span></div><p>Myyjä varaa ja maksaa paikan itse. Näet pöydät kartalta.</p></div>
+    <div class="m-fc" style="--b:#C5D0D3;--f:#3E2520"><h3>Tilitykset</h3><div class="m-tags"><span>Yksi pankkitiedosto</span></div><p>Kaikki myyjien rahat lähtevät kerralla yhdellä tiedostolla.</p></div>
+    <div class="m-fc" style="--b:#F6F6EE;--f:#3E2520"><h3>Asiakashallinta</h3><div class="m-tags"><span>Sopimukset</span><span>Varaushistoria</span></div><p>Myyjien tiedot, sopimukset ja varaukset yhdessä paikassa.</p></div>
     <div class="m-fc last" style="--b:#3E2520;--f:#ECECDC"><h3>Raportointi</h3><div class="m-tags"><span>Provisio</span><span>ALV</span><span>Kausivertailu</span></div><p>Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p></div>
   </div>
   <details class="m-more">
