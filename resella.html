@@ -1403,7 +1403,7 @@ section.fd{background:var(--blue)}
 </section>
 
 <!-- KOHTAUS: maskotit vierivat kaareen -->
-<section class="scene scene--roll" data-scene="roll" data-edge="120" data-ctrl="430" aria-hidden="true">
+<section class="scene scene--roll" id="kohtaus" data-scene="roll" data-edge="120" data-ctrl="430" aria-hidden="true">
   <svg class="scene__bg" viewBox="0 0 1000 500" preserveAspectRatio="none"><path class="scene__ground" d=""/></svg>
   <div class="scene__slot" data-m="tyyny" data-c="#C24029"></div>
   <div class="scene__slot" data-m="apila" data-c="#C5D0D3"></div>
@@ -1654,6 +1654,17 @@ section.fd{background:var(--blue)}
   <button class="btn s" id="cookie-ok">Selvä</button>
 </div>
 
+<script>document.write('<script src="jarjestys.js?t='+Math.floor(Date.now()/60000)+'"><\/script>');</script>
+<script>
+/* osioiden järjestys: jarjestys.js tai esikatselussa ?jarjestys=... */
+(function(){ var o=window.RS_ORDER||{};
+  try{ var q=new URLSearchParams(location.search).get('jarjestys'); if(q) o=JSON.parse(decodeURIComponent(escape(atob(q)))); }catch(e){}
+  function apply(parent,ids,anchor){ if(!parent||!ids) return; ids.forEach(function(id){ var el=document.getElementById(id); if(el&&el.parentNode===parent){ anchor?parent.insertBefore(el,anchor):parent.appendChild(el); } }); }
+  var main=document.getElementById('sisalto'); apply(main,o.desktop,null);
+  var m2=document.getElementById('m2'); apply(m2,o.mobiili,m2&&m2.querySelector(':scope>footer'));
+  (o.piilota||[]).forEach(function(id){ var el=document.getElementById(id); if(el) el.style.display='none'; });
+})();
+</script>
 <script>
 (function(){
   "use strict";

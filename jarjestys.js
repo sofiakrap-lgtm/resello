@@ -1,0 +1,1 @@
+window.RS_ORDER={"desktop":["ominaisuudet","kohtaus","valmispaivissa","tarinat","kenelle","hinnoittelu","kassademo","laitteet","kayttoonotto","siirtyma","perustajat","faq","varaa"],"mobiili":["m-top","m-ominaisuudet","m-vaihto","m-tuki","m-kenelle","m-hinnoittelu","m-sovellus","m-laitteet","m-kayttoonotto","m-siirtyma","m-perustajat","m-ukk","m-varaa"],"piilota":[]};
