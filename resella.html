@@ -9,8 +9,8 @@
 <meta property="og:description" content="Kassa, joka tuo ostajia. Myynti, myyjät ja tilitykset yhdessä paikassa.">
 <meta property="og:image" content="assets/ikoni/profiilikuva_ruskea_400.png">
 <meta property="og:type" content="website">
-<link rel="icon" href="assets/ikoni/favicon.ico" sizes="any">
-<link rel="icon" type="image/svg+xml" href="assets/ikoni/ReSella_ikoni_pilvi_ruskea.svg">
+<link rel="icon" href="assets/ikoni/favicon.ico?v=2" sizes="any">
+<link rel="icon" type="image/svg+xml" href="assets/ikoni/favicon.svg?v=2">
 <link rel="apple-touch-icon" href="assets/ikoni/apple-touch-icon_180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -789,9 +789,393 @@ section.fd{background:var(--blue)}
 .end-in{display:flex;flex-direction:column;align-items:center;gap:20px;padding-inline:var(--side)}
 .end-lead{margin:0;max-width:30ch;font-size:18px;font-weight:500;line-height:1.4;color:rgb(236 236 220 / .8)}
 .end-big{font-family:var(--fd);font-weight:700;font-size:9vw;line-height:1;letter-spacing:-.05em;white-space:nowrap;color:var(--on-red);position:relative;z-index:1;margin:0}
+
+/* ===== MOBIILI M2 (alle 768 px) ===== */
+.m2{display:none}
+@media(max-width:767px){
+  body>#gm, body>.hero, #sisalto, body>footer.foot{display:none!important}
+  .m2{display:block;background:var(--bg);color:var(--ink);font-family:var(--fd);overflow-x:hidden}
+  html{scroll-padding-top:16px;scroll-padding-bottom:110px}
+}
+.m2 *{box-sizing:border-box}
+.m2 img{display:block;max-width:100%}
+.m2 .c{text-align:center}
+.m-h1{font-weight:600;font-size:48px;line-height:1.02;letter-spacing:-.035em;text-align:center;margin:0}
+.m-h2{font-weight:600;font-size:40px;line-height:1.05;letter-spacing:-.035em;margin:0;text-wrap:balance}
+.m-h2.big{font-size:48px;letter-spacing:-.045em}
+.m-h2.s{font-size:32px}
+.m-lead,.m-body{font-size:15px;line-height:1.47;margin:0;opacity:.75;font-weight:400}
+.m-pill{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--bg);font:500 15px/1 var(--fd);text-decoration:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.m-pill.lite{background:var(--bg);color:var(--ink)}
+.m-pill.out{background:none;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(62,37,32,.35)}
+.m-pill.s{height:40px;padding:0 16px;font-size:14px}
+.m-sec{padding:64px 20px;display:flex;flex-direction:column;gap:24px}
+.m-sec--flush{padding:0 12px 64px}
+.m-sec--pad12{padding:24px 12px}
+.m-tags{display:flex;flex-wrap:wrap;gap:6px}
+.m-tags.c{justify-content:center}
+.m-tags span{height:28px;display:inline-flex;align-items:center;padding:0 11px;border-radius:14px;box-shadow:inset 0 0 0 1px currentColor;font:400 12.5px/1 var(--fd);opacity:.9}
+
+/* hero */
+.m-hero{position:relative;height:750px;overflow:hidden}
+.m-hpanel{position:absolute;left:12px;right:12px;top:12px;height:540px;background:var(--blue);border-radius:36px;display:flex;flex-direction:column;align-items:center;padding:0 24px;text-align:center}
+.m-head{position:absolute;left:12px;right:12px;top:12px;height:52px;border-radius:26px;background:#F6F6EE;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 18px}
+.m-logo img{height:24px;width:auto}
+.m-burger{width:40px;height:40px;border:0;background:none;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;cursor:pointer}
+.m-burger span{display:block;width:18px;height:1.6px;background:var(--ink);border-radius:1px}
+.m-hpanel .m-h1{margin-top:128px}
+.m-hpanel .m-lead{margin-top:18px;max-width:300px}
+.m-hpanel .m-pill{margin-top:26px}
+/* kollaasi */
+.m-col{position:absolute;left:50%;width:390px;margin-left:-195px;height:260px;pointer-events:none}
+.m-col--hero{top:450px}
+.m-ci{position:absolute;border-radius:26px;overflow:hidden;box-shadow:0 10px 24px rgba(62,37,32,.18);background:#F6F6EE}
+.m-ci img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .9s var(--ease-std)}
+.m-ci img.out{opacity:0}
+.m-col--hero .a{left:22px;top:20px;width:128px;height:150px;transform:rotate(-6deg)}
+.m-col--hero .b{left:232px;top:10px;width:136px;height:150px;transform:rotate(7deg)}
+.m-col--hero .c{left:104px;top:50px;width:184px;height:214px}
+
+/* ominaisuudet */
+.m-stack{display:flex;flex-direction:column}
+.m-fc{background:var(--b);color:var(--f);border-radius:30px;padding:20px 20px 46px 22px;margin-bottom:-34px;box-shadow:0 -6px 18px rgba(62,37,32,.10);position:relative}
+.m-fc.last{margin-bottom:0;padding-bottom:20px}
+.m-fc h3{font:600 28px/32px var(--fd);letter-spacing:-.025em;margin:0 0 12px}
+.m-fc p{font-size:15px;line-height:22px;opacity:.7;margin:12px 0 0}
+.m-more summary{list-style:none;align-self:flex-start;width:max-content}
+.m-more summary::-webkit-details-marker{display:none}
+.m-flist{margin:16px 0 0;padding:0;list-style:none;columns:2;column-gap:16px;font-size:15px;line-height:1.4}
+.m-flist li{padding:8px 0;border-top:1px solid rgba(62,37,32,.15);break-inside:avoid}
+
+/* karusellit */
+.m-car{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:0 20px;scroll-padding:0 20px}
+.m-car::-webkit-scrollbar{display:none}
+.m-car>img{flex:none;scroll-snap-align:start;scroll-snap-stop:always}
+.m-car--slides{margin:0 -12px;padding:0 12px;scroll-padding:0 12px}
+.m-car--slides>img{width:calc(100vw - 24px);max-width:420px;aspect-ratio:366/680;height:auto;object-fit:cover;border-radius:36px}
+.m-car--tuki>img{width:300px;height:440px;border-radius:30px;object-fit:cover}
+.m-car--app>img{width:300px;height:520px;border-radius:32px;object-fit:cover}
+.m-car--found>img{width:320px;height:400px;border-radius:32px;object-fit:cover}
+.m-car[hidden]{display:none}
+.m-dots{display:flex;gap:4px;align-items:center}
+.m-dots i{display:block;width:18px;height:3px;border-radius:2px;background:var(--ink);opacity:.3;transition:width .3s,opacity .3s}
+.m-dots i.on{width:36px;opacity:1}
+
+/* kenelle */
+.m-bpanel{background:var(--blue);border-radius:36px;padding:56px 24px 40px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.m-bpanel .m-pill{margin-top:4px}
+
+/* hinnoittelu */
+.m-price{padding:64px 0 0}
+.m-price .m-h2{padding:0 20px 28px}
+.m-calc{background:var(--red);color:var(--bg);padding:24px 20px 28px;display:flex;flex-direction:column;gap:14px}
+.m-calc label{font:500 15px/20px var(--fd);opacity:.9}
+.m-field{height:56px;border-radius:14px;background:rgba(236,236,220,.14);display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+.m-field input{background:none;border:0;outline:0;color:var(--bg);font:600 22px/28px var(--fd);width:60%;padding:0}
+.m-field span{font:500 16px var(--fd);opacity:.8}
+.m-res{display:flex;align-items:baseline;gap:8px}
+.m-res b{font:600 72px/72px var(--fd);letter-spacing:-.05em}
+.m-res span{font:500 18px var(--fd)}
+.m-calc p{font-size:15px;line-height:22px;opacity:.9;margin:0}
+.m-bento{display:grid;grid-template-columns:1fr 1fr;background:linear-gradient(var(--red) 0 50%,#E2E2CE 50%)}
+.m-cell{background:var(--b);color:var(--f);border-radius:24px;min-height:250px;padding:16px 16px 18px;display:flex;flex-direction:column;justify-content:space-between}
+.m-lab{display:flex;justify-content:space-between;font:600 12px/16px var(--fd)}
+.m-cell b{display:block;font:600 46px/48px var(--fd);letter-spacing:-.04em}
+.m-cell small{font-size:13px;opacity:.75}
+.m-free{grid-column:1/-1;background:#E2E2CE;padding:22px 20px 24px;display:flex;flex-direction:column;gap:4px}
+.m-free-b{display:flex;align-items:baseline;gap:10px;padding-top:26px}
+.m-free-b b{font:600 56px/56px var(--fd);letter-spacing:-.05em}
+.m-free-b span{font:400 24px var(--fd);letter-spacing:-.02em}
+.m-free small{font-size:14px;line-height:20px;opacity:.65}
+
+/* sovellus */
+.m-tabs{display:flex;gap:6px}
+.m-tabs button{height:40px;padding:0 16px;border-radius:20px;border:0;background:#E2E2CE;color:var(--ink);font:500 14px var(--fd);cursor:pointer}
+.m-tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+
+/* laitteet */
+.m-dev{padding-left:0;padding-right:0}
+.m-dev>.m-h2,.m-dev>.m-body{padding:0 20px}
+.m-tab{width:350px;max-width:calc(100% - 40px);height:250px;object-fit:contain;margin:0 auto}
+.m-dlist{list-style:none;margin:0;padding:0}
+.m-dlist li{display:flex;align-items:center;gap:16px;padding:18px 20px;border-top:1px solid rgba(62,37,32,.15)}
+.m-dlist li:last-child{border-bottom:1px solid rgba(62,37,32,.15)}
+.m-dlist div{flex:1}
+.m-dlist h3{font:600 21px/26px var(--fd);letter-spacing:-.02em;margin:0 0 4px}
+.m-dlist p{font-size:14px;line-height:20px;opacity:.6;margin:0}
+.m-dlist img{width:120px;height:88px;object-fit:contain;flex:none}
+
+/* käyttöönotto */
+.m-tl{list-style:none;margin:0;padding:8px 0 0;display:flex;flex-direction:column;gap:8px;position:relative}
+.m-tl::before{content:"";position:absolute;left:11px;top:40px;bottom:40px;width:2px;background:rgba(62,37,32,.3)}
+.m-tl li{display:flex;align-items:center;gap:12px;position:relative}
+.m-tl i{flex:none;width:24px;height:24px;display:grid;place-items:center}
+.m-tl i::before{content:"";width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--ink);background:var(--bg)}
+.m-tl li.on i::before{width:20px;height:20px;background:radial-gradient(var(--ink) 0 4px,var(--bg) 4.5px)}
+.m-tlc{flex:1;background:#F6F6EE;border-radius:18px;padding:14px 14px 14px 16px;display:flex;align-items:center;gap:10px}
+.m-tl li.on .m-tlc{background:var(--blue)}
+.m-tlc>div{flex:1}
+.m-tlc h3{font:600 16px/22px var(--fd);letter-spacing:-.01em;margin:0}
+.m-tlc p{font-size:13px;line-height:18px;opacity:.65;margin:2px 0 0}
+.m-tlc .m-pill{height:36px;padding:0 14px;font-size:13px}
+
+/* vanhasta uuteen */
+.m-red{position:relative;background:var(--red);color:var(--bg);padding:72px 20px;display:flex;flex-direction:column;gap:24px;overflow:hidden}
+.m-red>*{position:relative}
+.m-red-lines{position:absolute!important;left:50%;top:0;width:390px;height:774px;margin-left:-195px;pointer-events:none}
+.m-red .m-lead{color:#fff;opacity:1}
+.m-bars{display:flex;flex-direction:column;gap:6px}
+.m-bars p{background:var(--bg);color:var(--ink);border-radius:20px;padding:16px 18px;margin:0;font-size:15px;line-height:22px}
+.m-bars b{font-weight:600}
+.m-bars a{height:56px;border-radius:20px;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font:600 15px var(--fd);text-decoration:none}
+.m-eyes{width:72px;height:auto;margin:14px auto 0}
+
+/* ukk */
+.m-faq{display:flex;flex-direction:column;gap:10px}
+.m-faq details{background:#F6F6EE;border-radius:24px;padding:18px 16px 18px 20px}
+.m-faq details[open]{background:var(--blue)}
+.m-faq summary{list-style:none;display:flex;align-items:center;gap:12px;font:500 16px/22px var(--fd);cursor:pointer;min-height:32px}
+.m-faq summary::-webkit-details-marker{display:none}
+.m-faq summary i{margin-left:auto;flex:none;width:32px;height:32px;border-radius:50%;background:#E2E2CE;position:relative}
+.m-faq summary i::before,.m-faq summary i::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.6px;margin:-.8px 0 0 -5px;background:var(--ink)}
+.m-faq summary i::after{transform:rotate(90deg)}
+.m-faq details[open] summary i{background:var(--ink)}
+.m-faq details[open] summary i::before{background:var(--bg)}
+.m-faq details[open] summary i::after{display:none}
+.m-faq details p{margin:10px 40px 0 0;font-size:15px;line-height:22px;opacity:.75}
+.m-faqmore{display:flex;align-items:center;justify-content:space-between;padding-top:10px;font:500 15px var(--fd)}
+
+/* loppu */
+.m-end{position:relative;background:var(--ink);color:var(--bg);border-radius:36px;height:520px;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:56px 24px 0;gap:14px;text-align:center}
+.m-end .m-h2{font-size:44px}
+.m-end .m-lead{max-width:280px}
+.m-end .m-pill{margin-top:10px}
+.m-col--end{top:330px;margin-left:-195px}
+.m-col--end .m-ci{border-radius:22px;box-shadow:none}
+.m-col--end .a{left:42px;top:30px;width:120px;height:140px;transform:rotate(-7deg)}
+.m-col--end .b{left:228px;top:20px;width:120px;height:140px;transform:rotate(6deg)}
+.m-col--end .c{left:130px;top:50px;width:130px;height:160px}
+
+/* footer */
+.m-foot{padding:40px 20px 120px;display:flex;flex-direction:column;gap:28px}
+.m-news{height:56px;border-radius:28px;background:#F6F6EE;display:flex;align-items:center;padding:0 6px 0 20px;margin:0}
+.m-news input{flex:1;border:0;background:none;outline:0;font:400 16px var(--fd);color:var(--ink);min-width:0}
+.m-news .m-pill{height:44px;font-size:14px}
+.m-links{display:flex;flex-wrap:wrap;gap:8px}
+.m-links a{height:40px;display:inline-flex;align-items:center;padding:0 16px;border-radius:20px;box-shadow:inset 0 0 0 1px rgba(62,37,32,.35);color:var(--ink);text-decoration:none;font:500 14px var(--fd)}
+.m-word{width:100%;height:auto}
+.m-legal{font-size:12px;line-height:18px;opacity:.55;margin:0}
+
+/* kelluva palkki */
+.m-bar{position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));height:64px;border-radius:32px;background:#F6F6EE;box-shadow:0 8px 24px rgba(62,37,32,.15);display:none;align-items:center;gap:8px;padding:0 8px;z-index:70;transform:translateY(120px);transition:transform .45s var(--ease-reveal)}
+@media(max-width:767px){.m-bar{display:flex}}
+.m-bar.on{transform:none}
+.m-bar .m-pill{flex:1}
+.m-ic{width:48px;height:48px;border-radius:50%;background:#E2E2CE;color:var(--ink);border:0;display:grid;place-items:center;cursor:pointer}
+.m-ic svg{width:22px;height:22px}
+
+/* valikko */
+.m-menu{position:fixed;inset:0;background:var(--bg);z-index:80;display:flex;flex-direction:column;padding:24px 20px 40px}
+.m-menu[hidden]{display:none}
+.m-menu .m-head{position:relative;left:auto;right:auto;top:auto;margin:0 -8px}
+.m-x{width:40px;height:40px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);font:400 22px/1 var(--fd);cursor:pointer}
+.m-menu nav{display:flex;flex-direction:column;margin-top:56px}
+.m-menu nav a{font:600 40px/56px var(--fd);letter-spacing:-.035em;color:var(--ink);text-decoration:none}
+.m-menu-b{margin-top:auto;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.m-call{font:500 15px var(--fd);color:var(--ink);opacity:.7}
+
+@media(prefers-reduced-motion:reduce){.m-ci img,.m-bar{transition:none}}
+
+@media(min-width:768px){#kassademo>.wrap{width:80%;max-width:none;margin-left:auto;margin-right:auto}}
 </style>
 </head>
 <body>
+<!-- MOBIILI (alle 768 px): oma rakenne Figman M2-version mukaan. Desktop ei muutu. -->
+<div class="m2" id="m2">
+
+<section class="m-hero" id="m-top">
+  <div class="m-hpanel">
+    <div class="m-head">
+      <a href="#m-top" class="m-logo" aria-label="Resella"><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a>
+      <button class="m-burger" type="button" aria-label="Avaa valikko" aria-expanded="false" data-mopen><span></span><span></span></button>
+    </div>
+    <h1 class="m-h1">Kassa, joka<br>tuo ostajia</h1>
+    <p class="m-lead c">Kassa, tilitykset ja uudet ostajat yhdessä järjestelmässä. Ostajat löytävät tuotteesi appista, joka julkaistaan 2027.</p>
+    <a class="m-pill" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a>
+  </div>
+  <div class="m-col m-col--hero" data-col="assets/m/hero1.webp,assets/m/hero2.webp,assets/m/hero3.webp,assets/m/hero4.webp,assets/m/hero5.webp,assets/m/hero6.webp,assets/m/hero7.webp">
+    <div class="m-ci a"><img alt=""></div><div class="m-ci b"><img alt=""></div><div class="m-ci c"><img alt=""></div>
+  </div>
+</section>
+
+<section class="m-sec" id="m-ominaisuudet">
+  <h2 class="m-h2">Kaikki työkalut<br>yhdessä paikassa</h2>
+  <div class="m-stack">
+    <div class="m-fc" style="--b:#C5D0D3;--f:#3E2520"><h3>Kassa</h3><div class="m-tags"><span>Toimii ilman nettiä</span><span>Viivakoodi ja QR</span></div></div>
+    <div class="m-fc" style="--b:#3E2520;--f:#ECECDC"><h3>Näkyvyys</h3><div class="m-tags"><span>Tuotteet verkossa</span></div></div>
+    <div class="m-fc" style="--b:#C24029;--f:#ECECDC"><h3>Varaukset</h3><div class="m-tags"><span>Pöytäkartta</span><span>Myyjä maksaa itse</span></div></div>
+    <div class="m-fc" style="--b:#C5D0D3;--f:#3E2520"><h3>Tilitykset</h3><div class="m-tags"><span>Yksi pankkitiedosto</span></div></div>
+    <div class="m-fc" style="--b:#F6F6EE;--f:#3E2520"><h3>Asiakashallinta</h3><div class="m-tags"><span>Sopimukset</span><span>Varaushistoria</span></div></div>
+    <div class="m-fc last" style="--b:#3E2520;--f:#ECECDC"><h3>Raportointi</h3><div class="m-tags"><span>Provisio</span><span>ALV</span><span>Kausivertailu</span></div><p>Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p></div>
+  </div>
+  <details class="m-more">
+    <summary class="m-pill out">Kaikki 12 ominaisuutta</summary>
+    <ul class="m-flist"><li>Kassa ilman nettiä</li><li>Viivakoodi ja QR</li><li>Tuotteet verkossa</li><li>Pöytäkartta ja varaukset</li><li>Myyjä maksaa paikan itse</li><li>Tilitykset yhdellä pankkitiedostolla</li><li>Myyjä- ja asiakashallinta</li><li>Raportit: myynti, provisio, ALV</li><li>Hintaehdotus kuvasta</li><li>Hintatarrat ja kuitit</li><li>Oma ilme</li><li>Kuluttaja-appi 2027</li></ul>
+  </details>
+</section>
+
+<section class="m-sec m-sec--flush" id="m-vaihto">
+  <div class="m-car m-car--slides" data-car>
+    <img src="assets/m/s1.webp" alt="Helpotusta vaihtoon. Vaihto hoituu ilman, että kirppis menee kiinni. Esittely: aloitetaan 30 minuutin demolla, jossa näet oman kirppiksesi Resellassa.">
+    <img src="assets/m/s2.webp" alt="Määritys: rakennamme järjestelmän kirppiksesi näköiseksi, pöydät, hinnat, provisio ja oma ilme." loading="lazy">
+    <img src="assets/m/s3.webp" alt="Asennus: tuomme kassan ja laitteet paikan päälle ja asennamme ne valmiiksi." loading="lazy">
+    <img src="assets/m/s4.webp" alt="Koulutus: käymme kassan läpi sinun ja henkilökuntasi kanssa." loading="lazy">
+    <img src="assets/m/s5.webp" alt="Ensimmäinen myynti: olemme paikalla, kun ensimmäiset tuotteet myydään." loading="lazy">
+    <img src="assets/m/s6.webp" alt="Tilitykset: käymme ensimmäiset tilitykset läpi yhdessä." loading="lazy">
+  </div>
+</section>
+
+<section class="m-sec" id="m-tuki">
+  <h2 class="m-h2 c">Apua,<br>kun tarvitset</h2>
+  <div class="m-car m-car--tuki" data-car>
+    <img src="assets/m/t1.webp" alt="Opetusvideot: lyhyet videot näyttävät kassan, tilitykset ja myyjien ohjeet vaihe vaiheelta." loading="lazy">
+    <img src="assets/m/t2.webp" alt="Puhelintuki: soita suoraan meille, kun tarvitset apua kassalla tai tilityksissä." loading="lazy">
+    <img src="assets/m/t3.webp" alt="Sähköposti: kirjoita kysymyksesi, niin vastaamme." loading="lazy">
+    <img src="assets/m/t4.webp" alt="Apuri järjestelmässä: kysy apurilta suoraan järjestelmässä." loading="lazy">
+  </div>
+</section>
+
+<section class="m-sec m-sec--pad12" id="m-kenelle">
+  <div class="m-bpanel">
+    <h2 class="m-h2 c">Sopii jokaiselle<br>kirppikselle</h2>
+    <p class="m-body c">Sama järjestelmä joustaa kirppiksesi koon ja tavan mukaan.</p>
+    <div class="m-tags c"><span>Kyläkirppis</span><span>Iso halli</span><span>Antiikkiliike</span></div>
+    <a class="m-pill" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a>
+  </div>
+</section>
+
+<section class="m-price" id="m-hinnoittelu">
+  <h2 class="m-h2 big">Hinta joustaa<br>myynnin<br>mukaan.</h2>
+  <div class="m-calc">
+    <label for="mSales">Kassamyynti kuukaudessa</label>
+    <div class="m-field"><input id="mSales" inputmode="numeric" value="10 000" aria-label="Kassamyynti kuukaudessa euroina"><span>€ / kk</span></div>
+    <div class="m-res"><b id="mFee">108 €</b><span>/ kk</span></div>
+    <p id="mNote">Maksu on noin 1,08 % myynnistä. Esimerkkilaskelma, tarkka hinta katsotaan demossa.</p>
+  </div>
+  <div class="m-bento">
+    <div class="m-cell" style="--b:#3E2520;--f:#ECECDC"><div class="m-lab"><span>Alkaen</span><span>↗</span></div><div><b>1,25 %</b><small>kassamyynnistä</small></div></div>
+    <div class="m-cell" style="--b:#C5D0D3;--f:#3E2520"><div class="m-lab"><span>Isolla myynnillä</span><span>↗</span></div><div><b>0,25 %</b><small>prosentti laskee</small></div></div>
+    <div class="m-free"><div class="m-lab"><span>Käyttöönoton jälkeen</span><span>↗</span></div><div class="m-free-b"><b>3 kk</b><span>ilmaiseksi</span></div><small>Maksu alkaa vasta neljännestä kuukaudesta.</small></div>
+  </div>
+</section>
+
+<section class="m-sec" id="m-sovellus">
+  <h2 class="m-h2" id="mApH">Myyjä laittaa<br>tuotteet myyntiin</h2>
+  <div class="m-tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="0">Myyjä</button><button role="tab" aria-selected="false" data-tab="1">Ostaja</button><button role="tab" aria-selected="false" data-tab="2">Kaikki hyötyvät</button>
+  </div>
+  <div class="m-car m-car--app on" data-car data-set="0">
+    <img src="assets/m/a1_1.webp" alt="Varaa paikka puhelimella" loading="lazy"><img src="assets/m/a1_2.webp" alt="Kuvaa tuote, saat hintaehdotuksen" loading="lazy"><img src="assets/m/a1_3.webp" alt="Seuraa myyntiä ja tilityksiä" loading="lazy"><img src="assets/m/a1_4.webp" alt="Oma profiili ja varaukset" loading="lazy"><img src="assets/m/a1_5.webp" alt="Saldo näkyy heti" loading="lazy"><img src="assets/m/a1_6.webp" alt="Myy lähikirppiksellä" loading="lazy">
+  </div>
+  <div class="m-car m-car--app" data-car data-set="1" hidden>
+    <img src="assets/m/a2_1.webp" alt="Uudet löydöt joka päivä" loading="lazy"><img src="assets/m/a2_2.webp" alt="Hae läheltä ja kauempaa" loading="lazy"><img src="assets/m/a2_3.webp" alt="Varaa ja nouda kirppikseltä" loading="lazy"><img src="assets/m/a2_4.webp" alt="Hae kuvalla" loading="lazy"><img src="assets/m/a2_5.webp" alt="Asuideat kirppislöydöistä" loading="lazy"><img src="assets/m/a2_6.webp" alt="Kauden löydöt koottuna" loading="lazy"><img src="assets/m/a2_7.webp" alt="Ilmoitus uusista osumista" loading="lazy">
+  </div>
+  <div class="m-car m-car--app" data-car data-set="2" hidden>
+    <img src="assets/m/a3_1.webp" alt="Myyjä saa rahat tilille" loading="lazy"><img src="assets/m/a3_2.webp" alt="Ostaja löytää uniikin tuotteen" loading="lazy"><img src="assets/m/a3_3.webp" alt="Kirppis saa provision" loading="lazy"><img src="assets/m/a3_4.webp" alt="Hae, varaa ja nouda" loading="lazy"><img src="assets/m/a3_5.webp" alt="Kaikki hyllyt yhdessä" loading="lazy"><img src="assets/m/a3_6.webp" alt="Suosikit talteen" loading="lazy">
+  </div>
+</section>
+
+<section class="m-sec m-dev" id="m-laitteet">
+  <h2 class="m-h2 c">Kassa valmiina<br>käyttöön</h2>
+  <img class="m-tab" src="assets/tarrat/laitteet/tabletti.webp" alt="Tabletti telineessä kassanäkymällä" loading="lazy">
+  <ul class="m-dlist">
+    <li><div><h3>Viivakoodinlukija</h3><p>Lukee viivakoodit ja QR-koodit.</p></div><img src="assets/tarrat/laitteet/viivakoodinlukija.webp" alt="" loading="lazy"></li>
+    <li><div><h3>Maksupääte</h3><p>Summa siirtyy suoraan päätteeseen.</p></div><img src="assets/tarrat/laitteet/maksupaate.webp" alt="" loading="lazy"></li>
+    <li><div><h3>Kuittitulostin</h3><p>Kuitti heti maksun jälkeen.</p></div><img src="assets/tarrat/laitteet/kuittitulostin.webp" alt="" loading="lazy"></li>
+    <li><div><h3>Kassalipas</h3><p>Käteiselle oma lipas.</p></div><img src="assets/tarrat/laitteet/kassalipas.webp" alt="" loading="lazy"></li>
+  </ul>
+  <p class="m-body">Tuomme laitteet paikan päälle ja asennamme ne valmiiksi.</p>
+</section>
+
+<section class="m-sec" id="m-kayttoonotto">
+  <h2 class="m-h2 c">Käyttöönotto<br>ilman vaivaa</h2>
+  <p class="m-body c">Neljä vaihetta demosta omaan arkeen. Hoidamme jokaisen kanssasi.</p>
+  <ol class="m-tl">
+    <li class="on"><i></i><div class="m-tlc"><div><h3>Esittely</h3><p>30 minuutin demo. Ei sido mihinkään.</p></div><a class="m-pill s lite" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a></div></li>
+    <li><i></i><div class="m-tlc"><div><h3>Määritys ja asennus</h3><p>Syötämme tiedot, tuomme ja asennamme laitteet.</p></div></div></li>
+    <li><i></i><div class="m-tlc"><div><h3>Koulutus ja ensimmäinen myynti</h3><p>Opetamme kassan ja olemme paikalla avauspäivänä.</p></div></div></li>
+    <li><i></i><div class="m-tlc"><div><h3>Tilitykset ja kasvu</h3><p>Ensimmäiset tilitykset yhdessä, uudet ominaisuudet mukana.</p></div></div></li>
+  </ol>
+</section>
+
+<section class="m-red" id="m-siirtyma">
+  <svg class="m-red-lines" viewBox="0 0 390 774" preserveAspectRatio="xMidYMin slice" aria-hidden="true"><g fill="none" stroke="#C5D0D3" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <path transform="translate(215 102)" d="M 225 0 C 165 40 135 100 125 160 C 115 220 105 286 65 346 C 40 401.9 20 441.9 0 441.9"/>
+    <path transform="translate(-10 544)" d="M 0 208.1 C 70 218.1 120 178.1 100 128.1 C 80 78.1 20 88.1 40 28.1 C 60 -21.9 150 60 180 20 C 200 0 215 0 225 0"/></g></svg>
+  <h2 class="m-h2 big">Vanhasta<br>uuteen vähitellen</h2>
+  <p class="m-lead">Kirppiksen ei tarvitse aloittaa alusta. Me autamme koko matkan.</p>
+  <div class="m-bars">
+    <p><b>Vanhat tuotteet</b> myydään loppuun nykyisillä hintalapuilla.</p>
+    <p><b>Uudet varaukset</b> tehdään Resellaan, vanha järjestelmä toimii rinnalla.</p>
+    <p><b>Olemme mukana</b> koko siirtymän ajan ja paikalla ensimmäisenä myyntipäivänä.</p>
+    <a href="mailto:hei@resella.fi?subject=Siirtym%C3%A4">Kysy siirtymästä demossa</a>
+  </div>
+  <img class="m-eyes" src="assets/m/silmat.png" alt="" aria-hidden="true">
+</section>
+
+<section class="m-sec" id="m-perustajat">
+  <h2 class="m-h2 c">Kirpputorista<br>koodiin</h2>
+  <div class="m-car m-car--found" data-car>
+    <img src="assets/m/f1.webp" alt="Sofia Kraptsak, CEO. 10 vuotta second hand -alalla. Tuleva diplomi-insinööri." loading="lazy">
+    <img src="assets/m/f2.webp" alt="Leon Gustafsson, CTO. Oma ohjelmistoyritys takana. Senior-kehittäjä 21-vuotiaana." loading="lazy">
+  </div>
+</section>
+
+<section class="m-sec" id="m-ukk">
+  <h2 class="m-h2 c">Usein kysyttyä</h2>
+  <div class="m-faq">
+    <details open><summary>Pitääkö kaikki vanhat tuotteet kuvata uudelleen?<i></i></summary><p>Ei. Vanhat tuotteet myydään loppuun nykyisillä lapuilla, ja uudet varaukset tulevat Resellaan.</p></details>
+    <details><summary>Toimiiko kassa, jos netti katkeaa?<i></i></summary><p>Toimii. Myynnit tallentuvat ja synkronoituvat, kun yhteys palaa.</p></details>
+    <details><summary>Mitä laitteita tarvitsen?<i></i></summary><p>Tabletin tai kosketusnäytön, lukijan ja tarvittaessa kuittitulostimen ja kassalippaan. Käymme laitteet läpi kanssasi.</p></details>
+    <details><summary>Voinko käyttää omaa logoa ja värejä?<i></i></summary><p>Voit. Myyjien varaussivu näkyy kirppiksesi ilmeellä.</p></details>
+    <details><summary>Kauanko käyttöönotto kestää?<i></i></summary><p>Yleensä 1-3 päivää. Hoidamme asennuksen kanssasi.</p></details>
+    <details><summary>Mitä Resella maksaa?<i></i></summary><p>Käymme hinnan läpi demossa, kun näemme kirppiksesi koon ja tarpeet.</p></details>
+  </div>
+  <div class="m-faqmore"><span>Etkö löytänyt vastausta?</span><a class="m-pill s" href="mailto:hei@resella.fi">Ota yhteyttä</a></div>
+</section>
+
+<section class="m-sec m-sec--pad12" id="m-varaa">
+  <div class="m-end">
+    <h2 class="m-h2 c">Rakennetaanko<br>yhdessä?</h2>
+    <p class="m-lead c">30 minuutin demo, jossa näet oman kirppiksesi Resellassa.</p>
+    <a class="m-pill lite" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a>
+    <div class="m-col m-col--end" data-col="assets/m/end1.webp,assets/m/end2.webp,assets/m/end3.webp,assets/m/end4.webp,assets/m/end5.webp,assets/m/end6.webp,assets/m/end7.webp">
+      <div class="m-ci a"><img alt=""></div><div class="m-ci b"><img alt=""></div><div class="m-ci c"><img alt=""></div>
+    </div>
+  </div>
+</section>
+
+<footer class="m-foot">
+  <h2 class="m-h2 s">Pysy mukana</h2>
+  <form class="m-news" onsubmit="location.href='mailto:hei@resella.fi?subject=Uutiskirje';return false"><input type="email" placeholder="Sähköpostisi" aria-label="Sähköpostisi"><button class="m-pill s">Tilaa</button></form>
+  <nav class="m-links"><a href="#m-ominaisuudet">Ominaisuudet</a><a href="#m-hinnoittelu">Hinnoittelu</a><a href="#m-ukk">UKK</a><a href="#m-perustajat">Meistä</a><a href="mailto:hei@resella.fi">Yhteystiedot</a></nav>
+  <img class="m-word" src="assets/logot/ReSella_sanamerkki_matala_ruskea.svg" alt="Resella">
+  <p class="m-legal">© 2026 Resella Oy · Espoo · Y 3641828-1 · Tietosuoja · Ehdot · FI / EN</p>
+</footer>
+
+<div class="m-bar" id="mBar" aria-hidden="true">
+  <a class="m-pill" href="mailto:hei@resella.fi?subject=Demovaraus" tabindex="-1">Varaa demo</a>
+  <a class="m-ic" href="mailto:hei@resella.fi" aria-label="Ota yhteyttä" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></a>
+  <button class="m-ic" type="button" aria-label="Avaa valikko" data-mopen tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 9h14M5 15h14"/></svg></button>
+</div>
+
+<div class="m-menu" id="mMenu" hidden>
+  <div class="m-head"><a href="#m-top" class="m-logo" aria-label="Resella" data-mclose><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a><button class="m-x" type="button" aria-label="Sulje valikko" data-mclose>×</button></div>
+  <nav><a href="#m-ominaisuudet" data-mclose>Ominaisuudet</a><a href="#m-kayttoonotto" data-mclose>Käyttöönotto</a><a href="#m-hinnoittelu" data-mclose>Hinnoittelu</a><a href="#m-ukk" data-mclose>UKK</a><a href="#m-perustajat" data-mclose>Meistä</a></nav>
+  <div class="m-menu-b"><a class="m-pill" href="mailto:hei@resella.fi?subject=Demovaraus">Varaa demo</a><a class="m-call" href="mailto:hei@resella.fi">Ota yhteyttä</a></div>
+</div>
+</div>
+
 
 <!-- HEADER -->
 <header class="gm intro" id="gm">
@@ -944,7 +1328,7 @@ section.fd{background:var(--blue)}
   <div class="rotary" id="rotary">
     <div class="rotary-stage">
       <article class="rcard" style="--cb:#C5D0D3;--ci:#3E2520">
-        <div class="rc-media"><img src="assets/kuvat/03_vihrea_naytto/01_lappari_esittely.jpg?v=2" alt="Kannettavalla auki Resellan Varaa demo -sivu" loading="lazy"></div>
+        <div class="rc-media"><img src="assets/kuvat/03_vihrea_naytto/01_lappari_esittely.jpg?v=3" alt="Kannettavalla auki Resellan Varaa demo -sivu" loading="lazy"></div>
         <div class="rc-body"><h3>Opetusvideot</h3><p>Lyhyet videot näyttävät kassan, tilitykset ja myyjien ohjeet vaihe vaiheelta.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
@@ -954,12 +1338,12 @@ section.fd{background:var(--blue)}
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#D09C4C;--ci:#3E2520">
-        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/04b_tuki_sahkoposti.webp" alt="Tabletilla auki tukiviesti: tilitysten aikataulu" style="object-position:50% 8%" loading="lazy"></div>
+        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/04b_tuki_sahkoposti.webp?v=3" alt="Tabletilla auki tukiviesti: tilitysten aikataulu" style="object-position:50% 8%" loading="lazy"></div>
         <div class="rc-body"><h3>Sähköposti</h3><p>Kirjoita kysymyksesi, niin vastaamme suomeksi.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
       <article class="rcard" style="--cb:#C24029;--ci:#ECECDC">
-        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/03b_tuki_apuri.webp" alt="Puhelimella auki Apuri, joka neuvoo tuotteen palautuksen" style="object-position:50% 8%" loading="lazy"></div>
+        <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/03b_tuki_apuri.webp?v=3" alt="Puhelimella auki Apuri, joka neuvoo tuotteen palautuksen" style="object-position:50% 8%" loading="lazy"></div>
         <div class="rc-body"><h3>Apuri järjestelmässä</h3><p>Kysy apurilta suoraan järjestelmässä, niin se näyttää, miten asia tehdään.</p></div>
         <a class="rc-btn" href="#varaa">Lue lisää</a>
       </article>
@@ -1537,6 +1921,59 @@ section.fd{background:var(--blue)}
   if(!('IntersectionObserver' in window)){ vis=true; loop(); return; }
   new IntersectionObserver(function(es){ es.forEach(function(e){ vis=e.isIntersecting; loop(); }); },{threshold:.2}).observe(ap);
   document.addEventListener('visibilitychange',loop);
+})();
+</script>
+<script>
+/* mobiili M2 */
+(function(){
+  var root=document.getElementById('m2'); if(!root) return;
+  var mq=matchMedia('(max-width:767px)');
+  var red=false; try{ red=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  // kollaasit: kolme paikkaa, kuvat vaihtuvat vuorotellen
+  root.querySelectorAll('[data-col]').forEach(function(col){
+    var list=col.getAttribute('data-col').split(','), slots=col.querySelectorAll('.m-ci'), k=0;
+    function set(i,src){ var s=slots[i], cur=s.querySelector('img'), n=new Image(); n.alt=''; n.src=src; n.className='out'; s.appendChild(n);
+      n.onload=function(){ requestAnimationFrame(function(){ n.className=''; if(cur){ cur.className='out'; setTimeout(function(){ cur.remove(); },950); } }); }; }
+    slots.forEach(function(s,i){ s.querySelector('img').src=list[i%list.length]; });
+    if(red) return;
+    var slot=0;
+    setInterval(function(){ if(!mq.matches||document.hidden) return; k=(k+1)%list.length; set(slot,list[(k+2)%list.length]); slot=(slot+1)%slots.length; },2600);
+  });
+  // karusellit: palkki-indikaattori
+  root.querySelectorAll('[data-car]').forEach(function(car){
+    var n=car.children.length, d=document.createElement('div'); d.className='m-dots'; d.setAttribute('aria-hidden','true');
+    for(var i=0;i<n;i++){ var e=document.createElement('i'); if(!i) e.className='on'; d.appendChild(e); }
+    car.insertAdjacentElement('afterend',d); car._dots=d;
+    car.addEventListener('scroll',function(){ var w=car.children[0].getBoundingClientRect().width+10, i=Math.round(car.scrollLeft/w);
+      d.querySelectorAll('i').forEach(function(x,j){ x.className=j===i?'on':''; }); },{passive:true});
+  });
+  // sovellus: välilehdet
+  var heads=['Myyjä laittaa<br>tuotteet myyntiin','Ostaja löytää<br>ne sovelluksesta','Kirppis, myyjä ja<br>ostaja hyötyvät'];
+  var tabs=root.querySelectorAll('.m-tabs button'), sets=root.querySelectorAll('.m-car--app'), h=document.getElementById('mApH');
+  tabs.forEach(function(b){ b.addEventListener('click',function(){ var t=+b.getAttribute('data-tab');
+    tabs.forEach(function(x){ x.setAttribute('aria-selected',x===b?'true':'false'); });
+    sets.forEach(function(s){ var on=+s.getAttribute('data-set')===t; s.hidden=!on; s._dots.style.display=on?'':'none'; if(on) s.scrollLeft=0; });
+    h.innerHTML=heads[t]; }); });
+  sets.forEach(function(s,i){ if(i) s._dots.style.display='none'; });
+  // laskuri
+  var inp=document.getElementById('mSales'), fee=document.getElementById('mFee'), note=document.getElementById('mNote');
+  function fmt(n){ return Math.round(n).toLocaleString('fi-FI'); }
+  function calc(){ var r=parseFloat((inp.value||'').replace(/[^\d]/g,''))||0, t=Math.max(0,Math.min(1,(r-3000)/42000)), p=1.25-t;
+    fee.textContent=fmt(r*p/100)+' €';
+    note.textContent=r>0?'Maksu on noin '+p.toFixed(2).replace('.',',')+' % myynnistä. Esimerkkilaskelma, tarkka hinta katsotaan demossa.':'Syötä kuukausimyynti, niin näet arvion.'; }
+  inp.addEventListener('input',calc); inp.addEventListener('blur',function(){ var r=parseFloat((inp.value||'').replace(/[^\d]/g,'')); if(r>0) inp.value=fmt(r); }); calc();
+  // valikko
+  var menu=document.getElementById('mMenu');
+  function openM(){ menu.hidden=false; document.documentElement.style.overflow='hidden'; root.querySelectorAll('.m-burger').forEach(function(b){ b.setAttribute('aria-expanded','true'); }); }
+  function closeM(){ menu.hidden=true; document.documentElement.style.overflow=''; root.querySelectorAll('.m-burger').forEach(function(b){ b.setAttribute('aria-expanded','false'); }); }
+  root.querySelectorAll('[data-mopen]').forEach(function(b){ b.addEventListener('click',openM); });
+  root.querySelectorAll('[data-mclose]').forEach(function(b){ b.addEventListener('click',closeM); });
+  addEventListener('keydown',function(e){ if(e.key==='Escape'&&!menu.hidden) closeM(); });
+  // kelluva palkki heron jälkeen, piiloon loppu-CTA:n kohdalla
+  var bar=document.getElementById('mBar'), hero=document.getElementById('m-top'), end=document.getElementById('m-varaa');
+  function onS(){ if(!mq.matches) return; var past=hero.getBoundingClientRect().bottom<80, er=end.getBoundingClientRect(), atEnd=er.top<innerHeight&&er.bottom>0;
+    var on=past&&!atEnd; bar.classList.toggle('on',on); bar.setAttribute('aria-hidden',on?'false':'true'); bar.querySelectorAll('a,button').forEach(function(x){ x.tabIndex=on?0:-1; }); }
+  addEventListener('scroll',onS,{passive:true}); onS();
 })();
 </script>
 </body>
