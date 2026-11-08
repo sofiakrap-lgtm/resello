@@ -100,11 +100,11 @@ section[id]{scroll-margin-top:72px}
 .gm-menu{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease-out)}
 .gm.open .gm-menu{grid-template-rows:1fr}
 .gm-menu-in{overflow:hidden;min-width:238px}
-.gm-mrow{display:flex;align-items:center;gap:6px;padding-right:14px}
+.gm-mrow{display:block}
 .gm-mrow nav{flex:1}
-.gm-eyes{flex:none;width:76px;opacity:0;transform:scale(.6);transition:opacity .35s var(--ease-out) .25s,transform .5s var(--ease-reveal) .25s}
+.gm-eyes{position:absolute;top:2px;right:12px;height:40px;display:flex;align-items:center;z-index:2;pointer-events:none;opacity:0;transform:scale(.6);transition:opacity .35s var(--ease-out) .25s,transform .5s var(--ease-reveal) .25s}
 .gm.open .gm-eyes{opacity:1;transform:none}
-.gm-eyes img{width:100%;height:auto;display:block}
+.gm-eyes img{height:40px;width:auto;display:block}
 .gm-eyes .er{display:none}
 .gm.on-dark .gm-eyes .ev{display:none}
 .gm.on-dark .gm-eyes .er{display:block}
@@ -112,7 +112,7 @@ section[id]{scroll-margin-top:72px}
 .gm-menu a{font:400 20px/1.15 var(--fb);letter-spacing:-.01em;color:inherit;padding:7px 0;opacity:0;transform:translateY(14px);transition:opacity .3s var(--ease-out),transform .3s var(--ease-out)}
 .gm.open .gm-menu a{opacity:1;transform:none}
 .gm-menu a:hover{opacity:.6;transition:opacity .18s linear}
-.gm-sub{display:flex;flex-wrap:wrap;gap:4px 16px;margin:12px -12px 0;padding:12px 12px 0;border-top:1px solid rgba(236,236,220,.14);font-size:14px}
+.gm-sub{display:flex;flex-wrap:wrap;gap:4px 16px;margin:12px -14px 0;padding:12px 14px 0;border-top:1px solid rgba(236,236,220,.14);font-size:14px}
 .gm.on-dark .gm-sub{border-top-color:rgba(62,37,32,.14)}
 .gm-sub a{font-size:14px;color:var(--ink-muted);opacity:0;transform:translateY(14px);transition:opacity .3s var(--ease-out),transform .3s var(--ease-out)}
 .gm.open .gm-sub a{opacity:1;transform:none}
@@ -820,7 +820,7 @@ section.fd{background:var(--blue)}
 .m-h2{font-weight:600;font-size:40px;line-height:1.05;letter-spacing:-.035em;margin:0;text-wrap:balance}
 .m-h2.big{font-size:48px;letter-spacing:-.045em}
 .m-h2.s{font-size:32px}
-.m-lead,.m-body{font-size:15px;line-height:1.47;margin:0;opacity:.75;font-weight:400}
+.m-lead,.m-body{font-size:15px;line-height:1.47;margin:0;opacity:.75;font-weight:600}
 .m-pill{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--bg);font:500 15px/1 var(--fd);text-decoration:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;white-space:nowrap}
 .m-pill.lite{background:var(--bg);color:var(--ink)}
 .m-pill.out{background:none;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(62,37,32,.35)}
@@ -1296,6 +1296,7 @@ section.fd{background:var(--blue)}
       <button class="gm-burger" id="gmBurger" aria-label="Avaa valikko" aria-expanded="false"><span></span><span></span></button>
       <a class="gm-cta" href="#varaa">Varaa demo</a>
     </div>
+    <span class="gm-eyes" aria-hidden="true"><img class="ev" src="assets/silmat/silmat-katsoo-vaalea.svg" alt=""><img class="er" src="assets/silmat/silmat-katsoo-ruskea.svg" alt=""></span>
     <div class="gm-menu" id="gmMenu">
       <div class="gm-menu-in"><div class="gm-mrow">
         <nav aria-label="Valikko">
@@ -1308,7 +1309,7 @@ section.fd{background:var(--blue)}
             <a href="#perustajat">Meistä</a>
             <a href="#varaa">Yhteystiedot</a>
           </div>
-        </nav><span class="gm-eyes" aria-hidden="true"><img class="ev" src="assets/silmat/silmat-katsoo-vaalea.svg" alt=""><img class="er" src="assets/silmat/silmat-katsoo-ruskea.svg" alt=""></span></div>
+        </nav></div>
       </div>
     </div>
   </div>
@@ -1352,7 +1353,7 @@ section.fd{background:var(--blue)}
   <div class="caro-track" id="caroTrack">
     <article class="caro-card c-color" style="--cc:var(--blue);--ct:var(--ink)">
       <div class="cc-body"><h3>Toimitukset</h3><p>Ostaja tilaa kotiin ja näkee, missä paketti menee.</p></div>
-    <img class="cc-tarra" src="assets/tarrat/karuselli/kassa-puhelin.webp" alt="Paketti matkalla -näkymä puhelimessa" loading="lazy" style="left:15.73%;top:39.47%;width:69.83%">
+    <img class="cc-tarra" src="assets/tarrat/karuselli/kassa-puhelin.webp?v=20" alt="Paketti matkalla -näkymä puhelimessa" loading="lazy" style="left:15.73%;top:39.47%;width:69.83%">
     </article>
     <article class="caro-card c-img">
       <img src="assets/kuvat/04_loydot_tuotteet/01_takki_esittely.jpg" alt="Takki esillä kirpputorilla" loading="lazy">
@@ -1360,7 +1361,7 @@ section.fd{background:var(--blue)}
     </article>
     <article class="caro-card c-color" style="--cc:var(--red);--ct:var(--on-red)">
       <div class="cc-body"><h3>Varaukset</h3><p>Myyjät varaavat ja maksavat pöydän itse, sinä näet tilanteen kartalta.</p></div>
-    <img class="cc-tarra" src="assets/tarrat/karuselli/varaukset-yopoyta.webp" alt="" loading="lazy" style="left:9.31%;top:44.00%;width:107.37%;transform:rotate(-0.6deg)">
+    <img class="cc-tarra" src="assets/tarrat/karuselli/varaukset-yopoyta.webp?v=20" alt="" loading="lazy" style="left:9.31%;top:44.00%;width:107.37%;transform:rotate(-0.6deg)">
     </article>
     <article class="caro-card c-img">
       <img src="assets/kuvat/02_kassa_maksu/10_kuitti_tulostuu.jpg" alt="Kuitti tulostuu kassalla" loading="lazy">
@@ -1368,7 +1369,7 @@ section.fd{background:var(--blue)}
     </article>
     <article class="caro-card c-color" style="--cc:var(--ink);--ct:var(--bg)">
       <div class="cc-body"><h3>Asiakashallinta</h3><p>Myyjät, sopimukset, tilinumerot ja varaushistoria samassa paikassa.</p></div>
-    <img class="cc-tarra" src="assets/tarrat/karuselli/asiakashallinta-jakkara.webp" alt="" loading="lazy" style="left:14.87%;top:12.96%;width:72.41%">
+    <img class="cc-tarra" src="assets/tarrat/karuselli/asiakashallinta-jakkara.webp?v=20" alt="" loading="lazy" style="left:14.87%;top:12.96%;width:72.41%">
     </article>
     <article class="caro-card c-img">
       <img src="assets/kuvat/02_kassa_maksu/01_kassa_tiski_tabletti.jpg" alt="Tabletti kassatiskillä" loading="lazy">
@@ -1376,7 +1377,7 @@ section.fd{background:var(--blue)}
     </article>
     <article class="caro-card c-color" style="--cc:var(--mustard);--ct:var(--ink)">
       <div class="cc-body"><h3>Hintaehdotus</h3><p>Myyjä kuvaa tuotteen ja saa hintaehdotuksen.</p></div>
-    <img class="cc-tarra" src="assets/tarrat/karuselli/hintaehdotus-kamera.webp" alt="" loading="lazy" style="left:-27.37%;top:63.07%;width:150.00%">
+    <img class="cc-tarra" src="assets/tarrat/karuselli/hintaehdotus-kamera.webp?v=20" alt="" loading="lazy" style="left:-27.37%;top:63.07%;width:150.00%">
     </article>
     <article class="caro-card c-img">
       <img src="assets/kuvat/01_kirppis_tila/06_kauppa_rekit_poyta.jpg" alt="Kirpputorin pöydät ja rekit" loading="lazy">
@@ -1384,7 +1385,7 @@ section.fd{background:var(--blue)}
     </article>
     <article class="caro-card c-color" style="--cc:var(--blue);--ct:var(--ink)">
       <div class="cc-body"><h3>Kuluttaja-appi</h3><p>Ostajat löytävät tuotteesi appista ja tulevat hakemaan.</p></div>
-    <img class="cc-tarra" src="assets/tarrat/karuselli/tarrat-puhelin.webp" alt="Sovelluksen kotinäkymä puhelimessa" loading="lazy" style="left:15.73%;top:39.47%;width:69.83%">
+    <img class="cc-tarra" src="assets/tarrat/karuselli/tarrat-puhelin.webp?v=20" alt="Sovelluksen kotinäkymä puhelimessa" loading="lazy" style="left:15.73%;top:39.47%;width:69.83%">
     </article>
     <article class="caro-card c-img">
       <img src="assets/kuvat/02_kassa_maksu/07_hintalappu_neule.jpg" alt="Hintalappu neuleessa" loading="lazy">
@@ -1392,7 +1393,7 @@ section.fd{background:var(--blue)}
     </article>
     <article class="caro-card c-color" style="--cc:var(--red);--ct:var(--on-red)">
       <div class="cc-body"><h3>Käyttäjäroolit</h3><p>Työntekijä näkee kassan, mutta ei tilityksiä.</p></div>
-    <img class="cc-tarra" src="assets/tarrat/karuselli/kayttajaroolit-lamppu.webp" alt="" loading="lazy" style="left:32.54%;top:38.50%;width:73.28%">
+    <img class="cc-tarra" src="assets/tarrat/karuselli/kayttajaroolit-lamppu.webp?v=20" alt="" loading="lazy" style="left:32.54%;top:38.50%;width:73.28%">
     </article>
     <article class="caro-card c-img">
       <img src="assets/kuvat/01_kirppis_tila/03_hylly_laukut_varikas.jpg" alt="Värikäs hylly laukkuja" loading="lazy">
@@ -1510,7 +1511,7 @@ section.fd{background:var(--blue)}
 <!-- BENTO: kassatapahtuma -->
 <section class="ap" id="kassademo" data-t="1">
   <div class="wrap">
-    <div class="ap-panel"><div class="ap-deco" aria-hidden="true"><div class="ap-dg on"><img class="ap-t" src="assets/tarrat/karuselli/varaukset-yopoyta.webp" alt="" style="left:-4.4%;top:8.4%;width:26.3%;aspect-ratio:342/405;object-fit:cover;transform:scaleX(-1)"><img class="ap-t" src="assets/tarrat/karuselli/kayttajaroolit-lamppu.webp" alt="" style="left:76.1%;top:-.8%;width:33.2%;aspect-ratio:432/490;object-fit:cover"></div><div class="ap-dg"><img class="ap-t" src="assets/tarrat/04-didriksons-haalari.webp" alt="" style="left:-3.8%;top:-17.5%;width:37.8%;aspect-ratio:491/557"><img class="ap-t" src="assets/tarrat/05-farkut-bootcut.webp" alt="" style="left:77.4%;top:10.9%;width:23%;aspect-ratio:299/420"></div><div class="ap-dg"><img class="ap-t" src="assets/tarrat/23-farkkutakki.webp" alt="" style="left:-2.2%;top:3.1%;width:32.3%;aspect-ratio:420/398"><img class="ap-t" src="assets/tarrat/16-jakkara.webp" alt="" style="left:79.3%;top:-17.5%;width:32%;aspect-ratio:416/811"></div></div><div class="ap-heads"><h2 class="disp m on">Myyjä laittaa tuotteet myyntiin</h2><h2 class="disp m">Ostaja löytää ne sovelluksesta</h2><h2 class="disp m">Kirppis, myyjä ja ostaja hyötyvät</h2></div></div>
+    <div class="ap-panel"><div class="ap-deco" aria-hidden="true"><div class="ap-dg on"><img class="ap-t" src="assets/tarrat/karuselli/varaukset-yopoyta.webp?v=20" alt="" style="left:-4.4%;top:8.4%;width:26.3%;aspect-ratio:342/405;object-fit:cover;transform:scaleX(-1)"><img class="ap-t" src="assets/tarrat/karuselli/kayttajaroolit-lamppu.webp?v=20" alt="" style="left:76.1%;top:-.8%;width:33.2%;aspect-ratio:432/490;object-fit:cover"></div><div class="ap-dg"><img class="ap-t" src="assets/tarrat/04-didriksons-haalari.webp?v=20" alt="" style="left:-3.8%;top:-17.5%;width:37.8%;aspect-ratio:491/557"><img class="ap-t" src="assets/tarrat/05-farkut-bootcut.webp?v=20" alt="" style="left:77.4%;top:10.9%;width:23%;aspect-ratio:299/420"></div><div class="ap-dg"><img class="ap-t" src="assets/tarrat/23-farkkutakki.webp?v=20" alt="" style="left:-2.2%;top:3.1%;width:32.3%;aspect-ratio:420/398"><img class="ap-t" src="assets/tarrat/16-jakkara.webp?v=20" alt="" style="left:79.3%;top:-17.5%;width:32%;aspect-ratio:416/811"></div></div><div class="ap-heads"><h2 class="disp m on">Myyjä laittaa tuotteet myyntiin</h2><h2 class="disp m">Ostaja löytää ne sovelluksesta</h2><h2 class="disp m">Kirppis, myyjä ja ostaja hyötyvät</h2></div></div>
     <div class="ap-sets"><div class="ap-grid on" aria-hidden="false"><article class="ap-card top"><h3>Myy lähikirppiksellä</h3><div class="ap-phone"><div class="ap-isl"></div><img src="assets/kuvat/appi/myy-kirppiksella.webp?v=9" alt="Sovelluksen kotinäkymä: myy kirppiksellä, varaa myyntipaikka" loading="lazy"></div></article><article class="ap-card bot"><div class="ap-web"><img src="assets/kuvat/hallinta-hintaehdotus.webp" alt="Hallinnan Uusi tuote -näkymä: hintaehdotus 18–24 EUR kuvasta" loading="lazy"></div><h3>Hintaehdotus kuvasta</h3></article><article class="ap-card top"><h3>Seuraa myyntiä ja tilityksiä</h3><div class="ap-phone"><div class="ap-isl"></div><img src="assets/kuvat/appi/saldo.webp?v=9" alt="Tilitykset: saldo 51,00 EUR" loading="lazy"></div></article></div><div class="ap-grid" aria-hidden="true"><article class="ap-card top"><h3>Uudet löydöt joka päivä</h3><div class="ap-phone"><div class="ap-isl"></div><img src="assets/kuvat/appi/inspiraatio-asu.webp?v=9" alt="Sovelluksen kotinäkymä: asuidea kirppislöydöistä" loading="lazy"></div></article><article class="ap-card bot"><div class="ap-phone"><div class="ap-isl"></div><img src="assets/kuvat/appi/haku.webp?v=9" alt="Hakutulokset: farkkuja eri kirppiksiltä" loading="lazy"></div><h3>Hae läheltä ja kauempaa</h3></article><article class="ap-card top"><h3>Varaa ja nouda kirppikseltä</h3><div class="ap-phone"><div class="ap-isl"></div><img src="assets/kuvat/appi/ostoskori.webp?v=9" alt="Ostoskori: nouto kirppikseltä tai kotiin" loading="lazy"></div></article></div><div class="ap-grid" aria-hidden="true"><article class="ap-card top"><h3>Kirppis saa provision</h3><div class="ap-rc"><div class="ap-rc-top"><b>Ostoskori</b><span>Pöytä 14</span></div><div class="ap-rc-row"><span>Villapaita</span><b>12,00 €</b></div><div class="ap-rc-row"><span>Nahkatakki</span><b>35,00 €</b></div><div class="ap-rc-row"><span>Lastenkirja</span><b>4,00 €</b></div><div class="ap-rc-tot"><span>Provisio kirppikselle</span><b>Jokaisesta</b></div></div></article><article class="ap-card top"><h3>Myyjä saa rahat tilille</h3><div class="ap-phone"><div class="ap-isl"></div><img src="assets/kuvat/appi/siirrot.webp?v=9" alt="Tilitykset: siirrot pankkitilille" loading="lazy"></div></article><article class="ap-card photo"><div class="ap-photo"><img src="assets/kuvat/06_ihmiset/loyto_juna.webp" alt="Mies istuu junassa ruskeassa puvussa ja lippalakissa" loading="lazy"></div><h3>Ostaja löytää uniikin tuotteen</h3></article></div></div>
     <div class="ap-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
   </div>
@@ -1523,11 +1524,11 @@ section.fd{background:var(--blue)}
     <h2 class="disp d80">Kassa valmiina käyttöön</h2>
     <p class="lt-lead">Tuomme laitteet paikan päälle ja asennamme ne valmiiksi. Sinun ei tarvitse hankkia mitään itse.</p>
     <div class="lt-grid">
-      <article class="lt-card"><div><h3>Tabletti</h3><p>Kassa toimii tabletilla tai omalla kosketusnäytöllä, myös ilman nettiä.</p></div><img class="lt-img" src="assets/tarrat/laitteet/tabletti.webp" alt="Tabletti telineessä, näytöllä Resellan kassa" loading="lazy" style="left:6%;top:47%;width:124%"></article>
-      <article class="lt-card"><div><h3>Viivakoodinlukija</h3><p>Lukee sekä viivakoodit että QR-koodit. Piippaa, ja tuote on ostoskorissa.</p></div><img class="lt-img" src="assets/tarrat/laitteet/viivakoodinlukija.webp" alt="Viivakoodinlukija jalustalla" loading="lazy" style="left:26%;top:40%;width:78%"></article>
-      <article class="lt-card"><div><h3>Maksupääte</h3><p>Summa siirtyy kassalta suoraan päätteeseen, ei näppäilyä.</p></div><img class="lt-img" src="assets/tarrat/laitteet/maksupaate.webp" alt="Maksupääte telakassa" loading="lazy" style="left:4%;top:50%;width:118%"></article>
-      <article class="lt-card"><div><h3>Kuittitulostin</h3><p>Kuitti asiakkaalle heti, kun maksu on valmis.</p></div><img class="lt-img" src="assets/tarrat/laitteet/kuittitulostin.webp" alt="Kuittitulostin" loading="lazy" style="left:8%;top:44%;width:112%"></article>
-      <article class="lt-card"><div><h3>Kassalipas</h3><p>Käteiselle oma lipas kassan viereen.</p></div><img class="lt-img" src="assets/tarrat/laitteet/kassalipas.webp" alt="Kassalipas" loading="lazy" style="left:-26%;top:55%;width:136%"></article>
+      <article class="lt-card"><div><h3>Tabletti</h3><p>Kassa toimii tabletilla tai omalla kosketusnäytöllä, myös ilman nettiä.</p></div><img class="lt-img" src="assets/tarrat/laitteet/tabletti.webp?v=20" alt="Tabletti telineessä, näytöllä Resellan kassa" loading="lazy" style="left:6%;top:47%;width:124%"></article>
+      <article class="lt-card"><div><h3>Viivakoodinlukija</h3><p>Lukee sekä viivakoodit että QR-koodit. Piippaa, ja tuote on ostoskorissa.</p></div><img class="lt-img" src="assets/tarrat/laitteet/viivakoodinlukija.webp?v=20" alt="Viivakoodinlukija jalustalla" loading="lazy" style="left:26%;top:40%;width:78%"></article>
+      <article class="lt-card"><div><h3>Maksupääte</h3><p>Summa siirtyy kassalta suoraan päätteeseen, ei näppäilyä.</p></div><img class="lt-img" src="assets/tarrat/laitteet/maksupaate.webp?v=20" alt="Maksupääte telakassa" loading="lazy" style="left:4%;top:50%;width:118%"></article>
+      <article class="lt-card"><div><h3>Kuittitulostin</h3><p>Kuitti asiakkaalle heti, kun maksu on valmis.</p></div><img class="lt-img" src="assets/tarrat/laitteet/kuittitulostin.webp?v=20" alt="Kuittitulostin" loading="lazy" style="left:8%;top:44%;width:112%"></article>
+      <article class="lt-card"><div><h3>Kassalipas</h3><p>Käteiselle oma lipas kassan viereen.</p></div><img class="lt-img" src="assets/tarrat/laitteet/kassalipas.webp?v=20" alt="Kassalipas" loading="lazy" style="left:-26%;top:55%;width:136%"></article>
     </div>
   </div>
 </section>
