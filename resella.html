@@ -831,7 +831,7 @@ section.fd{background:var(--blue)}
 .m-logo img{height:24px;width:auto}
 .m-burger{width:40px;height:40px;border:0;background:none;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;cursor:pointer}
 .m-burger span{display:block;width:18px;height:1.6px;background:var(--ink);border-radius:1px}
-.m-hpanel .m-h1{margin-top:128px}
+.m-hpanel .m-h1{margin-top:60px}
 .m-hpanel .m-lead{margin-top:18px;max-width:300px}
 .m-hpanel .m-pill{margin-top:26px}
 /* kollaasi */
@@ -932,7 +932,7 @@ section.fd{background:var(--blue)}
 .m-res span{font:500 18px var(--fd)}
 .m-calc p{font-size:15px;line-height:22px;opacity:.9;margin:0}
 .m-bento{display:grid;grid-template-columns:1fr 1fr;background:linear-gradient(var(--red) 0 50%,#E2E2CE 50%)}
-.m-cell{background:var(--b);color:var(--f);border-radius:24px;min-height:250px;padding:16px 16px 18px;display:flex;flex-direction:column;justify-content:space-between}
+.m-cell{background:var(--b);color:var(--f);border-radius:24px;min-height:170px;padding:16px 16px 18px;display:flex;flex-direction:column;justify-content:space-between}
 .m-lab{display:flex;justify-content:space-between;font:600 12px/16px var(--fd)}
 .m-cell b{display:block;font:600 46px/48px var(--fd);letter-spacing:-.04em}
 .m-cell small{font-size:13px;opacity:.75}
@@ -951,14 +951,14 @@ section.fd{background:var(--blue)}
 /* laitteet */
 .m-dev{padding-left:0;padding-right:0}
 .m-dev>.m-h2,.m-dev>.m-body{padding:0 20px}
-.m-tab{width:350px;max-width:calc(100% - 40px);height:250px;object-fit:contain;margin:0 auto}
+.m-tab{width:280px;max-width:calc(100% - 40px);height:160px;object-fit:contain;margin:0 auto}
 .m-dlist{list-style:none;margin:0;padding:0}
-.m-dlist li{display:flex;align-items:center;gap:16px;padding:18px 20px;border-top:1px solid rgba(62,37,32,.15)}
+.m-dlist li{display:flex;align-items:center;gap:16px;padding:9px 20px;border-top:1px solid rgba(62,37,32,.15)}
 .m-dlist li:last-child{border-bottom:1px solid rgba(62,37,32,.15)}
 .m-dlist div{flex:1}
 .m-dlist h3{font:600 21px/26px var(--fd);letter-spacing:-.02em;margin:0 0 4px}
 .m-dlist p{font-size:14px;line-height:20px;opacity:.6;margin:0}
-.m-dlist img{width:120px;height:88px;object-fit:contain;flex:none}
+.m-dlist img{width:100px;height:72px;object-fit:contain;flex:none}
 
 /* käyttöönotto */
 .m-tl{list-style:none;margin:0;padding:8px 0 0;display:flex;flex-direction:column;gap:8px;position:relative}
@@ -1021,6 +1021,19 @@ section.fd{background:var(--blue)}
 .m-fab{position:relative;flex:none;width:56px;height:56px;border-radius:50%;background:none;border:1.5px solid currentColor;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0;cursor:pointer;transition:color .25s;-webkit-tap-highlight-color:transparent}
 .m-fab span{display:block;width:18px;height:1.6px;border-radius:1px;background:currentColor}
 .m-fab.dark{color:#ECECDC}
+
+/* koko näkymän osiot + vieritysliike */
+@media(max-width:767px){
+  #m2>section:not(#m-top):not(#m-ominaisuudet){min-height:calc(100svh / .8);box-sizing:border-box;justify-content:center}
+  #m2>section#m-kenelle,#m2>section#m-varaa,#m2>section#m-hinnoittelu{display:flex;flex-direction:column}
+  #m2>section{transform-origin:50% 100%;will-change:transform}
+  .rv{opacity:0;transform:translate3d(0,46px,0) scale(.97);transition:opacity .9s var(--ease-std),transform 1.1s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--rd,0) * 90ms)}
+  .rv.in{opacity:1;transform:none}
+  .m-h2.rv{transform:translate3d(0,60px,0)}
+  .m-h2.rv.in{transform:none}
+  .m-sl>img,.m-tk>img,.m-fd>img{transform:translate3d(0,var(--py,0px),0) scale(1.12);will-change:transform}
+}
+@media(max-width:767px) and (prefers-reduced-motion:reduce){ .rv{opacity:1;transform:none;transition:none} #m2>section{transform:none!important;opacity:1!important} }
 .m-bar{position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));height:56px;display:none;align-items:center;gap:8px;padding:0;z-index:70;transform:translateY(120px);transition:transform .45s var(--ease-reveal)}
 @media(max-width:767px){.m-bar{display:flex}}
 .m-bar.on{transform:none}
@@ -1998,11 +2011,27 @@ section.fd{background:var(--blue)}
   // kollaasit skaalautuvat näytön leveyden mukaan
   function colScale(){ var hero=document.querySelector('#m2 .m-hero'), end=document.querySelector('#m2 .m-end');
     root.querySelectorAll('.m-col').forEach(function(col){ var w=col.parentElement.clientWidth, k=Math.min(Math.max(w/487.5,1),1.9); col.style.setProperty('--cs',k);
-      if(col.classList.contains('m-col--hero')&&hero) hero.style.height=(750+270*(k-1))+'px';
+      if(col.classList.contains('m-col--hero')&&hero){ var z=hero.getBoundingClientRect().height/hero.offsetHeight||0.8, vh=innerHeight/z, H=Math.max(750+270*(k-1),vh), ph=Math.max(540,H-210*k); hero.style.height=H+'px'; var pn=hero.querySelector('.m-hpanel'); if(pn){ pn.style.height=ph+'px'; pn.style.justifyContent='center'; pn.style.paddingBottom=(130*k)+'px'; } col.style.top=(ph-90)+'px'; }
       if(col.classList.contains('m-col--end')&&end){ end.style.height=(520+150*(k-1))+'px'; end.style.marginBottom=(70+100*(k-1))+'px'; } }); }
   colScale(); addEventListener('resize',colScale);
   // perustajat: lue lisää
   root.querySelectorAll('.m-fd').forEach(function(c){ c.querySelectorAll('.m-fd-btn').forEach(function(b){ b.addEventListener('click',function(){ var o=c.classList.toggle('open'); c.querySelector('.m-fd-b .m-fd-btn').setAttribute('aria-expanded',o?'true':'false'); }); }); });
+  // vieritysliike: paljastukset, osioiden syvyys, kuvien parallaksi
+  (function(){ if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var secs=[].slice.call(root.querySelectorAll(':scope>section'));
+    var sel='.m-h2,.m-lead,.m-body,.m-tabs,.m-car,.m-dots,.m-tl>li,.m-bars>*,.m-dlist>li,.m-tab,.m-faq details,.m-cells>*,.m-calc,.m-free,.m-chips,.m-kpanel,.m-end>*,.m-foot>*';
+    secs.concat([root.querySelector('.m-foot')]).forEach(function(sec){ if(!sec) return; var k=0;
+      sec.querySelectorAll(sel).forEach(function(el){ if(el.closest('.m-fc')||el.closest('.rv')||el.classList.contains('m-col')) return; el.classList.add('rv'); el.style.setProperty('--rd',Math.min(k++,6)); }); });
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -8% 0px',threshold:0.08});
+    root.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+    var par=[].slice.call(root.querySelectorAll('.m-sl>img,.m-tk>img,.m-fd>img')), ticking=false;
+    function upd(){ ticking=false; if(!mq.matches) return; var vh=innerHeight;
+      secs.forEach(function(sec){ if(sec.id==='m-ominaisuudet'||sec.id==='m-top'&&false){ return; } var r=sec.getBoundingClientRect();
+        if(r.bottom<vh&&r.bottom>-50){ var t=Math.min(1,Math.max(0,(vh-r.bottom)/(vh*0.9))); sec.style.transform='scale('+(1-0.07*t).toFixed(4)+')'; sec.style.opacity=(1-0.55*t).toFixed(3); }
+        else if(sec.style.transform){ sec.style.transform=''; sec.style.opacity=''; } });
+      par.forEach(function(im){ var r=im.parentElement.getBoundingClientRect(); if(r.bottom<0||r.top>vh) return; var c=(r.top+r.height/2-vh/2)/vh; im.style.setProperty('--py',(c*-28).toFixed(1)+'px'); }); }
+    addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(upd); } },{passive:true}); addEventListener('resize',upd); upd();
+  })();
   // karusellit: palkki-indikaattori
   root.querySelectorAll('[data-car]:not([data-nodots])').forEach(function(car){
     var n=car.children.length, d=document.createElement('div'); d.className='m-dots'; d.setAttribute('aria-hidden','true');
