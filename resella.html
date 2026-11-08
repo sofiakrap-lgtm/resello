@@ -888,6 +888,11 @@ section.fd{background:var(--blue)}
 .m-sl-d i{display:block;width:18px;height:3px;border-radius:2px;background:currentColor;opacity:.35}
 .m-sl-d i.on{width:36px;opacity:1}
 .m-car--slides>img{width:calc(100% + 16px);max-width:420px;aspect-ratio:366/680;height:auto;object-fit:cover;border-radius:36px}
+.m-tk{position:relative;flex:none;width:300px;height:440px;border-radius:30px;overflow:hidden;background:#3E2520;color:#ECECDC;scroll-snap-align:start;scroll-snap-stop:always}
+.m-tk>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.m-tk::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(62,37,32,0) 50%,rgba(62,37,32,.85) 100%)}
+.m-tk-pill{position:absolute;left:14px;top:14px;z-index:1;background:#F6F6EE;color:#3E2520;border-radius:999px;padding:10px 16px;font:500 15px/1 var(--fd)}
+.m-tk p{position:absolute;left:20px;right:20px;bottom:22px;z-index:1;margin:0;font:600 19px/26px var(--fd);letter-spacing:-.01em}
 .m-car--tuki>img{width:300px;height:440px;border-radius:30px;object-fit:cover}
 .m-car--app>img{width:300px;height:520px;border-radius:32px;object-fit:cover}
 .m-fd{position:relative;flex:none;width:320px;height:400px;border-radius:32px;overflow:hidden;background:#3E2520;color:#ECECDC;scroll-snap-align:start;scroll-snap-stop:always}
@@ -1094,10 +1099,10 @@ section.fd{background:var(--blue)}
 <section class="m-sec" id="m-tuki">
   <h2 class="m-h2 c">Apua,<br>kun tarvitset</h2>
   <div class="m-car m-car--tuki" data-car>
-    <img src="assets/m/t1.webp?v=6" alt="Opetusvideot: lyhyet videot näyttävät kassan, tilitykset ja myyjien ohjeet vaihe vaiheelta." loading="lazy">
-    <img src="assets/m/t2.webp?v=6" alt="Puhelintuki: soita suoraan meille, kun tarvitset apua kassalla tai tilityksissä." loading="lazy">
-    <img src="assets/m/t3.webp?v=6" alt="Sähköposti: kirjoita kysymyksesi, niin vastaamme." loading="lazy">
-    <img src="assets/m/t4.webp?v=6" alt="Apuri järjestelmässä: kysy apurilta suoraan järjestelmässä." loading="lazy">
+    <article class="m-tk"><img src="assets/m/tk1.webp?v=1" alt="" loading="lazy"><span class="m-tk-pill">Opetusvideot</span><p>Lyhyet videot näyttävät kassan, tilitykset ja myyjien ohjeet vaihe vaiheelta.</p></article>
+    <article class="m-tk"><img src="assets/m/tk2.webp?v=1" alt="" loading="lazy"><span class="m-tk-pill">Puhelintuki</span><p>Soita suoraan meille, kun tarvitset apua kassalla tai tilityksissä.</p></article>
+    <article class="m-tk"><img src="assets/m/tk3.webp?v=2" alt="" loading="lazy"><span class="m-tk-pill">Sähköposti</span><p>Kirjoita kysymyksesi, niin vastaamme.</p></article>
+    <article class="m-tk"><img src="assets/m/tk4.webp?v=2" alt="" loading="lazy"><span class="m-tk-pill">Apuri järjestelmässä</span><p>Kysy apurilta suoraan järjestelmässä.</p></article>
   </div>
 </section>
 
