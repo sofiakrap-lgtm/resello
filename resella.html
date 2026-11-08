@@ -1001,11 +1001,9 @@ section.fd{background:var(--blue)}
 .m-legal{font-size:12px;line-height:18px;opacity:.55;margin:0}
 
 /* kelluva palkki */
-.m-fab{position:fixed;top:calc(16px + env(safe-area-inset-top));right:16px;z-index:70;width:48px;height:48px;border-radius:50%;background:none;border:1.5px solid currentColor;color:var(--ink);display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0;cursor:pointer;opacity:0;transform:scale(.8);pointer-events:none;transition:opacity .3s,transform .3s var(--ease-reveal),color .25s;-webkit-tap-highlight-color:transparent}
+.m-fab{position:relative;flex:none;width:56px;height:56px;border-radius:50%;background:none;border:1.5px solid currentColor;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0;cursor:pointer;transition:color .25s;-webkit-tap-highlight-color:transparent}
 .m-fab span{display:block;width:18px;height:1.6px;border-radius:1px;background:currentColor}
 .m-fab.dark{color:#ECECDC}
-@media(max-width:767px){.m-fab{display:flex}}
-.m-fab.on{opacity:1;transform:none;pointer-events:auto}
 .m-bar{position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));height:56px;display:none;align-items:center;gap:8px;padding:0;z-index:70;transform:translateY(120px);transition:transform .45s var(--ease-reveal)}
 @media(max-width:767px){.m-bar{display:flex}}
 .m-bar.on{transform:none}
@@ -1207,7 +1205,7 @@ section.fd{background:var(--blue)}
   <p class="m-legal">© 2026 Resella Oy · Espoo · Y 3641828-1 · Tietosuoja · Ehdot · FI / EN</p>
 </footer>
 
-<button class="m-fab" id="mFab" type="button" aria-label="Avaa valikko" data-mopen tabindex="-1"><span></span><span></span></button>
+<div class="m-bar" id="mBar" aria-hidden="true"><a class="m-pill" href="mailto:hei@resella.fi?subject=Demovaraus" tabindex="-1">Varaa demo</a><button class="m-fab" id="mFab" type="button" aria-label="Avaa valikko" data-mopen tabindex="-1"><span></span><span></span></button></div>
 
 <div class="m-menu" id="mMenu" hidden>
   <div class="m-head"><a href="#m-top" class="m-logo" aria-label="Resella" data-mclose><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a><button class="m-x" type="button" aria-label="Sulje valikko" data-mclose><span></span><span></span></button></div>
@@ -2035,11 +2033,13 @@ section.fd{background:var(--blue)}
     for(var i=0;i<cand.length;i++){ var c=cand[i], r=c.el.getBoundingClientRect(); if(r.width&&x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom){ if(c.img){ var d=imgDark(c.el,x,y); if(d!==null) hit=d; } else hit=c.dark; } }
     return hit===null?false:hit; }
   var tick=false;
-  function onS(){ if(!mq.matches) return; var on=hd.getBoundingClientRect().bottom<0; fab.classList.toggle('on',on); fab.tabIndex=on?0:-1;
+  var bar=document.getElementById('mBar'), heroEl=document.getElementById('m-top'), endEl=document.getElementById('m-varaa');
+  function onS(){ if(!mq.matches) return; var er=endEl.getBoundingClientRect(), on=heroEl.getBoundingClientRect().bottom<80&&!(er.top<innerHeight&&er.bottom>0);
+    bar.classList.toggle('on',on); bar.setAttribute('aria-hidden',on?'false':'true'); bar.querySelectorAll('a,button').forEach(function(x){ x.tabIndex=on?0:-1; });
     if(!on||tick) return; tick=true; requestAnimationFrame(function(){ tick=false; var r=fab.getBoundingClientRect(), n=0;
       [[.5,.5],[.15,.5],[.85,.5],[.5,.15],[.5,.85]].forEach(function(q){ if(darkAt(r.left+r.width*q[0],r.top+r.height*q[1])) n++; });
       fab.classList.toggle('dark',n>=3); }); }
-  addEventListener('scroll',onS,{passive:true}); onS(); setInterval(function(){ if(fab.classList.contains('on')) onS(); },700);
+  addEventListener('scroll',onS,{passive:true}); onS(); setInterval(function(){ if(bar.classList.contains('on')) onS(); },700);
 })();
 </script>
 </body>
