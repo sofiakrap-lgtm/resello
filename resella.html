@@ -986,10 +986,15 @@ section.fd{background:var(--blue)}
 .m-legal{font-size:12px;line-height:18px;opacity:.55;margin:0}
 
 /* kelluva palkki */
+.m-fab{position:fixed;top:calc(16px + env(safe-area-inset-top));right:16px;z-index:70;width:48px;height:48px;border-radius:50%;background:none;border:1.5px solid currentColor;color:var(--ink);display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0;cursor:pointer;opacity:0;transform:scale(.8);pointer-events:none;transition:opacity .3s,transform .3s var(--ease-reveal),color .25s;-webkit-tap-highlight-color:transparent}
+.m-fab span{display:block;width:18px;height:1.6px;border-radius:1px;background:currentColor}
+.m-fab.dark{color:#ECECDC}
+@media(max-width:767px){.m-fab{display:flex}}
+.m-fab.on{opacity:1;transform:none;pointer-events:auto}
 .m-bar{position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));height:56px;display:none;align-items:center;gap:8px;padding:0;z-index:70;transform:translateY(120px);transition:transform .45s var(--ease-reveal)}
 @media(max-width:767px){.m-bar{display:flex}}
 .m-bar.on{transform:none}
-@media(max-width:767px){.m2>*:not(.m-bar):not(.m-menu):not(.cookie){zoom:.8}}
+@media(max-width:767px){.m2>*:not(.m-bar):not(.m-fab):not(.m-menu):not(.cookie){zoom:.8}}
 @media(max-width:767px){
 .cookie{left:50%!important;top:50%!important;bottom:auto!important;right:auto!important;transform:translate(-50%,-50%);width:calc(100% - 40px)!important;max-width:360px;z-index:95;flex-direction:column;align-items:stretch;gap:20px;padding:26px 22px 22px;border-radius:30px;background:var(--bg);color:var(--ink);}
 .cookie::before{content:'';position:absolute;inset:-200vmax;background:rgba(62,37,32,.55);z-index:-1}
@@ -1146,7 +1151,7 @@ section.fd{background:var(--blue)}
     <p><b>Olemme mukana</b> koko siirtymän ajan ja paikalla ensimmäisenä myyntipäivänä.</p>
     <a href="mailto:hei@resella.fi?subject=Siirtym%C3%A4">Kysy siirtymästä demossa</a>
   </div>
-  <img class="m-eyes" src="assets/m/silmat.png" alt="" aria-hidden="true">
+  
 </section>
 
 <section class="m-sec" id="m-perustajat">
@@ -1187,11 +1192,7 @@ section.fd{background:var(--blue)}
   <p class="m-legal">© 2026 Resella Oy · Espoo · Y 3641828-1 · Tietosuoja · Ehdot · FI / EN</p>
 </footer>
 
-<div class="m-bar" id="mBar" aria-hidden="true">
-  <a class="m-pill" href="mailto:hei@resella.fi?subject=Demovaraus" tabindex="-1">Varaa demo</a>
-  <a class="m-ic" href="mailto:hei@resella.fi" aria-label="Ota yhteyttä" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></a>
-  <button class="m-ic" type="button" aria-label="Avaa valikko" data-mopen tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 9h14M5 15h14"/></svg></button>
-</div>
+<button class="m-fab" id="mFab" type="button" aria-label="Avaa valikko" data-mopen tabindex="-1"><span></span><span></span></button>
 
 <div class="m-menu" id="mMenu" hidden>
   <div class="m-head"><a href="#m-top" class="m-logo" aria-label="Resella" data-mclose><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a><button class="m-x" type="button" aria-label="Sulje valikko" data-mclose><span></span><span></span></button></div>
@@ -1995,11 +1996,26 @@ section.fd{background:var(--blue)}
   root.querySelectorAll('[data-mopen]').forEach(function(b){ b.addEventListener('click',openM); });
   root.querySelectorAll('[data-mclose]').forEach(function(b){ b.addEventListener('click',closeM); });
   addEventListener('keydown',function(e){ if(e.key==='Escape'&&!menu.hidden) closeM(); });
-  // kelluva palkki heron jälkeen, piiloon loppu-CTA:n kohdalla
-  var bar=document.getElementById('mBar'), hero=document.getElementById('m-top'), end=document.getElementById('m-varaa');
-  function onS(){ if(!mq.matches) return; var past=hero.getBoundingClientRect().bottom<80, er=end.getBoundingClientRect(), atEnd=er.top<innerHeight&&er.bottom>0;
-    var on=past&&!atEnd; bar.classList.toggle('on',on); bar.setAttribute('aria-hidden',on?'false':'true'); bar.querySelectorAll('a,button').forEach(function(x){ x.tabIndex=on?0:-1; }); }
-  addEventListener('scroll',onS,{passive:true}); onS();
+  // kelluva valikkopallo heron jälkeen, väri taustan mukaan
+  var fab=document.getElementById('mFab'), hd=document.querySelector('#m2 .m-head');
+  var cv=document.createElement('canvas'); cv.width=cv.height=1; var cx=cv.getContext('2d',{willReadFrequently:true});
+  function imgDark(im,x,y){ try{ var r=im.getBoundingClientRect(), nw=im.naturalWidth, nh=im.naturalHeight; if(!nw) return null;
+    var sc=Math.max(r.width/nw,r.height/nh), ox=(r.width-nw*sc)/2, oy=(r.height-nh*sc)/2, sx=(x-r.left-ox)/sc, sy=(y-r.top-oy)/sc;
+    cx.clearRect(0,0,1,1); cx.drawImage(im,sx-6,sy-6,12,12,0,0,1,1); var d=cx.getImageData(0,0,1,1).data; if(d[3]<128) return null; return (0.299*d[0]+0.587*d[1]+0.114*d[2])<140; }catch(e){ return null; } }
+  function lum(c){ return 0.299*c[0]+0.587*c[1]+0.114*c[2]; }
+  var cand=null;
+  function build(){ cand=[]; document.querySelectorAll('#m2 *').forEach(function(el){ if(el===fab||el.closest('.m-menu')) return;
+      if(el.tagName==='IMG'){ cand.push({el:el,img:1}); return; }
+      var c=getComputedStyle(el).backgroundColor.match(/[\d.]+/g); if(c&&(c.length<4||+c[3]>0.5)) cand.push({el:el,dark:lum(c)<140}); }); }
+  function darkAt(x,y){ if(!cand) build(); var hit=null;
+    for(var i=0;i<cand.length;i++){ var c=cand[i], r=c.el.getBoundingClientRect(); if(r.width&&x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom){ if(c.img){ var d=imgDark(c.el,x,y); if(d!==null) hit=d; } else hit=c.dark; } }
+    return hit===null?false:hit; }
+  var tick=false;
+  function onS(){ if(!mq.matches) return; var on=hd.getBoundingClientRect().bottom<0; fab.classList.toggle('on',on); fab.tabIndex=on?0:-1;
+    if(!on||tick) return; tick=true; requestAnimationFrame(function(){ tick=false; var r=fab.getBoundingClientRect(), n=0;
+      [[.5,.5],[.15,.5],[.85,.5],[.5,.15],[.5,.85]].forEach(function(q){ if(darkAt(r.left+r.width*q[0],r.top+r.height*q[1])) n++; });
+      fab.classList.toggle('dark',n>=3); }); }
+  addEventListener('scroll',onS,{passive:true}); onS(); setInterval(function(){ if(fab.classList.contains('on')) onS(); },700);
 })();
 </script>
 </body>
