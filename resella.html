@@ -863,6 +863,12 @@ section.fd{background:var(--blue)}
 .m-fc-t b{font-weight:600;opacity:1}
 .m-fc-t{color:color-mix(in srgb,var(--f) 62%,transparent)}
 .m-fc-t b{color:var(--f)}
+.m-all{background:#F6F6EE;border-radius:28px;padding:22px 18px 20px}
+.m-all h3{font:600 21px/28px var(--fd);letter-spacing:-.015em;margin:0 0 14px 4px}
+.m-all ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.m-all li{font:600 14px/1 var(--fd);padding:11px 14px;border-radius:999px;background:#ECECDC;color:var(--ink)}
+.m-all li:nth-child(4n+1){background:var(--blue)}
+.m-all li:last-child{background:var(--ink);color:#ECECDC}
 .m-more summary{list-style:none;align-self:flex-start;width:max-content}
 .m-more summary::-webkit-details-marker{display:none}
 .m-flist{margin:16px 0 0;padding:0;list-style:none;columns:2;column-gap:16px;font-size:15px;line-height:1.4}
@@ -1111,10 +1117,7 @@ section.fd{background:var(--blue)}
     <div class="m-fc" style="--b:#F6F6EE;--f:#3E2520"><p class="m-fc-t"><b>Asiakashallinta.</b> Myyjien tiedot, sopimukset ja varaukset yhdessä paikassa.</p><div class="m-tags"><span>Sopimukset</span><span>Varaushistoria</span></div></div>
     <div class="m-fc last" style="--b:#3E2520;--f:#ECECDC"><p class="m-fc-t"><b>Raportointi.</b> Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p><div class="m-tags"><span>Provisio</span><span>ALV</span><span>Kausivertailu</span></div></div>
   </div>
-  <details class="m-more">
-    <summary class="m-pill out">Kaikki 12 ominaisuutta</summary>
-    <ul class="m-flist"><li>Kassa ilman nettiä</li><li>Viivakoodi ja QR</li><li>Tuotteet verkossa</li><li>Pöytäkartta ja varaukset</li><li>Myyjä maksaa paikan itse</li><li>Tilitykset yhdellä pankkitiedostolla</li><li>Myyjä- ja asiakashallinta</li><li>Raportit: myynti, provisio, ALV</li><li>Hintaehdotus kuvasta</li><li>Hintatarrat ja kuitit</li><li>Oma ilme</li><li>Kuluttaja-appi 2027</li></ul>
-  </details>
+  <div class="m-all"><h3>Kaikki 12 ominaisuutta</h3><ul><li>Kassa ilman nettiä</li><li>Viivakoodi ja QR</li><li>Tuotteet verkossa</li><li>Pöytäkartta ja varaukset</li><li>Myyjä maksaa paikan itse</li><li>Tilitykset yhdellä pankkitiedostolla</li><li>Myyjä- ja asiakashallinta</li><li>Raportit: myynti, provisio, ALV</li><li>Hintaehdotus kuvasta</li><li>Hintatarrat ja kuitit</li><li>Oma ilme</li><li>Kuluttaja-appi 2027</li></ul></div>
 </section>
 
 <section class="m-sec m-sec--flush" id="m-vaihto">
@@ -1226,7 +1229,7 @@ section.fd{background:var(--blue)}
 <section class="m-sec" id="m-ukk">
   <h2 class="m-h2 c">Usein kysyttyä</h2>
   <div class="m-faq">
-    <details open><summary>Pitääkö kaikki vanhat tuotteet kuvata uudelleen?<i></i></summary><p>Ei. Vanhat tuotteet myydään loppuun nykyisillä lapuilla, ja uudet varaukset tulevat Resellaan.</p></details>
+    <details><summary>Pitääkö kaikki vanhat tuotteet kuvata uudelleen?<i></i></summary><p>Ei. Vanhat tuotteet myydään loppuun nykyisillä lapuilla, ja uudet varaukset tulevat Resellaan.</p></details>
     <details><summary>Toimiiko kassa, jos netti katkeaa?<i></i></summary><p>Toimii. Myynnit tallentuvat ja synkronoituvat, kun yhteys palaa.</p></details>
     <details><summary>Mitä laitteita tarvitsen?<i></i></summary><p>Tabletin tai kosketusnäytön, lukijan ja tarvittaessa kuittitulostimen ja kassalippaan. Käymme laitteet läpi kanssasi.</p></details>
     <details><summary>Voinko käyttää omaa logoa ja värejä?<i></i></summary><p>Voit. Myyjien varaussivu näkyy kirppiksesi ilmeellä.</p></details>
