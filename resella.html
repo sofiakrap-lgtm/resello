@@ -1098,7 +1098,7 @@ section.fd{background:var(--blue)}
 
 <section class="m-sec" id="m-tuki">
   <h2 class="m-h2 c">Apua,<br>kun tarvitset</h2>
-  <div class="m-car m-car--tuki" data-car>
+  <div class="m-car m-car--tuki" data-car data-auto>
     <article class="m-tk"><img src="assets/m/tk1.webp?v=1" alt="" loading="lazy"><span class="m-tk-pill">Opetusvideot</span><p>Lyhyet videot näyttävät kassan, tilitykset ja myyjien ohjeet vaihe vaiheelta.</p></article>
     <article class="m-tk"><img src="assets/m/tk2.webp?v=1" alt="" loading="lazy"><span class="m-tk-pill">Puhelintuki</span><p>Soita suoraan meille, kun tarvitset apua kassalla tai tilityksissä.</p></article>
     <article class="m-tk"><img src="assets/m/tk3.webp?v=2" alt="" loading="lazy"><span class="m-tk-pill">Sähköposti</span><p>Kirjoita kysymyksesi, niin vastaamme.</p></article>
@@ -1135,13 +1135,13 @@ section.fd{background:var(--blue)}
   <div class="m-tabs" role="tablist">
     <button role="tab" aria-selected="true" data-tab="0">Myyjä</button><button role="tab" aria-selected="false" data-tab="1">Ostaja</button><button role="tab" aria-selected="false" data-tab="2">Kaikki hyötyvät</button>
   </div>
-  <div class="m-car m-car--app on" data-car data-set="0">
+  <div class="m-car m-car--app on" data-car data-auto data-set="0">
     <img src="assets/m/a1_1.webp?v=6" alt="Varaa paikka puhelimella" loading="lazy"><img src="assets/m/a1_2.webp?v=6" alt="Kuvaa tuote, saat hintaehdotuksen" loading="lazy"><img src="assets/m/a1_3.webp?v=6" alt="Seuraa myyntiä ja tilityksiä" loading="lazy"><img src="assets/m/a1_4.webp?v=6" alt="Oma profiili ja varaukset" loading="lazy"><img src="assets/m/a1_5.webp?v=6" alt="Saldo näkyy heti" loading="lazy"><img src="assets/m/a1_6.webp?v=6" alt="Myy lähikirppiksellä" loading="lazy">
   </div>
-  <div class="m-car m-car--app" data-car data-set="1" hidden>
+  <div class="m-car m-car--app" data-car data-auto data-set="1" hidden>
     <img src="assets/m/a2_1.webp?v=6" alt="Uudet löydöt joka päivä" loading="lazy"><img src="assets/m/a2_2.webp?v=6" alt="Hae läheltä ja kauempaa" loading="lazy"><img src="assets/m/a2_3.webp?v=6" alt="Varaa ja nouda kirppikseltä" loading="lazy"><img src="assets/m/a2_4.webp?v=6" alt="Hae kuvalla" loading="lazy"><img src="assets/m/a2_5.webp?v=6" alt="Asuideat kirppislöydöistä" loading="lazy"><img src="assets/m/a2_6.webp?v=6" alt="Kauden löydöt koottuna" loading="lazy"><img src="assets/m/a2_7.webp?v=6" alt="Ilmoitus uusista osumista" loading="lazy">
   </div>
-  <div class="m-car m-car--app" data-car data-set="2" hidden>
+  <div class="m-car m-car--app" data-car data-auto data-set="2" hidden>
     <img src="assets/m/a3_1.webp?v=6" alt="Myyjä saa rahat tilille" loading="lazy"><img src="assets/m/a3_2.webp?v=6" alt="Ostaja löytää uniikin tuotteen" loading="lazy"><img src="assets/m/a3_3.webp?v=6" alt="Kirppis saa provision" loading="lazy"><img src="assets/m/a3_4.webp?v=6" alt="Hae, varaa ja nouda" loading="lazy"><img src="assets/m/a3_5.webp?v=6" alt="Kaikki hyllyt yhdessä" loading="lazy"><img src="assets/m/a3_6.webp?v=6" alt="Suosikit talteen" loading="lazy">
   </div>
 </section>
@@ -1185,7 +1185,7 @@ section.fd{background:var(--blue)}
 
 <section class="m-sec" id="m-perustajat">
   <h2 class="m-h2 c">Kirpputorista<br>koodiin</h2>
-  <div class="m-car m-car--found" data-car>
+  <div class="m-car m-car--found" data-car data-auto>
     <article class="m-fd"><img src="assets/kuvat/perustaja-sofia.jpg?v=2" alt="" loading="lazy" style="object-position:47% 30%"><span class="m-fd-pill">Sofia Kraptsak <em>CEO</em></span><div class="m-fd-b"><p>10 vuotta second hand -alalla.<br>Tuleva diplomi-insinööri.</p><button type="button" class="m-fd-btn" aria-expanded="false">Lue lisää</button></div><div class="m-fd-more"><p>Perusti oman kirppiksen 14-vuotiaana ja kasvatti sen neljän hengen tiimiksi Helsingin keskustaan. Fintage Store valittiin Suomen Vuoden nuoreksi yritykseksi 2021.</p><button type="button" class="m-fd-btn">Sulje</button></div></article>
     <article class="m-fd"><img src="assets/kuvat/perustaja-leon.jpg" alt="" loading="lazy" style="object-position:50% 0%"><span class="m-fd-pill">Leon Gustafsson <em>CTO</em></span><div class="m-fd-b"><p>Oma ohjelmistoyritys takana.<br>Senior-kehittäjä 21-vuotiaana.</p><button type="button" class="m-fd-btn" aria-expanded="false">Lue lisää</button></div><div class="m-fd-more"><p>Rakensi oman ohjelmistoyrityksen yli 100 000 euron liikevaihtoon. Toimi 21-vuotiaana senior-kehittäjänä Veikkauksella.</p><button type="button" class="m-fd-btn">Sulje</button></div></article>
   </div>
@@ -2018,7 +2018,9 @@ section.fd{background:var(--blue)}
       var dur=4500, el=0, last=performance.now(), cur=0, hold=false, io=false;
       function go(i){ cur=i; el=0; car._auto=true; car.scrollTo({left:car.children[i].offsetLeft-car.children[0].offsetLeft,behavior:'smooth'}); setTimeout(function(){ car._auto=false; },800); }
       function frame(now){ var dt=now-last; last=now;
-        if(!hold&&io&&!document.hidden&&mq.matches){ el+=dt; var f=Math.min(1,el/dur);
+        if(!hold&&io&&!document.hidden&&mq.matches&&!car.querySelector('.open')){
+          if(!car._auto){ var w0=car.children[1].offsetLeft-car.children[0].offsetLeft, mx=car.scrollWidth-car.clientWidth, tg=Math.min(cur*w0,mx); if(Math.abs(car.scrollLeft-tg)>w0*0.6){ cur=Math.min(n-1,Math.round(car.scrollLeft/w0)); el=0; } }
+          el+=dt; var f=Math.min(1,el/dur);
           d.querySelectorAll('i').forEach(function(x,j){ x.className=j<cur?'past':(j===cur?'on':''); x.firstChild.style.width=(j===cur?Math.round(f*100):0)+'%'; });
           if(f>=1) go((cur+1)%n); }
         requestAnimationFrame(frame); }
