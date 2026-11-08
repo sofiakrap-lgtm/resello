@@ -835,12 +835,12 @@ section.fd{background:var(--blue)}
 .m-hpanel .m-lead{margin-top:18px;max-width:300px}
 .m-hpanel .m-pill{margin-top:26px}
 /* kollaasi */
-.m-col{position:absolute;left:50%;width:390px;margin-left:-195px;height:260px;pointer-events:none}
+.m-col{position:absolute;left:50%;width:390px;margin-left:-195px;height:260px;pointer-events:none;transform:scale(var(--cs,1));transform-origin:50% 0}
 .m-col--hero{top:450px}
-.m-ci{position:absolute;border-radius:26px;overflow:hidden;box-shadow:0 10px 24px rgba(62,37,32,.18);background:#F6F6EE}
+.m-ci{position:absolute;border-radius:26px;overflow:hidden;box-shadow:0 10px 24px rgba(62,37,32,.18);background:none;transform-style:flat;isolation:isolate}
 
 .m-ci{transition:left .9s var(--ease-reveal),top .9s var(--ease-reveal),width .9s var(--ease-reveal),height .9s var(--ease-reveal),transform .9s var(--ease-reveal),opacity .6s var(--ease-std)}
-.m-ci img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.m-ci img{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);max-width:none;object-fit:cover}
 .m-ci.p-wait,.m-ci.p-in{transition:none;opacity:0;z-index:1}
 .m-ci.p-out{opacity:0;z-index:1}
 .m-ci.p-l,.m-ci.p-r{z-index:2}
@@ -874,6 +874,19 @@ section.fd{background:var(--blue)}
 .m-car::-webkit-scrollbar{display:none}
 .m-car>img{flex:none;scroll-snap-align:start;scroll-snap-stop:always}
 .m-car--slides{margin:0 -12px;padding:0 12px;scroll-padding:0 12px}
+.m-car--slides>.m-sl{position:relative;flex:none;margin:0;width:calc(100% + 16px);max-width:420px;aspect-ratio:366/680;border-radius:36px;overflow:hidden;background:#3E2520;color:#ECECDC;scroll-snap-align:start;scroll-snap-stop:always}
+.m-sl>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.m-sl::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(62,37,32,.55) 0%,rgba(62,37,32,0) 32%,rgba(62,37,32,0) 58%,rgba(62,37,32,.92) 82%,#3E2520 100%)}
+.m-sl-top,.m-sl figcaption{position:absolute;left:24px;right:24px;z-index:1}
+.m-sl-top{top:30px}
+.m-sl-h{font:600 46px/46px var(--fd);letter-spacing:-.04em;margin:0 0 14px}
+.m-sl-top p{font-size:17px;line-height:24px;margin:0;max-width:250px;opacity:.9}
+.m-sl figcaption{bottom:30px}
+.m-sl figcaption h3{font:500 25px/30px var(--fd);letter-spacing:-.02em;margin:0 0 8px}
+.m-sl figcaption p{font-size:16px;line-height:23px;margin:0;opacity:.88}
+.m-sl-d{display:flex;gap:4px;margin-top:26px}
+.m-sl-d i{display:block;width:18px;height:3px;border-radius:2px;background:currentColor;opacity:.35}
+.m-sl-d i.on{width:36px;opacity:1}
 .m-car--slides>img{width:calc(100% + 16px);max-width:420px;aspect-ratio:366/680;height:auto;object-fit:cover;border-radius:36px}
 .m-car--tuki>img{width:300px;height:440px;border-radius:30px;object-fit:cover}
 .m-car--app>img{width:300px;height:520px;border-radius:32px;object-fit:cover}
@@ -945,7 +958,7 @@ section.fd{background:var(--blue)}
 /* vanhasta uuteen */
 .m-red{position:relative;background:var(--red);color:var(--bg);padding:72px 20px;display:flex;flex-direction:column;gap:24px;overflow:hidden}
 .m-red>*{position:relative}
-.m-red-lines{position:absolute!important;left:50%;top:0;width:390px;height:774px;margin-left:-195px;pointer-events:none}
+.m-red-lines{overflow:visible;position:absolute!important;left:50%;top:0;width:390px;height:774px;margin-left:-195px;pointer-events:none}
 .m-red .m-lead{color:#fff;opacity:1}
 .m-bars{display:flex;flex-direction:column;gap:6px}
 .m-bars p{background:var(--bg);color:var(--ink);border-radius:20px;padding:16px 18px;margin:0;font-size:15px;line-height:22px}
@@ -1057,11 +1070,11 @@ section.fd{background:var(--blue)}
 
 <section class="m-sec m-sec--flush" id="m-vaihto">
   <div class="m-car m-car--slides" data-car data-nodots>
-    <img src="assets/m/s1.webp?v=6" alt="Helpotusta vaihtoon. Vaihto hoituu ilman, että kirppis menee kiinni. Esittely: aloitetaan 30 minuutin demolla, jossa näet oman kirppiksesi Resellassa.">
+    <figure class="m-sl"><img src="assets/m/sl1.webp?v=2" alt=""><div class="m-sl-top"><h3 class="m-sl-h">Helpotusta vaihtoon</h3><p>Vaihto hoituu ilman, että kirppis menee kiinni.</p></div><figcaption><h3>Esittely</h3><p>Aloitetaan 30 minuutin demolla, jossa näet oman kirppiksesi Resellassa.</p><span class="m-sl-d" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span></figcaption></figure>
     <img src="assets/m/s2.webp?v=6" alt="Määritys: rakennamme järjestelmän kirppiksesi näköiseksi, pöydät, hinnat, provisio ja oma ilme." loading="lazy">
-    <img src="assets/m/s3.webp?v=6" alt="Asennus: tuomme kassan ja laitteet paikan päälle ja asennamme ne valmiiksi." loading="lazy">
+    <figure class="m-sl"><img src="assets/m/sl3.webp?v=1" alt="" loading="lazy"><figcaption><h3>Asennus</h3><p>Tuomme kassan ja laitteet paikan päälle ja asennamme ne valmiiksi.</p><span class="m-sl-d" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></span></figcaption></figure>
     <img src="assets/m/s4.webp?v=7" alt="Koulutus: käymme kassan läpi sinun ja henkilökuntasi kanssa." loading="lazy">
-    <img src="assets/m/s5.webp?v=6" alt="Ensimmäinen myynti: olemme paikalla, kun ensimmäiset tuotteet myydään." loading="lazy">
+    <figure class="m-sl"><img src="assets/m/sl5.webp?v=1" alt="" loading="lazy"><figcaption><h3>Ensimmäinen myynti</h3><p>Olemme paikalla, kun ensimmäiset tuotteet myydään. Et jää yksin.</p><span class="m-sl-d" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i><i></i></span></figcaption></figure>
     <img src="assets/m/s6.webp?v=6" alt="Tilitykset: käymme ensimmäiset tilitykset läpi yhdessä." loading="lazy">
   </div>
 </section>
@@ -1141,8 +1154,8 @@ section.fd{background:var(--blue)}
 
 <section class="m-red" id="m-siirtyma">
   <svg class="m-red-lines" viewBox="0 0 390 774" preserveAspectRatio="xMidYMin slice" aria-hidden="true"><g fill="none" stroke="#C5D0D3" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
-    <path transform="translate(215 102)" d="M 225 0 C 165 40 135 100 125 160 C 115 220 105 286 65 346 C 40 401.9 20 441.9 0 441.9"/>
-    <path transform="translate(-10 544)" d="M 0 208.1 C 70 218.1 120 178.1 100 128.1 C 80 78.1 20 88.1 40 28.1 C 60 -21.9 150 60 180 20 C 200 0 215 0 225 0"/></g></svg>
+    <path transform="translate(215 102)" d="M 525 -200 L 225 0 C 165 40 135 100 125 160 C 115 220 105 286 65 346 C 40 401.9 20 441.9 0 441.9"/>
+    <path transform="translate(-10 544)" d="M -350 158.1 L 0 208.1 C 70 218.1 120 178.1 100 128.1 C 80 78.1 20 88.1 40 28.1 C 60 -21.9 150 60 180 20 C 200 0 215 0 225 0"/></g></svg>
   <h2 class="m-h2 big">Vanhasta<br>uuteen vähitellen</h2>
   <p class="m-lead">Kirppiksen ei tarvitse aloittaa alusta. Me autamme koko matkan.</p>
   <div class="m-bars">
@@ -1966,6 +1979,12 @@ section.fd{background:var(--blue)}
       setTimeout(function(){ out.className='m-ci p-wait'; order.push(out); paint(); },950);
     },2800);
   });
+  // kollaasit skaalautuvat näytön leveyden mukaan
+  function colScale(){ var hero=document.querySelector('#m2 .m-hero'), end=document.querySelector('#m2 .m-end');
+    root.querySelectorAll('.m-col').forEach(function(col){ var w=col.parentElement.clientWidth, k=Math.min(Math.max(w/487.5,1),1.9); col.style.setProperty('--cs',k);
+      if(col.classList.contains('m-col--hero')&&hero) hero.style.height=(750+270*(k-1))+'px';
+      if(col.classList.contains('m-col--end')&&end){ end.style.height=(520+150*(k-1))+'px'; end.style.marginBottom=(70+100*(k-1))+'px'; } }); }
+  colScale(); addEventListener('resize',colScale);
   // karusellit: palkki-indikaattori
   root.querySelectorAll('[data-car]:not([data-nodots])').forEach(function(car){
     var n=car.children.length, d=document.createElement('div'); d.className='m-dots'; d.setAttribute('aria-hidden','true');
