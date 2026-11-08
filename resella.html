@@ -223,8 +223,8 @@ section[id]{scroll-margin-top:72px}
 .caro-card.c-color .cc-body{padding:clamp(16px,1.8vw,22px);display:flex;flex-direction:column;gap:9px;align-self:flex-start;color:var(--ct)}
 .caro-card.c-color h3{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em;line-height:1.1}
 .caro-card.c-color p{font-size:15px;font-weight:500;line-height:1.4;opacity:.92;max-width:24ch}
-.caro-card.c-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.caro-card.c-img .ci-cap{position:relative;margin-top:auto;z-index:1;width:100%;padding:clamp(20px,2.2vw,26px) clamp(14px,1.6vw,18px) clamp(14px,1.6vw,18px);color:var(--on-red);background:linear-gradient(to top,rgba(30,19,17,.86),rgba(30,19,17,.3) 58%,transparent)}
+.caro-card.c-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.1)}
+.caro-card.c-img .ci-cap{position:relative;margin:0 0 auto;z-index:1;width:100%;padding:clamp(22px,2.4vw,28px) clamp(16px,1.8vw,22px) clamp(36px,3.6vw,48px);color:var(--on-red);background:linear-gradient(to bottom,rgba(30,19,17,.82),rgba(30,19,17,.45) 62%,transparent)}
 .caro-card.c-img .ci-cap h3{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em;line-height:1.1;margin-bottom:5px}
 .caro-card.c-img .ci-cap p{font-size:14px;font-weight:500;line-height:1.4;opacity:.96;max-width:26ch}
 @media(max-width:620px){.caro-card{flex:0 0 min(210px,62vw)}}
@@ -1346,12 +1346,12 @@ section.fd{background:var(--blue)}
   </div>
   <div class="caro-track" id="caroTrack">
     <article class="caro-card c-color" style="--cc:var(--blue);--ct:var(--ink)">
-      <div class="cc-body"><h3>Kassa</h3><p>Piippaa, maksa ja valmis. Toimii myös ilman nettiä.</p></div>
+      <div class="cc-body"><h3>Toimitukset</h3><p>Ostaja tilaa kotiin ja näkee, missä paketti menee.</p></div>
     <img class="cc-tarra" src="assets/tarrat/karuselli/kassa-puhelin.webp" alt="Paketti matkalla -näkymä puhelimessa" loading="lazy" style="left:15.73%;top:39.47%;width:69.83%">
     </article>
     <article class="caro-card c-img">
       <img src="assets/kuvat/04_loydot_tuotteet/01_takki_esittely.jpg" alt="Takki esillä kirpputorilla" loading="lazy">
-      <div class="ci-cap"><h3>Näkyvyys</h3><p>Jokainen hinnoiteltu tuote näkyy ostajille verkossa.</p></div>
+      <div class="ci-cap"><h3>Näkyvyys</h3><p>Hinnoiteltu tuote näkyy ostajille verkossa heti, kun lappu on kiinni.</p></div>
     </article>
     <article class="caro-card c-color" style="--cc:var(--red);--ct:var(--on-red)">
       <div class="cc-body"><h3>Varaukset</h3><p>Myyjät varaavat ja maksavat pöydän itse, sinä näet tilanteen kartalta.</p></div>
@@ -1359,7 +1359,7 @@ section.fd{background:var(--blue)}
     </article>
     <article class="caro-card c-img">
       <img src="assets/kuvat/02_kassa_maksu/10_kuitti_tulostuu.jpg" alt="Kuitti tulostuu kassalla" loading="lazy">
-      <div class="ci-cap"><h3>Tilitykset</h3><p>Kaikki myyjien rahat lähtevät kerralla yhdellä pankkitiedostolla.</p></div>
+      <div class="ci-cap"><h3>Kassa</h3><p>Piippaa, maksa ja valmis. Kuitti tulostuu heti, myös ilman nettiä.</p></div>
     </article>
     <article class="caro-card c-color" style="--cc:var(--ink);--ct:var(--bg)">
       <div class="cc-body"><h3>Asiakashallinta</h3><p>Myyjät, sopimukset, tilinumerot ja varaushistoria samassa paikassa.</p></div>
@@ -1367,7 +1367,7 @@ section.fd{background:var(--blue)}
     </article>
     <article class="caro-card c-img">
       <img src="assets/kuvat/02_kassa_maksu/01_kassa_tiski_tabletti.jpg" alt="Tabletti kassatiskillä" loading="lazy">
-      <div class="ci-cap"><h3>Raportointi</h3><p>Myynti, provisiot, ALV ja kausivertailu valmiina kirjanpitäjälle.</p></div>
+      <div class="ci-cap"><h3>Raportointi</h3><p>Päivän myynti, provisiot ja ALV näkyvät kassalta suoraan.</p></div>
     </article>
     <article class="caro-card c-color" style="--cc:var(--mustard);--ct:var(--ink)">
       <div class="cc-body"><h3>Hintaehdotus</h3><p>Myyjä kuvaa tuotteen ja saa hintaehdotuksen.</p></div>
@@ -1378,12 +1378,12 @@ section.fd{background:var(--blue)}
       <div class="ci-cap"><h3>Pöytäkartta</h3><p>Näe pöydät ja rekit kartalta: vapaa, varattu, päättymässä.</p></div>
     </article>
     <article class="caro-card c-color" style="--cc:var(--blue);--ct:var(--ink)">
-      <div class="cc-body"><h3>Tarrat</h3><p>Tulosta hintalaput omalle tarra-arkillesi.</p></div>
-    <img class="cc-tarra" src="assets/tarrat/karuselli/tarrat-puhelin.webp" alt="Inspiraatio-näkymä puhelimessa" loading="lazy" style="left:8.41%;top:7.47%;width:84.91%">
+      <div class="cc-body"><h3>Kuluttaja-appi</h3><p>Ostajat löytävät tuotteesi appista ja tulevat hakemaan.</p></div>
+    <img class="cc-tarra" src="assets/tarrat/karuselli/tarrat-puhelin.webp" alt="Sovelluksen kotinäkymä puhelimessa" loading="lazy" style="left:15.73%;top:39.47%;width:69.83%">
     </article>
     <article class="caro-card c-img">
       <img src="assets/kuvat/02_kassa_maksu/07_hintalappu_neule.jpg" alt="Hintalappu neuleessa" loading="lazy">
-      <div class="ci-cap"><h3>Alennukset</h3><p>Myyjä laskee hintoja itse kesken varauksen.</p></div>
+      <div class="ci-cap"><h3>Hintalaput</h3><p>Jokainen tuote saa oman viivakoodilapun, myös tavalliselle tarra-arkille.</p></div>
     </article>
     <article class="caro-card c-color" style="--cc:var(--red);--ct:var(--on-red)">
       <div class="cc-body"><h3>Käyttäjäroolit</h3><p>Työntekijä näkee kassan, mutta ei tilityksiä.</p></div>
@@ -1391,7 +1391,7 @@ section.fd{background:var(--blue)}
     </article>
     <article class="caro-card c-img">
       <img src="assets/kuvat/01_kirppis_tila/03_hylly_laukut_varikas.jpg" alt="Värikäs hylly laukkuja" loading="lazy">
-      <div class="ci-cap"><h3>Oma ilme</h3><p>Varaussivu omalla logollasi ja väreilläsi.</p></div>
+      <div class="ci-cap"><h3>Oma ilme</h3><p>Varaussivu ja appi kirppiksesi logolla ja väreillä.</p></div>
     </article>
   </div>
 </section>
