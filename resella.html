@@ -890,10 +890,22 @@ section.fd{background:var(--blue)}
 .m-car--slides>img{width:calc(100% + 16px);max-width:420px;aspect-ratio:366/680;height:auto;object-fit:cover;border-radius:36px}
 .m-car--tuki>img{width:300px;height:440px;border-radius:30px;object-fit:cover}
 .m-car--app>img{width:300px;height:520px;border-radius:32px;object-fit:cover}
+.m-fd{position:relative;flex:none;width:320px;height:400px;border-radius:32px;overflow:hidden;background:#3E2520;color:#ECECDC;scroll-snap-align:start;scroll-snap-stop:always}
+.m-fd>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.m-fd::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(62,37,32,0) 40%,rgba(62,37,32,.75) 100%);pointer-events:none}
+.m-fd-pill{position:absolute;left:16px;top:16px;z-index:1;background:#F6F6EE;color:#3E2520;border-radius:999px;padding:10px 18px;font:500 15px/1 var(--fd)}
+.m-fd-pill em{font-style:normal;opacity:.55;margin-left:4px}
+.m-fd-b{position:absolute;left:20px;right:20px;bottom:20px;z-index:1}
+.m-fd-b p{font:600 17px/25px var(--fd);margin:0 0 16px}
+.m-fd-btn{height:42px;padding:0 22px;border-radius:999px;background:none;border:1.5px solid #ECECDC;color:#ECECDC;font:500 15px var(--fd);cursor:pointer}
+.m-fd-more{position:absolute;inset:0;z-index:2;background:#3E2520;padding:28px 22px 20px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;opacity:0;pointer-events:none;transition:opacity .3s}
+.m-fd-more p{font-size:17px;line-height:26px;margin:0}
+.m-fd.open .m-fd-more{opacity:1;pointer-events:auto}
 .m-car--found>img{width:320px;height:400px;border-radius:32px;object-fit:cover}
 .m-car[hidden]{display:none}
 .m-dots{display:flex;gap:11px;align-items:center;margin-top:16px}
 .m-dots i{position:relative;display:block;width:10px;height:10px;border-radius:999px;background:rgba(62,37,32,.12);overflow:hidden;transition:width .3s var(--ease-std)}
+.m-dots.center{justify-content:center}
 .m-dots i.past{background:rgba(62,37,32,.42)}
 .m-dots i.on{width:40px}
 .m-dots i b{position:absolute;left:0;top:0;height:100%;width:0;border-radius:999px;background:rgba(62,37,32,.42)}
@@ -1170,8 +1182,8 @@ section.fd{background:var(--blue)}
 <section class="m-sec" id="m-perustajat">
   <h2 class="m-h2 c">Kirpputorista<br>koodiin</h2>
   <div class="m-car m-car--found" data-car>
-    <img src="assets/m/f1.webp?v=6" alt="Sofia Kraptsak, CEO. 10 vuotta second hand -alalla. Tuleva diplomi-insinööri." loading="lazy">
-    <img src="assets/m/f2.webp?v=6" alt="Leon Gustafsson, CTO. Oma ohjelmistoyritys takana. Senior-kehittäjä 21-vuotiaana." loading="lazy">
+    <article class="m-fd"><img src="assets/kuvat/perustaja-sofia.jpg?v=2" alt="" loading="lazy" style="object-position:47% 30%"><span class="m-fd-pill">Sofia Kraptsak <em>CEO</em></span><div class="m-fd-b"><p>10 vuotta second hand -alalla.<br>Tuleva diplomi-insinööri.</p><button type="button" class="m-fd-btn" aria-expanded="false">Lue lisää</button></div><div class="m-fd-more"><p>Perusti oman kirppiksen 14-vuotiaana ja kasvatti sen neljän hengen tiimiksi Helsingin keskustaan. Fintage Store valittiin Suomen Vuoden nuoreksi yritykseksi 2021.</p><button type="button" class="m-fd-btn">Sulje</button></div></article>
+    <article class="m-fd"><img src="assets/kuvat/perustaja-leon.jpg" alt="" loading="lazy" style="object-position:50% 0%"><span class="m-fd-pill">Leon Gustafsson <em>CTO</em></span><div class="m-fd-b"><p>Oma ohjelmistoyritys takana.<br>Senior-kehittäjä 21-vuotiaana.</p><button type="button" class="m-fd-btn" aria-expanded="false">Lue lisää</button></div><div class="m-fd-more"><p>Rakensi oman ohjelmistoyrityksen yli 100 000 euron liikevaihtoon. Toimi 21-vuotiaana senior-kehittäjänä Veikkauksella.</p><button type="button" class="m-fd-btn">Sulje</button></div></article>
   </div>
 </section>
 
@@ -1985,11 +1997,14 @@ section.fd{background:var(--blue)}
       if(col.classList.contains('m-col--hero')&&hero) hero.style.height=(750+270*(k-1))+'px';
       if(col.classList.contains('m-col--end')&&end){ end.style.height=(520+150*(k-1))+'px'; end.style.marginBottom=(70+100*(k-1))+'px'; } }); }
   colScale(); addEventListener('resize',colScale);
+  // perustajat: lue lisää
+  root.querySelectorAll('.m-fd').forEach(function(c){ c.querySelectorAll('.m-fd-btn').forEach(function(b){ b.addEventListener('click',function(){ var o=c.classList.toggle('open'); c.querySelector('.m-fd-b .m-fd-btn').setAttribute('aria-expanded',o?'true':'false'); }); }); });
   // karusellit: palkki-indikaattori
   root.querySelectorAll('[data-car]:not([data-nodots])').forEach(function(car){
     var n=car.children.length, d=document.createElement('div'); d.className='m-dots'; d.setAttribute('aria-hidden','true');
     for(var i=0;i<n;i++){ var e=document.createElement('i'); e.appendChild(document.createElement('b')); d.appendChild(e); }
     car.insertAdjacentElement('afterend',d); car._dots=d;
+    var sec=car.closest('section'), hh=sec&&sec.querySelector('h2'); if(hh&&getComputedStyle(hh).textAlign==='center') d.classList.add('center');
     function upd(){ var w=car.children[1]?car.children[1].offsetLeft-car.children[0].offsetLeft:car.clientWidth, max=car.scrollWidth-car.clientWidth, pos=car.scrollLeft/w, i=Math.min(n-1,Math.round(pos));
       if(max>0&&car.scrollLeft>=max-2) i=n-1;
       var f=(car.scrollLeft>=max-2)?1:Math.min(1,Math.max(0,pos-i+0.5));
