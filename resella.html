@@ -873,7 +873,7 @@ section.fd{background:var(--blue)}
 .m-car{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:0 20px;scroll-padding:0 20px}
 .m-car::-webkit-scrollbar{display:none}
 .m-car>img{flex:none;scroll-snap-align:start;scroll-snap-stop:always}
-.m-car--slides{margin:0 -12px;padding:0 12px;scroll-padding:0 12px}
+.m-car--slides{margin:0 -12px;padding:0 12px;scroll-padding:0 12px;zoom:.8}
 .m-car--slides>.m-sl{position:relative;flex:none;margin:0;width:calc(100% + 16px);max-width:420px;aspect-ratio:366/680;border-radius:36px;overflow:hidden;background:#3E2520;color:#ECECDC;scroll-snap-align:start;scroll-snap-stop:always}
 .m-sl>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .m-sl::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(62,37,32,.55) 0%,rgba(62,37,32,0) 32%,rgba(62,37,32,0) 58%,rgba(62,37,32,.92) 82%,#3E2520 100%)}
@@ -2016,7 +2016,7 @@ section.fd{background:var(--blue)}
     car.addEventListener('scroll',function(){ if(!car._auto) upd(); },{passive:true}); upd();
     if(car.hasAttribute('data-auto')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
       var dur=4500, el=0, last=performance.now(), cur=0, hold=false, io=false;
-      function go(i){ cur=i; el=0; car._auto=true; car.scrollTo({left:car.children[i].offsetLeft-car.children[0].offsetLeft,behavior:'smooth'}); setTimeout(function(){ car._auto=false; },800); }
+      function go(i){ cur=i; el=0; car._auto=true; var cr=car.getBoundingClientRect(), kr=car.children[i].getBoundingClientRect(), z=car.offsetWidth?cr.width/car.offsetWidth:1; car.scrollBy({left:(kr.left-cr.left)/z-(parseFloat(getComputedStyle(car).scrollPaddingLeft)||0),behavior:'smooth'}); setTimeout(function(){ car._auto=false; },800); }
       function frame(now){ var dt=now-last; last=now;
         if(!hold&&io&&!document.hidden&&mq.matches&&!car.querySelector('.open')){
           if(!car._auto){ var w0=car.children[1].offsetLeft-car.children[0].offsetLeft, mx=car.scrollWidth-car.clientWidth, tg=Math.min(cur*w0,mx); if(Math.abs(car.scrollLeft-tg)>w0*0.6){ cur=Math.min(n-1,Math.round(car.scrollLeft/w0)); el=0; } }
