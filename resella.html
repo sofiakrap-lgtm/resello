@@ -95,6 +95,14 @@ section[id]{scroll-margin-top:72px}
 .gm-menu{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease-out)}
 .gm.open .gm-menu{grid-template-rows:1fr}
 .gm-menu-in{overflow:hidden;min-width:238px}
+.gm-mrow{display:flex;align-items:center;gap:6px;padding-right:14px}
+.gm-mrow nav{flex:1}
+.gm-eyes{flex:none;width:76px;opacity:0;transform:scale(.6);transition:opacity .35s var(--ease-out) .25s,transform .5s var(--ease-reveal) .25s}
+.gm.open .gm-eyes{opacity:1;transform:none}
+.gm-eyes img{width:100%;height:auto;display:block}
+.gm-eyes .er{display:none}
+.gm.on-dark .gm-eyes .ev{display:none}
+.gm.on-dark .gm-eyes .er{display:block}
 .gm-menu nav{display:flex;flex-direction:column;padding:22px 10px 8px}
 .gm-menu a{font:400 20px/1.15 var(--fb);letter-spacing:-.01em;color:inherit;padding:7px 0;opacity:0;transform:translateY(14px);transition:opacity .3s var(--ease-out),transform .3s var(--ease-out)}
 .gm.open .gm-menu a{opacity:1;transform:none}
@@ -1190,7 +1198,7 @@ section.fd{background:var(--blue)}
       <a class="gm-cta" href="#varaa">Varaa demo</a>
     </div>
     <div class="gm-menu" id="gmMenu">
-      <div class="gm-menu-in">
+      <div class="gm-menu-in"><div class="gm-mrow">
         <nav aria-label="Valikko">
           <a href="#ominaisuudet">Ominaisuudet</a>
           <a href="#kayttoonotto">Käyttöönotto</a>
@@ -1201,7 +1209,7 @@ section.fd{background:var(--blue)}
             <a href="#perustajat">Meistä</a>
             <a href="#varaa">Yhteystiedot</a>
           </div>
-        </nav>
+        </nav><span class="gm-eyes" aria-hidden="true"><img class="ev" src="assets/silmat/silmat-katsoo-vaalea.svg" alt=""><img class="er" src="assets/silmat/silmat-katsoo-ruskea.svg" alt=""></span></div>
       </div>
     </div>
   </div>
