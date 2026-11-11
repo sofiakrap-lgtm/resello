@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Varaa esittely · Resella</title>
+<meta name="description" content="Varaa maksuton tunnin esittely. Näytämme videopuhelulla, miten Resellan kassa, myyjät ja tilitykset toimivat sinun kirppiksessäsi.">
+<link rel="icon" href="assets/ikoni/favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/svg+xml" href="assets/ikoni/favicon.svg?v=3">
+<link rel="apple-touch-icon" href="assets/ikoni/apple-touch-icon_180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ECECDC;--surface:#F6F6EE;--line:#DCDBC6;--ink:#3E2520;--ink-muted:#6E5E56;--blue-deep:#3A4961;--faint:#B5ABA2;--std:cubic-bezier(.45,0,.55,1)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.5 "Inter Tight",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--ink)}
+:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px}
+.wrap{max-width:1300px;margin:0 auto;padding:40px clamp(20px,4.4vw,63px) 120px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:72px}
+.top img{height:30px;width:auto;display:block}
+.top a.back{font-size:15px;font-weight:500;text-underline-offset:3px}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,600px);gap:clamp(40px,7vw,96px);align-items:start}
+h1{margin:8px 0 28px;font-weight:600;font-size:clamp(56px,7vw,96px);line-height:.95;letter-spacing:-.04em}
+.lead{margin:0 0 28px;font-size:20px;line-height:1.45;max-width:560px}
+.facts{margin:0 0 28px;padding:0;list-style:none;max-width:560px;border-top:1px solid var(--line)}
+.facts li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);color:var(--ink-muted)}
+.facts b{color:var(--ink);font-weight:600}
+.note{margin:0 0 20px;color:var(--ink-muted);line-height:1.5;max-width:560px}
+.sign{margin:0;font-weight:600}
+.card{background:var(--surface);border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:28px}
+.hr{height:1px;background:var(--line)}
+.cal-h{display:flex;justify-content:space-between;align-items:center}
+.cal-h h2{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
+.cal-nav{display:flex;gap:18px}
+.cal-nav button{border:0;background:none;padding:6px 0;font:500 15px "Inter Tight",sans-serif;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cal-nav button:disabled{color:var(--faint);text-decoration:none;cursor:default}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));row-gap:2px;text-align:center}
+.grid .wd{font-size:13px;color:var(--ink-muted);padding-bottom:8px}
+.grid .d{height:52px;display:grid;place-items:center}
+.grid .d span,.grid .d button{width:44px;height:44px;border-radius:999px;display:grid;place-items:center;font:400 16px "Inter Tight",sans-serif;color:var(--faint);border:0;background:none;padding:0}
+.grid .d button{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:background-color 200ms var(--std)}
+.grid .d button:hover{background:var(--bg)}
+.grid .d button[aria-pressed="true"]{background:var(--ink);color:var(--bg);text-decoration:none}
+.day-h{margin:0 0 12px;font-size:18px;font-weight:600}
+.times{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.times button{height:44px;border-radius:999px;border:1px solid var(--line);background:none;font:600 15px "Inter Tight",sans-serif;color:var(--ink);cursor:pointer;transition:background-color 200ms var(--std),color 200ms var(--std)}
+.times button:hover{background:var(--bg)}
+.times button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.times button:disabled{color:var(--faint);text-decoration:line-through;cursor:default;background:none}
+.empty{margin:0;color:var(--ink-muted)}
+.fields{display:flex;flex-direction:column;gap:12px}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-muted)}
+input{height:48px;border:0;border-radius:10px;background:var(--bg);padding:0 16px;font:400 16px "Inter Tight",sans-serif;color:var(--ink)}
+input::placeholder{color:#9C9087}
+.submit{height:52px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:600 17px "Inter Tight",sans-serif;cursor:pointer;transition:background-color 200ms var(--std),color 200ms var(--std)}
+.submit:hover{background:#2A1814}
+.submit:disabled{background:var(--line);color:var(--ink-muted);cursor:default}
+.small{margin:0;text-align:center;font-size:14px;color:var(--ink-muted)}
+.done{text-align:left}
+.done h2{margin:0 0 10px;font-size:32px;font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.done p{margin:0 0 12px;color:var(--ink-muted);line-height:1.5}
+[hidden]{display:none!important}
+@media(max-width:900px){
+  .top{margin-bottom:40px}
+  .cols{grid-template-columns:1fr}
+  .card{padding:22px}
+  .lead{font-size:18px}
+  .grid .d{height:46px}.grid .d span,.grid .d button{width:40px;height:40px;font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a href="resella.html" aria-label="Resella etusivu"><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a>
+    <a class="back" href="resella.html">Takaisin etusivulle</a>
+  </header>
+
+  <main class="cols">
+    <section>
+      <h1>Varataan<br>esittely.</h1>
+      <p class="lead">Tunnissa näytämme, miten kassa, myyjät ja tilitykset toimivat juuri sinun kirppiksessäsi. Voit kysyä mitä tahansa, myös hinnasta.</p>
+      <ul class="facts">
+        <li>Kesto <b id="kesto">1 tunti</b></li>
+        <li>Missä <b>Videopuhelu</b></li>
+        <li>Hinta <b>Maksuton</b></li>
+      </ul>
+      <p class="note">Kun otat Resellan käyttöön, tulemme asentamaan sen paikan päälle ja käymme sen läpi henkilökunnan kanssa.</p>
+      <p class="sign">Sofia ja Leon</p>
+    </section>
+
+    <section class="card" aria-label="Varauslomake">
+      <form id="form" novalidate>
+        <div style="display:flex;flex-direction:column;gap:28px">
+          <div>
+            <div class="cal-h">
+              <h2 id="month" aria-live="polite">Kuukausi</h2>
+              <div class="cal-nav"><button type="button" id="prev">Edellinen</button><button type="button" id="next">Seuraava</button></div>
+            </div>
+            <div class="grid" id="grid" style="margin-top:20px" role="group" aria-label="Valitse päivä"></div>
+          </div>
+          <div class="hr"></div>
+          <div>
+            <h3 class="day-h" id="dayH">Valitse päivä</h3>
+            <div class="times" id="times" role="group" aria-label="Valitse aika"></div>
+            <p class="empty" id="noTimes" hidden>Tälle päivälle ei ole vapaita aikoja.</p>
+          </div>
+          <div class="hr"></div>
+          <div class="fields">
+            <label>Nimi<input id="nimi" name="nimi" autocomplete="name" required></label>
+            <label>Sähköposti<input id="email" name="email" type="email" autocomplete="email" required></label>
+            <label>Kirppis ja paikkakunta<input id="kirppis" name="kirppis" placeholder="esim. Kirppis Keskusta, Espoo" required></label>
+          </div>
+          <button class="submit" id="submit" type="submit" disabled>Valitse päivä ja aika</button>
+          <p class="small">Lähetämme vahvistuksen ja videopuhelun linkin sähköpostiin.</p>
+        </div>
+      </form>
+
+      <div class="done" id="done" hidden>
+        <h2>Melkein valmista.</h2>
+        <p id="doneText"></p>
+        <p>Jos sähköpostiohjelma ei auennut, lähetä nimesi ja toivottu aika osoitteeseen <a id="doneMail" href="mailto:hei@resella.fi">hei@resella.fi</a>.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="avoimet-ajat.js"></script>
+<script>
+(function(){
+  var A=window.RESELLA_AJAT||{viikko:{},aikaisintaan:2,enintaan:42,eiAikoja:[],varatut:[],kesto:60,sahkoposti:'hei@resella.fi'};
+  var KUUT=['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'];
+  var PV=['su','ma','ti','ke','to','pe','la'], PVPITKA=['Sunnuntai','Maanantai','Tiistai','Keskiviikko','Torstai','Perjantai','Lauantai'];
+  var $=function(id){return document.getElementById(id);};
+  var pad=function(n){return (n<10?'0':'')+n;};
+  var iso=function(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
+  var fi=function(d){return d.getDate()+'.'+(d.getMonth()+1)+'.';};
+  if(A.kesto){ $('kesto').textContent = A.kesto===60?'1 tunti':(A.kesto%60===0?(A.kesto/60)+' tuntia':A.kesto+' min'); }
+
+  var today=new Date(); today.setHours(0,0,0,0);
+  var first=new Date(today); first.setDate(first.getDate()+(A.aikaisintaan||0));
+  var last=new Date(today); last.setDate(last.getDate()+(A.enintaan||42));
+
+  function closed(d){ var s=iso(d); return (A.eiAikoja||[]).some(function(e){ return Array.isArray(e)? (s>=e[0]&&s<=e[1]) : s===e; }); }
+  function slots(d){ if(d<first||d>last||closed(d)) return []; return (A.viikko[PV[d.getDay()]]||[]); }
+  function taken(d,t){ return (A.varatut||[]).indexOf(iso(d)+' '+t)>-1; }
+  function hasFree(d){ return slots(d).some(function(t){return !taken(d,t);}); }
+
+  // ensimmäinen vapaa päivä
+  var sel=null, time=null;
+  for(var x=new Date(first); x<=last; x.setDate(x.getDate()+1)){ if(hasFree(x)){ sel=new Date(x); break; } }
+  var view=new Date((sel||first).getFullYear(),(sel||first).getMonth(),1);
+
+  function renderCal(){
+    var g=$('grid'); g.innerHTML='';
+    $('month').textContent=KUUT[view.getMonth()]+(view.getFullYear()!==today.getFullYear()?' '+view.getFullYear():'');
+    ['ma','ti','ke','to','pe','la','su'].forEach(function(w){ var e=document.createElement('div'); e.className='wd'; e.textContent=w; g.appendChild(e); });
+    var lead=(view.getDay()+6)%7;
+    for(var i=0;i<lead;i++){ var e=document.createElement('div'); e.className='d'; g.appendChild(e); }
+    var days=new Date(view.getFullYear(),view.getMonth()+1,0).getDate();
+    for(var dd=1; dd<=days; dd++){
+      var d=new Date(view.getFullYear(),view.getMonth(),dd), cell=document.createElement('div'); cell.className='d';
+      if(hasFree(d)){
+        var b=document.createElement('button'); b.type='button'; b.textContent=dd;
+        b.setAttribute('aria-label',PVPITKA[d.getDay()]+' '+fi(d)+', vapaita aikoja');
+        b.setAttribute('aria-pressed', sel&&iso(sel)===iso(d)?'true':'false');
+        (function(dc){ b.addEventListener('click',function(){ sel=dc; time=null; renderCal(); renderTimes(); }); })(d);
+        cell.appendChild(b);
+      } else { var s=document.createElement('span'); s.textContent=dd; s.setAttribute('aria-hidden','true'); cell.appendChild(s); }
+      g.appendChild(cell);
+    }
+    var prevM=new Date(view.getFullYear(),view.getMonth()-1,1), nextM=new Date(view.getFullYear(),view.getMonth()+1,1);
+    $('prev').disabled = new Date(view.getFullYear(),view.getMonth(),0) < first;
+    $('next').disabled = nextM > last;
+  }
+  function renderTimes(){
+    var w=$('times'); w.innerHTML='';
+    if(!sel){ $('dayH').textContent='Ei vapaita aikoja'; $('noTimes').hidden=false; update(); return; }
+    $('dayH').textContent=PVPITKA[sel.getDay()]+' '+fi(sel);
+    var ts=slots(sel); $('noTimes').hidden=ts.length>0;
+    ts.forEach(function(t){
+      var b=document.createElement('button'); b.type='button'; b.textContent=t;
+      if(taken(sel,t)){ b.disabled=true; b.setAttribute('aria-label',t+', varattu'); }
+      b.setAttribute('aria-pressed', time===t?'true':'false');
+      b.addEventListener('click',function(){ time=t; renderTimes(); });
+      w.appendChild(b);
+    });
+    update();
+  }
+  function update(){
+    var s=$('submit');
+    if(sel&&time){ s.disabled=false; s.textContent='Varaa '+PV[sel.getDay()]+' '+fi(sel)+' klo '+time; }
+    else { s.disabled=true; s.textContent=sel?'Valitse aika':'Valitse päivä ja aika'; }
+  }
+  $('prev').addEventListener('click',function(){ view=new Date(view.getFullYear(),view.getMonth()-1,1); renderCal(); });
+  $('next').addEventListener('click',function(){ view=new Date(view.getFullYear(),view.getMonth()+1,1); renderCal(); });
+
+  $('form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var f=['nimi','email','kirppis'].map($), bad=f.filter(function(i){return !i.checkValidity()||!i.value.trim();});
+    if(bad.length){ bad[0].focus(); bad[0].reportValidity&&bad[0].reportValidity(); return; }
+    var aika=PVPITKA[sel.getDay()]+' '+fi(sel)+' klo '+time;
+    var body='Hei,\n\nhaluaisin varata Resellan esittelyn.\n\nAika: '+aika+'\nNimi: '+f[0].value.trim()+'\nSähköposti: '+f[1].value.trim()+'\nKirppis: '+f[2].value.trim()+'\n';
+    var mail='mailto:'+(A.sahkoposti||'hei@resella.fi')+'?subject='+encodeURIComponent('Esittelyvaraus: '+aika)+'&body='+encodeURIComponent(body);
+    $('doneText').textContent='Varausviesti ajalle '+aika.toLowerCase()+' on valmiina sähköpostiohjelmassasi. Lähetä se, niin vahvistamme ajan ja lähetämme videopuhelun linkin.';
+    $('doneMail').href=mail;
+    $('form').hidden=true; $('done').hidden=false;
+    location.href=mail;
+  });
+
+  renderCal(); renderTimes();
+})();
+</script>
+</body>
+</html>
