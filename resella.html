@@ -1176,8 +1176,8 @@ section.fd{background:var(--blue)}
   <div class="m-calc">
     <label for="mSales">Kassamyynti kuukaudessa</label>
     <div class="m-field"><input id="mSales" inputmode="numeric" value="10 000" aria-label="Kassamyynti kuukaudessa euroina"><span>€ / kk</span></div>
-    <div class="m-res"><b id="mFee">125 €</b><span>/ kk</span></div>
-    <p id="mNote">Maksu on noin 1,25 % myynnistä. Esimerkkilaskelma, tarkka hinta katsotaan demossa.</p>
+    <div class="m-res"><b id="mFee">133 €</b><span>/ kk</span></div>
+    <p id="mNote">Maksu on noin 1,33 % myynnistä. Esimerkkilaskelma, tarkka hinta katsotaan demossa.</p>
   </div>
   <div class="m-bento">
     <div class="m-cell" style="--b:#3E2520;--f:#ECECDC"><div class="m-lab"><span>Käyttöönotto</span></div><div><b>1–3 pv</b><small>asennus mukana</small></div></div>
@@ -1495,15 +1495,15 @@ section.fd{background:var(--blue)}
           <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Ei kuukausimaksua, ei piilokuluja</li>
           <li><span class="mk"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></span>Sama järjestelmä kasvaa mukana</li>
         </ul>
-        <p class="pct">Prosentti laskee myynnin kasvaessa: 1,25 % alkaen, 0,25 % asti.</p>
+        <p class="pct">Prosentti laskee myynnin kasvaessa: 1,5 % alkaen, 0,25 % asti.</p>
       </div>
       <div class="pcard hl">
         <h3>Paljonko se maksaisi?</h3>
         <label class="price-field" for="revInput"><span class="price-lbl">Kassamyynti kuukaudessa</span>
           <span class="price-input"><input type="text" inputmode="numeric" id="revInput" value="10 000" aria-label="Kassamyynti kuukaudessa euroina"><span class="suf">€ / kk</span></span>
         </label>
-        <div><span class="big" id="priceVal">125 €</span><span class="perkk">/ kk</span></div>
-        <p class="salesline" id="priceSales">Maksu on noin 1,25 % myynnistä. Kolme ensimmäistä kuukautta ovat ilmaisia.</p>
+        <div><span class="big" id="priceVal">133 €</span><span class="perkk">/ kk</span></div>
+        <p class="salesline" id="priceSales">Maksu on noin 1,33 % myynnistä. Kolme ensimmäistä kuukautta ovat ilmaisia.</p>
         <p class="exnote">Esimerkkilaskelma. Tarkan hinnan katsomme yhdessä demossa.</p>
         <a class="btn" href="varaa.html">Varaa demo</a>
       </div>
@@ -1795,7 +1795,7 @@ section.fd{background:var(--blue)}
   if(pVal&&revInput){
     function fmt(n){ return Math.round(n).toLocaleString('fi-FI'); }
     // porrastettu kuin verotus: jokainen myyntiporras omalla prosentilla, joten maksu ei koskaan laske myynnin kasvaessa. 200 000 € vuodessa = 200 € / kk
-    var fee=function(r){ var b=[[13333,1.25],[25000,1],[41667,.75],[83333,.5],[Infinity,.25]], f=0, a=0; for(var i=0;i<b.length&&r>a;i++){ f+=(Math.min(r,b[i][0])-a)*b[i][1]/100; a=b[i][0]; } return f; }
+    var fee=function(r){ var b=[[5000,1.5],[8333,1.25],[25000,1],[41667,.75],[83333,.5],[Infinity,.25]], f=0, a=0; for(var i=0;i<b.length&&r>a;i++){ f+=(Math.min(r,b[i][0])-a)*b[i][1]/100; a=b[i][0]; } return f; }
     function update(){
       var r=parseFloat((revInput.value||'').replace(/[^\d]/g,''))||0;
       var price=fee(r), p=r>0?price/r*100:0;
@@ -2121,7 +2121,7 @@ section.fd{background:var(--blue)}
   // laskuri
   var inp=document.getElementById('mSales'), fee=document.getElementById('mFee'), note=document.getElementById('mNote');
   function fmt(n){ return Math.round(n).toLocaleString('fi-FI'); }
-  var feeOf=function(r){ var b=[[13333,1.25],[25000,1],[41667,.75],[83333,.5],[Infinity,.25]], f=0, a=0; for(var i=0;i<b.length&&r>a;i++){ f+=(Math.min(r,b[i][0])-a)*b[i][1]/100; a=b[i][0]; } return f; }
+  var feeOf=function(r){ var b=[[5000,1.5],[8333,1.25],[25000,1],[41667,.75],[83333,.5],[Infinity,.25]], f=0, a=0; for(var i=0;i<b.length&&r>a;i++){ f+=(Math.min(r,b[i][0])-a)*b[i][1]/100; a=b[i][0]; } return f; }
   function calc(){ var r=parseFloat((inp.value||'').replace(/[^\d]/g,''))||0, f=feeOf(r), p=r>0?f/r*100:0;
     fee.textContent=fmt(f)+' €';
     note.textContent=window.mLang==='en'?(r>0?'The fee is about '+p.toFixed(2)+'% of sales. Example only, exact pricing in the demo.':'Enter monthly sales to see an estimate.'):(r>0?'Maksu on noin '+p.toFixed(2).replace('.',',')+' % myynnistä. Esimerkkilaskelma, tarkka hinta katsotaan demossa.':'Syötä kuukausimyynti, niin näet arvion.'); }
