@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F4F4EA">
+<meta name="robots" content="noindex">
+<title>Resella, kuluttaja-appin demo</title>
+<link rel="icon" href="../assets/ikoni/favicon.svg">
+<style>
+@font-face{font-family:"DM Sans";src:url("fontit/dm-sans-latin-wght-normal.woff2") format("woff2");font-weight:100 1000;font-display:swap}
+:root{--bg:#F4F4EA;--surf:#FAFAF4;--line:#E7E6D8;--info:#E2E8E9;--sec:#EFEEE3;--ink:#3E2520;--muted:#6E5E56;--light:#FAFAF4}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--ink);font:400 15px/1.3 "DM Sans",system-ui,sans-serif}
+button,input{font:inherit;color:inherit;background:none;border:0;outline:0}
+button{cursor:pointer}
+img{display:block}
+svg{display:block;flex:none}
+
+/* Kehys: puhelimessa koko ruutu, tietokoneella puhelinkehys */
+.kehys{position:relative;height:100%;width:100%}
+.naytto{position:relative;height:100%;width:100%;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
+.tilarivi{display:none}
+.demomerkki{flex:none;display:flex;justify-content:center;padding:calc(env(safe-area-inset-top) + 4px) 0 4px;background:var(--bg)}
+.pilleri-demo{background:var(--ink);color:var(--bg);font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px}
+@media (min-width:700px) and (min-height:600px){
+  html,body{background:#DCDBC6}
+  body{display:grid;place-items:center;overflow:hidden}
+  .kehys{width:414px;height:868px;flex:none;background:#2A1814;border-radius:62px;padding:12px;transform-origin:center;transform:scale(var(--skaala,1))}
+  .kehys::before,.kehys::after{content:"";position:absolute;width:4px;border-radius:2px;background:#2A1814}
+  .kehys::before{left:-4px;top:170px;height:60px;box-shadow:0 80px 0 #2A1814}
+  .kehys::after{right:-4px;top:230px;height:90px}
+  .naytto{border-radius:50px}
+  .demomerkki{display:none}
+  .tilarivi{display:flex;flex:none;height:54px;align-items:center;justify-content:space-between;padding:0 30px 0 48px;background:var(--bg)}
+  .tilarivi b{font-size:16px;font-weight:600}
+  .tilarivi img{height:13px}
+}
+
+/* Sisältö */
+.sisalto{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none}
+.sisalto::-webkit-scrollbar{display:none}
+.ylapalkki{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:14px;height:46px;padding:0 20px;border-bottom:1px solid var(--line)}
+.ylapalkki h1{font-size:19px;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ylapalkki .ikoni-nappi{display:grid;place-items:center;min-width:28px;height:36px}
+.kotipalkki{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:16px;padding:6px 16px 10px}
+.hakukentta{flex:1;display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;border:1.2px solid var(--ink);border-radius:999px;text-align:left}
+.hakukentta span{flex:1;font-size:15px;color:var(--muted)}
+.hakukentta input{flex:1;font-size:16px;min-width:0}
+.hakukentta input::placeholder{color:var(--muted)}
+.merkki{position:relative}
+.merkki i{position:absolute;top:-7px;right:-8px;min-width:17px;height:17px;border-radius:9px;background:var(--ink);color:var(--bg);font:700 10px/17px "DM Sans";font-style:normal;text-align:center;padding:0 4px}
+.valilehdet{display:flex;border-bottom:1px solid var(--line)}
+.valilehdet button{flex:1;height:36px;font-size:15px;color:var(--muted);position:relative}
+.valilehdet button.valittu{color:var(--ink);font-weight:500}
+.valilehdet button.valittu::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--ink)}
+
+.banneri{position:relative;height:420px;overflow:hidden;color:var(--light)}
+.banneri img{width:100%;height:100%;object-fit:cover}
+.banneri::after{content:"";position:absolute;inset:0;background:rgba(62,37,32,.3)}
+.banneri .teksti{position:absolute;left:16px;right:16px;bottom:24px;z-index:1}
+.banneri h2{font-size:30px;font-weight:600;line-height:1.15;margin-bottom:6px}
+.banneri p{font-size:15px;max-width:260px;margin-bottom:16px}
+.vaalea-nappi{display:inline-block;background:var(--bg);color:var(--ink);font-size:15px;font-weight:500;padding:13px 22px;border-radius:999px}
+
+.osio-otsikko{display:flex;align-items:center;gap:10px;padding:28px 16px 14px;font-size:20px;font-weight:500}
+.karuselli{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.karuselli::-webkit-scrollbar{display:none}
+.karuselli .kortti{flex:0 0 168px}
+.ruudukko{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.kortti{min-width:0;cursor:pointer}
+.kortti .kuva{position:relative;aspect-ratio:193/240;background:var(--sec);overflow:hidden}
+.kortti .kuva img{width:100%;height:100%;object-fit:cover}
+.toiminnot{position:absolute;left:0;right:0;bottom:0;height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 10px}
+.toiminnot button{display:flex;align-items:center;gap:6px;height:40px;padding:0 4px;font-size:14px}
+.toiminnot .tumma{color:var(--ink)}
+.toiminnot .vaalea{color:var(--light)}
+.sydan.paalla path{fill:currentColor}
+.kortti .tekstit{padding:8px 10px 18px;display:flex;flex-direction:column;gap:3px}
+.kortti .nimi{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kortti .kuvaus{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sijainti{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted);white-space:nowrap;overflow:hidden}
+.hinta{font-size:15px;font-weight:700}
+.varattu-tagi{position:absolute;left:8px;top:8px;background:var(--surf);font-size:13px;padding:4px 10px;border-radius:999px}
+
+.tiedote{flex:none;display:flex;align-items:center;justify-content:space-between;height:31px;padding:0 16px;background:var(--info);font-size:13px}
+.tiedote span{flex:1;text-align:center}
+
+.alavalikko{flex:none;display:flex;justify-content:space-between;align-items:center;height:calc(58px + env(safe-area-inset-bottom));padding:0 20px env(safe-area-inset-bottom);border-top:1px solid var(--line);background:var(--bg)}
+.alavalikko button{position:relative;width:48px;height:48px;display:grid;place-items:center;opacity:.42}
+.alavalikko button.valittu{opacity:1}
+.alavalikko button.valittu::after{content:"";position:absolute;bottom:2px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:2px;background:var(--ink)}
+.alavalikko .pilvi img{width:36px}
+.alavalikko .merkki i{top:-9px;right:-11px}
+@media (min-width:700px) and (min-height:600px){.alavalikko{height:76px;padding-bottom:18px}.alavalikko::after{content:"";position:absolute}}
+.kotipalkki-viiva{display:none}
+@media (min-width:700px) and (min-height:600px){.kotipalkki-viiva{display:block;position:absolute;bottom:9px;left:50%;width:134px;margin-left:-67px;height:5px;border-radius:3px;background:var(--ink);z-index:30}}
+
+/* Hakutulokset */
+.ryhmarivi{display:flex;gap:22px;overflow-x:auto;padding:12px 16px;scrollbar-width:none;border-bottom:1px solid var(--line)}
+.ryhmarivi::-webkit-scrollbar{display:none}
+.ryhmarivi button{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:500;white-space:nowrap;opacity:.55}
+.ryhmarivi button.valittu{opacity:1}
+.suodatinrivi{display:flex;gap:8px;overflow-x:auto;padding:12px 16px 6px;scrollbar-width:none}
+.suodatinrivi::-webkit-scrollbar{display:none}
+.chip{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border:1.2px solid var(--ink);border-radius:999px;font-size:14px;font-weight:500;white-space:nowrap;flex:none}
+.chip.tumma{background:var(--ink);color:var(--bg)}
+.valitut{display:flex;align-items:center;gap:12px;padding:8px 16px;flex-wrap:wrap}
+.valittu-chip{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px;background:var(--surf);border-radius:999px;font-size:15px}
+.linkki{font-size:15px;text-decoration:none}
+.lajittelu{display:flex;align-items:center;justify-content:space-between;padding:8px 24px 14px}
+.lajittelu button{display:flex;align-items:center;gap:10px;font-size:15px}
+
+/* Haku */
+.ryhmaotsikko{padding:20px 16px 6px;font-size:13px;color:var(--muted)}
+.hakurivi{display:flex;align-items:center;justify-content:space-between;width:100%;padding:13px 16px;border-bottom:1px solid var(--line);text-align:left;font-size:16px}
+.hakurivi small{font-size:13px;color:var(--muted)}
+.ehdotukset{display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px 4px}
+.ehdotukset .chip{height:34px}
+
+/* Listat ja osiot */
+.raita{height:8px;background:var(--sec)}
+.osio{padding:20px 16px;display:flex;flex-direction:column;gap:10px}
+.osio-label{font-size:14px}
+.laatikko{background:var(--surf);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:16px}
+.laatikko .rivit{display:flex;flex-direction:column;gap:2px}
+.iso{font-size:16px;font-weight:500}
+.himmea{color:var(--muted);font-size:14px}
+.rivi{display:flex;justify-content:space-between;align-items:center;padding:15px 16px;border-bottom:1px solid var(--line);font-size:16px;font-weight:500}
+.rivi span:first-child{font-size:15px;font-weight:400;color:var(--muted)}
+.rivi.vahva span:first-child{color:var(--ink)}
+.rivi.vahva span:last-child{font-weight:700}
+.tuoterivi{display:flex;gap:24px;padding:24px 16px 24px 40px;cursor:pointer}
+.tuoterivi img{width:72px;height:96px;object-fit:cover;background:var(--sec)}
+.tuoterivi .tiedot{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.tuoterivi .tiedot .hinta{margin-top:auto;align-self:flex-end;font-size:16px}
+.tuoterivi .poista{align-self:flex-start;padding:4px}
+.tuotekuva{aspect-ratio:1/1;background:var(--sec)}
+.tuotekuva img{width:100%;height:100%;object-fit:cover}
+.tuoteotsikko{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.tuoteotsikko h2{font-size:18px;font-weight:600}
+.tuoteotsikko b{font-size:18px;font-weight:700;white-space:nowrap}
+.kentta{background:var(--surf);border-radius:8px;padding:14px 16px;font-size:16px;font-weight:500;width:100%}
+.valinnat{display:flex;flex-wrap:wrap;gap:8px}
+.valinta{background:var(--surf);border:1.2px solid transparent;border-radius:8px;padding:7px 12px;font-size:14px;font-weight:500}
+.valinta.valittu{border-color:var(--ink);font-weight:600}
+.edistyminen{height:3px;background:var(--line)}
+.edistyminen div{height:100%;background:var(--ink)}
+.vaiheet{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.vaiheet b{color:var(--ink);font-weight:600}
+.otsikko-iso{font-size:22px;font-weight:500}
+.tyhja{text-align:center;padding:48px 32px 24px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.tyhja p{color:var(--muted)}
+.vali{height:24px}
+
+/* Alapalkit */
+.toimintopalkki{flex:none;display:flex;gap:16px;padding:12px 16px;border-top:1px solid var(--line);background:var(--bg)}
+.yhteenveto{flex:none;background:var(--sec);padding:16px 16px 12px;display:flex;flex-direction:column;gap:8px}
+.summa{display:flex;justify-content:space-between;align-items:center;font-size:15px;color:var(--muted)}
+.summa b{color:var(--ink);font-weight:500}
+.summa.vahva{color:var(--ink);font-weight:500}
+.summa.vahva b{font-size:17px;font-weight:700}
+.nappi{flex:1;height:48px;border-radius:24px;background:var(--ink);color:var(--bg);font-size:16px;font-weight:500;display:grid;place-items:center;width:100%}
+.nappi.ulko{background:var(--bg);color:var(--ink);border:1.2px solid var(--ink)}
+.nappi:disabled{opacity:.4}
+.yhteenveto .nappi{height:44px;flex:none}
+
+/* Paneeli */
+.peite{position:absolute;inset:0;background:rgba(62,37,32,.35);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
+.peite.auki{opacity:1;pointer-events:auto}
+.paneeli{position:absolute;left:0;right:0;bottom:0;top:58px;z-index:41;background:var(--bg);border-radius:20px 20px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.22,.61,.36,1)}
+.paneeli.auki{transform:none}
+.paneeli header{display:flex;align-items:center;justify-content:space-between;padding:18px 16px;border-bottom:1px solid var(--line)}
+.paneeli header h3{font-size:18px;font-weight:500}
+.paneeli .runko{flex:1;overflow-y:auto}
+.paneeli footer{padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);display:flex;align-items:center;gap:16px}
+.hintarivi{display:flex;align-items:center;gap:12px}
+.arvokentta{flex:1;display:flex;align-items:center;gap:6px;height:49px;padding:0 16px;border:1.2px solid var(--ink);border-radius:20px}
+.arvokentta input{width:100%;font-size:17px;font-weight:500}
+.arvokentta small{font-size:13px;color:var(--muted)}
+
+.ilmoitus{position:absolute;left:50%;top:110px;transform:translate(-50%,-10px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;z-index:50;opacity:0;transition:.25s;pointer-events:none;white-space:nowrap}
+.ilmoitus.nakyy{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="kehys" id="kehys">
+  <div class="naytto" id="naytto">
+    <div class="demomerkki"><span class="pilleri-demo">Demo, tulossa 2027</span></div>
+    <div class="tilarivi"><b>9.41</b><span class="pilleri-demo">Demo, tulossa 2027</span><img src="kuvat/statusikonit.png" alt=""></div>
+    <div class="sisalto" id="sisalto"></div>
+    <div id="alapalkki"></div>
+    <nav class="alavalikko" id="alavalikko"></nav>
+    <div class="kotipalkki-viiva"></div>
+    <div class="peite" id="peite"></div>
+    <div class="paneeli" id="paneeli"></div>
+    <div class="ilmoitus" id="ilmoitus"></div>
+  </div>
+</div>
+<script src="tuotteet.js"></script>
+<script src="ikonit.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
