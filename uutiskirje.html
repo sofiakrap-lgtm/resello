@@ -82,14 +82,16 @@ input::placeholder{color:#9C9087}
 .card h2{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
 @media(max-width:520px){.who{grid-template-columns:1fr}}
 body{background:var(--blue,#C5D0D3)}
-.deco{position:fixed;left:0;right:0;bottom:0;width:100%;height:62vh;pointer-events:none;z-index:0}
+.deco{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.deco.m{display:none}
 .deco path{fill:none;stroke:#C24029;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
 .wrap{position:relative;z-index:1}
-@media(max-width:900px){.deco{height:40vh}}
+@media(max-width:900px){.deco.d{display:none}.deco.m{display:block;top:auto;height:40vh}}
 </style>
 </head>
 <body>
-<svg class="deco" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-60 520 C110 470 210 560 230 650 C250 760 120 770 130 690 C140 600 330 560 470 640 C560 690 640 720 720 640 C860 500 1000 230 1180 170 C1300 130 1400 150 1500 110"/></svg>
+<svg class="deco d" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-80 820 C120 760 260 820 290 740 C320 660 220 600 170 660 C120 720 230 800 360 790 C520 778 600 700 640 560 C690 380 640 260 760 170 C880 100 1100 120 1300 110 C1400 105 1460 95 1520 90"/></svg>
+<svg class="deco m" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-60 520 C110 470 210 560 230 650 C250 760 120 770 130 690 C140 600 330 560 470 640 C560 690 640 720 720 640 C860 500 1000 230 1180 170 C1300 130 1400 150 1500 110"/></svg>
 <div class="wrap">
   <header class="top">
     <a href="resella.html" aria-label="Resella etusivu"><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a>
