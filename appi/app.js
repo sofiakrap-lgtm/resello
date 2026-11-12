@@ -58,8 +58,8 @@
       <div class="kuva"><img src="${t.kuva}" alt="${esc(t.nimi)}" loading="lazy">
         ${tila.varaukset[t.id] ? '<span class="varattu-tagi">Varattu sinulle</span>' : ''}
         <div class="toiminnot">
-          <button class="${t.ikoni.kori}" data-kori="${t.id}" aria-label="Lisää ostoskoriin">${ik('cart')}</button>
-          <button class="${t.ikoni.sydan}" data-sydan="${t.id}" aria-label="Suosikki">${ik('heart', 'sydan' + (s ? ' paalla' : ''))}<span>${tykkaykset(t)}</span></button>
+          <button class="${t.ikoni}" data-kori="${t.id}" aria-label="Lisää ostoskoriin">${ik('cart')}</button>
+          <button class="${t.ikoni}" data-sydan="${t.id}" aria-label="Suosikki">${ik('heart', 'sydan' + (s ? ' paalla' : ''))}<span>${tykkaykset(t)}</span></button>
         </div></div>
       <div class="tekstit"><div class="nimi">${esc(t.nimi)}</div><div class="kuvaus">${esc(kuvausrivi(t))}</div>
         <div class="sijainti">${ik('pin')}${esc(t.kirppis)}</div><div class="hinta">${eur(t.hinta)}</div></div>

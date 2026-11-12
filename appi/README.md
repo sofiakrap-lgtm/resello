@@ -23,7 +23,7 @@ Avaa `tuotteet.js` GitHubissa (kynäkuvake) ja muuta rivin tietoja:
  "koko": "M", "kokotyyppi": "Unisex", "vari": "Monivärinen", "kunto": "Hyvä",
  "kunnonKuvaus": "Kevyttä nyppyyntymistä, ei reikiä", "hinta": 45.0,
  "kirppis": "Kirppis Keskusta", "poyta": 22, "kuva": "kuvat/RS-080.webp",
- "ikoni": {"kori": "tumma", "sydan": "tumma"}}
+ "ikoni": "tumma"}
 ```
 
 - **hinta:** piste desimaalina (45.0). Demo näyttää "45,00 EUR".
@@ -31,7 +31,7 @@ Avaa `tuotteet.js` GitHubissa (kynäkuvake) ja muuta rivin tietoja:
 - **kunto:** Erinomainen, Hyvä, Kohtalainen tai Kulunut.
 - **kirppis:** täsmälleen sama nimi kuin `KIRPPIKSET`-listassa.
 - **poyta:** näkyy vasta varauksen jälkeen.
-- **ikoni:** ostoskori- ja sydänikonin väri kuvan päällä. `tumma` vaalealle kuvalle, `vaalea` tummalle.
+- **ikoni:** ostoskori- ja sydänikonin väri kuvan päällä (molemmat samaa väriä). `tumma` vaalealle kuvalle, `vaalea` tummalle.
 
 **Uusi tuote:** kopioi rivi, vaihda id ja tiedot, lisää kuva kansioon `kuvat/` (pystykuva 4:5, noin 720 x 900 px, webp tai jpg).
 **Poista tuote:** poista koko rivi. Muista pilkut rivien välissä.
