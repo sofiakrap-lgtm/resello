@@ -25,8 +25,8 @@ svg{display:block;flex:none}
 .pilleri-demo{background:var(--ink);color:var(--bg);font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px}
 @media (min-width:700px) and (min-height:600px){
   html,body{background:#DCDBC6}
-  body{display:grid;place-items:center;overflow:hidden}
-  .kehys{width:414px;height:868px;flex:none;background:#2A1814;border-radius:62px;padding:12px;transform-origin:center;transform:scale(var(--skaala,1))}
+  body{overflow:hidden}
+  .kehys{position:fixed;left:50%;top:50%;width:414px;height:868px;background:#2A1814;border-radius:62px;padding:12px;transform-origin:center;transform:translate(-50%,-50%) scale(var(--skaala,1))}
   .kehys::before,.kehys::after{content:"";position:absolute;width:4px;border-radius:2px;background:#2A1814}
   .kehys::before{left:-4px;top:170px;height:60px;box-shadow:0 80px 0 #2A1814}
   .kehys::after{right:-4px;top:230px;height:90px}
