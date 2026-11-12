@@ -96,22 +96,23 @@
 
   /* ---------- Näkymät ---------- */
   const N = {};
-  const ASU = ['RS-046', 'RS-023', 'RS-026', 'RS-103', 'RS-034'];
-  N.asu = () => ({ html: ylapalkki('Asun löydöt', true) + `<div class="osio" style="gap:6px"><h2 class="otsikko-iso">Koko asu kirppikseltä</h2><p class="himmea" style="font-size:15px">Farkut, neule ja nahkalaukku. Kaikki löytyi lähikirppiksiltä.</p></div><div class="ruudukko">${ASU.map(tuote).filter(Boolean).filter(myynnissa).map(kortti).join('')}</div><div class="vali"></div>`, nav: 'koti' });
+  const BAN = window.BANNERIT || {};
+  const banneri = (v) => BAN[v] || BAN.Kaikki;
+  N.asu = (v) => { const b = banneri(v || 'Kaikki'); return { html: ylapalkki('Asun löydöt', true) + `<div class="osio" style="gap:6px"><h2 class="otsikko-iso">${esc(b.otsikko)}</h2><p class="himmea" style="font-size:15px">${esc(b.teksti)}</p></div><div class="ruudukko">${b.tuotteet.map(tuote).filter(Boolean).filter(myynnissa).map(kortti).join('')}</div><div class="vali"></div>`, nav: 'koti' }; };
   let kotiValilehti = 'Kaikki';
 
   N.koti = () => {
     const lista = T.filter(myynnissa).filter((t) => kotiValilehti === 'Kaikki' || t.kokotyyppi === (kotiValilehti === 'Naiset' ? 'Naisten' : 'Miesten') || t.kokotyyppi === 'Unisex');
-    const asu = ASU.map(tuote).filter(Boolean).filter(myynnissa);
+    const b = banneri(kotiValilehti); const asu = b.tuotteet.map(tuote).filter(Boolean).filter(myynnissa);
     return {
       html: `<div class="kotipalkki"><button class="hakukentta" data-mene="#/haku">${ik('search')}<span>Mitä haluaisit ostaa?</span>${ik('cam')}</button>
         <button class="merkki" data-mene="#/varaukset" aria-label="Varaukset">${ik('bell')}${Object.keys(tila.varaukset).length ? `<i>${Object.keys(tila.varaukset).length}</i>` : ''}</button>
         <button data-mene="#/profiili" aria-label="Profiili">${ik('user')}</button></div>
       <div class="valilehdet">${['Kaikki', 'Naiset', 'Miehet'].map((v) => `<button class="${v === kotiValilehti ? 'valittu' : ''}" data-valilehti="${v}">${v}</button>`).join('')}</div>
-      <section class="banneri"><img src="kuvat/inspiraatio-asu.webp" alt=""><div class="teksti">
-        <h2>Koko asu kirppikseltä</h2><p>Farkut, neule ja nahkalaukku. Kaikki löytyi lähikirppiksiltä.</p>
-        <button class="vaalea-nappi" data-mene="#/asu">Katso asu</button></div></section>
-      <h2 class="osio-otsikko">Asun löydöt ${ik('chev')}</h2>
+      <section class="banneri"><img src="${b.kuva}" alt=""><div class="teksti">
+        <h2>${esc(b.otsikko)}</h2><p>${esc(b.teksti)}</p>
+        <button class="vaalea-nappi" data-mene="#/asu/${kotiValilehti}">Katso asu</button></div></section>
+      <button class="osio-otsikko" data-mene="#/asu/${kotiValilehti}">Asun löydöt ${ik('chev')}</button>
       <div class="karuselli">${asu.map(kortti).join('')}</div>
       <h2 class="osio-otsikko">Uusimmat löydöt</h2>
       <div class="ruudukko">${lista.map(kortti).join('')}</div><div class="vali"></div>`,

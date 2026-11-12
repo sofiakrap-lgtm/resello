@@ -2,6 +2,13 @@
 // Muokkaa tätä tiedostoa, niin demo päivittyy. Ohje: appi/README.md
 // Kaikki nimet, osoitteet ja hinnat ovat keksittyjä esimerkkejä.
 
+// Etusivun kuvabanneri välilehdittäin: kuva, otsikko, teksti ja asun tuotteet (id:t)
+window.BANNERIT = {
+ "Kaikki": {"kuva": "kuvat/inspiraatio-asu.webp", "otsikko": "Koko asu kirppikseltä", "teksti": "Farkut, neule ja nahkalaukku. Kaikki löytyi lähikirppiksiltä.", "tuotteet": ["RS-046", "RS-023", "RS-026", "RS-103", "RS-034"]},
+ "Naiset": {"kuva": "kuvat/inspiraatio-naiset.webp", "otsikko": "Korkoja ja kukkia", "teksti": "Avokkaat, mekko ja nahkalaukku. Kaikki löytyi lähikirppiksiltä.", "tuotteet": ["RS-077", "RS-025", "RS-072", "RS-017", "RS-078"]},
+ "Miehet": {"kuva": "kuvat/inspiraatio-miehet.webp", "otsikko": "Valmiina liikkeelle", "teksti": "Kuoritakki, farkut ja reppu. Kaikki löytyi lähikirppiksiltä.", "tuotteet": ["RS-001", "RS-043", "RS-110", "RS-004", "RS-039"]}
+};
+
 window.KIRPPIKSET = [
  {
   "nimi": "Kirppis Keskusta",
