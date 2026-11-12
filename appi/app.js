@@ -10,9 +10,16 @@
 
   /* ---------- Tila ---------- */
   const AVAIN = 'resella-demo-v1';
-  let tila = { suosikit: [], kori: [], varaukset: {}, tilaukset: [], haut: ['Farkut', 'Neule', 'Kuoritakki'], tiedote: true };
+  let tila = { suosikit: [], kori: [], varaukset: {}, tilaukset: [], ostetut: [], haut: ['Farkut', 'Neule', 'Kuoritakki'], tiedote: true, puhelin: '040 123 4567', osoite: { nimi: 'Anna Esimerkki', katu: 'Esimerkkikatu 10 A 2', posti: '00100 Helsinki' } };
   try { const t = JSON.parse(localStorage.getItem(AVAIN)); if (t) tila = Object.assign(tila, t); } catch (e) {}
   const tallenna = () => { try { localStorage.setItem(AVAIN, JSON.stringify(tila)); } catch (e) {} };
+  function siivoa() { // varaus raukeaa 48 h jälkeen, myydyt pois korista
+    let m = false;
+    for (const id of Object.keys(tila.varaukset)) if (tila.varaukset[id].asti < Date.now()) { delete tila.varaukset[id]; m = true; }
+    const k = tila.kori.filter((id) => !tila.ostetut.includes(id) && !tila.varaukset[id]); if (k.length !== tila.kori.length) { tila.kori = k; m = true; }
+    if (m) tallenna();
+  }
+  const myynnissa = (t) => !tila.ostetut.includes(t.id);
 
   /* ---------- Apurit ---------- */
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -75,7 +82,7 @@
     return norm(q).split(/\s+/).every((s) => h.includes(s.replace(/t$/, '')));
   }
   function tulokset(ohita) {
-    let r = T.filter((t) => osuu(t, haku.q)
+    let r = T.filter(myynnissa).filter((t) => osuu(t, haku.q)
       && (!haku.ryhma || ryhma(t) === haku.ryhma || (t.kokotyyppi === 'Unisex' && ['Naisten', 'Miesten'].includes(haku.ryhma)))
       && (ohita === 'koko' || !haku.koot.length || haku.koot.includes(t.koko))
       && (!haku.kunnot.length || haku.kunnot.includes(t.kunto))
@@ -90,12 +97,12 @@
   /* ---------- Näkymät ---------- */
   const N = {};
   const ASU = ['RS-046', 'RS-023', 'RS-026', 'RS-103', 'RS-034'];
-  N.asu = () => ({ html: ylapalkki('Asun löydöt', true) + `<div class="osio" style="gap:6px"><h2 class="otsikko-iso">Koko asu kirppikseltä</h2><p class="himmea" style="font-size:15px">Farkut, neule ja nahkalaukku. Kaikki löytyi lähikirppiksiltä.</p></div><div class="ruudukko">${ASU.map(tuote).filter(Boolean).map(kortti).join('')}</div><div class="vali"></div>`, nav: 'koti' });
+  N.asu = () => ({ html: ylapalkki('Asun löydöt', true) + `<div class="osio" style="gap:6px"><h2 class="otsikko-iso">Koko asu kirppikseltä</h2><p class="himmea" style="font-size:15px">Farkut, neule ja nahkalaukku. Kaikki löytyi lähikirppiksiltä.</p></div><div class="ruudukko">${ASU.map(tuote).filter(Boolean).filter(myynnissa).map(kortti).join('')}</div><div class="vali"></div>`, nav: 'koti' });
   let kotiValilehti = 'Kaikki';
 
   N.koti = () => {
-    const lista = T.filter((t) => kotiValilehti === 'Kaikki' || t.kokotyyppi === (kotiValilehti === 'Naiset' ? 'Naisten' : 'Miesten') || t.kokotyyppi === 'Unisex');
-    const asu = ASU.map(tuote).filter(Boolean);
+    const lista = T.filter(myynnissa).filter((t) => kotiValilehti === 'Kaikki' || t.kokotyyppi === (kotiValilehti === 'Naiset' ? 'Naisten' : 'Miesten') || t.kokotyyppi === 'Unisex');
+    const asu = ASU.map(tuote).filter(Boolean).filter(myynnissa);
     return {
       html: `<div class="kotipalkki"><button class="hakukentta" data-mene="#/haku">${ik('search')}<span>Mitä haluaisit ostaa?</span>${ik('cam')}</button>
         <button class="merkki" data-mene="#/varaukset" aria-label="Varaukset">${ik('bell')}${Object.keys(tila.varaukset).length ? `<i>${Object.keys(tila.varaukset).length}</i>` : ''}</button>
@@ -128,7 +135,7 @@
       el.innerHTML = `<div class="ryhmaotsikko">Viimeisimmät haut</div>` + tila.haut.map((h) => `<button class="hakurivi" data-hae="${esc(h)}">${esc(h)}<small>Haku</small></button>`).join('');
       return;
     }
-    const nimet = [...new Set(T.filter((t) => osuu(t, q)).map((t) => t.nimi))].slice(0, 5);
+    const nimet = [...new Set(T.filter(myynnissa).filter((t) => osuu(t, q)).map((t) => t.nimi))].slice(0, 5);
     const kat = [...new Set(T.map((t) => t.tyyppi))].filter((k) => norm(k).includes(norm(q))).slice(0, 4);
     const kir = K.filter((k) => norm(k.nimi).includes(norm(q)));
     el.innerHTML = `<div class="ehdotukset"><button class="chip" data-hae="${esc(q)}">Hae "${esc(q)}"</button></div>`
@@ -159,6 +166,7 @@
         <button class="chip ${haku.kunnot.length ? 'tumma' : ''}" data-suodattimet="kunto">Kunto</button>
         <button class="chip ${haku.kirppikset.length ? 'tumma' : ''}" data-suodattimet="kirppis">Kirppis</button></div>
       ${haku.q || m ? `<div class="valitut">${haku.q ? `<span class="valittu-chip">'${esc(haku.q)}'<button data-poista-haku aria-label="Poista haku">${ik('x')}</button></span>` : ''}<button class="linkki" data-tyhjenna>Tyhjennä</button></div>` : ''}
+      ${haku.kirppikset.length === 1 && !haku.q ? (() => { const k = kirppis(haku.kirppikset[0]); return `<div class="osio" style="padding:8px 16px 4px"><div class="laatikko">${ik('shop')}<div class="rivit"><span class="iso">${esc(k.nimi)}</span><span class="himmea">${esc(k.osoite)}</span><span class="himmea">Avoinna ${esc(k.aukiolo)}</span></div></div></div>`; })() : ''}
       <div class="lajittelu"><button data-jarjestys>${ik('sort')}${haku.jarjestys}</button><span>${r.length} tulosta</span></div>
       ${r.length ? `<div class="ruudukko">${r.map(kortti).join('')}</div>` : `<div class="tyhja"><h2 class="otsikko-iso">Ei osumia</h2><p>Kokeile toista hakusanaa tai poista suodattimia.</p></div>`}<div class="vali"></div>`,
       nav: 'selaa'
@@ -167,18 +175,19 @@
 
   N.tuote = (id) => {
     const t = tuote(id); if (!t) return N.koti();
-    const v = tila.varaukset[id];
+    const v = tila.varaukset[id]; const myyty = tila.ostetut.includes(id); const korissa = tila.kori.includes(id);
     return {
-      html: ylapalkki(esc(t.tyyppi), true) + `<div class="tuotekuva"><img src="${t.kuva}" alt="${esc(t.nimi)}"></div>
+      html: ylapalkki(esc(t.tyyppi), true) + `<div class="tuotekuva"><img src="${t.kuva}" alt="${esc(t.nimi)}">
+        <button class="kuvasydan" data-sydan="${t.id}" aria-label="Suosikki">${ik('heart', 'sydan' + (tila.suosikit.includes(t.id) ? ' paalla' : ''))}</button></div>
       <div class="osio" style="gap:6px;padding:16px"><div class="tuoteotsikko"><h2>${esc(t.nimi)}</h2><b>${eur(t.hinta)}</b></div>
-        <span class="himmea" style="font-size:15px">${esc(t.vari)}, ${esc(kuvausrivi(t))}</span><span class="sijainti">${ik('pin')}${esc(t.kirppis)}</span></div>
+        <span class="himmea" style="font-size:15px">${esc(t.vari)}, ${esc(kuvausrivi(t))}</span><button class="sijainti" data-kirppis="${esc(t.kirppis)}">${ik('pin')}${esc(t.kirppis)}</button></div>
       <div class="raita"></div>
-      <div class="osio"><div class="laatikko">${ik('shop')}<span class="iso" style="font-size:15px">${v ? 'Varattu sinulle. Nouda ' + pvm(new Date(v.asti)) + ' ' + klo(new Date(v.asti)) + ' mennessä.' : 'Varaa nyt, nouda 48 h sisällä ja maksa kirppiksellä'}</span></div></div>
+      <div class="osio"><div class="laatikko">${ik('shop')}<span class="iso" style="font-size:15px">${myyty ? 'Tämä löytö on jo myyty.' : v ? 'Varattu sinulle. Nouda ' + pvm(new Date(v.asti)) + ' ' + klo(new Date(v.asti)) + ' mennessä.' : 'Varaa nyt, nouda 48 h sisällä ja maksa kirppiksellä'}</span></div></div>
       <div class="osio" style="padding-top:0;gap:4px"><span class="osio-label">Kunto</span><span class="himmea" style="font-size:15px">${esc(t.kunnonKuvaus)}.</span></div>
       <div class="osio" style="padding-top:0;gap:4px"><span class="osio-label">Tiedot</span><span class="himmea" style="font-size:15px">${esc(t.kategoria)}, ${esc(t.tyyppi.toLowerCase())}${t.kokotyyppi !== 'Ei kokoa' ? ', ' + esc(t.kokotyyppi.toLowerCase()) : ''}</span></div>`,
-      ala: `<div class="toimintopalkki">${v
+      ala: myyty ? `<div class="toimintopalkki"><button class="nappi ulko" data-mene="#/selaa">Selaa muita löytöjä</button></div>` : `<div class="toimintopalkki">${v
         ? `<button class="nappi" data-mene="#/varaus/${id}">Näytä varaus</button>`
-        : `<button class="nappi ulko" data-kori="${id}">Lisää koriin</button><button class="nappi" data-mene="#/varaa/${id}">Varaa</button>`}</div>`,
+        : `${korissa ? `<button class="nappi ulko" data-mene="#/kori">Korissa</button>` : `<button class="nappi ulko" data-kori="${id}">Lisää koriin</button>`}<button class="nappi" data-mene="#/varaa/${id}">Varaa</button>`}</div>`,
       nav: 'selaa'
     };
   };
@@ -191,7 +200,7 @@
         <div class="laatikko">${ik('shop')}<div class="rivit"><span class="iso">${esc(k.nimi)}</span><span class="himmea">${esc(k.osoite)}</span><span class="himmea">Avoinna ${esc(k.aukiolo)}</span></div></div>
         <span style="font-size:14px">Tuote odottaa sinua <b style="font-weight:600">48 h</b>. Maksat noudettaessa. Pöytäpaikka näkyy, kun varaus on tehty.</span></div>
       <div class="raita"></div>
-      <div class="osio"><label class="osio-label" for="puh">Puhelinnumero</label><input class="kentta" id="puh" type="tel" inputmode="tel" value="040 123 4567"></div>`,
+      <div class="osio"><label class="osio-label" for="puh">Puhelinnumero</label><input class="kentta" id="puh" type="tel" inputmode="tel" autocomplete="tel" value="${esc(tila.puhelin)}"><span class="himmea" style="font-size:13px">Saat tekstiviestin, kun varaus on valmis ja ennen kuin se raukeaa.</span></div>`,
       ala: `<div class="yhteenveto"><div class="summa vahva">Maksetaan noudettaessa<b>${eur(t.hinta)}</b></div><button class="nappi" data-vahvista="${id}">Vahvista varaus</button></div>`,
       nav: 'selaa'
     };
@@ -217,17 +226,25 @@
 
   N.varaukset = () => {
     const ids = Object.keys(tila.varaukset);
+    const tyhja = !ids.length && !tila.tilaukset.length;
     return {
-      html: ylapalkki('Varaukset', true) + (ids.length ? ids.map((id) => `<div data-mene="#/varaus/${id}">${tuoterivi(tuote(id), ', pöytä ' + tuote(id).poyta)}</div><div class="raita"></div>`).join('')
-        : `<div class="tyhja"><h2 class="otsikko-iso">Ei varauksia</h2><p>Varaa tuote, niin se odottaa sinua kirppiksellä 48 h.</p><button class="nappi" style="width:auto;padding:0 28px" data-mene="#/">Aloita selaus</button></div>`),
+      html: ylapalkki('Varaukset ja tilaukset', true) + (tyhja
+        ? `<div class="tyhja"><h2 class="otsikko-iso">Ei vielä varauksia</h2><p>Varaa tuote, niin se odottaa sinua kirppiksellä 48 h.</p><button class="nappi" style="width:auto;padding:0 28px" data-mene="#/">Aloita selaus</button></div>`
+        : (ids.length ? `<div class="ryhmaotsikko">Varaukset</div>` + ids.map((id) => { const v = tila.varaukset[id]; const a = new Date(v.asti); return `<button class="hakurivi" data-mene="#/varaus/${id}"><span>${esc(tuote(id).nimi)}<br><small>${esc(tuote(id).kirppis)}, pöytä ${tuote(id).poyta}. Nouda ${pvm(a)} ${klo(a)} mennessä</small></span>${ik('chev_r')}</button>`; }).join('') : '')
+        + (tila.tilaukset.length ? `<div class="ryhmaotsikko" style="padding-top:28px">Tilaukset</div>` + tila.tilaukset.map((o) => `<button class="hakurivi" data-mene="#/tilaus/${o.numero}"><span>Tilaus ${o.numero}<br><small>${o.tuotteet.length} tuotetta, ${eur(o.summa)}. ${tilausVaihe(o)[1]}</small></span>${ik('chev_r')}</button>`).join('') : '')),
       nav: 'koti'
     };
   };
 
+  const kirppisMaara = (tt) => new Set(tt.map((t) => t.kirppis)).size;
+  function tilausVaihe(o) {
+    if (Date.now() > o.arvio + 12 * 3600 * 1000) return [3, 'Toimitettu'];
+    return [2, 'Matkalla'];
+  }
   N.kori = () => {
     const tt = tila.kori.map(tuote).filter(Boolean);
     if (!tt.length) {
-      const s = tila.suosikit.map(tuote).filter(Boolean);
+      const s = tila.suosikit.map(tuote).filter(Boolean).filter(myynnissa);
       return {
         html: ylapalkki('Ostoskori') + `<div class="tyhja"><h2 class="otsikko-iso">Ostoskorisi on tyhjä</h2><p>Löydöt odottavat kirppisten hyllyillä.</p>
           <button class="nappi" style="width:auto;padding:0 28px" data-mene="#/selaa">Aloita selaus</button></div>
@@ -235,11 +252,11 @@
         nav: 'kori'
       };
     }
-    const summa = tt.reduce((a, t) => a + t.hinta, 0);
-    const arvio = arkipaivat(new Date(), 2);
+    const summa = tt.reduce((a, t) => a + t.hinta, 0); const n = kirppisMaara(tt);
     return {
-      html: ylapalkki('Ostoskori') + `<div class="osio" style="gap:6px"><span style="font-size:14px">Toimitus arviolta <b style="font-weight:600">${pvm(arvio)}</b></span></div><div class="raita"></div>`
-        + tt.map((t) => tuoterivi(t, '', true)).join('<div class="raita" style="height:1px;background:var(--line)"></div>')
+      html: ylapalkki('Ostoskori') + `<div class="osio" style="gap:6px"><span style="font-size:14px">Toimitus arviolta <b style="font-weight:600">${pvm(arkipaivat(new Date(), 2))}</b></span>
+        ${n > 1 ? `<span class="himmea" style="font-size:13px">Tuotteet tulevat ${n} kirppikseltä, ${n} erillistä pakettia.</span>` : ''}</div><div class="raita"></div>`
+        + tt.map((t) => tuoterivi(t, '', true)).join('<div style="height:1px;background:var(--line)"></div>')
         + `<div class="raita"></div><div class="osio"><div class="laatikko">${ik('shop')}<span class="iso" style="font-size:15px">Haluatko noutaa itse? Varaa tuote sen omalta sivulta.</span></div></div>`,
       ala: `<div class="yhteenveto"><div class="summa vahva">Yhteensä (sis. ALV)<b>${eur(summa)} *</b></div><span class="himmea" style="font-size:13px;margin-top:-6px">*Toimitus lisätään seuraavassa vaiheessa</span><button class="nappi" data-mene="#/toimitus">Siirry maksamaan</button></div>`,
       nav: 'kori'
@@ -250,40 +267,46 @@
   const TAVAT = [['Pakettiautomaatti', 5.9, 3], ['Kotiovelle', 9.9, 2]];
   N.toimitus = () => {
     const tt = tila.kori.map(tuote).filter(Boolean); if (!tt.length) return N.kori();
-    const summa = tt.reduce((a, t) => a + t.hinta, 0); const tapa = TAVAT[toimitustapa];
+    const summa = tt.reduce((a, t) => a + t.hinta, 0); const tapa = TAVAT[toimitustapa]; const n = kirppisMaara(tt); const o = tila.osoite;
     return {
       html: ylapalkki('Kotiinkuljetus', true) + `<div class="osio"><span class="osio-label">Toimitusosoite</span>
-        <div class="laatikko"><div class="rivit"><span class="iso">Anna Esimerkki</span><span class="himmea">Esimerkkikatu 10 A 2, 00100 Helsinki</span></div></div></div>
+        <input class="kentta" id="o-nimi" autocomplete="name" placeholder="Nimi" value="${esc(o.nimi)}">
+        <input class="kentta" id="o-katu" autocomplete="street-address" placeholder="Katuosoite" value="${esc(o.katu)}">
+        <input class="kentta" id="o-posti" autocomplete="postal-code" placeholder="Postinumero ja toimipaikka" value="${esc(o.posti)}"></div>
       <div class="raita"></div>
       <div class="osio"><span class="osio-label">Toimitustapa</span><div class="valinnat">${TAVAT.map((x, i) => `<button class="valinta ${i === toimitustapa ? 'valittu' : ''}" data-tapa="${i}">${x[0]} ${eur(x[1])}</button>`).join('')}</div>
-        <span style="font-size:14px">Toimitus arviolta <b style="font-weight:600">${pvm(arkipaivat(new Date(), tapa[2]))}</b></span></div>
+        <span style="font-size:14px">Toimitus arviolta <b style="font-weight:600">${pvm(arkipaivat(new Date(), tapa[2]))}</b></span>
+        ${n > 1 ? `<span class="himmea" style="font-size:13px">Tuotteet tulevat ${n} kirppikseltä. Jokainen kirppis lähettää oman pakettinsa.</span>` : ''}</div>
       <div class="raita"></div>
       <div class="osio"><span class="osio-label">Maksutapa</span><div class="valinnat">${['Kortti', 'Mobiilimaksu', 'Verkkopankki'].map((x, i) => `<button class="valinta ${i === maksutapa ? 'valittu' : ''}" data-maksu="${i}">${x}</button>`).join('')}</div>
         <span class="himmea" style="font-size:13px">Demo: oikeaa maksua ei tehdä.</span></div>`,
-      ala: `<div class="yhteenveto"><div class="summa">Tuotteet<b>${eur(summa)}</b></div><div class="summa">Toimitus<b>${eur(tapa[1])}</b></div>
-        <div class="summa vahva">Yhteensä (sis. ALV)<b>${eur(summa + tapa[1])}</b></div><button class="nappi" data-maksa>Maksa</button></div>`,
-      nav: 'kori'
+      ala: `<div class="yhteenveto"><div class="summa">Tuotteet (${tt.length})<b>${eur(summa)}</b></div><div class="summa">Toimitus${n > 1 ? ' (' + n + ' pakettia)' : ''}<b>${eur(tapa[1] * n)}</b></div>
+        <div class="summa vahva">Yhteensä (sis. ALV)<b>${eur(summa + tapa[1] * n)}</b></div><button class="nappi" data-maksa>Maksa ${eur(summa + tapa[1] * n)}</button></div>`,
+      nav: 'kori', jalkeen: () => [['o-nimi', 'nimi'], ['o-katu', 'katu'], ['o-posti', 'posti']].forEach(([i, k]) => $('#' + i).addEventListener('input', (e) => { tila.osoite[k] = e.target.value; tallenna(); }))
     };
   };
 
   N.tilaus = (nro) => {
     const o = tila.tilaukset.find((x) => x.numero === nro) || tila.tilaukset[0]; if (!o) return N.koti();
-    const tt = o.tuotteet.map(tuote).filter(Boolean);
+    const tt = o.tuotteet.map(tuote).filter(Boolean); const [vaihe, teksti] = tilausVaihe(o);
     return {
-      html: ylapalkki('Tilaus', true) + `<div class="osio"><span class="iso">Paketti on matkalla</span>
-        <div class="edistyminen"><div style="width:66%"></div></div>
-        <div class="vaiheet"><span>Pakattu</span><b>Matkalla</b><span>Perillä</span></div>
-        <span style="font-size:14px">Toimitus arviolta <b style="font-weight:600">${pvm(new Date(o.arvio))}</b> ${o.tapa === 'Kotiovelle' ? 'kotiovelle' : 'pakettiautomaattiin'}</span></div>
+      html: ylapalkki('Tilaus', true) + `<div class="osio"><span class="iso">${vaihe === 3 ? 'Paketti on perillä' : 'Paketti on matkalla'}</span>
+        <div class="edistyminen"><div style="width:${vaihe === 3 ? 100 : 66}%"></div></div>
+        <div class="vaiheet"><span>Pakattu</span>${vaihe === 3 ? '<span>Matkalla</span><b>Perillä</b>' : '<b>Matkalla</b><span>Perillä</span>'}</div>
+        <span style="font-size:14px">${vaihe === 3 ? 'Toimitettu' : 'Toimitus arviolta'} <b style="font-weight:600">${pvm(new Date(o.arvio))}</b> ${o.tapa === 'Kotiovelle' ? 'kotiovelle' : 'pakettiautomaattiin'}</span>
+        ${o.paketit > 1 ? `<span class="himmea" style="font-size:13px">${o.paketit} pakettia, jokainen kirppis lähettää omansa.</span>` : ''}</div>
       <div class="raita"></div>${tt.map((t) => tuoterivi(t)).join('')}<div class="raita"></div>
       <div class="rivi vahva"><span>Tilausnumero</span><span>${o.numero}</span></div>
       <div class="rivi"><span>Toimitustapa</span><span>${o.tapa}</span></div>
+      <div class="rivi"><span>Toimitusosoite</span><span style="text-align:right">${esc(o.osoite || '')}</span></div>
       <div class="rivi"><span>Maksettu</span><span>${eur(o.summa)}</span></div><div class="vali"></div>`,
+      ala: `<div class="toimintopalkki"><button class="nappi ulko" data-mene="#/">Takaisin etusivulle</button></div>`,
       nav: 'kori'
     };
   };
 
   N.suosikit = () => {
-    const s = tila.suosikit.map(tuote).filter(Boolean);
+    const s = tila.suosikit.map(tuote).filter(Boolean).filter(myynnissa);
     return {
       html: ylapalkki('Suosikit') + (s.length ? `<div class="lajittelu" style="padding-top:14px"><span></span><span>${s.length} tuotetta</span></div><div class="ruudukko">${s.map(kortti).join('')}</div><div class="vali"></div>`
         : `<div class="tyhja"><h2 class="otsikko-iso">Ei vielä suosikkeja</h2><p>Paina sydäntä tuotekuvassa, niin löydät tuotteen täältä.</p><button class="nappi" style="width:auto;padding:0 28px" data-mene="#/selaa">Aloita selaus</button></div>`),
@@ -347,19 +370,19 @@
       .map(([k, i, l]) => `<button class="${k === a ? 'valittu' : ''} ${k === 'koti' ? 'pilvi' : ''}" data-mene="#/${k === 'koti' ? '' : k}" aria-label="${l}">${k === 'koti' ? `<img src="kuvat/pilvi${a === 'koti' ? '_aktiivinen' : ''}.png" alt="">` : k === 'kori' ? `<span class="merkki">${ik(i)}${n ? `<i>${n}</i>` : ''}</span>` : ik(i)}</button>`).join('');
   }
   function piirra(sailytaVieritys) {
-    const r = reitti(); const y = sis.scrollTop;
+    const r = reitti(); const y = sis.scrollTop; siivoa();
     const f = N[r.nimi] || N.koti; const v = f(r.arg);
     sis.innerHTML = v.html; ala.innerHTML = v.ala || ''; piirraNav(v.nav);
     sis.scrollTop = sailytaVieritys ? y : 0;
     if (v.jalkeen) v.jalkeen();
   }
-  window.addEventListener('hashchange', () => piirra());
+  window.addEventListener('hashchange', () => { $('#ilmoitus').classList.remove('nakyy'); piirra(); });
 
   /* ---------- Tapahtumat ---------- */
   document.addEventListener('click', (e) => {
     const el = e.target.closest('button, [data-tuote], [data-mene], h1[data-mene]'); if (!el) return;
     const d = el.dataset;
-    if (d.kori) { e.stopPropagation(); lisaaKoriin(d.kori); if (reitti().nimi !== 'tuote') piirra(true); return; }
+    if (d.kori) { e.stopPropagation(); lisaaKoriin(d.kori); piirra(true); return; }
     if (d.sydan) { e.stopPropagation(); vaihdaSuosikki(d.sydan); piirra(true); return; }
     if ('takaisin' in d) { history.length > 1 ? history.back() : (location.hash = '#/'); return; }
     if (d.mene !== undefined) { location.hash = d.mene; return; }
@@ -380,7 +403,9 @@
     if ('suljePaneeli' in d) { suljePaneeli(); return; }
     if (d.poista) { e.stopPropagation(); tila.kori = tila.kori.filter((x) => x !== d.poista); tallenna(); piirra(true); return; }
     if (d.vahvista) {
-      const id = d.vahvista;
+      const id = d.vahvista; const puh = ($('#puh') || {}).value || '';
+      if (puh.replace(/\D/g, '').length < 7) { ilmoita('Lisää puhelinnumero'); $('#puh').focus(); return; }
+      tila.puhelin = puh;
       tila.varaukset[id] = { numero: 'RS-' + (4000 + Math.floor(Math.random() * 6000)), asti: Date.now() + 48 * 3600 * 1000 };
       tila.kori = tila.kori.filter((x) => x !== id); tallenna(); location.replace('#/varaus/' + id); return;
     }
@@ -388,9 +413,13 @@
     if (d.tapa) { toimitustapa = +d.tapa; piirra(true); return; }
     if (d.maksu) { maksutapa = +d.maksu; piirra(true); return; }
     if ('maksa' in d) {
-      const tt = tila.kori.map(tuote).filter(Boolean); const tapa = TAVAT[toimitustapa];
-      const o = { numero: 'RS-' + (10000 + Math.floor(Math.random() * 90000)), tuotteet: tila.kori.slice(), tapa: tapa[0], summa: tt.reduce((a, t) => a + t.hinta, 0) + tapa[1], arvio: +arkipaivat(new Date(), tapa[2]) };
-      tila.tilaukset.unshift(o); tila.kori = []; tallenna(); location.replace('#/tilaus/' + o.numero); return;
+      const os = { nimi: $('#o-nimi').value.trim(), katu: $('#o-katu').value.trim(), posti: $('#o-posti').value.trim() };
+      if (!os.nimi || !os.katu || !/\d{5}/.test(os.posti)) { ilmoita('Täydennä toimitusosoite'); return; }
+      tila.osoite = os;
+      const tt = tila.kori.map(tuote).filter(Boolean); const tapa = TAVAT[toimitustapa]; const n = kirppisMaara(tt);
+      const o = { numero: 'RS-' + (10000 + Math.floor(Math.random() * 90000)), tuotteet: tila.kori.slice(), tapa: tapa[0], paketit: n, osoite: os.katu + ', ' + os.posti,
+        summa: tt.reduce((a, t) => a + t.hinta, 0) + tapa[1] * n, arvio: +arkipaivat(new Date(), tapa[2]) };
+      tila.tilaukset.unshift(o); tila.ostetut.push(...tila.kori); tila.kori = []; tallenna(); location.replace('#/tilaus/' + o.numero); return;
     }
     if ('nollaa' in d) { try { localStorage.removeItem(AVAIN); } catch (x) {} location.hash = '#/'; location.reload(); return; }
     if (d.tuote && el.tagName !== 'BUTTON') { location.hash = '#/tuote/' + d.tuote; }

@@ -40,6 +40,9 @@ Muutos näkyy linkissä noin minuutin kuluttua tallennuksesta.
 
 ## Oletukset
 
-- Varaus: tuote odottaa 48 h ja maksetaan noudettaessa. Leon vahvistaa.
+- Varaus: tuote odottaa 48 h ja maksetaan noudettaessa. Varaus raukeaa automaattisesti 48 h jälkeen. Leon vahvistaa.
+- Pöytäpaikka näkyy vasta, kun varaus on tehty.
+- Kotiinkuljetus: jokainen kirppis lähettää oman pakettinsa, joten toimitusmaksu lasketaan kirppiskohtaisesti.
+- Ostettu tuote poistuu valikoimasta. Varattua tuotetta ei voi lisätä koriin.
 - Kirppisten nimet, osoitteet, toimitushinnat ja asiakas ovat keksittyjä esimerkkejä.
 - Tuotenimet ovat yleisnimiä, ei merkkejä. Logo- ja monogrammituotteet on jätetty pois.
