@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Uutiskirje · Resella</title>
+<meta name="description" content="Tilaa Resellan uutiskirje: uudet ominaisuudet, käyttöönoton vinkit ja kuluttaja-appin eteneminen.">
+<link rel="icon" href="assets/ikoni/favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/svg+xml" href="assets/ikoni/favicon.svg?v=3">
+<link rel="apple-touch-icon" href="assets/ikoni/apple-touch-icon_180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ECECDC;--surface:#F6F6EE;--line:#DCDBC6;--ink:#3E2520;--ink-muted:#6E5E56;--blue-deep:#3A4961;--faint:#B5ABA2;--std:cubic-bezier(.45,0,.55,1)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.5 "Inter Tight",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--ink)}
+:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px}
+.wrap{max-width:1300px;margin:0 auto;padding:40px clamp(20px,4.4vw,63px) 120px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:72px}
+.top img{height:30px;width:auto;display:block}
+.top a.back{font-size:15px;font-weight:500;text-underline-offset:3px}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,600px);gap:clamp(40px,7vw,96px);align-items:start}
+h1{margin:8px 0 28px;font-weight:600;font-size:clamp(56px,7vw,96px);line-height:.95;letter-spacing:-.04em}
+.lead{margin:0 0 28px;font-size:20px;line-height:1.45;max-width:560px}
+.facts{margin:0 0 28px;padding:0;list-style:none;max-width:560px;border-top:1px solid var(--line)}
+.facts li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);color:var(--ink-muted)}
+.facts b{color:var(--ink);font-weight:600}
+.note{margin:0 0 20px;color:var(--ink-muted);line-height:1.5;max-width:560px}
+.sign{margin:0;font-weight:600}
+.card{background:var(--surface);border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:28px}
+.hr{height:1px;background:var(--line)}
+.cal-h{display:flex;justify-content:space-between;align-items:center}
+.cal-h h2{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
+.cal-nav{display:flex;gap:18px}
+.cal-nav button{border:0;background:none;padding:6px 0;font:500 15px "Inter Tight",sans-serif;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cal-nav button:disabled{color:var(--faint);text-decoration:none;cursor:default}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));row-gap:2px;text-align:center}
+.grid .wd{font-size:13px;color:var(--ink-muted);padding-bottom:8px}
+.grid .d{height:52px;display:grid;place-items:center}
+.grid .d span,.grid .d button{width:44px;height:44px;border-radius:999px;display:grid;place-items:center;font:400 16px "Inter Tight",sans-serif;color:var(--faint);border:0;background:none;padding:0}
+.grid .d button{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:background-color 200ms var(--std)}
+.grid .d button:hover{background:var(--bg)}
+.grid .d button[aria-pressed="true"]{background:var(--ink);color:var(--bg);text-decoration:none}
+.day-h{margin:0 0 12px;font-size:18px;font-weight:600}
+.times{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.times button{height:44px;border-radius:999px;border:1px solid var(--line);background:none;font:600 15px "Inter Tight",sans-serif;color:var(--ink);cursor:pointer;transition:background-color 200ms var(--std),color 200ms var(--std)}
+.times button:hover{background:var(--bg)}
+.times button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.times button:disabled{color:var(--faint);text-decoration:line-through;cursor:default;background:none}
+.empty{margin:0;color:var(--ink-muted)}
+.fields{display:flex;flex-direction:column;gap:12px}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-muted)}
+input{height:48px;border:0;border-radius:10px;background:var(--bg);padding:0 16px;font:400 16px "Inter Tight",sans-serif;color:var(--ink)}
+input::placeholder{color:#9C9087}
+.submit{height:52px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:600 17px "Inter Tight",sans-serif;cursor:pointer;transition:background-color 200ms var(--std),color 200ms var(--std)}
+.submit:hover{background:#2A1814}
+.submit:disabled{background:var(--line);color:var(--ink-muted);cursor:default}
+.small{margin:0;text-align:center;font-size:14px;color:var(--ink-muted)}
+.done{text-align:left}
+.done h2{margin:0 0 10px;font-size:32px;font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.done p{margin:0 0 12px;color:var(--ink-muted);line-height:1.5}
+[hidden]{display:none!important}
+@media(max-width:900px){
+  .top{margin-bottom:40px}
+  .cols{grid-template-columns:1fr}
+  .card{padding:22px}
+  .lead{font-size:18px}
+  .grid .d{height:46px}.grid .d span,.grid .d button{width:40px;height:40px;font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.who{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border:0;margin:0;padding:0}
+.who legend{font-size:14px;color:var(--ink-muted);margin-bottom:10px;padding:0}
+.who label{position:relative;display:block}
+.who input{position:absolute;opacity:0;width:1px;height:1px}
+.who span{display:grid;place-items:center;height:44px;border-radius:999px;border:1px solid var(--line);font-weight:600;font-size:15px;color:var(--ink);cursor:pointer;text-align:center;padding:0 8px;transition:background-color 200ms var(--std),color 200ms var(--std)}
+.who input:checked+span{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.who input:focus-visible+span{outline:2px solid var(--blue-deep);outline-offset:2px}
+.consent{display:flex;flex-direction:row;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45;color:var(--ink-muted)}
+.consent input{width:22px;height:22px;flex:0 0 22px;margin:1px 0 0;accent-color:var(--ink);padding:0}
+.card h2{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
+@media(max-width:520px){.who{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a href="resella.html" aria-label="Resella etusivu"><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a>
+    <a class="back" href="resella.html">Takaisin etusivulle</a>
+  </header>
+  <main class="cols">
+    <section>
+      <h1>Pysy<br>mukana.</h1>
+      <p class="lead">Kerromme, kun Resellaan tulee jotain uutta: uudet ominaisuudet, käyttöönoton vinkit ja kuluttaja-appin eteneminen.</p>
+      <ul class="facts">
+        <li>Kuinka usein <b>Vain kun on asiaa</b></li>
+        <li>Hinta <b>Maksuton</b></li>
+        <li>Peruminen <b>Yhdellä klikkauksella</b></li>
+      </ul>
+      <p class="sign">Sofia ja Leon</p>
+    </section>
+    <section class="card" aria-label="Uutiskirjeen tilaus">
+      <form id="form" novalidate style="display:flex;flex-direction:column;gap:24px">
+        <h2>Tilaa uutiskirje</h2>
+        <div class="fields">
+          <label>Sähköposti<input id="email" name="email" type="email" autocomplete="email" required></label>
+          <label>Nimi (vapaaehtoinen)<input id="nimi" name="nimi" autocomplete="name"></label>
+        </div>
+        <fieldset class="who">
+          <legend>Olen</legend>
+          <label><input type="radio" name="rooli" value="Kirppiksen omistaja" checked><span>Kirppiksen omistaja</span></label>
+          <label><input type="radio" name="rooli" value="Myyjä"><span>Myyjä</span></label>
+          <label><input type="radio" name="rooli" value="Ostaja"><span>Ostaja</span></label>
+        </fieldset>
+        <label class="consent"><input type="checkbox" id="lupa" required><span>Haluan Resellan uutiskirjeen sähköpostiini. Voin perua tilauksen milloin tahansa.</span></label>
+        <button class="submit" type="submit">Tilaa uutiskirje</button>
+        <p class="small">Emme jaa osoitettasi kenellekään.</p>
+      </form>
+      <div class="done" id="done" hidden>
+        <h2 style="font-size:32px;margin-bottom:10px">Melkein valmista.</h2>
+        <p>Tilausviesti on valmiina sähköpostiohjelmassasi. Lähetä se, niin lisäämme sinut listalle.</p>
+        <p>Jos sähköpostiohjelma ei auennut, lähetä viesti osoitteeseen <a id="doneMail" href="mailto:hei@resella.fi">hei@resella.fi</a>.</p>
+      </div>
+    </section>
+  </main>
+</div>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var q=new URLSearchParams(location.search); if(q.get('email')) $('email').value=q.get('email');
+  $('form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var em=$('email'), lupa=$('lupa');
+    if(!em.value.trim()||!em.checkValidity()){ em.focus(); em.reportValidity&&em.reportValidity(); return; }
+    if(!lupa.checked){ lupa.focus(); lupa.reportValidity&&lupa.reportValidity(); return; }
+    var rooli=(document.querySelector('input[name=rooli]:checked')||{}).value||'';
+    var body='Hei,\n\nhaluan tilata Resellan uutiskirjeen.\n\nSähköposti: '+em.value.trim()+'\nNimi: '+($('nimi').value.trim()||'-')+'\nOlen: '+rooli+'\n';
+    var mail='mailto:hei@resella.fi?subject='+encodeURIComponent('Uutiskirjeen tilaus')+'&body='+encodeURIComponent(body);
+    $('doneMail').href=mail; $('form').hidden=true; $('done').hidden=false; location.href=mail;
+  });
+})();
+</script>
+</body>
+</html>
