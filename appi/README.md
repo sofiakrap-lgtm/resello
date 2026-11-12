@@ -2,7 +2,7 @@
 
 Linkki: https://sofiakrap-lgtm.github.io/resello/appi/
 
-Klikattava demo. Ei taustajärjestelmää eikä analytiikkaa. Suosikit, ostoskori, varaukset ja tilaukset säilyvät vain katsojan omassa selaimessa. Nollaus: alavalikko Myy, "Aloita demo alusta".
+Klikattava demo ostajalle (haku, varaus, kotiinkuljetus) ja myyjälle (myyntipaikan varaus, myyntini, tilitykset). Ei taustajärjestelmää eikä analytiikkaa. Suosikit, ostoskori, varaukset ja tilaukset säilyvät vain katsojan omassa selaimessa. Nollaus: profiili (henkilökuvake), "Aloita demo alusta".
 
 ## Tiedostot
 
@@ -37,6 +37,11 @@ Avaa `tuotteet.js` GitHubissa (kynäkuvake) ja muuta rivin tietoja:
 **Poista tuote:** poista koko rivi. Muista pilkut rivien välissä.
 
 Muutos näkyy linkissä noin minuutin kuluttua tallennuksesta.
+
+## Myyjän demo
+
+- Demokäyttäjä Anna myy pöydällä 22 (Kirppis Keskusta). Hänen tuotteensa ovat kaikki tuotteet, joilla on `"kirppis": "Kirppis Keskusta"` ja `"poyta": 22`.
+- Myyntipaikan hinta 25 EUR / vk on esimerkki (`MP_HINTA` tiedostossa app.js).
 
 ## Oletukset
 

@@ -19,7 +19,7 @@
     const k = tila.kori.filter((id) => !tila.ostetut.includes(id) && !tila.varaukset[id]); if (k.length !== tila.kori.length) { tila.kori = k; m = true; }
     if (m) tallenna();
   }
-  const myynnissa = (t) => !tila.ostetut.includes(t.id);
+  const myynnissa = (t) => !tila.ostetut.includes(t.id) && !(window.MYYDYT_ENNEN || []).includes(t.id);
 
   /* ---------- Apurit ---------- */
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -326,14 +326,129 @@
     nav: 'selaa'
   });
 
-  N.myy = () => ({
-    html: ylapalkki('Myy') + `<div class="osio" style="gap:8px"><h2 style="font-size:28px;font-weight:600">Myy kirppiksellä</h2>
-      <p class="himmea" style="font-size:15px">Myyjän näkymät tulevat appiin myöhemmin. Tässä demossa voit kokeilla ostamista: hakua, varausta ja kotiinkuljetusta.</p></div>
-      <div class="raita"></div><div class="osio"><button class="nappi ulko" data-nollaa>Aloita demo alusta</button>
-      <span class="himmea" style="font-size:13px">Tyhjentää suosikit, ostoskorin, varaukset ja tilaukset tästä selaimesta.</span></div>`,
+  /* ---------- Myyjän näkymät ---------- */
+  const OMA_POYTA = { kirppis: 'Kirppis Keskusta', poyta: 22 };
+  const OMAT = T.filter((t) => t.kirppis === OMA_POYTA.kirppis && t.poyta === OMA_POYTA.poyta).map((t) => t.id);
+  const MYYDYT_ENNEN = OMAT.slice(-2); window.MYYDYT_ENNEN = MYYDYT_ENNEN; // demon alussa myydyt omat tuotteet
+  const PAIVA = 24 * 3600 * 1000;
+  const lyhytPvm = (d) => d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear();
+  if (!tila.myyntipaikat) tila.myyntipaikat = [{ kirppis: OMA_POYTA.kirppis, poyta: OMA_POYTA.poyta, alku: Date.now() - 5 * PAIVA, viikot: 2, numero: 'MP-2041' }];
+  const SIIRROT = [[-15, 60.4, 3], [-53, 101.4, 6], [-83, 30.2, 2]];
+  const listarivi = (ikoni, otsikko, ala, kohde) => `<button class="listarivi" ${kohde ? (kohde[0] === '!' ? `data-ilmoita="${kohde.slice(1)}"` : `data-mene="${kohde}"`) : ''}>${ik(ikoni)}<span class="lr-teksti">${otsikko}${ala ? `<small>${ala}</small>` : ''}</span>${ik('chev_r')}</button>`;
+  const myydytOmat = () => OMAT.filter((id) => MYYDYT_ENNEN.includes(id) || tila.ostetut.includes(id));
+  let bannerisivu = 0;
+  const MYY_BANNERIT = [['Koti täynnä tavaraa? Varaa paikka ja anna kirppiksen myydä', 'Varaa myyntipaikka', '#/myyntipaikka'],
+    ['Tuotteesi näkyvät appissa heti, kun kirppis hinnoittelee ne', 'Näin se toimii', '#/nain-toimii'],
+    ['Tilitys suoraan pankkitilillesi, ei erillistä nostoa', 'Katso tilitykset', '#/tilitykset']];
+
+  N.myy = () => {
+    const nyt = Date.now(); const akt = tila.myyntipaikat.filter((m) => m.alku + m.viikot * 7 * PAIVA > nyt);
+    const [ot, link, kohde] = MYY_BANNERIT[bannerisivu];
+    return {
+      html: ylapalkki('Myy') + `<div class="osio" style="padding-bottom:8px"><h2 class="sivuotsikko">Myyntini</h2></div>
+      <div style="padding:0 16px"><div class="bannerikortti" data-mene="${kohde}"><b>${ot}</b><span>${link} ${ik('chev_r')}</span></div>
+      <div class="sivupisteet">${MYY_BANNERIT.map((_, i) => `<button data-bannerisivu="${i}" class="${i === bannerisivu ? 'valittu' : ''}" aria-label="Sivu ${i + 1}"></button>`).join('')}</div></div>
+      ${listarivi('box', 'Varaa myyntipaikka', '', '#/myyntipaikka')}${listarivi('stores', 'Omat varaukset', akt.length ? akt.length + ' voimassa' : '', '#/myyntipaikat')}${listarivi('clock', 'Aiemmat varaukset', '', '#/myyntipaikat/aiemmat')}
+      <div class="raita"></div>
+      ${listarivi('tag', 'Myyntini', OMAT.length - myydytOmat().length + ' myynnissä, ' + myydytOmat().length + ' myyty', '#/myyntini')}${listarivi('wallet', 'Tilitykset', '', '#/tilitykset')}${listarivi('info', 'Näin se toimii', '', '#/nain-toimii')}<div class="vali"></div>`,
+      nav: 'myy'
+    };
+  };
+
+  N.profiili = () => ({
+    html: ylapalkki('Profiili', true).replace(/<button class="ikoni-nappi" data-mene="#\/profiili"[^]*?<\/button>/, '') + `<div class="osio" style="flex-direction:row;justify-content:space-between;align-items:center"><h2 class="sivuotsikko">Anna</h2>${ik('gear')}</div>
+      <div style="padding:0 16px 24px"><div class="nostokortti"><b>Kaapin siivouspäivä?</b><span>Varaa paikka lähikirppikseltä parilla klikkauksella.</span><button class="chip" style="height:34px;align-self:flex-start" data-mene="#/myyntipaikka">Varaa paikka</button></div></div>
+      ${listarivi('wallet', 'Tilitykset', '', '#/tilitykset')}${listarivi('box', 'Tilaukseni ja varaukseni', '', '#/varaukset')}${listarivi('nav_heart', 'Suosikit', '', '#/suosikit')}${listarivi('tag', 'Myyntini', '', '#/myyntini')}
+      <div class="osio" style="padding-top:32px"><button class="linkki" data-nollaa style="align-self:center">Aloita demo alusta</button>
+      <span class="himmea" style="font-size:13px;text-align:center">Tyhjentää suosikit, ostoskorin, varaukset ja tilaukset tästä selaimesta.</span></div>`,
     nav: 'myy'
   });
-  N.profiili = N.myy;
+
+  let mp = { kirppis: 0, alku: 1, viikot: 2 };
+  const MP_HINTA = 25; // esimerkkihinta EUR / viikko
+  N.myyntipaikka = () => {
+    const paivat = Array.from({ length: 10 }, (_, i) => { const d = new Date(); d.setHours(10, 0, 0, 0); d.setDate(d.getDate() + i + 1); return d; }).filter((d) => d.getDay() !== 0);
+    const k = K[mp.kirppis]; const alku = paivat[Math.min(mp.alku, paivat.length - 1)]; const loppu = new Date(+alku + (mp.viikot * 7 - 1) * PAIVA);
+    return {
+      html: ylapalkki('Varaa myyntipaikka', true) + `<div class="osio"><span class="osio-label">Kirppis</span><div class="valinnat">${K.map((x, i) => `<button class="valinta ${i === mp.kirppis ? 'valittu' : ''}" data-mp="kirppis" data-arvo="${i}">${esc(x.nimi)}</button>`).join('')}</div>
+        <div class="laatikko">${ik('shop')}<div class="rivit"><span class="iso">${esc(k.nimi)}</span><span class="himmea">${esc(k.osoite)}</span><span class="himmea">Avoinna ${esc(k.aukiolo)}</span></div></div></div>
+      <div class="raita"></div>
+      <div class="osio"><span class="osio-label">Aloituspäivä</span><div class="valinnat">${paivat.map((d, i) => `<button class="valinta ${i === mp.alku ? 'valittu' : ''}" data-mp="alku" data-arvo="${i}">${pvm(d)}</button>`).join('')}</div></div>
+      <div class="raita"></div>
+      <div class="osio"><span class="osio-label">Kesto</span><div class="valinnat">${[1, 2, 3, 4].map((v) => `<button class="valinta ${v === mp.viikot ? 'valittu' : ''}" data-mp="viikot" data-arvo="${v}">${v} vk</button>`).join('')}</div>
+        <span style="font-size:14px">Myyntiaika <b style="font-weight:600">${pvm(alku)} - ${pvm(loppu)}</b>. Pöytäpaikka näkyy varauksen jälkeen.</span></div>`,
+      ala: `<div class="yhteenveto"><div class="summa">Myyntipaikka ${mp.viikot} vk<b>${eur(MP_HINTA * mp.viikot)}</b></div><span class="himmea" style="font-size:13px;margin-top:-6px">Esimerkkihinta. Jokainen kirppis päättää omat hintansa.</span><button class="nappi" data-mp-vahvista>Varaa ja maksa ${eur(MP_HINTA * mp.viikot)}</button></div>`,
+      nav: 'myy', jalkeen: () => { N.myyntipaikka.alku = +alku; }
+    };
+  };
+
+  N.myyntipaikkavaraus = (nro) => {
+    const m = tila.myyntipaikat.find((x) => x.numero === nro); if (!m) return N.myy();
+    const alku = new Date(m.alku); const loppu = new Date(m.alku + (m.viikot * 7 - 1) * PAIVA); const k = kirppis(m.kirppis);
+    return {
+      html: ylapalkki('Myyntipaikka', true) + `<div class="osio" style="gap:6px"><h2 class="otsikko-iso">${m.alku > Date.now() ? 'Myyntipaikka varattu' : 'Myyntipaikka'}</h2>
+        <p class="himmea" style="font-size:15px">Tuo tuotteesi kirppikselle ensimmäisenä päivänä. Kirppis hinnoittelee ne, ja ne näkyvät appissa heti.</p></div>
+      <div class="raita"></div>
+      <div class="rivi vahva"><span>Varausnumero</span><span>${m.numero}</span></div>
+      <div class="rivi"><span>Kirppis</span><span>${esc(m.kirppis)}</span></div>
+      <div class="rivi"><span>Pöytä</span><span>${m.poyta}</span></div>
+      <div class="rivi"><span>Myyntiaika</span><span>${pvm(alku)} - ${pvm(loppu)}</span></div>
+      <div class="rivi"><span>Osoite</span><span>${esc(k.osoite)}</span></div><div class="vali"></div>`,
+      ala: `<div class="toimintopalkki"><button class="nappi ulko" data-mene="#/myy">Takaisin myyntiin</button></div>`,
+      nav: 'myy'
+    };
+  };
+
+  N.myyntipaikat = (osa) => {
+    const nyt = Date.now(); const aiemmat = osa === 'aiemmat';
+    const omat = tila.myyntipaikat.filter((m) => (m.alku + m.viikot * 7 * PAIVA > nyt) !== aiemmat);
+    const vanhat = aiemmat ? [[-70, 2, 'Kirppis Keskusta', 22, 'MP-1733'], [-130, 3, 'Kirppis Itä', 8, 'MP-1290']].map(([p, v, k, po, n]) => ({ kirppis: k, poyta: po, alku: nyt + p * PAIVA, viikot: v, numero: n })) : [];
+    const kaikki = omat.concat(vanhat);
+    return {
+      html: ylapalkki(aiemmat ? 'Aiemmat varaukset' : 'Omat varaukset', true) + (kaikki.length ? kaikki.map((m) => { const a = new Date(m.alku); const l = new Date(m.alku + (m.viikot * 7 - 1) * PAIVA);
+        return `<button class="hakurivi" ${tila.myyntipaikat.includes(m) ? `data-mene="#/myyntipaikkavaraus/${m.numero}"` : ''}><span>${esc(m.kirppis)}, pöytä ${m.poyta}<br><small>${aiemmat ? lyhytPvm(a) + ' - ' + lyhytPvm(l) : pvm(a) + ' - ' + pvm(l)}${!aiemmat && m.alku > nyt ? ', alkaa pian' : ''}</small></span>${ik('chev_r')}</button>`; }).join('')
+        : `<div class="tyhja"><h2 class="otsikko-iso">Ei voimassa olevia varauksia</h2><p>Varaa myyntipaikka lähikirppikseltä.</p><button class="nappi" style="width:auto;padding:0 28px" data-mene="#/myyntipaikka">Varaa myyntipaikka</button></div>`),
+      nav: 'myy'
+    };
+  };
+
+  N.myyntini = () => {
+    const myydyt = myydytOmat();
+    return {
+      html: ylapalkki('Myyntini', true) + `<div class="osio" style="gap:4px"><span class="iso">${esc(OMA_POYTA.kirppis)}, pöytä ${OMA_POYTA.poyta}</span><span class="himmea">${OMAT.length - myydyt.length} myynnissä, ${myydyt.length} myyty</span></div><div class="raita"></div>`
+        + OMAT.map(tuote).map((t) => `<div class="tuoterivi" data-tuote="${t.id}"><img src="${t.kuva}" alt=""><div class="tiedot"><b style="font-size:16px;font-weight:600">${esc(t.nimi)}</b><span class="himmea">${esc(kuvausrivi(t))}</span><span class="tila-tagi ${myydyt.includes(t.id) ? 'myyty' : ''}">${myydyt.includes(t.id) ? 'Myyty' : tila.varaukset[t.id] ? 'Varattu' : 'Myynnissä'}</span><span class="hinta">${eur(t.hinta)}</span></div></div>`).join('<div style="height:1px;background:var(--line)"></div>') + '<div class="vali"></div>',
+      nav: 'myy'
+    };
+  };
+
+  let tilitysValilehti = 'Saldo'; let auki = -1; let yhteenveto = false;
+  N.tilitykset = (osa) => {
+    if (osa === 'siirrot' && piirra.uusi) tilitysValilehti = 'Siirrot';
+    const myydyt = myydytOmat().map(tuote); const saldo = myydyt.reduce((a, t) => a + t.hinta, 0); const hyllyssa = OMAT.length - myydyt.length;
+    const tabs = `<div class="valilehdet">${['Saldo', 'Siirrot'].map((v) => `<button class="${v === tilitysValilehti ? 'valittu' : ''}" data-tilitys="${v}">${v}</button>`).join('')}</div>`;
+    const saldoHtml = `<div style="padding:16px;display:flex;flex-direction:column;gap:16px"><div class="kortti-surf"><div style="padding:20px 16px 8px"><div class="saldo">${eur(saldo)}</div><span class="himmea">Myynneistä</span></div>
+        <div style="padding:8px 16px 4px"><button class="nappi ulko" style="height:40px;background:var(--sec);border-color:var(--line)" data-yhteenveto>${yhteenveto ? 'Piilota yhteenveto' : 'Katso yhteenveto'}</button></div>
+        ${yhteenveto ? `<div style="padding:4px 16px 8px">${myydyt.map((t) => `<div class="summa" style="padding:6px 0">${esc(t.nimi)}<b>${eur(t.hinta)}</b></div>`).join('')}<span class="himmea" style="font-size:13px">Kirppis vähentää palkkionsa ennen tilitystä.</span></div>` : ''}
+        ${listarivi('bank', 'Pankkitilille', 'Kirppis tilittää sovitusti', '!Tilitykset menevät tilille FI** **** **** 1234')}${listarivi('clock', 'Tilityshistoria', 'Kaikki aiemmat tilitykset', '#/tilitykset/siirrot')}${listarivi('sparkle', 'Automaattinen tilitys', 'Ei erillistä nostoa', '!Automaattinen tilitys on päällä')}</div>
+      <div class="kortti-surf" style="padding:24px 16px"><div class="saldo">${hyllyssa}</div><span class="himmea">Tuotetta hyllyssä nyt</span></div></div>`;
+    const siirrotHtml = `<div class="ryhmaotsikko">Valmiit tilitykset</div><div style="margin:0 16px" class="kortti-surf">${SIIRROT.map(([p, e, n], i) => { const d = new Date(Date.now() + p * PAIVA);
+      return `<button class="siirto" data-siirto="${i}"><span><span class="iso" style="font-weight:400">Pankkitilille</span><br><small class="himmea">${lyhytPvm(d)}</small></span><span style="display:flex;gap:12px;align-items:center;font-size:14px">${eur(e)}${ik('chevd')}</span></button>
+      ${auki === i ? `<div class="siirto-tiedot"><div class="summa">Myydyt tuotteet<b>${n} kpl</b></div><div class="summa">Tilitetty tilille<b>FI** **** **** 1234</b></div><div class="summa">Kirppis<b>${esc(OMA_POYTA.kirppis)}</b></div></div>` : ''}`; }).join('')}</div>
+      <button class="linkki" style="display:block;margin:20px auto" data-ilmoita="Ei aiempia tilityksiä">Näytä lisää</button>`;
+    return { html: ylapalkki('Tilitykset', true) + tabs + (tilitysValilehti === 'Saldo' ? saldoHtml : siirrotHtml), nav: 'myy' };
+  };
+
+  N['nain-toimii'] = () => ({
+    html: ylapalkki('Näin se toimii', true) + `<div class="osio" style="gap:8px"><h2 class="sivuotsikko" style="font-size:28px">Myy kirppiksellä, ilman vaivaa</h2><p class="himmea" style="font-size:15px">Sinä tuot tavarat, kirppis hoitaa myynnin. Tuotteesi näkyvät appissa heti, kun ne on hinnoiteltu.</p></div>
+      <div class="raita"></div>
+      ${[['box', 'Varaa myyntipaikka', 'Valitse kirppis, aloituspäivä ja kesto.'], ['tag', 'Tuo tuotteet', 'Kirppis hinnoittelee ne, ja ne näkyvät ostajille appissa.'], ['wallet', 'Saat tilityksen', 'Myynnit tilitetään pankkitilillesi automaattisesti.']]
+        .map(([i, o, t]) => `<div class="listarivi" style="cursor:default">${ik(i)}<span class="lr-teksti">${o}<small>${t}</small></span></div>`).join('')}
+      <div class="raita"></div><div class="ryhmaotsikko">Usein kysyttyä</div>
+      ${[['Mitä myyntipaikka maksaa?', 'Jokainen kirppis päättää omat hintansa. Näet hinnan ennen varausta.'], ['Kuka hinnoittelee tuotteet?', 'Kirppis hinnoittelee tuotteet, kun tuot ne. Voit sopia hinnoista kirppiksen kanssa.'], ['Milloin saan rahat?', 'Kirppis tilittää myynnit sovitusti suoraan pankkitilillesi.'], ['Mitä myymättömille tuotteille tapahtuu?', 'Haet ne myyntiajan päätyttyä tai sovit kirppiksen kanssa lahjoituksesta.']]
+        .map(([k, v], i) => `<button class="siirto" data-ukk="${i}"><span class="iso" style="font-weight:500;text-align:left">${k}</span>${ik('chevd')}</button>${auki === 100 + i ? `<div class="siirto-tiedot"><span style="font-size:15px">${v}</span></div>` : ''}`).join('')}
+      <div class="osio"><button class="nappi" data-mene="#/myyntipaikka">Varaa myyntipaikka</button></div>`,
+    nav: 'myy'
+  });
 
   /* ---------- Suodatinpaneeli ---------- */
   function avaaPaneeli(kohta) {
@@ -372,7 +487,7 @@
   }
   function piirra(sailytaVieritys) {
     const r = reitti(); const y = sis.scrollTop; siivoa();
-    const f = N[r.nimi] || N.koti; const v = f(r.arg);
+    piirra.uusi = !sailytaVieritys; const f = N[r.nimi] || N.koti; const v = f(r.arg);
     sis.innerHTML = v.html; ala.innerHTML = v.ala || ''; piirraNav(v.nav);
     sis.scrollTop = sailytaVieritys ? y : 0;
     if (v.jalkeen) v.jalkeen();
@@ -422,6 +537,17 @@
         summa: tt.reduce((a, t) => a + t.hinta, 0) + tapa[1] * n, arvio: +arkipaivat(new Date(), tapa[2]) };
       tila.tilaukset.unshift(o); tila.ostetut.push(...tila.kori); tila.kori = []; tallenna(); location.replace('#/tilaus/' + o.numero); return;
     }
+    if (d.bannerisivu) { bannerisivu = +d.bannerisivu; piirra(true); return; }
+    if (d.mp) { mp[d.mp] = +d.arvo; piirra(true); return; }
+    if ('mpVahvista' in d) {
+      const k = K[mp.kirppis]; const m = { kirppis: k.nimi, poyta: 10 + Math.floor(Math.random() * 40), alku: N.myyntipaikka.alku, viikot: mp.viikot, numero: 'MP-' + (2100 + Math.floor(Math.random() * 800)) };
+      tila.myyntipaikat.push(m); tallenna(); location.replace('#/myyntipaikkavaraus/' + m.numero); return;
+    }
+    if (d.tilitys) { tilitysValilehti = d.tilitys; auki = -1; piirra(true); return; }
+    if ('yhteenveto' in d) { yhteenveto = !yhteenveto; piirra(true); return; }
+    if (d.siirto) { auki = auki === +d.siirto ? -1 : +d.siirto; piirra(true); return; }
+    if (d.ukk) { auki = auki === 100 + +d.ukk ? -1 : 100 + +d.ukk; piirra(true); return; }
+    if (d.ilmoita) { ilmoita(d.ilmoita); return; }
     if ('nollaa' in d) { try { localStorage.removeItem(AVAIN); } catch (x) {} location.hash = '#/'; location.reload(); return; }
     if (d.tuote && el.tagName !== 'BUTTON') { location.hash = '#/tuote/' + d.tuote; }
   });
