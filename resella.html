@@ -380,6 +380,26 @@ section[id]{scroll-margin-top:72px}
 @media(max-width:700px){.ks-deco{top:auto;height:55%}.ks .disp{max-width:none}.ks{padding-bottom:200px}}
 
 /* laitteet: viisi korttia, otsikko, kortit ja laitteet nousevat esiin vuorotellen */
+/* Odotuslista (kuluttajat) */
+.ol{background:var(--bg);color:var(--ink);padding:clamp(80px,9vw,130px) 0}
+.ol .disp{text-align:center;margin:0 auto}
+.ol-row{display:flex;align-items:center;justify-content:center;gap:clamp(40px,5.5vw,96px);margin-top:clamp(40px,4.4vw,64px)}
+.ol-phones{display:flex;gap:clamp(28px,4.4vw,72px)}
+.ol-phone{position:relative;width:clamp(200px,20.8vw,300px);aspect-ratio:1350/2760;flex:none}
+.ol-phone::after{content:"";position:absolute;inset:0;background:url(assets/laitteet/iphone17-kehys.webp?v=1) center/100% 100% no-repeat;z-index:3;pointer-events:none}
+.ol-phone img{position:absolute;left:5.33%;top:2.5%;width:89.34%;height:95%;object-fit:cover;object-position:50% 0;border-radius:15.6%/7.17%;display:block;z-index:1}
+.ol-steps{width:min(320px,24vw)}
+.ol-step{padding:22px 0}.ol-step+.ol-step{border-top:1px solid var(--line)}
+.ol-step h3{font:600 22px/1.2 var(--fd);letter-spacing:-.015em;margin:0 0 6px}
+.ol-step p{margin:0;font-size:17px;line-height:1.45;color:var(--ink-muted)}
+.ol-cta{text-align:center;margin-top:clamp(44px,4.8vw,72px)}
+.ol .btn{--h:56px;--px:34px;--fs:17px}
+@media(max-width:1100px){.ol-row{flex-direction:column}.ol-steps{width:min(420px,90%)}}
+.m-ol{align-items:stretch}
+.m-ol .m-h2{text-align:center}
+.m-ol .ol-phone{width:min(230px,62vw);margin:8px auto 0}
+.m-ol .ol-step{padding:16px 0}.m-ol .ol-step h3{font-size:20px}.m-ol .ol-step p{font-size:16px}
+.m-ol .m-pill{width:100%}
 .lt{background:var(--bg);color:var(--ink);padding:clamp(72px,8.4vw,120px) 0 clamp(80px,9vw,130px);overflow:hidden}
 .lt .disp{text-align:center;margin:0 auto}
 @media(min-width:900px){.lt .disp{white-space:nowrap}}
@@ -1250,6 +1270,13 @@ section.fd{background:var(--blue)}
   
 </section>
 
+<section class="m-sec m-ol" id="m-odotuslista">
+  <h2 class="m-h2" data-txt="Odotuslista / otsikko">Odotuslista on auki.</h2>
+  <div class="ol-phone"><div class="ap-isl"></div><img src="assets/kuvat/appi/odotus-kartta.webp?v=1" alt="Kartta, jolla näkyy missä odotuslistalle liittyneitä on eniten" loading="lazy"></div>
+  <div><div class="ol-step"><h3 data-txt="Odotuslista / Liity listalle / otsikko">Liity listalle</h3><p data-txt="Odotuslista / Liity listalle / teksti">Sähköposti ja postinumero riittävät.</p></div><div class="ol-step"><h3 data-txt="Odotuslista / Kartta täyttyy / otsikko">Kartta täyttyy</h3><p data-txt="Odotuslista / Kartta täyttyy / teksti">Näemme, missä kiinnostusta on eniten.</p></div><div class="ol-step"><h3 data-txt="Odotuslista / Alue aukeaa / otsikko">Alue aukeaa</h3><p data-txt="Odotuslista / Alue aukeaa / teksti">Kerromme sinulle, kun lähikirppiksesi ovat appissa.</p></div></div>
+  <a class="m-pill" href="odotuslista.html">Liity odotuslistalle</a>
+</section>
+
 <section class="m-sec" id="m-perustajat">
   <h2 class="m-h2 c">Kirpputorista<br>koodiin</h2>
   <div class="m-car m-car--found" data-car>
@@ -1281,8 +1308,8 @@ section.fd{background:var(--blue)}
 </section>
 
 <footer class="m-foot">
-  <h2 class="m-h2 s">Pysy mukana</h2>
-  <form class="m-news" action="uutiskirje.html" method="get"><input type="email" name="email" placeholder="Sähköpostisi" aria-label="Sähköpostisi"><button class="m-pill s">Tilaa</button></form>
+  <h2 class="m-h2 s">Lähikirppikset taskuusi</h2>
+  <form class="m-news" action="odotuslista.html" method="get"><input type="email" name="email" placeholder="Sähköpostisi" aria-label="Sähköpostisi"><button class="m-pill s">Liity listalle</button></form>
   <nav class="m-links"><a href="#m-ominaisuudet">Ominaisuudet</a><a href="#m-hinnoittelu">Hinnoittelu</a><a href="#m-ukk">UKK</a><a href="#m-perustajat">Meistä</a><a href="mailto:hei@resella.fi">Yhteystiedot</a></nav>
   <img class="m-word" src="assets/logot/ReSella_sanamerkki_matala_ruskea.svg" alt="Resella">
   <p class="m-legal">© 2026 Resella Oy · Espoo · Y 3641828-1 · <a href="tietosuoja.html">Tietosuoja</a> · Ehdot · FI / EN</p>
@@ -1592,6 +1619,20 @@ section.fd{background:var(--blue)}
 </section>
 
 <!-- PERUSTAJAT: Kirpputorista koodiin -->
+<section class="ol" id="odotuslista">
+  <div class="wrap">
+    <h2 class="disp d80" data-txt="Odotuslista / otsikko">Odotuslista on auki.</h2>
+    <div class="ol-row">
+      <div class="ol-phones">
+        <div class="ol-phone"><div class="ap-isl"></div><img src="assets/kuvat/appi/odotus-farkut.webp?v=1" alt="Appin haku: farkkuja lähikirppiksiltä, etäisyys näkyy jokaisessa tuotteessa" loading="lazy"></div>
+        <div class="ol-phone"><div class="ap-isl"></div><img src="assets/kuvat/appi/odotus-kartta.webp?v=1" alt="Kartta, jolla näkyy missä odotuslistalle liittyneitä on eniten" loading="lazy"></div>
+      </div>
+      <div class="ol-steps"><div class="ol-step"><h3 data-txt="Odotuslista / Liity listalle / otsikko">Liity listalle</h3><p data-txt="Odotuslista / Liity listalle / teksti">Sähköposti ja postinumero riittävät.</p></div><div class="ol-step"><h3 data-txt="Odotuslista / Kartta täyttyy / otsikko">Kartta täyttyy</h3><p data-txt="Odotuslista / Kartta täyttyy / teksti">Näemme, missä kiinnostusta on eniten.</p></div><div class="ol-step"><h3 data-txt="Odotuslista / Alue aukeaa / otsikko">Alue aukeaa</h3><p data-txt="Odotuslista / Alue aukeaa / teksti">Kerromme sinulle, kun lähikirppiksesi ovat appissa.</p></div></div>
+    </div>
+    <div class="ol-cta"><a class="btn" href="odotuslista.html">Liity odotuslistalle</a></div>
+  </div>
+</section>
+
 <section class="band fd" id="perustajat" data-p="0">
   <div class="wrap">
     <div class="fd-head"><h2 class="disp m">Kirpputorista koodiin</h2></div>
@@ -1655,7 +1696,7 @@ section.fd{background:var(--blue)}
 <footer class="foot">
   <div class="foot-inner">
     <div class="foot-top">
-      <div class="foot-intro"><p class="head">Pysy mukana: uudet ominaisuudet ensimmäisenä</p><a class="btn out s" href="uutiskirje.html">Tilaa uutiskirje</a></div>
+      <div class="foot-intro"><p class="head">Lähikirppikset taskuusi: liity odotuslistalle</p><a class="btn out s" href="odotuslista.html">Liity odotuslistalle</a></div>
       <div class="foot-cols">
         <div class="foot-col"><b>Sivut</b><a href="#ominaisuudet">Ominaisuudet</a><a href="#hinnoittelu">Hinnoittelu</a><a href="#faq">UKK</a></div>
         <div class="foot-col"><b>Yritys</b><a href="#perustajat">Meistä</a><a href="#varaa">Yhteystiedot</a></div>
@@ -1675,6 +1716,8 @@ section.fd{background:var(--blue)}
 
 <script>document.write('<script src="jarjestys.js?t='+Math.floor(Date.now()/60000)+'"><\/script>');document.write('<script src="tekstit.js?t='+Math.floor(Date.now()/60000)+'"><\/script>');</script>
 <script>
+/* UTM talteen odotuslistaa varten */
+try{ var _q=new URLSearchParams(location.search); ["utm_source","utm_medium","utm_campaign"].forEach(function(k){ if(_q.get(k)) sessionStorage.setItem("rs_"+k,_q.get(k)); }); }catch(e){}
 /* tekstit: tekstit-editori.html tallentaa muutokset tekstit.js-tiedostoon */
 (function(){ var t=window.RS_TEXT||{}; document.querySelectorAll('[data-txt]').forEach(function(el){ var k=el.getAttribute('data-txt'); if(Object.prototype.hasOwnProperty.call(t,k)) el.textContent=t[k]; }); })();
 </script>

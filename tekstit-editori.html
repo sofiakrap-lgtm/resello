@@ -123,7 +123,7 @@ $('ifr').addEventListener('load',function(){ fit(); pushAll(); });
 fetch('resella.html?t='+Date.now()).then(function(r){return r.text();}).then(function(h){
   var d=new DOMParser().parseFromString(h,'text/html');
   d.querySelectorAll('[data-txt]').forEach(function(el){ var k=el.getAttribute('data-txt'); if(!(k in DEF)){ DEF[k]=el.textContent; ORDER.push(k); } });
-  var RANK=['Hinnoittelu','Kassa valmiina käyttöön','Käyttöönotto','Usein kysyttyä','Kassa valmiina käyttöön puhelimessa','Käyttöönotto puhelimessa'];
+  var RANK=['Hinnoittelu','Kassa valmiina käyttöön','Käyttöönotto','Odotuslista','Usein kysyttyä','Kassa valmiina käyttöön puhelimessa','Käyttöönotto puhelimessa'];
   function rk(k){ var i=RANK.indexOf(k.split(' / ')[0]); return i<0?99:i; }
   ORDER=ORDER.map(function(k,i){return [k,i];}).sort(function(x,y){ return rk(x[0])-rk(y[0])||x[1]-y[1]; }).map(function(x){return x[0];});
   var s=document.createElement('script'); s.src='tekstit.js?t='+Date.now();
