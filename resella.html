@@ -381,11 +381,16 @@ section[id]{scroll-margin-top:72px}
 
 /* laitteet: viisi korttia, otsikko, kortit ja laitteet nousevat esiin vuorotellen */
 /* Odotuslista (kuluttajat) */
-.ol{background:var(--bg);color:var(--ink);padding:clamp(80px,9vw,130px) 0}
+.ol{background:var(--bg);color:var(--ink);padding:clamp(80px,9vw,130px) 0;overflow:hidden}
 .ol-row{display:flex;align-items:center;justify-content:space-between;gap:clamp(40px,5.5vw,88px);max-width:1094px;margin:0 auto}
 .ol-left{width:min(320px,26vw);flex:none}
 .ol .ol-h{font-size:clamp(44px,4.45vw,64px);line-height:1;letter-spacing:-.04em;margin:0 0 clamp(20px,2.2vw,32px);max-width:6.4em;text-align:left;text-wrap:balance}
-.ol-phones{display:flex;gap:clamp(40px,6vw,87px)}
+.ol-phones{display:flex;align-items:flex-start;gap:clamp(28px,3.54vw,51px);position:relative}
+.ol-phones .ol-phone{z-index:1}
+.ol-phones .ol-phone+.ol-phone{margin-top:clamp(6px,.62vw,9px)}
+.ol-tarra{position:absolute;z-index:0;height:auto;pointer-events:none;display:block}
+.ol-tarra.jakkara{left:-15.8%;top:71.1%;width:33.8%}
+.ol-tarra.takki{left:77%;top:-7.8%;width:46.1%;transform:rotate(8deg)}
 .ol-phone{position:relative;width:clamp(200px,20.8vw,300px);aspect-ratio:1350/2760;flex:none}
 .ol-phone::after{content:"";position:absolute;inset:0;background:url(assets/laitteet/iphone17-kehys.webp?v=1) center/100% 100% no-repeat;z-index:3;pointer-events:none}
 .ol-phone img{position:absolute;left:5.33%;top:2.5%;width:89.34%;height:95%;object-fit:cover;object-position:50% 0;border-radius:15.6%/7.17%;display:block;z-index:1}
@@ -1627,6 +1632,8 @@ section.fd{background:var(--blue)}
         <a class="btn" href="odotuslista.html">Liity odotuslistalle</a>
       </div>
       <div class="ol-phones">
+        <img class="ol-tarra jakkara" src="assets/tarrat/16-jakkara-pieni.webp" alt="" aria-hidden="true" loading="lazy">
+        <img class="ol-tarra takki" src="assets/tarrat/23-farkkutakki-pieni.webp" alt="" aria-hidden="true" loading="lazy">
         <div class="ol-phone"><div class="ap-isl"></div><img src="assets/kuvat/appi/odotus-kartta.webp?v=1" alt="Kartta, jolla näkyy missä odotuslistalle liittyneitä on eniten" loading="lazy"></div>
         <div class="ol-phone"><div class="ap-isl"></div><img src="assets/kuvat/appi/odotus-farkut.webp?v=1" alt="Appin haku: farkkuja lähikirppiksiltä, etäisyys näkyy jokaisessa tuotteessa" loading="lazy"></div>
       </div>
