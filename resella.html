@@ -571,6 +571,9 @@ section[id]{scroll-margin-top:72px}
 .acc-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur-base) var(--ease-std)}
 .acc-q[aria-expanded="true"]+.acc-a{grid-template-rows:1fr}
 .acc-a-in{overflow:hidden}
+.acc-go{margin-top:12px!important}
+.acc-go a{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--ink);text-underline-offset:3px}
+.acc-go svg{width:14px;height:14px}
 .acc-a p{margin:0;padding:0 62px 22px 22px;font-size:15px;font-weight:400;line-height:1.55;color:var(--ink-muted);max-width:62ch}
 .faq-more{margin-top:clamp(28px,4vw,40px);text-align:center;font-size:15px;color:var(--ink-muted)}
 .faq-more a{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:.2em}
@@ -1044,6 +1047,7 @@ section.fd{background:var(--blue)}
 .m-faq details[open] summary i::before{background:var(--bg)}
 .m-faq details[open] summary i::after{display:none}
 .m-faq details p{margin:10px 40px 0 0;font-size:15px;line-height:22px;opacity:.75}
+.m-faqgo{margin-top:14px;display:inline-flex}
 .m-faqmore{display:flex;align-items:center;justify-content:space-between;padding-top:10px;font:500 15px var(--fd)}
 
 /* loppu */
@@ -1262,7 +1266,7 @@ section.fd{background:var(--blue)}
     <details><summary><span data-txt="Usein kysyttyä / kysymys 3">Mitä laitteita tarvitsen?</span><i></i></summary><p data-txt="Usein kysyttyä / kysymys 3 / vastaus">Tabletin tai kosketusnäytön, lukijan ja tarvittaessa kuittitulostimen ja kassalippaan. Käymme laitteet läpi kanssasi.</p></details>
     <details><summary><span data-txt="Usein kysyttyä / kysymys 4">Voinko käyttää omaa logoa ja värejä?</span><i></i></summary><p data-txt="Usein kysyttyä / kysymys 4 / vastaus">Voit. Myyjien varaussivu näkyy kirppiksesi ilmeellä.</p></details>
     <details><summary><span data-txt="Usein kysyttyä / kysymys 5">Kauanko käyttöönotto kestää?</span><i></i></summary><p data-txt="Usein kysyttyä / kysymys 5 / vastaus">Yleensä 1-3 päivää. Hoidamme asennuksen kanssasi.</p></details>
-    <details><summary><span data-txt="Usein kysyttyä / kysymys 6">Mitä Resella maksaa?</span><i></i></summary><p data-txt="Usein kysyttyä / kysymys 6 / vastaus">Käymme hinnan läpi demossa, kun näemme kirppiksesi koon ja tarpeet.</p></details>
+    <details><summary><span data-txt="Usein kysyttyä / kysymys 6">Mitä Resella maksaa?</span><i></i></summary><p data-txt="Usein kysyttyä / kysymys 6 / vastaus">Käymme hinnan läpi demossa, kun näemme kirppiksesi koon ja tarpeet.</p><a class="m-pill s m-faqgo" href="#m-hinnoittelu">Avaa hintalaskuri</a></details>
   </div>
   <div class="m-faqmore"><span>Etkö löytänyt vastausta?</span><a class="m-pill s" href="mailto:hei@resella.fi">Ota yhteyttä</a></div>
 </section>
@@ -1627,7 +1631,7 @@ section.fd{background:var(--blue)}
       <div class="acc-item"><button class="acc-q" aria-expanded="false"><span data-txt="Usein kysyttyä / kysymys 3">Mitä laitteita tarvitsen?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p data-txt="Usein kysyttyä / kysymys 3 / vastaus">Tabletin tai kosketusnäytön, lukijan ja tarvittaessa kuittitulostimen ja kassalippaan. Käymme laitteet läpi kanssasi.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false"><span data-txt="Usein kysyttyä / kysymys 4">Voinko käyttää omaa logoa ja värejä?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p data-txt="Usein kysyttyä / kysymys 4 / vastaus">Voit. Myyjien varaussivu näkyy kirppiksesi ilmeellä.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false"><span data-txt="Usein kysyttyä / kysymys 5">Kauanko käyttöönotto kestää?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p data-txt="Usein kysyttyä / kysymys 5 / vastaus">Yleensä 1-3 päivää. Hoidamme asennuksen kanssasi.</p></div></div></div>
-      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span data-txt="Usein kysyttyä / kysymys 6">Mitä Resella maksaa?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p data-txt="Usein kysyttyä / kysymys 6 / vastaus">Käymme hinnan läpi demossa, kun näemme kirppiksesi koon ja tarpeet.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false"><span data-txt="Usein kysyttyä / kysymys 6">Mitä Resella maksaa?</span><i aria-hidden="true"></i></button><div class="acc-a"><div class="acc-a-in"><p data-txt="Usein kysyttyä / kysymys 6 / vastaus">Käymme hinnan läpi demossa, kun näemme kirppiksesi koon ja tarpeet.</p><p class="acc-go"><a href="#hinnoittelu">Avaa hintalaskuri <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a></p></div></div></div>
     </div>
     <p class="faq-more">Onko muita kysymyksiä?<br><a href="#varaa">Ota yhteyttä <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a></p>
    </div>
