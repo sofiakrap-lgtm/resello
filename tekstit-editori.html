@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Resella · tekstit</title>
+<link rel="icon" href="assets/ikoni/favicon.svg?v=3">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ECECDC;--ink:#3E2520;--blue:#C5D0D3;--red:#C24029;--card:#F6F6EE}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 15px/1.4 "Inter Tight",system-ui,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 28px;border-bottom:1px solid rgba(62,37,32,.12);position:sticky;top:0;background:var(--bg);z-index:5}
+h1{font:600 24px/1 "Inter Tight";letter-spacing:-.02em;margin:0}
+.acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button{font:600 14px "Inter Tight";border:0;border-radius:999px;height:40px;padding:0 18px;cursor:pointer;background:var(--card);color:var(--ink)}
+button.p{background:var(--ink);color:var(--bg)}
+button:active{transform:scale(.97)}
+.count{font-size:14px;opacity:.7;margin-right:6px}
+.wrap{display:grid;grid-template-columns:440px 1fr;gap:24px;padding:24px 28px}
+.side{height:calc(100vh - 130px);overflow:auto;padding-right:6px}
+.tabs{display:flex;gap:6px;background:var(--card);border-radius:999px;padding:4px;width:max-content;margin-bottom:14px}
+.tabs button{height:34px;background:none}
+.tabs button.on{background:var(--ink);color:var(--bg)}
+h2{font:600 18px/1.2 "Inter Tight";margin:26px 0 10px}
+h2:first-of-type{margin-top:4px}
+.f{background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:8px}
+.f.ch{box-shadow:inset 3px 0 0 var(--red)}
+.f label{display:flex;justify-content:space-between;gap:8px;font-size:13px;opacity:.75;margin-bottom:6px}
+.f label a{color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+textarea{width:100%;border:1px solid rgba(62,37,32,.2);border-radius:10px;padding:9px 11px;font:500 15px/1.4 "Inter Tight";color:var(--ink);background:#fff;resize:none;overflow:hidden}
+textarea:focus{outline:2px solid var(--ink);outline-offset:1px}
+.sg{margin-top:8px;font-size:14px;line-height:1.4;background:#E2E2CE;border-radius:10px;padding:9px 11px}
+.sg b{display:block;font-size:12px;opacity:.7;margin-bottom:3px}
+.sg button{height:30px;padding:0 12px;font-size:13px;margin-top:7px;background:var(--ink);color:var(--bg)}
+.note{font-size:13px;opacity:.7;margin:0 2px 14px}
+.prev{background:var(--card);border-radius:24px;overflow:hidden;position:relative;height:calc(100vh - 130px)}
+.prev iframe{border:0;position:absolute;left:0;top:0;transform-origin:0 0;background:#fff}
+.prev.mob{display:flex;justify-content:center;background:var(--blue)}
+.prev.mob iframe{position:relative;width:390px;height:calc(100% - 32px);transform:none;border-radius:28px;margin:16px 0}
+dialog{border:0;border-radius:24px;padding:24px;max-width:460px;background:var(--bg);color:var(--ink)}
+dialog input{width:100%;height:44px;border-radius:12px;border:1px solid rgba(62,37,32,.25);padding:0 12px;font:inherit;margin:10px 0 14px;background:#fff}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:999px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:10}
+.toast.on{opacity:1}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}.side{height:auto}.prev{height:70vh}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Tekstit</h1>
+  <div class="acts">
+    <span class="count" id="count"></span>
+    <button id="save" class="p">Tallenna sivulle</button>
+  </div>
+</header>
+<div class="wrap">
+  <div class="side">
+    <div class="tabs"><button data-v="desktop" class="on">Tietokone</button><button data-v="mobiili">Puhelin</button></div>
+    <p class="note">Kirjoita suoraan kenttiin. Esikatselu päivittyy heti ja hyppää kohtaan, jota muokkaat. Sivu muuttuu vasta, kun painat Tallenna sivulle. Punainen reuna = muutettu.</p>
+    <div id="fields"></div>
+  </div>
+  <div class="prev" id="prev"><iframe id="ifr" title="Esikatselu" src="resella.html"></iframe></div>
+</div>
+<dialog id="dlg">
+  <h3 style="margin:0 0 6px;font:600 20px 'Inter Tight'">GitHub-avain</h3>
+  <p style="margin:0;font-size:14px;opacity:.8">Tallennus tarvitsee kerran GitHub-avaimen (sama kuin järjestyseditorissa). Avain tallentuu vain tähän selaimeen.</p>
+  <input id="tok" type="password" placeholder="github_pat_...">
+  <div class="acts"><button id="dCancel">Peruuta</button><button id="dOk" class="p">Tallenna</button></div>
+</dialog>
+<div class="toast" id="toast"></div>
+<script>
+var REPO='sofiakrap-lgtm/resello', BRANCH='claude/frontend-stack-setup-anh5xj', FILE='tekstit.js';
+// Clauden ehdotukset 15.11.2026 (päätökset: demo etänä, hinta julkinen, laitteiden hinta ei sivulla)
+var SUGG={
+ 'Käyttöönotto / Esittely / teksti':'Tunnin videopuhelu, jossa näet oman kirppiksesi Resellassa. Demo on maksuton eikä sido mihinkään.',
+ 'Käyttöönotto / Asennus / teksti':'Tuomme laitteet paikan päälle ja asennamme ne kanssasi. Kirppiksen ei tarvitse mennä kiinni.',
+ 'Käyttöönotto / Koulutus / teksti':'Opetamme kassan käytön henkilökunnalle. Saat opetusvideot ja valmiit ohjeet myyjille.',
+ 'Kassa valmiina käyttöön / Tabletti / teksti':'Kassa toimii tabletilla, myös ilman nettiä.',
+ 'Usein kysyttyä / kysymys 3 / vastaus':'Toimitamme kaiken: tabletin, lukijan, kuittitulostimen ja kassalippaan. Asennus kuuluu hintaan.',
+ 'Usein kysyttyä / kysymys 6 / vastaus':'49-299 € kuukaudessa kirppiksen koon mukaan, ensimmäiset 3 kuukautta maksutta. Tarkan hinnan näet laskurista.',
+ 'Hinnoittelu / lista 1':'Kolme ensimmäistä kuukautta maksutta'
+};
+try{localStorage.setItem('rs-cookie','1');}catch(e){}
+var DEF={}, ORDER=[], cur={}, view='desktop';
+function $(i){return document.getElementById(i);}
+function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(function(){e.classList.remove('on');},2400);}
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function grow(ta){ ta.style.height='auto'; ta.style.height=(ta.scrollHeight+2)+'px'; }
+function label(k){ var p=k.split(' / '); return p.slice(1).join(' / '); }
+function changed(){ return ORDER.filter(function(k){ return cur[k]!==DEF[k]; }); }
+function updCount(){ var n=changed().length; $('count').textContent=n?n+' muutettu':''; }
+function build(){
+  var box=$('fields'), g=null; box.innerHTML='';
+  ORDER.forEach(function(k){
+    var grp=k.split(' / ')[0];
+    if(grp!==g){ g=grp; var h=document.createElement('h2'); h.textContent=grp; box.appendChild(h); }
+    var f=document.createElement('div'); f.className='f'; f.dataset.k=k;
+    f.innerHTML='<label><span>'+esc(label(k))+'</span><a data-a="reset" hidden>Palauta alkuperäinen</a></label><textarea rows="1"></textarea>'+
+      (SUGG[k]?'<div class="sg"><b>Ehdotus</b>'+esc(SUGG[k])+'<br><button type="button" data-a="sugg">Käytä ehdotusta</button></div>':'');
+    var ta=f.querySelector('textarea'); ta.value=cur[k];
+    box.appendChild(f); grow(ta); mark(f);
+  });
+  updCount();
+}
+function mark(f){ var k=f.dataset.k, ch=cur[k]!==DEF[k]; f.classList.toggle('ch',ch); f.querySelector('[data-a="reset"]').hidden=!ch;
+  var sg=f.querySelector('.sg'); if(sg) sg.style.display=cur[k]===SUGG[k]?'none':''; }
+function idoc(){ try{ return $('ifr').contentDocument; }catch(e){ return null; } }
+function push(k){ var d=idoc(); if(!d) return; d.querySelectorAll('[data-txt]').forEach(function(el){ if(el.getAttribute('data-txt')===k) el.textContent=cur[k]; }); }
+function pushAll(){ ORDER.forEach(push); }
+function show(k){ var d=idoc(); if(!d) return; var els=[].filter.call(d.querySelectorAll('[data-txt]'),function(el){ return el.getAttribute('data-txt')===k && el.getClientRects().length; });
+  var el=els[0]; if(!el) return;
+  var det=el.closest('details'); if(det) det.open=true;
+  var acc=el.closest('.acc-item'); if(acc&&!acc.classList.contains('open')){ var q=acc.querySelector('.acc-q'); if(q) q.click(); }
+  el.scrollIntoView({block:'center'}); el.style.outline='3px solid #C24029'; el.style.outlineOffset='4px'; clearTimeout(el._o); el._o=setTimeout(function(){ el.style.outline=''; },1600); }
+var fb=$('fields');
+fb.addEventListener('input',function(e){ var ta=e.target; if(ta.tagName!=='TEXTAREA') return; var f=ta.closest('.f'), k=f.dataset.k; cur[k]=ta.value.replace(/\s*\n\s*/g,' '); grow(ta); push(k); mark(f); updCount(); });
+fb.addEventListener('focusin',function(e){ if(e.target.tagName==='TEXTAREA') show(e.target.closest('.f').dataset.k); });
+fb.addEventListener('click',function(e){ var a=e.target.closest('[data-a]'); if(!a) return; var f=a.closest('.f'), k=f.dataset.k, ta=f.querySelector('textarea');
+  cur[k]=a.dataset.a==='sugg'?SUGG[k]:DEF[k]; ta.value=cur[k]; grow(ta); push(k); mark(f); updCount(); show(k); });
+function fit(){ var pv=$('prev'), f=$('ifr'); pv.classList.toggle('mob',view==='mobiili');
+  if(view==='desktop'){ var k=pv.clientWidth/1440; f.style.width='1440px'; f.style.height=(pv.clientHeight/k)+'px'; f.style.transform='scale('+k+')'; } else { f.style.width=''; f.style.height=''; f.style.transform=''; } }
+addEventListener('resize',fit);
+document.querySelectorAll('.tabs button').forEach(function(b){ b.onclick=function(){ document.querySelectorAll('.tabs button').forEach(function(x){x.classList.toggle('on',x===b);}); view=b.dataset.v; fit(); setTimeout(pushAll,300); }; });
+$('ifr').addEventListener('load',function(){ fit(); pushAll(); });
+// alkuperäiset tekstit sivun HTML:stä, tallennetut muutokset tekstit.js:stä
+fetch('resella.html?t='+Date.now()).then(function(r){return r.text();}).then(function(h){
+  var d=new DOMParser().parseFromString(h,'text/html');
+  d.querySelectorAll('[data-txt]').forEach(function(el){ var k=el.getAttribute('data-txt'); if(!(k in DEF)){ DEF[k]=el.textContent; ORDER.push(k); } });
+  var RANK=['Hinnoittelu','Kassa valmiina käyttöön','Käyttöönotto','Usein kysyttyä','Kassa valmiina käyttöön puhelimessa','Käyttöönotto puhelimessa'];
+  function rk(k){ var i=RANK.indexOf(k.split(' / ')[0]); return i<0?99:i; }
+  ORDER=ORDER.map(function(k,i){return [k,i];}).sort(function(x,y){ return rk(x[0])-rk(y[0])||x[1]-y[1]; }).map(function(x){return x[0];});
+  var s=document.createElement('script'); s.src='tekstit.js?t='+Date.now();
+  s.onload=s.onerror=function(){ var t=window.RS_TEXT||{}; ORDER.forEach(function(k){ cur[k]=(k in t)?t[k]:DEF[k]; }); build(); fit(); pushAll(); };
+  document.head.appendChild(s);
+});
+function fileText(){ var o={}; changed().forEach(function(k){ o[k]=cur[k]; }); return 'window.RS_TEXT='+JSON.stringify(o,null,1)+';\n'; }
+function tok(){ try{return localStorage.getItem('rs_gh_token')||'';}catch(e){return '';} }
+function gh(method,body){ return fetch('https://api.github.com/repos/'+REPO+'/contents/'+FILE+(method==='GET'?'?ref='+encodeURIComponent(BRANCH):''),{method:method,headers:{'Authorization':'Bearer '+tok(),'Accept':'application/vnd.github+json'},body:body?JSON.stringify(body):undefined}).then(function(r){ return r.json().then(function(j){ if(!r.ok) throw new Error(j.message||r.status); return j; }); }); }
+function save(){ toast('Tallennetaan…');
+  gh('GET').then(function(j){ return gh('PUT',{message:'Tekstit päivitetty editorissa',content:btoa(unescape(encodeURIComponent(fileText()))),sha:j.sha,branch:BRANCH}); })
+  .then(function(){ toast('Tallennettu. Sivu päivittyy noin minuutissa.'); })
+  .catch(function(err){ if(/credentials|401|403|Not Found/i.test(err.message)){ try{localStorage.removeItem('rs_gh_token');}catch(e){} $('dlg').showModal(); } toast('Tallennus ei onnistunut: '+err.message); }); }
+$('save').onclick=function(){ if(!tok()) $('dlg').showModal(); else save(); };
+$('dCancel').onclick=function(){ $('dlg').close(); };
+$('dOk').onclick=function(){ var v=$('tok').value.trim(); if(!v) return; try{localStorage.setItem('rs_gh_token',v);}catch(e){} $('dlg').close(); save(); };
+</script>
+</body>
+</html>
