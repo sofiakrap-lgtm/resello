@@ -619,6 +619,13 @@ section[id]{scroll-margin-top:72px}
 .rc-body p{font-size:15px;font-weight:500;line-height:1.46;color:var(--ci);opacity:.8;margin:0}
 .rc-btn{flex:none;margin:clamp(12px,1.5vw,18px) clamp(18px,1.9vw,24px) clamp(16px,1.8vw,24px);text-align:center;background:var(--ci);color:var(--cb);border-radius:999px;height:40px;padding:0 20px;display:flex;align-items:center;justify-content:center;font:600 15px/1 var(--fb);text-decoration:none;transition:opacity var(--dur-fast) var(--ease-out)}
 .rc-btn:hover{opacity:.88}
+button.rc-btn{border:0;cursor:pointer}
+.rc-more{position:absolute;inset:0;z-index:4;background:var(--cb);color:var(--ci);display:flex;flex-direction:column;gap:12px;padding:clamp(22px,2.4vw,30px) clamp(18px,1.9vw,24px) 0;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s var(--ease-out),transform .3s var(--ease-out),visibility 0s .3s}
+.rcard.open .rc-more{opacity:1;visibility:visible;transform:none;transition:opacity .3s var(--ease-out),transform .3s var(--ease-out),visibility 0s}
+.rc-more h3{font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,24px);letter-spacing:-.01em;line-height:1.08;margin:0 0 4px}
+.rc-more p{font-size:15px;font-weight:500;line-height:1.5;margin:0}
+.rc-more a{color:inherit;text-underline-offset:3px}
+.rc-more .rc-close{margin:auto 0 clamp(16px,1.8vw,24px)}
 .rot-head{margin-bottom:clamp(8px,1vw,16px)}
 #tarinat{padding-top:clamp(110px,15vw,190px)}
 .rotary-ctrl{position:relative;z-index:5;display:flex;align-items:center;justify-content:center;gap:11px;margin-top:clamp(24px,2.2vw,30px)}
@@ -1441,22 +1448,26 @@ section.fd{background:var(--blue)}
       <article class="rcard" style="--cb:#C5D0D3;--ci:#3E2520">
         <div class="rc-media"><img src="assets/kuvat/03_vihrea_naytto/01_lappari_esittely.jpg?v=5" alt="Kannettavalla auki Resellan Varaa demo -sivu" loading="lazy"></div>
         <div class="rc-body"><h3>Opetusvideot</h3><p>Lyhyet videot näyttävät kassan, tilitykset ja myyjien ohjeet vaihe vaiheelta.</p></div>
-        <a class="rc-btn" href="#varaa">Lue lisää</a>
+        <button type="button" class="rc-btn" aria-expanded="false">Lue lisää</button>
+        <div class="rc-more" aria-hidden="true"><h3>Opetusvideot</h3><p>Saat käyttöönoton yhteydessä lyhyet videot kassan käytöstä, tilityksistä ja myyjien ohjeista. Videot on tehty erikseen henkilökunnalle ja omistajalle.</p><p>Katso ne silloin kun sinulle sopii, ja jaa myyjien ohjeet suoraan myyjillesi.</p><button type="button" class="rc-btn rc-close">Sulje</button></div>
       </article>
       <article class="rcard" style="--cb:#3E2520;--ci:#ECECDC">
         <div class="rc-media"><img src="assets/kuvat/06_ihmiset/21_nainen_puhelin_lappari.jpg" alt="Nainen puhuu puhelimessa läppäri sylissä" style="object-position:50% 22%" loading="lazy"></div>
         <div class="rc-body"><h3>Puhelintuki</h3><p>Soita suoraan meille, kun tarvitset apua kassalla tai tilityksissä.</p></div>
-        <a class="rc-btn" href="#varaa">Lue lisää</a>
+        <button type="button" class="rc-btn" aria-expanded="false">Lue lisää</button>
+        <div class="rc-more" aria-hidden="true"><h3>Puhelintuki</h3><p>Kun kassalla tai tilityksissä tulee kysyttävää, soita meille. Puhelimeen vastaamme me itse, Sofia ja Leon.</p><p>Käymme asian läpi kanssasi ja hoidamme sen kuntoon.</p><button type="button" class="rc-btn rc-close">Sulje</button></div>
       </article>
       <article class="rcard" style="--cb:#D09C4C;--ci:#3E2520">
         <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/04c_tuki_sahkoposti.webp?v=3" alt="Kannettavalla auki Resellan tukiviesti: tilitysten aikataulu" style="object-position:50% 26%" loading="lazy"></div>
         <div class="rc-body"><h3>Sähköposti</h3><p>Kirjoita kysymyksesi, niin vastaamme suomeksi.</p></div>
-        <a class="rc-btn" href="#varaa">Lue lisää</a>
+        <button type="button" class="rc-btn" aria-expanded="false">Lue lisää</button>
+        <div class="rc-more" aria-hidden="true"><h3>Sähköposti</h3><p>Lähetä kysymys osoitteeseen <a href="mailto:hei@resella.fi">hei@resella.fi</a>. Vastaamme suomeksi arkisin mahdollisimman pian.</p><p>Liitä mukaan kuvakaappaus, jos se auttaa näyttämään, mistä on kyse.</p><button type="button" class="rc-btn rc-close">Sulje</button></div>
       </article>
       <article class="rcard" style="--cb:#C24029;--ci:#ECECDC">
         <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/03e_tuki_apuri_splash.webp?v=1" alt="Kädessä puhelin, jossa Resella-sovellus auki" style="object-position:50% 30%" loading="lazy"></div>
         <div class="rc-body"><h3>Apuri järjestelmässä</h3><p>Kysy apurilta suoraan järjestelmässä, niin se näyttää, miten asia tehdään.</p></div>
-        <a class="rc-btn" href="#varaa">Lue lisää</a>
+        <button type="button" class="rc-btn" aria-expanded="false">Lue lisää</button>
+        <div class="rc-more" aria-hidden="true"><h3>Apuri järjestelmässä</h3><p>Apuri on osa järjestelmää. Kysy omin sanoin, esimerkiksi miten myyjälle tehdään tilitys, niin apuri näyttää vaiheet.</p><p>Jos apuri ei osaa vastata, se ohjaa sinut meille. Apuri käyttää tekoälyä, lue lisää <a href="tietosuoja.html">tietosuojaselosteesta</a>.</p><button type="button" class="rc-btn rc-close">Sulje</button></div>
       </article>
     </div>
     <div class="rotary-ctrl" aria-hidden="true">
@@ -1788,6 +1799,17 @@ section.fd{background:var(--blue)}
     // liikkuu aina vain yhteen suuntaan. Palkki pyorii jatkuvasti, tauko vain aktiivisen vedon ajaksi (ei jumitu)
     rot.addEventListener('pointerdown',function(){ rPaused=true; });
     addEventListener('pointerup',function(){ rPaused=false; }); addEventListener('pointercancel',function(){ rPaused=false; });
+    // Lue lisää: kortti kääntyy näyttämään lisätiedon, karuselli odottaa kunnes suljetaan
+    var rOpen=null;
+    function rClose(){ if(!rOpen) return; rOpen.classList.remove('open'); rOpen.querySelector('.rc-more').setAttribute('aria-hidden','true'); var b=rOpen.querySelector('.rc-btn:not(.rc-close)'); b.setAttribute('aria-expanded','false'); rOpen=null; }
+    rcards.forEach(function(c){
+      var b=c.querySelector('.rc-btn:not(.rc-close)'), x=c.querySelector('.rc-close'), m=c.querySelector('.rc-more');
+      if(!b||!m) return;
+      b.addEventListener('click',function(){ rClose(); c.classList.add('open'); m.setAttribute('aria-hidden','false'); b.setAttribute('aria-expanded','true'); rOpen=c; x.focus({preventScroll:true}); });
+      x.addEventListener('click',function(){ rClose(); b.focus({preventScroll:true}); });
+    });
+    var _rgo=rgo; rgo=function(d){ rClose(); _rgo(d); };
+    var _rLoop=rLoop; rLoop=function(now){ if(rOpen){ rLast=now; rRaf=requestAnimationFrame(rLoop); return; } _rLoop(now); };
     rlayout(); if(!rReduce){ rRaf=requestAnimationFrame(rLoop); } else { rSetFill(1); }
   }
   // hinnoittelu: liikevaihtopohjainen laskuri, kayttaja syottaa oman myynnin
