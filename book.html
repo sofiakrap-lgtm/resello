@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Book a demo · Resella">
+<meta property="og:description" content="A free one-hour video call.">
+<meta property="og:image" content="https://sofiakrap-lgtm.github.io/resello/assets/ikoni/og-book.jpg?v=1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://sofiakrap-lgtm.github.io/resello/book.html">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="fi" href="varaa.html">
+<link rel="alternate" hreflang="en" href="book.html">
 <title>Book a demo · Resella</title>
 <meta name="description" content="Book a free one-hour demo. On a video call we show you how Resella's till, sellers and payouts work in your shop.">
 <link rel="icon" href="assets/ikoni/favicon.ico?v=3" sizes="any">
@@ -183,7 +194,7 @@ input::placeholder{color:#9C9087}
     $('dayH').textContent=PVPITKA[sel.getDay()]+' '+fi(sel);
     var ts=slots(sel); $('noTimes').hidden=ts.length>0;
     ts.forEach(function(t){
-      var b=document.createElement('button'); b.type='button'; b.textContent=t;
+      var b=document.createElement('button'); b.type='button'; b.textContent=t.replace('.',':');
       if(taken(sel,t)){ b.disabled=true; b.setAttribute('aria-label',t+', booked'); }
       b.setAttribute('aria-pressed', time===t?'true':'false');
       b.addEventListener('click',function(){ time=t; renderTimes(); });
@@ -193,7 +204,7 @@ input::placeholder{color:#9C9087}
   }
   function update(){
     var s=$('submit');
-    if(sel&&time){ s.disabled=false; s.textContent='Book '+PVEN[sel.getDay()]+' '+fi(sel)+' at '+time; }
+    if(sel&&time){ s.disabled=false; s.textContent='Book '+PVEN[sel.getDay()]+' '+fi(sel)+' at '+time.replace('.',':'); }
     else { s.disabled=true; s.textContent=sel?'Choose a time':'Choose a day and time'; }
   }
   $('prev').addEventListener('click',function(){ view=new Date(view.getFullYear(),view.getMonth()-1,1); renderCal(); });
@@ -203,7 +214,7 @@ input::placeholder{color:#9C9087}
     e.preventDefault();
     var f=['nimi','email','kirppis'].map($), bad=f.filter(function(i){return !i.checkValidity()||!i.value.trim();});
     if(bad.length){ bad[0].focus(); bad[0].reportValidity&&bad[0].reportValidity(); return; }
-    var aika=PVPITKA[sel.getDay()]+' '+fi(sel)+' at '+time;
+    var aika=PVPITKA[sel.getDay()]+' '+fi(sel)+' at '+time.replace('.',':');
     var body='Hi,\n\nI would like to book a Resella demo.\n\nTime: '+aika+'\nName: '+f[0].value.trim()+'\nEmail: '+f[1].value.trim()+'\nShop: '+f[2].value.trim()+'\nLanguage: EN\n';
     var mail='mailto:'+(A.sahkoposti||'hei@resella.fi')+'?subject='+encodeURIComponent('Demo booking: '+aika)+'&body='+encodeURIComponent(body);
     $('doneText').textContent='Your booking message for '+aika+' is ready in your email app. Send it and we will confirm the time and send you the video call link.';
