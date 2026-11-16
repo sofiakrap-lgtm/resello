@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Resella</title>
+<link rel="alternate" hreflang="fi" href="resella.html">
+<link rel="alternate" hreflang="en" href="en.html">
 <meta name="description" content="Kassa, joka tuo ostajia. Hoida myynti, myyjät ja tilitykset yhdessä paikassa. Hyllysi näkyy samalla netissä.">
 <meta property="og:title" content="Resella">
 <meta property="og:description" content="Kassa, joka tuo ostajia. Myynti, myyjät ja tilitykset yhdessä paikassa.">
@@ -1135,7 +1137,8 @@ section.fd{background:var(--blue)}
 .m-menu-b{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .m-lang{display:flex;gap:4px;background:#E2E2CE;border-radius:999px;padding:4px}
 .m-lang button{height:40px;min-width:52px;border:0;border-radius:999px;background:none;color:var(--ink);font:600 15px var(--fd);cursor:pointer}
-.m-lang button[aria-pressed="true"]{background:var(--ink);color:#ECECDC}
+.m-lang button[aria-pressed="true"],.m-lang a[aria-current]{background:var(--ink);color:#ECECDC}
+.m-lang a{height:40px;min-width:52px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;color:var(--ink);font:600 15px var(--fd);text-decoration:none}
 .m-menu nav{display:flex;flex-direction:column;margin-top:56px}
 .m-menu nav a{font:600 40px/56px var(--fd);letter-spacing:-.035em;color:var(--ink);text-decoration:none}
 .m-menu-b{margin-top:auto;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
@@ -1182,7 +1185,7 @@ section.fd{background:var(--blue)}
     <figure class="m-sl m-sl--light" style="background:#C5D0D3"><img src="assets/m/sb2.webp?v=4" alt="" loading="lazy"><figcaption><h3>Määritys</h3><p>Rakennamme järjestelmän kirppiksesi näköiseksi: pöydät, hinnat, provisio ja oma ilme.</p></figcaption></figure>
     <figure class="m-sl"><img src="assets/m/sl3.webp?v=1" alt="" loading="lazy"><figcaption><h3>Asennus</h3><p>Tuomme kassan ja laitteet paikan päälle ja asennamme ne valmiiksi.</p></figcaption></figure>
     <figure class="m-sl m-sl--vid"><div class="m-pad"><div class="m-scr"><img src="assets/m/koulutus-ss.webp?v=1" alt="Opetusvideo: kassan käyttö" loading="lazy"></div><div class="m-pl"><div class="m-pl-b"><span class="m-pl-i" aria-hidden="true"></span><span class="m-pl-bar"><i style="width:38%"></i></span><span class="m-pl-time">0:08</span></div></div></div><figcaption><h3>Koulutus</h3><p>Käymme kassan läpi sinun ja henkilökuntasi kanssa.</p></figcaption></figure>
-    <figure class="m-sl"><img src="assets/m/sl5.webp?v=1" alt="" loading="lazy"><figcaption><h3>Ensimmäinen myynti</h3><p>Olemme paikalla, kun ensimmäiset tuotteet myydään. Et jää yksin.</p></figcaption></figure>
+    <figure class="m-sl"><img src="assets/m/sl5.webp?v=1" alt="" loading="lazy"><figcaption><h3>Ensimmäinen myynti</h3><p>Olemme tukenasi, kun ensimmäiset tuotteet myydään. Et jää yksin.</p></figcaption></figure>
     <figure class="m-sl m-sl--light" style="background:#E1E2CD"><img src="assets/m/sb6.webp?v=4" alt="" loading="lazy"><figcaption><h3>Tilitykset</h3><p>Käymme ensimmäiset tilitykset läpi yhdessä.</p></figcaption></figure>
   </div>
 </section>
@@ -1191,7 +1194,7 @@ section.fd{background:var(--blue)}
   <h2 class="m-h2 c">Apua,<br>kun tarvitset</h2>
   <div class="m-car m-car--tuki" data-car>
     <article class="m-tk"><img src="assets/m/tk1.webp?v=6" alt="" loading="lazy"><span class="m-tk-pill">Opetusvideot</span><p>Lyhyet videot näyttävät kassan, tilitykset ja myyjien ohjeet vaihe vaiheelta.</p></article>
-    <article class="m-tk"><img src="assets/m/tk2.webp?v=6" alt="" loading="lazy"><span class="m-tk-pill">Puhelintuki</span><p>Soita suoraan meille, kun tarvitset apua kassalla tai tilityksissä.</p></article>
+    <article class="m-tk"><img src="assets/m/tk2.webp?v=6" alt="" loading="lazy"><span class="m-tk-pill">Puhelintuki</span><p>Soita suoraan meille, kun tarvitset apua kassalla tai tilityksissä: <a href="tel:+358503233075">050 323 3075</a>.</p></article>
     <article class="m-tk"><img src="assets/m/tk3.webp?v=6" alt="" loading="lazy"><span class="m-tk-pill">Sähköposti</span><p>Kirjoita kysymyksesi, niin vastaamme.</p></article>
     <article class="m-tk"><img src="assets/m/tk4.webp?v=6" alt="" loading="lazy"><span class="m-tk-pill">Apuri järjestelmässä</span><p>Kysy apurilta suoraan järjestelmässä.</p></article>
   </div>
@@ -1254,7 +1257,7 @@ section.fd{background:var(--blue)}
   <ol class="m-tl">
     <li class="on"><i></i><div class="m-tlc"><div><h3 data-txt="Käyttöönotto puhelimessa / vaihe 1 / otsikko">Esittely</h3><p data-txt="Käyttöönotto puhelimessa / vaihe 1 / teksti">Tunnin demo. Ei sido mihinkään.</p></div><a class="m-pill s lite" href="varaa.html">Varaa demo</a></div></li>
     <li><i></i><div class="m-tlc"><div><h3 data-txt="Käyttöönotto puhelimessa / vaihe 2 / otsikko">Määritys ja asennus</h3><p data-txt="Käyttöönotto puhelimessa / vaihe 2 / teksti">Syötämme tiedot, tuomme ja asennamme laitteet.</p></div></div></li>
-    <li><i></i><div class="m-tlc"><div><h3 data-txt="Käyttöönotto puhelimessa / vaihe 3 / otsikko">Koulutus ja ensimmäinen myynti</h3><p data-txt="Käyttöönotto puhelimessa / vaihe 3 / teksti">Opetamme kassan ja olemme paikalla avauspäivänä.</p></div></div></li>
+    <li><i></i><div class="m-tlc"><div><h3 data-txt="Käyttöönotto puhelimessa / vaihe 3 / otsikko">Koulutus ja ensimmäinen myynti</h3><p data-txt="Käyttöönotto puhelimessa / vaihe 3 / teksti">Opetamme kassan ja olemme tukenasi avauspäivänä.</p></div></div></li>
     <li><i></i><div class="m-tlc"><div><h3 data-txt="Käyttöönotto puhelimessa / vaihe 4 / otsikko">Tilitykset ja kasvu</h3><p data-txt="Käyttöönotto puhelimessa / vaihe 4 / teksti">Ensimmäiset tilitykset yhdessä, uudet ominaisuudet mukana.</p></div></div></li>
   </ol>
 </section>
@@ -1268,7 +1271,7 @@ section.fd{background:var(--blue)}
   <div class="m-bars">
     <p><b>Vanhat tuotteet</b> myydään loppuun nykyisillä hintalapuilla.</p>
     <p><b>Uudet varaukset</b> tehdään Resellaan, vanha järjestelmä toimii rinnalla.</p>
-    <p><b>Olemme mukana</b> koko siirtymän ajan ja paikalla ensimmäisenä myyntipäivänä.</p>
+    <p><b>Olemme mukana</b> koko siirtymän ajan ja tukenasi ensimmäisenä myyntipäivänä.</p>
     <a href="mailto:hei@resella.fi?subject=Siirtym%C3%A4">Kysy siirtymästä demossa</a>
   </div>
   
@@ -1314,9 +1317,9 @@ section.fd{background:var(--blue)}
 <footer class="m-foot">
   <h2 class="m-h2 s">Lähikirppikset taskuusi</h2>
   <form class="m-news" action="odotuslista.html" method="get"><input type="email" name="email" placeholder="Sähköpostisi" aria-label="Sähköpostisi"><button class="m-pill s">Liity listalle</button></form>
-  <nav class="m-links"><a href="#m-ominaisuudet">Ominaisuudet</a><a href="#m-hinnoittelu">Hinnoittelu</a><a href="#m-ukk">UKK</a><a href="#m-perustajat">Meistä</a><a href="mailto:hei@resella.fi">Yhteystiedot</a></nav>
+  <nav class="m-links"><a href="#m-ominaisuudet">Ominaisuudet</a><a href="#m-hinnoittelu">Hinnoittelu</a><a href="#m-ukk">UKK</a><a href="#m-perustajat">Meistä</a><a href="mailto:hei@resella.fi">Yhteystiedot</a><a href="tel:+358503233075">050 323 3075</a></nav>
   <img class="m-word" src="assets/logot/ReSella_sanamerkki_matala_ruskea.svg" alt="Resella">
-  <p class="m-legal">© 2026 Resella Oy · Espoo · Y 3641828-1 · <a href="tietosuoja.html">Tietosuoja</a> · Ehdot · FI / EN</p>
+  <p class="m-legal">© 2026 Resella Oy · Espoo · Y 3641828-1 · <a href="tietosuoja.html">Tietosuoja</a> · <a href="ehdot.html">Ehdot</a> · <b>FI</b> / <a href="en.html" hreflang="en" lang="en">EN</a></p>
 </footer>
 
 <div class="m-bar" id="mBar" aria-hidden="true"><a class="m-pill" href="varaa.html" tabindex="-1">Varaa demo</a><button class="m-fab" id="mFab" type="button" aria-label="Avaa valikko" data-mopen tabindex="-1"><span></span><span></span></button></div>
@@ -1324,7 +1327,7 @@ section.fd{background:var(--blue)}
 <div class="m-menu" id="mMenu" hidden>
   <div class="m-head"><a href="#m-top" class="m-logo" aria-label="Resella" data-mclose><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a><button class="m-x" type="button" aria-label="Sulje valikko" data-mclose><span></span><span></span></button></div>
   <nav><a href="#m-ominaisuudet" data-mclose>Ominaisuudet</a><a href="#m-kayttoonotto" data-mclose>Käyttöönotto</a><a href="#m-hinnoittelu" data-mclose>Hinnoittelu</a><a href="#m-ukk" data-mclose>UKK</a><a href="#m-perustajat" data-mclose>Meistä</a><a href="mailto:hei@resella.fi" data-mclose>Ota yhteyttä</a></nav>
-  <div class="m-menu-b"><a class="m-pill" href="varaa.html">Varaa demo</a><div class="m-lang" role="group" aria-label="Kieli / Language"><button type="button" data-lang="fi" aria-pressed="true">FI</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div>
+  <div class="m-menu-b"><a class="m-pill" href="varaa.html">Varaa demo</a><div class="m-lang" role="group" aria-label="Kieli / Language"><a href="resella.html" aria-current="true" lang="fi">FI</a><a href="en.html" hreflang="en" lang="en">EN</a></div></div>
 </div>
 </div>
 
@@ -1466,7 +1469,7 @@ section.fd{background:var(--blue)}
       <article class="step step--video"><div class="step__col"><div class="step__text"><h3>Määritys</h3><p>Rakennamme järjestelmän kirppiksesi näköiseksi: pöydät, hinnat, provisio ja oma ilme. Sinä tarkistat, me viimeistelemme.</p></div><ul class="step__list"><li>Pöydät ja hinnat</li><li>Provisio</li><li>Oma ilme</li></ul></div><div class="step__media"><video src="assets/video/maaritys.mp4?v=20261107" autoplay muted loop playsinline preload="metadata" aria-label="Määritys"></video></div></article>
       <article class="step step--video"><div class="step__col"><div class="step__text"><h3>Asennus</h3><p>Tuomme kassan laitteet paikan päälle ja asennamme ne valmiiksi. Kassa on käytössä heti asennuksen jälkeen.</p></div><ul class="step__list"><li>Kassan laitteet</li><li>Asennus paikan päällä</li></ul></div><div class="step__media"><video src="assets/video/asennus.mp4?v=20261107" autoplay muted loop playsinline preload="metadata" aria-label="Asennus"></video></div></article>
       <article class="step step--video"><div class="step__col"><div class="step__text"><h3>Koulutus</h3><p>Käymme kassan läpi sinun ja henkilökuntasi kanssa. Myyjät saavat selkeät ohjeet pöydän varaamiseen ja hinnoitteluun.</p></div><ul class="step__list"><li>Kassan käyttö</li><li>Myyjien ohjeet</li></ul></div><div class="step__media"><video src="assets/video/koulutus.mp4?v=20261107" autoplay muted loop playsinline preload="metadata" aria-label="Koulutus"></video></div></article>
-      <article class="step step--video"><div class="step__col"><div class="step__text"><h3>Ensimmäinen myynti</h3><p>Olemme paikalla, kun ensimmäiset tuotteet myydään, ja autamme heti, jos jokin mietityttää. Et jää yksin.</p></div><ul class="step__list"><li>Tuki paikan päällä</li></ul></div><div class="step__media"><video src="assets/video/ensimmainen-myynti.mp4?v=20261107" autoplay muted loop playsinline preload="metadata" aria-label="Ensimmäinen myynti"></video></div></article>
+      <article class="step step--video"><div class="step__col"><div class="step__text"><h3>Ensimmäinen myynti</h3><p>Olemme tukenasi puhelimitse ja sähköpostilla, kun ensimmäiset tuotteet myydään, ja autamme heti, jos jokin mietityttää. Et jää yksin.</p></div><ul class="step__list"><li>Tuki paikan päällä</li></ul></div><div class="step__media"><video src="assets/video/ensimmainen-myynti.mp4?v=20261107" autoplay muted loop playsinline preload="metadata" aria-label="Ensimmäinen myynti"></video></div></article>
       <article class="step step--video"><div class="step__col"><div class="step__text"><h3>Tilitykset</h3><p>Myyjien rahat lähtevät yhdellä pankkitiedostolla, ja jokainen myyjä näkee omat myyntinsä. Tilityspäivä ei enää vie koko iltaa.</p></div><ul class="step__list"><li>Yksi pankkitiedosto</li></ul></div><div class="step__media"><video src="assets/video/tilitykset.mp4?v=20261107" autoplay muted loop playsinline preload="metadata" aria-label="Tilitykset"></video></div></article>    </div>
   </div>
 </section>
@@ -1490,7 +1493,7 @@ section.fd{background:var(--blue)}
         <div class="rc-media"><img src="assets/kuvat/06_ihmiset/21_nainen_puhelin_lappari.jpg" alt="Nainen puhuu puhelimessa läppäri sylissä" style="object-position:50% 22%" loading="lazy"></div>
         <div class="rc-body"><h3>Puhelintuki</h3><p>Soita suoraan meille, kun tarvitset apua kassalla tai tilityksissä.</p></div>
         <button type="button" class="rc-btn" aria-expanded="false">Lue lisää</button>
-        <div class="rc-more" aria-hidden="true"><h3>Puhelintuki</h3><p>Kun kassalla tai tilityksissä tulee kysyttävää, soita meille. Puhelimeen vastaamme me itse, Sofia ja Leon.</p><p>Käymme asian läpi kanssasi ja hoidamme sen kuntoon.</p><button type="button" class="rc-btn rc-close">Sulje</button></div>
+        <div class="rc-more" aria-hidden="true"><h3>Puhelintuki</h3><p>Kun kassalla tai tilityksissä tulee kysyttävää, soita meille numeroon <a href="tel:+358503233075">050 323 3075</a>. Puhelimeen vastaamme me itse, Sofia ja Leon.</p><p>Käymme asian läpi kanssasi ja hoidamme sen kuntoon.</p><button type="button" class="rc-btn rc-close">Sulje</button></div>
       </article>
       <article class="rcard" style="--cb:#D09C4C;--ci:#3E2520">
         <div class="rc-media"><img src="assets/kuvat/02_kassa_maksu/04c_tuki_sahkoposti.webp?v=3" alt="Kannettavalla auki Resellan tukiviesti: tilitysten aikataulu" style="object-position:50% 26%" loading="lazy"></div>
@@ -1616,7 +1619,7 @@ section.fd{background:var(--blue)}
     <ol class="sr-steps">
       <li><span><strong>Vanhat tuotteet</strong> myydään loppuun nykyisillä hintalapuilla, eikä kaikkea tarvitse kuvata uudelleen.</span></li>
       <li><span><strong>Uudet varaukset</strong> tehdään Resellaan, ja vanha järjestelmä toimii rinnalla siirtymän ajan.</span></li>
-      <li><span><strong>Olemme mukana</strong> koko siirtymän ajan ja paikalla ensimmäisenä myyntipäivänä.</span></li>
+      <li><span><strong>Olemme mukana</strong> koko siirtymän ajan ja tukenasi ensimmäisenä myyntipäivänä.</span></li>
     </ol>
     <a class="sr-cta" href="#varaa">Kysy siirtymästä demossa</a>
   </div>
@@ -1707,12 +1710,12 @@ section.fd{background:var(--blue)}
       <div class="foot-intro"><p class="head">Lähikirppikset taskuusi: liity odotuslistalle</p><a class="btn out s" href="odotuslista.html">Liity odotuslistalle</a></div>
       <div class="foot-cols">
         <div class="foot-col"><b>Sivut</b><a href="#ominaisuudet">Ominaisuudet</a><a href="#hinnoittelu">Hinnoittelu</a><a href="#faq">UKK</a></div>
-        <div class="foot-col"><b>Yritys</b><a href="#perustajat">Meistä</a><a href="#varaa">Yhteystiedot</a></div>
+        <div class="foot-col"><b>Yritys</b><a href="#perustajat">Meistä</a><a href="mailto:hei@resella.fi">hei@resella.fi</a><a href="tel:+358503233075">050 323 3075</a></div>
       </div>
     </div>
   </div>
   <img class="wordmark" src="assets/logot/ReSella_sanamerkki_matala_ruskea.svg" alt="Resella">
-  <div class="foot-legal"><span>© 2026 Resella Oy · Espoo · Y 3641828-1</span><a href="tietosuoja.html">Tietosuoja</a><span>Ehdot</span><span>FI / EN</span></div>
+  <div class="foot-legal"><span>© 2026 Resella Oy · Espoo · Y 3641828-1</span><a href="tietosuoja.html">Tietosuoja</a><a href="ehdot.html">Ehdot</a><span class="lang-sw"><b>FI</b> / <a href="en.html" hreflang="en" lang="en">EN</a></span></div>
 </footer>
 
 <!-- EVÄSTEET -->

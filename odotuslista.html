@@ -20,7 +20,8 @@ a{color:var(--ink)}
 .wrap{max-width:1300px;margin:0 auto;padding:40px clamp(20px,4.4vw,63px) 120px}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:72px}
 .top img{height:30px;width:auto;display:block}
-.top a.back{font-size:15px;font-weight:500;text-underline-offset:3px}
+.top a.back,.top a.lang{font-size:15px;font-weight:500;text-underline-offset:3px}
+.top .nav{display:flex;gap:24px}
 .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,600px);gap:clamp(40px,7vw,96px);align-items:start}
 h1{margin:8px 0 28px;font-weight:600;font-size:clamp(56px,7vw,96px);line-height:.95;letter-spacing:-.04em}
 .lead{margin:0 0 28px;font-size:20px;line-height:1.45;max-width:560px}
@@ -115,7 +116,7 @@ body{background:var(--blue,#C5D0D3)}
 <div class="wrap">
   <header class="top">
     <a href="resella.html" aria-label="Resella etusivu"><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a>
-    <a class="back" href="resella.html">Takaisin etusivulle</a>
+    <span class="nav"><a class="lang" href="waitlist.html" hreflang="en" lang="en">EN</a><a class="back" href="resella.html">Takaisin etusivulle</a></span>
   </header>
   <main class="cols">
     <section>

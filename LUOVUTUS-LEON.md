@@ -12,14 +12,16 @@ Tämä kuvaa, mitä sivulla pitää toimia ja mitä käyttäjä näkee. Toteutus
 | `odotuslista.html` | Odotuslistan lomakesivu |
 | `varaa.html` | Demon varaussivu (kalenteri ja lomake) |
 | `avoimet-ajat.js` | Demon avoimet ajat, joita Sofia muokkaa käsin |
-| `tietosuoja.html` | Tietosuojaseloste (15.11.2026) |
+| `tietosuoja.html` | Tietosuojaseloste (16.11.2026) |
+| `ehdot.html` | Nettisivun käyttöehdot |
+| `en.html`, `book.html`, `waitlist.html`, `privacy.html`, `terms.html` | Englanninkieliset versiot (ks. kohta F) |
 | `uutiskirje.html` | Vanha osoite, ohjaa odotuslistaan |
 | `tekstit.js` + `tekstit-editori.html` | Sofian tekstieditori. Tallentaa tekstimuutokset GitHubiin |
 | `jarjestys.js` + `editori.html` | Sofian osioiden järjestyseditori |
 
 Sivu on nyt GitHub Pagesissa: https://sofiakrap-lgtm.github.io/resello/resella.html
 
-Vanhat sivut (`resello.html`, `resello-v2.html`, `resello-v3.html`, `resella-kopio.html`) ovat yhä julkisia, mutta niihin ei linkitetä. Niissä on vanha nimi ja vanhaa sisältöä. Ne voi poistaa.
+Vanhat sivut (`resello.html`, `resello-v2.html`, `resello-v3.html`, `resella-kopio.html`) on poistettu 16.11.2026. Ne löytyvät tarvittaessa git-historiasta.
 
 ## 1. Mihin tarvitaan logiikkaa
 
@@ -30,9 +32,9 @@ Vanhat sivut (`resello.html`, `resello-v2.html`, `resello-v3.html`, `resella-kop
 | C | **Hintalaskuri** | Hinnoittelu (`#hinnoittelu`), kenttä `#revInput`, tulos `#priceVal` ja `#priceSales` | Hinnoittelu (`#m-hinnoittelu`), kenttä `#mSales`, tulos `#mFee` ja `#mNote` | Toimii selaimessa. Sama kaava on koodissa kahdessa paikassa (funktiot `fee` ja `feeOf`) | Ei palvelinta. Kaava yhteen paikkaan |
 | D | **Sähköpostilinkit** (hei@resella.fi) | Tukikortti "Sähköposti" (`#tarinat`, "Lue lisää") | UKK "Ota yhteyttä", loppuosion yhteystiedot. Siirtymäosion nappi "Kysy siirtymästä demossa" on mobiilissa mailto, tietokoneella se vie osioon `#varaa` | mailto | Varmista, että osoite hei@resella.fi ottaa postia vastaan. Ehdotus: mobiilin siirtymänappi myös sivulle `varaa.html` |
 | E | **Evästeilmoitus** | Vasen alakulma | Alareuna | Tallentaa sulkemisen selaimeen (localStorage) | Ei mitään, ellei sivulle lisätä analytiikkaa (ks. osio 3) |
-| F | **Kielivalinta FI / EN** | Footerissa pelkkä teksti, ei toimi | Valikossa FI/EN-napit | Kesken | Päätös: tehdäänkö englanninkielinen versio vai poistetaanko valinta |
-| G | **Ehdot** | Footerissa pelkkä teksti, ei linkkiä | Sama | Sivua ei ole | Sofia ja Miro kirjoittavat ehdot, sen jälkeen linkki |
-| H | **Puhelintuki** | Tukikortti "Puhelintuki" kehottaa soittamaan | Tukikortit | Sivulla ei ole puhelinnumeroa | Päätös numerosta |
+| F | **Kielivalinta FI / EN** | Footerin linkki | Valikon FI/EN-linkit ja footer | Englanninkieliset sivut ovat erillisiä tiedostoja. EN-lomakkeet lähettävät viestin englanniksi ja rivin `Language: EN`. EN-odotuslistan rooli- ja kategoria-arvot ovat englanniksi (Finder, Seller, Shop owner) | Tallennukseen kenttä kieli (FI/EN), jotta vahvistusviesti lähtee oikealla kielellä. Huom: `en.html` ei lue `tekstit.js`-tiedostoa, joten Sofian tekstieditori muuttaa vain suomenkielistä sivua |
+| G | **Ehdot** | Footerin linkki `ehdot.html` | Sama | Valmis | Ei logiikkaa |
+| H | **Puhelintuki** | Tukikortti "Puhelintuki" ja footer | Tukikortti ja footer | Numero 050 323 3075 (Sofia), `tel:`-linkki | Ei logiikkaa |
 | I | **Editorit** | `editori.html`, `tekstit-editori.html` | | Tallentavat GitHubiin Sofian omalla avaimella (selaimen localStorage). Sivu lukee tiedostot `tekstit.js` ja `jarjestys.js` | Jos hosting tai rakenne muuttuu, editorien pitää toimia edelleen tai tilalle tarvitaan vastaava |
 
 ## 2. Lomakkeet tarkemmin
@@ -118,13 +120,38 @@ Porrastus on marginaalinen eli toimii kuin verotus. Maksu on vähintään 49 €
 | Mistä | Tiedot | Peruste | Ruksi? | Säilytys |
 |---|---|---|---|---|
 | Odotuslista | Sähköposti, postinumero, rooli, kategoria, lähde | Suostumus | Kyllä, pakollinen ja tyhjä oletuksena (on jo lomakkeessa) | Kunnes käyttäjä peruu, tai alue on avattu ja siitä on kerrottu |
-| Varaa demo | Nimi, sähköposti, kirppis, aika | Oikeutettu etu | Ei tarvita. Linkki tietosuojaselosteeseen lomakkeen alla (on jo) | Enintään 2 vuotta |
+| Varaa demo | Nimi, sähköposti, kirppis, aika | Sopimusta edeltävät toimet ja oikeutettu etu | Ei tarvita. Linkki tietosuojaselosteeseen lomakkeen alla (on jo) | Enintään 2 vuotta |
 | Evästeilmoitus | Tieto sulkemisesta selaimessa | Välttämätön | Ei | Selaimessa |
 
 - **Tietosuojaseloste on olemassa** (`tietosuoja.html`). Tarkista, että käsittelijät vastaavat toteutusta: hosting, MailerLite, kalenteri- ja videopalvelu. Jos jokin muuttuu, kerro Sofialle, niin seloste päivitetään. Miro tarkistaa selosteen.
 - **Analytiikka tai mainospikselit** (esim. Meta Pixel) vaativat suostumuksen ennen latausta. Silloin evästeilmoitukseen tarvitaan hyväksy- ja hylkää-valinnat, ja seloste päivitetään. Nyt sivulla ei ole seurantaa.
 - **Google Fonts** ladataan Googlelta, jolloin kävijän IP-osoite siirtyy Googlelle. Fonttien hostaaminen itse poistaisi siirron.
 - Älä kerää mitään muuta kuin yllä olevat kentät.
+
+### Tarkista tietosuojaseloste ja vahvista (16.11.2026)
+
+Tietosuojaselosteeseen on lisätty tekninen kuvaus tekoälystä ja muita lain vaatimia kohtia. Alla olevat kohdat kuvaavat järjestelmää. Vahvista, että ne pitävät paikkansa, tai kerro Sofialle oikea tieto. Seloste on jo sivulla, mutta sivua ei mainosteta ennen kuin kaikki on vahvistettu.
+
+| # | Väite selosteessa | Laki | Vahvista |
+|---|---|---|---|
+| 1 | Hintaehdotus: kuva ja tuotteen tiedot (kategoria, kunto) lähetetään salatulla yhteydellä ulkopuolisen palveluntarjoajan kielimallille rajapinnan kautta | GDPR 13 art. | Mitkä tiedot lähtevät, mikä palveluntarjoaja ja malli, missä maassa käsitellään |
+| 2 | Palveluntarjoaja ei käytä tietoja koulutukseen, säilyttää ne vain lyhyen ajan väärinkäytösten valvontaa varten | GDPR 5 ja 28 art. | Palveluntarjoajan API-ehdot ja säilytysaika. Tietojenkäsittelysopimus (DPA) hyväksytty |
+| 3 | Tekoälylle ei lähetetä myyjien yhteystietoja, pankkitietoja tai myyntihistoriaa | GDPR 5 art. (minimointi) | Pitää paikkansa myös apurissa |
+| 4 | Apuri kertoo aina olevansa tekoäly | **EU:n tekoälyasetus 50 art., voimassa 2.8.2026 alkaen** | Apurin käyttöliittymässä näkyvä maininta, esim. "Apuri on tekoäly ja voi olla väärässä" |
+| 5 | Apurin keskustelut säilytetään enintään 90 päivää | GDPR 5 art. | Toteutettu tai muuta luku |
+| 6 | Apuri ohjaa ihmiselle, jos ei osaa vastata | | Toteutus |
+| 7 | Salatut yhteydet ja vahva tunnistautuminen | GDPR 32 art. | Ylläpidon kirjautumisessa kaksivaiheinen tunnistautuminen |
+| 8 | EU/ETA:n ulkopuoliset siirrot vakiosopimuslausekkeilla | GDPR 44-46 art. | Lista palveluista, jotka käsittelevät tietoja EU:n ulkopuolella |
+| 9 | Kirppis on rekisterinpitäjä myyjiensä ja ostajiensa tiedoille, Resella käsittelijä | GDPR 28 art. | Asiakassopimukseen tarvitaan tietojenkäsittelysopimus (Sofia ja Miro tekevät, sinä kerrot tekniset tiedot) |
+| 10 | Tekoälyn käyttö ei ole tekoälyasetuksen suuririskistä käyttöä | Tekoälyasetus | Ei luottopäätöksiä, profilointia tai muuta liitteen III käyttöä |
+
+**Korjattava ennen julkaisua**
+
+- **Kampanjatunniste (`rs_utm_*` sessionStoragessa)** ei ole välttämätön tallennus. Traficomin linjan mukaan selaimen tallennustilaa käyttävät ei-välttämättömät tekniikat vaativat suostumuksen. Vaihtoehdot: välitä UTM suoraan linkin parametrina odotuslistasivulle ilman tallennusta, tai kysy suostumus.
+- **Google Fonts** on kolmannen osapuolen verkkokutsu, joka välittää IP-osoitteen. Hostaa Inter Tight ja DM Sans itse, niin siirto poistuu. Sen jälkeen Sofia poistaa maininnan selosteesta.
+- **Analytiikka:** jos lisäät mittauksen, evästeilmoitukseen tarvitaan "Hyväksy" ja "Hylkää" samanarvoisina ensimmäisellä tasolla, ja skriptit latautuvat vasta hyväksynnän jälkeen.
+- **Odotuslistan viesteissä** pitää olla poistumislinkki (MailerLitessä oletuksena).
+
 
 ## 4. Hyväksymiskriteerit
 

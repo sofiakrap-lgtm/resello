@@ -20,7 +20,8 @@ a{color:var(--ink);text-underline-offset:3px}
 .wrap{max-width:1300px;margin:0 auto;padding:40px clamp(20px,4.4vw,63px) 120px}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:72px}
 .top img{height:30px;width:auto;display:block}
-.top a.back{font-size:15px;font-weight:500}
+.top a.back,.top a.lang{font-size:15px;font-weight:500}
+.top .nav{display:flex;gap:24px}
 main{max-width:720px}
 h1{margin:0 0 20px;font-weight:600;font-size:clamp(44px,6vw,80px);line-height:.95;letter-spacing:-.04em}
 .lead{margin:0 0 56px;font-size:20px;line-height:1.45}
@@ -39,7 +40,7 @@ li{margin-bottom:6px}
 <div class="wrap">
   <header class="top">
     <a href="resella.html" aria-label="Resella etusivu"><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a>
-    <a class="back" href="resella.html">Takaisin etusivulle</a>
+    <span class="nav"><a class="lang" href="privacy.html" hreflang="en" lang="en">EN</a><a class="back" href="resella.html">Takaisin etusivulle</a></span>
   </header>
   <main>
     <h1>Tietosuoja&shy;seloste.</h1>
@@ -47,7 +48,7 @@ li{margin-bottom:6px}
 
     <h2>1. Rekisterinpitäjä</h2>
     <div class="box">
-      <p><b>Resella Oy</b><br>Y-tunnus 3641828-1<br>Espoo<br>Sähköposti: <a href="mailto:hei@resella.fi">hei@resella.fi</a></p>
+      <p><b>Resella Oy</b><br>Y-tunnus 3641828-1<br>Espoo<br>Yhteyshenkilö: Sofia Kraptsak<br>Sähköposti: <a href="mailto:hei@resella.fi">hei@resella.fi</a><br>Puhelin: <a href="tel:+358503233075">050 323 3075</a></p>
     </div>
     <p>Tietosuoja-asioissa voit ottaa yhteyttä samaan osoitteeseen.</p>
 
@@ -59,7 +60,11 @@ li{margin-bottom:6px}
       <li>Resellan käyttäjät, kuten kirppiksen henkilökunta, myyjät ja ostajat</li>
     </ul>
 
-    <h2>3. Mitä tietoja keräämme</h2>
+    <h2>3. Kirppiksen myyjien ja ostajien tiedot</h2>
+    <p>Kun kirppis käyttää Resellan kassa- ja hallintajärjestelmää, kirppis on rekisterinpitäjä omien myyjiensä ja ostajiensa tiedoille. Resella käsittelee näitä tietoja kirppiksen puolesta ja sen ohjeiden mukaan. Tästä on sovittu kirppiksen kanssa tietojenkäsittelysopimuksella.</p>
+    <p>Jos olet myyjä tai ostaja, ota tietoja koskevissa asioissa yhteyttä ensin omaan kirppikseesi. Autamme kirppistä vastaamaan pyyntöösi.</p>
+
+    <h2>4. Mitä tietoja keräämme</h2>
     <ul>
       <li><b>Yhteystiedot:</b> nimi, sähköposti, puhelinnumero ja kirpputorin nimi</li>
       <li><b>Esittelyvaraus:</b> valitsemasi aika ja viestisi</li>
@@ -68,64 +73,81 @@ li{margin-bottom:6px}
       <li><b>Tekniset tiedot:</b> IP-osoite, selain ja laite. Näitä syntyy automaattisesti, kun käytät sivua.</li>
     </ul>
     <p>Saamme tiedot sinulta itseltäsi tai kirpputorilta, joka käyttää Resellaa.</p>
+    <p>Tietojen antaminen on vapaaehtoista. Ilman sähköpostiosoitetta emme kuitenkaan voi lisätä sinua odotuslistalle tai vastata sinulle. Palvelun käyttö edellyttää ne tiedot, joita myynnit ja tilitykset vaativat.</p>
+    <p>Odotuslistalle voi liittyä itse 13 vuotta täyttänyt. Sitä nuoremman puolesta suostumuksen antaa huoltaja.</p>
 
-    <h2>4. Miksi käsittelemme tietoja</h2>
+    <h2>5. Miksi käsittelemme tietoja</h2>
     <ul>
-      <li>Esittelyjen sopiminen ja yhteydenottoihin vastaaminen (oikeutettu etu)</li>
-      <li>Odotuslista: ilmoitus, kun Resella avautuu alueellasi, ja postinumeroiden perusteella ensimmäisten alueiden valinta (suostumus, jonka voit perua milloin tahansa)</li>
-      <li>Palvelun toimittaminen asiakkaille ja käyttäjille (sopimus)</li>
-      <li>Kirjanpito ja muut lakisääteiset velvoitteet (laki)</li>
-      <li>Sivuston ja palvelun toimivuus ja turvallisuus (oikeutettu etu)</li>
+      <li><b>Esittelyt ja yhteydenotot:</b> vastaamme sinulle ja sovimme esittelyn, jota olet pyytänyt (sopimusta edeltävät toimet ja oikeutettu etu: yhteydenpito yrityksiin, jotka ovat kiinnostuneita palvelustamme)</li>
+      <li><b>Odotuslista:</b> ilmoitamme, kun Resella avautuu alueellasi, ja valitsemme postinumeroiden perusteella ensimmäiset alueet (suostumus, jonka voit perua milloin tahansa)</li>
+      <li><b>Palvelu:</b> toimitamme palvelun asiakkaille ja käyttäjille (sopimus)</li>
+      <li><b>Kirjanpito:</b> hoidamme kirjanpidon ja muut lakisääteiset velvoitteet (laki)</li>
+      <li><b>Toimivuus ja turvallisuus:</b> pidämme sivuston ja palvelun toimivana ja estämme väärinkäytöksiä (oikeutettu etu)</li>
     </ul>
 
-    <h2>5. Tekoälyn käyttö</h2>
-    <p>Käytämme tekoälyä työssämme ja palvelussamme. Haluamme kertoa siitä avoimesti.</p>
+    <h2>6. Tekoälyn käyttö</h2>
+    <p>Käytämme tekoälyä työssämme ja palvelussamme. Kerromme siitä avoimesti EU:n tekoälyasetuksen mukaisesti.</p>
     <ul>
-      <li><b>Palvelussa:</b> tekoäly ehdottaa tuotteelle hintaa kuvan perusteella. Ehdotus on vain apu, ja hinnan päättää aina ihminen.</li>
-      <li><b>Asiakaspalvelussa:</b> järjestelmän apuri voi vastata kysymyksiin. Sinulla on aina mahdollisuus saada vastaus ihmiseltä.</li>
-      <li><b>Omassa työssämme:</b> käytämme tekoälyä esimerkiksi tekstien, kuvien ja ohjeiden laatimiseen.</li>
+      <li><b>Hintaehdotus kuvasta:</b> kun pyydät hintaehdotusta, tuotteen kuva ja sen tiedot, kuten kategoria ja kunto, lähetetään salatulla yhteydellä tekoälypalvelulle. Palvelu palauttaa hintaehdotuksen. Ehdotus on vain apu, ja hinnan päättää aina ihminen. Kuvaa ei tarvita mihinkään muuhun, joten ota kuva tuotteesta, älä ihmisistä.</li>
+      <li><b>Apuri:</b> järjestelmän apuri on tekoäly, ja se kerrotaan aina, kun käytät sitä. Apuri vastaa kysymyksiin käyttöohjeiden perusteella. Se voi olla väärässä, joten tärkeissä asioissa varmista meiltä. Saat aina vastauksen myös ihmiseltä.</li>
+      <li><b>Omassa työssämme:</b> käytämme tekoälyä apuna esimerkiksi tekstien, kuvien ja ohjeiden laatimisessa. Ihminen tarkistaa kaiken ennen julkaisua.</li>
     </ul>
-    <p>Emme tee tekoälyllä päätöksiä, joilla olisi oikeudellisia tai muita merkittäviä vaikutuksia sinuun. Käytämme vain palveluita, jotka eivät käytä tietojasi tekoälyn kouluttamiseen. Syötämme tekoälylle henkilötietoja vain silloin, kun se on tehtävän kannalta tarpeen.</p>
+    <p><b>Näin tietoja käsitellään teknisesti:</b></p>
+    <ul>
+      <li>Tekoälypalvelut ovat ulkopuolisten palveluntarjoajien kielimalleja, joita käytämme rajapinnan kautta.</li>
+      <li>Palveluntarjoajat eivät käytä lähettämiämme tietoja tekoälyn kouluttamiseen. Ne säilyttävät tiedot vain lyhyen ajan väärinkäytösten valvontaa varten ja poistavat ne sen jälkeen.</li>
+      <li>Lähetämme tekoälylle vain tehtävään tarvittavat tiedot. Emme lähetä myyjien yhteystietoja, pankkitietoja tai myyntihistoriaa.</li>
+      <li>Apurin keskusteluja säilytetään enintään 90 päivää, jotta voimme korjata virheitä ja parantaa ohjeita.</li>
+    </ul>
+    <p>Emme tee tekoälyllä päätöksiä, joilla olisi oikeudellisia tai muita merkittäviä vaikutuksia sinuun. Tekoälyn käyttömme ei kuulu tekoälyasetuksen suuririskisiin käyttötarkoituksiin.</p>
 
-    <h2>6. Kuka tietoja käsittelee</h2>
+    <h2>7. Kuka tietoja käsittelee</h2>
     <p>Emme myy tai luovuta tietojasi markkinointiin. Käytämme luotettavia palveluntarjoajia, jotka käsittelevät tietoja puolestamme:</p>
     <ul>
       <li>palvelinten ja nettisivun ylläpito</li>
       <li>sähköposti ja uutiskirjepalvelu (MailerLite)</li>
+      <li>ajanvaraus ja kalenteri</li>
       <li>maksut ja pankkipalvelut</li>
       <li>tekoälypalvelut</li>
       <li>kirjanpito</li>
     </ul>
     <p>Osa palveluntarjoajista voi käsitellä tietoja EU:n ja ETA:n ulkopuolella. Silloin siirto tehdään EU:n hyväksymillä suojakeinoilla, kuten vakiosopimuslausekkeilla.</p>
 
-    <h2>7. Kuinka kauan säilytämme tietoja</h2>
+    <h2>8. Kuinka kauan säilytämme tietoja</h2>
     <ul>
       <li><b>Yhteydenotot ja esittelyt:</b> enintään 2 vuotta viimeisestä yhteydenotosta</li>
       <li><b>Odotuslista:</b> kunnes perut tai alueesi on avattu ja olemme kertoneet siitä sinulle</li>
+      <li><b>Apurin keskustelut:</b> enintään 90 päivää</li>
       <li><b>Asiakkuus ja palvelun käyttö:</b> sopimuksen ajan ja sen jälkeen niin kauan kuin laki vaatii</li>
       <li><b>Kirjanpito:</b> lain mukaan, yleensä 6 tai 10 vuotta</li>
     </ul>
 
-    <h2>8. Evästeet</h2>
-    <p>Sivustomme käyttää vain toiminnan kannalta välttämättömiä tietoja. Selaimeesi tallennetaan esimerkiksi tieto siitä, että olet sulkenut evästeilmoituksen. Emme käytä mainos- tai seurantaevästeitä. Fontit ladataan Googlen palvelimelta, jolloin selaimesi IP-osoite välittyy Googlelle.</p>
+    <h2>9. Evästeet ja selaimen tallennustila</h2>
+    <p>Emme käytä mainos- tai seurantaevästeitä. Sivusto tallentaa selaimeesi vain nämä tiedot:</p>
+    <ul>
+      <li><b>Evästeilmoitus suljettu:</b> muistaa, että olet sulkenut ilmoituksen, jotta se ei näy joka kerta. Säilyy, kunnes tyhjennät selaimen tiedot.</li>
+      <li><b>Kampanjatunniste:</b> jos tulit sivulle mainoksen tai QR-koodin linkistä, tallennamme linkin kampanjatiedon. Se liitetään odotuslistailmoittautumiseen vain, jos lähetät sen. Tieto poistuu, kun suljet selaimen.</li>
+    </ul>
+    <p>Fontit ladataan Googlen palvelimelta, jolloin selaimesi IP-osoite välittyy Googlelle.</p>
 
-    <h2>9. Oikeutesi</h2>
+    <h2>10. Oikeutesi</h2>
     <ul>
       <li>saada tietää, mitä tietoja sinusta on</li>
       <li>korjata väärät tiedot</li>
       <li>pyytää tietojesi poistamista</li>
       <li>rajoittaa tai vastustaa käsittelyä</li>
+      <li>kieltää suoramarkkinointi milloin tahansa</li>
       <li>siirtää tietosi toiseen palveluun</li>
-      <li>perua suostumuksesi, esimerkiksi poistua odotuslistalta</li>
+      <li>perua suostumuksesi, esimerkiksi poistua odotuslistalta. Jokaisessa viestissämme on linkki, jolla voit poistua.</li>
     </ul>
     <p>Lähetä pyyntö osoitteeseen <a href="mailto:hei@resella.fi">hei@resella.fi</a>. Vastaamme kuukauden kuluessa. Voit myös tehdä valituksen <a href="https://tietosuoja.fi" rel="noopener">tietosuojavaltuutetulle</a>.</p>
 
-    <h2>10. Tietoturva</h2>
+    <h2>11. Tietoturva</h2>
     <p>Tietoihin pääsevät vain ne, jotka tarvitsevat niitä työssään. Käytämme salattuja yhteyksiä ja vahvaa tunnistautumista.</p>
 
-    <h2>11. Muutokset</h2>
-    <p>Päivitämme tätä selostetta, kun palvelumme muuttuu. Uusin versio on aina tällä sivulla.</p>
-    <p class="muted">Päivitetty 15.11.2026</p>
+    <h2>12. Muutokset</h2>
+    <p>Päivitämme tätä selostetta, kun palvelumme muuttuu. Uusin versio on aina tällä sivulla. Kuluttaja-appin myötä päivitämme selosteen ennen appin julkaisua.</p>
+    <p class="muted">Päivitetty 16.11.2026</p>
   </main>
 </div>
 </body>

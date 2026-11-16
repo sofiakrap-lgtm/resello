@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Waitlist · Resella</title>
+<meta name="description" content="Join the Resella waitlist. We let you know when the shelves of your local second-hand shops open in the app.">
+<link rel="icon" href="assets/ikoni/favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/svg+xml" href="assets/ikoni/favicon.svg?v=3">
+<link rel="apple-touch-icon" href="assets/ikoni/apple-touch-icon_180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ECECDC;--surface:#F6F6EE;--line:#DCDBC6;--ink:#3E2520;--ink-muted:#6E5E56;--blue-deep:#3A4961;--faint:#B5ABA2;--std:cubic-bezier(.45,0,.55,1)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.5 "Inter Tight",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--ink)}
+:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px}
+.wrap{max-width:1300px;margin:0 auto;padding:40px clamp(20px,4.4vw,63px) 120px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:72px}
+.top img{height:30px;width:auto;display:block}
+.top a.back,.top a.lang{font-size:15px;font-weight:500;text-underline-offset:3px}
+.top .nav{display:flex;gap:24px}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,600px);gap:clamp(40px,7vw,96px);align-items:start}
+h1{margin:8px 0 28px;font-weight:600;font-size:clamp(56px,7vw,96px);line-height:.95;letter-spacing:-.04em}
+.lead{margin:0 0 28px;font-size:20px;line-height:1.45;max-width:560px}
+.facts{margin:0 0 28px;padding:0;list-style:none;max-width:560px;border-top:1px solid var(--line)}
+.facts li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);color:var(--ink-muted)}
+.facts b{color:var(--ink);font-weight:600}
+.note{margin:0 0 20px;color:var(--ink-muted);line-height:1.5;max-width:560px}
+.sign{margin:0;font-weight:600}
+.card{background:var(--surface);border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:28px}
+.hr{height:1px;background:var(--line)}
+.cal-h{display:flex;justify-content:space-between;align-items:center}
+.cal-h h2{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
+.cal-nav{display:flex;gap:18px}
+.cal-nav button{border:0;background:none;padding:6px 0;font:500 15px "Inter Tight",sans-serif;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cal-nav button:disabled{color:var(--faint);text-decoration:none;cursor:default}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));row-gap:2px;text-align:center}
+.grid .wd{font-size:13px;color:var(--ink-muted);padding-bottom:8px}
+.grid .d{height:52px;display:grid;place-items:center}
+.grid .d span,.grid .d button{width:44px;height:44px;border-radius:999px;display:grid;place-items:center;font:400 16px "Inter Tight",sans-serif;color:var(--faint);border:0;background:none;padding:0}
+.grid .d button{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:background-color 200ms var(--std)}
+.grid .d button:hover{background:var(--bg)}
+.grid .d button[aria-pressed="true"]{background:var(--ink);color:var(--bg);text-decoration:none}
+.day-h{margin:0 0 12px;font-size:18px;font-weight:600}
+.times{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.times button{height:44px;border-radius:999px;border:1px solid var(--line);background:none;font:600 15px "Inter Tight",sans-serif;color:var(--ink);cursor:pointer;transition:background-color 200ms var(--std),color 200ms var(--std)}
+.times button:hover{background:var(--bg)}
+.times button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.times button:disabled{color:var(--faint);text-decoration:line-through;cursor:default;background:none}
+.empty{margin:0;color:var(--ink-muted)}
+.fields{display:flex;flex-direction:column;gap:12px}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-muted)}
+input{height:48px;border:0;border-radius:10px;background:var(--bg);padding:0 16px;font:400 16px "Inter Tight",sans-serif;color:var(--ink)}
+input::placeholder{color:#9C9087}
+.submit{height:52px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:600 17px "Inter Tight",sans-serif;cursor:pointer;transition:background-color 200ms var(--std),color 200ms var(--std)}
+.submit:hover{background:#2A1814}
+.submit:disabled{background:var(--line);color:var(--ink-muted);cursor:default}
+.small{margin:0;text-align:center;font-size:14px;color:var(--ink-muted)}
+.done{text-align:left}
+.done h2{margin:0 0 10px;font-size:32px;font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.done p{margin:0 0 12px;color:var(--ink-muted);line-height:1.5}
+[hidden]{display:none!important}
+@media(max-width:900px){
+  .top{margin-bottom:40px}
+  .cols{grid-template-columns:1fr}
+  .card{padding:22px}
+  .lead{font-size:18px}
+  .grid .d{height:46px}.grid .d span,.grid .d button{width:40px;height:40px;font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.who{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border:0;margin:0;padding:0}
+.who legend{font-size:14px;color:var(--ink-muted);margin-bottom:10px;padding:0}
+.who label{position:relative;display:block}
+.who input{position:absolute;opacity:0;width:1px;height:1px}
+.who span{display:grid;place-items:center;height:44px;border-radius:999px;border:1px solid var(--line);font-weight:600;font-size:15px;color:var(--ink);cursor:pointer;text-align:center;padding:0 8px;transition:background-color 200ms var(--std),color 200ms var(--std)}
+.who input:checked+span{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.who input:focus-visible+span{outline:2px solid var(--blue-deep);outline-offset:2px}
+.consent{display:flex;flex-direction:row;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45;color:var(--ink-muted)}
+.consent input{width:22px;height:22px;flex:0 0 22px;margin:1px 0 0;accent-color:var(--ink);padding:0}
+.card h2{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
+.dd{position:relative;display:flex;flex-direction:column;gap:6px}
+.dd-l{font-size:14px;color:var(--ink-muted)}
+.dd-btn{height:48px;border:0;border-radius:10px;background:var(--bg);padding:0 14px 0 16px;font:400 16px "Inter Tight",sans-serif;color:var(--ink);display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left}
+.dd-btn .ph{color:#9C9087}
+.dd-btn svg{width:16px;height:16px;flex:none;transition:transform 200ms var(--std)}
+.dd-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.dd-btn:focus-visible,.dd-list:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px}
+.dd.err .dd-btn{box-shadow:inset 0 0 0 1.5px #C24029}
+.dd-list{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:5;margin:0;padding:6px;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 32px rgba(62,37,32,.12);max-height:220px;overflow-y:auto;overscroll-behavior:contain}
+.dd-list li{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:10px;cursor:pointer}
+.dd-list li b{font-weight:600;font-size:15px;color:var(--ink)}
+.dd-list li span{font-size:13.5px;color:var(--ink-muted);line-height:1.35}
+.dd-list li:hover,.dd-list li.act{background:var(--bg)}
+.dd-list li[aria-selected="true"]{background:var(--ink)}
+.dd-list li[aria-selected="true"] b,.dd-list li[aria-selected="true"] span{color:var(--bg)}
+.who.kat{display:flex;flex-wrap:wrap}
+.who.kat legend{width:100%}
+.who.kat span{padding:0 18px}
+.done .btn2{display:inline-block;margin-top:6px;background:var(--ink);color:var(--bg);border-radius:999px;padding:14px 26px;font-weight:600;text-decoration:none}
+@media(max-width:520px){.who:not(.kat){grid-template-columns:1fr}}
+body{background:var(--blue,#C5D0D3)}
+.deco{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.deco.m{display:none}
+.deco path{fill:none;stroke:#C24029;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
+.wrap{position:relative;z-index:1}
+@media(min-width:901px){.wrap{zoom:.8}}
+@media(max-width:900px){.deco.d{display:none}.deco.m{display:block;top:auto;height:40vh}}
+</style>
+</head>
+<body>
+<svg class="deco d" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-80 790 C200 770 420 790 560 700 C680 620 700 470 720 380 C750 240 800 150 900 100 C970 55 1000 10 1020 -60"/></svg>
+<svg class="deco m" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-60 600 C200 580 420 560 600 470 C800 370 980 200 1500 120"/></svg>
+<div class="wrap">
+  <header class="top">
+    <a href="en.html" aria-label="Resella home"><img src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella"></a>
+    <span class="nav"><a class="lang" href="waitlist.html" hreflang="fi" lang="fi">FI</a><a class="back" href="en.html">Back to home</a></span>
+  </header>
+  <main class="cols">
+    <section>
+      <h1>Join<br>the list.</h1>
+      <p class="lead">We let you know when Resella opens in your area. Your postal code helps us choose where to start.</p>
+    </section>
+    <section class="card" aria-label="Joining the waitlist">
+      <form id="form" novalidate style="display:flex;flex-direction:column;gap:24px">
+        <h2>Join the waitlist</h2>
+        <div class="fields">
+          <label>Email<input id="email" name="email" type="email" autocomplete="email" required></label>
+          <label>Postal code<input id="posti" name="postinumero" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" required></label>
+        </div>
+        <div class="dd" id="dd">
+          <span class="dd-l" id="ddLabel">I am</span>
+          <input type="hidden" name="rooli" id="rooli">
+          <button type="button" class="dd-btn" id="ddBtn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ddLabel ddBtn"><span id="ddVal" class="ph">Choose a role</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="dd-list" id="ddList" role="listbox" aria-labelledby="ddLabel" tabindex="-1" hidden>
+            <li role="option" aria-selected="false" data-v="Finder"><b>Finder</b><span>I look for and buy second-hand finds.</span></li>
+            <li role="option" aria-selected="false" data-v="Seller"><b>Seller</b><span>I sell my own things at second-hand shops.</span></li>
+            <li role="option" aria-selected="false" data-v="Shop owner"><b>Shop owner</b><span>I run a second-hand shop or am planning one.</span></li>
+          </ul>
+        </div>
+        <fieldset class="who kat">
+          <legend>What do you look for most? (optional)</legend>
+          <label><input type="radio" name="kategoria" value="Clothes"><span>Clothes</span></label>
+          <label><input type="radio" name="kategoria" value="Kids' items"><span>Kids' items</span></label>
+          <label><input type="radio" name="kategoria" value="Home decor"><span>Home decor</span></label>
+          <label><input type="radio" name="kategoria" value="Collectibles"><span>Collectibles</span></label>
+          <label><input type="radio" name="kategoria" value="Other"><span>Other</span></label>
+        </fieldset>
+        <label class="consent"><input type="checkbox" id="lupa" required><span>I agree to get an email when Resella opens in my area.</span></label>
+        <button class="submit" type="submit">Join the waitlist</button>
+        <p class="small">We never share your address. <a href="privacy.html">Privacy</a></p>
+      </form>
+      <div class="done" id="done" hidden>
+        <h2 style="font-size:32px;margin-bottom:10px">Almost done.</h2>
+        <p>The message is ready in your email app. Send it and you are on the list.</p>
+        <p>If your email app did not open, send a message to <a id="doneMail" href="mailto:hei@resella.fi">hei@resella.fi</a>.</p>
+        <p>Tell a friend who loves second-hand. Your area opens faster the more of your neighbours join.</p>
+        <div id="omistaja" hidden><p>Want the Resella till for your shop now?</p><a class="btn2" href="book.html">Book a 1 h demo</a></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var q=new URLSearchParams(location.search); if(q.get('email')) $('email').value=q.get('email');
+  // Olen-valikko: avautuva, vieritettävä lista, jokaisella roolilla pieni tarkennus
+  var btn=$('ddBtn'), list=$('ddList'), opts=[].slice.call(list.children), ai=-1;
+  function mark(i){ opts.forEach(function(o,j){ o.classList.toggle('act',j===i); }); ai=i; if(i>=0) opts[i].scrollIntoView({block:'nearest'}); }
+  function open(){ list.hidden=false; btn.setAttribute('aria-expanded','true'); var s=opts.findIndex(function(o){return o.getAttribute('aria-selected')==='true';}); mark(s<0?0:s); list.focus({preventScroll:true}); }
+  function close(f){ list.hidden=true; btn.setAttribute('aria-expanded','false'); if(f) btn.focus(); }
+  function pick(i){ var o=opts[i]; opts.forEach(function(x){ x.setAttribute('aria-selected',x===o?'true':'false'); }); $('rooli').value=o.dataset.v; var v=$('ddVal'); v.textContent=o.dataset.v; v.className=''; $('dd').classList.remove('err'); close(true); }
+  btn.addEventListener('click',function(){ list.hidden?open():close(); });
+  opts.forEach(function(o,i){ o.addEventListener('click',function(){ pick(i); }); o.addEventListener('mousemove',function(){ mark(i); }); });
+  list.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'){ e.preventDefault(); mark(Math.min(opts.length-1,ai+1)); } else if(e.key==='ArrowUp'){ e.preventDefault(); mark(Math.max(0,ai-1)); } else if(e.key==='Enter'||e.key===' '){ e.preventDefault(); if(ai>=0) pick(ai); } else if(e.key==='Escape'||e.key==='Tab'){ close(e.key==='Escape'); } });
+  btn.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'){ e.preventDefault(); open(); } });
+  document.addEventListener('click',function(e){ if(!$('dd').contains(e.target)) close(); });
+  $('form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var em=$('email'), lupa=$('lupa'), po=$('posti');
+    if(!em.value.trim()||!em.checkValidity()){ em.focus(); em.reportValidity&&em.reportValidity(); return; }
+    if(!/^[0-9]{5}$/.test(po.value.trim())){ po.setCustomValidity('Enter a five-digit postal code.'); po.reportValidity&&po.reportValidity(); po.setCustomValidity(''); po.focus(); return; }
+    if(!lupa.checked){ lupa.focus(); lupa.reportValidity&&lupa.reportValidity(); return; }
+    var rooli=$('rooli').value;
+    if(!rooli){ $('dd').classList.add('err'); $('ddBtn').focus(); open(); return; }
+    var kat=(document.querySelector('input[name=kategoria]:checked')||{}).value||'-';
+    var utm=[]; ['utm_source','utm_medium','utm_campaign'].forEach(function(k){ var v=q.get(k); if(!v){ try{ v=sessionStorage.getItem('rs_'+k); }catch(e){} } if(v) utm.push(k+'='+v); });
+    var body='Hi,\n\nI want to join the Resella waitlist.\n\nEmail: '+em.value.trim()+'\nPostal code: '+po.value.trim()+'\nI am: '+rooli+'\nLooking for: '+kat+'\nSource: '+(utm.join(', ')||'-')+'\nLanguage: EN\n';
+    var mail='mailto:hei@resella.fi?subject='+encodeURIComponent('Waitlist '+po.value.trim())+'&body='+encodeURIComponent(body);
+    $('doneMail').href=mail; $('omistaja').hidden=rooli!=='Shop owner'; $('form').hidden=true; $('done').hidden=false; location.href=mail;
+  });
+})();
+</script>
+</body>
+</html>
