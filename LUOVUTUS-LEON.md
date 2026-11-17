@@ -182,6 +182,11 @@ Tietosuojaselosteeseen on lisätty tekninen kuvaus tekoälystä ja muita lain va
 - [ ] Tarkistusluvut täsmäävät
 - [ ] Vähimmäis- ja enimmäismaksu näkyvät oikein
 
+**Englanninkieliset sivut**
+- [ ] `waitlist.html` ja `book.html` tallentavat samaan paikkaan kuin suomenkieliset, kenttä kieli = EN
+- [ ] Vahvistus- ja kiitosviestit lähtevät englanniksi, kun kieli on EN
+- [ ] EN-odotuslistan arvot (Finder, Seller, Shop owner) yhdistyvät samoihin rooleihin kuin suomenkieliset
+
 **Yleiset**
 - [ ] Tietosuojaseloste vastaa toteutusta
 - [ ] Mitään tietoa ei kerätä ilman, että se mainitaan selosteessa
@@ -189,7 +194,16 @@ Tietosuojaselosteeseen on lisätty tekninen kuvaus tekoälystä ja muita lain va
 - [ ] Ulkoasu ja tekstit eivät muutu ilman Sofian hyväksyntää
 - [ ] Kaikki toimii myös hitaalla mobiiliyhteydellä
 
-## 5. Koodi ja pääsy
+## 5. Muut ennen julkaisua
+
+| Asia | Mitä tehdään |
+|---|---|
+| **Oma osoite** | resella.fi osoittamaan sivulle (GitHub Pages: Custom domain + DNS). Nyt osoitteessa näkyy vanha nimi "resello" |
+| **Jakokuvien osoitteet** | og:url ja og:image viittaavat nyt github.io-osoitteeseen. Vaihda resella.fi-osoitteeseen, kun domain on käytössä |
+| **Mittaus** | Kävijämäärien lähtötaso ennen mainontaa. Evästeilmoitukseen silloin hyväksy/hylkää (ks. osio 3) |
+| **Fontit omalta palvelimelta** | Inter Tight ja DM Sans, jotta Googlelle ei välity IP-osoitetta (ks. osio 3) |
+
+## 6. Koodi ja pääsy
 
 - **Repo:** https://github.com/sofiakrap-lgtm/resello
 - **Branch:** `claude/frontend-stack-setup-anh5xj` (repon oletusbranch)
