@@ -104,9 +104,14 @@ section[id]{scroll-margin-top:72px}
 .gm-menu-in{overflow:hidden;min-width:238px}
 .gm-mrow{display:block}
 .gm-mrow nav{flex:1}
-.gm-eyes{position:absolute;top:2px;right:12px;height:40px;display:flex;align-items:center;z-index:2;pointer-events:none;opacity:0;transform:scale(.6);transition:opacity .35s var(--ease-out) .25s,transform .5s var(--ease-reveal) .25s}
+.gm-lang{position:absolute;top:2px;right:14px;height:40px;display:flex;align-items:center;gap:6px;z-index:2;font:500 15px/1 var(--fb);opacity:0;visibility:hidden;transition:opacity .3s var(--ease-out) .2s}
+.gm.open .gm-lang{opacity:1;visibility:visible}
+.gm-lang span{opacity:.4}
+.gm-lang a{color:inherit;opacity:.55}
+.gm-lang a:hover{opacity:1}
+.gm-eyes{margin-left:auto;align-self:flex-end;height:30px;display:flex;align-items:center;pointer-events:none;opacity:0;transform:scale(.6);transition:opacity .35s var(--ease-out) .35s,transform .5s var(--ease-reveal) .35s}
 .gm.open .gm-eyes{opacity:1;transform:none}
-.gm-eyes img{height:40px;width:auto;display:block}
+.gm-eyes img{height:30px;width:auto;display:block}
 .gm-eyes .er{display:none}
 .gm.on-dark .gm-eyes .ev{display:none}
 .gm.on-dark .gm-eyes .er{display:block}
@@ -1344,7 +1349,7 @@ section.fd{background:var(--blue)}
       <button class="gm-burger" id="gmBurger" aria-label="Avaa valikko" aria-expanded="false"><span></span><span></span></button>
       <a class="gm-cta" href="#varaa">Varaa demo</a>
     </div>
-    <span class="gm-eyes" aria-hidden="true"><img class="ev" src="assets/silmat/silmat-katsoo-vaalea.svg" alt=""><img class="er" src="assets/silmat/silmat-katsoo-ruskea.svg" alt=""></span>
+    <span class="gm-lang"><b>FI</b><span>/</span><a href="en.html" hreflang="en" lang="en">EN</a></span>
     <div class="gm-menu" id="gmMenu">
       <div class="gm-menu-in"><div class="gm-mrow">
         <nav aria-label="Valikko">
@@ -1356,6 +1361,7 @@ section.fd{background:var(--blue)}
           <div class="gm-sub">
             <a href="#perustajat">Meistä</a>
             <a href="#varaa">Yhteystiedot</a>
+            <span class="gm-eyes" aria-hidden="true"><img class="ev" src="assets/silmat/silmat-katsoo-vaalea.svg" alt=""><img class="er" src="assets/silmat/silmat-katsoo-ruskea.svg" alt=""></span>
           </div>
         </nav></div>
       </div>
