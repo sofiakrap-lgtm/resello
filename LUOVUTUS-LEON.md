@@ -215,3 +215,32 @@ Tietosuojaselosteeseen on lisätty tekninen kuvaus tekoälystä ja muita lain va
   - Tee oma branch (esim. `leon/logiikka`) ja pull request, jonka Sofia hyväksyy.
   - Julkinen sivu päivittyy suoraan oletusbranchista, ja Sofian editorit sekä Claude tallentavat sinne. Jos teet töitä suoraan siinä, muutokset näkyvät heti ja menevät ristiin.
 - **Salaisuudet:** älä laita avaimia tai salasanoja repoon, koska repo on julkinen.
+
+## 7. Siirto: tunnukset ja muut kuin koodi
+
+Repo sisältää kaiken koodin, kuvat ja videot. Siirtoon tarvitaan lisäksi nämä. **Tunnuksia ja avaimia ei laiteta repoon eikä tähän dokumenttiin**, vaan ne annetaan salasanojen hallinnan tai kasvokkain kautta.
+
+| Mitä | Kuka antaa | Huom. |
+|---|---|---|
+| GitHub: kirjoitusoikeus repoon | Sofia | Osio 6 |
+| resella.fi: verkkotunnuksen hallinta ja DNS | Sofia | Missä verkkotunnus on rekisteröity, tunnukset |
+| Sähköposti hei@resella.fi | Sofia | Toimiiko postilaatikko jo, ja kuka lukee sitä. Lomakkeiden ilmoitukset tulevat tänne |
+| MailerLite | Sofia | Tili Resella Oy:n nimiin. Leonille käyttäjä tai API-avain |
+| Kalenteri demovarauksille | Sofia | Mikä kalenteri (Google?), Sofian ja Leonin kalenterit näkyviin |
+| Figma (yaTmCavX9QjL7ePl0b2cot) | Sofia | Katseluoikeus. Design tehdään Figmassa ennen koodia |
+| Analytiikka (myöhemmin) | Leon ehdottaa | Ei ennen evästeratkaisua (osio 3) |
+
+**Koodissa olevat osoitteet, jotka muuttuvat siirrossa**
+- `tekstit-editori.html` rivi 73: repo `sofiakrap-lgtm/resello` ja branch. Jos repo tai branch vaihtuu, päivitä tähän, muuten Sofian tekstieditori lakkaa tallentamasta.
+- Kaikkien sivujen og:url ja og:image: `sofiakrap-lgtm.github.io/resello/...` → resella.fi.
+- Sofian GitHub-avaimella pitää olla kirjoitusoikeus uuteen repoon.
+
+**Suositukset siirtoon**
+- Oletusbranchin nimi on `claude/frontend-stack-setup-anh5xj`. Vaihda se `main`-nimiseksi siirron yhteydessä (ja päivitä editori).
+- Repon historia on noin 280 Mt vanhojen kuvien ja videoiden takia. Uuteen repoon voi siirtää pelkän nykytilan ilman historiaa, jos koolla on väliä.
+- Suomenkielisen sivun pääsivu on `resella.html`, englanninkielinen `en.html`. `index.html` ohjaa suomenkieliseen.
+
+**Avoimet asiat, jotka eivät ole Leonin**
+- Miro tarkistaa tietosuojaselosteen ja ehdot.
+- Tietojenkäsittelysopimus kirppiksille (Sofia ja Miro).
+- Englanninkielisten videoiden korjaukset ("flea market", demon kesto 30 min).
