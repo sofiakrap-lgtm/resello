@@ -214,7 +214,7 @@
     return {
       html: ylapalkki('Varaa', true) + tuoterivi(t) + `<div class="raita"></div>
       <div class="osio"><span class="osio-label">Nouto</span>
-        <div class="laatikko">${ik('shop')}<div class="rivit"><span class="iso">${esc(k.nimi)}</span><span class="himmea">${esc(k.osoite)}</span><span class="himmea">Avoinna ${esc(k.aukiolo)}</span></div></div>
+        <div class="laatikko">${ik('pin')}<div class="rivit"><span class="iso">${esc(k.nimi)}</span><span class="himmea">${esc(k.osoite)}</span><span class="himmea">Avoinna ${esc(k.aukiolo)}</span></div></div>
         <span style="font-size:14px">Tuote odottaa sinua <b style="font-weight:600">48 h</b>. Maksat noudettaessa. Pöytäpaikka näkyy, kun varaus on tehty.</span></div>
       <div class="raita"></div>
       <div class="osio"><label class="osio-label" for="puh">Puhelinnumero</label><input class="kentta" id="puh" type="tel" inputmode="tel" autocomplete="tel" value="${esc(tila.puhelin)}"><span class="himmea" style="font-size:13px">Saat tekstiviestin, kun varaus on valmis ja ennen kuin se raukeaa.</span></div>`,
@@ -337,13 +337,12 @@
       ${OSASTOT.map(([k, n, i]) => `<button class="hakurivi" data-osasto="${k}"><span class="rivi-ikoni">${ik(i)}${n}</span>${ik('chev')}</button>`).join('')}
       <button class="hakurivi" data-osasto=""><span class="rivi-ikoni">${ik('grid')}Kaikki tuotteet</span>${ik('chev')}</button>
       <div class="ryhmaotsikko" style="padding-top:28px">Kirppikset</div>
-      <button class="hakurivi" data-mene="#/kirppikset"><span class="rivi-ikoni">${ik('pin')}Lähimmät kirppikset</span>${ik('chev')}</button>
-      <button class="hakurivi" data-mene="#/kirppikset/auki"><span class="rivi-ikoni">${ik('clock')}Auki nyt</span>${ik('chev')}</button><div class="vali"></div>`,
+      <button class="hakurivi" data-mene="#/kirppikset"><span class="rivi-ikoni">${ik('pin')}Lähimmät kirppikset</span>${ik('chev')}</button><div class="vali"></div>`,
     nav: 'selaa'
   });
 
   N.kirppikset = (osa) => ({
-    html: ylapalkki(osa === 'auki' ? 'Auki nyt' : 'Lähimmät kirppikset', true) + `<div style="padding:12px 16px;display:flex;flex-direction:column;gap:10px">${K.map((k, i) => `<button class="kirppiskortti" data-kirppis="${esc(k.nimi)}">${ik('pin')}<span class="lr-teksti">${esc(k.nimi)}<small>${(1.2 + i * 0.9).toFixed(1).replace('.', ',')} km, ${esc(k.osoite)}</small><small>Avoinna ${esc(k.aukiolo)}</small></span>${ik('chev')}</button>`).join('')}</div>`,
+    html: ylapalkki('Lähimmät kirppikset', true) + `<div style="padding:12px 16px;display:flex;flex-direction:column;gap:10px">${K.map((k, i) => `<button class="kirppiskortti" data-kirppis="${esc(k.nimi)}">${ik('pin')}<span class="lr-teksti">${esc(k.nimi)}<small>${(1.2 + i * 0.9).toFixed(1).replace('.', ',')} km, ${esc(k.osoite)}</small><small>Avoinna ${esc(k.aukiolo)}</small></span>${ik('chev')}</button>`).join('')}</div>`,
     nav: 'selaa'
   });
 
@@ -389,16 +388,11 @@
   N.hakuvahdit = () => ({
     html: ylapalkki('Hakuvahdit', true) + `<div class="osio" style="gap:4px"><span class="himmea">Kerromme heti, kun lähikirppisten hyllyihin tulee jotain, mitä etsit.</span></div>
       <div style="padding:0 16px;display:flex;flex-direction:column;gap:10px">${tila.vahdit.map((v, i) => `<div class="korttiryhma"><button class="ryhmapaa" data-hae="${esc(v.q.split(' ')[0])}"><span class="lr-teksti">${esc(v.q)}</span>${ik('chev')}</button>
-        <div class="vahtirivi">${ik('bell')}<span style="flex:1">Ilmoitus</span><button class="kytkin ${v.paalla ? 'paalla' : ''}" data-vahti-kytkin="${i}" aria-label="Ilmoitus"></button></div>
-        <div style="padding:0 14px 14px"><button class="chip" data-vahti-poista="${i}">Muokkaa</button></div></div>`).join('')}</div>`,
+        <div class="vahtirivi">${ik('bell')}<span style="flex:1">Ilmoitus</span><button class="kytkin ${v.paalla ? 'paalla' : ''}" data-vahti-kytkin="${i}" aria-label="Ilmoitus"></button></div></div>`).join('')}</div>`,
     nav: null
   });
 
-  N.viestit = () => ({
-    html: ylapalkki('Viestit', true) + `<div style="padding:12px 16px"><div class="korttiryhma">${[['Kirppis Keskusta', 'Pöytäsi 22 viikko alkaa maanantaina.', 'Eilen'], ['Kirppis Itä', 'Kiitos! Varaus on peruttu.', '14.11.']].map(([k, m, d]) => `<div class="ilmorivi"><span class="ikonipallo">${ik('shop')}</span><span class="lr-teksti">${k}<small>${m}</small></span><small class="himmea">${d}</small></div>`).join('')}</div></div>
-      <div class="osio"><span class="himmea" style="font-size:13px">Kirppis lähettää tänne tiedot varauksista ja pöydästäsi.</span></div>`,
-    nav: null
-  });
+
 
   /* ---------- Myyjän näkymät ---------- */
   const OMA_POYTA = { kirppis: 'Kirppis Keskusta', poyta: 22 };
@@ -438,9 +432,9 @@
     return {
       html: ylapalkki('Valikko', true).replace(/<button class="ikoni-nappi merkki valikko"[^]*?<\/button>/, '') + `<div class="profiilipaa"><span class="ikonipallo iso">AE</span><span class="lr-teksti">Anna Esimerkki<small>Ostaja ja myyjä</small></span></div>
       <div style="padding:0 16px"><button class="korttiryhma lahikortti" data-mene="#/kirppikset"><b>Lähikirppikseni</b><span class="sijainti">${ik('pin')}Kirppis Keskusta ja ${K.length - 1} muuta</span></button></div>
-      ${ryhma('Ostaminen', [listarivi('bell', 'Ilmoitukset', ilmoitukset().filter((x) => x.uusi).length + ' uutta', '#/ilmoitukset'), listarivi('clock', 'Varaukseni', n ? n + ' noudettavana' : '', '#/varaukset'), listarivi('box', 'Tilaukseni', '', '#/varaukset'), listarivi('heart', 'Suosikit', '', '#/suosikit'), listarivi('bookmark', 'Hakuvahdit', '', '#/hakuvahdit'), listarivi('chat', 'Viestit kirppiksiltä', '', '#/viestit')])}
+      ${ryhma('Ostaminen', [listarivi('bell', 'Ilmoitukset', ilmoitukset().filter((x) => x.uusi).length + ' uutta', '#/ilmoitukset'), listarivi('clock', 'Varaukset ja tilaukset', n ? n + ' noudettavana' : '', '#/varaukset'), listarivi('heart', 'Suosikit', '', '#/suosikit'), listarivi('bookmark', 'Hakuvahdit', '', '#/hakuvahdit')])}
       ${ryhma('Myyminen', [listarivi('stores', 'Oma pöytä', '', '#/myy'), listarivi('tag', 'Tuotteeni', '', '#/myyntini'), listarivi('wallet', 'Tilitykset', '', '#/tilitykset')])}
-      ${ryhma('Apua', [listarivi('info', 'Ohjeet', '', '#/nain-toimii'), listarivi('chat', 'Ota yhteyttä', '', '!Demo: yhteydenotto ei ole käytössä')])}
+      ${ryhma('Apua', [listarivi('info', 'Näin se toimii', '', '#/nain-toimii')])}
       <div class="osio" style="padding-top:28px"><button class="linkki" data-nollaa style="align-self:center">Aloita demo alusta</button>
       <span class="himmea" style="font-size:13px;text-align:center">Tyhjentää suosikit, ostoskorin, varaukset ja tilaukset tästä selaimesta.</span></div>`,
       nav: null
@@ -454,7 +448,7 @@
     const k = K[mp.kirppis]; const alku = paivat[Math.min(mp.alku, paivat.length - 1)]; const loppu = new Date(+alku + (mp.viikot * 7 - 1) * PAIVA);
     return {
       html: ylapalkki('Varaa myyntipaikka', true) + `<div class="osio"><span class="osio-label">Kirppis</span><div class="valinnat">${K.map((x, i) => `<button class="valinta ${i === mp.kirppis ? 'valittu' : ''}" data-mp="kirppis" data-arvo="${i}">${esc(x.nimi)}</button>`).join('')}</div>
-        <div class="laatikko">${ik('shop')}<div class="rivit"><span class="iso">${esc(k.nimi)}</span><span class="himmea">${esc(k.osoite)}</span><span class="himmea">Avoinna ${esc(k.aukiolo)}</span></div></div></div>
+        <div class="laatikko">${ik('pin')}<div class="rivit"><span class="iso">${esc(k.nimi)}</span><span class="himmea">${esc(k.osoite)}</span><span class="himmea">Avoinna ${esc(k.aukiolo)}</span></div></div></div>
       <div class="raita"></div>
       <div class="osio"><span class="osio-label">Aloituspäivä</span><div class="valinnat">${paivat.map((d, i) => `<button class="valinta ${i === mp.alku ? 'valittu' : ''}" data-mp="alku" data-arvo="${i}">${pvm(d)}</button>`).join('')}</div></div>
       <div class="raita"></div>
@@ -515,7 +509,7 @@
     const saldoHtml = `<div style="padding:16px;display:flex;flex-direction:column;gap:16px"><div class="kortti-surf"><div style="padding:20px 16px 8px"><div class="saldo">${eur(saldo)}</div><span class="himmea">Myynneistä</span></div>
         <div style="padding:8px 16px 4px"><button class="nappi ulko" style="height:40px;background:var(--sec);border-color:var(--line)" data-yhteenveto>${yhteenveto ? 'Piilota yhteenveto' : 'Katso yhteenveto'}</button></div>
         ${yhteenveto ? `<div style="padding:4px 16px 8px">${myydyt.map((t) => `<div class="summa" style="padding:6px 0">${esc(t.nimi)}<b>${eur(t.hinta)}</b></div>`).join('')}<span class="himmea" style="font-size:13px">Kirppis vähentää palkkionsa ennen tilitystä.</span></div>` : ''}
-        ${listarivi('bank', 'Pankkitilille', 'Kirppis tilittää sovitusti', '!Tilitykset menevät tilille FI** **** **** 1234')}${listarivi('clock', 'Tilityshistoria', 'Kaikki aiemmat tilitykset', '#/tilitykset/siirrot')}${listarivi('sparkle', 'Automaattinen tilitys', 'Ei erillistä nostoa', '!Automaattinen tilitys on päällä')}</div>
+        ${listarivi('bank', 'Pankkitilille', 'Kirppis tilittää sovitusti', '!Tilitykset menevät tilille FI** **** **** 1234')}${listarivi('clock', 'Tilityshistoria', 'Kaikki aiemmat tilitykset', '#/tilitykset/siirrot')}${listarivi('check', 'Automaattinen tilitys', 'Ei erillistä nostoa', '!Automaattinen tilitys on päällä')}</div>
       <div class="kortti-surf" style="padding:24px 16px"><div class="saldo">${hyllyssa}</div><span class="himmea">Tuotetta hyllyssä nyt</span></div></div>`;
     const siirrotHtml = `<div class="ryhmaotsikko">Valmiit tilitykset</div><div style="margin:0 16px" class="kortti-surf">${SIIRROT.map(([p, e, n], i) => { const d = new Date(Date.now() + p * PAIVA);
       return `<button class="siirto" data-siirto="${i}"><span><span class="iso" style="font-weight:400">Pankkitilille</span><br><small class="himmea">${lyhytPvm(d)}</small></span><span style="display:flex;gap:12px;align-items:center;font-size:14px">${eur(e)}${ik('chevd')}</span></button>
@@ -539,7 +533,8 @@
   /* ---------- Suodatinpaneeli ---------- */
   function avaaPaneeli(kohta) {
     const p = $('#paneeli');
-    const koot = [...new Set(tulokset('koko').map((t) => t.koko).filter((k) => k && k !== 'Onesize'))];
+    const KIR = ['XS', 'S', 'M', 'L', 'XL', 'XXL']; const paino = (k) => KIR.includes(k) ? KIR.indexOf(k) : /^\d+$/.test(k) ? 100 + +k : 1000;
+    const koot = [...new Set(tulokset('koko').filter((t) => t.kokotyyppi !== 'Ei kokoa').map((t) => t.koko).filter((k) => k && k !== 'Onesize' && !/cm|kpl| l$/.test(k)))].sort((a, b) => paino(a) - paino(b) || a.localeCompare(b, 'fi'));
     const ryh = (otsikko, avain, arvot) => `<div class="osio" id="p-${avain}"><span class="osio-label">${otsikko}</span><div class="valinnat">${arvot.map((a) => `<button class="valinta ${haku[avain].includes(a) ? 'valittu' : ''}" data-p="${avain}" data-arvo="${esc(a)}">${esc(a)}</button>`).join('') || '<span class="himmea">Ei valittavaa</span>'}</div></div>`;
     p.innerHTML = `<header><h3>Suodata</h3><button data-sulje-paneeli aria-label="Sulje">${ik('x')}</button></header><div class="runko">
       <div class="osio"><span class="osio-label">Järjestys</span><div class="valinnat">${JARJ.map((j) => `<button class="valinta ${haku.jarjestys === j ? 'valittu' : ''}" data-jarj="${j}">${j}</button>`).join('')}</div></div><div class="raita"></div>
@@ -592,7 +587,6 @@
     if (d.myyntisuodatin) { myyntiSuodatin = d.myyntisuodatin; piirra(true); return; }
     if (d.vahti) { if (!tila.vahdit.some((v) => v.q === d.vahti)) tila.vahdit.unshift({ q: d.vahti, paalla: true }); tallenna(); ilmoita('Hakuvahti päällä'); return; }
     if (d.vahtiKytkin) { const v = tila.vahdit[+d.vahtiKytkin]; v.paalla = !v.paalla; tallenna(); piirra(true); return; }
-    if (d.vahtiPoista) { ilmoita('Demo: muokkaus ei ole käytössä'); return; }
     if ('varaaKaikki' in d) { const loppu = Date.now() + 48 * 3600 * 1000; tila.kori.forEach((id) => { tila.varaukset[id] = { numero: 'RS-' + (4000 + Math.floor(Math.random() * 6000)), asti: loppu }; }); tila.kori = []; tallenna(); ilmoita('Varaus tehty'); location.hash = '#/varaukset'; return; }
     if (d.valilehti) { kotiValilehti = d.valilehti; piirra(true); return; }
     if ('suljeTiedote' in d) { tila.tiedote = false; tallenna(); ala.innerHTML = ''; return; }

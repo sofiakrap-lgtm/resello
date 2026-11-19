@@ -58,8 +58,13 @@ Ulkoasu päivitetty Figman Koonti-sivun (18.11.2026) mukaan.
 - Alavalikko: Selaa, Ostoskori, Koti, Suosikit, Myy.
 - Hampurilaisvalikko (`#/profiili`) korvaa kellon ja profiilin. Pallo näyttää varaukset ja uudet ilmoitukset.
 - Haku: kamera ja "Kerro omin sanoin" (`#/ideat`), kuvahaku (`#/kuvahaku`).
-- Uudet näkymät: `#/ilmoitukset`, `#/hakuvahdit`, `#/viestit`, `#/kirppikset`.
+- Uudet näkymät: `#/ilmoitukset`, `#/hakuvahdit`, `#/kirppikset`.
 - Tuote: hinta ensin, tiedot taulukkona, Samalta kirppikseltä, hakuvahti. Pöytänumero näkyy vasta varauksen jälkeen.
 - Kori ryhmitelty kirppiksittäin, "Vahvista varaus" varaa kaikki.
 - Myy on nyt Oma pöytä. Tuotteeni-näkymässä tilasuodattimet.
 - Kulmat 4 px, tuotekuvat neliöitä.
+
+### Karsinta 19.11.2026
+- Pois: Viestit kirppiksiltä, Ota yhteyttä, Auki nyt, hakuvahdin Muokkaa, erillinen Tilaukseni (yhdistetty: Varaukset ja tilaukset).
+- Kokosuodatin näyttää vain vaate- ja kenkäkoot järjestyksessä (ei senttejä, litroja tai kappaleita).
+- Kaikki laatikot ja kortit samalla reunaviivalla, kirppiksen ikonina aina sijaintipiste.
