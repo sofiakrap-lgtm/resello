@@ -42,6 +42,7 @@
     ['koti', 'Koti ja sisustus', 'lamp', (t) => ['Astiat', 'Sisustus'].includes(t.kategoria)],
     ['lapset', 'Lasten tavarat', 'ball', (t) => t.kokotyyppi === 'Lasten' || t.kategoria === 'Lastenvaatteet']];
   const osasto = (k) => OSASTOT.find((o) => o[0] === k);
+  const osastoIkoni = (t) => { if (!t) return 'tag'; const o = OSASTOT.slice().reverse().find((x) => x[3](t)); return o ? o[2] : 'tag'; };
   const varausMaara = () => Object.keys(tila.varaukset).length;
   const kuvausrivi = (t) => (t.koko && t.kokotyyppi !== 'Ei kokoa' ? 'koko ' + t.koko + ', ' : '') + t.kunto.toLowerCase();
 
@@ -150,9 +151,9 @@
     const kat = [...new Set(T.map((t) => t.tyyppi))].filter((k) => norm(k).includes(norm(q))).slice(0, 4);
     const kir = K.filter((k) => norm(k.nimi).includes(norm(q)));
     el.innerHTML = `<div class="ehdotukset"><button class="chip" data-hae="${esc(q)}">Hae "${esc(q)}"</button></div>`
-      + (kat.length ? `<div class="ryhmaotsikko">Kategoriat</div>` + kat.map((n) => `<button class="hakurivi" data-hae="${esc(n)}">${esc(n)}<small>Kategoria</small></button>`).join('') : '')
-      + (nimet.length ? `<div class="ryhmaotsikko">Tuotteet</div>` + nimet.map((n) => `<button class="hakurivi" data-hae="${esc(n)}">${esc(n)}<small>Tuote</small></button>`).join('') : '')
-      + (kir.length ? `<div class="ryhmaotsikko">Kirppikset</div>` + kir.map((k) => `<button class="hakurivi" data-kirppis="${esc(k.nimi)}">${esc(k.nimi)}<small>Kirppis</small></button>`).join('') : '');
+      + (kat.length ? `<div class="ryhmaotsikko">Kategoriat</div>` + kat.map((n) => `<button class="hakurivi" data-hae="${esc(n)}"><span class="rivi-ikoni">${ik(osastoIkoni(T.find((t) => t.tyyppi === n || t.kategoria === n)))}${esc(n)}</span><small>Kategoria</small></button>`).join('') : '')
+      + (nimet.length ? `<div class="ryhmaotsikko">Tuotteet</div>` + nimet.map((n) => `<button class="hakurivi" data-hae="${esc(n)}"><span class="rivi-ikoni">${ik(osastoIkoni(T.find((t) => t.nimi === n)))}${esc(n)}</span><small>Tuote</small></button>`).join('') : '')
+      + (kir.length ? `<div class="ryhmaotsikko">Kirppikset</div>` + kir.map((k) => `<button class="hakurivi" data-kirppis="${esc(k.nimi)}"><span class="rivi-ikoni">${ik('pin')}${esc(k.nimi)}</span><small>Kirppis</small></button>`).join('') : '');
   }
   function hae(q) {
     q = (q || '').trim();
