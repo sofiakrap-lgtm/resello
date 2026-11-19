@@ -51,3 +51,15 @@ Muutos näkyy linkissä noin minuutin kuluttua tallennuksesta.
 - Ostettu tuote poistuu valikoimasta. Varattua tuotetta ei voi lisätä koriin.
 - Kirppisten nimet, osoitteet, toimitushinnat ja asiakas ovat keksittyjä esimerkkejä.
 - Tuotenimet ovat yleisnimiä, ei merkkejä. Logo- ja monogrammituotteet on jätetty pois.
+
+## Päivitys 19.11.2026: Koonti-ilme
+Ulkoasu päivitetty Figman Koonti-sivun (18.11.2026) mukaan.
+- Uudet ikonit (`ikonit.js`): ohut viiva, pyöreät päät.
+- Alavalikko: Selaa, Ostoskori, Koti, Suosikit, Myy.
+- Hampurilaisvalikko (`#/profiili`) korvaa kellon ja profiilin. Pallo näyttää varaukset ja uudet ilmoitukset.
+- Haku: kamera ja "Kerro omin sanoin" (`#/ideat`), kuvahaku (`#/kuvahaku`).
+- Uudet näkymät: `#/ilmoitukset`, `#/hakuvahdit`, `#/viestit`, `#/kirppikset`.
+- Tuote: hinta ensin, tiedot taulukkona, Samalta kirppikseltä, hakuvahti. Pöytänumero näkyy vasta varauksen jälkeen.
+- Kori ryhmitelty kirppiksittäin, "Vahvista varaus" varaa kaikki.
+- Myy on nyt Oma pöytä. Tuotteeni-näkymässä tilasuodattimet.
+- Kulmat 4 px, tuotekuvat neliöitä.
