@@ -39,6 +39,7 @@ h1{margin:8px 0 28px;font-weight:600;font-size:clamp(56px,7vw,96px);line-height:
 .facts{margin:0 0 28px;padding:0;list-style:none;max-width:560px;border-top:1px solid var(--line)}
 .facts li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);color:var(--ink-muted)}
 .facts b{color:var(--ink);font-weight:600}
+.form-err{color:#9E3220;margin:-4px 0 6px}
 .note{margin:0 0 20px;color:var(--ink-muted);line-height:1.5;max-width:560px}
 .sign{margin:0;font-weight:600}
 .card{background:var(--surface);border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:28px}
@@ -126,15 +127,17 @@ input::placeholder{color:#9C9087}
             <label>Email<input id="email" name="email" type="email" autocomplete="email" required></label>
             <label>Shop and town<input id="kirppis" name="kirppis" placeholder="e.g. Second-hand Centre, Espoo" required></label>
           </div>
+          <input id="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <button class="submit" id="submit" type="submit" disabled>Choose a day and time</button>
+          <p class="small form-err" id="formErr" role="alert" hidden></p>
           <p class="small">We send a confirmation and the video call link by email. <a href="privacy.html">Privacy</a></p>
         </div>
       </form>
 
       <div class="done" id="done" hidden>
-        <h2>Almost done.</h2>
+        <h2 id="doneH">Almost done.</h2>
         <p id="doneText"></p>
-        <p>If your email app did not open, send your name and preferred time to <a id="doneMail" href="mailto:hei@resella.fi">hei@resella.fi</a>.</p>
+        <p id="doneFallback">If your email app did not open, send your name and preferred time to <a id="doneMail" href="mailto:hei@resella.fi">hei@resella.fi</a>.</p>
       </div>
     </section>
   </main>
@@ -152,13 +155,16 @@ input::placeholder{color:#9C9087}
   var fi=function(d){return d.getDate()+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];};
   if(A.kesto){ $('kesto').textContent = A.kesto===60?'1 hour':(A.kesto%60===0?(A.kesto/60)+' hours':A.kesto+' min'); }
 
+  var EN=document.documentElement.lang==='en', API=A.varausUrl||'', AJAT=null;
+  var T=EN?{load:'Loading free times',ok:'Booking confirmed.',okText:function(a,e){return 'See you '+a+'. We sent a calendar invite and the video call link to '+e+'.';},busy:'Someone just booked this time. Please choose another one.',err:'Booking failed. Please try again or email us.',sending:'Booking'}
+          :{load:'Haetaan vapaita aikoja',ok:'Varaus vahvistettu.',okText:function(a,e){return 'Nähdään '+a+'. Lähetimme kalenterikutsun ja videopuhelun linkin osoitteeseen '+e+'.';},busy:'Joku ehti varata tämän ajan juuri. Valitse toinen aika.',err:'Varaus ei onnistunut. Yritä uudelleen tai lähetä meille sähköpostia.',sending:'Varataan'};
   var today=new Date(); today.setHours(0,0,0,0);
   var first=new Date(today); first.setDate(first.getDate()+(A.aikaisintaan||0));
   var last=new Date(today); last.setDate(last.getDate()+(A.enintaan||42));
 
   function closed(d){ var s=iso(d); return (A.eiAikoja||[]).some(function(e){ return Array.isArray(e)? (s>=e[0]&&s<=e[1]) : s===e; }); }
-  function slots(d){ if(d<first||d>last||closed(d)) return []; return (A.viikko[PV[d.getDay()]]||[]); }
-  function taken(d,t){ return (A.varatut||[]).indexOf(iso(d)+' '+t)>-1; }
+  function slots(d){ if(AJAT) return AJAT[iso(d)]||[]; if(d<first||d>last||closed(d)) return []; return (A.viikko[PV[d.getDay()]]||[]); }
+  function taken(d,t){ if(AJAT) return false; return (A.varatut||[]).indexOf(iso(d)+' '+t)>-1; }
   function hasFree(d){ return slots(d).some(function(t){return !taken(d,t);}); }
 
   // ensimmäinen vapaa päivä
@@ -214,6 +220,7 @@ input::placeholder{color:#9C9087}
     e.preventDefault();
     var f=['nimi','email','kirppis'].map($), bad=f.filter(function(i){return !i.checkValidity()||!i.value.trim();});
     if(bad.length){ bad[0].focus(); bad[0].reportValidity&&bad[0].reportValidity(); return; }
+    if(API&&AJAT){ book(f); return; }
     var aika=PVPITKA[sel.getDay()]+' '+fi(sel)+' at '+time.replace('.',':');
     var body='Hi,\n\nI would like to book a Resella demo.\n\nTime: '+aika+'\nName: '+f[0].value.trim()+'\nEmail: '+f[1].value.trim()+'\nShop: '+f[2].value.trim()+'\nLanguage: EN\n';
     var mail='mailto:'+(A.sahkoposti||'hei@resella.fi')+'?subject='+encodeURIComponent('Demo booking: '+aika)+'&body='+encodeURIComponent(body);
@@ -223,7 +230,29 @@ input::placeholder{color:#9C9087}
     location.href=mail;
   });
 
-  renderCal(); renderTimes();
+  function pick(){ sel=null; time=null; for(var x=new Date(first); x<=last; x.setDate(x.getDate()+1)){ if(hasFree(x)){ sel=new Date(x); break; } } view=new Date((sel||first).getFullYear(),(sel||first).getMonth(),1); }
+  function load(keep){
+    if(!API) return;
+    if(!keep){ $('dayH').textContent=T.load; $('times').innerHTML=''; $('noTimes').hidden=true; }
+    fetch(API+'?action=ajat',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+      if(!d||!d.ok||!d.ajat) throw 0;
+      AJAT=d.ajat; var k=Object.keys(AJAT).sort();
+      if(k.length){ var p=function(s){var a=s.split('-');return new Date(+a[0],a[1]-1,+a[2]);}; first=p(k[0]); last=p(k[k.length-1]); }
+      if(!keep||!sel||!hasFree(sel)) pick(); else time=null;
+      renderCal(); renderTimes();
+    }).catch(function(){ API=''; AJAT=null; renderCal(); renderTimes(); });
+  }
+  function book(f){
+    var s=$('submit'), err=$('formErr'), aika=PVPITKA[sel.getDay()]+' '+fi(sel)+(EN?' at ':' klo ')+(EN?time.replace('.',':'):time);
+    err.hidden=true; s.disabled=true; s.textContent=T.sending;
+    fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({nimi:f[0].value.trim(),email:f[1].value.trim(),kirppis:f[2].value.trim(),paiva:iso(sel),aika:time,kieli:EN?'en':'fi',hp:$('hp').value})})
+      .then(function(r){return r.json();}).then(function(d){
+        if(d&&d.ok){ $('doneH').textContent=T.ok; $('doneText').textContent=T.okText(EN?aika:aika.toLowerCase(),f[1].value.trim()); $('doneFallback').hidden=true; $('form').hidden=true; $('done').hidden=false; window.scrollTo(0,0); return; }
+        err.textContent=(d&&d.virhe==='varattu')?T.busy:T.err; err.hidden=false; update();
+        if(d&&d.virhe==='varattu') load(true);
+      }).catch(function(){ err.textContent=T.err; err.hidden=false; update(); });
+  }
+  renderCal(); renderTimes(); load();
 })();
 </script>
 </body>

@@ -2,6 +2,11 @@
 // Muokkaa tätä tiedostoa, niin varauslomake (varaa.html) näyttää vain nämä ajat.
 
 window.RESELLA_AJAT = {
+  // Varauskalenterin osoite (Apps Scriptin verkkosovellus, päättyy /exec).
+  // Kun tämä on täytetty, vapaat ajat tulevat suoraan Google-kalenterista ja alla oleva
+  // viikkopohja on vain varalla, jos yhteys ei toimi.
+  varausUrl: '',
+
   // Esittelyn kesto minuutteina (näytetään sivulla)
   kesto: 60,
 
