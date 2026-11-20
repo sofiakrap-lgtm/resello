@@ -156,8 +156,8 @@ input::placeholder{color:#9C9087}
   if(A.kesto){ $('kesto').textContent = A.kesto===60?'1 hour':(A.kesto%60===0?(A.kesto/60)+' hours':A.kesto+' min'); }
 
   var EN=document.documentElement.lang==='en', API=A.varausUrl||'', AJAT=null;
-  var T=EN?{load:'Loading free times',ok:'Booking confirmed.',okText:function(a,e){return 'See you '+a+'. We sent a calendar invite and the video call link to '+e+'.';},busy:'Someone just booked this time. Please choose another one.',err:'Booking failed. Please try again or email us.',sending:'Booking'}
-          :{load:'Haetaan vapaita aikoja',ok:'Varaus vahvistettu.',okText:function(a,e){return 'Nähdään '+a+'. Lähetimme kalenterikutsun ja videopuhelun linkin osoitteeseen '+e+'.';},busy:'Joku ehti varata tämän ajan juuri. Valitse toinen aika.',err:'Varaus ei onnistunut. Yritä uudelleen tai lähetä meille sähköpostia.',sending:'Varataan'};
+  var T=EN?{load:'Loading free times',ok:'Request sent.',okText:function(a,e){return 'Thanks! We received your request for '+a+'. We will confirm the time by email to '+e+', and the confirmation includes the video call link.';},busy:'Someone just booked this time. Please choose another one.',err:'Sending failed. Please try again or email us.',sending:'Sending'}
+          :{load:'Haetaan vapaita aikoja',ok:'Pyyntö lähetetty.',okText:function(a,e){return 'Kiitos! Saimme pyyntösi ajalle '+a+'. Vahvistamme ajan sähköpostilla osoitteeseen '+e+', ja vahvistuksessa on videopuhelun linkki.';},busy:'Joku ehti varata tämän ajan juuri. Valitse toinen aika.',err:'Lähetys ei onnistunut. Yritä uudelleen tai lähetä meille sähköpostia.',sending:'Lähetetään'};
   var today=new Date(); today.setHours(0,0,0,0);
   var first=new Date(today); first.setDate(first.getDate()+(A.aikaisintaan||0));
   var last=new Date(today); last.setDate(last.getDate()+(A.enintaan||42));
