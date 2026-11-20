@@ -137,7 +137,7 @@ input::placeholder{color:#9C9087}
       <div class="done" id="done" hidden>
         <h2 id="doneH">Melkein valmista.</h2>
         <p id="doneText"></p>
-        <p id="doneFallback">Jos sähköpostiohjelma ei auennut, lähetä nimesi ja toivottu aika osoitteeseen <a id="doneMail" href="mailto:hei@resella.fi">hei@resella.fi</a>.</p>
+        <p id="doneFallback">Jos sähköpostiohjelma ei auennut, lähetä nimesi ja toivottu aika osoitteeseen <a id="doneMail" href="mailto:info@resella.fi">info@resella.fi</a>.</p>
       </div>
     </section>
   </main>
@@ -146,7 +146,7 @@ input::placeholder{color:#9C9087}
 <script src="avoimet-ajat.js"></script>
 <script>
 (function(){
-  var A=window.RESELLA_AJAT||{viikko:{},aikaisintaan:2,enintaan:42,eiAikoja:[],varatut:[],kesto:60,sahkoposti:'hei@resella.fi'};
+  var A=window.RESELLA_AJAT||{viikko:{},aikaisintaan:2,enintaan:42,eiAikoja:[],varatut:[],kesto:60,sahkoposti:'info@resella.fi'};
   var KUUT=['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'];
   var PV=['su','ma','ti','ke','to','pe','la'], PVPITKA=['Sunnuntai','Maanantai','Tiistai','Keskiviikko','Torstai','Perjantai','Lauantai'];
   var $=function(id){return document.getElementById(id);};
@@ -223,7 +223,7 @@ input::placeholder{color:#9C9087}
     if(API&&AJAT){ book(f); return; }
     var aika=PVPITKA[sel.getDay()]+' '+fi(sel)+' klo '+time;
     var body='Hei,\n\nhaluaisin varata Resellan esittelyn.\n\nAika: '+aika+'\nNimi: '+f[0].value.trim()+'\nSähköposti: '+f[1].value.trim()+'\nKirppis: '+f[2].value.trim()+'\n';
-    var mail='mailto:'+(A.sahkoposti||'hei@resella.fi')+'?subject='+encodeURIComponent('Esittelyvaraus: '+aika)+'&body='+encodeURIComponent(body);
+    var mail='mailto:'+(A.sahkoposti||'info@resella.fi')+'?subject='+encodeURIComponent('Esittelyvaraus: '+aika)+'&body='+encodeURIComponent(body);
     $('doneText').textContent='Varausviesti ajalle '+aika.toLowerCase()+' on valmiina sähköpostiohjelmassasi. Lähetä se, niin vahvistamme ajan ja lähetämme videopuhelun linkin.';
     $('doneMail').href=mail;
     $('form').hidden=true; $('done').hidden=false;

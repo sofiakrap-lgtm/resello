@@ -39,5 +39,5 @@ window.RESELLA_AJAT = {
   ],
 
   // Mihin varaukset lähetetään
-  sahkoposti: 'hei@resella.fi'
+  sahkoposti: 'info@resella.fi'
 };

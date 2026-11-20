@@ -166,7 +166,7 @@ body{background:var(--blue,#C5D0D3)}
       <div class="done" id="done" hidden>
         <h2 style="font-size:32px;margin-bottom:10px">Almost done.</h2>
         <p>The message is ready in your email app. Send it and you are on the list.</p>
-        <p>If your email app did not open, send a message to <a id="doneMail" href="mailto:hei@resella.fi">hei@resella.fi</a>.</p>
+        <p>If your email app did not open, send a message to <a id="doneMail" href="mailto:info@resella.fi">info@resella.fi</a>.</p>
         <p>Tell a friend who loves second-hand. Your area opens faster the more of your neighbours join.</p>
         <div id="omistaja" hidden><p>Want the Resella till for your shop now?</p><a class="btn2" href="book.html">Book a 1 h demo</a></div>
       </div>
@@ -199,7 +199,7 @@ body{background:var(--blue,#C5D0D3)}
     var kat=(document.querySelector('input[name=kategoria]:checked')||{}).value||'-';
     var utm=[]; ['utm_source','utm_medium','utm_campaign'].forEach(function(k){ var v=q.get(k); if(!v){ try{ v=sessionStorage.getItem('rs_'+k); }catch(e){} } if(v) utm.push(k+'='+v); });
     var body='Hi,\n\nI want to join the Resella waitlist.\n\nEmail: '+em.value.trim()+'\nPostal code: '+po.value.trim()+'\nI am: '+rooli+'\nLooking for: '+kat+'\nSource: '+(utm.join(', ')||'-')+'\nLanguage: EN\n';
-    var mail='mailto:hei@resella.fi?subject='+encodeURIComponent('Waitlist '+po.value.trim())+'&body='+encodeURIComponent(body);
+    var mail='mailto:info@resella.fi?subject='+encodeURIComponent('Waitlist '+po.value.trim())+'&body='+encodeURIComponent(body);
     $('doneMail').href=mail; $('omistaja').hidden=rooli!=='Shop owner'; $('form').hidden=true; $('done').hidden=false; location.href=mail;
   });
 })();

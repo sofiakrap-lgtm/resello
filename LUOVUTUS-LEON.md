@@ -30,7 +30,7 @@ Vanhat sivut (`resello.html`, `resello-v2.html`, `resello-v3.html`, `resella-kop
 | A | **Odotuslista** | Osio "Odotuslista on auki" (`#odotuslista`), nappi "Liity odotuslistalle". Footerin linkki "Liity odotuslistalle" | Osio `#m-odotuslista`, nappi. Footerin sähköpostikenttä (`form.m-news`), joka vie osoitteen sivulle `odotuslista.html?email=` | Lomake avaa käyttäjän sähköpostiohjelman (mailto) | Tallennus, vahvistusviestit |
 | B | **Varaa demo** | Herossa "Varaa demo", valikossa, hinnoittelukortissa ja loppuosiossa (`#varaa`). Kaikki vievät sivulle `varaa.html` | Hero, "Sopiiko kirppiksellesi?", käyttöönoton vaihe 1, loppuosio `#m-varaa` ja valikko | Taustapalvelu tehty 20.11.: `varaus-backend/` (Google Apps Script). Saatavuus kalenterista "Resella demoajat", pyyntö jää odottamaan, tiimi hyväksyy tai hylkää sähköpostista, hyväksyntä lähettää vahvistuksen Meet-linkillä. Lukitus estää tuplavaraukset. Sivut käyttävät sitä, kun `avoimet-ajat.js`:ään on lisätty `varausUrl`. Ilman osoitetta toimii vanha sähköpostitapa | Katselmoi `varaus-backend/Code.gs` (15 min). Ei muuta logiikkaa |
 | C | **Hintalaskuri** | Hinnoittelu (`#hinnoittelu`), kenttä `#revInput`, tulos `#priceVal` ja `#priceSales` | Hinnoittelu (`#m-hinnoittelu`), kenttä `#mSales`, tulos `#mFee` ja `#mNote` | Toimii selaimessa. Sama kaava on koodissa kahdessa paikassa (funktiot `fee` ja `feeOf`) | Ei palvelinta. Kaava yhteen paikkaan |
-| D | **Sähköpostilinkit** (hei@resella.fi) | Tukikortti "Sähköposti" (`#tarinat`, "Lue lisää") | UKK "Ota yhteyttä", loppuosion yhteystiedot. Siirtymäosion nappi "Kysy siirtymästä demossa" on mobiilissa mailto, tietokoneella se vie osioon `#varaa` | mailto | Varmista, että osoite hei@resella.fi ottaa postia vastaan. Ehdotus: mobiilin siirtymänappi myös sivulle `varaa.html` |
+| D | **Sähköpostilinkit** (info@resella.fi) | Tukikortti "Sähköposti" (`#tarinat`, "Lue lisää") | UKK "Ota yhteyttä", loppuosion yhteystiedot. Siirtymäosion nappi "Kysy siirtymästä demossa" on mobiilissa mailto, tietokoneella se vie osioon `#varaa` | mailto | Varmista, että osoite info@resella.fi ottaa postia vastaan. Ehdotus: mobiilin siirtymänappi myös sivulle `varaa.html` |
 | E | **Evästeilmoitus** | Vasen alakulma | Alareuna | Tallentaa sulkemisen selaimeen (localStorage) | Ei mitään, ellei sivulle lisätä analytiikkaa (ks. osio 3) |
 | F | **Kielivalinta FI / EN** | Footerin linkki | Valikon FI/EN-linkit ja footer | Englanninkieliset sivut ovat erillisiä tiedostoja. EN-lomakkeet lähettävät viestin englanniksi ja rivin `Language: EN`. EN-odotuslistan rooli- ja kategoria-arvot ovat englanniksi (Finder, Seller, Shop owner) | Tallennukseen kenttä kieli (FI/EN), jotta vahvistusviesti lähtee oikealla kielellä. Huom: `en.html` ei lue `tekstit.js`-tiedostoa, joten Sofian tekstieditori muuttaa vain suomenkielistä sivua |
 | G | **Ehdot** | Footerin linkki `ehdot.html` | Sama | Valmis | Ei logiikkaa |
@@ -70,7 +70,7 @@ Tallenna myös aikaleima.
 |---|---|---|---|
 | Vahvistus (double opt-in) | Liittyjä | Heti | Sofia kirjoittaa |
 | Tervetuloa | Liittyjä | Vahvistuksen jälkeen | Sofia kirjoittaa. Omistajille demolinkki |
-| Ilmoitus uudesta omistajasta | hei@resella.fi | Kun rooli on Kirppiksen omistaja | Sähköposti, postinumero, aika, lähde |
+| Ilmoitus uudesta omistajasta | info@resella.fi | Kun rooli on Kirppiksen omistaja | Sähköposti, postinumero, aika, lähde |
 | Alue aukeaa | Alueen liittyjät | Launchissa | Myöhemmin |
 
 ### B. Varaa demo (`varaa.html`)
@@ -224,7 +224,7 @@ Repo sisältää kaiken koodin, kuvat ja videot. Siirtoon tarvitaan lisäksi nä
 |---|---|---|
 | GitHub: kirjoitusoikeus repoon | Sofia | Osio 6 |
 | resella.fi: verkkotunnuksen hallinta ja DNS | Sofia | Missä verkkotunnus on rekisteröity, tunnukset |
-| Sähköposti hei@resella.fi | Sofia | Toimiiko postilaatikko jo, ja kuka lukee sitä. Lomakkeiden ilmoitukset tulevat tänne |
+| Sähköposti info@resella.fi | Sofia | Toimiiko postilaatikko jo, ja kuka lukee sitä. Lomakkeiden ilmoitukset tulevat tänne |
 | MailerLite | Sofia | Tili Resella Oy:n nimiin. Leonille käyttäjä tai API-avain |
 | Kalenteri demovarauksille | Sofia | Mikä kalenteri (Google?), Sofian ja Leonin kalenterit näkyviin |
 | Figma (yaTmCavX9QjL7ePl0b2cot) | Sofia | Katseluoikeus. Design tehdään Figmassa ennen koodia |

@@ -166,7 +166,7 @@ body{background:var(--blue,#C5D0D3)}
       <div class="done" id="done" hidden>
         <h2 style="font-size:32px;margin-bottom:10px">Melkein valmista.</h2>
         <p>Viesti on valmiina sähköpostiohjelmassasi. Lähetä se, niin olet listalla.</p>
-        <p>Jos sähköpostiohjelma ei auennut, lähetä viesti osoitteeseen <a id="doneMail" href="mailto:hei@resella.fi">hei@resella.fi</a>.</p>
+        <p>Jos sähköpostiohjelma ei auennut, lähetä viesti osoitteeseen <a id="doneMail" href="mailto:info@resella.fi">info@resella.fi</a>.</p>
         <p>Kerro kirppisystävällesi, sillä alue aukeaa sitä nopeammin, mitä useampi naapurisi on mukana.</p>
         <div id="omistaja" hidden><p>Haluatko Resellan kassan kirppiksellesi jo nyt?</p><a class="btn2" href="varaa.html">Varaa 1 h demo</a></div>
       </div>
@@ -199,7 +199,7 @@ body{background:var(--blue,#C5D0D3)}
     var kat=(document.querySelector('input[name=kategoria]:checked')||{}).value||'-';
     var utm=[]; ['utm_source','utm_medium','utm_campaign'].forEach(function(k){ var v=q.get(k); if(!v){ try{ v=sessionStorage.getItem('rs_'+k); }catch(e){} } if(v) utm.push(k+'='+v); });
     var body='Hei,\n\nhaluan liittyä Resellan odotuslistalle.\n\nSähköposti: '+em.value.trim()+'\nPostinumero: '+po.value.trim()+'\nOlen: '+rooli+'\nEtsin useimmiten: '+kat+'\nLähde: '+(utm.join(', ')||'-')+'\n';
-    var mail='mailto:hei@resella.fi?subject='+encodeURIComponent('Odotuslista '+po.value.trim())+'&body='+encodeURIComponent(body);
+    var mail='mailto:info@resella.fi?subject='+encodeURIComponent('Odotuslista '+po.value.trim())+'&body='+encodeURIComponent(body);
     $('doneMail').href=mail; $('omistaja').hidden=rooli!=='Kirppiksen omistaja'; $('form').hidden=true; $('done').hidden=false; location.href=mail;
   });
 })();

@@ -137,7 +137,7 @@ input::placeholder{color:#9C9087}
       <div class="done" id="done" hidden>
         <h2 id="doneH">Almost done.</h2>
         <p id="doneText"></p>
-        <p id="doneFallback">If your email app did not open, send your name and preferred time to <a id="doneMail" href="mailto:hei@resella.fi">hei@resella.fi</a>.</p>
+        <p id="doneFallback">If your email app did not open, send your name and preferred time to <a id="doneMail" href="mailto:info@resella.fi">info@resella.fi</a>.</p>
       </div>
     </section>
   </main>
@@ -146,7 +146,7 @@ input::placeholder{color:#9C9087}
 <script src="avoimet-ajat.js"></script>
 <script>
 (function(){
-  var A=window.RESELLA_AJAT||{viikko:{},aikaisintaan:2,enintaan:42,eiAikoja:[],varatut:[],kesto:60,sahkoposti:'hei@resella.fi'};
+  var A=window.RESELLA_AJAT||{viikko:{},aikaisintaan:2,enintaan:42,eiAikoja:[],varatut:[],kesto:60,sahkoposti:'info@resella.fi'};
   var KUUT=['January','February','March','April','May','June','July','August','September','October','November','December'];
   var PV=['su','ma','ti','ke','to','pe','la'], PVPITKA=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],PVEN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   var $=function(id){return document.getElementById(id);};
@@ -223,7 +223,7 @@ input::placeholder{color:#9C9087}
     if(API&&AJAT){ book(f); return; }
     var aika=PVPITKA[sel.getDay()]+' '+fi(sel)+' at '+time.replace('.',':');
     var body='Hi,\n\nI would like to book a Resella demo.\n\nTime: '+aika+'\nName: '+f[0].value.trim()+'\nEmail: '+f[1].value.trim()+'\nShop: '+f[2].value.trim()+'\nLanguage: EN\n';
-    var mail='mailto:'+(A.sahkoposti||'hei@resella.fi')+'?subject='+encodeURIComponent('Demo booking: '+aika)+'&body='+encodeURIComponent(body);
+    var mail='mailto:'+(A.sahkoposti||'info@resella.fi')+'?subject='+encodeURIComponent('Demo booking: '+aika)+'&body='+encodeURIComponent(body);
     $('doneText').textContent='Your booking message for '+aika+' is ready in your email app. Send it and we will confirm the time and send you the video call link.';
     $('doneMail').href=mail;
     $('form').hidden=true; $('done').hidden=false;
