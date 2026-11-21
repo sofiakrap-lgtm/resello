@@ -1,0 +1,1536 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alueesi kirppiskatsaus 2027 · Resella</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Oman alueesi luvut: paljonko käytettyyn käytetään verkossa ja paljonko kirpputoreilla.">
+<link rel="icon" href="assets/ikoni/favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/svg+xml" href="assets/ikoni/favicon.svg?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== tokens.json ===== */
+:root{
+  --bg:#ECECDC; --surface:#F6F6EE; --line:#DCDBC6; --ink:#3E2520; --ink-muted:#6E5E56;
+  --blue:#C5D0D3; --blue-deep:#3A4961; --red:#C24029; --on-red:#ECECDC;
+  --olive:#8D8B4C; --mustard:#D09C4C; --brown-hover:#2A1814;
+  --radius-pill:999px; --radius-card:10px; --radius-field:10px; --radius-thumb:15px; --radius-small:5px; --radius-lg:20px;
+  --gap-xs:6px; --gap-s:10px; --gap-m:24px; --gap-l:36px; --gap-xl:clamp(72px,11vw,96px);
+  --ease-out:cubic-bezier(.22,.61,.36,1); --ease-std:cubic-bezier(.45,0,.55,1); --ease-reveal:cubic-bezier(.19,1,.22,1); --ease-emphasis:cubic-bezier(.22,.9,.28,1);
+  --dur-fast:200ms; --dur-base:300ms; --dur-slow:450ms;
+  --section-py:clamp(56px,9vw,96px); --wide:1300px; --mid:1200px; --narrow:960px; --side:clamp(20px,4.4vw,63px); --max:1300px; --gutter:clamp(20px,4.4vw,63px);
+  --fd:"Inter Tight",Arial,sans-serif; --fb:"Inter Tight",Arial,sans-serif;
+}
+.dark{--bg:#3E2520; --surface:#4B302A; --line:#5E433B; --ink:#ECECDC; --ink-muted:#CDBFB2; --blue-deep:#C5D0D3}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.5 var(--fb);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+*:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,p{margin:0}
+/* type */
+.disp{font-family:var(--fd);font-weight:600;line-height:.95;letter-spacing:-.035em;text-wrap:balance;font-size:clamp(40px,17.71px + 5.714vw,100px)}
+.disp.m{font-size:clamp(28px,16.86px + 2.857vw,58px);letter-spacing:-.03em;line-height:1.05}
+.disp.d80{font-size:clamp(36px,19px + 4.4vw,80px);letter-spacing:-.03em;line-height:1}
+.head{font-family:var(--fd);font-weight:600;letter-spacing:-.01em;line-height:1.15;font-size:24px}
+.sub{font-weight:400;color:var(--ink-muted);font-size:clamp(16px,2vw,20px);line-height:1.5;text-wrap:pretty}
+.num{font-family:var(--fd);font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.cap{font-size:13px;color:var(--ink-muted)}
+/* buttons */
+.btn{--h:40px;--px:20px;--fs:16px;min-width:0;text-align:center;padding:calc((var(--h) - var(--fs)*.75)/2 - 1px) var(--px);font:600 var(--fs)/1.2 var(--fb);letter-spacing:-.2px;border-radius:var(--radius-pill);border:1px solid transparent;display:inline-block;white-space:nowrap;cursor:pointer;background:var(--ink);color:var(--bg);text-decoration:none;transition:background-color var(--dur-fast) var(--ease-std),color var(--dur-fast) var(--ease-std)}
+.btn:hover{background:var(--blue);color:var(--ink)}
+.btn.s{--h:32px;--px:14px;--fs:15px;min-width:0}
+.btn.out{background:transparent;color:var(--ink);border-color:var(--ink)}.btn.out:hover{background:var(--ink);color:var(--bg)}
+.ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:square;flex:none}
+/* layout */
+section{padding-block:clamp(56px,9vw,100px);position:relative}
+.scene--roll + #valmispaivissa{padding-top:0;margin-top:-3px;position:relative}
+#kayttoonotto .disp{max-width:none}
+@media(min-width:900px){#kayttoonotto .disp{white-space:nowrap}}
+#ominaisuudet{padding-top:clamp(84px,10vw,140px)}
+section[id]{scroll-margin-top:72px}
+/* koko sivu 80 %:n kokoon isoilla näytöillä, jotta kokonaisuudet näkyvät kerralla */
+@media(min-width:1024px){html{zoom:.8;--vz:1.25}}
+.wrap{width:100%;max-width:calc(var(--wide) + 2 * var(--side));margin-inline:auto;padding-inline:var(--side)}
+.wrap.mid{max-width:calc(var(--mid) + 2 * var(--side))}
+.wrap.narrow{max-width:calc(var(--narrow) + 2 * var(--side))}
+
+/* ===== ylapalkki: kelluva pilleri (giveasy) ===== */
+:root{--header-offset:30px}
+.gm a,.gm button{pointer-events:auto}
+/* kulman logo (desktop) */
+.gm-logo{position:fixed;top:var(--header-offset);left:var(--header-offset);height:44px;display:flex;align-items:center;z-index:9999;transition:opacity .2s linear}
+.gm-logo:hover{opacity:.8}
+.gm-logo img{height:26px;display:block;transition:opacity .25s linear}
+.gm-logo .lr{display:block}.gm-logo .lb{display:none}
+.gm.on-dark .gm-logo .lr{display:none}.gm.on-dark .gm-logo .lb{display:block}
+/* pilleri */
+.gm-pill{position:fixed;top:var(--header-offset);right:var(--header-offset);z-index:9999;background:var(--ink);color:var(--bg);border-radius:22px;padding:2px;overflow:hidden;box-sizing:border-box;transition:width .45s var(--ease-out),background-color .25s linear,color .25s linear,transform .55s var(--ease-out),opacity .55s var(--ease-out);transform-origin:100% 0}
+.gm.on-dark .gm-pill{background:var(--bg);color:var(--ink)}
+.gm.intro .gm-pill{transform:translateY(-26px) scale(.86);opacity:0}
+.gm-bar{display:flex;align-items:center;gap:10px;height:40px;white-space:nowrap}
+.gm-pill-logo{display:none}
+.gm-login{font:500 16px/1 var(--fb);letter-spacing:-.2px;color:inherit;transition:opacity .16s linear}
+.gm-login:hover{opacity:.65}
+.gm-cta{flex:none;height:40px;padding:0 16px;border-radius:300px;display:inline-flex;align-items:center;min-width:0;font:500 15px/1 var(--fb);letter-spacing:-.2px;background:var(--bg);color:var(--ink);white-space:nowrap;transition:opacity .16s linear,background-color .2s var(--ease-std),color .2s var(--ease-std)}
+.gm.on-dark .gm-cta{background:var(--ink);color:var(--bg)}
+.gm-cta:hover{background:var(--line)}
+.gm.on-dark .gm-cta:hover{background:var(--brown-hover)}
+.gm-burger{width:40px;height:40px;border:0;background:none;color:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;flex:none;padding:0}
+.gm-burger span{display:block;width:20px;height:2px;border-radius:2px;background:currentColor;transition:transform .4s var(--ease-out)}
+.gm.open .gm-burger span:nth-child(1){transform:translateY(4px) rotate(45deg)}
+.gm.open .gm-burger span:nth-child(2){transform:translateY(-4px) rotate(-45deg)}
+.gm.collapsed:not(.open) .gm-login,.gm.collapsed:not(.open) .gm-cta{opacity:0;visibility:hidden}
+.gm.collapsed:not(.open) .gm-bar{gap:0}
+.gm.collapsed:not(.open) .gm-burger{margin-left:1px}
+/* avattu valikko */
+.gm-menu{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease-out)}
+.gm.open .gm-menu{grid-template-rows:1fr}
+.gm-menu-in{overflow:hidden;min-width:238px}
+.gm-mrow{display:block}
+.gm-mrow nav{flex:1}
+.gm-lang{position:absolute;top:2px;right:14px;height:40px;display:flex;align-items:center;gap:6px;z-index:2;font:500 15px/1 var(--fb);opacity:0;visibility:hidden;transition:opacity .3s var(--ease-out) .2s}
+.gm.open .gm-lang{opacity:1;visibility:visible}
+.gm-lang span{opacity:.4}
+.gm-lang a{color:inherit;opacity:.55}
+.gm-lang a:hover{opacity:1}
+.gm-eyes{margin-left:auto;align-self:flex-end;height:30px;display:flex;align-items:center;pointer-events:none;opacity:0;transform:scale(.6);transition:opacity .35s var(--ease-out) .35s,transform .5s var(--ease-reveal) .35s}
+.gm.open .gm-eyes{opacity:1;transform:none}
+.gm-eyes img{height:30px;width:auto;display:block}
+.gm-eyes .er{display:none}
+.gm.on-dark .gm-eyes .ev{display:none}
+.gm.on-dark .gm-eyes .er{display:block}
+.gm-menu nav{display:flex;flex-direction:column;padding:22px 10px 8px}
+.gm-menu a{font:400 20px/1.15 var(--fb);letter-spacing:-.01em;color:inherit;padding:7px 0;opacity:0;transform:translateY(14px);transition:opacity .3s var(--ease-out),transform .3s var(--ease-out)}
+.gm.open .gm-menu a{opacity:1;transform:none}
+.gm-menu a:hover{opacity:.6;transition:opacity .18s linear}
+.gm-sub{display:flex;flex-wrap:wrap;gap:4px 16px;margin:12px -14px 0;padding:12px 14px 0;border-top:1px solid rgba(236,236,220,.14);font-size:14px}
+.gm.on-dark .gm-sub{border-top-color:rgba(62,37,32,.14)}
+.gm-sub a{font-size:14px;color:var(--ink-muted);opacity:0;transform:translateY(14px);transition:opacity .3s var(--ease-out),transform .3s var(--ease-out)}
+.gm.open .gm-sub a{opacity:1;transform:none}
+.gm.open .gm-menu nav>a:nth-child(1){transition-delay:.12s}
+.gm.open .gm-menu nav>a:nth-child(2){transition-delay:.165s}
+.gm.open .gm-menu nav>a:nth-child(3){transition-delay:.21s}
+.gm.open .gm-menu nav>a:nth-child(4){transition-delay:.255s}
+.gm.open .gm-menu nav>a:nth-child(5){transition-delay:.30s}
+.gm.open .gm-menu nav>a:nth-child(6){transition-delay:.345s}
+.gm.open .gm-sub a{transition-delay:.33s}
+@media(max-width:640px){
+  body{font-size:14px}
+  .gm-logo{display:none}
+  .gm-pill{left:50%;right:auto;top:16px;transform:translateX(-50%);width:280px!important;padding:2px}
+  .gm.intro .gm-pill{transform:translateX(-50%) translateY(-10px);opacity:0}
+  .gm-bar{display:grid;grid-template-columns:1fr auto 1fr;height:40px;gap:0}
+  .gm-pill-logo{display:flex;align-items:center;justify-self:start;margin-left:9px}
+  .gm-pill-logo img{height:24px;display:block}
+  .gm-pill-logo .lr{display:none}.gm-pill-logo .lb{display:block}
+  .gm.on-dark .gm-pill-logo .lb{display:none}.gm.on-dark .gm-pill-logo .lr{display:block}
+  .gm-login{display:none}
+  .gm-cta,.gm.on-dark .gm-cta{order:2;justify-self:center;background:none!important;color:inherit!important;padding:0;height:auto;font-size:15px}
+  .gm-burger{order:3;justify-self:end;width:40px;height:40px;border-radius:999px;background:var(--bg);color:var(--ink);margin-left:0}
+  .gm.on-dark .gm-burger{background:var(--ink);color:var(--bg)}
+  .gm-burger span{width:16px;gap:5px}
+  .gm.collapsed:not(.open) .gm-cta{opacity:1;visibility:visible}
+  .gm-menu nav{padding:18px 8px 6px}
+}
+
+/* ===== hero ===== */
+.hero{position:relative;min-height:calc(100svh * var(--vz,1));display:flex;align-items:flex-end;overflow:hidden;background:var(--ink);padding:0}
+.hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-tint{position:absolute;inset:0;z-index:1;background:rgb(0 0 0 / .18)}
+.hero-in{position:relative;z-index:2;width:100%;padding:120px clamp(18px,3vw,38px) 0;color:var(--bg)}
+.hero-row{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(24px,5vw,72px)}
+.hero-title{display:flex;flex-direction:column;margin-bottom:clamp(14px,2vw,22px)}
+.hero-right{margin-bottom:clamp(14px,2vw,22px)}
+.hero-title .disp{display:block;color:var(--bg);font-size:clamp(24px,6.5vw,60px);white-space:nowrap}
+.hero-right{display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:18px;max-width:42ch}
+.hero-right .lead{font-size:clamp(15px,2vw,18px);color:rgb(236 236 220 / .92)}
+.hero-cta{display:flex;gap:10px;flex-wrap:nowrap;justify-content:flex-end}
+.hero-cta .btn{background:var(--bg);color:var(--ink)}
+.hero-cta .btn:hover{background:var(--blue);color:var(--ink)}
+.hero-cta .btn.out{background:transparent;color:var(--bg);border-color:rgb(236 236 220 / .6)}
+.hero-cta .btn.out:hover{background:var(--bg);color:var(--ink)}
+
+/* ===== footer ===== */
+.foot{padding:clamp(20px,6vw,88px) 0 28px;font-size:14px}
+.foot-inner{padding-inline:clamp(16px,2vw,24px)}
+.foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:clamp(24px,5vw,64px);padding-bottom:clamp(18px,2.5vw,26px)}
+.foot-intro{max-width:34ch}
+.foot-intro .head{font-size:20px;margin-bottom:14px}
+.foot-cols{display:flex;gap:clamp(36px,6vw,72px)}
+.foot-col b{font-weight:500;display:block;margin-bottom:8px}
+.foot-col a{display:block;color:var(--ink-muted);padding:3px 0}
+.foot .wordmark{display:block;width:calc((100% - 96px) * 0.5);height:auto;margin:clamp(16px,2.5vw,28px) auto 10px}
+.foot-legal{border-top:1px solid var(--ink);margin-top:16px;padding:14px clamp(16px,2vw,24px) 0;display:flex;flex-wrap:wrap;gap:10px 20px;justify-content:space-between;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted)}
+
+/* ===== osiot ===== */
+.band{background:var(--bg);color:var(--ink)}
+.band-surface{background:var(--surface)}
+.band-blue{background:var(--blue);color:var(--ink)}
+.shead{max-width:820px;margin:0 auto clamp(44px,5.5vw,76px);text-align:center}
+.shead .disp{margin-inline:auto;max-width:1000px}
+.shead.ctr{margin-inline:auto;text-align:center}
+.shead .sub{margin:18px auto 0;max-width:420px;font-size:18px;line-height:1.3;font-weight:500;color:var(--ink);opacity:.75}
+.shead.left{margin-inline:0;text-align:left;max-width:48ch}
+.shead.left .disp,.shead.left .sub{margin-inline:0}
+.tag{display:inline-block;padding:5px 12px;border:1px solid currentColor;border-radius:var(--radius-pill);font-size:12px;font-weight:500;letter-spacing:.05em;color:var(--ink-muted);text-transform:uppercase;line-height:1}
+.tag.red{background:var(--red);color:var(--on-red);border-color:var(--red)}
+.tag.blue{background:var(--blue);color:var(--ink);border-color:var(--blue)}
+.mb-tag{margin-bottom:18px}
+.grid{display:grid;gap:20px}
+.grid.c2{grid-template-columns:repeat(2,1fr)}
+.grid.c3{grid-template-columns:repeat(3,1fr)}
+.grid.c4{grid-template-columns:repeat(4,1fr)}
+/* "nain se toimii" -tyylinen kortti­virta nuolilla */
+.howflow{display:flex;align-items:stretch;gap:0}
+.hcard{flex:1 1 0;min-width:0;background:var(--surface);border-radius:12px;padding:clamp(18px,1.7vw,26px);display:flex;flex-direction:column;gap:9px}
+.hcard h3{font-family:var(--fd);font-weight:600;font-size:clamp(17px,1.4vw,20px);letter-spacing:-.01em;line-height:1.14;margin:0;color:var(--ink)}
+.hcard p{font-size:15px;font-weight:500;line-height:1.4;color:var(--ink-muted);margin:0}
+.howarrow{flex:none;align-self:center;width:38px;height:38px;border-radius:999px;background:var(--ink);color:var(--bg);display:grid;place-items:center;margin:0 clamp(6px,0.8vw,12px)}
+.howarrow svg{width:18px;height:18px}
+@media(max-width:860px){.howflow{flex-direction:column}.hcard{flex:none}.howarrow{margin:clamp(6px,2vw,12px) 0;transform:rotate(90deg)}}
+/* kortit */
+.card{background:var(--surface);border-radius:var(--radius-card);padding:clamp(22px,2.4vw,28px);display:flex;flex-direction:column;gap:9px}
+.card .ic{color:var(--blue-deep);margin-bottom:4px}
+.card .ic .ico{width:28px;height:28px}
+.card h3{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em;line-height:1.18}
+.card p{font-size:16px;font-weight:500;color:var(--ink-muted);line-height:1.45}
+/* vertaus */
+/* karuselli (ominaisuudet) */
+.caro-head{display:flex;flex-direction:column;align-items:center;gap:clamp(20px,2.4vw,34px);margin-bottom:clamp(42px,5vw,70px);text-align:center}
+.caro-eyebrow{cursor:default;margin-bottom:16px}
+.caro-eyebrow:hover{background:transparent;color:var(--ink)}
+.caro-title{font-family:var(--fd);font-weight:600;letter-spacing:-.035em;font-size:clamp(40px,17.71px + 5.714vw,100px);line-height:.95;margin:0;max-width:1000px;text-align:center;text-wrap:balance}
+.caro-nav{display:flex;gap:11px;flex:none;align-items:center}
+.caro-bar{position:relative;width:clamp(23px,2.87vw,40px);height:10px;border-radius:999px;background:rgba(62,37,32,.12);overflow:hidden}
+.caro-bar .fill{position:absolute;left:0;top:0;height:100%;width:0;border-radius:999px;background:rgba(62,37,32,.42)}
+.caro-dot{width:10px;height:10px;border-radius:999px;flex:none}
+.caro-dot.on{background:rgba(62,37,32,.42)}
+.caro-dot.off{background:rgba(62,37,32,.12)}
+.caro-track{display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:4px;scrollbar-width:none}
+.caro-track::-webkit-scrollbar{display:none}
+.caro-card{flex:0 0 clamp(190px,18vw,232px);aspect-ratio:3/4;border-radius:var(--radius-card);overflow:hidden;position:relative;display:flex}
+.caro-card.c-color{background:var(--cc)}
+.caro-card .cc-tarra{position:absolute;z-index:2;height:auto;max-width:none;pointer-events:none;user-select:none;transform-origin:0 0}
+.caro-card.c-color .cc-body{padding:clamp(16px,1.8vw,22px);display:flex;flex-direction:column;gap:9px;align-self:flex-start;color:var(--ct)}
+.caro-card.c-color h3{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em;line-height:1.1}
+.caro-card.c-color p{font-size:15px;font-weight:500;line-height:1.4;opacity:.92;max-width:24ch}
+.caro-card.c-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.1)}
+.caro-card.c-img .ci-cap{position:relative;margin-top:auto;z-index:1;width:100%;padding:clamp(36px,3.6vw,48px) clamp(16px,1.8vw,22px) clamp(16px,1.8vw,20px);color:var(--on-red);background:linear-gradient(to top,rgba(30,19,17,.86),rgba(30,19,17,.35) 62%,transparent)}
+.caro-card.c-img .ci-cap h3{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em;line-height:1.1;margin-bottom:5px}
+.caro-card.c-img .ci-cap p{font-size:14px;font-weight:500;line-height:1.4;opacity:.96;max-width:26ch}
+@media(max-width:620px){.caro-card{flex:0 0 min(210px,62vw)}}
+/* dashboard */
+.dash{background:var(--surface);border-radius:var(--radius-card);padding:clamp(16px,2vw,24px)}
+.dash-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.dash-top b{font-family:var(--fd);font-weight:500;font-size:15px}
+.dash-note{font-size:14px;font-weight:500;color:var(--ink-muted)}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border-radius:var(--radius-small);overflow:hidden}
+.dash-grid .t{background:var(--bg);padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.dash-grid .t .lb{font-size:14px;color:var(--ink-muted);line-height:1.3}
+.dash-grid .t .n{font-family:var(--fd);font-weight:700;font-size:clamp(22px,2.6vw,30px);line-height:1;white-space:nowrap}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.8vw,22px);margin-top:clamp(28px,3.6vw,44px)}
+.flow-step h4{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em;margin-bottom:6px}
+.flow-step p{font-size:16px;color:var(--ink-muted);line-height:1.45}
+/* appi puhelimet */
+.appwrap{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,48px)}
+.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,30px);max-width:720px;width:100%;margin-inline:auto}
+.phone-item{display:flex;flex-direction:column;gap:14px}
+.phone{aspect-ratio:9/15;border-radius:26px;background:#1E1311;padding:5px;position:relative}
+.phone::before{content:"";position:absolute;top:11px;left:50%;transform:translateX(-50%);width:34%;height:8px;border-radius:999px;background:#1E1311;z-index:2}
+.phone .scr{height:100%;border-radius:22px;overflow:hidden;background:var(--surface);padding:24px 11px 11px;display:flex;flex-direction:column;gap:7px}
+.phscr-field{background:var(--bg);border-radius:12px;padding:8px 10px;font-size:10px;color:var(--ink-muted);display:flex;align-items:center;gap:6px}
+.phscr-prod{background:var(--bg);border-radius:12px;padding:9px;display:flex;flex-direction:column;gap:6px}
+.phscr-prod .im{height:62px;border-radius:9px;background:var(--blue)}
+.phscr-prod .nm{font-size:10px;font-weight:500}
+.phscr-prod .pr{font-family:var(--fd);font-weight:700;font-size:15px}
+.phscr-qr{margin:auto;width:66px;height:66px;border-radius:10px;background:var(--ink);display:grid;place-items:center}
+.phscr-qr svg{width:48px;height:48px}
+.phscr-ttl{font-family:var(--fd);font-weight:500;font-size:11px}
+.ph-cap h4{font-family:var(--fd);font-weight:500;font-size:17px;margin-bottom:5px}
+.ph-cap p{font-size:15px;font-weight:500;color:var(--ink-muted);line-height:1.4}
+.app-note{display:flex;flex-direction:column;gap:12px;align-self:center;justify-self:center}
+.app-note .ap{display:flex;gap:10px;font-size:16px;align-items:flex-start}
+.app-note .mk{flex:none;margin-top:2px;color:var(--olive)}
+/* hyodyt luvut */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.nums .n .big{font-family:var(--fd);font-weight:700;font-size:clamp(40px,6vw,66px);line-height:.95;display:block;margin-bottom:10px}
+.nums .n .cap{font-size:15px;font-weight:500;color:var(--ink);line-height:1.4;display:block;max-width:20ch}
+/* käyttöönotto */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,28px)}
+.tl .node{position:relative;padding-top:30px}
+.tl .node::before{content:"";position:absolute;top:6px;left:0;width:15px;height:15px;border-radius:999px;background:var(--red)}
+.tl .node::after{content:"";position:absolute;top:13px;left:22px;right:-14px;height:2px;background:var(--line)}
+.tl .node:last-child::after{display:none}
+.tl .dur{font-size:12px;color:var(--blue-deep);font-weight:500;letter-spacing:.03em}
+.tl h4{font-family:var(--fd);font-weight:500;font-size:18px;margin:6px 0 6px}
+.tl p{font-size:13.5px;color:var(--ink-muted);line-height:1.45}
+.tl-extra{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:clamp(28px,3.5vw,44px)}
+.tl-extra .e{display:flex;gap:10px;font-size:14px;color:var(--ink-muted);max-width:40ch;align-items:flex-start}
+.tl-extra .mk{flex:none;margin-top:2px;color:var(--olive)}
+/* roadmap / polku */
+.steps{max-width:1160px;margin-inline:auto;display:grid;gap:clamp(22px,3vw,44px);--steps-top:clamp(84px,10vw,110px)}
+.step{position:sticky;top:var(--steps-top);background:linear-gradient(180deg,#56372F 0%,#4E322B 100%);border-radius:20px;box-shadow:inset 0 1px 0 rgba(236,236,220,.08),0 -4px 14px -6px rgba(20,10,8,.3);min-height:clamp(240px,24vw,320px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,360px);gap:clamp(22px,4vw,56px);--sp:clamp(28px,4vw,56px);padding:var(--sp);overflow:hidden;transform-origin:50% 0;align-items:center}
+.step__text{display:flex;flex-direction:column;gap:14px}
+.step h3{font-family:var(--fd);font-weight:600;font-size:clamp(26px,3vw,36px);letter-spacing:-.02em;line-height:1.06;color:#F6F6EE}
+.step__text p{font-size:18px;line-height:1.5;color:#E2D7CC;max-width:40ch}
+.step__list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.step__list li{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:999px;background:rgba(236,236,220,.1);box-shadow:inset 0 0 0 1px rgba(236,236,220,.28);font-size:15px;font-weight:500;line-height:1;color:var(--ink);white-space:nowrap}
+@media(max-width:760px){.step{grid-template-columns:1fr;gap:18px;align-items:start;min-height:0}}
+.step--video{grid-template-columns:minmax(0,1fr) minmax(0,46%);align-items:start}
+.step__col{display:flex;flex-direction:column;gap:clamp(16px,2.2vw,24px);justify-content:center;min-width:0;align-self:center}
+.step__media{margin:calc(-1*var(--sp)) calc(-1*var(--sp)) calc(-1*var(--sp)) 0;overflow:hidden;background:transparent;line-height:0;padding-top:clamp(20px,2.4vw,34px)}
+.step__media video{width:100%;height:auto;display:block}
+.step__media--portrait{padding-top:0;display:flex;align-items:flex-end;justify-content:flex-end}
+.step__media--portrait video{width:auto;max-width:100%;height:clamp(300px,34vw,440px);margin-left:auto}
+@media(max-width:760px){.step--video{grid-template-columns:1fr}.step__col{align-self:auto}.step__media{margin:0 calc(-1*var(--sp)) calc(-1*var(--sp));padding-top:clamp(16px,5vw,26px)}.step__media--portrait{justify-content:center}.step__media--portrait video{height:auto;width:auto;max-width:70%;max-height:62vh;margin:0 auto}}
+/* roadmap-kartta (kayttoonotto) - referenssityyli: ohut pyoristetty rata */
+.roadmap{position:relative;margin-top:clamp(44px,6vw,90px);max-width:1060px;margin-inline:auto;padding:clamp(8px,1.4vw,20px) clamp(8px,2vw,32px)}
+.rm-line{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+.rm-line path{fill:none;stroke:rgba(62,37,32,.4);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+.rm-grid{position:relative;z-index:1;display:grid;grid-template-columns:.86fr 1fr 1fr 1fr;row-gap:clamp(40px,5vw,74px);column-gap:clamp(14px,2vw,30px);align-items:start}
+.rm-node{display:flex;flex-direction:column;align-items:flex-start;gap:15px;text-align:left}
+.rm-dot{position:relative;width:14px;height:14px;border-radius:999px;background:var(--ink);flex:none}
+.rm-dot::after{content:"";position:absolute;left:7px;top:100%;width:1px;height:14px;background:rgba(62,37,32,.45)}
+.rm-t p{margin:0;font-size:clamp(16px,1.25vw,18px);line-height:1.5;color:var(--ink);opacity:.9;max-width:24ch}
+.rm-num{position:relative;min-width:38px;height:28px;padding:0 10px;border-radius:9px;background:var(--ink);color:#F6F6EE;display:grid;place-items:center;font-family:var(--fd);font-weight:600;font-size:13px;letter-spacing:.02em}
+.rm-num::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);width:1.5px;height:13px;background:rgba(62,37,32,.4)}
+.rm-t h3{font-family:var(--fd);font-weight:600;font-size:clamp(20px,1.8vw,26px);letter-spacing:-.01em;line-height:1.15;margin:0 0 9px;color:var(--ink);max-width:18ch}
+.rm-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.rm-list li{position:relative;padding-left:14px;font-size:clamp(16px,1.25vw,18px);line-height:1.5;color:var(--ink);opacity:.9}
+.rm-list li::before{content:"·";position:absolute;left:3px;top:-2px;font-size:18px;line-height:1}
+.rm-node.n1{grid-area:1/1/3/2;align-self:center}
+.rm-node.n1 .rm-dot{width:36px;height:18px}
+.rm-node.n2{grid-area:1/2}.rm-node.n3{grid-area:1/3}.rm-node.n4{grid-area:1/4}
+.rm-node.n5{grid-area:2/4}.rm-node.n6{grid-area:2/3}.rm-node.n7{grid-area:2/2}
+/* kayttoonoton ilmestymisanimaatio: viiva piirtyy, pisteet ponnahtavat, tekstit nousevat */
+.roadmap.rm-anim .rm-line path{stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.roadmap.rm-anim .rm-dot{transform:scale(0)}
+.roadmap.rm-anim .rm-dot::after{transform:scaleY(0);transform-origin:top}
+.roadmap.rm-anim .rm-t{opacity:0;transform:translateY(14px)}
+.roadmap.rm-go .rm-line path{stroke-dashoffset:0;transition:stroke-dashoffset 4.4s cubic-bezier(.45,0,.6,.95)}
+.roadmap.rm-go .rm-dot{transform:scale(1);transition:transform .8s cubic-bezier(.34,1.56,.64,1) var(--d,0s)}
+.roadmap.rm-go .rm-dot::after{transform:scaleY(1);transition:transform .5s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .45s)}
+.roadmap.rm-go .rm-t{opacity:1;transform:none;transition:opacity 1s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .3s),transform 1s cubic-bezier(0,0,.2,1) calc(var(--d,0s) + .3s)}
+.roadmap.rm-done .rm-line path{stroke-dasharray:none}
+/* sovellusosio: kolme näkökulmaa vuorotellen (myyjä, ostaja, kaikki hyötyvät), paneelin väri vaihtuu */
+.ap{background:var(--bg);color:var(--ink);padding:clamp(60px,7vw,110px) 0}
+.ap{--pb:#3E2520;--pt:#ECECDC}
+.ap[data-t="2"]{--pb:#C5D0D3;--pt:#3E2520}
+.ap[data-t="3"]{--pb:#C24029;--pt:#ECECDC}
+.ap-panel{background:var(--pb);color:var(--pt);border-radius:clamp(28px,3vw,44px);padding:clamp(52px,6vw,84px) var(--side) clamp(200px,20vw,280px);text-align:center;transition:background-color .6s var(--ease-std),color .6s var(--ease-std)}
+.ap-heads{display:grid}
+.ap-heads .disp{grid-area:1/1;color:inherit;margin:0 auto;max-width:18ch;opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease-std),transform .6s var(--ease-reveal)}
+.ap-heads .disp.on{opacity:1;transform:none}
+.ap-sets{display:grid;margin:calc(-1 * clamp(150px,15vw,210px)) clamp(16px,3vw,48px) 0;position:relative}
+.ap-grid{grid-area:1/1;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,24px);pointer-events:none}
+.ap-grid.on{pointer-events:auto}
+.ap-card{container-type:inline-size;position:relative;overflow:hidden;background:var(--surface);border-radius:clamp(22px,2.4vw,34px);aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translateY(40px);transition:opacity .45s var(--ease-std),transform .7s var(--ease-reveal)}
+.ap-grid.on .ap-card{opacity:1;transform:none}
+.ap-grid.on .ap-card:nth-child(2){transition-delay:.08s}.ap-grid.on .ap-card:nth-child(3){transition-delay:.16s}
+.ap-card h3{position:relative;z-index:2;font-family:var(--fd);font-weight:600;font-size:clamp(20px,5.2cqw + 6px,42px);letter-spacing:-.015em;line-height:1.18;margin:0;padding:clamp(26px,7cqw,56px) clamp(22px,6cqw,48px) 0;max-width:18ch}
+.ap-card.bot h3,.ap-card.photo h3{margin-top:auto;padding:0 clamp(22px,2.6vw,40px) clamp(26px,3vw,44px)}
+.ap-phone{position:absolute;left:50%;width:78%;aspect-ratio:1350/2760;transform:translateX(-50%);z-index:1}
+.ap-phone::after{content:"";position:absolute;inset:0;background:url(assets/laitteet/iphone17-kehys.webp?v=1) center/100% 100% no-repeat;z-index:3;pointer-events:none}
+.ap-card.top .ap-phone{top:26%}
+.ap-card.bot .ap-phone{bottom:27%}
+.ap-phone img{position:absolute;left:5.33%;top:2.5%;width:89.34%;height:95%;object-fit:cover;object-position:50% 0;border-radius:15.6%/7.17%;display:block;z-index:1}
+.ap-isl{position:absolute;top:3.7%;left:50%;width:28%;aspect-ratio:378/111;transform:translateX(-50%);background:#000;border-radius:999px;z-index:2}
+.ap-rc{position:absolute;left:9%;right:9%;top:42%;background:var(--bg);border-radius:20px;padding:clamp(16px,1.6vw,24px);display:flex;flex-direction:column;gap:clamp(8px,.8vw,12px);font-size:clamp(13px,1.05vw,15px);text-align:left}
+.ap-rc-top,.ap-rc-row,.ap-rc-tot{display:flex;justify-content:space-between;gap:12px}
+.ap-rc-top{font-size:clamp(15px,1.25vw,18px);padding-bottom:clamp(8px,.8vw,12px);border-bottom:1px solid var(--line)}.ap-rc-top span{color:var(--ink-muted)}
+.ap-rc-tot{margin-top:4px;padding-top:clamp(8px,.8vw,12px);border-top:1px solid var(--line)}.ap-rc-tot b{color:var(--red)}
+.ap-card.photo{color:var(--on-red)}
+.ap-photo{position:absolute;inset:0}.ap-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.ap-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(30,19,17,.7),rgba(30,19,17,0) 55%)}
+.ap-panel{position:relative;overflow:hidden}
+.ap-heads{position:relative;z-index:1}
+.ap-deco{position:absolute;inset:0;bottom:auto;aspect-ratio:1300/486;pointer-events:none}
+.ap-dg{position:absolute;inset:0;opacity:0;transition:opacity .6s var(--ease-std)}
+.ap-dg.on{opacity:1}
+.ap-t{position:absolute;height:auto;max-width:none;object-fit:contain;user-select:none}
+.ap-web{position:absolute;left:-20.5%;top:8%;width:117%;aspect-ratio:2620/1900;z-index:1}
+.ap-web::after{content:"";position:absolute;inset:0;background:url(assets/laitteet/ipadair-kehys.webp?v=1) center/100% 100% no-repeat;z-index:2;pointer-events:none}
+.ap-web img{position:absolute;left:4.96%;top:6.84%;width:90.08%;height:86.32%;object-fit:cover;object-position:0 0;border-radius:1.61%/2.32%;display:block;background:#F4F4EA}
+@media(max-width:820px){.ap-deco{display:none}.ap-web{left:-8%;width:116%;top:12%}}
+.ap-dots{display:flex;justify-content:center;gap:8px;margin-top:clamp(20px,2vw,28px)}
+.ap-dots i{width:8px;height:8px;border-radius:99px;background:var(--line);transition:width .4s var(--ease-std),background-color .4s var(--ease-std)}
+.ap-dots i.on{width:26px;background:var(--ink)}
+@media(max-width:820px){.ap-grid{grid-template-columns:1fr}.ap-sets{margin-inline:0}.ap-card{aspect-ratio:auto;height:440px}.ap-phone{width:min(300px,74%)}}
+@media(prefers-reduced-motion:reduce){.ap-card,.ap-heads .disp,.ap-panel{transition:none}}
+
+/* kenelle sopii: sininen pohja, iso otsikko vasemmalla, kiemurteleva viiva */
+.ks{position:relative;overflow:hidden;background:var(--blue);color:var(--ink);padding:clamp(80px,9vw,130px) 0 clamp(110px,13vw,190px)}
+.ks-deco{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.ks-deco path{fill:none;stroke:#C24029;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
+.ks .wrap{position:relative;z-index:1}
+.ks .disp{margin:0;max-width:13ch;text-align:left}
+.ks-lead{margin:clamp(18px,2vw,26px) 0 0;max-width:38ch;font-size:clamp(16px,1.6vw,19px);line-height:1.5}
+.ks .btn{margin-top:clamp(22px,2.4vw,32px)}
+.ks.ks-anim path{stroke-dasharray:var(--l);stroke-dashoffset:var(--l)}
+.ks.ks-go path{stroke-dashoffset:0;transition:stroke-dashoffset 2.6s cubic-bezier(.45,0,.6,.95)}
+@media(max-width:700px){.ks-deco{top:auto;height:55%}.ks .disp{max-width:none}.ks{padding-bottom:200px}}
+
+/* laitteet: viisi korttia, otsikko, kortit ja laitteet nousevat esiin vuorotellen */
+/* Odotuslista (kuluttajat) */
+.ol{background:var(--bg);color:var(--ink);padding:clamp(80px,9vw,130px) 0;overflow:hidden}
+.ol-row{display:flex;align-items:center;justify-content:space-between;gap:clamp(40px,5.5vw,88px);max-width:1094px;margin:0 auto}
+.ol-left{width:min(320px,26vw);flex:none}
+.ol .ol-h{font-size:clamp(44px,4.45vw,64px);line-height:1;letter-spacing:-.04em;margin:0 0 clamp(20px,2.2vw,32px);max-width:6.4em;text-align:left;text-wrap:balance}
+.ol-phones{display:flex;align-items:flex-start;gap:clamp(28px,3.54vw,51px);position:relative}
+.ol-phones .ol-phone{z-index:1}
+.ol-phones .ol-phone+.ol-phone{margin-top:clamp(6px,.62vw,9px)}
+.ol-tarra{position:absolute;z-index:0;height:auto;pointer-events:none;display:block}
+.ol-tarra.jakkara{left:-15.8%;top:71.1%;width:33.8%}
+.ol-tarra.takki{left:77%;top:-7.8%;width:46.1%;transform:rotate(8deg)}
+.ol-phone{position:relative;width:clamp(200px,20.8vw,300px);aspect-ratio:1350/2760;flex:none}
+.ol-phone::after{content:"";position:absolute;inset:0;background:url(assets/laitteet/iphone17-kehys.webp?v=1) center/100% 100% no-repeat;z-index:3;pointer-events:none}
+.ol-phone img{position:absolute;left:5.33%;top:2.5%;width:89.34%;height:95%;object-fit:cover;object-position:50% 0;border-radius:15.6%/7.17%;display:block;z-index:1}
+.ol-step{padding:18px 0}.ol-step:first-child{padding-top:0}.ol-step+.ol-step{border-top:1px solid var(--line)}
+.ol-step h3{font:600 22px/1.2 var(--fd);letter-spacing:-.015em;margin:0 0 6px}
+.ol-step p{margin:0;font-size:17px;line-height:1.45;color:var(--ink-muted)}
+.ol .btn{--h:56px;--px:28px;--fs:17px;margin-top:clamp(20px,2.2vw,28px)}
+@media(max-width:1100px){.ol-row{flex-direction:column;align-items:flex-start}.ol-left{width:min(420px,90%)}}
+.m-ol{align-items:stretch}
+.m-ol .m-h2{text-align:center}
+.m-ol .ol-phone{width:min(230px,62vw);margin:8px auto 0}
+.m-ol .ol-step{padding:16px 0}.m-ol .ol-step h3{font-size:20px}.m-ol .ol-step p{font-size:16px}
+.m-ol .m-pill{width:100%}
+.lt{background:var(--bg);color:var(--ink);padding:clamp(72px,8.4vw,120px) 0 clamp(80px,9vw,130px);overflow:hidden}
+.lt .disp{text-align:center;margin:0 auto}
+@media(min-width:900px){.lt .disp{white-space:nowrap}}
+.lt-lead{text-align:center;margin:clamp(12px,1.2vw,18px) auto 0;max-width:56ch;font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:var(--ink-muted)}
+.lt-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(10px,1.2vw,16px);margin-top:clamp(24px,2.2vw,32px)}
+.lt-card{position:relative;overflow:hidden;background:var(--surface);border-radius:var(--radius-lg);padding:clamp(20px,2vw,28px);aspect-ratio:3/4}
+.lt-img{position:absolute;height:auto;max-width:none;pointer-events:none;user-select:none}
+.lt-card h3{font-family:var(--fd);font-weight:600;font-size:clamp(19px,1.7vw,22px);letter-spacing:-.01em;line-height:1.15;margin:0 0 10px}
+.lt-card p{margin:0;font-size:15px;line-height:1.45;color:var(--ink-muted);max-width:28ch}
+.lt{padding-bottom:clamp(60px,8vw,120px)}
+/* korttien ilmestyminen */
+.lt-w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .1em;margin-bottom:-.1em}
+.lt-w>i{display:inline-block;font-style:normal;transition:transform 1.1s var(--ease-reveal)}
+.lt.pre .lt-w>i{transform:translateY(110%)}
+.lt-card{transition:opacity .9s var(--ease-std),transform 1.2s var(--ease-reveal)}
+.lt-card>div{transition:opacity .8s var(--ease-std),transform 1s var(--ease-reveal)}
+.lt-img{transition:transform 1.4s var(--ease-reveal),opacity .9s var(--ease-std)}
+.lt.pre .lt-card{opacity:0;transform:translateY(70px) scale(.94)}
+.lt.pre .lt-card>div{opacity:0;transform:translateY(14px)}
+.lt.pre .lt-img{opacity:0;transform:translateY(38%) rotate(-4deg)}
+.lt-lead{transition:opacity 1s var(--ease-std) 1.1s,transform 1.1s var(--ease-reveal) 1.1s}
+.lt.pre .lt-lead{opacity:0;transform:translateY(16px)}
+.lt-card:nth-child(1){transition-delay:0.35s}.lt-card:nth-child(1)>div{transition-delay:0.55s}.lt-card:nth-child(1) .lt-img{transition-delay:0.65s}
+.lt-card:nth-child(2){transition-delay:0.45s}.lt-card:nth-child(2)>div{transition-delay:0.65s}.lt-card:nth-child(2) .lt-img{transition-delay:0.75s}
+.lt-card:nth-child(3){transition-delay:0.55s}.lt-card:nth-child(3)>div{transition-delay:0.75s}.lt-card:nth-child(3) .lt-img{transition-delay:0.85s}
+.lt-card:nth-child(4){transition-delay:0.65s}.lt-card:nth-child(4)>div{transition-delay:0.85s}.lt-card:nth-child(4) .lt-img{transition-delay:0.95s}
+.lt-card:nth-child(5){transition-delay:0.75s}.lt-card:nth-child(5)>div{transition-delay:0.95s}.lt-card:nth-child(5) .lt-img{transition-delay:1.05s}
+@media(max-width:1100px){.lt-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:800px){.lt-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.lt-grid{grid-template-columns:1fr}.lt-card{aspect-ratio:auto;height:360px}}
+@media(prefers-reduced-motion:reduce){.lt.pre *{opacity:1!important;transform:none!important}}
+
+/* siirtyma vanhasta jarjestelmasta: punainen pohja, askeleet palkkeina, apukadet molemmin puolin */
+.sr{position:relative;overflow:hidden;background:var(--red);color:var(--on-red);padding:clamp(80px,9vw,130px) 0 clamp(90px,10vw,150px)}
+.sr-deco{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.sr-deco .ln{fill:none;stroke:#C5D0D3;stroke-width:30;stroke-linecap:round;stroke-linejoin:round}
+.sr-in{position:relative;z-index:1;max-width:620px;margin:0 auto;padding-inline:var(--side);text-align:center}
+.sr-in .disp{color:var(--on-red);margin:0 auto}
+.sr-lead{margin:clamp(16px,2vw,22px) auto 0;max-width:40ch;font-size:clamp(16px,1.6vw,18px);line-height:1.5;color:rgb(236 236 220 / .85)}
+.sr-steps{list-style:none;margin:clamp(32px,4vw,48px) 0 0;padding:0;display:flex;flex-direction:column;gap:6px;text-align:left}
+.sr-steps li{background:var(--on-red);color:var(--ink);border-radius:26px;padding:22px 28px;font-size:17px;font-weight:400;line-height:1.45}
+.sr-steps li strong{font-weight:600}
+.sr-cta{display:flex;align-items:center;justify-content:center;margin-top:6px;height:64px;border-radius:26px;background:var(--ink);color:var(--on-red);font:600 16px/1 var(--fb);text-decoration:none;transition:opacity 200ms cubic-bezier(0,0,.2,1)}
+.sr-cta:hover{opacity:.9}
+@media(max-width:900px){.sr-deco{display:none}}
+.sr.sr-anim .ln{stroke-dasharray:var(--l);stroke-dashoffset:var(--l)}
+.sr.sr-anim .glove{opacity:0;transform:scale(.15);transform-box:fill-box;transform-origin:left center}
+.sr.sr-go .ln{stroke-dashoffset:0;transition:stroke-dashoffset 2.4s cubic-bezier(.45,0,.55,1)}
+.sr.sr-go .glove{opacity:1;transform:none;transition:opacity .5s ease 2.1s,transform 1.4s cubic-bezier(.45,0,.3,1) 2.1s}
+
+@media(max-width:820px){
+  .rm-line{display:none}
+  .rm-grid{grid-template-columns:1fr;row-gap:0}
+  .rm-node{grid-area:auto!important;flex-direction:row;align-items:flex-start;gap:16px;text-align:left;padding:clamp(18px,4vw,24px) 0;border-top:1px solid rgba(62,37,32,.16)}
+  .rm-node:first-child{border-top:0}
+  .rm-dot{margin-top:4px;align-self:flex-start}
+  .rm-dot::after{display:none}
+  .rm-node.n1 .rm-dot{width:14px;height:14px}
+  .rm-t p{max-width:none}
+}
+/* bento: kassatapahtuma (Figman asettelu 1440 x 1055, skaalautuu leveyden mukaan) */
+.bento-sec{padding:0}
+.bk-stage{position:relative;max-width:none;margin:0 auto;overflow:hidden;--st-bg:var(--line);--wm:#3E2520;--c-card:var(--surface);--c-ink:#3E2520;--c-muted:#6E5E56;--c-line:#DCDBC6;--c-pt:#ECECDC;background:var(--st-bg);transition:background-color .3s var(--ease-std)}
+.bk-stage[data-t="2"]{--st-bg:#C5D0D3;--wm:#ECECDC}
+.bk-stage[data-t="3"]{--st-bg:#3E2520;--wm:#ECECDC;--c-card:#4B302A;--c-ink:#ECECDC;--c-muted:#CDBFB2;--c-line:#5E433B;--c-pt:#3E2520}
+.bento-cart,.bento-chip{transition:background-color .6s var(--ease-std),color .6s var(--ease-std)}
+.bento-cart>*,.bento-chip>*{transition:opacity .28s var(--ease-std)}
+.bk-stage.sw .bento-cart>*,.bk-stage.sw .bento-chip>*:not(.ch-dots){opacity:0}
+.bk-in{position:relative;width:1440px;height:1055px;transform-origin:0 0}
+.bk-in>*{position:absolute}
+.bk-wm{width:1308px;height:366px;pointer-events:none;user-select:none;background-color:var(--wm);-webkit-mask:url(assets/logot/ReSella_sanamerkki_matala_ruskea.svg) center/contain no-repeat;mask:url(assets/logot/ReSella_sanamerkki_matala_ruskea.svg) center/contain no-repeat;transition:background-color .6s var(--ease-std)}
+.bk-wm.w1{left:756px;top:-45px}
+.bk-wm.w2{left:-679px;top:698px}
+.bk-h{font-family:var(--fd);font-weight:600;letter-spacing:-.03em;line-height:1.12;color:var(--c-ink);margin:0;width:940px;transition:color .3s var(--ease-std)}
+.bk-h.h1{left:-369px;top:160px;font-size:67px;text-align:center}
+.bk-h.h2{left:469px;top:784px;width:1081px;font-size:52px;line-height:76px;text-align:right}
+.bk-stage.pre .bk-h{opacity:0;transform:translateY(30px)}
+.bk-stage.go .bk-h{transition:opacity 1s var(--ease-reveal),transform 1.2s var(--ease-reveal)}
+.bk-stage.go .bk-h.h2{transition-delay:.9s}
+.bk-img{left:62px;top:310px;width:443px;height:325px;border-radius:122px;overflow:hidden}
+.bk-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .3s var(--ease-std)}
+.bk-img img.on{opacity:1}
+.bk-phone{left:1010px;top:155px;width:276px;aspect-ratio:900/1849}
+.bk-phone img{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .6s var(--ease-std)}
+.bk-phone img.on{opacity:1}
+.bento-cart{left:485px;top:211px;width:415px;--cp:28px;background:var(--c-card);color:var(--c-ink);border-radius:20px;padding:var(--cp);display:flex;flex-direction:column;gap:14px}
+.bc-top{display:flex;justify-content:space-between;align-items:center;font-size:15px}
+.bc-top b{font-family:var(--fd);font-weight:600;font-size:22px}
+.bc-top span{color:var(--c-muted)}
+.bc-rows{display:flex;flex-direction:column;gap:11px;padding:14px var(--cp);margin-inline:calc(var(--cp) * -1);border-top:1px solid var(--c-line);border-bottom:1px solid var(--c-line)}
+.bc-row{display:flex;justify-content:space-between;font-size:16px;font-weight:500}
+.bc-total{display:flex;justify-content:space-between;align-items:baseline}
+.bc-total span{font-weight:500}
+.bc-total b{font-family:var(--fd);font-weight:600;font-size:30px}
+.bento-chip{background:var(--c-card);border-radius:20px;padding:20px;display:flex;flex-direction:column;z-index:1}
+.bento-chip small{font-size:12px;line-height:1.3;color:var(--c-muted)}
+.bento-chip b{font-family:var(--fd);font-weight:600;color:var(--c-ink);line-height:1}
+.chip-a{left:-65px;top:278px;width:187px;height:154px;justify-content:space-between}
+.chip-a b.n{font-size:32px;letter-spacing:-.02em;margin-top:auto;margin-bottom:6px}
+.ch-dots{display:flex;gap:4px}
+.ch-dots i{width:12px;height:3px;border-radius:2px;background:var(--c-line);transition:width .45s var(--ease-std),background-color .45s var(--ease-std)}
+.ch-dots i.on{width:18px;background:var(--c-ink)}
+.chip-b{left:408px;top:573px;width:270px;gap:10px}
+.ch-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ch-pill{font-size:11px;font-weight:500;line-height:1;padding:6px 10px;border-radius:999px;background:var(--c-ink);color:var(--c-pt);transition:background-color .6s var(--ease-std),color .6s var(--ease-std)}
+.chip-b b.t{font-size:26px;letter-spacing:-.02em}
+@media(max-width:860px){
+  .bk-stage{border-radius:0}
+  .bk-in{width:auto;height:auto!important;transform:none!important;display:grid;gap:24px;padding:48px 20px;grid-template-areas:"h1" "cart" "shot" "phone" "h2"}
+  .bk-in>*{position:relative;left:auto;top:auto}
+  .bk-wm{display:none}
+  .bk-h{left:auto!important;top:auto!important;width:auto!important;font-size:clamp(28px,8vw,40px)!important;text-align:left!important}
+  .bk-h.h1{grid-area:h1}.bk-h.h2{grid-area:h2;text-align:right!important}
+  .bento-cart{grid-area:cart;width:100%;max-width:420px;justify-self:center;--cp:22px}
+  .bk-img{grid-area:shot;width:100%;height:auto;aspect-ratio:5/4;border-radius:30%;margin:56px 0}
+  .chip-a{grid-area:shot;align-self:start;justify-self:start;width:150px;height:auto;gap:14px;padding:14px;z-index:2}
+  .chip-a b.n{font-size:24px;margin:0}
+  .chip-a small{display:none}
+  .chip-b{grid-area:shot;align-self:end;justify-self:end;width:210px;padding:14px;gap:6px;z-index:2}
+  .chip-b b.t{font-size:20px}
+  .chip-b>small{display:none}
+  .bk-phone{grid-area:phone;justify-self:center;width:min(300px,80%);position:relative}
+}
+/* kassaosion tuloanimaatio */
+.bk-stage.pre .bk-wm,.bk-stage.pre .bk-img,.bk-stage.pre .bk-phone,.bk-stage.pre .bento-cart,.bk-stage.pre .bento-chip{opacity:0}
+.bk-stage.pre .bk-wm.w1{transform:translateX(18%)}
+.bk-stage.pre .bk-wm.w2{transform:translateX(-18%)}
+.bk-stage.pre .bk-img{transform:scale(.86)}
+.bk-stage.pre .bk-phone{transform:translateY(90px)}
+.bk-stage.pre .bento-cart,.bk-stage.pre .bento-chip{transform:translateY(46px)}
+.bk-stage.go .bk-wm,.bk-stage.go .bk-img,.bk-stage.go .bk-phone,.bk-stage.go .bento-cart,.bk-stage.go .bento-chip{transition:opacity 1s var(--ease-reveal),transform 1.2s var(--ease-reveal),background-color .6s var(--ease-std),color .6s var(--ease-std)}
+.bk-stage.go .bk-img{transition-delay:.1s}
+.bk-stage.go .bk-phone{transition-delay:.25s}
+.bk-stage.go .chip-a{transition-delay:.45s}
+.bk-stage.go .chip-b{transition-delay:.6s}
+.bk-stage.go .bento-cart{transition-delay:.75s}
+/* luotettavuus */
+.tcol h3{font-family:var(--fd);font-weight:500;font-size:19px;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.tcol h3 .ico{width:24px;height:24px;color:var(--blue-deep)}
+.tlist{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:11px}
+.tlist li{display:flex;gap:10px;font-size:15px;font-weight:500;color:var(--ink-muted);line-height:1.45;align-items:flex-start}
+.tlist .mk{color:var(--olive);flex:none;margin-top:2px}
+.tlist .mk .ico{width:16px;height:16px}
+/* tarina */
+.story-bg{position:relative;overflow:hidden;min-height:clamp(340px,42vw,540px);display:flex;align-items:center}
+.story-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.story-content{position:relative;z-index:2;max-width:760px;margin-inline:auto;text-align:center}
+.story-content .disp{color:#F6F6EE;text-shadow:0 2px 30px rgba(0,0,0,.55),0 1px 4px rgba(0,0,0,.5)}
+.bios{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px);margin-top:clamp(26px,3.4vw,44px);text-align:left}
+.bio b{font-weight:600;display:block;margin-bottom:3px}
+.bio p{font-size:15px;font-weight:500;color:var(--ink-muted);line-height:1.5}
+.story-content .note{margin-top:clamp(18px,2.4vw,28px);font-size:15px;font-weight:500;color:var(--ink-muted)}
+@media(max-width:640px){.bios{grid-template-columns:1fr;gap:18px;text-align:center}}
+/* cta band */
+.ctaband{background:var(--bg);color:var(--ink);border-radius:var(--radius-card);padding:clamp(40px,6vw,76px) clamp(24px,4vw,56px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.ctaband .disp{color:var(--ink)}
+.ctaband .sub{color:var(--ink-muted);max-width:50ch}
+.ctaband .cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.btn.red{background:var(--red);color:var(--on-red);border-color:var(--red)}
+.btn.red:hover{background:#A6341F}
+.mailrow{margin-top:14px;font-size:14px;color:var(--ink-muted)}
+.mailrow a{color:var(--ink);text-decoration:underline;text-underline-offset:.18em}
+.btn.l{--h:46px;--px:26px;--fs:17px}
+/* loppu-cta: nayttava brandivarinen panaani */
+.cta-final{background:var(--red);color:var(--on-red);position:relative;overflow:hidden;gap:14px;padding:clamp(56px,8vw,108px) clamp(24px,5vw,72px);box-shadow:0 34px 90px rgba(0,0,0,.36)}
+.cta-final .disp{color:var(--on-red);max-width:16ch}
+.cta-final .sub{color:rgba(236,236,220,.84);max-width:46ch}
+.cta-mark{width:clamp(54px,6vw,78px);height:auto;margin-bottom:6px}
+.cta-final .cta-row{margin-top:14px}
+.cta-final .btn.cream{background:var(--bg);color:var(--ink);border-color:var(--bg)}
+.cta-final .btn.cream:hover{background:var(--blue);color:var(--ink);border-color:var(--blue)}
+.cta-final .mailrow{margin-top:18px;color:rgba(236,236,220,.82)}
+.cta-final .mailrow a{color:var(--on-red);text-decoration-color:rgba(236,236,220,.6)}
+.pilot-points{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+/* faq (giveasy: surface-rivit, 40px ympyra plus->rasti, grid-rows avaus) */
+#faq{padding-top:clamp(100px,10vw,140px);padding-bottom:clamp(120px,17vw,250px)}
+.faq-panel{max-width:1100px;margin-inline:auto;background:var(--blue);border-radius:36px;padding:clamp(44px,6vw,76px) clamp(14px,4vw,48px) clamp(36px,5vw,56px)}
+.faq-panel .shead{margin-bottom:clamp(28px,4vw,44px)}
+.acc{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;gap:8px}
+.acc-item{background:rgb(246 246 238 / .55);border-radius:16px;transition:background-color var(--dur-base) var(--ease-std)}
+.acc-item:hover,.acc-item:has(.acc-q[aria-expanded="true"]){background:var(--surface)}
+.acc-q{width:100%;background:none;border:0;cursor:pointer;display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;min-height:64px;padding:12px 12px 12px 22px;font-family:var(--fd);font-weight:600;font-size:16px;line-height:1.3;color:var(--ink);text-align:left}
+.acc-q i{width:36px;height:36px;border-radius:999px;position:relative;flex:none;background:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);transition:background-color var(--dur-base) var(--ease-std)}
+.acc-q i::before,.acc-q i::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1.6px;background:var(--bg);border-radius:2px;transform:translate(-50%,-50%);transition:transform var(--dur-base) var(--ease-std),background-color var(--dur-base) var(--ease-std)}
+.acc-q i::after{transform:translate(-50%,-50%) rotate(90deg)}
+.acc-q[aria-expanded="true"] i{background:transparent}
+.acc-q[aria-expanded="true"] i::before{background:var(--ink);transform:translate(-50%,-50%) rotate(-45deg)}
+.acc-q[aria-expanded="true"] i::after{background:var(--ink);transform:translate(-50%,-50%) rotate(45deg)}
+.acc-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur-base) var(--ease-std)}
+.acc-q[aria-expanded="true"]+.acc-a{grid-template-rows:1fr}
+.acc-a-in{overflow:hidden}
+.acc-go{margin-top:12px!important}
+.acc-go a{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--ink);text-underline-offset:3px}
+.acc-go svg{width:14px;height:14px}
+.acc-a p{margin:0;padding:0 62px 22px 22px;font-size:15px;font-weight:400;line-height:1.55;color:var(--ink-muted);max-width:62ch}
+.faq-more{margin-top:clamp(28px,4vw,40px);text-align:center;font-size:15px;color:var(--ink-muted)}
+.faq-more a{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:.2em}
+.faq-more a svg{width:14px;height:14px;transition:transform 260ms cubic-bezier(0,0,.2,1)}
+.faq-more a:hover svg{transform:translateX(3px)}
+@media(max-width:620px){.faq-panel{border-radius:24px}.acc-q{gap:10px;min-height:58px;padding:10px 10px 10px 16px;font-size:15px}.acc-a p{padding:0 16px 18px 16px}}
+@media(prefers-reduced-motion:reduce){.acc-q i,.acc-q i::before,.acc-q i::after,.acc-a,.acc-item{transition:none}}
+/* hinnoittelu */
+.price{display:grid;grid-template-columns:repeat(2,minmax(0,460px));gap:20px;justify-content:center;max-width:940px;margin-inline:auto;align-items:stretch}
+.pcard{background:var(--surface);border-radius:var(--radius-lg);padding:clamp(26px,3.2vw,40px);display:flex;flex-direction:column}
+.pcard h3{font-family:var(--fd);font-weight:600;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.02em;margin:0 0 10px}
+.pcard .lead{color:var(--ink-muted);margin:0 0 22px;font-size:16px;line-height:1.5}
+.pcard ul{list-style:none;margin:auto 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.pcard li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.45}
+.pcard li .mk{flex:none;margin-top:1px;width:20px;height:20px;color:var(--olive)}
+.pcard .pct{margin:18px 0 0;font-size:14px;color:var(--ink-muted)}
+.pcard.hl{background:var(--red);color:var(--on-red)}
+.pcard.hl h3{color:var(--on-red)}
+.pcard.hl .lead{color:rgba(236,236,220,.8)}
+.price-field{display:block;margin:0 0 22px}
+.price-lbl{display:block;font-size:14px;font-weight:500;color:rgba(236,236,220,.85);margin-bottom:8px}
+.price-input{display:flex;align-items:center;gap:8px;background:rgba(236,236,220,.14);border-radius:10px;padding:0 14px;height:48px}
+.price-input input{flex:1;min-width:0;width:100%;background:none;border:0;outline:none;color:var(--on-red);font:600 20px/1 var(--fb);letter-spacing:-.01em}
+.price-input input::placeholder{color:rgba(236,236,220,.5)}
+.price-input .suf{font-size:14px;font-weight:500;color:rgba(236,236,220,.8);white-space:nowrap}
+.price-input:focus-within{outline:2px solid var(--on-red);outline-offset:1px}
+.pcard.hl .big{font-family:var(--fd);font-weight:600;font-size:clamp(38px,5vw,56px);line-height:1;letter-spacing:-.02em;color:var(--on-red)}
+.pcard.hl .perkk{font-size:16px;font-weight:500;margin-left:6px}
+.pcard.hl .salesline{margin:12px 0 0;font-size:15px;color:rgba(236,236,220,.85);line-height:1.45}
+.pcard.hl .exnote{margin:14px 0 22px;font-size:14px;color:rgba(236,236,220,.7);line-height:1.4}
+.pcard.hl .btn{margin-top:auto;background:var(--bg);color:var(--ink);border-color:var(--bg);width:100%;min-width:0}
+.pcard.hl .btn:hover{background:var(--blue);color:var(--ink);border-color:var(--blue)}
+.pcard.hl .extag{align-self:flex-start;border:1px solid rgba(236,236,220,.5);color:var(--on-red);margin-bottom:16px}
+@media(max-width:720px){.price{grid-template-columns:1fr}}
+/* asiakastarinoiden kaarikaruselli */
+.rotary{margin-top:clamp(16px,2vw,28px);position:relative;overflow:hidden;padding:clamp(76px,9vw,116px) 0 clamp(40px,6vw,80px)}
+.rotary{--rh:clamp(340px,min(39vw,calc(58vh * var(--vz,1))),450px);--rw:min(clamp(260px,29vw,350px),calc(var(--rh) * .8))}
+.rotary-stage{position:relative;height:var(--rh);margin-inline:auto}
+.rcard{position:absolute;left:50%;top:0;width:var(--rw);height:var(--rh);margin-left:calc(var(--rw) / -2);background:var(--cb);color:var(--ci);border-radius:24px;overflow:hidden;transform-origin:50% 50%;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s var(--ease-std);display:flex;flex-direction:column;will-change:transform,opacity}
+.rc-media{flex:1 1 0%;min-height:0;overflow:hidden;position:relative}
+.rc-media--ph{background:#C5D0D3}
+.rc-media--ph img{object-fit:cover!important;object-position:50% 0!important;width:54%!important;height:auto!important;left:23%!important;top:8%!important;inset:auto!important;filter:drop-shadow(0 18px 28px rgba(62,37,32,.28))}
+.rc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.rc-body{flex:none;display:flex;flex-direction:column;gap:9px;padding:clamp(18px,1.9vw,24px) clamp(18px,1.9vw,24px) 0}
+.rc-body h3{font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,24px);letter-spacing:-.01em;line-height:1.08;margin:0;color:var(--ci)}
+.rc-body p{font-size:15px;font-weight:500;line-height:1.46;color:var(--ci);opacity:.8;margin:0}
+.rc-btn{flex:none;margin:clamp(12px,1.5vw,18px) clamp(18px,1.9vw,24px) clamp(16px,1.8vw,24px);text-align:center;background:var(--ci);color:var(--cb);border-radius:999px;height:40px;padding:0 20px;display:flex;align-items:center;justify-content:center;font:600 15px/1 var(--fb);text-decoration:none;transition:opacity var(--dur-fast) var(--ease-out)}
+.rc-btn:hover{opacity:.88}
+button.rc-btn{border:0;cursor:pointer}
+.rc-more{position:absolute;inset:0;z-index:4;background:var(--cb);color:var(--ci);display:flex;flex-direction:column;gap:12px;padding:clamp(22px,2.4vw,30px) clamp(18px,1.9vw,24px) 0;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s var(--ease-out),transform .3s var(--ease-out),visibility 0s .3s}
+.rcard.open .rc-more{opacity:1;visibility:visible;transform:none;transition:opacity .3s var(--ease-out),transform .3s var(--ease-out),visibility 0s}
+.rc-more h3{font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,24px);letter-spacing:-.01em;line-height:1.08;margin:0 0 4px}
+.rc-more p{font-size:15px;font-weight:500;line-height:1.5;margin:0}
+.rc-more a{color:inherit;text-underline-offset:3px}
+.rc-more .rc-close{margin:auto 0 clamp(16px,1.8vw,24px)}
+.rot-head{margin-bottom:clamp(8px,1vw,16px)}
+#tarinat{padding-top:clamp(110px,15vw,190px)}
+.rotary-ctrl{position:relative;z-index:5;display:flex;align-items:center;justify-content:center;gap:11px;margin-top:clamp(24px,2.2vw,30px)}
+.rot-arrow{width:34px;height:34px;background:none;border:0;color:var(--ink);display:grid;place-items:center;cursor:pointer;flex:none;transition:opacity var(--dur-fast) var(--ease-std)}
+.rot-arrow:hover{opacity:.6}
+.rot-arrow .ico{width:26px;height:26px;stroke-width:2.6}
+.rot-arrow:disabled{opacity:.35;cursor:default}
+.rot-dots{display:flex;gap:8px}
+.rot-dots button{width:26px;height:4px;border:0;border-radius:10px;background:var(--line);cursor:pointer;padding:0;transition:background-color var(--dur-fast) var(--ease-std),width var(--dur-base) var(--ease-std)}
+.rot-dots button[aria-current="true"]{background:var(--ink);width:40px}
+@media(max-width:620px){.rot-dots button{width:18px}.rot-dots button[aria-current="true"]{width:30px}}
+/* cookie */
+.cookie{position:fixed;left:24px;bottom:24px;z-index:96;width:380px;max-width:calc(100% - 32px);box-sizing:border-box;background:var(--ink);color:var(--bg);border-radius:20px;padding:20px 20px 20px 22px;display:flex;flex-direction:column;gap:14px;transition:opacity .3s var(--ease-std),transform .3s var(--ease-std)}
+.cookie-h{display:flex;align-items:center;justify-content:space-between}
+.cookie-h strong{font:600 18px/1.2 "Inter Tight",Arial,sans-serif;letter-spacing:-.01em}
+.cookie-x{width:32px;height:32px;margin:-6px -6px -6px 0;border:0;background:none;color:#CDBFB2;display:grid;place-items:center;cursor:pointer;border-radius:999px}
+.cookie-x:hover{color:var(--bg)}
+.cookie-x svg{width:20px;height:20px}
+.cookie p a{color:var(--bg);text-underline-offset:3px}
+.cookie p{margin:0;font-size:15px;line-height:1.45;color:#CDBFB2}
+.cookie .btn{align-self:flex-start;background:var(--bg);color:var(--ink)}
+.cookie .btn:hover{background:var(--blue);color:var(--ink)}
+.cookie[hidden]{display:none}
+/* giveasy: otsikot lihavia (600) */
+.card h3,.caro-card.c-color h3,.caro-card.c-img .ci-cap h3,.tcol h3,.tl h4,.foot-intro .head,.ph-cap h4,.bio b,.dash-top b{font-weight:600;letter-spacing:-.01em}
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(60px);transition:opacity 1s var(--ease-reveal),transform 1s var(--ease-reveal)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+/* maskottikohtaukset (mascot-scene.js) */
+.scene{position:relative;overflow:clip}
+.scene--roll{height:500px;background:var(--bg);margin-top:40px}
+.scene--pop{height:640px;background:transparent;position:relative;z-index:2}
+.scene__bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.scene--roll .scene__ground{fill:#3E2520}
+.scene--pop .scene__ground{fill:#3E2520}
+.scene__slot{position:absolute;left:0;top:0;opacity:0;will-change:transform;line-height:0;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;z-index:2}
+.scene--pop .scene__slot{opacity:1;cursor:default;touch-action:auto;z-index:3}
+.scene--pop .scene__bg{z-index:2}
+.scene__slot.is-grabbed{cursor:grabbing}
+.scene__slot svg{width:100%;height:100%;overflow:visible}
+.scene__hint{position:absolute;left:50%;top:24px;transform:translateX(-50%);font-size:14px;color:var(--ink-muted);white-space:nowrap;z-index:3}
+@media(max-width:1200px){.scene--roll{height:440px}}
+@media(max-width:640px){.scene__hint{top:12px}.scene--roll{height:360px}.scene--pop{height:420px}}
+
+@media(max-width:880px){
+  .grid.c3,.grid.c4{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:repeat(2,1fr)}
+  .nums{grid-template-columns:repeat(2,1fr)}
+  .tl{grid-template-columns:repeat(2,1fr);row-gap:30px}
+  .tl .node::after{display:none}
+  .story{grid-template-columns:1fr}
+  .story img{max-height:340px}
+}
+@media(max-width:620px){
+  .btn{--h:38px;--fs:15px}
+  .hero-row{flex-direction:column;align-items:flex-start;gap:26px}
+  .hero-title{margin-bottom:0}
+  .hero-right{align-items:flex-start;text-align:left;max-width:none}
+  .hero-cta{justify-content:flex-start;flex-wrap:wrap}
+  .foot-top{flex-direction:column;gap:28px}
+  .foot-cols{gap:48px}
+  .foot .wordmark{width:calc((100% - 32px) * 0.72);margin-top:16px;margin-bottom:8px}
+  .grid.c2,.grid.c3,.grid.c4{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .nums{grid-template-columns:repeat(2,1fr)}
+  .phones{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;max-width:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none}
+  .phones::-webkit-scrollbar{display:none}
+  .phone-item{scroll-snap-align:start}
+  .tl{grid-template-columns:1fr;row-gap:26px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.hero video{display:none}}
+/* ennen ja nyt: pädi ja vertailutaulukko */
+section.en{padding-block:0}
+.en-stage{position:relative;background:var(--blue);height:clamp(340px,38vw,540px);overflow:hidden}
+.en-pad{position:absolute;left:50%;bottom:-140px;width:min(780px,78vw);aspect-ratio:4/3;transform:translateX(-50%);
+  background:var(--brown-hover);border-radius:clamp(26px,3.2vw,44px);padding:clamp(10px,1.3vw,18px);}
+.en-pad::before{content:"";position:absolute;top:50%;left:clamp(4px,.5vw,7px);width:clamp(4px,.45vw,6px);height:clamp(4px,.45vw,6px);border-radius:50%;background:#4B302A;transform:translateY(-50%)}
+.en-screen{height:100%;border-radius:clamp(16px,2vw,28px);background:var(--surface);overflow:hidden;display:grid;grid-template-columns:1fr 34%;}
+.enu-main{padding:clamp(14px,2.2vw,30px);display:flex;flex-direction:column;gap:clamp(8px,1.2vw,16px);min-width:0}
+.enu-top{display:flex;align-items:center;justify-content:space-between}
+.enu-top img{height:clamp(14px,1.8vw,24px)}
+.enu-top span{font-size:clamp(9px,1vw,13px);font-weight:600;color:var(--ink-muted)}
+.enu-h{font-size:clamp(16px,2.3vw,30px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.enu-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(6px,.8vw,10px)}
+.enu-stat{background:var(--surface);border-radius:clamp(8px,.9vw,12px);padding:clamp(8px,1vw,14px)}
+.enu-stat small{display:block;font-size:clamp(8px,.85vw,11px);font-weight:500;color:var(--ink-muted)}
+.enu-stat b{display:block;white-space:nowrap;margin-top:4px;font-size:clamp(13px,1.7vw,22px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.enu-list{display:flex;flex-direction:column;gap:clamp(5px,.6vw,8px)}
+.enu-row{display:grid;grid-template-columns:clamp(22px,2.6vw,34px) 1fr auto;gap:clamp(8px,1vw,12px);align-items:center;background:var(--surface);border-radius:clamp(8px,.9vw,12px);padding:clamp(5px,.6vw,8px)}
+.enu-row .th{aspect-ratio:1;border-radius:clamp(5px,.6vw,8px)}
+.enu-row b{font-size:clamp(9px,1vw,13px);font-weight:600;display:block}
+.enu-row small{font-size:clamp(8px,.85vw,11px);color:var(--ink-muted);font-weight:500}
+.enu-row .p{font-size:clamp(9px,1vw,13px);font-weight:700;font-variant-numeric:tabular-nums;padding-right:6px}
+.enu-side{background:var(--bg);padding:clamp(14px,2.2vw,30px) clamp(12px,1.6vw,22px);display:flex;flex-direction:column;gap:clamp(8px,1vw,12px)}
+.enu-side small{font-size:clamp(8px,.9vw,12px);font-weight:600;color:var(--ink-muted)}
+.enu-big{font-size:clamp(20px,3vw,40px);font-weight:700;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.enu-bar{height:clamp(5px,.6vw,8px);border-radius:999px;background:var(--line);overflow:hidden}
+.enu-bar i{display:block;height:100%;width:72%;background:var(--red);border-radius:inherit}
+.enu-btn{margin-top:auto;margin-bottom:clamp(150px,18vw,190px);height:clamp(28px,3.4vw,46px);border-radius:999px;background:var(--red);color:var(--on-red);display:grid;place-items:center;font-size:clamp(10px,1.15vw,15px);font-weight:600}
+.en-body{max-width:1300px;margin:0 auto;padding:clamp(60px,8vw,110px) var(--gutter) clamp(80px,10vw,140px)}
+.en-head{display:grid;grid-template-columns:1fr minmax(0,300px);gap:40px;align-items:end;margin-bottom:clamp(48px,6vw,80px)}
+.en-head h2{font-size:clamp(48px,7.6vw,110px);font-weight:600;letter-spacing:-.04em;line-height:.92}
+.en-head p{font-size:18px;font-weight:500;line-height:1.35;color:var(--ink-muted);padding-bottom:10px}
+.en-cmp{display:grid;grid-template-columns:minmax(150px,.75fr) 1.15fr 1fr;position:relative}
+.en-cmp > *{position:relative;z-index:1}
+.en-ch.hl,.en-cy{background:var(--surface)}
+.en-ch.hl{border-radius:20px 20px 0 0}
+.en-cy.last{border-radius:0 0 20px 20px}
+.en-ch{padding:34px 28px 22px;font-size:20px;font-weight:600;letter-spacing:-.01em}
+.en-ch.hl{display:flex;align-items:center}
+.en-ch.hl img{height:26px}
+.en-ch.mut{color:var(--ink-muted);font-weight:500;font-size:18px;display:flex;align-items:flex-end}
+.en-cl,.en-cy,.en-cn{padding:22px 28px;border-top:1px solid var(--line);font-size:17px;line-height:1.35;display:flex;align-items:center}
+.en-cmp > .en-ch{border-top:0}
+.en-cl{font-weight:600}
+.en-cy{font-weight:600;gap:12px}
+.en-cy svg{flex:none;width:20px;height:20px;fill:none;stroke:var(--red);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.en-cn{color:var(--ink-muted);font-weight:500}
+.en-cmp .last{padding-bottom:34px}
+.en-note{margin-top:24px;font-size:14px;font-weight:500;color:var(--ink-muted)}
+.en-rv{opacity:0;transform:translateY(60px);transition:opacity 1s var(--ease-reveal),transform 1s var(--ease-reveal)}
+.en-rv.in{opacity:1;transform:none}
+.en-pad.en-rv{transform:translate(-50%,120px)}
+.en-pad.en-rv.in{transform:translate(-50%,0)}
+@media (max-width:760px){
+  .en-stage{height:290px}
+  .en-pad{width:92vw;bottom:-90px}
+  .en-head{grid-template-columns:1fr;gap:16px}
+  .en-head p{font-size:16px;padding:0}
+  .en-cmp{grid-template-columns:1fr}
+  .en-cmp .en-ch{display:none}
+  .en-cn{display:block}
+  .en-cmp .last{padding:0}
+  .en-row{display:grid;gap:6px;padding:18px 20px;border-top:1px solid var(--line)}
+  .en-cl,.en-cy,.en-cn{padding:0;border:0;font-size:16px;background:none}
+  .en-cl{font-size:14px;color:var(--ink-muted);font-weight:600}
+  .en-cn::before{content:"Ennen: ";font-weight:600}
+  .en-rows{background:var(--surface);border-radius:15px;overflow:hidden}
+  .en-rows .en-row:first-child{border-top:0}
+}
+@media (min-width:761px){ .en-row,.en-rows{display:contents} }
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .en-rv{opacity:1;transform:none}.en-pad.en-rv{transform:translateX(-50%)}
+}
+
+/* ===== perustajat: Kirpputorista koodiin (vaihtuvat kortit, varit vaihtuvat henkilon mukaan) ===== */
+section.fd{background:var(--blue)}
+.fd{--fl:#3E2520;--fr:#C24029;--fs:#D09C4C;--fq:#D09C4C;--ft:#ECECDC}
+.fd[data-p="1"]{--fl:#3A4961;--fr:#8D8B4C;--fs:#C5D0D3;--fq:#C5D0D3}
+.fd-head{margin:0 0 clamp(40px,6vw,96px)}
+.fd-head .disp{text-align:center;max-width:none}
+.fd-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.fd-quote{position:relative;background:var(--fl);color:var(--ft);border-radius:var(--radius-lg);padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;min-height:clamp(420px,36vw,520px);transition:background-color 460ms cubic-bezier(0,0,.2,1)}
+.fd-bars{display:flex;gap:10px}
+.fd-bar{flex:1;height:4px;border:0;padding:0;border-radius:4px;background:rgb(236 236 220 / .28);cursor:pointer;position:relative;overflow:hidden}
+.fd-bar i{position:absolute;inset:0;width:0;background:var(--ft);border-radius:inherit}
+.fd-bar.done i{width:100%}
+.fd-text{margin:auto 0;padding:clamp(32px,4vw,56px) 0;font-size:clamp(20px,2vw,26px);font-weight:500;line-height:1.35;letter-spacing:-.01em;max-width:30ch}
+.fd-who{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.fd-who b{display:block;font-size:16px;font-weight:600}
+.fd-who span{display:block;font-size:14px;opacity:.6;margin-top:4px}
+.fd-mark{width:clamp(54px,6vw,84px);height:auto;color:var(--fq);transition:color 460ms cubic-bezier(0,0,.2,1)}
+.fd-card{position:relative;overflow:hidden;background:var(--fr);border-radius:var(--radius-lg);display:flex;flex-direction:column;justify-content:space-between;padding:12px;transition:background-color 460ms cubic-bezier(0,0,.2,1)}
+.fd-photos{position:absolute;inset:0;pointer-events:none}
+.fd-photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 460ms cubic-bezier(0,0,.2,1)}
+.fd-photos img.on{opacity:1}
+.fd-pill{position:relative;align-self:flex-start;display:inline-flex;align-items:center;background:var(--surface);color:var(--ink);border-radius:999px;padding:10px 18px;font-size:15px;font-weight:600;margin:8px}
+.fd-table{position:relative;background:var(--surface);color:var(--ink);border-radius:14px;padding:22px;font-size:17px;font-weight:500;line-height:1.45;margin-top:clamp(160px,16vw,230px)}
+.fd-row{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;padding:15px 0;border-top:1px solid var(--line);align-items:baseline}
+.fd-row:first-child{border-top:0}
+.fd-row dt{font-size:14px;opacity:.6}
+.fd-row dd{margin:0;font-size:16px;font-weight:600}
+.fd-swap{transition:opacity 260ms cubic-bezier(0,0,.2,1)}
+.fd-swap.out{opacity:0}
+@media(max-width:860px){.fd-grid{grid-template-columns:1fr}.fd-quote{min-height:380px}.fd-table{margin-top:150px}}
+@media(prefers-reduced-motion:reduce){.fd *{transition:none!important}}
+
+
+
+/* ===== loppuosa: pieni teksti, nappi ja jättiotsikko ===== */
+.end{padding:clamp(96px,11vw,170px) 0 clamp(20px,2.4vw,40px);text-align:center;overflow:hidden;background:var(--red);color:var(--on-red)}
+.end-btn{display:inline-flex;align-items:center;gap:10px;padding:2px 2px 2px 18px;border-radius:999px;background:var(--on-red);color:var(--ink);font:600 16px/1 var(--fb);letter-spacing:-.2px;text-decoration:none;transition:background-color 200ms cubic-bezier(0,0,.2,1)}
+.end-btn .ar{width:36px;height:36px;border-radius:999px;background:var(--ink);color:var(--on-red);display:grid;place-items:center}
+.end-btn .ar svg{width:16px;height:16px}
+.end-btn:hover{background:var(--surface)}
+.end-btn .ar svg{transition:transform 260ms cubic-bezier(0,0,.2,1)}.end-btn:hover .ar svg{transform:translateX(3px)}
+.end-wrap{position:relative;margin-top:clamp(56px,8vw,120px)}
+.end-in{display:flex;flex-direction:column;align-items:center;gap:20px;padding-inline:var(--side)}
+.end-lead{margin:0;max-width:30ch;font-size:18px;font-weight:500;line-height:1.4;color:rgb(236 236 220 / .8)}
+.end-big{font-family:var(--fd);font-weight:700;font-size:9vw;line-height:1;letter-spacing:-.05em;white-space:nowrap;color:var(--on-red);position:relative;z-index:1;margin:0}
+
+/* ===== MOBIILI M2 (alle 768 px) ===== */
+.m2{display:none}
+@media(max-width:767px){
+  body>#gm, body>.hero, #sisalto, body>footer.foot{display:none!important}
+  .m2{display:block;background:var(--bg);color:var(--ink);font-family:var(--fd);overflow-x:clip}
+  html{scroll-padding-top:16px;scroll-padding-bottom:110px}
+}
+.m2 *{box-sizing:border-box}
+.m2 img{display:block;max-width:100%}
+.m2 .c{text-align:center}
+.m-h1{font-weight:600;font-size:48px;line-height:1.02;letter-spacing:-.035em;text-align:center;margin:0}
+.m-h2{font-weight:600;font-size:40px;line-height:1.05;letter-spacing:-.035em;margin:0;text-wrap:balance}
+.m-h2.big{font-size:48px;letter-spacing:-.045em}
+.m-h2.s{font-size:32px}
+.m-lead,.m-body{font-size:15px;line-height:1.47;margin:0;opacity:.75;font-weight:600}
+.m-pill{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--bg);font:500 15px/1 var(--fd);text-decoration:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.m-pill.lite{background:var(--bg);color:var(--ink)}
+.m-pill.out{background:none;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(62,37,32,.35)}
+.m-pill.s{height:40px;padding:0 16px;font-size:14px}
+.m-sec{padding:64px 20px;display:flex;flex-direction:column;gap:24px}
+.m-sec--flush{padding:0 12px 64px}
+.m-sec--pad12{padding:24px 12px}
+.m-tags{display:flex;flex-wrap:wrap;gap:6px}
+.m-tags.c{justify-content:center}
+.m-tags span{height:28px;display:inline-flex;align-items:center;padding:0 11px;border-radius:14px;box-shadow:inset 0 0 0 1px currentColor;font:400 12.5px/1 var(--fd);opacity:.9}
+
+/* hero */
+.m-hero{position:relative;height:750px;overflow:hidden}
+.m-hpanel{position:absolute;left:12px;right:12px;top:12px;height:540px;background:var(--blue);border-radius:36px;display:flex;flex-direction:column;align-items:center;padding:0 24px;text-align:center}
+.m-head{position:absolute;left:12px;right:12px;top:12px;height:52px;border-radius:26px;background:#F6F6EE;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 18px}
+.m-logo img{height:24px;width:auto}
+.m-burger{width:40px;height:40px;border:0;background:none;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;cursor:pointer}
+.m-burger span{display:block;width:18px;height:1.6px;background:var(--ink);border-radius:1px}
+.m-hpanel .m-h1{margin-top:60px}
+.m-hpanel .m-lead{margin-top:18px;max-width:300px}
+.m-hpanel .m-pill{margin-top:26px}
+/* kollaasi */
+.m-col{position:absolute;left:50%;width:390px;margin-left:-195px;height:260px;pointer-events:none;transform:scale(var(--cs,1));transform-origin:50% 0}
+.m-col--hero{top:450px}
+.m-ci{position:absolute;border-radius:26px;overflow:hidden;box-shadow:0 10px 24px rgba(62,37,32,.18);background:none;transform-style:flat;isolation:isolate}
+
+.m-ci{transition:left .9s var(--ease-reveal),top .9s var(--ease-reveal),width .9s var(--ease-reveal),height .9s var(--ease-reveal),transform .9s var(--ease-reveal),opacity .6s var(--ease-std)}
+.m-ci img{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);max-width:none;object-fit:cover}
+.m-ci.p-wait,.m-ci.p-in{transition:none;opacity:0;z-index:1}
+.m-ci.p-out{opacity:0;z-index:1}
+.m-ci.p-l,.m-ci.p-r{z-index:2}
+.m-ci.p-m{z-index:3}
+.m-col--hero .p-l{left:22px;top:20px;width:128px;height:150px;transform:rotate(-6deg)}
+.m-col--hero .p-m{left:104px;top:50px;width:184px;height:214px;transform:none}
+.m-col--hero .p-r{left:232px;top:10px;width:136px;height:150px;transform:rotate(7deg)}
+.m-col--hero .p-in,.m-col--hero .p-wait{left:330px;top:0;width:136px;height:150px;transform:rotate(14deg)}
+.m-col--hero .p-out{left:-70px;top:34px;width:128px;height:150px;transform:rotate(-14deg)}
+.m-col--end .p-l{left:42px;top:30px;width:120px;height:140px;transform:rotate(-7deg)}
+.m-col--end .p-m{left:118px;top:56px;width:154px;height:184px;transform:none}
+.m-col--end .p-r{left:228px;top:20px;width:120px;height:140px;transform:rotate(6deg)}
+.m-col--end .p-in,.m-col--end .p-wait{left:320px;top:10px;width:120px;height:140px;transform:rotate(12deg)}
+.m-col--end .p-out{left:-50px;top:40px;width:120px;height:140px;transform:rotate(-12deg)}
+/* ominaisuudet */
+.m-stack{display:flex;flex-direction:column}
+.m-stack{gap:14px;padding-bottom:8px}
+.m-fc{background:var(--b);color:var(--f);border-radius:30px;padding:24px 22px 26px;min-height:200px;box-shadow:0 -8px 24px rgba(62,37,32,.12);position:sticky;top:calc(24px + var(--i,0) * 14px)}
+.m-fc:nth-child(1){--i:0}.m-fc:nth-child(2){--i:1}.m-fc:nth-child(3){--i:2}.m-fc:nth-child(4){--i:3}.m-fc:nth-child(5){--i:4}.m-fc:nth-child(6){--i:5}
+.m-fc.last{min-height:200px}
+.m-fc h3{font:600 28px/32px var(--fd);letter-spacing:-.025em;margin:0 0 12px}
+.m-fc{display:flex;flex-direction:column}
+.m-fc p{font-size:15px;line-height:22px;opacity:.75;margin:auto 0 0;padding-top:16px}
+.m-all{align-self:flex-start;border-radius:28px;transition:background-color 300ms var(--m-ease,ease)}
+.m-all summary{list-style:none;display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(62,37,32,.35);font:500 15px/1 var(--fd);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.m-all summary::-webkit-details-marker{display:none}
+.m-all[open]{align-self:stretch;background:#F6F6EE;padding:18px 18px 20px}
+.m-all[open] summary{box-shadow:none;padding:0 4px;height:auto;margin:0 0 14px;font:600 21px/28px var(--fd);letter-spacing:-.015em}
+.m-all ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.m-all li{font:600 14px/1 var(--fd);padding:11px 14px;border-radius:999px;background:#ECECDC;color:var(--ink)}
+.m-all li:nth-child(4n+1){background:var(--blue)}
+.m-all li:last-child{background:var(--ink);color:#ECECDC}
+.m-more summary{list-style:none;align-self:flex-start;width:max-content}
+.m-more summary::-webkit-details-marker{display:none}
+.m-flist{margin:16px 0 0;padding:0;list-style:none;columns:2;column-gap:16px;font-size:15px;line-height:1.4}
+.m-flist li{padding:8px 0;border-top:1px solid rgba(62,37,32,.15);break-inside:avoid}
+
+/* karusellit */
+.m-car{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:0 20px;scroll-padding:0 20px}
+.m-car::-webkit-scrollbar{display:none}
+.m-car>img{flex:none;scroll-snap-align:start;scroll-snap-stop:always}
+.m-car--slides{margin:0 -12px;padding:0 12px;scroll-padding:0 12px;zoom:.8}
+.m-car--slides>.m-sl{position:relative;flex:none;margin:0;width:calc(100% + 16px);max-width:420px;aspect-ratio:366/680;border-radius:36px;overflow:hidden;background:#3E2520;color:#ECECDC;scroll-snap-align:start;scroll-snap-stop:always}
+.m-sl>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.m-sl::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(62,37,32,.55) 0%,rgba(62,37,32,0) 32%,rgba(62,37,32,0) 58%,rgba(62,37,32,.92) 82%,#3E2520 100%)}
+.m-sl-top,.m-sl figcaption{position:absolute;left:24px;right:24px;z-index:1}
+.m-sl-top{top:30px}
+.m-sl-h{font:600 46px/46px var(--fd);letter-spacing:-.04em;margin:0 0 14px}
+.m-sl-top p{font-size:17px;line-height:24px;margin:0;max-width:250px;opacity:.9}
+.m-sl figcaption{bottom:30px}
+.m-sl figcaption h3{font:600 26px/30px var(--fd);letter-spacing:-.025em;margin:0 0 8px}
+.m-sl figcaption p{font:500 16px/23px var(--fd);margin:0;opacity:.8;max-width:290px}
+.m-car--slides>.m-sl--light{color:#3E2520}
+.m-sl--light::after{display:none}
+.m-sl-d{display:flex;gap:4px;margin-top:26px}
+.m-sl-d i{display:block;width:18px;height:3px;border-radius:2px;background:currentColor;opacity:.35}
+.m-sl-d i.on{width:36px;opacity:1}
+.m-sl--vid::after{display:none}
+.m-pad{position:absolute;left:24px;top:28px;width:165%;aspect-ratio:2620/1900;filter:drop-shadow(0 24px 30px rgba(0,0,0,.35))}
+.m-pad::after{content:"";position:absolute;inset:0;background:url(assets/laitteet/ipadair-kehys.webp?v=1) center/100% 100% no-repeat;z-index:2;pointer-events:none}
+.m-scr{position:absolute;left:4.96%;top:6.84%;width:90.08%;height:86.32%;border-radius:1.61%/2.32%;overflow:hidden;background:#F6F6EE}
+.m-scr img{display:block;width:100%;height:100%;object-fit:cover;object-position:0 0}
+.m-pl{position:absolute;left:4.96%;top:6.84%;height:86.32%;width:calc(90.08% * .56);z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding:12px 14px;pointer-events:none}
+.m-pl-t{align-self:flex-start;font:500 11px/1 var(--fd);color:#ECECDC;background:rgba(30,19,16,.72);border-radius:999px;padding:6px 10px}
+.m-pl-b{display:flex;align-items:center;gap:10px;background:rgba(30,19,16,.72);border-radius:999px;padding:7px 12px 7px 10px;color:#ECECDC}
+.m-pl-i{width:0;height:0;border-left:8px solid #ECECDC;border-top:5px solid transparent;border-bottom:5px solid transparent;flex:none}
+.m-pl-bar{flex:1;height:3px;border-radius:2px;background:rgba(236,236,220,.3);overflow:hidden}
+.m-pl-bar i{display:block;height:100%;width:0;background:#ECECDC;border-radius:inherit}
+.m-pl-time{font:500 10px/1 var(--fd);font-variant-numeric:tabular-nums;opacity:.85}
+.m-car--slides>img{width:calc(100% + 16px);max-width:420px;aspect-ratio:366/680;height:auto;object-fit:cover;border-radius:36px}
+.m-tk{position:relative;flex:none;width:300px;height:440px;border-radius:30px;overflow:hidden;background:#3E2520;color:#ECECDC;scroll-snap-align:start;scroll-snap-stop:always}
+.m-tk>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.m-tk::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(62,37,32,0) 50%,rgba(62,37,32,.85) 100%)}
+.m-tk-pill{position:absolute;left:14px;top:14px;z-index:1;background:#F6F6EE;color:#3E2520;border-radius:999px;padding:10px 16px;font:500 15px/1 var(--fd)}
+.m-tk p{position:absolute;left:20px;right:20px;bottom:22px;z-index:1;margin:0;font:600 19px/26px var(--fd);letter-spacing:-.01em}
+.m-car--tuki>img{width:300px;height:440px;border-radius:30px;object-fit:cover}
+.m-car--app>img{width:300px;height:520px;border-radius:32px;object-fit:cover}
+.m-fd{position:relative;flex:none;width:320px;height:400px;border-radius:32px;overflow:hidden;background:#3E2520;color:#ECECDC;scroll-snap-align:start;scroll-snap-stop:always}
+.m-fd>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.m-fd::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(62,37,32,0) 40%,rgba(62,37,32,.75) 100%);pointer-events:none}
+.m-fd-pill{position:absolute;left:16px;top:16px;z-index:1;background:#F6F6EE;color:#3E2520;border-radius:999px;padding:10px 18px;font:500 15px/1 var(--fd)}
+.m-fd-pill em{font-style:normal;opacity:.55;margin-left:4px}
+.m-fd-b{position:absolute;left:20px;right:20px;bottom:20px;z-index:1}
+.m-fd-b p{font:600 17px/25px var(--fd);margin:0 0 16px}
+.m-fd-btn{height:42px;padding:0 22px;border-radius:999px;background:none;border:1.5px solid #ECECDC;color:#ECECDC;font:500 15px var(--fd);cursor:pointer}
+.m-fd-more{position:absolute;inset:0;z-index:2;background:#3E2520;padding:28px 22px 20px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;opacity:0;pointer-events:none;transition:opacity .3s}
+.m-fd-more p{font-size:17px;line-height:26px;margin:0}
+.m-fd.open .m-fd-more{opacity:1;pointer-events:auto}
+.m-car--found>img{width:320px;height:400px;border-radius:32px;object-fit:cover}
+.m-car[hidden]{display:none}
+.m-dots{display:flex;gap:11px;align-items:center;margin-top:16px}
+.m-dots i{position:relative;display:block;width:10px;height:10px;border-radius:999px;background:rgba(62,37,32,.12);overflow:hidden;transition:width .3s var(--ease-std)}
+.m-dots.center{justify-content:center}
+.m-dots i.past{background:rgba(62,37,32,.42)}
+.m-dots i.on{width:40px}
+.m-dots i b{position:absolute;left:0;top:0;height:100%;width:0;border-radius:999px;background:rgba(62,37,32,.42)}
+
+/* kenelle */
+.m-bpanel{background:var(--blue);border-radius:36px;padding:56px 24px 40px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.m-bpanel .m-pill{margin-top:4px}
+
+/* hinnoittelu */
+.m-price{padding:64px 0 0}
+.m-price .m-h2{padding:0 20px 36px}
+.m-calc{background:var(--red);color:var(--bg);padding:36px 24px 40px;display:flex;flex-direction:column;gap:22px}
+.m-calc label{font:500 15px/20px var(--fd);opacity:.9}
+.m-field{height:56px;border-radius:14px;background:rgba(236,236,220,.14);display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+.m-field input{background:none;border:0;outline:0;color:var(--bg);font:600 22px/28px var(--fd);width:60%;padding:0}
+.m-field span{font:500 16px var(--fd);opacity:.8}
+.m-res{display:flex;align-items:baseline;gap:8px;margin-top:8px}
+.m-res b{font:600 72px/72px var(--fd);letter-spacing:-.05em}
+.m-res span{font:500 18px var(--fd)}
+.m-calc p{font-size:15px;line-height:22px;opacity:.9;margin:0}
+.m-bento{display:grid;grid-template-columns:1fr 1fr;background:linear-gradient(var(--red) 0 50%,#E2E2CE 50%)}
+.m-cell{background:var(--b);color:var(--f);border-radius:24px;min-height:200px;padding:20px 18px 22px;display:flex;flex-direction:column;justify-content:space-between}
+.m-lab{display:flex;justify-content:space-between;font:600 12px/16px var(--fd)}
+.m-cell b{display:block;font:600 46px/48px var(--fd);letter-spacing:-.04em}
+.m-cell small{font-size:13px;opacity:.75;margin-top:6px;display:block}
+.m-free{grid-column:1/-1;background:#E2E2CE;padding:36px 24px 40px;display:flex;flex-direction:column;gap:10px}
+.m-free-b{display:flex;align-items:baseline;gap:10px;padding-top:26px}
+.m-free-b b{font:600 56px/56px var(--fd);letter-spacing:-.05em}
+.m-free-b span{font:400 24px var(--fd);letter-spacing:-.02em}
+.m-free-h{font:600 26px/30px var(--fd);letter-spacing:-.03em}
+.m-free small{font-size:14px;line-height:20px;opacity:.65}
+
+/* sovellus */
+.m-tabs{display:flex;gap:6px}
+.m-tabs button{height:40px;padding:0 16px;border-radius:20px;border:0;background:#E2E2CE;color:var(--ink);font:500 14px var(--fd);cursor:pointer}
+.m-tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+
+/* laitteet */
+.m-dev{padding-left:0;padding-right:0}
+.m-dev>.m-h2,.m-dev>.m-body{padding:0 20px}
+.m-h2-one{white-space:nowrap;font-size:min(38px,8.4vw / .8)!important}
+.m-dev>.m-body.c{text-align:center;margin-top:-10px}
+.m-tab{width:280px;max-width:calc(100% - 40px);height:180px;object-fit:contain;object-position:50% 100%;margin:0 auto -24px;display:block}
+.m-dlist{list-style:none;margin:0;padding:0}
+.m-dlist li{display:flex;align-items:center;gap:16px;padding:9px 20px;border-top:1px solid rgba(62,37,32,.15)}
+.m-dlist li:last-child{border-bottom:1px solid rgba(62,37,32,.15)}
+.m-dlist div{flex:1}
+.m-dlist h3{font:600 21px/26px var(--fd);letter-spacing:-.02em;margin:0 0 4px}
+.m-dlist p{font-size:14px;line-height:20px;opacity:.6;margin:0}
+.m-dlist img{width:100px;height:72px;object-fit:contain;flex:none}
+
+/* käyttöönotto */
+.m-tl{list-style:none;margin:0;padding:8px 0 0;display:flex;flex-direction:column;gap:8px;position:relative}
+.m-tl::before{content:"";position:absolute;left:11px;top:40px;bottom:40px;width:2px;background:rgba(62,37,32,.3)}
+.m-tl li{display:flex;align-items:center;gap:12px;position:relative}
+.m-tl i{flex:none;width:24px;height:24px;display:grid;place-items:center}
+.m-tl i::before{content:"";width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--ink);background:var(--bg)}
+.m-tl li.on i::before{width:20px;height:20px;background:radial-gradient(var(--ink) 0 4px,var(--bg) 4.5px)}
+.m-tlc{flex:1;background:#F6F6EE;border-radius:18px;padding:14px 14px 14px 16px;display:flex;align-items:center;gap:10px}
+.m-tl li.on .m-tlc{background:var(--blue)}
+.m-tlc>div{flex:1}
+.m-tlc h3{font:600 19px/25px var(--fd);letter-spacing:-.01em;margin:0}
+.m-tlc p{font-size:16px;line-height:22px;opacity:.85;margin:4px 0 0}
+.m-tlc .m-pill{height:36px;padding:0 14px;font-size:13px}
+
+/* vanhasta uuteen */
+.m-red{position:relative;background:var(--red);color:var(--bg);padding:72px 20px;display:flex;flex-direction:column;gap:24px;overflow:hidden}
+.m-red>*{position:relative}
+.m-red-lines{overflow:visible;position:absolute!important;left:50%;top:0;width:390px;height:774px;margin-left:-195px;pointer-events:none}
+.m-red .m-lead{color:#ECECDC;opacity:1}
+.m-bars{display:flex;flex-direction:column;gap:6px}
+.m-bars p{background:var(--bg);color:var(--ink);border-radius:20px;padding:16px 18px;margin:0;font-size:15px;line-height:22px}
+.m-bars b{font-weight:600}
+.m-bars a{height:56px;border-radius:20px;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font:600 15px var(--fd);text-decoration:none}
+.m-eyes{width:72px;height:auto;margin:14px auto 0}
+
+/* ukk */
+.m-faq{display:flex;flex-direction:column;gap:10px}
+.m-faq details{background:#F6F6EE;border-radius:24px;padding:18px 16px 18px 20px}
+.m-faq details[open]{background:var(--blue)}
+.m-faq summary{list-style:none;display:flex;align-items:center;gap:12px;font:500 16px/22px var(--fd);cursor:pointer;min-height:32px}
+.m-faq summary::-webkit-details-marker{display:none}
+.m-faq summary i{margin-left:auto;flex:none;width:32px;height:32px;border-radius:50%;background:#E2E2CE;position:relative}
+.m-faq summary i::before,.m-faq summary i::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.6px;margin:-.8px 0 0 -5px;background:var(--ink)}
+.m-faq summary i::after{transform:rotate(90deg)}
+.m-faq details[open] summary i{background:var(--ink)}
+.m-faq details[open] summary i::before{background:var(--bg)}
+.m-faq details[open] summary i::after{display:none}
+.m-faq details p{margin:10px 40px 0 0;font-size:15px;line-height:22px;opacity:.75}
+.m-faqgo{margin-top:14px;display:inline-flex}
+.m-faqmore{display:flex;align-items:center;justify-content:space-between;padding-top:10px;font:500 15px var(--fd)}
+
+/* loppu */
+.m-end{position:relative;background:var(--ink);color:var(--bg);border-radius:36px;height:520px;overflow:visible;margin-bottom:70px;display:flex;flex-direction:column;align-items:center;padding:56px 24px 0;gap:14px;text-align:center}
+.m-end .m-h2{font-size:44px}
+.m-end .m-lead{max-width:280px}
+.m-end .m-pill{margin-top:10px}
+.m-endclip{position:absolute;inset:0;clip-path:inset(0 0 -800px 0);-webkit-clip-path:inset(0 0 -800px 0);pointer-events:none}
+.m-col--end{top:330px;margin-left:-195px}
+
+/* footer */
+.m-foot{padding:40px 20px 120px;display:flex;flex-direction:column;gap:28px}
+.m-news{height:56px;border-radius:28px;background:#F6F6EE;display:flex;align-items:center;padding:0 6px 0 20px;margin:0}
+.m-news input{flex:1;border:0;background:none;outline:0;font:400 16px var(--fd);color:var(--ink);min-width:0}
+.m-news .m-pill{height:44px;font-size:14px}
+.m-links{display:flex;flex-wrap:wrap;gap:8px}
+.m-links a{height:40px;display:inline-flex;align-items:center;padding:0 16px;border-radius:20px;box-shadow:inset 0 0 0 1px rgba(62,37,32,.35);color:var(--ink);text-decoration:none;font:500 14px var(--fd)}
+.m-word{width:100%;height:auto}
+.m-legal{font-size:12px;line-height:18px;opacity:.55;margin:0}
+
+/* kelluva palkki */
+.m-fab{position:relative;flex:none;width:56px;height:56px;border-radius:50%;background:none;border:1.5px solid currentColor;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0;cursor:pointer;transition:color .25s;-webkit-tap-highlight-color:transparent}
+.m-fab span{display:block;width:18px;height:1.6px;border-radius:1px;background:currentColor}
+.m-fab.dark{color:#ECECDC}
+
+/* liike: hillitty järjestelmä (hero, otsikot, yksi tuotehetki, vaiheet) */
+:root{--m-ease:cubic-bezier(.23,1,.32,1)}
+.m-hb{display:flex;flex-direction:column;gap:inherit}
+.m-tl .m-tlc,.m-tl li i::before{transition:background-color 300ms var(--m-ease),width 300ms var(--m-ease),height 300ms var(--m-ease)}
+@media(max-width:767px) and (prefers-reduced-motion:no-preference){
+  .m-in{opacity:0;transform:translate3d(0,12px,0)}
+  .m-in.go{opacity:1;transform:none;transition:opacity 600ms var(--m-ease),transform 600ms var(--m-ease);transition-delay:calc(var(--rd,0) * 60ms)}
+  .rv{opacity:0;transform:translate3d(0,12px,0)}
+  .rv.in{opacity:1;transform:none;transition:opacity 450ms var(--m-ease),transform 450ms var(--m-ease)}
+  @supports (animation-timeline: view()){
+    .m-tab,.m-end{animation:m-grow linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+  }
+  .m-pill,.m-fab,.m-tabs button,.m-fd-btn{transition:transform 160ms var(--m-ease)}
+  .m-pill:active,.m-fab:active,.m-tabs button:active,.m-fd-btn:active{transform:scale(.97)}
+}
+@keyframes m-grow{from{transform:scale(.94)}to{transform:none}}
+
+.m-bar{position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));height:56px;display:none;align-items:center;gap:8px;padding:0;z-index:70;transform:translateY(120px);transition:transform .45s var(--ease-reveal)}
+@media(max-width:767px){.m-bar{display:flex}}
+.m-bar.on{transform:none}
+@media(max-width:767px){.m2>*:not(.m-bar):not(.m-fab):not(.m-menu):not(.cookie){zoom:.8}}
+@media(max-width:767px){
+.cookie{left:16px;right:16px;width:auto;max-width:none;bottom:calc(96px + env(safe-area-inset-bottom))}
+}
+.m-bar .m-pill{flex:1;height:56px;box-shadow:0 6px 18px rgba(62,37,32,.22)}
+.m-ic{width:56px;height:56px;flex:none;border-radius:50%;background:#F6F6EE;box-shadow:0 6px 18px rgba(62,37,32,.18);color:var(--ink);border:0;display:grid;place-items:center;cursor:pointer}
+.m-ic svg{width:22px;height:22px}
+
+/* valikko */
+.m-menu{position:fixed;inset:0;background:var(--bg);z-index:80;display:flex;flex-direction:column;padding:24px 20px 40px}
+.m-menu[hidden]{display:none}
+.m-menu .m-head{position:relative;left:auto;right:auto;top:auto;margin:0 -8px}
+.m-x{width:40px;height:40px;border:0;background:none;position:relative;cursor:pointer}
+.m-x span{position:absolute;left:11px;top:19.2px;width:18px;height:1.6px;border-radius:1px;background:var(--ink)}
+.m-x span:first-child{transform:rotate(45deg)}.m-x span:last-child{transform:rotate(-45deg)}
+.m-menu-b{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.m-lang{display:flex;gap:4px;background:#E2E2CE;border-radius:999px;padding:4px}
+.m-lang button{height:40px;min-width:52px;border:0;border-radius:999px;background:none;color:var(--ink);font:600 15px var(--fd);cursor:pointer}
+.m-lang button[aria-pressed="true"],.m-lang a[aria-current]{background:var(--ink);color:#ECECDC}
+.m-lang a{height:40px;min-width:52px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;color:var(--ink);font:600 15px var(--fd);text-decoration:none}
+.m-menu nav{display:flex;flex-direction:column;margin-top:56px}
+.m-menu nav a{font:600 40px/56px var(--fd);letter-spacing:-.035em;color:var(--ink);text-decoration:none}
+.m-menu-b{margin-top:auto;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.m-call{font:500 15px var(--fd);color:var(--ink);opacity:.7}
+
+@media(prefers-reduced-motion:reduce){.m-ci img,.m-bar{transition:none}}
+
+@media(min-width:768px){#kassademo>.wrap,#sovellus>.wrap{width:80%;max-width:none;margin-left:auto;margin-right:auto}}
+
+/* ===== Kirppiskatsaus: sivukohtaiset osat ===== */
+[hidden]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.u{text-decoration:underline}
+/* hero */
+.kh{background:var(--surface);padding:clamp(120px,13vw,170px) 0 0;overflow:hidden}
+.kh-in{display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;padding-inline:var(--side)}
+.kh-sub{font-family:var(--fd);font-weight:600;font-size:clamp(18px,1.9vw,24px);line-height:1.25;letter-spacing:-.01em;max-width:30ch;text-wrap:balance}
+.kh-pill{margin-top:12px;display:flex;align-items:center;gap:8px;width:min(540px,100%);height:60px;padding:5px 5px 5px 22px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.kh-sel{flex:1;min-width:0;height:100%;border:0;background:transparent;font:500 16px/1 var(--fb);color:var(--ink);appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5 8l5 5 5-5' stroke='%233E2520' stroke-width='1.4' stroke-linecap='square'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:34px}
+.kh-sel:focus{outline:none}
+.kh-go{height:50px;padding:0 22px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:600 16px/1 var(--fb);letter-spacing:-.2px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;white-space:nowrap;transition:background-color var(--dur-fast) var(--ease-std),color var(--dur-fast) var(--ease-std)}
+.kh-go:hover{background:var(--blue);color:var(--ink)}
+.kh-go .ico{width:16px;height:16px}
+.kh-stage{position:relative;height:clamp(420px,46vw,620px);margin-top:clamp(48px,6vw,80px);display:flex;justify-content:center;align-items:flex-start;gap:clamp(28px,5vw,72px)}
+.kh-photo{width:clamp(180px,20vw,280px);aspect-ratio:280/340;border-radius:var(--radius-thumb);object-fit:cover;margin-top:clamp(70px,8vw,110px);flex:none;position:relative;overflow:hidden}
+.kh-photo img{width:100%;height:100%;object-fit:cover}
+img.kh-photo.l{object-position:22% 50%}
+.kh-phone{width:clamp(250px,24vw,340px);height:auto;flex:none}
+.kh-loc{position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 14px 0 10px;border-radius:999px;background:var(--surface);font-size:14px;font-weight:500}
+.kh-loc svg{width:14px;height:14px;fill:none;stroke:var(--ink);stroke-width:1.3}
+.kh-btn{margin-top:8px}
+@media(max-width:760px){.kh-stage{height:auto;max-height:118vw;overflow:hidden;gap:4vw;margin-top:40px}.kh-phone{width:46vw}.kh-photo{width:34vw;margin-top:16vw;border-radius:12px}.kh-loc{top:8px;left:8px;height:24px;font-size:12px;padding:0 10px 0 8px}}
+/* luvut */
+.kn{background:var(--bg);padding-top:clamp(72px,8vw,110px);padding-bottom:clamp(56px,9vw,100px)}
+.kn-head{text-align:center;max-width:900px;margin:0 auto clamp(36px,4vw,52px)}
+.kn-head .disp{max-width:19ch;margin-inline:auto}
+.kn-sub{margin:18px auto 0;max-width:46ch;font-size:clamp(16px,1.6vw,19px);line-height:1.4;color:var(--ink-muted)}
+.kn-row{position:relative;display:grid;grid-template-columns:170fr 55fr;gap:8px;max-width:1100px;margin-inline:auto}
+.kn-b{position:relative;z-index:1;border-radius:20px;min-height:clamp(170px,17vw,230px);padding:clamp(20px,2vw,28px) clamp(20px,2.4vw,32px);display:flex;flex-direction:column;justify-content:space-between}
+.kn-b.web{background:var(--mustard)}.kn-b.flea{background:var(--blue);padding-inline:clamp(16px,1.8vw,24px)}
+.kn-l{font-family:var(--fd);font-weight:600;font-size:20px;letter-spacing:-.01em}
+.kn-b .num{font-size:clamp(44px,6vw,72px);letter-spacing:-.035em}
+.kn-t{position:absolute;z-index:0;height:auto;pointer-events:none;user-select:none}
+.kn-t.t1{width:clamp(130px,15vw,210px);left:-11%;top:-46%;transform:rotate(-5deg)}
+.kn-t.t2{width:clamp(110px,12vw,160px);right:-9%;top:-62%;transform:rotate(5deg)}
+.kn-t.t3{width:clamp(150px,16vw,220px);left:52%;bottom:-48%;transform:rotate(-4deg)}
+.kn-src{text-align:center;margin-top:clamp(20px,2vw,28px)}
+.kn-cta{display:table;margin:22px auto 0}
+@media(max-width:760px){.kn-row{grid-template-columns:1fr}.kn-t{display:none}.kn-src{margin-top:28px}}
+/* kaari ja tumma osio */
+.kc{background:var(--surface);line-height:0}
+.kc svg{width:100%;height:clamp(60px,11vw,160px);display:block}
+.kc path{fill:#3E2520}
+.kd{padding-top:clamp(70px,8vw,120px)}
+.step__text p b{color:#F6F6EE;font-weight:600}
+/* Laitteet kortissa kuten etusivulla: laite rajautuu kortin oikeaan ja alareunaan. Sijainti muuttujilla (cqw = % median leveydestä): --x vasen, --y ylä, --w leveys */
+#kaytto .step__media{position:relative;align-self:stretch;container-type:inline-size;padding-top:0;display:block;min-height:0;aspect-ratio:430/323}
+#kaytto .step__media video{position:absolute;left:calc(var(--x)*1cqw);top:calc(var(--y)*1cqw);width:calc(var(--w)*1cqw);height:auto;max-width:none;margin:0}
+@media(max-width:760px){#kaytto .step__media{min-height:0;aspect-ratio:var(--ar,1.45)}}
+
+/* sovellus */
+/* sovellus: vain yksi näkymä kerrallaan, ensin vanha pois ja sitten uusi esiin */
+#sovellus .ap-grid{visibility:hidden;transition:visibility 0s linear .25s}
+#sovellus .ap-grid.on{visibility:visible;transition:visibility 0s}
+#sovellus .ap-card{transition:opacity .25s var(--ease-std),transform .5s var(--ease-reveal)}
+#sovellus .ap-grid.on .ap-card{transition:opacity .35s var(--ease-std) .25s,transform .6s var(--ease-reveal) .25s}
+#sovellus .ap-grid.on .ap-card:nth-child(2){transition-delay:.31s}#sovellus .ap-grid.on .ap-card:nth-child(3){transition-delay:.37s}
+#sovellus .ap-heads .disp{transition:opacity .25s var(--ease-std),transform .5s var(--ease-reveal)}
+#sovellus .ap-heads .disp.on{transition:opacity .35s var(--ease-std) .25s,transform .6s var(--ease-reveal) .25s}
+#sovellus .ap-card h3{font-size:clamp(17px,4.4cqw + 4px,34px)}
+#sovellus .ap-heads .disp{font-size:clamp(34px,2.2vw + 22px,58px)}
+#sovellus .ap-rc-top{flex-wrap:wrap}
+@media(min-width:768px) and (max-width:1023px){#sovellus{zoom:.82}#sovellus .ap-rc{top:34%}}
+/* lomake */
+.kf{background:var(--surface);padding-top:clamp(72px,8vw,110px)}
+.kf-card{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,80px);max-width:1100px;margin-inline:auto;align-items:center}
+.kf-l{display:flex;flex-direction:column;gap:22px}
+.kf-more{display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line)}
+.kf-more details{border-bottom:1px solid var(--line)}
+.kf-more summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:14px 0;font-weight:600;font-size:16px}
+.kf-more summary::-webkit-details-marker{display:none}
+.kf-more summary::after{content:"";width:12px;height:12px;background:linear-gradient(currentColor,currentColor) center/12px 1.5px no-repeat,linear-gradient(currentColor,currentColor) center/1.5px 12px no-repeat;transition:transform 200ms cubic-bezier(.45,0,.55,1)}
+.kf-more details[open] summary::after{transform:rotate(45deg)}
+.kf-more details>*:not(summary){margin:0 0 16px}
+.kf-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.kf-list li{position:relative;padding-left:30px;font-size:17px}
+.kf-list li::before{content:"";position:absolute;left:0;top:3px;width:20px;height:20px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M4 10.5l4 4 8-9' stroke='%238D8B4C' stroke-width='1.6' stroke-linecap='square'/%3E%3C/svg%3E")}
+.kf-form{display:flex;flex-direction:column;gap:16px}
+.kf-f{display:flex;flex-direction:column;gap:8px}
+.kf-f span{font-size:14px;font-weight:600}
+.kf-f select,.kf-f input{height:56px;border:0;border-radius:var(--radius-field);background:var(--bg);padding:0 18px;font:500 16px/1 var(--fb);color:var(--ink);appearance:none}
+.kf-f select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5 8l5 5 5-5' stroke='%233E2520' stroke-width='1.4' stroke-linecap='square'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:44px}
+.kf-f select:focus,.kf-f input:focus{outline:2px solid var(--blue-deep);outline-offset:2px}
+.kf-c{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45;cursor:pointer}
+.kf-c input{width:20px;height:20px;margin:1px 0 0;accent-color:#3E2520;flex:none}
+.kf-btn{--h:46px;--px:26px;--fs:17px;width:100%}
+.kf-err{color:var(--red);font-weight:600;font-size:14px}
+.kf-ok{grid-column:2;display:flex;flex-direction:column;justify-content:center;gap:14px}
+@media(max-width:820px){.kf-card{grid-template-columns:1fr;gap:24px}.kf-ok{grid-column:1}}
+@media(max-width:767px){.kf{padding:48px 0 56px}.kf .disp.m{font-size:32px}.kf-l{gap:16px}.kf-list{gap:8px}.kf-list li{font-size:15px}.kf-note{display:none}.kf-form{gap:12px}.kf-f select,.kf-f input{height:52px}}
+/* puhelinversio: sama kuin Resellan sivulla */
+.m-sec{display:none}
+@media(max-width:767px){
+  .kn{display:none}.ap{display:none}
+  .m-sec{display:flex;flex-direction:column;gap:24px;padding:64px 20px;background:var(--bg);color:var(--ink);font-family:var(--fd);overflow-x:clip;zoom:.8}
+  .m-h2{font-weight:600;font-size:40px;line-height:1.05;letter-spacing:-.035em;margin:0;text-wrap:balance}
+  .m-tabs{display:flex;gap:6px}
+  .m-tabs button{height:40px;padding:0 16px;border-radius:20px;border:0;background:#E2E2CE;color:var(--ink);font:500 14px var(--fd);cursor:pointer}
+  .m-tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+  .m-car{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:0 20px;scroll-padding:0 20px}
+  .m-car::-webkit-scrollbar{display:none}
+  .m-car>img{flex:none;scroll-snap-align:start;scroll-snap-stop:always;display:block}
+  .m-car--app>img{width:300px;height:520px;border-radius:32px;object-fit:cover}
+  .m-car[hidden]{display:none}
+  .m-dots{display:flex;gap:11px;align-items:center;margin-top:-8px}
+  .m-dots i{position:relative;display:block;width:10px;height:10px;border-radius:999px;background:rgba(62,37,32,.12);overflow:hidden;transition:width .3s var(--ease-std)}
+  .m-dots i.past{background:rgba(62,37,32,.42)}
+  .m-dots i.on{width:40px}
+  .m-dots i b{position:absolute;left:0;top:0;height:100%;width:0;border-radius:999px;background:rgba(62,37,32,.42)}
+  .m-tabs button{transition:transform 160ms var(--ease-std)}.m-tabs button:active{transform:scale(.97)}
+}
+.end{padding-top:clamp(70px,8vw,120px)}
+
+
+/* ===== Alueen katsaus ===== */
+.ka{position:relative;overflow:hidden;background:#DDE5E7;padding:0;min-height:max(720px,calc(100svh * var(--vz,1)))}
+.ka-map{position:absolute;inset:0}
+.ka-map svg{width:100%;height:100%;display:block}
+.ka-map #naapurit{fill:#FBFBF4;stroke:none}
+.ka-map g:not(#naapurit) path{fill:#FBFBF4;stroke:#C9D4D7;stroke-width:.8;vector-effect:non-scaling-stroke;transition:fill .6s var(--ease-std),stroke .6s var(--ease-std)}
+.ka-map g.on:not(#naapurit) path{fill:#C24029;stroke:#C24029}
+.ka-in{position:relative;z-index:1;max-width:calc(var(--wide) + 2 * var(--side));margin:0 auto;padding:clamp(120px,11vw,150px) var(--side) clamp(64px,8vw,110px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);grid-template-rows:auto 1fr;column-gap:40px;min-height:inherit}
+.ka-head{grid-column:1/-1}
+.ka-h{font:600 clamp(44px,6.7vw,96px)/.92 var(--fd);letter-spacing:-.04em;margin:0;text-wrap:balance}
+.ka-sub{margin-top:14px;font-size:18px;font-weight:500}
+.ka-space{display:none}
+.ka-nums{grid-column:2;align-self:center;display:flex;flex-direction:column;gap:clamp(22px,2.6vw,36px);padding-block:24px}
+.ka-big{display:block;font:600 clamp(64px,8.4vw,120px)/.9 var(--fd);letter-spacing:-.045em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ka-l{display:block;margin-top:8px;font-size:17px;font-weight:500}
+.ka-tr{font:600 clamp(20px,2vw,28px)/1.18 var(--fd);letter-spacing:-.015em;max-width:22ch}
+.ka-act{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.ka-act .btn{--h:46px;--px:24px}
+.ka-link{border:0;background:none;padding:6px 0;font:500 15px var(--fb);color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.ka .rv{opacity:0;transform:translateY(16px)}
+.ka.go .rv{opacity:1;transform:none;transition:opacity .6s var(--ease-out),transform .6s var(--ease-out);transition-delay:calc(var(--i,0) * 120ms)}
+@media(max-width:760px){
+  .ka{min-height:0}
+  .ka-in{display:flex;flex-direction:column;padding:96px 20px 56px}
+  .ka-space{display:block;height:clamp(240px,70vw,320px)}
+  .ka-nums{display:grid;grid-template-columns:1fr 1fr;gap:20px 16px;padding:0}
+  .ka-big{font-size:clamp(48px,15vw,64px)}
+  .ka-l{font-size:14px}
+  .ka-tr,.ka-act{grid-column:1/-1}
+  .ka-act{flex-direction:column;align-items:flex-start;gap:12px}
+}
+/* koko katsaus */
+.kt{background:var(--surface);padding:clamp(56px,7vw,96px) 0}
+.kt.closed{display:none}
+.kt-list{margin:28px 0 0;border-top:1px solid var(--line)}
+.kt-list div{display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--line)}
+.kt-list dt{color:var(--ink-muted)}
+.kt-list dd{margin:0;font-weight:600;text-align:right}
+.kt-tr{margin-top:24px;font-size:18px;line-height:1.5}
+.kt-h3{margin:40px 0 10px;font:600 20px/1.2 var(--fd);outline:none}
+.kt-p{margin:0 0 12px;color:var(--ink-muted);line-height:1.55;max-width:68ch}
+.kt-src{margin:12px 0 0;padding-left:18px;color:var(--ink-muted);font-size:14px;line-height:1.6}
+/* molemmat: kaari puhelimen päällä */
+.ks2{padding-top:clamp(84px,9vw,120px)}
+.ks2 .kh-in h2{max-width:none}
+.ks2 .kh-sub{font-weight:500;font-size:clamp(16px,1.5vw,20px);line-height:1.35;max-width:34ch}
+.ks2-arc{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:clamp(60px,11vw,160px);z-index:3;display:block}
+.ks2-arc path{fill:#3E2520}
+.ks2 + .dark.kd,.ks2 + #kaytto{padding-top:clamp(40px,5vw,80px)}
+@media(prefers-reduced-motion:reduce){.ka .rv{opacity:1;transform:none}.ka-map g path{transition:none}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="gm intro" id="gm">
+  <a class="gm-logo" href="#alue" aria-label="Resella">
+    <img class="lr" src="assets/logot/ReSella_paalogo_vaaka_ruskea.svg" alt="Resella">
+    <img class="lb" src="assets/logot/ReSella_paalogo_vaaka_beige.svg" alt="Resella">
+  </a>
+  <div class="gm-pill" id="gmPill">
+    <div class="gm-bar">
+      <a class="gm-pill-logo" href="#alue" aria-label="Resella"><img class="lr" src="assets/ikoni/ReSella_ikoni_pilvi_ruskea.svg" alt="Resella"><img class="lb" src="assets/ikoni/ReSella_ikoni_pilvi_tummalle.svg" alt="Resella"></a>
+      <button class="gm-burger" id="gmBurger" aria-label="Avaa valikko" aria-expanded="false"><span></span><span></span></button>
+      <a class="gm-cta" href="varaa.html">Varaa demo</a>
+    </div>
+    <div class="gm-menu" id="gmMenu">
+      <div class="gm-menu-in"><div class="gm-mrow">
+        <nav aria-label="Valikko">
+          <a href="#alue">Alueesi luvut</a>
+          <a href="#tiedot">Koko katsaus</a>
+          <a href="#kaytto">Kevyesti käyttöön</a>
+          <a href="varaa.html">Varaa demo</a>
+          <div class="gm-sub">
+            <a href="mailto:info@resella.fi">Yhteystiedot</a>
+            <span class="gm-eyes" aria-hidden="true"><img class="ev" src="assets/silmat/silmat-katsoo-vaalea.svg" alt=""><img class="er" src="assets/silmat/silmat-katsoo-ruskea.svg" alt=""></span>
+          </div>
+        </nav></div>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+<!-- ALUEESI LUVUT: kartta -->
+<section class="ka" id="alue">
+  <div class="ka-map" id="kaMap" aria-hidden="true"></div>
+  <div class="ka-in">
+    <div class="ka-head" id="kaHead">
+      <h1 class="ka-h" id="kaNimi">Helsinki-Uusimaa</h1>
+      <p class="ka-sub">Käytetty tavara per asukas vuodessa</p>
+    </div>
+    <div class="ka-space" id="kaSpace" aria-hidden="true"></div>
+    <div class="ka-nums" id="kaNums">
+      <div class="ka-n rv" style="--i:0"><span class="ka-big" id="kaVerkko">192 €</span><span class="ka-l">verkossa</span></div>
+      <div class="ka-n rv" style="--i:1"><span class="ka-big" id="kaKirppis">51 €</span><span class="ka-l">kirpputoreilla</span></div>
+      <p class="ka-tr rv" style="--i:2" id="kaTrendi"></p>
+      <div class="ka-act rv" style="--i:3"><button class="btn" type="button" data-open="tiedot">Katso koko katsaus</button><button class="ka-link" type="button" data-open="ktMenetelma">Näin luvut on laskettu</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- KOKO KATSAUS: avautuu napista -->
+<section class="kt" id="tiedot" aria-labelledby="ktH">
+  <div class="wrap narrow">
+    <h2 class="disp m" id="ktH">Koko katsaus</h2>
+    <dl class="kt-list" id="ktList"></dl>
+    <p class="kt-tr" id="ktTrendi"></p>
+    <h3 class="kt-h3" id="ktMenetelma" tabindex="-1">Näin luvut on laskettu</h3>
+    <p class="kt-p" id="ktTapa"></p>
+    <p class="kt-p">Kirpputoreilla-luku sisältää myös käytetyn tavaran liikkeet, kuten Kaupan liiton jaossa. Kartta: Tilastokeskus ja Natural Earth.</p>
+    <ul class="kt-src" id="ktLahteet"></ul>
+  </div>
+</section>
+
+<!-- MOLEMMAT: puhelin ja kaksi kuvaa, alareuna ruskeaan kaareen -->
+<section class="kh ks2" id="molemmat">
+  <div class="kh-in">
+    <h2 class="disp d80">Molemmat,<br>samalla työllä.</h2>
+    <p class="kh-sub">Kun tuote hinnoitellaan Resellan kassalla, se näkyy ostajille myös verkossa. Sinä myyt hyllyltä kuten ennenkin.</p>
+    <a class="btn l kh-btn" href="varaa.html">Varaa demo</a>
+  </div>
+  <div class="kh-stage">
+    <img class="kh-photo l" src="assets/katsaus/kuitti-tulostuu.webp" alt="Kuitti tulostuu kirppiksen kassalla" loading="lazy">
+    <img class="kh-phone" src="assets/katsaus/puhelin-sanamerkki.webp" alt="Puhelin, jonka näytöllä Resella" loading="lazy">
+    <div class="kh-photo r"><img src="assets/katsaus/kenkarivi.webp" alt="Kenkiä ja vaaterekki kirpputorilla" loading="lazy"><span class="kh-loc"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14s4.5-4.2 4.5-7.5a4.5 4.5 0 10-9 0C3.5 9.8 8 14 8 14z"/><circle cx="8" cy="6.5" r="1.6"/></svg><span id="kaLoc">Uusimaa</span></span></div>
+  </div>
+  <svg class="ks2-arc" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 Q720 320 1440 0 L1440 161 L0 161 Z"/></svg>
+</section>
+
+<!-- KEVYESTI KÄYTTÖÖN -->
+
+<section class="dark band kd" id="kaytto">
+  <div class="wrap">
+    <div class="shead">
+      <h2 class="disp d80">Kevyesti käyttöön</h2>
+      <p class="sub">Yksi järjestelmä omistajalle, kassalle ja myyjälle.</p>
+    </div>
+    <div class="steps">
+      <article class="step step--video"><div class="step__col"><div class="step__text"><h3>Kaikki yhdessä näkymässä</h3><p><b>Omistaja:</b> myynti, provisiot ja pöytävarat yhdellä silmäyksellä.</p></div><ul class="step__list"><li>Raportit</li><li>Pöytäkartta</li><li>ALV</li></ul></div><div style="--x:-11.3;--y:-0.9;--w:142" class="step__media"><video autoplay muted loop playsinline preload="metadata" aria-label="Hallintanäkymä"><source src="assets/katsaus/video/video1_kooste_lapinakyva.webm" type="video/webm"><source src="assets/katsaus/video/video1_kooste.mp4" type="video/mp4"></video></div></article>
+      <article class="step step--video"><div class="step__col"><div class="step__text"><h3>Kassa, joka ei jumita</h3><p><b>Kassa:</b> viivakoodi tai QR, ja myynti kirjautuu myyjälle heti. Toimii myös ilman nettiä.</p></div><ul class="step__list"><li>Viivakoodi</li><li>QR</li><li>Offline</li></ul></div><div style="--x:1;--y:8;--w:116" class="step__media"><video autoplay muted loop playsinline preload="metadata" aria-label="Kassanäkymä"><source src="assets/katsaus/video/video2_kooste_lapinakyva.webm" type="video/webm"><source src="assets/katsaus/video/video2_kooste.mp4" type="video/mp4"></video></div></article>
+      <article class="step step--video"><div class="step__col"><div class="step__text"><h3>Saldo näkyy heti</h3><p><b>Myyjä:</b> näet myyntisi ja tilityksesi puhelimesta.</p></div><ul class="step__list"><li>Saldo</li><li>Tilitys</li><li>Varaukset</li></ul></div><div style="--x:12.27;--y:0;--w:75.28;--ar:1.05" class="step__media step__media--portrait"><video autoplay muted loop playsinline preload="metadata" aria-label="Myyjän saldo puhelimessa"><source src="assets/katsaus/video/video3_kooste_lapinakyva.webm" type="video/webm"><source src="assets/katsaus/video/video3_kooste.mp4" type="video/mp4"></video></div></article>
+      <article class="step step--video"><div class="step__col"><div class="step__text"><h3>Tilitykset yhdellä tiedostolla</h3><p><b>Omistaja:</b> kaikkien myyjien tilitykset yhtenä pankkitiedostona.</p></div><ul class="step__list"><li>Pankkitiedosto</li><li>Provisio</li></ul></div><div style="--x:-11.3;--y:-0.9;--w:142" class="step__media"><video autoplay muted loop playsinline preload="metadata" aria-label="Tilitykset"><source src="assets/katsaus/video/video4_kooste_lapinakyva.webm" type="video/webm"><source src="assets/katsaus/video/video4_kooste.mp4" type="video/mp4"></video></div></article>
+      <article class="step step--video"><div class="step__col"><div class="step__text"><h3>Pöytä varattu minuutissa</h3><p><b>Myyjä:</b> valitse vapaa pöytä ja aika, ja varaus on valmis.</p></div><ul class="step__list"><li>Pöytäkartta</li><li>Varaus</li></ul></div><div style="--x:12.27;--y:0;--w:75.28;--ar:1.05" class="step__media step__media--portrait"><video autoplay muted loop playsinline preload="metadata" aria-label="Pöytävaraus puhelimessa"><source src="assets/katsaus/video/video5_kooste_lapinakyva.webm" type="video/webm"><source src="assets/katsaus/video/video5_kooste.mp4" type="video/mp4"></video></div></article>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- LOPPU-CTA -->
+<section class="band end" id="loppu">
+  <div class="end-in">
+    <p class="end-lead">Haluatko nähdä, miltä oma kirppiksesi näyttää verkossa?</p>
+    <a class="end-btn" href="varaa.html">Varaa demo<span class="ar" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></span></a>
+  </div>
+  <div class="end-wrap"><h2 class="end-big">Rakennetaanko yhdessä?</h2></div>
+</section>
+
+</main>
+<footer class="foot">
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div class="foot-intro"><p class="head">Kysy lisää tai varaa demo</p><a class="btn out s" href="varaa.html">Varaa demo</a></div>
+      <div class="foot-cols">
+        <div class="foot-col"><b>Sivut</b><a href="#alue">Alueesi luvut</a><a href="#tiedot">Koko katsaus</a><a href="#kaytto">Kevyesti käyttöön</a></div>
+        <div class="foot-col"><b>Yritys</b><a href="mailto:info@resella.fi">info@resella.fi</a><a href="tel:+358503233075">050 323 3075</a></div>
+      </div>
+    </div>
+  </div>
+  <img class="wordmark" src="assets/logot/ReSella_sanamerkki_matala_ruskea.svg" alt="Resella">
+  <div class="foot-legal"><span>© 2026 Resella Oy · Espoo · Y 3641828-1</span><a href="tietosuoja.html" target="_blank" rel="noopener">Tietosuoja</a><a href="ehdot.html" target="_blank" rel="noopener">Ehdot</a><span><b>FI</b></span></div>
+</footer>
+</div>
+<script>
+(function(){
+  "use strict";
+  // ylapalkki: kelluva pilleri
+  var gm=document.getElementById('gm'), pill=document.getElementById('gmPill'), gmBurger=document.getElementById('gmBurger'), gmMenu=document.getElementById('gmMenu');
+  var isOpen=false, barW=0, mqMobile=matchMedia('(max-width:640px)');
+  function measurePill(){
+    if(mqMobile.matches){ pill.style.width=''; return; }
+    var cta=pill.querySelector('.gm-cta'), burg=pill.querySelector('.gm-burger');
+    barW=burg.offsetWidth+cta.offsetWidth+10+4+2; // nappi + CTA + vali + pillerin padding
+    applyWidth();
+  }
+  function applyWidth(){
+    if(mqMobile.matches){ pill.style.width=''; return; }
+    if(isOpen){ pill.style.width=Math.max(barW,254)+'px'; }
+    else{ pill.style.width=gm.classList.contains('collapsed') ? '44px' : barW+'px'; }
+  }
+  function darkRegions(){ var a=[document.getElementById('top')]; document.querySelectorAll('section.dark,.scene--pop').forEach(function(s){ a.push(s); }); return a; }
+  var regions=darkRegions();
+  function onScroll(){
+    var y=window.scrollY||0;
+    gm.classList.toggle('collapsed', !mqMobile.matches && y>120);
+    var r=pill.getBoundingClientRect(), cy=r.top+r.height/2, onDark=false;
+    var bk=document.getElementById('bkStage'); if(bk && bk.getAttribute('data-t')==='3' && innerWidth>860){ var br=bk.getBoundingClientRect(); if(cy>=br.top && cy<=br.bottom) onDark=true; }
+    for(var i=0;i<regions.length;i++){ if(!regions[i]) continue; var rr=regions[i].getBoundingClientRect(); if(cy>=rr.top && cy<=rr.bottom){ onDark=true; break; } }
+    gm.classList.toggle('on-dark', onDark);
+    applyWidth();
+  }
+  addEventListener('scroll',onScroll,{passive:true}); window.__gmCheck=onScroll;
+  addEventListener('resize',function(){ regions=darkRegions(); measurePill(); onScroll(); });
+  function closeMenu(){ isOpen=false; gm.classList.remove('open'); gmBurger.setAttribute('aria-expanded','false'); applyWidth(); }
+  function toggleMenu(){ isOpen=!isOpen; gm.classList.toggle('open',isOpen); gmBurger.setAttribute('aria-expanded',isOpen?'true':'false'); applyWidth(); }
+  gmBurger.addEventListener('click',toggleMenu);
+  gmMenu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',closeMenu); });
+  measurePill(); onScroll();
+  try{ new ResizeObserver(function(){ measurePill(); }).observe(pill.querySelector('.gm-cta')); }catch(e){}
+  if(document.fonts&&document.fonts.addEventListener){ document.fonts.addEventListener('loadingdone',measurePill); }
+  setTimeout(measurePill,1500);
+
+  // Sisäiset linkit: vieritys JS:llä (toimii myös upotettuna). Puhelimessa piilotettu osio -> m-versio.
+  function navTarget(id){ var el=document.getElementById(id); if(el && el.offsetParent===null && getComputedStyle(el).position!=='fixed'){ var m=document.getElementById('m-'+id); if(m && m.offsetParent!==null) return m; return null; } return el; }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){ var id=a.getAttribute('href').slice(1); if(!id) return;
+    a.addEventListener('click',function(e){ var t=navTarget(id); e.preventDefault(); if(!t) return; var off=(id==='alku')?0:Math.max(0,t.getBoundingClientRect().top+window.scrollY-10); window.scrollTo({top:id==='alku'?0:off,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); }); });
+  function hideDead(){ document.querySelectorAll('a[href^="#"]').forEach(function(a){ var id=a.getAttribute('href').slice(1); if(!id||a.closest('.gm-logo,.gm-pill-logo')) return; a.style.display=navTarget(id)?'':'none'; }); }
+  hideDead(); addEventListener('resize',hideDead);
+  if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(function(){ measurePill(); }); } addEventListener("load",measurePill);
+  setTimeout(function(){ gm.classList.remove('intro'); }, 900);
+  
+})();
+</script>
+<script>(function(){
+  var D=[{"alue": "Helsinki-Uusimaa", "maakunnat": ["Uusimaa"], "verkko": [169, 215], "kirppis": [45, 57], "verkko_meur": 345, "kirppis_meur": 92, "kirppiksia": 75, "asukkaita_per_kirppis": 24000, "trendi": "Väkiluku kasvoi vuonna 2025 eniten koko maassa ja verkosta ostetaan useammin kuin muualla, joten vuonna 2027 kirppiksen kannattaa näkyä myös verkossa.", "menetelma": "Koko Suomen luvut (verkossa 170 €, kirpputoreilla 55 € asukasta kohden vuodessa) on jaettu alueille kahden tilaston avulla: kuinka suuri osa asukkaista ostaa verkosta (Tilastokeskus 2025) ja kotitalouksien käytettävissä olevat tulot (Tilastokeskus 2023). Kertoimet on tasattu niin, että koko maan keskiarvo pysyy samana. Alueluvut ovat laskettuja eivätkä suoria tilastoja, joten ne näytetään vaihteluvälinä (±12 %). Alueen summa on asukasluku 31.12.2025 kerrottuna euroilla. Kirppisten määrä on Resellan oma hakemisto marraskuussa 2026. Kirpputorien kerrointa on pienennetty 10 %, koska pääkaupunkiseudulla ostetaan kirpputoreilta harvemmin kuin muualla (Helsingin kaupunkitieto).", "lahteet": ["Kaupan liitto 2025: Kiertokauppa kasvanut vauhdilla (18.9.2025)", "Tilastokeskus: Väestörakenne 2025", "Tilastokeskus: Väestön tieto- ja viestintätekniikan käyttö 2025", "Tilastokeskus: Aluetilinpito, kotitalouksien käytettävissä olevat tulot 2023", "Helsingin kaupunkitieto: Jakamistalous Helsingissä", "Resella: itsepalvelukirppisten hakemisto, marraskuu 2026"], "id": "hu", "lyhyt": "Verkosta ostetaan täällä eniten. Kirppiksen kannattaa näkyä myös siellä."}, {"alue": "Etelä-Suomi", "maakunnat": ["Varsinais-Suomi", "Kanta-Häme", "Päijät-Häme", "Kymenlaakso", "Etelä-Karjala"], "verkko": [144, 183], "kirppis": [50, 64], "verkko_meur": 188, "kirppis_meur": 66, "kirppiksia": 62, "asukkaita_per_kirppis": 18600, "trendi": "Turun seutu kasvaa ja Kymenlaakso menettää asukkaita, joten vuonna 2027 ostajat keskittyvät yhä enemmän kasvaviin kaupunkeihin.", "menetelma": "Koko Suomen luvut (verkossa 170 €, kirpputoreilla 55 € asukasta kohden vuodessa) on jaettu alueille kahden tilaston avulla: kuinka suuri osa asukkaista ostaa verkosta (Tilastokeskus 2025) ja kotitalouksien käytettävissä olevat tulot (Tilastokeskus 2023). Kertoimet on tasattu niin, että koko maan keskiarvo pysyy samana. Alueluvut ovat laskettuja eivätkä suoria tilastoja, joten ne näytetään vaihteluvälinä (±12 %). Alueen summa on asukasluku 31.12.2025 kerrottuna euroilla. Kirppisten määrä on Resellan oma hakemisto marraskuussa 2026.", "lahteet": ["Kaupan liitto 2025: Kiertokauppa kasvanut vauhdilla (18.9.2025)", "Tilastokeskus: Väestörakenne 2025", "Tilastokeskus: Väestön tieto- ja viestintätekniikan käyttö 2025", "Tilastokeskus: Aluetilinpito, kotitalouksien käytettävissä olevat tulot 2023", "Resella: itsepalvelukirppisten hakemisto, marraskuu 2026"], "id": "es", "lyhyt": "Ostajat keskittyvät kasvaviin kaupunkeihin, kuten Turun seudulle."}, {"alue": "Länsi-Suomi", "maakunnat": ["Satakunta", "Pirkanmaa", "Keski-Suomi", "Etelä-Pohjanmaa", "Pohjanmaa"], "verkko": [141, 180], "kirppis": [50, 63], "verkko_meur": 225, "kirppis_meur": 79, "kirppiksia": 53, "asukkaita_per_kirppis": 26400, "trendi": "Pirkanmaa kasvaa ja Satakunta menettää asukkaita, joten vuonna 2027 kysyntä vahvistuu erityisesti Tampereen seudulla.", "menetelma": "Koko Suomen luvut (verkossa 170 €, kirpputoreilla 55 € asukasta kohden vuodessa) on jaettu alueille kahden tilaston avulla: kuinka suuri osa asukkaista ostaa verkosta (Tilastokeskus 2025) ja kotitalouksien käytettävissä olevat tulot (Tilastokeskus 2023). Kertoimet on tasattu niin, että koko maan keskiarvo pysyy samana. Alueluvut ovat laskettuja eivätkä suoria tilastoja, joten ne näytetään vaihteluvälinä (±12 %). Alueen summa on asukasluku 31.12.2025 kerrottuna euroilla. Kirppisten määrä on Resellan oma hakemisto marraskuussa 2026.", "lahteet": ["Kaupan liitto 2025: Kiertokauppa kasvanut vauhdilla (18.9.2025)", "Tilastokeskus: Väestörakenne 2025", "Tilastokeskus: Väestön tieto- ja viestintätekniikan käyttö 2025", "Tilastokeskus: Aluetilinpito, kotitalouksien käytettävissä olevat tulot 2023", "Resella: itsepalvelukirppisten hakemisto, marraskuu 2026"], "id": "ls", "lyhyt": "Kysyntä vahvistuu erityisesti Tampereen seudulla."}, {"alue": "Pohjois- ja Itä-Suomi", "maakunnat": ["Etelä-Savo", "Pohjois-Savo", "Pohjois-Karjala", "Keski-Pohjanmaa", "Pohjois-Pohjanmaa", "Kainuu", "Lappi"], "verkko": [137, 175], "kirppis": [50, 63], "verkko_meur": 198, "kirppis_meur": 72, "kirppiksia": 41, "asukkaita_per_kirppis": 30900, "trendi": "Väestö vähenee suuressa osassa aluetta, mutta Kuopioon ja Ouluun avatut suuret itsepalvelukirppikset näyttävät, että vuonna 2027 kysyntä keskittyy kasvukeskuksiin.", "menetelma": "Koko Suomen luvut (verkossa 170 €, kirpputoreilla 55 € asukasta kohden vuodessa) on jaettu alueille kahden tilaston avulla: kuinka suuri osa asukkaista ostaa verkosta (Tilastokeskus 2025) ja kotitalouksien käytettävissä olevat tulot (Tilastokeskus 2023). Kertoimet on tasattu niin, että koko maan keskiarvo pysyy samana. Alueluvut ovat laskettuja eivätkä suoria tilastoja, joten ne näytetään vaihteluvälinä (±12 %). Alueen summa on asukasluku 31.12.2025 kerrottuna euroilla. Kirppisten määrä on Resellan oma hakemisto marraskuussa 2026.", "lahteet": ["Kaupan liitto 2025: Kiertokauppa kasvanut vauhdilla (18.9.2025)", "Tilastokeskus: Väestörakenne 2025", "Tilastokeskus: Väestön tieto- ja viestintätekniikan käyttö 2025", "Tilastokeskus: Aluetilinpito, kotitalouksien käytettävissä olevat tulot 2023", "Resella: itsepalvelukirppisten hakemisto, marraskuu 2026"], "id": "pi", "lyhyt": "Kysyntä keskittyy kasvukeskuksiin, kuten Ouluun ja Kuopioon."}, {"alue": "Ahvenanmaa", "maakunnat": ["Ahvenanmaa"], "verkko": [121, 182], "kirppis": [55, 82], "verkko_meur": 4.7, "kirppis_meur": 2.1, "kirppiksia": 2, "asukkaita_per_kirppis": 15400, "trendi": "Väkiluku kasvaa hitaasti ja verkkotilaukset muualta ovat tullauksen vuoksi hankalampia, joten vuonna 2027 paikallisen kirppiksen asema pysyy vahvana.", "menetelma": "Koko Suomen luvut (verkossa 170 €, kirpputoreilla 55 € asukasta kohden vuodessa) on jaettu alueille kahden tilaston avulla: kuinka suuri osa asukkaista ostaa verkosta (Tilastokeskus 2025) ja kotitalouksien käytettävissä olevat tulot (Tilastokeskus 2023). Kertoimet on tasattu niin, että koko maan keskiarvo pysyy samana. Alueluvut ovat laskettuja eivätkä suoria tilastoja, joten ne näytetään vaihteluvälinä (±20 %). Alueen summa on asukasluku 31.12.2025 kerrottuna euroilla. Kirppisten määrä on Resellan oma hakemisto marraskuussa 2026. Ahvenanmaan verkko-ostamista ei tilastoida, joten sen on oletettu olevan 15 % koko maata pienempää, koska muualta tilatut paketit tullataan ja niistä maksetaan arvonlisävero. Alueella on vain kaksi kirppistä, joten asukkaita per kirppis on suuntaa antava.", "lahteet": ["Kaupan liitto 2025: Kiertokauppa kasvanut vauhdilla (18.9.2025)", "ÅSUB: Invånarantalet 31.12.2025", "Tilastokeskus: Aluetilinpito, kotitalouksien käytettävissä olevat tulot 2023", "Tulli: Arvonlisäverouudistus Ahvenanmaalla 1.7.2021", "Resella: itsepalvelukirppisten hakemisto, marraskuu 2026"], "id": "ah", "lyhyt": "Paikallisen kirppiksen asema pysyy vahvana."}];
+  var K={hu:[192,51],es:[163,57],ls:[161,57],pi:[156,56],ah:[152,68]};
+  var LOC={hu:'Uusimaa',es:'Etelä-Suomi',ls:'Länsi-Suomi',pi:'Pohjois- ja Itä-Suomi',ah:'Ahvenanmaa'};
+  var $=function(id){return document.getElementById(id);};
+  var norm=function(s){return String(s||'').toLowerCase().replace(/[^a-zåäö]/g,'');};
+  var q=''; try{ q=new URLSearchParams(location.search).get('alue')||''; }catch(e){}
+  var a=D[0], n=norm(q);
+  if(n){ D.forEach(function(x){ if(norm(x.id)===n||norm(x.alue)===n||x.maakunnat.some(function(m){return norm(m)===n;})) a=x; }); }
+  var eur=function(v){return String(v).replace('.',',')+' €';};
+  var big=function(v){return v>=1000?String(v).replace(/\B(?=(\d{3})+(?!\d))/g,' '):String(v);};
+  $('kaNimi').textContent=a.alue; $('kaVerkko').textContent=eur(K[a.id][0]); $('kaKirppis').textContent=eur(K[a.id][1]);
+  $('kaTrendi').textContent=a.lyhyt; $('kaLoc').textContent=LOC[a.id];
+  document.title=a.alue+': kirppiskatsaus 2027 · Resella';
+  $('ktH').textContent=a.alue+', koko katsaus';
+  var rows=[['Verkossa per asukas',a.verkko[0]+'–'+eur(a.verkko[1])+' (koko Suomi 170 €)'],['Kirpputoreilla per asukas',a.kirppis[0]+'–'+eur(a.kirppis[1])+' (koko Suomi 55 €)'],['Ostot verkossa alueella','noin '+String(a.verkko_meur).replace('.',',')+' M€'],['Ostot kirpputoreilla alueella','noin '+String(a.kirppis_meur).replace('.',',')+' M€'],['Itsepalvelukirppiksiä',String(a.kirppiksia)],['Asukkaita per kirppis','noin '+big(a.asukkaita_per_kirppis)]];
+  $('ktList').innerHTML=rows.map(function(r){return '<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>';}).join('');
+  $('ktTrendi').textContent=a.trendi; $('ktTapa').textContent=a.menetelma;
+  $('ktLahteet').innerHTML=a.lahteet.map(function(l){return '<li>'+l.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</li>';}).join('');
+  var kt=$('tiedot'); kt.classList.add('closed');
+  document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener('click',function(){ kt.classList.remove('closed'); var t=$(b.getAttribute('data-open')); var y=t.getBoundingClientRect().top+scrollY-24; scrollTo({top:y,behavior:red?'auto':'smooth'}); if(t.id==='ktMenetelma') t.focus({preventScroll:true}); }); });
+
+  // kartta: koko Suomi, alue korostuu, zoom alueeseen, luvut esiin
+  var red=false; try{ red=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  var sec=$('alue'), box=$('kaMap'), svg=null, fin=null, reg=null, done=false;
+  function go(){ sec.classList.add('go'); }
+  function target(){ var s=sec.getBoundingClientRect(), mob=innerWidth<=760;
+    if(mob){ var p=$('kaSpace').getBoundingClientRect(); return {x:0,y:p.top-s.top,w:s.width,h:p.height,k:.82}; }
+    var h=$('kaHead').getBoundingClientRect(), nm=$('kaNums').getBoundingClientRect(); return {x:0,y:h.bottom-s.top,w:nm.left-s.left-24,h:s.bottom-h.bottom,k:.78}; }
+  function vb(bb,t){ var W=sec.clientWidth,H=sec.clientHeight, s=Math.min(t.w*t.k/bb.width,t.h*t.k/bb.height); return [bb.x+bb.width/2-(t.x+t.w/2)/s, bb.y+bb.height/2-(t.y+t.h/2)/s, W/s, H/s]; }
+  function set(v){ svg.setAttribute('viewBox',v.map(function(x){return x.toFixed(2);}).join(' ')); }
+  function ease(t){ return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; }
+  function anim(){ var W=sec.clientWidth,H=sec.clientHeight, a0=vb(fin,{x:0,y:0,w:W,h:H,k:.9}), a1=vb(reg.getBBox(),target());
+    set(a0); setTimeout(function(){ reg.classList.add('on'); },350);
+    var t0=null, dur=1400; setTimeout(function(){ requestAnimationFrame(function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur), e=ease(p);
+      // zoom logaritmisesti, jotta liike tuntuu tasaiselta
+      var z=Math.exp(Math.log(a0[2])+(Math.log(a1[2])-Math.log(a0[2]))*e), f=(a0[2]-z)/(a0[2]-a1[2]||1);
+      set([a0[0]+(a1[0]-a0[0])*f, a0[1]+(a1[1]-a0[1])*f, z, a0[3]*z/a0[2]]);
+      if(p<1) requestAnimationFrame(step); else { done=true; go(); } }); },800); }
+  function final(){ if(!svg) return; set(vb(reg.getBBox(),target())); }
+  function start(){ if(red){ reg.classList.add('on'); final(); done=true; go(); return; }
+    if(!('IntersectionObserver' in window)){ anim(); return; }
+    var io=new IntersectionObserver(function(es){ if(es[0].isIntersecting){ io.disconnect(); anim(); } },{threshold:.3}); io.observe(sec); }
+  fetch('assets/katsaus/kartta.svg').then(function(r){ if(!r.ok) throw 0; return r.text(); }).then(function(t){
+    box.innerHTML=t; svg=box.querySelector('svg'); svg.setAttribute('preserveAspectRatio','none');
+    var ids=['hu','es','ls','pi','ah'], x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+    ids.forEach(function(i){ var b=svg.getElementById(i).getBBox(); x0=Math.min(x0,b.x);y0=Math.min(y0,b.y);x1=Math.max(x1,b.x+b.width);y1=Math.max(y1,b.y+b.height); });
+    fin={x:x0,y:y0,width:x1-x0,height:y1-y0}; reg=svg.getElementById(a.id); start();
+  }).catch(function(){ go(); });
+  addEventListener('resize',function(){ if(done) final(); });
+  setTimeout(function(){ if(!sec.classList.contains('go')) go(); },6000);
+})();
+</script>
+</body>
+</html>
