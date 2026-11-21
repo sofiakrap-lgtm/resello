@@ -1511,7 +1511,7 @@ img.kh-photo.l{object-position:22% 50%}
   function go(){ sec.classList.add('go'); }
   function target(){ var s=sec.getBoundingClientRect(), mob=innerWidth<=760;
     if(mob){ var p=$('kaSpace').getBoundingClientRect(); return {x:0,y:p.top-s.top,w:s.width,h:p.height,k:.82}; }
-    var h=$('kaHead').getBoundingClientRect(), nm=$('kaNums').getBoundingClientRect(); return {x:0,y:h.bottom-s.top,w:nm.left-s.left-24,h:s.bottom-h.bottom,k:.78}; }
+    var h=$('kaHead').getBoundingClientRect(), nm=$('kaNums').getBoundingClientRect(); return {x:0,y:h.bottom-s.top,w:nm.left-s.left-24,h:s.bottom-h.bottom,k:.72}; }
   function vb(bb,t){ var W=sec.clientWidth,H=sec.clientHeight, s=Math.min(t.w*t.k/bb.width,t.h*t.k/bb.height); return [bb.x+bb.width/2-(t.x+t.w/2)/s, bb.y+bb.height/2-(t.y+t.h/2)/s, W/s, H/s]; }
   function set(v){ svg.setAttribute('viewBox',v.map(function(x){return x.toFixed(2);}).join(' ')); }
   function ease(t){ return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; }
