@@ -1343,6 +1343,16 @@ img.kh-photo.l{object-position:22% 50%}
   .kg-foot{flex-direction:column;align-items:flex-start}
 }
 @media(prefers-reduced-motion:reduce){.kg-fill{transition:none}}
+
+.kg-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+.kg-stat{padding:clamp(20px,2.2vw,28px) clamp(22px,2.4vw,32px)}
+.kg-stat+.kg-stat{border-left:1px solid var(--ink)}
+.kg-stat b{display:flex;align-items:baseline;gap:4px;font:600 clamp(36px,3.6vw,48px)/1 var(--fd);letter-spacing:-.03em}
+.kg-stat b small{font-size:.38em;font-weight:500;letter-spacing:0}
+.kg-stat span{display:block;margin-top:8px;font-size:14px;line-height:1.4;color:var(--ink-muted)}
+.kg-val small{display:block;font-size:11px;font-weight:500;color:var(--ink-muted)}
+.kg-bar{grid-template-columns:200px minmax(0,1fr) 72px}
+@media(max-width:760px){.kg-stats{grid-template-columns:1fr 1fr}.kg-stat:nth-child(3){border-left:0}.kg-stat:nth-child(n+3){border-top:1px solid var(--ink)}.kg-bar{grid-template-columns:1fr 64px}}
 </style>
 </head>
 <body>
@@ -1405,6 +1415,7 @@ img.kh-photo.l{object-position:22% 50%}
         <div class="kg-c kg-share"><p class="kg-big"><span id="ktOsuus">79</span><small>%</small></p><p class="kg-cap">alueen käytetyn tavaran ostoista tehdään verkossa</p></div>
         <div class="kg-c kg-bars" id="ktBars"></div>
       </div>
+      <div class="kg-row kg-stats" id="ktStats"></div>
       <div class="kg-row kg-foot">
         <p class="kg-tr" id="ktTrendi"></p>
         <button class="kg-pill kg-btn" type="button" data-open="ktMenetelma" id="ktOpen">Näin luvut on laskettu</button>
@@ -1544,8 +1555,10 @@ img.kh-photo.l{object-position:22% 50%}
   document.title=a.alue+': kirppiskatsaus 2027 · Resella';
   $('ktH').textContent=a.alue;
   $('ktOsuus').textContent=Math.round(100*a.verkko_meur/(a.verkko_meur+a.kirppis_meur));
-  var MAXB=230, bars=[['Verkossa, '+LOC[a.id],K[a.id][0],1],['Verkossa, koko Suomi',170,0],['Kirpputoreilla, '+LOC[a.id],K[a.id][1],1],['Kirpputoreilla, koko Suomi',55,0]];
-  $('ktBars').innerHTML=bars.map(function(r){return '<div class="kg-bar'+(r[2]?' on':'')+'"><span class="kg-pill">'+r[0]+'</span><span class="kg-track"><span class="kg-fill" data-w="'+(100*r[1]/MAXB).toFixed(1)+'"></span></span><span class="kg-val">'+eur(r[1])+'</span></div>';}).join('');
+  var MAXB=230, bars=[['Verkossa, '+LOC[a.id],K[a.id][0],1,a.verkko],['Verkossa, koko Suomi',170,0],['Kirpputoreilla, '+LOC[a.id],K[a.id][1],1,a.kirppis],['Kirpputoreilla, koko Suomi',55,0]];
+  $('ktBars').innerHTML=bars.map(function(r){return '<div class="kg-bar'+(r[2]?' on':'')+'"><span class="kg-pill">'+r[0]+'</span><span class="kg-track"><span class="kg-fill" data-w="'+(100*r[1]/MAXB).toFixed(1)+'"></span></span><span class="kg-val">'+eur(r[1])+(r[3]?'<small>'+r[3][0]+'\u2013'+r[3][1]+'\u00a0€</small>':'')+'</span></div>';}).join('');
+  var st=[[String(a.verkko_meur).replace('.',','),'M€','ostot verkossa alueella vuodessa'],[String(a.kirppis_meur).replace('.',','),'M€','ostot kirpputoreilla alueella vuodessa'],[String(a.kirppiksia),'','itsepalvelukirppistä alueella'],[big(a.asukkaita_per_kirppis),'','asukasta per kirppis']];
+  $('ktStats').innerHTML=st.map(function(s){return '<div class="kg-stat"><b>'+s[0]+(s[1]?'<small>'+s[1]+'</small>':'')+'</b><span>'+s[2]+'</span></div>';}).join('');
   $('ktTrendi').textContent=a.trendi; $('ktTapa').textContent=a.menetelma;
   $('ktLahteet').innerHTML=a.lahteet.map(function(l){return '<li>'+l.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</li>';}).join('');
   var kt=$('tiedot'); kt.classList.add('closed');
