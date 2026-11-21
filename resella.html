@@ -90,7 +90,7 @@ section[id]{scroll-margin-top:72px}
 .gm-pill-logo{display:none}
 .gm-login{font:500 16px/1 var(--fb);letter-spacing:-.2px;color:inherit;transition:opacity .16s linear}
 .gm-login:hover{opacity:.65}
-.gm-cta{height:40px;padding:0 16px;border-radius:300px;display:inline-flex;align-items:center;min-width:0;font:500 15px/1 var(--fb);letter-spacing:-.2px;background:var(--bg);color:var(--ink);white-space:nowrap;transition:opacity .16s linear,background-color .2s var(--ease-std),color .2s var(--ease-std)}
+.gm-cta{flex:none;height:40px;padding:0 16px;border-radius:300px;display:inline-flex;align-items:center;min-width:0;font:500 15px/1 var(--fb);letter-spacing:-.2px;background:var(--bg);color:var(--ink);white-space:nowrap;transition:opacity .16s linear,background-color .2s var(--ease-std),color .2s var(--ease-std)}
 .gm.on-dark .gm-cta{background:var(--ink);color:var(--bg)}
 .gm-cta:hover{background:var(--line)}
 .gm.on-dark .gm-cta:hover{background:var(--brown-hover)}
@@ -1760,7 +1760,7 @@ try{ var _q=new URLSearchParams(location.search); ["utm_source","utm_medium","ut
   function measurePill(){
     if(mqMobile.matches){ pill.style.width=''; return; }
     var cta=pill.querySelector('.gm-cta'), burg=pill.querySelector('.gm-burger');
-    barW=burg.offsetWidth+cta.offsetWidth+10+4; // nappi + CTA + vali + pillerin padding
+    barW=Math.ceil(burg.getBoundingClientRect().width+cta.getBoundingClientRect().width)+10+6; // nappi + CTA + vali + pillerin padding
     applyWidth();
   }
   function applyWidth(){
@@ -1786,6 +1786,8 @@ try{ var _q=new URLSearchParams(location.search); ["utm_source","utm_medium","ut
   gmBurger.addEventListener('click',toggleMenu);
   gmMenu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',closeMenu); });
   measurePill(); onScroll();
+  try{ new ResizeObserver(function(){ measurePill(); }).observe(pill.querySelector('.gm-cta')); }catch(e){}
+  if(document.fonts&&document.fonts.addEventListener){ document.fonts.addEventListener('loadingdone',measurePill); }
   setTimeout(function(){ gm.classList.remove('intro'); }, 900);
   // scroll reveal (>=980px, ei reduced-motion, ei herossa/footerissa)
   try{
