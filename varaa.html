@@ -71,6 +71,8 @@ input::placeholder{color:#9C9087}
 .submit:hover{background:#2A1814}
 .submit:disabled{background:var(--line);color:var(--ink-muted);cursor:default}
 .small{margin:0;text-align:center;font-size:14px;color:var(--ink-muted)}
+.cal-embed{min-height:520px;width:100%;overflow:auto}
+.card .small{text-align:left}
 .done{text-align:left}
 .done h2{margin:0 0 10px;font-size:32px;font-weight:600;letter-spacing:-.03em;line-height:1.05}
 .done p{margin:0 0 12px;color:var(--ink-muted);line-height:1.5}
@@ -105,154 +107,24 @@ input::placeholder{color:#9C9087}
       <p class="sign">Sofia ja Leon</p>
     </section>
 
-    <section class="card" aria-label="Varauslomake">
-      <form id="form" novalidate>
-        <div style="display:flex;flex-direction:column;gap:28px">
-          <div>
-            <div class="cal-h">
-              <h2 id="month" aria-live="polite">Kuukausi</h2>
-              <div class="cal-nav"><button type="button" id="prev">Edellinen</button><button type="button" id="next">Seuraava</button></div>
-            </div>
-            <div class="grid" id="grid" style="margin-top:20px" role="group" aria-label="Valitse päivä"></div>
-          </div>
-          <div class="hr"></div>
-          <div>
-            <h3 class="day-h" id="dayH">Valitse päivä</h3>
-            <div class="times" id="times" role="group" aria-label="Valitse aika"></div>
-            <p class="empty" id="noTimes" hidden>Tälle päivälle ei ole vapaita aikoja.</p>
-          </div>
-          <div class="hr"></div>
-          <div class="fields">
-            <label>Nimi<input id="nimi" name="nimi" autocomplete="name" required></label>
-            <label>Sähköposti<input id="email" name="email" type="email" autocomplete="email" required></label>
-            <label>Kirppis ja paikkakunta<input id="kirppis" name="kirppis" placeholder="esim. Kirppis Keskusta, Espoo" required></label>
-          </div>
-          <input id="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-          <button class="submit" id="submit" type="submit" disabled>Valitse päivä ja aika</button>
-          <p class="small form-err" id="formErr" role="alert" hidden></p>
-          <p class="small">Lähetämme vahvistuksen ja videopuhelun linkin sähköpostiin. <a href="tietosuoja.html">Tietosuoja</a></p>
-        </div>
-      </form>
-
-      <div class="done" id="done" hidden>
-        <h2 id="doneH">Melkein valmista.</h2>
-        <p id="doneText"></p>
-        <p id="doneFallback">Jos sähköpostiohjelma ei auennut, lähetä nimesi ja toivottu aika osoitteeseen <a id="doneMail" href="mailto:info@resella.fi">info@resella.fi</a>.</p>
-      </div>
+    <section class="card" aria-label="Varauskalenteri">
+      <div id="cal" class="cal-embed"><p class="empty" id="calLoad">Ladataan kalenteria</p></div>
+      <p class="small">Valitse aika. Vahvistamme sen sähköpostilla, ja vahvistuksessa on videopuhelun linkki. <a href="tietosuoja.html">Tietosuoja</a></p>
+      <p class="small" id="calFb" hidden>Kalenteri ei näy? Lähetä toivottu aika osoitteeseen <a href="mailto:info@resella.fi">info@resella.fi</a>.</p>
     </section>
   </main>
 </div>
 
-<script src="avoimet-ajat.js"></script>
 <script>
+(function(C,A,L){var p=function(a,ar){a.q.push(ar);};var d=C.document;C.Cal=C.Cal||function(){var cal=C.Cal;var ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];var sc=d.createElement("script");sc.src=A;sc.onerror=function(){C.calFail&&C.calFail();};d.head.appendChild(sc);cal.loaded=true;}if(ar[0]===L){var api=function(){p(api,arguments);};var ns=ar[1];api.q=api.q||[];if(typeof ns==="string"){cal.ns[ns]=cal.ns[ns]||api;p(cal.ns[ns],ar);p(cal,["initNamespace",ns]);}else p(cal,ar);return;}p(cal,ar);};})(window,"https://app.cal.com/embed/embed.js","init");
 (function(){
-  var A=window.RESELLA_AJAT||{viikko:{},aikaisintaan:2,enintaan:42,eiAikoja:[],varatut:[],kesto:60,sahkoposti:'info@resella.fi'};
-  var KUUT=['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'];
-  var PV=['su','ma','ti','ke','to','pe','la'], PVPITKA=['Sunnuntai','Maanantai','Tiistai','Keskiviikko','Torstai','Perjantai','Lauantai'];
-  var $=function(id){return document.getElementById(id);};
-  var pad=function(n){return (n<10?'0':'')+n;};
-  var iso=function(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
-  var fi=function(d){return d.getDate()+'.'+(d.getMonth()+1)+'.';};
-  if(A.kesto){ $('kesto').textContent = A.kesto===60?'1 tunti':(A.kesto%60===0?(A.kesto/60)+' tuntia':A.kesto+' min'); }
-
-  var EN=document.documentElement.lang==='en', API=A.varausUrl||'', AJAT=null;
-  var T=EN?{load:'Loading free times',ok:'Request sent.',okText:function(a,e){return 'Thanks! We received your request for '+a+'. We will confirm the time by email to '+e+', and the confirmation includes the video call link.';},busy:'Someone just booked this time. Please choose another one.',err:'Sending failed. Please try again or email us.',sending:'Sending'}
-          :{load:'Haetaan vapaita aikoja',ok:'Pyyntö lähetetty.',okText:function(a,e){return 'Kiitos! Saimme pyyntösi ajalle '+a+'. Vahvistamme ajan sähköpostilla osoitteeseen '+e+', ja vahvistuksessa on videopuhelun linkki.';},busy:'Joku ehti varata tämän ajan juuri. Valitse toinen aika.',err:'Lähetys ei onnistunut. Yritä uudelleen tai lähetä meille sähköpostia.',sending:'Lähetetään'};
-  var today=new Date(); today.setHours(0,0,0,0);
-  var first=new Date(today); first.setDate(first.getDate()+(A.aikaisintaan||0));
-  var last=new Date(today); last.setDate(last.getDate()+(A.enintaan||42));
-
-  function closed(d){ var s=iso(d); return (A.eiAikoja||[]).some(function(e){ return Array.isArray(e)? (s>=e[0]&&s<=e[1]) : s===e; }); }
-  function slots(d){ if(AJAT) return AJAT[iso(d)]||[]; if(d<first||d>last||closed(d)) return []; return (A.viikko[PV[d.getDay()]]||[]); }
-  function taken(d,t){ if(AJAT) return false; return (A.varatut||[]).indexOf(iso(d)+' '+t)>-1; }
-  function hasFree(d){ return slots(d).some(function(t){return !taken(d,t);}); }
-
-  // ensimmäinen vapaa päivä
-  var sel=null, time=null;
-  for(var x=new Date(first); x<=last; x.setDate(x.getDate()+1)){ if(hasFree(x)){ sel=new Date(x); break; } }
-  var view=new Date((sel||first).getFullYear(),(sel||first).getMonth(),1);
-
-  function renderCal(){
-    var g=$('grid'); g.innerHTML='';
-    $('month').textContent=KUUT[view.getMonth()]+(view.getFullYear()!==today.getFullYear()?' '+view.getFullYear():'');
-    ['ma','ti','ke','to','pe','la','su'].forEach(function(w){ var e=document.createElement('div'); e.className='wd'; e.textContent=w; g.appendChild(e); });
-    var lead=(view.getDay()+6)%7;
-    for(var i=0;i<lead;i++){ var e=document.createElement('div'); e.className='d'; g.appendChild(e); }
-    var days=new Date(view.getFullYear(),view.getMonth()+1,0).getDate();
-    for(var dd=1; dd<=days; dd++){
-      var d=new Date(view.getFullYear(),view.getMonth(),dd), cell=document.createElement('div'); cell.className='d';
-      if(hasFree(d)){
-        var b=document.createElement('button'); b.type='button'; b.textContent=dd;
-        b.setAttribute('aria-label',PVPITKA[d.getDay()]+' '+fi(d)+', vapaita aikoja');
-        b.setAttribute('aria-pressed', sel&&iso(sel)===iso(d)?'true':'false');
-        (function(dc){ b.addEventListener('click',function(){ sel=dc; time=null; renderCal(); renderTimes(); }); })(d);
-        cell.appendChild(b);
-      } else { var s=document.createElement('span'); s.textContent=dd; s.setAttribute('aria-hidden','true'); cell.appendChild(s); }
-      g.appendChild(cell);
-    }
-    var prevM=new Date(view.getFullYear(),view.getMonth()-1,1), nextM=new Date(view.getFullYear(),view.getMonth()+1,1);
-    $('prev').disabled = new Date(view.getFullYear(),view.getMonth(),0) < first;
-    $('next').disabled = nextM > last;
-  }
-  function renderTimes(){
-    var w=$('times'); w.innerHTML='';
-    if(!sel){ $('dayH').textContent='Ei vapaita aikoja'; $('noTimes').hidden=false; update(); return; }
-    $('dayH').textContent=PVPITKA[sel.getDay()]+' '+fi(sel);
-    var ts=slots(sel); $('noTimes').hidden=ts.length>0;
-    ts.forEach(function(t){
-      var b=document.createElement('button'); b.type='button'; b.textContent=t;
-      if(taken(sel,t)){ b.disabled=true; b.setAttribute('aria-label',t+', varattu'); }
-      b.setAttribute('aria-pressed', time===t?'true':'false');
-      b.addEventListener('click',function(){ time=t; renderTimes(); });
-      w.appendChild(b);
-    });
-    update();
-  }
-  function update(){
-    var s=$('submit');
-    if(sel&&time){ s.disabled=false; s.textContent='Varaa '+PV[sel.getDay()]+' '+fi(sel)+' klo '+time; }
-    else { s.disabled=true; s.textContent=sel?'Valitse aika':'Valitse päivä ja aika'; }
-  }
-  $('prev').addEventListener('click',function(){ view=new Date(view.getFullYear(),view.getMonth()-1,1); renderCal(); });
-  $('next').addEventListener('click',function(){ view=new Date(view.getFullYear(),view.getMonth()+1,1); renderCal(); });
-
-  $('form').addEventListener('submit',function(e){
-    e.preventDefault();
-    var f=['nimi','email','kirppis'].map($), bad=f.filter(function(i){return !i.checkValidity()||!i.value.trim();});
-    if(bad.length){ bad[0].focus(); bad[0].reportValidity&&bad[0].reportValidity(); return; }
-    if(API&&AJAT){ book(f); return; }
-    var aika=PVPITKA[sel.getDay()]+' '+fi(sel)+' klo '+time;
-    var body='Hei,\n\nhaluaisin varata Resellan esittelyn.\n\nAika: '+aika+'\nNimi: '+f[0].value.trim()+'\nSähköposti: '+f[1].value.trim()+'\nKirppis: '+f[2].value.trim()+'\n';
-    var mail='mailto:'+(A.sahkoposti||'info@resella.fi')+'?subject='+encodeURIComponent('Esittelyvaraus: '+aika)+'&body='+encodeURIComponent(body);
-    $('doneText').textContent='Varausviesti ajalle '+aika.toLowerCase()+' on valmiina sähköpostiohjelmassasi. Lähetä se, niin vahvistamme ajan ja lähetämme videopuhelun linkin.';
-    $('doneMail').href=mail;
-    $('form').hidden=true; $('done').hidden=false;
-    location.href=mail;
-  });
-
-  function pick(){ sel=null; time=null; for(var x=new Date(first); x<=last; x.setDate(x.getDate()+1)){ if(hasFree(x)){ sel=new Date(x); break; } } view=new Date((sel||first).getFullYear(),(sel||first).getMonth(),1); }
-  function load(keep){
-    if(!API) return;
-    if(!keep){ $('dayH').textContent=T.load; $('times').innerHTML=''; $('noTimes').hidden=true; }
-    fetch(API+'?action=ajat',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
-      if(!d||!d.ok||!d.ajat) throw 0;
-      AJAT=d.ajat; var k=Object.keys(AJAT).sort();
-      if(k.length){ var p=function(s){var a=s.split('-');return new Date(+a[0],a[1]-1,+a[2]);}; first=p(k[0]); last=p(k[k.length-1]); }
-      if(!keep||!sel||!hasFree(sel)) pick(); else time=null;
-      renderCal(); renderTimes();
-    }).catch(function(){ API=''; AJAT=null; renderCal(); renderTimes(); });
-  }
-  function book(f){
-    var s=$('submit'), err=$('formErr'), aika=PVPITKA[sel.getDay()]+' '+fi(sel)+(EN?' at ':' klo ')+(EN?time.replace('.',':'):time);
-    err.hidden=true; s.disabled=true; s.textContent=T.sending;
-    fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({nimi:f[0].value.trim(),email:f[1].value.trim(),kirppis:f[2].value.trim(),paiva:iso(sel),aika:time,kieli:EN?'en':'fi',hp:$('hp').value})})
-      .then(function(r){return r.json();}).then(function(d){
-        if(d&&d.ok){ $('doneH').textContent=T.ok; $('doneText').textContent=T.okText(EN?aika:aika.toLowerCase(),f[1].value.trim()); $('doneFallback').hidden=true; $('form').hidden=true; $('done').hidden=false; window.scrollTo(0,0); return; }
-        err.textContent=(d&&d.virhe==='varattu')?T.busy:T.err; err.hidden=false; update();
-        if(d&&d.virhe==='varattu') load(true);
-      }).catch(function(){ err.textContent=T.err; err.hidden=false; update(); });
-  }
-  renderCal(); renderTimes(); load();
+  var ok=false, fb=document.getElementById('calFb'), ld=document.getElementById('calLoad');
+  window.calFail=function(){ if(ok) return; if(ld) ld.hidden=true; fb.hidden=false; };
+  Cal("init","demo",{origin:"https://app.cal.com"});
+  Cal.ns.demo("inline",{elementOrSelector:"#cal",calLink:"resella/demo",config:{layout:"month_view",theme:"light"}});
+  Cal.ns.demo("ui",{theme:"light",hideEventTypeDetails:true,layout:"month_view",cssVarsPerTheme:{light:{"cal-brand":"#3E2520","cal-brand-emphasis":"#2A1814","cal-brand-text":"#ECECDC"}}});
+  Cal.ns.demo("on",{action:"linkReady",callback:function(){ ok=true; if(ld) ld.hidden=true; fb.hidden=true; }});
+  setTimeout(window.calFail,10000);
 })();
 </script>
 </body>

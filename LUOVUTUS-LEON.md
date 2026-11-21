@@ -10,8 +10,7 @@ Tämä kuvaa, mitä sivulla pitää toimia ja mitä käyttäjä näkee. Toteutus
 |---|---|
 | `resella.html` | Etusivu. Tietokone- ja mobiiliversio ovat samassa tiedostossa. Mobiiliosiot alkavat `m-` (esim. `#m-odotuslista`) ja näkyvät alle 900 px leveydellä |
 | `odotuslista.html` | Odotuslistan lomakesivu |
-| `varaa.html` | Demon varaussivu (kalenteri ja lomake) |
-| `avoimet-ajat.js` | Demon avoimet ajat, joita Sofia muokkaa käsin |
+| `varaa.html`, `book.html` | Demon varaussivu FI ja EN. Cal.comin upotettu kalenteri (cal.com/resella/demo) |
 | `tietosuoja.html` | Tietosuojaseloste (16.11.2026) |
 | `ehdot.html` | Nettisivun käyttöehdot |
 | `en.html`, `book.html`, `waitlist.html`, `privacy.html`, `terms.html` | Englanninkieliset versiot (ks. kohta F) |
@@ -28,7 +27,7 @@ Vanhat sivut (`resello.html`, `resello-v2.html`, `resello-v3.html`, `resella-kop
 | # | Toiminto | Tietokone: missä | Mobiili: missä | Nyt | Tarvitaan |
 |---|---|---|---|---|---|
 | A | **Odotuslista** | Osio "Odotuslista on auki" (`#odotuslista`), nappi "Liity odotuslistalle". Footerin linkki "Liity odotuslistalle" | Osio `#m-odotuslista`, nappi. Footerin sähköpostikenttä (`form.m-news`), joka vie osoitteen sivulle `odotuslista.html?email=` | Lomake avaa käyttäjän sähköpostiohjelman (mailto) | Tallennus, vahvistusviestit |
-| B | **Varaa demo** | Herossa "Varaa demo", valikossa, hinnoittelukortissa ja loppuosiossa (`#varaa`). Kaikki vievät sivulle `varaa.html` | Hero, "Sopiiko kirppiksellesi?", käyttöönoton vaihe 1, loppuosio `#m-varaa` ja valikko | Taustapalvelu tehty 20.11.: `varaus-backend/` (Google Apps Script). Saatavuus kalenterista "Resella demoajat", pyyntö jää odottamaan, tiimi hyväksyy tai hylkää sähköpostista, hyväksyntä lähettää vahvistuksen Meet-linkillä. Lukitus estää tuplavaraukset. Sivut käyttävät sitä, kun `avoimet-ajat.js`:ään on lisätty `varausUrl`. Ilman osoitetta toimii vanha sähköpostitapa | Katselmoi `varaus-backend/Code.gs` (15 min). Ei muuta logiikkaa |
+| B | **Varaa demo** | Herossa "Varaa demo", valikossa, hinnoittelukortissa ja loppuosiossa (`#varaa`). Kaikki vievät sivulle `varaa.html` | Hero, "Sopiiko kirppiksellesi?", käyttöönoton vaihe 1, loppuosio `#m-varaa` ja valikko | Valmis 21.11.: Cal.com (ilmainen, tili info@resella.fi, käyttäjä resella). Saatavuus ma–pe 10–16, Sofia hyväksyy pyynnöt, vahvistuksessa Google Meet. Sivu upottaa kalenterin, varalla sähköpostiohje | Ei toimenpiteitä. Tarkista vain, että upotus latautuu |
 | C | **Hintalaskuri** | Hinnoittelu (`#hinnoittelu`), kenttä `#revInput`, tulos `#priceVal` ja `#priceSales` | Hinnoittelu (`#m-hinnoittelu`), kenttä `#mSales`, tulos `#mFee` ja `#mNote` | Toimii selaimessa. Sama kaava on koodissa kahdessa paikassa (funktiot `fee` ja `feeOf`) | Ei palvelinta. Kaava yhteen paikkaan |
 | D | **Sähköpostilinkit** (info@resella.fi) | Tukikortti "Sähköposti" (`#tarinat`, "Lue lisää") | UKK "Ota yhteyttä", loppuosion yhteystiedot. Siirtymäosion nappi "Kysy siirtymästä demossa" on mobiilissa mailto, tietokoneella se vie osioon `#varaa` | mailto | Varmista, että osoite info@resella.fi ottaa postia vastaan. Ehdotus: mobiilin siirtymänappi myös sivulle `varaa.html` |
 | E | **Evästeilmoitus** | Vasen alakulma | Alareuna | Tallentaa sulkemisen selaimeen (localStorage) | Ei mitään, ellei sivulle lisätä analytiikkaa (ks. osio 3) |
@@ -86,7 +85,7 @@ Tallenna myös aikaleima.
 | Sähköposti | `email` | Kyllä |
 | Kirppis ja paikkakunta | `kirppis` | Kyllä |
 
-**Avoimet ajat:** viikkopohja, aikaisin ja myöhäisin varattava päivä sekä poikkeuspäivät ovat tiedostossa `avoimet-ajat.js`. Lisäksi pitää poistaa jo varatut ajat ja Sofian ja Leonin kalentereiden varatut hetket. Samaa aikaa ei saa voida varata kahdesti.
+**Avoimet ajat:** hoidetaan Cal.comissa (Availability). Cal.com tarkistaa Sofian Google-kalenterin ja estää tuplavaraukset.
 
 **Mitä käyttäjä näkee lähetyksen jälkeen:** "Varaus vahvistettu: {viikonpäivä} {pv.kk.} klo {aika}. Lähetimme vahvistuksen ja videopuhelun linkin sähköpostiisi." Jos aika ehdittiin varata välissä: "Tämä aika ehdittiin juuri varata. Valitse toinen aika." ja kalenteri päivittyy.
 
