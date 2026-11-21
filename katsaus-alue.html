@@ -1308,6 +1308,41 @@ img.kh-photo.l{object-position:22% 50%}
 .ks2-arc path{fill:#3E2520}
 .ks2 + .dark.kd,.ks2 + #kaytto{padding-top:clamp(40px,5vw,80px)}
 @media(prefers-reduced-motion:reduce){.ka .rv{opacity:1;transform:none}.ka-map g path{transition:none}}
+
+/* koko katsaus: vertailupalkit */
+.kg{border:1px solid var(--ink)}
+.kg-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);border-bottom:1px solid var(--ink)}
+.kg-row:last-child{border-bottom:0}
+.kg-c{padding:clamp(22px,2.4vw,32px)}
+.kg-c+.kg-c{border-left:1px solid var(--ink)}
+.kg-h{margin:0;font:600 clamp(40px,4.4vw,56px)/.95 var(--fd);letter-spacing:-.03em;text-wrap:balance}
+.kg-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.kg-pill{display:inline-flex;align-items:center;height:30px;padding:0 14px;border:1px solid var(--ink);border-radius:999px;font:500 13px var(--fb);color:var(--ink);background:none;white-space:nowrap}
+.kg-intro p{margin:0;font-size:15px;line-height:1.5;color:var(--ink-muted);max-width:52ch}
+.kg-big{margin:0;display:flex;align-items:baseline;gap:4px;font:600 clamp(72px,8vw,96px)/.95 var(--fd);letter-spacing:-.045em}
+.kg-big small{font-size:.32em;font-weight:500;letter-spacing:0}
+.kg-cap{margin:14px 0 0;font-size:15px;line-height:1.45;color:var(--ink-muted);max-width:26ch}
+.kg-bars{display:flex;flex-direction:column;justify-content:center;gap:14px}
+.kg-bar{display:grid;grid-template-columns:200px minmax(0,1fr) 56px;align-items:center;gap:16px}
+.kg-bar .kg-pill{border-radius:3px;justify-content:flex-start}
+.kg-bar.on .kg-pill{background:var(--ink);color:var(--bg)}
+.kg-track{display:block;height:24px;border:1px solid var(--ink);border-radius:4px;overflow:hidden}
+.kg-fill{display:block;height:100%;width:0;background:var(--ink);transition:width .9s var(--ease-out)}
+.kg-bar:not(.on) .kg-fill{opacity:.35}
+.kg-val{font-weight:600;font-size:15px;text-align:right;white-space:nowrap}
+.kg-foot{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:clamp(18px,2vw,24px) clamp(22px,2.4vw,32px)}
+.kg-tr{margin:0;font-size:15px;font-weight:500;line-height:1.5;max-width:80ch}
+.kg-btn{cursor:pointer;flex:none}
+.kg-btn:hover{background:var(--ink);color:var(--bg)}
+.kt-tapa{max-width:760px;margin-top:8px}
+@media(max-width:760px){
+  .kg-row{grid-template-columns:1fr}
+  .kg-c+.kg-c{border-left:0;border-top:1px solid var(--ink)}
+  .kg-bar{grid-template-columns:1fr 48px;gap:8px 12px}
+  .kg-bar .kg-pill{grid-column:1/-1;justify-self:start}
+  .kg-foot{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){.kg-fill{transition:none}}
 </style>
 </head>
 <body>
@@ -1358,18 +1393,28 @@ img.kh-photo.l{object-position:22% 50%}
   </div>
 </section>
 
-<!-- KOKO KATSAUS: avautuu napista -->
+<!-- KOKO KATSAUS: avautuu napista (vertailupalkit) -->
 <section class="kt" id="tiedot" aria-labelledby="ktH">
-  <div class="wrap narrow">
-    <h2 class="disp m" id="ktH">Koko katsaus</h2>
-    <dl class="kt-list" id="ktList"></dl>
-    <p class="kt-tr" id="ktTrendi"></p>
-    <button class="ka-link kt-open" type="button" data-open="ktMenetelma" id="ktOpen">Näin luvut on laskettu</button>
+  <div class="wrap">
+    <div class="kg">
+      <div class="kg-row">
+        <div class="kg-c kg-title"><h2 class="kg-h" id="ktH">Helsinki-Uusimaa</h2></div>
+        <div class="kg-c kg-intro"><div class="kg-pills"><span class="kg-pill">Kirppiskatsaus 2027</span><span class="kg-pill">Vertailu</span></div><p>Käytetty tavara per asukas vuodessa. Alueluvut ovat laskettuja arvioita.</p></div>
+      </div>
+      <div class="kg-row">
+        <div class="kg-c kg-share"><p class="kg-big"><span id="ktOsuus">79</span><small>%</small></p><p class="kg-cap">alueen käytetyn tavaran ostoista tehdään verkossa</p></div>
+        <div class="kg-c kg-bars" id="ktBars"></div>
+      </div>
+      <div class="kg-row kg-foot">
+        <p class="kg-tr" id="ktTrendi"></p>
+        <button class="kg-pill kg-btn" type="button" data-open="ktMenetelma" id="ktOpen">Näin luvut on laskettu</button>
+      </div>
+    </div>
     <div class="kt-tapa closed" id="ktTapaWrap">
       <h3 class="kt-h3" id="ktMenetelma" tabindex="-1">Näin luvut on laskettu</h3>
-    <p class="kt-p" id="ktTapa"></p>
-    <p class="kt-p">Kirpputoreilla-luku sisältää myös käytetyn tavaran liikkeet, kuten Kaupan liiton jaossa. Kartta: Tilastokeskus ja Natural Earth.</p>
-    <ul class="kt-src" id="ktLahteet"></ul>
+      <p class="kt-p" id="ktTapa"></p>
+      <p class="kt-p">Kirpputoreilla-luku sisältää myös käytetyn tavaran liikkeet, kuten Kaupan liiton jaossa. Kartta: Tilastokeskus, Eurostat ja Natural Earth.</p>
+      <ul class="kt-src" id="ktLahteet"></ul>
     </div>
   </div>
 </section>
@@ -1497,13 +1542,14 @@ img.kh-photo.l{object-position:22% 50%}
   $('kaNimi').textContent=a.alue; $('kaVerkko').textContent=eur(K[a.id][0]); $('kaKirppis').textContent=eur(K[a.id][1]);
   $('kaTrendi').textContent=a.lyhyt; $('kaLoc').textContent=LOC[a.id];
   document.title=a.alue+': kirppiskatsaus 2027 · Resella';
-  $('ktH').textContent=a.alue+', koko katsaus';
-  var rows=[['Verkossa per asukas',a.verkko[0]+'–'+eur(a.verkko[1])+' (koko Suomi 170 €)'],['Kirpputoreilla per asukas',a.kirppis[0]+'–'+eur(a.kirppis[1])+' (koko Suomi 55 €)'],['Ostot verkossa alueella','noin '+String(a.verkko_meur).replace('.',',')+' M€'],['Ostot kirpputoreilla alueella','noin '+String(a.kirppis_meur).replace('.',',')+' M€'],['Itsepalvelukirppiksiä',String(a.kirppiksia)],['Asukkaita per kirppis','noin '+big(a.asukkaita_per_kirppis)]];
-  $('ktList').innerHTML=rows.map(function(r){return '<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>';}).join('');
+  $('ktH').textContent=a.alue;
+  $('ktOsuus').textContent=Math.round(100*a.verkko_meur/(a.verkko_meur+a.kirppis_meur));
+  var MAXB=230, bars=[['Verkossa, '+LOC[a.id],K[a.id][0],1],['Verkossa, koko Suomi',170,0],['Kirpputoreilla, '+LOC[a.id],K[a.id][1],1],['Kirpputoreilla, koko Suomi',55,0]];
+  $('ktBars').innerHTML=bars.map(function(r){return '<div class="kg-bar'+(r[2]?' on':'')+'"><span class="kg-pill">'+r[0]+'</span><span class="kg-track"><span class="kg-fill" data-w="'+(100*r[1]/MAXB).toFixed(1)+'"></span></span><span class="kg-val">'+eur(r[1])+'</span></div>';}).join('');
   $('ktTrendi').textContent=a.trendi; $('ktTapa').textContent=a.menetelma;
   $('ktLahteet').innerHTML=a.lahteet.map(function(l){return '<li>'+l.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</li>';}).join('');
   var kt=$('tiedot'); kt.classList.add('closed');
-  document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener('click',function(){ kt.classList.remove('closed'); var t=$(b.getAttribute('data-open')); if(t.id==='ktMenetelma'){ $('ktTapaWrap').classList.remove('closed'); $('ktOpen').hidden=true; } var y=t.getBoundingClientRect().top+scrollY-24; scrollTo({top:y,behavior:red?'auto':'smooth'}); if(t.id==='ktMenetelma') t.focus({preventScroll:true}); }); });
+  document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener('click',function(){ kt.classList.remove('closed'); setTimeout(function(){ document.querySelectorAll('.kg-fill').forEach(function(x){ x.style.width=x.getAttribute('data-w')+'%'; }); },60); var t=$(b.getAttribute('data-open')); if(t.id==='ktMenetelma'){ $('ktTapaWrap').classList.remove('closed'); $('ktOpen').hidden=true; } var y=t.getBoundingClientRect().top+scrollY-24; scrollTo({top:y,behavior:red?'auto':'smooth'}); if(t.id==='ktMenetelma') t.focus({preventScroll:true}); }); });
 
   // kartta: koko Suomi, alue korostuu, zoom alueeseen, luvut esiin
   var red=false; try{ red=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
