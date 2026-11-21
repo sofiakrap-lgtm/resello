@@ -1760,7 +1760,7 @@ try{ var _q=new URLSearchParams(location.search); ["utm_source","utm_medium","ut
   function measurePill(){
     if(mqMobile.matches){ pill.style.width=''; return; }
     var cta=pill.querySelector('.gm-cta'), burg=pill.querySelector('.gm-burger');
-    barW=Math.ceil(burg.getBoundingClientRect().width+cta.getBoundingClientRect().width)+10+6; // nappi + CTA + vali + pillerin padding
+    barW=burg.offsetWidth+cta.offsetWidth+10+4+2; // nappi + CTA + vali + pillerin padding
     applyWidth();
   }
   function applyWidth(){
