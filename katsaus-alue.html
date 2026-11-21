@@ -1290,7 +1290,8 @@ img.kh-photo.l{object-position:22% 50%}
 }
 /* koko katsaus */
 .kt{background:var(--surface);padding:clamp(56px,7vw,96px) 0}
-.kt.closed{display:none}
+.kt.closed,.kt-tapa.closed{display:none}
+.kt-open{margin-top:24px}
 .kt-list{margin:28px 0 0;border-top:1px solid var(--line)}
 .kt-list div{display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--line)}
 .kt-list dt{color:var(--ink-muted)}
@@ -1363,10 +1364,13 @@ img.kh-photo.l{object-position:22% 50%}
     <h2 class="disp m" id="ktH">Koko katsaus</h2>
     <dl class="kt-list" id="ktList"></dl>
     <p class="kt-tr" id="ktTrendi"></p>
-    <h3 class="kt-h3" id="ktMenetelma" tabindex="-1">Näin luvut on laskettu</h3>
+    <button class="ka-link kt-open" type="button" data-open="ktMenetelma" id="ktOpen">Näin luvut on laskettu</button>
+    <div class="kt-tapa closed" id="ktTapaWrap">
+      <h3 class="kt-h3" id="ktMenetelma" tabindex="-1">Näin luvut on laskettu</h3>
     <p class="kt-p" id="ktTapa"></p>
     <p class="kt-p">Kirpputoreilla-luku sisältää myös käytetyn tavaran liikkeet, kuten Kaupan liiton jaossa. Kartta: Tilastokeskus ja Natural Earth.</p>
     <ul class="kt-src" id="ktLahteet"></ul>
+    </div>
   </div>
 </section>
 
@@ -1499,7 +1503,7 @@ img.kh-photo.l{object-position:22% 50%}
   $('ktTrendi').textContent=a.trendi; $('ktTapa').textContent=a.menetelma;
   $('ktLahteet').innerHTML=a.lahteet.map(function(l){return '<li>'+l.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</li>';}).join('');
   var kt=$('tiedot'); kt.classList.add('closed');
-  document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener('click',function(){ kt.classList.remove('closed'); var t=$(b.getAttribute('data-open')); var y=t.getBoundingClientRect().top+scrollY-24; scrollTo({top:y,behavior:red?'auto':'smooth'}); if(t.id==='ktMenetelma') t.focus({preventScroll:true}); }); });
+  document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener('click',function(){ kt.classList.remove('closed'); var t=$(b.getAttribute('data-open')); if(t.id==='ktMenetelma'){ $('ktTapaWrap').classList.remove('closed'); $('ktOpen').hidden=true; } var y=t.getBoundingClientRect().top+scrollY-24; scrollTo({top:y,behavior:red?'auto':'smooth'}); if(t.id==='ktMenetelma') t.focus({preventScroll:true}); }); });
 
   // kartta: koko Suomi, alue korostuu, zoom alueeseen, luvut esiin
   var red=false; try{ red=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
