@@ -94,7 +94,7 @@ input::placeholder{color:#9C9087}
 
   <main class="cols">
     <section>
-      <h1>Varataan<br>esittely.</h1>
+      <h1 id="calH">Varaukset aukeavat helmikuussa.</h1>
       <p class="lead">Tunnissa näytämme, miten kassa, myyjät ja tilitykset toimivat juuri sinun kirppiksessäsi. Voit kysyä mitä tahansa, myös hinnasta.</p>
       <ul class="facts">
         <li>Kesto <b id="kesto">1 tunti</b></li>
@@ -106,8 +106,9 @@ input::placeholder{color:#9C9087}
     </section>
 
     <section class="card" aria-label="Varauskalenteri">
-      <div id="cal" class="cal-embed"><p class="empty" id="calLoad">Ladataan kalenteria</p></div>
-      <p class="small">Valitse aika. Vahvistamme sen sähköpostilla, ja vahvistuksessa on videopuhelun linkki. <a href="tietosuoja.html">Tietosuoja</a></p>
+      <div id="calClosed"><p class="empty">Esittelyajat aukeavat helmikuun alussa. Jos haluat jutella jo nyt, ole yhteydessä: <a href="mailto:info@resella.fi">info@resella.fi</a>.</p></div>
+      <div id="cal" class="cal-embed" hidden><p class="empty" id="calLoad">Ladataan kalenteria</p></div>
+      <p class="small" id="calInfo" hidden>Valitse aika. Vahvistamme sen sähköpostilla, ja vahvistuksessa on videopuhelun linkki. <a href="tietosuoja.html">Tietosuoja</a></p>
       <p class="small" id="calFb" hidden>Kalenteri ei näy? Lähetä toivottu aika osoitteeseen <a href="mailto:info@resella.fi">info@resella.fi</a>.</p>
     </section>
   </main>
@@ -115,7 +116,12 @@ input::placeholder{color:#9C9087}
 
 <script>
 (function(C,A,L){var p=function(a,ar){a.q.push(ar);};var d=C.document;C.Cal=C.Cal||function(){var cal=C.Cal;var ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];var sc=d.createElement("script");sc.src=A;sc.onerror=function(){C.calFail&&C.calFail();};d.head.appendChild(sc);cal.loaded=true;}if(ar[0]===L){var api=function(){p(api,arguments);};var ns=ar[1];api.q=api.q||[];if(typeof ns==="string"){cal.ns[ns]=cal.ns[ns]||api;p(cal.ns[ns],ar);p(cal,["initNamespace",ns]);}else p(cal,ar);return;}p(cal,ar);};})(window,"https://app.cal.com/embed/embed.js","init");
+// VARAUKSET KIINNI: vaihda true, kun esittelyajat avataan (Sofia avaa ajat Cal.comissa helmikuussa)
+var VARAUKSET_AUKI=false;
 (function(){
+  if(!VARAUKSET_AUKI) return;
+  document.getElementById('calClosed').hidden=true; document.getElementById('cal').hidden=false; document.getElementById('calInfo').hidden=false;
+  document.getElementById('calH').innerHTML='Varataan<br>esittely.';
   var ok=false, fb=document.getElementById('calFb'), ld=document.getElementById('calLoad');
   window.calFail=function(){ if(ok) return; if(ld) ld.hidden=true; fb.hidden=false; };
   Cal("init","demo",{origin:"https://app.cal.com"});
