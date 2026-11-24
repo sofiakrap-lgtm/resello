@@ -656,6 +656,7 @@ section[id]{scroll-margin-top:72px}
 .rc-btn:hover{opacity:.88}
 button.rc-btn{border:0;cursor:pointer}
 .rc-more{position:absolute;inset:0;z-index:4;background:var(--cb);color:var(--ci);display:flex;flex-direction:column;gap:12px;padding:clamp(22px,2.4vw,30px) clamp(18px,1.9vw,24px) 0;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s var(--ease-out),transform .3s var(--ease-out),visibility 0s .3s}
+.rcard.side{cursor:pointer}
 .rcard.open .rc-more{opacity:1;visibility:visible;transform:none;transition:opacity .3s var(--ease-out),transform .3s var(--ease-out),visibility 0s}
 .rc-more h3{font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,24px);letter-spacing:-.01em;line-height:1.08;margin:0 0 4px}
 .rc-more p{font-size:15px;font-weight:400;line-height:1.5;margin:0}
@@ -1848,11 +1849,12 @@ section.fd{background:var(--blue)}
             setTimeout(function(){ c.style.transition='none'; c.style.transform='translateX('+SPREAD.toFixed(1)+'px) translateY(0px) rotate('+DEG+'deg) scale(0.760)'; c.offsetWidth; c.style.transition=''; },450); return; }
           off=2; }
         var voff=Math.max(-1,Math.min(1,off)); // naapurit sivuille, reunat vuotavat yli
+        if(off===-1 && prev!==undefined && Math.abs(prev)>1){ c.style.transition='none'; c.style.opacity='0'; c.style.transform='translateX('+(-SPREAD).toFixed(1)+'px) translateY(0px) rotate('+(-DEG)+'deg) scale(0.880)'; c.offsetWidth; c.style.transition=''; } // taaksepäin siirtyessä vasemmalle ilmestyvä kortti ei lennä ruudun yli
         var tx=voff*SPREAD, deg=voff*DEG, sc=1-ao*0.12, ty=off===0?(W<720?-36:-Math.round(80*(c.offsetHeight||450)/450)):0; // keskimmainen selvasti naapureita ylempana
         c.style.transform='translateX('+tx.toFixed(1)+'px) translateY('+ty+'px) rotate('+deg+'deg) scale('+sc.toFixed(3)+')';
         c.style.opacity=vis?'1':'0';
         c.style.zIndex=String(off===0?30:20-ao);
-        c.style.pointerEvents=off===0?'auto':'none';
+        c.style.pointerEvents=vis?'auto':'none'; c.classList.toggle('side',off!==0);
         if(vis){ c.removeAttribute('aria-hidden'); c.removeAttribute('inert'); }
         else{ c.setAttribute('aria-hidden','true'); c.setAttribute('inert',''); }
       });
@@ -1880,6 +1882,16 @@ section.fd{background:var(--blue)}
       x.addEventListener('click',function(){ rClose(); b.focus({preventScroll:true}); });
     });
     var _rgo=rgo; rgo=function(d){ rClose(); _rgo(d); };
+    // sivukortti: klikkaus tuo kortin keskelle, Lue lisää avaa sen samalla
+    rcards.forEach(function(c,i){
+      c.addEventListener('click',function(e){
+        if(!c.classList.contains('side')) return;
+        e.preventDefault(); e.stopPropagation();
+        var wantOpen=!!(e.target.closest&&e.target.closest('.rc-btn:not(.rc-close)'));
+        rClose(); active=i; rElapsed=0; rSetFill(0); rlayout();
+        if(wantOpen){ setTimeout(function(){ c.querySelector('.rc-btn:not(.rc-close)').click(); },420); }
+      },true);
+    });
     var _rLoop=rLoop; rLoop=function(now){ if(rOpen){ rLast=now; rRaf=requestAnimationFrame(rLoop); return; } _rLoop(now); };
     rlayout(); if(!rReduce){ rRaf=requestAnimationFrame(rLoop); } else { rSetFill(1); }
   }
