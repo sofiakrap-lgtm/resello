@@ -6,10 +6,10 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Odotuslista · Resella">
 <meta property="og:description" content="Lähikirppikset taskuusi. Liity odotuslistalle.">
-<meta property="og:image" content="https://sofiakrap-lgtm.github.io/resello/assets/ikoni/og-odotuslista.jpg?v=1">
+<meta property="og:image" content="https://resella.fi/assets/ikoni/og-odotuslista.jpg?v=1">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://sofiakrap-lgtm.github.io/resello/odotuslista.html">
+<meta property="og:url" content="https://resella.fi/odotuslista.html">
 <meta property="og:locale" content="fi_FI">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" hreflang="fi" href="odotuslista.html">
@@ -19,9 +19,7 @@
 <link rel="icon" href="assets/ikoni/favicon.ico?v=4" sizes="any">
 <link rel="icon" type="image/svg+xml" href="assets/ikoni/favicon.svg?v=4">
 <link rel="apple-touch-icon" href="assets/ikoni/apple-touch-icon_180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="fonts/alasivu.css?v=1" rel="stylesheet">
 <style>
 :root{--bg:#ECECDC;--surface:#F6F6EE;--line:#DCDBC6;--ink:#3E2520;--ink-muted:#6E5E56;--blue-deep:#3A4961;--faint:#B5ABA2;--std:cubic-bezier(.45,0,.55,1)}
 *{box-sizing:border-box}
@@ -112,6 +110,11 @@ input::placeholder{color:#9C9087}
 .who.kat span{padding:0 18px}
 .done .btn2{display:inline-block;margin-top:6px;background:var(--ink);color:var(--bg);border-radius:999px;padding:14px 26px;font-weight:600;text-decoration:none}
 @media(max-width:520px){.who:not(.kat){grid-template-columns:1fr}}
+.ferr{margin:-18px 0 0;font-size:14px;line-height:1.4;color:#9E3220}
+.fields .ferr{margin:-6px 0 0}
+.submit+.ferr{margin-top:-12px;text-align:center}
+.submit[aria-busy="true"]{cursor:progress}
+.hp{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 body{background:var(--blue,#C5D0D3)}
 .deco{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .deco.m{display:none}
@@ -139,7 +142,9 @@ body{background:var(--blue,#C5D0D3)}
         <h2>Liity odotuslistalle</h2>
         <div class="fields">
           <label>Sähköposti<input id="email" name="email" type="email" autocomplete="email" required></label>
+          <p class="ferr" id="email-virhe" hidden></p>
           <label>Postinumero<input id="posti" name="postinumero" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" required></label>
+          <p class="ferr" id="postinumero-virhe" hidden></p>
         </div>
         <div class="dd" id="dd">
           <span class="dd-l" id="ddLabel">Olen</span>
@@ -151,6 +156,7 @@ body{background:var(--blue,#C5D0D3)}
             <li role="option" aria-selected="false" data-v="Kirppiksen omistaja"><b>Kirppiksen omistaja</b><span>Pyöritän kirppistä tai suunnittelen sellaista.</span></li>
           </ul>
         </div>
+        <p class="ferr" id="rooli-virhe" hidden></p>
         <fieldset class="who kat">
           <legend>Mitä etsit useimmiten? (vapaaehtoinen)</legend>
           <label><input type="radio" name="kategoria" value="Vaatteet"><span>Vaatteet</span></label>
@@ -159,20 +165,29 @@ body{background:var(--blue,#C5D0D3)}
           <label><input type="radio" name="kategoria" value="Keräilyesineet"><span>Keräilyesineet</span></label>
           <label><input type="radio" name="kategoria" value="Muu"><span>Muu</span></label>
         </fieldset>
+        <p class="ferr" id="kategoria-virhe" hidden></p>
         <label class="consent"><input type="checkbox" id="lupa" required><span>Saan sähköpostia, kun Resella avautuu alueellani.</span></label>
-        <button class="submit" type="submit">Liity odotuslistalle</button>
+        <p class="ferr" id="lupa-virhe" hidden></p>
+        <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" id="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true"></label></div>
+        <button class="submit" type="submit" id="laheta">Liity odotuslistalle</button>
+        <p class="ferr" id="lomake-virhe" role="alert" hidden></p>
         <p class="small">Emme jaa osoitettasi kenellekään. <a href="tietosuoja.html">Tietosuoja</a></p>
+        <noscript><p class="small">Lähetä viesti osoitteeseen <a href="mailto:info@resella.fi?subject=Odotuslista">info@resella.fi</a>.</p></noscript>
       </form>
-      <div class="done" id="done" hidden>
-        <h2 style="font-size:32px;margin-bottom:10px">Melkein valmista.</h2>
-        <p>Viesti on valmiina sähköpostiohjelmassasi. Lähetä se, niin olet listalla.</p>
-        <p>Jos sähköpostiohjelma ei auennut, lähetä viesti osoitteeseen <a id="doneMail" href="mailto:info@resella.fi">info@resella.fi</a>.</p>
+      <div class="done" id="done" tabindex="-1" style="outline:none" hidden>
+        <div id="doneMailto">
+          <h2 style="font-size:32px;margin-bottom:10px">Melkein valmista.</h2>
+          <p>Viesti on valmiina sähköpostiohjelmassasi. Lähetä se, niin olet listalla.</p>
+          <p>Jos sähköpostiohjelma ei auennut, lähetä viesti osoitteeseen <a id="doneMail" href="mailto:info@resella.fi">info@resella.fi</a>.</p>
+        </div>
+        <h2 id="doneOk" style="font-size:32px;margin-bottom:10px" hidden>Kiitos, olet listalla.</h2>
         <p>Kerro kirppisystävällesi, sillä alue aukeaa sitä nopeammin, mitä useampi naapurisi on mukana.</p>
         <div id="omistaja" hidden><p>Haluatko Resellan kassan kirppiksellesi jo nyt?</p><a class="btn2" href="varaa.html">Varaa 1 h demo</a></div>
       </div>
     </section>
   </main>
 </div>
+<script src="lomake.js?v=1"></script>
 <script>
 (function(){
   var $=function(id){return document.getElementById(id);};
@@ -182,27 +197,59 @@ body{background:var(--blue,#C5D0D3)}
   function mark(i){ opts.forEach(function(o,j){ o.classList.toggle('act',j===i); }); ai=i; if(i>=0) opts[i].scrollIntoView({block:'nearest'}); }
   function open(){ list.hidden=false; btn.setAttribute('aria-expanded','true'); var s=opts.findIndex(function(o){return o.getAttribute('aria-selected')==='true';}); mark(s<0?0:s); list.focus({preventScroll:true}); }
   function close(f){ list.hidden=true; btn.setAttribute('aria-expanded','false'); if(f) btn.focus(); }
-  function pick(i){ var o=opts[i]; opts.forEach(function(x){ x.setAttribute('aria-selected',x===o?'true':'false'); }); $('rooli').value=o.dataset.v; var v=$('ddVal'); v.textContent=o.dataset.v; v.className=''; $('dd').classList.remove('err'); close(true); }
+  function pick(i){ var o=opts[i]; opts.forEach(function(x){ x.setAttribute('aria-selected',x===o?'true':'false'); }); $('rooli').value=o.dataset.v; var v=$('ddVal'); v.textContent=o.dataset.v; v.className=''; virhe('rooli',''); close(true); }
   btn.addEventListener('click',function(){ list.hidden?open():close(); });
   opts.forEach(function(o,i){ o.addEventListener('click',function(){ pick(i); }); o.addEventListener('mousemove',function(){ mark(i); }); });
   list.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'){ e.preventDefault(); mark(Math.min(opts.length-1,ai+1)); } else if(e.key==='ArrowUp'){ e.preventDefault(); mark(Math.max(0,ai-1)); } else if(e.key==='Enter'||e.key===' '){ e.preventDefault(); if(ai>=0) pick(ai); } else if(e.key==='Escape'||e.key==='Tab'){ close(e.key==='Escape'); } });
   btn.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'){ e.preventDefault(); open(); } });
   document.addEventListener('click',function(e){ if(!$('dd').contains(e.target)) close(); });
+  // API:n roolit ja virheviestit
+  var ROOLIT={'Löytäjä':'loytaja','Myyjä':'myyja','Kirppiksen omistaja':'omistaja'};
+  var KENTAT={email:$('email'),postinumero:$('posti'),rooli:btn,kategoria:document.querySelector('input[name=kategoria]'),lupa:$('lupa')};
+  var lahettaa=false;
+  function virhe(k,viesti){ var p=$(k+'-virhe'), el=KENTAT[k]; p.textContent=viesti||''; p.hidden=!viesti;
+    if(el&&k!=='kategoria'){ if(viesti){ el.setAttribute('aria-invalid','true'); el.setAttribute('aria-describedby',k+'-virhe'); } else { el.removeAttribute('aria-invalid'); el.removeAttribute('aria-describedby'); } }
+    if(k==='rooli') $('dd').classList.toggle('err',!!viesti); }
+  function tyhjenna(){ Object.keys(KENTAT).concat('lomake').forEach(function(k){ virhe(k,''); }); }
+  ['email','postinumero','lupa'].forEach(function(k){ KENTAT[k].addEventListener('input',function(){ virhe(k,''); }); });
+  document.querySelectorAll('input[name=kategoria]').forEach(function(r){ r.addEventListener('change',function(){ virhe('kategoria',''); }); });
+  function kiire(on){ lahettaa=on; var b=$('laheta'); b.disabled=on; if(on) b.setAttribute('aria-busy','true'); else b.removeAttribute('aria-busy'); }
   $('form').addEventListener('submit',function(e){
     e.preventDefault();
+    if(lahettaa) return;
+    tyhjenna();
     var em=$('email'), lupa=$('lupa'), po=$('posti');
     if(!em.value.trim()||!em.checkValidity()){ em.focus(); em.reportValidity&&em.reportValidity(); return; }
     if(!/^[0-9]{5}$/.test(po.value.trim())){ po.setCustomValidity('Kirjoita viisinumeroinen postinumero.'); po.reportValidity&&po.reportValidity(); po.setCustomValidity(''); po.focus(); return; }
     if(!lupa.checked){ lupa.focus(); lupa.reportValidity&&lupa.reportValidity(); return; }
     var rooli=$('rooli').value;
     if(!rooli){ $('dd').classList.add('err'); $('ddBtn').focus(); open(); return; }
-    var kat=(document.querySelector('input[name=kategoria]:checked')||{}).value||'-';
-    var utm=[]; ['utm_source','utm_medium','utm_campaign'].forEach(function(k){ var v=q.get(k); if(!v){ try{ v=sessionStorage.getItem('rs_'+k); }catch(e){} } if(v) utm.push(k+'='+v); });
-    var body='Hei,\n\nhaluan liittyä Resellan odotuslistalle.\n\nSähköposti: '+em.value.trim()+'\nPostinumero: '+po.value.trim()+'\nOlen: '+rooli+'\nEtsin useimmiten: '+kat+'\nLähde: '+(utm.join(', ')||'-')+'\n';
+    var kat=(document.querySelector('input[name=kategoria]:checked')||{}).value||'';
+    var utm=[], tiedot={lomake:'odotuslista',kieli:'fi',email:em.value.trim(),postinumero:po.value.trim(),rooli:ROOLIT[rooli],lupa:true,sivu:location.pathname,website:$('website').value};
+    if(kat) tiedot.kategoria=kat;
+    ['utm_source','utm_medium','utm_campaign'].forEach(function(k){ var v=q.get(k); if(v){ utm.push(k+'='+v); tiedot[k]=v.slice(0,100); } });
+    var body='Hei,\n\nhaluan liittyä Resellan odotuslistalle.\n\nSähköposti: '+em.value.trim()+'\nPostinumero: '+po.value.trim()+'\nOlen: '+rooli+'\nEtsin useimmiten: '+(kat||'-')+'\nLähde: '+(utm.join(', ')||'-')+'\n';
     var mail='mailto:info@resella.fi?subject='+encodeURIComponent('Odotuslista '+po.value.trim())+'&body='+encodeURIComponent(body);
-    $('doneMail').href=mail; $('omistaja').hidden=rooli!=='Kirppiksen omistaja'; $('form').hidden=true; $('done').hidden=false; location.href=mail;
+    function valmis(sahkoposti){ $('doneMailto').hidden=!sahkoposti; $('doneOk').hidden=sahkoposti; $('omistaja').hidden=rooli!=='Kirppiksen omistaja'; $('form').hidden=true; $('done').hidden=false; $('done').focus(); }
+    kiire(true);
+    (window.rsLaheta?rsLaheta(tiedot):Promise.resolve({tila:'ei-yhteytta'})).then(function(v){
+      kiire(false);
+      if(v.tila==='ok'){ valmis(false); if($('doneVahvista')) $('doneVahvista').hidden=!v.tuplavahvistus; return; }
+      if(v.tila==='liikaa'){ virhe('lomake','Liian monta yritystä, yritä hetken päästä uudelleen.'); return; }
+      if(v.tila==='virhe'){
+        var muut=[], eka=null;
+        Object.keys(v.kentat).forEach(function(k){ if(KENTAT.hasOwnProperty(k)){ virhe(k,String(v.kentat[k])); } else muut.push(String(v.kentat[k])); });
+        Object.keys(KENTAT).forEach(function(k){ if(!eka&&v.kentat.hasOwnProperty(k)) eka=KENTAT[k]; });
+        if(!eka||muut.length) virhe('lomake',muut.join(' ')||'Tarkista tiedot ja yritä uudelleen.');
+        if(eka) eka.focus();
+        return;
+      }
+      // API ei ole käytössä: sähköposti kuten ennen
+      $('doneMail').href=mail; valmis(true); location.href=mail;
+    });
   });
 })();
 </script>
+<script src="utm.js?v=1"></script>
 </body>
 </html>

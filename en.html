@@ -9,21 +9,19 @@
 <meta name="description" content="A till that brings buyers. Run sales, sellers and payouts in one place. Your shelf is online at the same time.">
 <meta property="og:title" content="Resella">
 <meta property="og:description" content="A till that brings buyers. Sales, sellers and payouts in one place.">
-<meta property="og:image" content="https://sofiakrap-lgtm.github.io/resello/assets/ikoni/og-en.jpg?v=1">
+<meta property="og:image" content="https://resella.fi/assets/ikoni/og-en.jpg?v=1">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="624">
-<meta property="og:url" content="https://sofiakrap-lgtm.github.io/resello/en.html">
+<meta property="og:url" content="https://resella.fi/en.html">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sofiakrap-lgtm.github.io/resello/assets/ikoni/og-en.jpg?v=1">
+<meta name="twitter:image" content="https://resella.fi/assets/ikoni/og-en.jpg?v=1">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Resella">
 <meta property="og:locale" content="en_GB">
 <link rel="icon" href="assets/ikoni/favicon.ico?v=4" sizes="any">
 <link rel="icon" type="image/svg+xml" href="assets/ikoni/favicon.svg?v=4">
 <link rel="apple-touch-icon" href="assets/ikoni/apple-touch-icon_180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="fonts/etusivu.css?v=1" rel="stylesheet">
 <style>
 /* ===== tokens.json ===== */
 :root{
@@ -1738,8 +1736,6 @@ section.fd{background:var(--blue)}
 
 <script>document.write('<script src="jarjestys.js?t='+Math.floor(Date.now()/60000)+'"><\/script>');</script>
 <script>
-/* UTM talteen odotuslistaa varten */
-try{ var _q=new URLSearchParams(location.search); ["utm_source","utm_medium","utm_campaign"].forEach(function(k){ if(_q.get(k)) sessionStorage.setItem("rs_"+k,_q.get(k)); }); }catch(e){}
 /* tekstit: tekstit-editori.html tallentaa muutokset tekstit.js-tiedostoon */
 (function(){ var t=window.RS_TEXT||{}; document.querySelectorAll('[data-txt]').forEach(function(el){ var k=el.getAttribute('data-txt'); if(Object.prototype.hasOwnProperty.call(t,k)) el.textContent=t[k]; }); })();
 </script>
@@ -2254,5 +2250,6 @@ try{ var _q=new URLSearchParams(location.search); ["utm_source","utm_medium","ut
   addEventListener('scroll',onS,{passive:true}); onS(); setInterval(function(){ if(bar.classList.contains('on')) onS(); },700);
 })();
 </script>
+<script src="utm.js?v=1"></script>
 </body>
 </html>
