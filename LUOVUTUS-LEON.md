@@ -50,6 +50,7 @@ Vanhat sivut (`resello.html`, `resello-v2.html`, `resello-v3.html`, `resella-kop
 | Postinumero | `postinumero` | Kyllä | Tasan 5 numeroa |
 | Olen | `rooli` (piilokenttä, avattava lista) | Kyllä | Löytäjä / Myyjä / Kirppiksen omistaja |
 | Mitä etsit useimmiten? | `kategoria` | Ei | Vaatteet / Lastentavarat / Sisustus / Keräilyesineet / Muu |
+| Suosittele lähikirppistäsi | `lahikirppis` | Ei | Vapaa teksti, enintään 120 merkkiä (lisätty 24.11.2026). MailerLiteen kenttään `lahikirppis` |
 | Suostumus | `lupa` | Kyllä | Ruksi, ei valmiiksi valittuna. Teksti: "Saan sähköpostia, kun Resella avautuu alueellani." |
 | Lähde | `utm_source`, `utm_medium`, `utm_campaign` | Piilossa | URL:sta tai sessionStoragesta (`rs_utm_*`). Etusivu tallentaa ne, kun kävijä tulee esim. Instagram-linkistä |
 
@@ -155,7 +156,7 @@ Tietosuojaselosteeseen on lisätty tekninen kuvaus tekoälystä ja muita lain va
 ## 4. Hyväksymiskriteerit
 
 **Odotuslista**
-- [ ] Lomake tallentaa sähköpostin, postinumeron, roolin, kategorian, utm-lähteen ja aikaleiman
+- [ ] Lomake tallentaa sähköpostin, postinumeron, roolin, kategorian, suositellun lähikirppiksen, utm-lähteen ja aikaleiman
 - [ ] Postinumero hyväksytään vain viisinumeroisena
 - [ ] Lähetys ei onnistu ilman sähköpostia, postinumeroa, roolia ja ruksia
 - [ ] Käyttäjä näkee kiitostekstin, ja kirppiksen omistaja lisäksi demonapin

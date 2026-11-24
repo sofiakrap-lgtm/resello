@@ -166,6 +166,8 @@ body{background:var(--blue,#C5D0D3)}
           <label><input type="radio" name="kategoria" value="Muu"><span>Muu</span></label>
         </fieldset>
         <p class="ferr" id="kategoria-virhe" hidden></p>
+        <label>Suosittele lähikirppistäsi (vapaaehtoinen)<input id="kirppis" name="lahikirppis" type="text" maxlength="120" autocomplete="off" placeholder="Kirppiksen nimi ja paikkakunta"></label>
+        <p class="ferr" id="lahikirppis-virhe" hidden></p>
         <label class="consent"><input type="checkbox" id="lupa" required><span>Saan sähköpostia, kun Resella avautuu alueellani.</span></label>
         <p class="ferr" id="lupa-virhe" hidden></p>
         <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" id="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true"></label></div>
@@ -205,7 +207,7 @@ body{background:var(--blue,#C5D0D3)}
   document.addEventListener('click',function(e){ if(!$('dd').contains(e.target)) close(); });
   // API:n roolit ja virheviestit
   var ROOLIT={'Löytäjä':'loytaja','Myyjä':'myyja','Kirppiksen omistaja':'omistaja'};
-  var KENTAT={email:$('email'),postinumero:$('posti'),rooli:btn,kategoria:document.querySelector('input[name=kategoria]'),lupa:$('lupa')};
+  var KENTAT={email:$('email'),postinumero:$('posti'),rooli:btn,kategoria:document.querySelector('input[name=kategoria]'),lahikirppis:$('kirppis'),lupa:$('lupa')};
   var lahettaa=false;
   function virhe(k,viesti){ var p=$(k+'-virhe'), el=KENTAT[k]; p.textContent=viesti||''; p.hidden=!viesti;
     if(el&&k!=='kategoria'){ if(viesti){ el.setAttribute('aria-invalid','true'); el.setAttribute('aria-describedby',k+'-virhe'); } else { el.removeAttribute('aria-invalid'); el.removeAttribute('aria-describedby'); } }
@@ -227,8 +229,9 @@ body{background:var(--blue,#C5D0D3)}
     var kat=(document.querySelector('input[name=kategoria]:checked')||{}).value||'';
     var utm=[], tiedot={lomake:'odotuslista',kieli:'fi',email:em.value.trim(),postinumero:po.value.trim(),rooli:ROOLIT[rooli],lupa:true,sivu:location.pathname,website:$('website').value};
     if(kat) tiedot.kategoria=kat;
+    var kirppis=$('kirppis').value.trim(); if(kirppis) tiedot.lahikirppis=kirppis.slice(0,120);
     ['utm_source','utm_medium','utm_campaign'].forEach(function(k){ var v=q.get(k); if(v){ utm.push(k+'='+v); tiedot[k]=v.slice(0,100); } });
-    var body='Hei,\n\nhaluan liittyä Resellan odotuslistalle.\n\nSähköposti: '+em.value.trim()+'\nPostinumero: '+po.value.trim()+'\nOlen: '+rooli+'\nEtsin useimmiten: '+(kat||'-')+'\nLähde: '+(utm.join(', ')||'-')+'\n';
+    var body='Hei,\n\nhaluan liittyä Resellan odotuslistalle.\n\nSähköposti: '+em.value.trim()+'\nPostinumero: '+po.value.trim()+'\nOlen: '+rooli+'\nEtsin useimmiten: '+(kat||'-')+(kirppis?'\nSuosittelen kirppistä: '+kirppis:'')+'\nLähde: '+(utm.join(', ')||'-')+'\n';
     var mail='mailto:info@resella.fi?subject='+encodeURIComponent('Odotuslista '+po.value.trim())+'&body='+encodeURIComponent(body);
     function valmis(sahkoposti){ $('doneMailto').hidden=!sahkoposti; $('doneOk').hidden=sahkoposti; $('omistaja').hidden=rooli!=='Kirppiksen omistaja'; $('form').hidden=true; $('done').hidden=false; $('done').focus(); }
     kiire(true);
