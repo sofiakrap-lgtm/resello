@@ -4,7 +4,7 @@
    Valinta tallennetaan selaimeen (välttämätön tieto), ja sen voi muuttaa
    mistä tahansa linkistä, jolla on data-evasteet-attribuutti. */
 (function(){
-  var GA_ID='';            // mittaustunnus, esim. 'G-ABC123'. Tyhjä = Google Analytics ei käytössä
+  var GA_ID='G-3PW5X5T251'; // Google Analytics 4, tili Resella Oy, ominaisuus resella.fi. Tyhjä = ei käytössä
   var AVAIN='rs-suostumus'; // 'kylla' tai 'ei'
   var en=(document.documentElement.lang||'').slice(0,2)==='en';
   var T=en?{
