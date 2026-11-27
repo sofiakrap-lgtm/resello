@@ -1326,7 +1326,7 @@ section.fd{background:var(--blue)}
   <form class="m-news" action="odotuslista.html" method="get"><input type="email" name="email" placeholder="Sähköpostisi" aria-label="Sähköpostisi"><button class="m-pill s">Liity listalle</button></form>
   <nav class="m-links"><a href="#m-ominaisuudet">Ominaisuudet</a><a href="#m-hinnoittelu">Hinnoittelu</a><a href="#m-ukk">UKK</a><a href="#m-perustajat">Meistä</a><a href="mailto:info@resella.fi">Yhteystiedot</a><a href="tel:+358503233075">050 323 3075</a></nav>
   <img class="m-word" src="assets/logot/ReSella_sanamerkki_matala_ruskea.svg" alt="Resella">
-  <p class="m-legal">© 2026 Resella Oy · Espoo · Y 3641828-1 · <a href="tietosuoja.html">Tietosuoja</a> · <a href="ehdot.html">Ehdot</a> · <b>FI</b> / <a href="en.html" hreflang="en" lang="en">EN</a></p>
+  <p class="m-legal">© 2026 Resella Oy · Espoo · Y 3641828-1 · <a href="tietosuoja.html">Tietosuoja</a> · <a href="#" data-evasteet>Evästeasetukset</a> · <a href="ehdot.html">Ehdot</a> · <b>FI</b> / <a href="en.html" hreflang="en" lang="en">EN</a></p>
 </footer>
 
 <div class="m-bar" id="mBar" aria-hidden="true"><a class="m-pill" href="varaa.html" tabindex="-1">Varaa demo</a><button class="m-fab" id="mFab" type="button" aria-label="Avaa valikko" data-mopen tabindex="-1"><span></span><span></span></button></div>
@@ -1723,15 +1723,10 @@ section.fd{background:var(--blue)}
     </div>
   </div>
   <img class="wordmark" src="assets/logot/ReSella_sanamerkki_matala_ruskea.svg" alt="Resella">
-  <div class="foot-legal"><span>© 2026 Resella Oy · Espoo · Y 3641828-1</span><a href="tietosuoja.html">Tietosuoja</a><a href="ehdot.html">Ehdot</a><span class="lang-sw"><b>FI</b> / <a href="en.html" hreflang="en" lang="en">EN</a></span></div>
+  <div class="foot-legal"><span>© 2026 Resella Oy · Espoo · Y 3641828-1</span><a href="tietosuoja.html">Tietosuoja</a><a href="#" data-evasteet>Evästeasetukset</a><a href="ehdot.html">Ehdot</a><span class="lang-sw"><b>FI</b> / <a href="en.html" hreflang="en" lang="en">EN</a></span></div>
 </footer>
 
 <!-- EVÄSTEET -->
-<div class="cookie" id="cookie" role="region" aria-label="Evästeet ja tekoäly" hidden>
-  <div class="cookie-h"><strong>Evästeet ja tekoäly</strong><button class="cookie-x" id="cookie-x" aria-label="Sulje"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.4"/></svg></button></div>
-  <p>Käytämme vain evästeitä, joita sivusto tarvitsee toimiakseen. Emme seuraa sinua emmekä näytä mainoksia. Osa sivun kuvista ja videoista on tehty kokonaan tai osittain tekoälyllä. Kerromme tekoälyn käytöstä <a href="tietosuoja.html">tietosuojaselosteessa</a>.</p>
-  <button class="btn s" id="cookie-ok">Selvä</button>
-</div>
 
 <script>document.write('<script src="jarjestys.js?t='+Math.floor(Date.now()/60000)+'"><\/script>');document.write('<script src="tekstit.js?t='+Math.floor(Date.now()/60000)+'"><\/script>');</script>
 <script>
@@ -1911,14 +1906,6 @@ section.fd{background:var(--blue)}
     revInput.addEventListener('blur',function(){ var r=parseFloat((revInput.value||'').replace(/[^\d]/g,'')); if(r>0) revInput.value=fmt(r); });
     update();
   }
-  // evästeilmoitus
-  var ck=document.getElementById('cookie'), ok=document.getElementById('cookie-ok');
-  var seen=false; try{ seen=localStorage.getItem('rs-cookie')==='1'; }catch(e){}
-  // puhelimessa heti, tietokoneella kun hero on ohitettu (ettei peitä otsikkoa)
-  if(!seen && matchMedia('(max-width:767px)').matches){ setTimeout(function(){ ck.hidden=false; },1200); }
-  else if(!seen){ var showCk=function(){ if(scrollY>innerHeight*0.6){ ck.hidden=false; removeEventListener('scroll',showCk); } }; addEventListener('scroll',showCk,{passive:true}); showCk(); }
-  var closeCk=function(){ ck.hidden=true; try{ localStorage.setItem('rs-cookie','1'); }catch(e){} };
-  ok.addEventListener('click',closeCk); document.getElementById('cookie-x').addEventListener('click',closeCk);
   // karuselli: aareton kierto
   var track=document.getElementById('caroTrack');
   if(track){
@@ -2261,5 +2248,6 @@ section.fd{background:var(--blue)}
 })();
 </script>
 <script src="utm.js?v=1"></script>
+<script src="consent.js?v=2"></script>
 </body>
 </html>
